@@ -1,0 +1,258 @@
+//
+// qmemployeesettingswidget.cpp is part of QualificationMatrix
+//
+// QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of
+// the GNU General Public License as published by the Free Software Foundation, either version 3 of
+// the License, or (at your option) any later version.
+//
+// QualificationMatrix is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+// without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See
+// the GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License along with QualificationMatrix.
+// If not, see <http://www.gnu.org/licenses/>.
+//
+
+#include "qmemployeesettingswidget.h"
+#include "ui_qmemployeesettingswidget.h"
+#include "model/qmdatamanager.h"
+#include "delegate/proxysqlrelationaldelegate.h"
+#include "qmemployeedetailsdialog.h"
+
+#include <QDebug>
+#include <QSqlError>
+#include <QSqlQuery>
+#include <QMessageBox>
+#include <QModelIndexList>
+
+QMEmployeeSettingsWidget::QMEmployeeSettingsWidget(QWidget *parent)
+    : QMSettingsWidget(parent), ui(new Ui::QMEmployeeSettingsWidget), employeeModel(nullptr),
+      funcModel(nullptr), employeeFuncModel(nullptr), trainModel(nullptr),
+      trainExceptionModel(nullptr), shiftModel(nullptr),
+      employeeFilterModel(new QSortFilterProxyModel()),
+      employeeFuncFilterModel(new QSortFilterProxyModel()),
+      trainExceptionFilterModel(new QSortFilterProxyModel())
+{
+    ui->setupUi(this);
+
+    // Set initial settings for ui elements.
+    ui->tvEmployee->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeMode::Interactive);
+    ui->tvEmployee->verticalHeader()->setSectionResizeMode(
+        QHeaderView::ResizeMode::ResizeToContents
+    );
+    ui->tvEmployee->verticalHeader()->setVisible(true);
+    ui->tvEmployee->setItemDelegateForColumn(2, new ProxySqlRelationalDelegate());
+
+    ui->tvEmployeeGroups->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->tvEmployeeGroups->verticalHeader()->setVisible(true);
+}
+
+QMEmployeeSettingsWidget::~QMEmployeeSettingsWidget()
+{
+    delete ui;
+}
+
+void QMEmployeeSettingsWidget::updateData()
+{
+    // Get the model data.
+    auto dm = QMDataManager::getInstance();
+
+    employeeModel = dm->getEmployeeModel();
+    employeeFuncModel = dm->getEmployeeFuncModel();
+    trainModel = dm->getTrainModel();
+    funcModel = dm->getFuncModel();
+    trainExceptionModel = dm->getTrainExceptionModel();
+    shiftModel = dm->getShiftModel();
+
+    employeeFilterModel->setSourceModel(employeeModel.get());
+    employeeFilterModel->setFilterKeyColumn(1);
+
+    // Update the views.
+    ui->tvEmployee->setModel(employeeFilterModel);
+    ui->tvEmployee->hideColumn(0);
+
+    ui->tvEmployeeGroups->setModel(shiftModel.get());
+    ui->tvEmployeeGroups->hideColumn(0);
+
+    // Build connections of the new models.
+    connect(
+        employeeModel.get(), &QAbstractItemModel::dataChanged, this,
+        &QMSettingsWidget::settingsChanged
+    );
+    connect(
+        employeeFuncModel.get(), &QAbstractItemModel::dataChanged, this,
+        &QMSettingsWidget::settingsChanged
+    );
+    connect(
+        trainExceptionModel.get(), &QAbstractItemModel::dataChanged, this,
+        &QMSettingsWidget::settingsChanged
+    );
+}
+
+void QMEmployeeSettingsWidget::saveSettings()
+{
+    employeeModel->submitAll();
+    shiftModel->submitAll();
+}
+
+void QMEmployeeSettingsWidget::loadSettings()
+{
+    updateData();
+}
+
+void QMEmployeeSettingsWidget::revertChanges()
+{
+    // int current = ui->cbEmployee->currentIndex();
+
+    employeeModel->revertAll();
+    shiftModel->revertAll();
+}
+
+void QMEmployeeSettingsWidget::resetFilter()
+{
+    ui->leEmployeeFilter->setText("");
+}
+
+void QMEmployeeSettingsWidget::updateFilter()
+{
+    employeeFilterModel->setFilterFixedString(ui->leEmployeeFilter->text());
+}
+
+void QMEmployeeSettingsWidget::showEmployeeDetails()
+{
+    QModelIndexList indexes = ui->tvEmployee->selectionModel()->selectedRows();
+
+    if (indexes.size() != 1) {
+        QMessageBox::critical(
+            this, tr("Mitarbeiterdetails"), tr(
+                "Es muss genau ein Mitarbeiter in der Tabelle selektiert sein."
+                "\n\nDie Aktion wird abgebrochen!"
+            ));
+
+        return;
+    }
+
+    int row = indexes.first().row();
+    QString id = employeeFilterModel->data(employeeFilterModel->index(row, 0)).toString();
+    QString name = employeeFilterModel->data(employeeFilterModel->index(row, 1)).toString();
+    QString group = employeeFilterModel->data(employeeFilterModel->index(row, 2)).toString();
+
+    QMEmployeeDetailsDialog employeeDetailsDialog(id, name, group, this);
+    employeeDetailsDialog.updateData();
+    employeeDetailsDialog.exec();
+}
+
+void QMEmployeeSettingsWidget::addEmployee()
+{
+    // Reset the filter. Otherwise, they might be a new employee no one can see.
+    resetFilter();
+
+    // Add a new line.
+    if (!employeeFilterModel->insertRow(employeeModel->rowCount())) {
+        QMessageBox::critical(
+            this, tr("Mitarbeiter hinzufügen"), tr(
+                "Der Mitarbeiter konnt enciht hinzugefügt werden. Bitte informieren Sie den"
+                " den Entwickler."
+            ));
+
+        return;
+    }
+
+    // Set the new employee name in edit mode.
+    employeeModel->setData(
+        employeeModel->index(employeeModel->rowCount() - 1, 1), tr("Name eingeben"));
+    ui->tvEmployee->edit(employeeFilterModel->index(employeeModel->rowCount() - 1, 1));
+
+    // Information to settings parent.
+    settingsChanged();
+}
+
+void QMEmployeeSettingsWidget::removeEmployee()
+{
+    // Test if there is a connection to the id of the foreign key.
+
+    // TODO: Implement
+
+    // Get the primary key of the employee, after that search in different models for a relation
+    // to this employee. When no connection exist, removing is save. Otherwise this action
+    // is not secure enough.
+    int primaryKey = -1;
+    QModelIndex employeeIndex;
+    QString employeeName;
+    for (int i = 0; i < employeeModel->rowCount(); i++) {
+        employeeIndex = employeeModel->index(i, 1);
+        employeeName = employeeFilterModel->data(employeeFilterModel->index(employeeIndex.row(), 1))
+            .toString();
+
+        if (employeeModel->data(employeeIndex).toString() == employeeName) {
+            primaryKey = employeeModel->data(employeeModel->index(i, 0)).toInt();
+            break;
+        }
+    }
+
+    if (primaryKey == -1) {
+        QMessageBox::information(
+            this, tr("Mitarbeiter entfernen"), tr(
+                "Der Mitarbeiter konnte nicht gefunden werden."
+                "\n\nDie Aktion wird abgebrochen."
+            ));
+
+        return;
+    }
+
+    // Search in different table for a relation.
+    for (int i = 0; i < trainModel->rowCount(); i++) {
+        QModelIndex index = trainModel->index(i, 1);
+        if (trainModel->data(index).toString() == employeeName) {
+            QMessageBox::critical(
+                this, tr("Mitarbeiter entfernen"), tr(
+                    "In den Schulungsdaten befinden sich Einträge mit dem Mitarbeiter,"
+                    " er kann daher nicht gelöscht werden."
+                    "\n\nDie Aktion wird abgebrochen."
+                ));
+
+            return;
+        }
+    }
+
+    for (int i = 0; i < trainExceptionModel->rowCount(); i++) {
+        QModelIndex index = trainExceptionModel->index(i, 1);
+        if (trainExceptionModel->data(index).toString() == employeeName) {
+            QMessageBox::critical(
+                this, tr("Mitarbeiter entfernen"), tr(
+                    "In den Daten der Schulungsausnahmen befinden sich Einträge mit dem"
+                    " Mitarbeiter, er kann daher nicht gelöscht werden."
+                    "\n\nDie Aktion wird abgebrochen."
+                ));
+
+            return;
+        }
+    }
+
+    for (int i = 0; i < employeeFuncModel->rowCount(); i++) {
+        QModelIndex index = employeeFuncModel->index(i, 1);
+        if (employeeFuncModel->data(index).toString() == employeeName) {
+            QMessageBox::critical(
+                this, tr("Mitarbeiter entfernen"), tr(
+                    "In den Daten der Mitarbeiterfunktionen befinden sich Einträge mit dem"
+                    " Mitarbeiter, er kann daher nicht gelöscht werden."
+                    "\n\nDie Aktion wird abgebrochen."
+                ));
+
+            return;
+        }
+    }
+
+    if (!employeeModel->removeRow(employeeIndex.row())) {
+        QMessageBox::critical(
+            this, tr("Mitarbeiter entfernen"), tr(
+                "Der Mitarbeiter konnte aus einem unbekannten Grund nicht entfernt werden."
+                "\n\nDie Aktion wird abgebrochen."
+            ));
+    }
+
+    QMessageBox::information(
+        this, tr("Mitarbeiter entfernen"), tr("Der Mitarbeiter wurde entfernt."));
+
+    settingsChanged();
+}

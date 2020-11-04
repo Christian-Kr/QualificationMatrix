@@ -1,0 +1,45 @@
+//
+// qmdatabaseupdater.h is part of QualificationMatrix
+//
+// QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of
+// the GNU General Public License as published by the Free Software Foundation, either version 3 of
+// the License, or (at your option) any later version.
+//
+// QualificationMatrix is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+// without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See
+// the GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License along with QualificationMatrix.
+// If not, see <http://www.gnu.org/licenses/>.
+//
+
+#ifndef QMDATABASEUPDATER_H
+#define QMDATABASEUPDATER_H
+
+#include <QObject>
+
+class QSqlDatabase;
+
+class QMDatabaseUpdater: public QObject
+{
+Q_OBJECT
+
+public:
+    explicit QMDatabaseUpdater(QObject *parent = nullptr);
+
+    ~QMDatabaseUpdater();
+
+signals:
+
+    /// \brief always when an update will be send while updating a database
+    /// \param msg what is the progress doing now
+    void updateProgressState(QString msg);
+
+public slots:
+
+    /// \brief includes all steps before and after updating the database
+    /// \param db needs to be opened already
+    bool updateDatabase(QSqlDatabase &db);
+};
+
+#endif // QMDATABASEUPDATER_H

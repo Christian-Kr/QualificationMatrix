@@ -1,0 +1,10 @@
+*.pro
+*.qmsql
+.git
+*.pro.user*
+build
+*.user*
+.vscode
+.DS_Store
+.idea
+cmake-build*

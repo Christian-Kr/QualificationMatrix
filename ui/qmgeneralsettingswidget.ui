@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>QMGeneralSettingsWidget</class>
+ <widget class="QWidget" name="QMGeneralSettingsWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>761</width>
+    <height>487</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="2" column="0">
+    <widget class="QCheckBox" name="cbLoadLastDatabase">
+     <property name="text">
+      <string>Zuletzt geladene Datenbank beim start automatisch laden</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_14">
+     <item>
+      <widget class="QLabel" name="label_12">
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Sprache</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="cbLanguage"/>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_14">
+       <property name="text">
+        <string>(Neustart erforderlich)</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="3" column="0">
+    <widget class="QGroupBox" name="cbCentralizedSettings">
+     <property name="title">
+      <string>&amp;Zentralisierte Einstellungen (Änderungen erfordern einen Neustart der Anwendung)</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_5">
+      <item row="0" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <item>
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>Datei</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="leCentralizedSettingsFile"/>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pbChooseCentralizedSettingsFile">
+          <property name="text">
+           <string>Auswählen</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_15">
+     <item>
+      <widget class="QLabel" name="label_13">
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Aussehen</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="cbStyle"/>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_15">
+       <property name="text">
+        <string>(Neustart erforderlich)</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="4" column="0">
+    <widget class="QGroupBox" name="cbAutoBackup">
+     <property name="title">
+      <string>Automatisches Backup vor &amp;jeder Nutzung erstellen</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_4">
+      <item row="0" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Verzeichnis</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="leBackupPath"/>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pbChoosePath">
+          <property name="text">
+           <string>Auswählen</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="1" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <item>
+         <widget class="QLabel" name="label_3">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Anzahl der vorzuhaltenden Backups</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="spBackupCount"/>
+        </item>
+       </layout>
+      </item>
+      <item row="2" column="0">
+       <widget class="QCheckBox" name="cbAutoBackupDelete">
+        <property name="text">
+         <string>Backups automatisch löschen, wenn die Anzahl der vorzuhaltenden Backups überschritten wird</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>pbChooseCentralizedSettingsFile</sender>
+   <signal>clicked()</signal>
+   <receiver>QMGeneralSettingsWidget</receiver>
+   <slot>chooseCentralizedSettingsFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>680</x>
+     <y>165</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>380</x>
+     <y>243</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbChoosePath</sender>
+   <signal>clicked()</signal>
+   <receiver>QMGeneralSettingsWidget</receiver>
+   <slot>chooseBackupPath()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>680</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>380</x>
+     <y>243</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cbStyle</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>QMGeneralSettingsWidget</receiver>
+   <slot>emitSettingsChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>143</x>
+     <y>27</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>380</x>
+     <y>243</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cbLanguage</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>QMGeneralSettingsWidget</receiver>
+   <slot>emitSettingsChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>143</x>
+     <y>69</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>380</x>
+     <y>243</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cbLoadLastDatabase</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>QMGeneralSettingsWidget</receiver>
+   <slot>emitSettingsChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>383</x>
+     <y>102</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>380</x>
+     <y>243</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cbCentralizedSettings</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>QMGeneralSettingsWidget</receiver>
+   <slot>emitSettingsChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>380</x>
+     <y>157</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>380</x>
+     <y>243</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cbAutoBackupDelete</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>QMGeneralSettingsWidget</receiver>
+   <slot>emitSettingsChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>383</x>
+     <y>321</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>380</x>
+     <y>243</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cbAutoBackup</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>QMGeneralSettingsWidget</receiver>
+   <slot>emitSettingsChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>380</x>
+     <y>274</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>380</x>
+     <y>243</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spBackupCount</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>QMGeneralSettingsWidget</receiver>
+   <slot>emitSettingsChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>714</x>
+     <y>293</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>380</x>
+     <y>243</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>chooseCentralizedSettingsFile()</slot>
+  <slot>chooseBackupPath()</slot>
+  <slot>emitSettingsChanged()</slot>
+ </slots>
+</ui>

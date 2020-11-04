@@ -1,0 +1,122 @@
+cmake_minimum_required(VERSION 3.13.0)
+
+project(QualificationMatrix)
+
+include_directories(${QualificationMatrix_SOURCE_DIR}/src)
+
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+
+set(CMAKE_AUTOUIC_SEARCH_PATHS ui)
+
+if (CMAKE_VERSION VERSION_LESS "3.7.0")
+    set(CMAKE_INCLUDE_CURRENT_DIR ON)
+endif ()
+
+find_package(Qt5 COMPONENTS LinguistTools Widgets Sql PrintSupport REQUIRED)
+
+# Translation
+set(TS_FILES
+    ${CMAKE_CURRENT_SOURCE_DIR}/translations/qm_de.ts
+    ${CMAKE_CURRENT_SOURCE_DIR}/translations/qm_en.ts)
+file(GLOB_RECURSE TS_SOURCES "*.cpp" "*.h" "*.ui")
+
+# Add a custom translation target. ts files will only be updated if explicitly wanted.
+add_custom_target(translations)
+
+foreach (_ts_file ${TS_FILES})
+    get_filename_component(_ts_name ${_ts_file} NAME_WE)
+    add_custom_command(
+        OUTPUT "${_ts_file}"
+        DEPENDS ${TS_SOURCES}
+        COMMAND ${Qt5_LUPDATE_EXECUTABLE} -recursive
+        ${CMAKE_CURRENT_SOURCE_DIR} -ts ${_ts_file})
+
+    # create a target that depends on the generated files
+    add_custom_target(translate_${_ts_name} DEPENDS ${_ts_file})
+
+    # attach the custom target for this ts file to the parent target
+    add_dependencies(translations translate_${_ts_name})
+endforeach ()
+
+qt5_add_translation(QM_FILES ${TS_FILES})
+
+# Create executable and link libraries.
+
+add_executable(QualificationMatrix WIN32
+    icons.qrc
+    src/model/qmdatamanager.cpp
+    src/traindata/datedelegate.cpp
+    src/main.cpp
+    src/general/qmmainwindow.cpp
+    src/delegate/proxysqlrelationaldelegate.cpp
+    src/qualimatrix/qmqualimatrixdelegate.cpp
+    src/qualimatrix/qmqualimatrixheaderview.cpp
+    src/qualimatrix/qmqualimatrixmodel.cpp
+    src/qualimatrix/qmtableview.cpp
+    src/qualiresult/qualiresultmodel.cpp
+    src/qualiresult/qualiresultrecord.cpp
+    src/settings/qmsettingsdialog.cpp
+    src/settings/qmfuncsettingswidget.cpp
+    src/settings/qmemployeesettingswidget.cpp
+    src/settings/qmsettingswidget.cpp
+    src/settings/qmsettings.cpp
+    src/settings/qmapplicationsettings.cpp
+    src/delegate/colorchooserdelegate.cpp
+    src/settings/qmtrainsettingswidget.cpp
+    src/settings/qmdatabasesettings.cpp
+    src/settings/qmgeneralsettingswidget.cpp
+    src/settings/qmqualimatrixsettingswidget.cpp
+    src/settings/qmqualiresultsettingswidget.cpp
+    src/qualimatrix/qmqualimatrixwidget.cpp
+    src/qualiresult/qualiresultwidget.cpp
+    src/traindata/traindatawidget.cpp
+    src/traindata/importcsvdialog.cpp
+    src/model/qmsqlrelationaltablemodel.cpp
+    src/traindata/traindatadialog.cpp
+    src/database/qmdatabasedialog.cpp
+    src/database/qmdatabaseupdater.cpp
+    src/delegate/checkboxdelegate.cpp
+    src/settings/qmemployeedetailsdialog.cpp
+    src/model/functionmodel.cpp
+    src/model/trainingmodel.cpp
+    src/model/trainingdatamodel.cpp
+    src/model/functiongroupmodel.cpp
+    src/model/traininggroupmodel.cpp
+    src/model/trainingdatastatemodel.cpp
+    src/model/employeemodel.cpp
+    src/model/employeefunctionmodel.cpp
+    src/model/qualificationmatrixmodel.cpp
+    src/model/trainingexceptionmodel.cpp
+    src/model/infomodel.cpp
+    src/general/qmprogresslogdialog.cpp
+    ui/qmemployeesettingswidget.ui
+    ui/qmfuncsettingswidget.ui
+    ui/qmmainwindow.ui
+    ui/qmqualimatrixwidget.ui
+    ui/qualiresultwidget.ui
+    ui/qmsettingsdialog.ui
+    ui/traindatawidget.ui
+    ui/qmtrainsettingswidget.ui
+    ui/importcsvdialog.ui
+    ui/traindatadialog.ui
+    ui/qmdatabasedialog.ui
+    ui/qmemployeedetailsdialog.ui
+    ui/qmprogresslogdialog.ui
+    ui/qmgeneralsettingswidget.ui
+    ui/qmqualimatrixsettingswidget.ui
+    ui/qmqualiresultsettingswidget.ui)
+
+# copy database directory to binary
+add_custom_command(
+    TARGET QualificationMatrix PRE_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${CMAKE_SOURCE_DIR}/database $<TARGET_FILE_DIR:QualificationMatrix>/database)
+
+target_sources(QualificationMatrix PRIVATE ${QM_FILES})
+
+target_link_libraries(QualificationMatrix Qt5::Widgets Qt5::Sql Qt5::PrintSupport)

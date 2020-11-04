@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>QMQualiResultSettingsWidget</class>
+ <widget class="QWidget" name="QMQualiResultSettingsWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>590</width>
+    <height>609</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QGroupBox" name="cbQualiResIgnore">
+     <property name="title">
+      <string>Ignoriere Funktionen und Schulungen &amp;mit nachfolgendem Text</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Text</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="leIgnoreText"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pbAddIgnore">
+            <property name="text">
+             <string>Hinzufügen</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pbRemoveIgnore">
+            <property name="text">
+             <string>Entfernen</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QListWidget" name="lwIgnoreList"/>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_11" stretch="2,0">
+     <item>
+      <widget class="QLabel" name="label_9">
+       <property name="text">
+        <string>Hintergrundfarbe für Status &quot;Gut&quot;</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pbOkColor">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="2" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_13" stretch="2,0">
+     <item>
+      <widget class="QLabel" name="label_11">
+       <property name="text">
+        <string>Hintergrundfarbe für Status &quot;Ausreichend&quot;</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pbEnoughColor">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="3" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_12" stretch="2,0">
+     <item>
+      <widget class="QLabel" name="label_10">
+       <property name="text">
+        <string>Hintergrundfarbe für Status &quot;Schlecht&quot;</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pbBadColor">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="4" column="0">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>163</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>cbQualiResIgnore</sender>
+   <signal>clicked()</signal>
+   <receiver>QMQualiResultSettingsWidget</receiver>
+   <slot>emitSettingsChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>294</x>
+     <y>146</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>294</x>
+     <y>304</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbAddIgnore</sender>
+   <signal>clicked()</signal>
+   <receiver>QMQualiResultSettingsWidget</receiver>
+   <slot>addIgnore()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>402</x>
+     <y>53</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>294</x>
+     <y>304</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbOkColor</sender>
+   <signal>clicked()</signal>
+   <receiver>QMQualiResultSettingsWidget</receiver>
+   <slot>changeOkColor()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>539</x>
+     <y>320</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>294</x>
+     <y>304</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbBadColor</sender>
+   <signal>clicked()</signal>
+   <receiver>QMQualiResultSettingsWidget</receiver>
+   <slot>changeBadColor()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>539</x>
+     <y>404</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>294</x>
+     <y>304</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbRemoveIgnore</sender>
+   <signal>clicked()</signal>
+   <receiver>QMQualiResultSettingsWidget</receiver>
+   <slot>removeIgnore()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>511</x>
+     <y>53</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>294</x>
+     <y>304</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbEnoughColor</sender>
+   <signal>clicked()</signal>
+   <receiver>QMQualiResultSettingsWidget</receiver>
+   <slot>changeEnoughColor()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>539</x>
+     <y>362</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>294</x>
+     <y>304</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>emitSettingsChanged()</slot>
+  <slot>changeEnoughColor()</slot>
+  <slot>changeOkColor()</slot>
+  <slot>changeBadColor()</slot>
+  <slot>addIgnore()</slot>
+  <slot>removeIgnore()</slot>
+ </slots>
+</ui>

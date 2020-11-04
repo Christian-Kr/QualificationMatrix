@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>QMSettingsDialog</class>
+ <widget class="QDialog" name="QMSettingsDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>757</width>
+    <height>623</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Einstellungen</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="spacing">
+      <number>10</number>
+     </property>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0">
+       <property name="spacing">
+        <number>20</number>
+       </property>
+       <item>
+        <widget class="QTreeWidget" name="twSettingGroups">
+         <property name="itemsExpandable">
+          <bool>true</bool>
+         </property>
+         <property name="expandsOnDoubleClick">
+          <bool>true</bool>
+         </property>
+         <attribute name="headerVisible">
+          <bool>false</bool>
+         </attribute>
+         <column>
+          <property name="text">
+           <string>Optionen</string>
+          </property>
+         </column>
+        </widget>
+       </item>
+       <item>
+        <widget class="QStackedWidget" name="swSettingGroups">
+         <property name="currentIndex">
+          <number>-1</number>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_9">
+       <item>
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pbAccept">
+         <property name="text">
+          <string>Ok</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pbReject">
+         <property name="text">
+          <string>Abbrechen</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pbApply">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Anwenden</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>pbAccept</sender>
+   <signal>clicked()</signal>
+   <receiver>QMSettingsDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>590</x>
+     <y>525</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>400</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbReject</sender>
+   <signal>clicked()</signal>
+   <receiver>QMSettingsDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>671</x>
+     <y>525</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>400</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbApply</sender>
+   <signal>clicked()</signal>
+   <receiver>QMSettingsDialog</receiver>
+   <slot>apply()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>752</x>
+     <y>525</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>400</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>twSettingGroups</sender>
+   <signal>itemClicked(QTreeWidgetItem*,int)</signal>
+   <receiver>QMSettingsDialog</receiver>
+   <slot>changeSettingsGroup(QTreeWidgetItem*,int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>138</x>
+     <y>256</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>400</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>showSettingGroup(QTreeViewItem*,int)</slot>
+  <slot>apply()</slot>
+  <slot>changeSettingsGroup(QTreeWidgetItem*,int)</slot>
+  <slot>settingsChanged()</slot>
+  <slot>changeGridColor()</slot>
+  <slot>changeSelectionColor()</slot>
+  <slot>addIgnore()</slot>
+  <slot>removeIgnore()</slot>
+  <slot>changeOkColor()</slot>
+  <slot>changeBadColor()</slot>
+  <slot>changeEnoughColor()</slot>
+  <slot>chooseBackupPath()</slot>
+  <slot>chooseCentralizedSettingsFile()</slot>
+  <slot>restartNeededInformation()</slot>
+ </slots>
+</ui>
