@@ -53,7 +53,7 @@ add_executable(QualificationMatrix WIN32
     src/traindata/datedelegate.cpp
     src/main.cpp
     src/general/qmmainwindow.cpp
-    src/delegate/proxysqlrelationaldelegate.cpp
+    src/delegate/qmproxysqlrelationaldelegate.cpp
     src/qualimatrix/qmqualimatrixdelegate.cpp
     src/qualimatrix/qmqualimatrixheaderview.cpp
     src/qualimatrix/qmqualimatrixmodel.cpp
@@ -66,7 +66,7 @@ add_executable(QualificationMatrix WIN32
     src/settings/qmsettingswidget.cpp
     src/settings/qmsettings.cpp
     src/settings/qmapplicationsettings.cpp
-    src/delegate/colorchooserdelegate.cpp
+    src/delegate/qmcolorchooserdelegate.cpp
     src/settings/qmtrainsettingswidget.cpp
     src/settings/qmdatabasesettings.cpp
     src/settings/qmgeneralsettingswidget.cpp
@@ -80,7 +80,7 @@ add_executable(QualificationMatrix WIN32
     src/traindata/traindatadialog.cpp
     src/database/qmdatabasedialog.cpp
     src/database/qmdatabaseupdater.cpp
-    src/delegate/checkboxdelegate.cpp
+    src/delegate/qmcheckboxdelegate.cpp
     src/settings/qmemployeedetailsdialog.cpp
     src/model/qmfunctionmodel.cpp
     src/model/qmtrainingmodel.cpp

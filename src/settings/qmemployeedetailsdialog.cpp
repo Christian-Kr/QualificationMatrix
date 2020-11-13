@@ -16,7 +16,7 @@
 #include "qmemployeedetailsdialog.h"
 #include "ui_qmemployeedetailsdialog.h"
 #include "model/qmdatamanager.h"
-#include "delegate/proxysqlrelationaldelegate.h"
+#include "delegate/qmproxysqlrelationaldelegate.h"
 
 #include <QDebug>
 #include <QInputDialog>
@@ -42,12 +42,12 @@ QMEmployeeDetailsDialog::QMEmployeeDetailsDialog(
     ui->tvEmployeeFunc->horizontalHeader()->setStretchLastSection(true);
     ui->tvEmployeeFunc->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     ui->tvEmployeeFunc->horizontalHeader()->setVisible(false);
-    ui->tvEmployeeFunc->setItemDelegateForColumn(2, new ProxySqlRelationalDelegate());
+    ui->tvEmployeeFunc->setItemDelegateForColumn(2, new QMProxySqlRelationalDelegate());
 
     ui->tvTrainException->horizontalHeader()->setStretchLastSection(false);
     ui->tvTrainException->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     ui->tvTrainException->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft);
-    ui->tvTrainException->setItemDelegateForColumn(2, new ProxySqlRelationalDelegate());
+    ui->tvTrainException->setItemDelegateForColumn(2, new QMProxySqlRelationalDelegate());
 }
 
 QMEmployeeDetailsDialog::~QMEmployeeDetailsDialog()

@@ -18,7 +18,7 @@
 #include "traindatawidget.h"
 #include "ui_traindatawidget.h"
 #include "model/qmdatamanager.h"
-#include "delegate/proxysqlrelationaldelegate.h"
+#include "delegate/qmproxysqlrelationaldelegate.h"
 #include "datedelegate.h"
 #include "importcsvdialog.h"
 #include "importcsvdialog.h"
@@ -88,7 +88,7 @@ void TrainDataWidget::updateData()
     // Update the views.
     ui->tvTrainData->setModel(trainDataStateFilterModel);
     ui->tvTrainData->hideColumn(0);
-    ui->tvTrainData->setItemDelegate(new ProxySqlRelationalDelegate());
+    ui->tvTrainData->setItemDelegate(new QMProxySqlRelationalDelegate());
     ui->tvTrainData->setItemDelegateForColumn(3, new DateDelegate());
 
     ui->cbFilterEmployee->setModel(employeeModel.get());

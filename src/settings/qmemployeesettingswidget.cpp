@@ -16,7 +16,7 @@
 #include "qmemployeesettingswidget.h"
 #include "ui_qmemployeesettingswidget.h"
 #include "model/qmdatamanager.h"
-#include "delegate/proxysqlrelationaldelegate.h"
+#include "delegate/qmproxysqlrelationaldelegate.h"
 #include "qmemployeedetailsdialog.h"
 
 #include <QDebug>
@@ -41,7 +41,7 @@ QMEmployeeSettingsWidget::QMEmployeeSettingsWidget(QWidget *parent)
         QHeaderView::ResizeMode::ResizeToContents
     );
     ui->tvEmployee->verticalHeader()->setVisible(true);
-    ui->tvEmployee->setItemDelegateForColumn(2, new ProxySqlRelationalDelegate());
+    ui->tvEmployee->setItemDelegateForColumn(2, new QMProxySqlRelationalDelegate());
 
     ui->tvEmployeeGroups->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tvEmployeeGroups->verticalHeader()->setVisible(true);

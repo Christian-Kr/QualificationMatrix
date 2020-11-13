@@ -16,8 +16,8 @@
 #include "qmfuncsettingswidget.h"
 #include "ui_qmfuncsettingswidget.h"
 #include "model/qmdatamanager.h"
-#include "delegate/proxysqlrelationaldelegate.h"
-#include "delegate/colorchooserdelegate.h"
+#include "delegate/qmproxysqlrelationaldelegate.h"
+#include "delegate/qmcolorchooserdelegate.h"
 
 #include <QSqlTableModel>
 #include <QMessageBox>
@@ -33,13 +33,13 @@ QMFuncSettingsWidget::QMFuncSettingsWidget(QWidget *parent)
     ui->tvFunc->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     ui->tvFunc->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft);
     ui->tvFunc->verticalHeader()->setVisible(true);
-    ui->tvFunc->setItemDelegateForColumn(2, new ProxySqlRelationalDelegate(this));
+    ui->tvFunc->setItemDelegateForColumn(2, new QMProxySqlRelationalDelegate(this));
 
     ui->tvFuncGroups->horizontalHeader()->setStretchLastSection(false);
     ui->tvFuncGroups->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     ui->tvFuncGroups->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft);
     ui->tvFuncGroups->verticalHeader()->setVisible(true);
-    ui->tvFuncGroups->setItemDelegateForColumn(2, new ColorChooserDelegate(this));
+    ui->tvFuncGroups->setItemDelegateForColumn(2, new QMColorChooserDelegate(this));
 }
 
 QMFuncSettingsWidget::~QMFuncSettingsWidget()

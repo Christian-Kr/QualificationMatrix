@@ -16,9 +16,9 @@
 #include "qmtrainsettingswidget.h"
 #include "ui_qmtrainsettingswidget.h"
 #include "model/qmdatamanager.h"
-#include "delegate/proxysqlrelationaldelegate.h"
-#include "delegate/colorchooserdelegate.h"
-#include "delegate/checkboxdelegate.h"
+#include "delegate/qmproxysqlrelationaldelegate.h"
+#include "delegate/qmcolorchooserdelegate.h"
+#include "delegate/qmcheckboxdelegate.h"
 
 #include <QSqlTableModel>
 #include <QMessageBox>
@@ -34,14 +34,14 @@ QMTrainSettingsWidget::QMTrainSettingsWidget(QWidget *parent)
     ui->tvTrain->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     ui->tvTrain->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft);
     ui->tvTrain->verticalHeader()->setVisible(true);
-    ui->tvTrain->setItemDelegateForColumn(2, new ProxySqlRelationalDelegate(ui->tvTrain));
-    ui->tvTrain->setItemDelegateForColumn(4, new CheckBoxDelegate());
+    ui->tvTrain->setItemDelegateForColumn(2, new QMProxySqlRelationalDelegate(ui->tvTrain));
+    ui->tvTrain->setItemDelegateForColumn(4, new QMCheckBoxDelegate());
 
     ui->tvTrainGroups->horizontalHeader()->setStretchLastSection(false);
     ui->tvTrainGroups->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     ui->tvTrainGroups->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft);
     ui->tvTrainGroups->verticalHeader()->setVisible(true);
-    ui->tvTrainGroups->setItemDelegateForColumn(2, new ColorChooserDelegate(this));
+    ui->tvTrainGroups->setItemDelegateForColumn(2, new QMColorChooserDelegate(this));
 }
 
 QMTrainSettingsWidget::~QMTrainSettingsWidget()

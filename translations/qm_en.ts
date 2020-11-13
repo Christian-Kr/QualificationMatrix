@@ -68,27 +68,6 @@
     </message>
 </context>
 <context>
-    <name>EmployeeFunctionModel</name>
-    <message>
-        <location filename="../src/model/employeefunctionmodel.cpp" line="30"/>
-        <source>Funktion</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>EmployeeModel</name>
-    <message>
-        <location filename="../src/model/employeemodel.cpp" line="29"/>
-        <source>Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/model/employeemodel.cpp" line="30"/>
-        <source>Gruppe</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>EmployeeWidget</name>
     <message>
         <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_employeewidget.h" line="256"/>
@@ -153,32 +132,6 @@
     <message>
         <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_employeewidget.h" line="283"/>
         <source>Entfernen einer selektierten Funktionsgruppe</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>FunctionGroupModel</name>
-    <message>
-        <location filename="../src/model/functiongroupmodel.cpp" line="28"/>
-        <source>Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/model/functiongroupmodel.cpp" line="29"/>
-        <source>Farbe</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>FunctionModel</name>
-    <message>
-        <location filename="../src/model/functionmodel.cpp" line="31"/>
-        <source>Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/model/functionmodel.cpp" line="32"/>
-        <source>Gruppe</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -367,19 +320,6 @@ Die Aktion wird abgebrochen.</source>
         <source>Sie verfügen über keine Schreiberechtigungne für die Backup-Datei. Bitte überprüfen Sie die Berechtigungen.
 
 Die Aktion wird abgebrochen.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>InfoModel</name>
-    <message>
-        <location filename="../src/model/infomodel.cpp" line="26"/>
-        <source>Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/model/infomodel.cpp" line="27"/>
-        <source>Wert</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -647,6 +587,27 @@ Die Aktion wird abgebrochen.</source>
         <source>Bitte selektieren Sie genau eine Ausnahme um Sie zu entfernen.
 
 Die Aktion wird abgebrochen.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QMEmployeeFunctionModel</name>
+    <message>
+        <location filename="../src/model/qmemployeefunctionmodel.cpp" line="30"/>
+        <source>Funktion</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QMEmployeeModel</name>
+    <message>
+        <location filename="../src/model/qmemployeemodel.cpp" line="29"/>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/model/qmemployeemodel.cpp" line="30"/>
+        <source>Gruppe</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -946,6 +907,32 @@ Sind Sie sich sicher?</source>
     </message>
 </context>
 <context>
+    <name>QMFunctionGroupModel</name>
+    <message>
+        <location filename="../src/model/qmfunctiongroupmodel.cpp" line="28"/>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/model/qmfunctiongroupmodel.cpp" line="29"/>
+        <source>Farbe</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QMFunctionModel</name>
+    <message>
+        <location filename="../src/model/qmfunctionmodel.cpp" line="31"/>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/model/qmfunctionmodel.cpp" line="32"/>
+        <source>Gruppe</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QMGeneralSettingsWidget</name>
     <message>
         <location filename="../ui/qmgeneralsettingswidget.ui" line="14"/>
@@ -1031,6 +1018,19 @@ Sind Sie sich sicher?</source>
     <message>
         <location filename="../src/settings/qmgeneralsettingswidget.cpp" line="120"/>
         <source>Backupverzeichnis öffnen</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QMInfoModel</name>
+    <message>
+        <location filename="../src/model/qminfomodel.cpp" line="26"/>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/model/qminfomodel.cpp" line="27"/>
+        <source>Wert</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1513,6 +1513,24 @@ Die Aktion wird abgebrochen.</source>
     </message>
 </context>
 <context>
+    <name>QMQualificationMatrixModel</name>
+    <message>
+        <location filename="../src/model/qmqualificationmatrixmodel.cpp" line="29"/>
+        <source>Funktion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/model/qmqualificationmatrixmodel.cpp" line="31"/>
+        <source>Schulung</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/model/qmqualificationmatrixmodel.cpp" line="33"/>
+        <source>Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QMSettingsDialog</name>
     <message>
         <location filename="../ui/qmsettingsdialog.ui" line="14"/>
@@ -1829,6 +1847,96 @@ Sind Sie sich sicher?</source>
     </message>
 </context>
 <context>
+    <name>QMTrainingDataModel</name>
+    <message>
+        <location filename="../src/model/qmtrainingdatamodel.cpp" line="29"/>
+        <source>Mitarbeiter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/model/qmtrainingdatamodel.cpp" line="31"/>
+        <source>Schulung</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/model/qmtrainingdatamodel.cpp" line="33"/>
+        <source>Schulungsdatum</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/model/qmtrainingdatamodel.cpp" line="34"/>
+        <source>Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/model/qmtrainingdatamodel.cpp" line="36"/>
+        <source>Datei</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QMTrainingDataStateModel</name>
+    <message>
+        <location filename="../src/model/qmtrainingdatastatemodel.cpp" line="28"/>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QMTrainingExceptionModel</name>
+    <message>
+        <location filename="../src/model/qmtrainingexceptionmodel.cpp" line="28"/>
+        <source>Mitarbeiter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/model/qmtrainingexceptionmodel.cpp" line="30"/>
+        <source>Schulung</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/model/qmtrainingexceptionmodel.cpp" line="32"/>
+        <source>Erläuterung</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QMTrainingGroupModel</name>
+    <message>
+        <location filename="../src/model/qmtraininggroupmodel.cpp" line="28"/>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/model/qmtraininggroupmodel.cpp" line="29"/>
+        <source>Farbe</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QMTrainingModel</name>
+    <message>
+        <location filename="../src/model/qmtrainingmodel.cpp" line="29"/>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/model/qmtrainingmodel.cpp" line="30"/>
+        <source>Gruppe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/model/qmtrainingmodel.cpp" line="32"/>
+        <source>Intervall</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/model/qmtrainingmodel.cpp" line="33"/>
+        <source>Rechtlich Notwendig</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QualiMatrixModel</name>
     <message>
         <location filename="../src/qualimatrix/qmqualimatrixmodel.cpp" line="145"/>
@@ -2001,24 +2109,6 @@ Aktion wird abgebrochen.</source>
     <message>
         <location filename="../src/qualiresult/qualiresultwidget.cpp" line="216"/>
         <source>Die Daten wurden erfolgreich gespeichert.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>QualificationMatrixModel</name>
-    <message>
-        <location filename="../src/model/qualificationmatrixmodel.cpp" line="29"/>
-        <source>Funktion</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/model/qualificationmatrixmodel.cpp" line="31"/>
-        <source>Schulung</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/model/qualificationmatrixmodel.cpp" line="33"/>
-        <source>Status</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2320,96 +2410,6 @@ Die Aktion wird abgebrochen.</source>
         <source>Aktuell sind mehrere Einträge selektiert, bitte selektieren Sie genau einen Eintrag zum Löschen.
 
 Die Aktion wird abgebrochen.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TrainingDataModel</name>
-    <message>
-        <location filename="../src/model/trainingdatamodel.cpp" line="29"/>
-        <source>Mitarbeiter</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/model/trainingdatamodel.cpp" line="31"/>
-        <source>Schulung</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/model/trainingdatamodel.cpp" line="33"/>
-        <source>Schulungsdatum</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/model/trainingdatamodel.cpp" line="34"/>
-        <source>Status</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/model/trainingdatamodel.cpp" line="36"/>
-        <source>Datei</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TrainingDataStateModel</name>
-    <message>
-        <location filename="../src/model/trainingdatastatemodel.cpp" line="28"/>
-        <source>Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TrainingExceptionModel</name>
-    <message>
-        <location filename="../src/model/trainingexceptionmodel.cpp" line="28"/>
-        <source>Mitarbeiter</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/model/trainingexceptionmodel.cpp" line="30"/>
-        <source>Schulung</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/model/trainingexceptionmodel.cpp" line="32"/>
-        <source>Erläuterung</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TrainingGroupModel</name>
-    <message>
-        <location filename="../src/model/traininggroupmodel.cpp" line="28"/>
-        <source>Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/model/traininggroupmodel.cpp" line="29"/>
-        <source>Farbe</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TrainingModel</name>
-    <message>
-        <location filename="../src/model/trainingmodel.cpp" line="29"/>
-        <source>Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/model/trainingmodel.cpp" line="30"/>
-        <source>Gruppe</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/model/trainingmodel.cpp" line="32"/>
-        <source>Intervall</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/model/trainingmodel.cpp" line="33"/>
-        <source>Rechtlich Notwendig</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
