@@ -1,31 +1,25 @@
 //
-// traindatawidget.cpp is part of QualificationMatrix
+// qmtraindatawidget.cpp is part of QualificationMatrix
 //
-// QualificationMatrix is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
+// QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of
+// the GNU General Public License as published by the Free Software Foundation, either version 3 of
+// the License, or (at your option) any later version.
 //
-// QualificationMatrix is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
+// QualificationMatrix is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+// without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See
+// the GNU General Public License for more details.
 //
-// You should have received a copy of the GNU General Public License
-// along with QualificationMatrix.  If not, see <http://www.gnu.org/licenses/>.
+// You should have received a copy of the GNU General Public License along with QualificationMatrix.
+// If not, see <http://www.gnu.org/licenses/>.
 //
 
-#include "traindatawidget.h"
-#include "ui_traindatawidget.h"
+#include "qmtraindatawidget.h"
+#include "ui_qmtraindatawidget.h"
 #include "model/qmdatamanager.h"
 #include "delegate/qmproxysqlrelationaldelegate.h"
-#include "datedelegate.h"
-#include "importcsvdialog.h"
-#include "importcsvdialog.h"
-#include "model/qmsqlrelationaltablemodel.h"
+#include "qmdatedelegate.h"
+#include "qmimportcsvdialog.h"
 
-#include <QSqlRelationalTableModel>
-#include <QSqlTableModel>
 #include <QMessageBox>
 #include <QDebug>
 #include <QSqlRecord>
@@ -34,12 +28,12 @@
 #include <QSortFilterProxyModel>
 #include <QProgressDialog>
 
-TrainDataWidget::TrainDataWidget(QWidget *parent)
-    : QWidget(parent), ui(new Ui::TrainDataWidget), employeeModel(nullptr), trainModel(nullptr),
-      trainDataModel(nullptr), trainDataStateModel(nullptr),
-      employeeFilterModel(new QSortFilterProxyModel(this)),
-      trainFilterModel(new QSortFilterProxyModel(this)),
-      trainDataStateFilterModel(new QSortFilterProxyModel(this)), progressDialog(nullptr)
+QMTrainDataWidget::QMTrainDataWidget(QWidget *parent)
+    : QWidget(parent), ui(new Ui::QMTrainDataWidget), employeeModel(nullptr), trainModel(nullptr),
+    trainDataModel(nullptr), trainDataStateModel(nullptr),
+    employeeFilterModel(new QSortFilterProxyModel(this)),
+    trainFilterModel(new QSortFilterProxyModel(this)),
+    trainDataStateFilterModel(new QSortFilterProxyModel(this)), progressDialog(nullptr)
 {
     ui->setupUi(this);
 
@@ -49,24 +43,22 @@ TrainDataWidget::TrainDataWidget(QWidget *parent)
     ui->tvTrainData->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft);
 
     // Connect to data manager, to know when model reinitialization has been done.
-    connect(
-        QMDataManager::getInstance(), &QMDataManager::modelsInitialized, this,
-        &TrainDataWidget::updateData
-    );
+    connect(QMDataManager::getInstance(), &QMDataManager::modelsInitialized, this,
+        &QMTrainDataWidget::updateData);
 }
 
-TrainDataWidget::~TrainDataWidget()
+QMTrainDataWidget::~QMTrainDataWidget()
 {
     delete ui;
 }
 
-void TrainDataWidget::importCsv()
+void QMTrainDataWidget::importCsv()
 {
-    ImportCsvDialog importDialog(this);
+    QMImportCsvDialog importDialog(this);
     importDialog.exec();
 }
 
-void TrainDataWidget::updateData()
+void QMTrainDataWidget::updateData()
 {
     // Get the model data.
     auto dm = QMDataManager::getInstance();
@@ -103,39 +95,39 @@ void TrainDataWidget::updateData()
     resetFilter();
 }
 
-void TrainDataWidget::updateFilter()
+void QMTrainDataWidget::updateFilter()
 {
     trainFilterModel->setFilterFixedString(ui->cbFilterTrain->currentText());
     trainDataStateFilterModel->setFilterFixedString(ui->cbFilterState->currentText());
     employeeFilterModel->setFilterFixedString(ui->cbFilterEmployee->currentText());
 }
 
-void TrainDataWidget::resetFilter()
+void QMTrainDataWidget::resetFilter()
 {
     ui->cbFilterEmployee->setCurrentText("");
     ui->cbFilterTrain->setCurrentText("");
     ui->cbFilterState->setCurrentText("");
 }
 
-void TrainDataWidget::addSingleEntry()
+void QMTrainDataWidget::addSingleEntry()
 {
-    if (trainModel->rowCount() < 1 || employeeModel->rowCount() < 1) {
+    if (trainModel->rowCount() < 1 || employeeModel->rowCount() < 1)
+    {
         QMessageBox::critical(
-            this, tr("Eintrag hinzufügen"), tr(
-                "Es gibt keine definierte Schulung und/oder keinen definierten Mitarbeiter."
-                " Bitte definieren Sie beides zuerst in den Einstellungen."
-                "\n\nDie Aktion wird abgebrochen."
-            ));
+            this, tr("Eintrag hinzufügen"),
+            tr("Es gibt keine definierte Schulung und/oder keinen definierten Mitarbeiter."
+               " Bitte definieren Sie beides zuerst in den Einstellungen."
+               "\n\nDie Aktion wird abgebrochen."));
         return;
     }
 
-    if (trainDataStateModel->rowCount() < 1) {
+    if (trainDataStateModel->rowCount() < 1)
+    {
         QMessageBox::critical(
-            this, tr("Eintrag hinzufügen"), tr(
-                "Es gibt keinen Status der zugeordnet werden könnte. Bitte definieren Sie"
-                " in den Einstellungen zuerst einen Status für die Schulungseinträge."
-                "\n\nDie Aktion wird abgebrochen."
-            ));
+            this, tr("Eintrag hinzufügen"),
+            tr("Es gibt keinen Status der zugeordnet werden könnte. Bitte definieren Sie"
+               " in den Einstellungen zuerst einen Status für die Schulungseinträge."
+               "\n\nDie Aktion wird abgebrochen."));
         return;
     }
 
@@ -150,14 +142,16 @@ void TrainDataWidget::addSingleEntry()
     // Get the current number and add the entry.
     int selRow = trainDataModel->rowCount();
     QModelIndexList selIdxList = ui->tvTrainData->selectionModel()->selectedRows();
-    if (!selIdxList.isEmpty()) {
+    if (!selIdxList.isEmpty())
+    {
         selRow = selIdxList.first().row();
     }
     trainDataModel->insertRow(selRow, QModelIndex());
 
     // If only one line exist. Add a new line with default values. If there are more than one line
     // available, user the values of the last entry as default.
-    if (trainDataModel->rowCount() == 1 || selRow == 0) {
+    if (trainDataModel->rowCount() == 1 || selRow == 0)
+    {
         trainDataModel->setData(
             trainDataModel->index(selRow, 1), employeeModel->data(employeeModel->index(0, 0)));
         trainDataModel->setData(
@@ -167,12 +161,14 @@ void TrainDataWidget::addSingleEntry()
             trainDataModel->index(selRow, 4),
             trainDataStateModel->data(trainDataStateModel->index(0, 0)));
     }
-    else {
+    else
+    {
         QModelIndexList indexes = employeeModel->match(
             employeeModel->index(0, employeeModel->fieldIndex("name")), Qt::DisplayRole,
             trainDataModel->data(trainDataModel->index(selRow - 1, 1)), Qt::MatchFixedString
         );
-        if (indexes.size() == 1) {
+        if (indexes.size() == 1)
+        {
             trainDataModel->setData(
                 trainDataModel->index(selRow, 1),
                 employeeModel->data(employeeModel->index(indexes.first().row(), 0)));
@@ -182,7 +178,8 @@ void TrainDataWidget::addSingleEntry()
             trainModel->index(0, trainModel->fieldIndex("name")), Qt::DisplayRole,
             trainDataModel->data(trainDataModel->index(selRow - 1, 2)), Qt::MatchFixedString
         );
-        if (indexes.size() == 1) {
+        if (indexes.size() == 1)
+        {
             trainDataModel->setData(
                 trainDataModel->index(selRow, 2),
                 trainModel->data(trainModel->index(indexes.first().row(), 0)));
@@ -195,7 +192,8 @@ void TrainDataWidget::addSingleEntry()
             trainDataStateModel->index(0, trainModel->fieldIndex("name")), Qt::DisplayRole,
             trainDataModel->data(trainDataModel->index(selRow - 1, 4)), Qt::MatchFixedString
         );
-        if (indexes.size() == 1) {
+        if (indexes.size() == 1)
+        {
             trainDataModel->setData(
                 trainDataModel->index(selRow, 4),
                 trainDataStateModel->data(trainDataStateModel->index(indexes.first().row(), 0)));
@@ -206,26 +204,26 @@ void TrainDataWidget::addSingleEntry()
     ui->tvTrainData->selectRow(selRow);
 }
 
-void TrainDataWidget::deleteSelected()
+void QMTrainDataWidget::deleteSelected()
 {
     // For the seletion of entries in train data, there is no special need of restriction. Cause
     // there is no table in the structure that is connected ti primary key of it.
     QModelIndexList idxList = ui->tvTrainData->selectionModel()->selectedRows();
-    if (idxList.isEmpty()) {
+    if (idxList.isEmpty())
+    {
         QMessageBox::information(
-            this, tr("Eintrag löschen"), tr(
-                "Es muss zumindest ein Eintrag selektiert werden, der gelöscht werden kann."
-                "\n\nDie Aktion wird abgebrochen."
-            ));
+            this, tr("Eintrag löschen"),
+            tr("Es muss zumindest ein Eintrag selektiert werden, der gelöscht werden kann."
+               "\n\nDie Aktion wird abgebrochen."));
         return;
     }
 
-    if (idxList.size() != 1) {
+    if (idxList.size() != 1)
+    {
         QMessageBox::information(
-            this, tr("Eintrag löschen"), tr(
-                "Aktuell sind mehrere Einträge selektiert, bitte selektieren Sie genau einen"
-                " Eintrag zum Löschen.\n\nDie Aktion wird abgebrochen."
-            ));
+            this, tr("Eintrag löschen"),
+            tr("Aktuell sind mehrere Einträge selektiert, bitte selektieren Sie genau einen"
+               " Eintrag zum Löschen.\n\nDie Aktion wird abgebrochen."));
         return;
     }
 

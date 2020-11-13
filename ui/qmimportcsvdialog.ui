@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ImportCsvDialog</class>
- <widget class="QDialog" name="ImportCsvDialog">
+ <class>QMImportCsvDialog</class>
+ <widget class="QDialog" name="QMImportCsvDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -376,7 +376,7 @@ color: rgb(115, 115, 115);</string>
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>ImportCsvDialog</receiver>
+   <receiver>QMImportCsvDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -392,7 +392,7 @@ color: rgb(115, 115, 115);</string>
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>ImportCsvDialog</receiver>
+   <receiver>QMImportCsvDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -408,7 +408,7 @@ color: rgb(115, 115, 115);</string>
   <connection>
    <sender>pbOpenImportFile</sender>
    <signal>clicked()</signal>
-   <receiver>ImportCsvDialog</receiver>
+   <receiver>QMImportCsvDialog</receiver>
    <slot>openImportFile()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -424,7 +424,7 @@ color: rgb(115, 115, 115);</string>
   <connection>
    <sender>pbOpenBackupFile</sender>
    <signal>clicked()</signal>
-   <receiver>ImportCsvDialog</receiver>
+   <receiver>QMImportCsvDialog</receiver>
    <slot>openBackupFile()</slot>
    <hints>
     <hint type="sourcelabel">

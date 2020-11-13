@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>QualiResultWidget</class>
- <widget class="QWidget" name="QualiResultWidget">
+ <class>QMQualiResultWidget</class>
+ <widget class="QWidget" name="QMQualiResultWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -358,7 +358,7 @@
   <connection>
    <sender>tbSaveToPDF</sender>
    <signal>clicked()</signal>
-   <receiver>QualiResultWidget</receiver>
+   <receiver>QMQualiResultWidget</receiver>
    <slot>printToPDF()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -374,7 +374,7 @@
   <connection>
    <sender>tbSaveToCsv</sender>
    <signal>clicked()</signal>
-   <receiver>QualiResultWidget</receiver>
+   <receiver>QMQualiResultWidget</receiver>
    <slot>saveToCsv()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -390,7 +390,7 @@
   <connection>
    <sender>tbFilterVisible</sender>
    <signal>clicked()</signal>
-   <receiver>QualiResultWidget</receiver>
+   <receiver>QMQualiResultWidget</receiver>
    <slot>switchFilterVisibility()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -406,7 +406,7 @@
   <connection>
    <sender>tbFilterReset</sender>
    <signal>clicked()</signal>
-   <receiver>QualiResultWidget</receiver>
+   <receiver>QMQualiResultWidget</receiver>
    <slot>resetFilter()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -422,7 +422,7 @@
   <connection>
    <sender>tbUpdate</sender>
    <signal>clicked()</signal>
-   <receiver>QualiResultWidget</receiver>
+   <receiver>QMQualiResultWidget</receiver>
    <slot>updateFilterAndCalculate()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -438,7 +438,7 @@
   <connection>
    <sender>dwFilter</sender>
    <signal>visibilityChanged(bool)</signal>
-   <receiver>QualiResultWidget</receiver>
+   <receiver>QMQualiResultWidget</receiver>
    <slot>filterVisibilityChanged()</slot>
    <hints>
     <hint type="sourcelabel">

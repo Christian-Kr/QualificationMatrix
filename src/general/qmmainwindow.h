@@ -28,7 +28,7 @@ QT_END_NAMESPACE
 
 // Forward declarations
 class QProgressDialog;
-class QualiResultWidget;
+class QMQualiResultWidget;
 class QMQualiMatrixWidget;
 class QTranslator;
 
@@ -138,7 +138,7 @@ private:
     Ui::QMMainWindow *ui;
 
     std::unique_ptr<QProgressDialog> progressDialog;
-    std::unique_ptr<QualiResultWidget> qualiResultWidget;
+    std::unique_ptr<QMQualiResultWidget> qualiResultWidget;
     std::unique_ptr<QMQualiMatrixWidget> qualiMatrixWidget;
 };
 

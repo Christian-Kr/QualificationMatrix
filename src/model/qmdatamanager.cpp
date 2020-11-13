@@ -15,7 +15,7 @@
 
 #include "qmdatamanager.h"
 #include "qualimatrix/qmqualimatrixmodel.h"
-#include "qualiresult/qualiresultmodel.h"
+#include "qualiresult/qmqualiresultmodel.h"
 #include "qmsqlrelationaltablemodel.h"
 #include "qmfunctionmodel.h"
 #include "qmtrainingmodel.h"
@@ -48,7 +48,7 @@ QMDataManager *QMDataManager::instance = nullptr;
 QMDataManager::QMDataManager()
     : QObject()
 {
-    qualiResultModel = std::make_shared<QualiResultModel>();
+    qualiResultModel = std::make_shared<QMQualiResultModel>();
     qualiMatrixModel = std::make_shared<QualiMatrixModel>();
 }
 

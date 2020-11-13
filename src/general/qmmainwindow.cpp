@@ -19,12 +19,12 @@
 #include "settings/qmsettingsdialog.h"
 #include "qualimatrix/qmqualimatrixmodel.h"
 #include "qualimatrix/qmqualimatrixheaderview.h"
-#include "qualiresult/qualiresultmodel.h"
+#include "qualiresult/qmqualiresultmodel.h"
 #include "model/qmdatamanager.h"
 #include "qualimatrix/qmqualimatrixwidget.h"
-#include "qualiresult/qualiresultwidget.h"
+#include "qualiresult/qmqualiresultwidget.h"
 #include "settings/qmapplicationsettings.h"
-#include "traindata/traindatadialog.h"
+#include "traindata/qmtraindatadialog.h"
 #include "database/qmdatabasedialog.h"
 
 #include <QProgressDialog>
@@ -55,7 +55,7 @@ QMMainWindow::QMMainWindow(QWidget *parent)
     ui->setupUi(this);
 
     // Creating widgets here, doesn't mean they will be shown on startup.
-    qualiResultWidget = std::make_unique<QualiResultWidget>();
+    qualiResultWidget = std::make_unique<QMQualiResultWidget>();
     qualiMatrixWidget = std::make_unique<QMQualiMatrixWidget>();
 
     initConnections();
@@ -317,15 +317,15 @@ void QMMainWindow::afterInitializeModels()
         &QMMainWindow::closeProgress);
 
     connect(
-        dm->getQualiResultModel().get(), &QualiResultModel::beforeUpdateQualiInfo, this,
+        dm->getQualiResultModel().get(), &QMQualiResultModel::beforeUpdateQualiInfo, this,
         &QMMainWindow::beforeQualiResultCalculation);
 
     connect(
-        dm->getQualiResultModel().get(), &QualiResultModel::updateUpdateQualiInfo, this,
+        dm->getQualiResultModel().get(), &QMQualiResultModel::updateUpdateQualiInfo, this,
         &QMMainWindow::updateProgress);
 
     connect(
-        dm->getQualiResultModel().get(), &QualiResultModel::afterUpdateQualiInfo, this,
+        dm->getQualiResultModel().get(), &QMQualiResultModel::afterUpdateQualiInfo, this,
         &QMMainWindow::closeProgress);
 
     // After the models have been initialized and connected, the widgets need to be set up.
@@ -491,12 +491,12 @@ void QMMainWindow::saveSettings()
 void QMMainWindow::showTrainData()
 {
     auto &settings = QMApplicationSettings::getInstance();
-    auto varWidth = settings.read("TrainDataDialog/Width");
+    auto varWidth = settings.read("QMTrainDataDialog/Width");
     auto width = (varWidth.isNull()) ? 400 : varWidth.toInt();
-    auto varHeight = settings.read("TrainDataDialog/Height");
+    auto varHeight = settings.read("QMTrainDataDialog/Height");
     auto height = (varHeight.isNull()) ? 400 : varHeight.toInt();
 
-    TrainDataDialog trainDataDialog(this);
+    QMTrainDataDialog trainDataDialog(this);
     trainDataDialog.resize(width, height);
     trainDataDialog.setModal(true);
     trainDataDialog.exec();

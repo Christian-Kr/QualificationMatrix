@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>TrainDataWidget</class>
- <widget class="QWidget" name="TrainDataWidget">
+ <class>QMTrainDataWidget</class>
+ <widget class="QWidget" name="QMTrainDataWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -269,7 +269,7 @@
   <connection>
    <sender>tbFilterReset</sender>
    <signal>clicked()</signal>
-   <receiver>TrainDataWidget</receiver>
+   <receiver>QMTrainDataWidget</receiver>
    <slot>resetFilter()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -285,7 +285,7 @@
   <connection>
    <sender>tbFilter</sender>
    <signal>clicked()</signal>
-   <receiver>TrainDataWidget</receiver>
+   <receiver>QMTrainDataWidget</receiver>
    <slot>updateFilter()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -301,7 +301,7 @@
   <connection>
    <sender>tbAddSingle</sender>
    <signal>clicked()</signal>
-   <receiver>TrainDataWidget</receiver>
+   <receiver>QMTrainDataWidget</receiver>
    <slot>addSingleEntry()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -317,7 +317,7 @@
   <connection>
    <sender>tbDeleteSelected</sender>
    <signal>clicked()</signal>
-   <receiver>TrainDataWidget</receiver>
+   <receiver>QMTrainDataWidget</receiver>
    <slot>deleteSelected()</slot>
    <hints>
     <hint type="sourcelabel">

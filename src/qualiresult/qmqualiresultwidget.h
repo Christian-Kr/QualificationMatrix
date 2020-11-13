@@ -1,5 +1,5 @@
 //
-// qualiresultwidget.h is part of QualificationMatrix
+// qmqualiresultwidget.h is part of QualificationMatrix
 //
 // QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of
 // the GNU General Public License as published by the Free Software Foundation, either version 3 of
@@ -13,105 +13,76 @@
 // If not, see <http://www.gnu.org/licenses/>.
 //
 
-#ifndef QUALIRESULTWIDGET_H
-#define QUALIRESULTWIDGET_H
+#ifndef QMQUALIRESULTWIDGET_H
+#define QMQUALIRESULTWIDGET_H
 
 #include <QWidget>
 
 #include <memory>
 
 // Forward declaration for faster compiling.
-class QualiResultModel;
-
+class QMQualiResultModel;
 class QSqlRelationalTableModel;
-
 class QSortFilterProxyModel;
-
 class QProgressDialog;
-
 class QSqlTableModel;
-
 class QPrinter;
 
 namespace Ui
 {
-class QualiResultWidget;
+class QMQualiResultWidget;
 }
 
-/**
- * @brief Display the results of qualification.
- * @author Christian Kr, Copyright (c) 2020
- */
-class QualiResultWidget: public QWidget
+/// Display the results of qualification.
+/// \author Christian Kr, Copyright 2020
+class QMQualiResultWidget: public QWidget
 {
 Q_OBJECT
 
 public:
-    /**
-     * @brief Constructor
-     * @param parent
-     */
-    explicit QualiResultWidget(QWidget *parent = nullptr);
+    /// Constructor
+    /// \param parent
+    explicit QMQualiResultWidget(QWidget *parent = nullptr);
 
-    ~QualiResultWidget() override;
+    /// Destructor
+    ~QMQualiResultWidget() override;
 
 public slots:
-
-    /**
-     * @brief Prints the qualification result to a pdf file.
-     */
+    /// Prints the qualification result to a pdf file.
     void printToPDF();
 
-    /**
-     * @brief Save table to csv file.
-     */
+    /// Save table to csv file.
     void saveToCsv();
 
-    /**
-     * @brief Update calculation with all filters.
-     */
+    /// Update calculation with all filters.
     void updateFilterAndCalculate();
 
-    /**
-     * @brief Update the models, cause they might have changed.
-     */
+    /// Update the models, cause they might have changed.
     void updateData();
 
-    /**
-     * @brief Show or hide filter elements.
-     */
+    /// Show or hide filter elements.
     void switchFilterVisibility();
 
-    /**
-     * @brief Empty the text in all filters.
-     */
+    /// Empty the text in all filters.
     void resetFilter();
 
-    /**
-     * @brief Load settings for ui.
-     */
+    /// Load settings for ui.
     void loadSettings();
 
-    /**
-     * @brief Resets the model.
-     */
+    /// Resets the model.
     void resetModel();
 
-    /**
-     * @brief Called when the visibility of the filter dock widget changed.
-     */
+    /// Called when the visibility of the filter dock widget changed.
     void filterVisibilityChanged();
 
 private:
-    /**
-     * @brief Create printer for pdf.
-     * @param printer The printer object to draw an.
-     */
+    /// Create printer for pdf.
+    /// \param printer The printer object to draw an.
     void paintPdfRequest(QPrinter *printer);
 
-    Ui::QualiResultWidget *ui;
+    Ui::QMQualiResultWidget *ui;
 
-    std::shared_ptr<QualiResultModel> qualiResultModel;
+    std::shared_ptr<QMQualiResultModel> qualiResultModel;
     std::shared_ptr<QSqlRelationalTableModel> funcModel;
     std::shared_ptr<QSqlRelationalTableModel> trainModel;
     std::shared_ptr<QSqlRelationalTableModel> employeeModel;
@@ -122,4 +93,4 @@ private:
     QSortFilterProxyModel *qualiResultFilterTState;
 };
 
-#endif // QUALIRESULTWIDGET_H
+#endif // QMQUALIRESULTWIDGET_H

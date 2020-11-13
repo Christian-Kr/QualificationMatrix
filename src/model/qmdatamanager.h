@@ -23,7 +23,7 @@
 class QSqlRelationalTableModel;
 class QSqlDatabase;
 class QSqlTableModel;
-class QualiResultModel;
+class QMQualiResultModel;
 class QualiMatrixModel;
 
 // Typedefs
@@ -91,7 +91,7 @@ public:
     sp_tableModel getFuncGroupModel() { return funcGroupModel; }
     sp_relTableModel getEmployeeModel() { return employeeModel; }
     sp_relTableModel getEmployeeFuncModel() { return employeeFuncModel; }
-    std::shared_ptr<QualiResultModel> getQualiResultModel() { return qualiResultModel; }
+    std::shared_ptr<QMQualiResultModel> getQualiResultModel() { return qualiResultModel; }
     std::shared_ptr<QualiMatrixModel> getQualiMatrixModel() { return qualiMatrixModel; }
     sp_relTableModel getQualiModel() { return qualiModel; }
     sp_relTableModel getTrainExceptionModel() { return trainExceptionModel; }
@@ -126,7 +126,7 @@ private:
 
     // These models are custom ones. They won't get updated as an object itself, but they are based
     // on the basic models above. So the basic models have to be updated inside the quali models.
-    std::shared_ptr<QualiResultModel> qualiResultModel;
+    std::shared_ptr<QMQualiResultModel> qualiResultModel;
     std::shared_ptr<QualiMatrixModel> qualiMatrixModel;
 
 signals:

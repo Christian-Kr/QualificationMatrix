@@ -50,7 +50,7 @@ qt5_add_translation(QM_FILES ${TS_FILES})
 add_executable(QualificationMatrix WIN32
     icons.qrc
     src/model/qmdatamanager.cpp
-    src/traindata/datedelegate.cpp
+    src/traindata/qmdatedelegate.cpp
     src/main.cpp
     src/general/qmmainwindow.cpp
     src/delegate/qmproxysqlrelationaldelegate.cpp
@@ -58,8 +58,8 @@ add_executable(QualificationMatrix WIN32
     src/qualimatrix/qmqualimatrixheaderview.cpp
     src/qualimatrix/qmqualimatrixmodel.cpp
     src/qualimatrix/qmtableview.cpp
-    src/qualiresult/qualiresultmodel.cpp
-    src/qualiresult/qualiresultrecord.cpp
+    src/qualiresult/qmqualiresultmodel.cpp
+    src/qualiresult/qmqualiresultrecord.cpp
     src/settings/qmsettingsdialog.cpp
     src/settings/qmfuncsettingswidget.cpp
     src/settings/qmemployeesettingswidget.cpp
@@ -73,11 +73,11 @@ add_executable(QualificationMatrix WIN32
     src/settings/qmqualimatrixsettingswidget.cpp
     src/settings/qmqualiresultsettingswidget.cpp
     src/qualimatrix/qmqualimatrixwidget.cpp
-    src/qualiresult/qualiresultwidget.cpp
-    src/traindata/traindatawidget.cpp
-    src/traindata/importcsvdialog.cpp
+    src/qualiresult/qmqualiresultwidget.cpp
+    src/traindata/qmtraindatawidget.cpp
+    src/traindata/qmimportcsvdialog.cpp
     src/model/qmsqlrelationaltablemodel.cpp
-    src/traindata/traindatadialog.cpp
+    src/traindata/qmtraindatadialog.cpp
     src/database/qmdatabasedialog.cpp
     src/database/qmdatabaseupdater.cpp
     src/delegate/qmcheckboxdelegate.cpp
@@ -98,12 +98,12 @@ add_executable(QualificationMatrix WIN32
     ui/qmfuncsettingswidget.ui
     ui/qmmainwindow.ui
     ui/qmqualimatrixwidget.ui
-    ui/qualiresultwidget.ui
+    ui/qmqualiresultwidget.ui
     ui/qmsettingsdialog.ui
-    ui/traindatawidget.ui
+    ui/qmtraindatawidget.ui
     ui/qmtrainsettingswidget.ui
-    ui/importcsvdialog.ui
-    ui/traindatadialog.ui
+    ui/qmimportcsvdialog.ui
+    ui/qmtraindatadialog.ui
     ui/qmdatabasedialog.ui
     ui/qmemployeedetailsdialog.ui
     ui/qmprogresslogdialog.ui

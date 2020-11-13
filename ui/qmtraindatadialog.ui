@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>TrainDataDialog</class>
- <widget class="QDialog" name="TrainDataDialog">
+ <class>QMTrainDataDialog</class>
+ <widget class="QDialog" name="QMTrainDataDialog">
   <property name="windowModality">
    <enum>Qt::ApplicationModal</enum>
   </property>
@@ -21,7 +21,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="TrainDataWidget" name="wiTrainData" native="true"/>
+    <widget class="QMTrainDataWidget" name="wiTrainData" native="true"/>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
@@ -37,9 +37,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>TrainDataWidget</class>
+   <class>QMTrainDataWidget</class>
    <extends>QWidget</extends>
-   <header>traindata/traindatawidget.h</header>
+   <header>traindata/qmtraindatawidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
@@ -48,7 +48,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>TrainDataDialog</receiver>
+   <receiver>QMTrainDataDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -64,7 +64,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>TrainDataDialog</receiver>
+   <receiver>QMTrainDataDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
