@@ -1,5 +1,5 @@
 //
-// employeemodel.cpp is part of QualificationMatrix
+// qmtrainingmodel.cpp is part of QualificationMatrix
 //
 // QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of
 // the GNU General Public License as published by the Free Software Foundation, either version 3 of
@@ -13,13 +13,13 @@
 // If not, see <http://www.gnu.org/licenses/>.
 //
 
-#include "employeemodel.h"
+#include "qmtrainingmodel.h"
 
-EmployeeModel::EmployeeModel(QObject *parent, QSqlDatabase db)
+QMTrainingModel::QMTrainingModel(QObject *parent, QSqlDatabase db)
     : QSqlRelationalTableModel(parent, db)
 {
     // The name of the Table.
-    setTable("Employee");
+    setTable("Train");
 
     // The edit and join mode/strategy.
     setJoinMode(QSqlRelationalTableModel::LeftJoin);
@@ -28,5 +28,7 @@ EmployeeModel::EmployeeModel(QObject *parent, QSqlDatabase db)
     // Specifiy header data of table.
     setHeaderData(1, Qt::Horizontal, tr("Name"));
     setHeaderData(2, Qt::Horizontal, tr("Gruppe"));
-    setRelation(2, QSqlRelation("Shift", "id", "name"));
+    setRelation(2, QSqlRelation("TrainGroup", "id", "name"));
+    setHeaderData(3, Qt::Horizontal, tr("Intervall"));
+    setHeaderData(4, Qt::Horizontal, tr("Rechtlich Notwendig"));
 }

@@ -1,5 +1,5 @@
 //
-// functionmodel.h is part of QualificationMatrix
+// qmemployeefunctionmodel.cpp is part of QualificationMatrix
 //
 // QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of
 // the GNU General Public License as published by the Free Software Foundation, either version 3 of
@@ -13,25 +13,20 @@
 // If not, see <http://www.gnu.org/licenses/>.
 //
 
-#ifndef FUNCTIONMODEL_H
-#define FUNCTIONMODEL_H
+#include "qmemployeefunctionmodel.h"
 
-#include <QSqlRelationalTableModel>
-
-/// Sql model for the function table.
-/// \author Christian Kr, Copyright 2020
-class FunctionModel: public QSqlRelationalTableModel
+QMEmployeeFunctionModel::QMEmployeeFunctionModel(QObject *parent, const QSqlDatabase &db)
+    : QSqlRelationalTableModel(parent, db)
 {
-Q_OBJECT
+    // The name of the Table.
+    setTable("EmployeeFunc");
 
-public:
-    /// Constructor
-    /// \param parent Parent object for the qt system.
-    /// \param db The database to work with.
-    explicit FunctionModel(QObject *parent = nullptr, QSqlDatabase db = QSqlDatabase());
+    // The edit and join mode/strategy.
+    setJoinMode(QSqlRelationalTableModel::LeftJoin);
+    setEditStrategy(QSqlTableModel::OnManualSubmit);
 
-    /// Destructor
-    ~FunctionModel() override = default;
-};
-
-#endif // FUNCTIONMODEL_H
+    // Specifiy header data of table.
+    setRelation(1, QSqlRelation("Employee", "id", "name"));
+    setHeaderData(2, Qt::Horizontal, tr("Funktion"));
+    setRelation(2, QSqlRelation("Func", "id", "name"));
+}

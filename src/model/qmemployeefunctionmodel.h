@@ -1,5 +1,5 @@
 //
-// functiongroupmodel.h is part of QualificationMatrix
+// qmemployeefunctionmodel.h is part of QualificationMatrix
 //
 // QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of
 // the GNU General Public License as published by the Free Software Foundation, either version 3 of
@@ -13,24 +13,23 @@
 // If not, see <http://www.gnu.org/licenses/>.
 //
 
-#ifndef FUNCTIONGROUPMODEL_H
-#define FUNCTIONGROUPMODEL_H
+#ifndef QMEMPLOYEEFUNCTIONMODEL_H
+#define QMEMPLOYEEFUNCTIONMODEL_H
 
-#include <QSqlTableModel>
+#include <QSqlRelationalTableModel>
 
-/**
- * @brief Employee function group table in sql.
- * @author Christian Kr, Copyright (c) 2020
- */
-class FunctionGroupModel: public QSqlTableModel
+/// Employee function relation table in sql.
+/// \author Christian Kr, Copyright 2020
+class QMEmployeeFunctionModel: public QSqlRelationalTableModel
 {
 Q_OBJECT
 
 public:
-    /**
-     * @brief Constructor - Override from QSqlTableModel.
-     */
-    FunctionGroupModel(QObject *parent = nullptr, QSqlDatabase db = QSqlDatabase());
+    /// Constructor - Override from QSqlRelationalTableModel.
+    /// \param parent
+    /// \param db
+    explicit QMEmployeeFunctionModel(
+        QObject *parent = nullptr, const QSqlDatabase &db = QSqlDatabase());
 };
 
-#endif // FUNCTIONGROUPMODEL_H
+#endif // QMEMPLOYEEFUNCTIONMODEL_H

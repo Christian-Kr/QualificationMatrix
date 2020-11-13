@@ -82,17 +82,17 @@ add_executable(QualificationMatrix WIN32
     src/database/qmdatabaseupdater.cpp
     src/delegate/checkboxdelegate.cpp
     src/settings/qmemployeedetailsdialog.cpp
-    src/model/functionmodel.cpp
-    src/model/trainingmodel.cpp
-    src/model/trainingdatamodel.cpp
-    src/model/functiongroupmodel.cpp
-    src/model/traininggroupmodel.cpp
-    src/model/trainingdatastatemodel.cpp
-    src/model/employeemodel.cpp
-    src/model/employeefunctionmodel.cpp
-    src/model/qualificationmatrixmodel.cpp
-    src/model/trainingexceptionmodel.cpp
-    src/model/infomodel.cpp
+    src/model/qmfunctionmodel.cpp
+    src/model/qmtrainingmodel.cpp
+    src/model/qmtrainingdatamodel.cpp
+    src/model/qmfunctiongroupmodel.cpp
+    src/model/qmtraininggroupmodel.cpp
+    src/model/qmtrainingdatastatemodel.cpp
+    src/model/qmemployeemodel.cpp
+    src/model/qmemployeefunctionmodel.cpp
+    src/model/qmqualificationmatrixmodel.cpp
+    src/model/qmtrainingexceptionmodel.cpp
+    src/model/qminfomodel.cpp
     src/general/qmprogresslogdialog.cpp
     ui/qmemployeesettingswidget.ui
     ui/qmfuncsettingswidget.ui

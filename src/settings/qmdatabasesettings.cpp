@@ -14,11 +14,11 @@
 //
 
 #include "qmdatabasesettings.h"
-#include "model/infomodel.h"
+#include "model/qminfomodel.h"
 
 #include <QVariant>
 
-QMDatabaseSettings::QMDatabaseSettings(std::shared_ptr<InfoModel> model, QObject *parent)
+QMDatabaseSettings::QMDatabaseSettings(std::shared_ptr<QMInfoModel> model, QObject *parent)
     : QMSettings(parent)
 {
     infoModel = model;

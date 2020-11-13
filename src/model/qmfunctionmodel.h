@@ -1,5 +1,5 @@
 //
-// traininggroupmodel.h is part of QualificationMatrix
+// qmfunctionmodel.h is part of QualificationMatrix
 //
 // QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of
 // the GNU General Public License as published by the Free Software Foundation, either version 3 of
@@ -13,24 +13,25 @@
 // If not, see <http://www.gnu.org/licenses/>.
 //
 
-#ifndef TRAININGGROUPMODEL_H
-#define TRAININGGROUPMODEL_H
+#ifndef QMFUNCTIONMODEL_H
+#define QMFUNCTIONMODEL_H
 
-#include <QSqlTableModel>
+#include <QSqlRelationalTableModel>
 
-/**
- * @brief Employee training group table in sql.
- * @author Christian Kr, Copyright (c) 2020
- */
-class TrainingGroupModel: public QSqlTableModel
+/// Sql model for the function table.
+/// \author Christian Kr, Copyright 2020
+class QMFunctionModel: public QSqlRelationalTableModel
 {
 Q_OBJECT
 
 public:
-    /**
-     * @brief Constructor - Override from QSqlTableModel.
-     */
-    TrainingGroupModel(QObject *parent = nullptr, QSqlDatabase db = QSqlDatabase());
+    /// Constructor
+    /// \param parent Parent object for the qt system.
+    /// \param db The database to work with.
+    explicit QMFunctionModel(QObject *parent = nullptr, const QSqlDatabase &db = QSqlDatabase());
+
+    /// Destructor
+    ~QMFunctionModel() override = default;
 };
 
-#endif // TRAININGGROUPMODEL_H
+#endif // QMFUNCTIONMODEL_H

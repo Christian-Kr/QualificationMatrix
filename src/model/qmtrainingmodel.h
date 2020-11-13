@@ -1,5 +1,5 @@
 //
-// trainingmodel.h is part of QualificationMatrix
+// qmtrainingmodel.h is part of QualificationMatrix
 //
 // QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of
 // the GNU General Public License as published by the Free Software Foundation, either version 3 of
@@ -13,24 +13,22 @@
 // If not, see <http://www.gnu.org/licenses/>.
 //
 
-#ifndef TRAININGMODEL_H
-#define TRAININGMODEL_H
+#ifndef QMTRAININGMODEL_H
+#define QMTRAININGMODEL_H
 
 #include <QSqlRelationalTableModel>
 
-/**
- * @brief Employee training table in sql.
- * @author Christian Kr, Copyright (c) 2020
- */
-class TrainingModel: public QSqlRelationalTableModel
+/// Employee training table in sql.
+/// \author Christian Kr, Copyright 2020
+class QMTrainingModel: public QSqlRelationalTableModel
 {
 Q_OBJECT
 
 public:
-    /**
-     * @brief Constructor - Override from QSqlRelationalTableModel.
-     */
-    TrainingModel(QObject *parent = nullptr, QSqlDatabase db = QSqlDatabase());
+    /// Constructor - Override from QSqlRelationalTableModel.
+    /// \param parent
+    /// \param db
+    explicit QMTrainingModel(QObject *parent = nullptr, QSqlDatabase db = QSqlDatabase());
 };
 
-#endif // TRAININGMODEL_H
+#endif // QMTRAININGMODEL_H

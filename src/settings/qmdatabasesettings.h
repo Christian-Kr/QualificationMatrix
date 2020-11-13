@@ -18,7 +18,7 @@
 
 #include "qmsettings.h"
 
-class InfoModel;
+class QMInfoModel;
 
 /// \brief only a wrapper to data from an sql table model
 class QMDatabaseSettings: public QMSettings
@@ -26,7 +26,7 @@ class QMDatabaseSettings: public QMSettings
 Q_OBJECT
 
 public:
-    explicit QMDatabaseSettings(std::shared_ptr<InfoModel> model, QObject *parent = nullptr);
+    explicit QMDatabaseSettings(std::shared_ptr<QMInfoModel> model, QObject *parent = nullptr);
 
     /// \brief override of QMSettings::read
     virtual QVariant read(const QString &name) override;
@@ -40,7 +40,7 @@ private:
     /// \return -1 if name could not be found
     int getNameRow(const QString &name);
 
-    std::shared_ptr<InfoModel> infoModel;
+    std::shared_ptr<QMInfoModel> infoModel;
 };
 
 #endif // QMDATABASESETTINGS_H

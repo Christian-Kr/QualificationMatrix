@@ -17,17 +17,17 @@
 #include "qualimatrix/qmqualimatrixmodel.h"
 #include "qualiresult/qualiresultmodel.h"
 #include "qmsqlrelationaltablemodel.h"
-#include "functionmodel.h"
-#include "trainingmodel.h"
-#include "trainingdatamodel.h"
-#include "functiongroupmodel.h"
-#include "traininggroupmodel.h"
-#include "trainingdatastatemodel.h"
-#include "employeemodel.h"
-#include "employeefunctionmodel.h"
-#include "qualificationmatrixmodel.h"
-#include "trainingexceptionmodel.h"
-#include "infomodel.h"
+#include "qmfunctionmodel.h"
+#include "qmtrainingmodel.h"
+#include "qmtrainingdatamodel.h"
+#include "qmfunctiongroupmodel.h"
+#include "qmtraininggroupmodel.h"
+#include "qmtrainingdatastatemodel.h"
+#include "qmemployeemodel.h"
+#include "qmemployeefunctionmodel.h"
+#include "qmqualificationmatrixmodel.h"
+#include "qmtrainingexceptionmodel.h"
+#include "qminfomodel.h"
 
 #include <QSqlRelationalTableModel>
 #include <QSqlQuery>
@@ -141,52 +141,52 @@ void QMDataManager::initializeModels(QSqlDatabase &db)
 
     // Initialize all models with the given database object.
 
-    funcModel = std::make_shared<FunctionModel>(this, db);
+    funcModel = std::make_shared<QMFunctionModel>(this, db);
     funcModel->select();
 
     emit updateInitializeModels(1);
 
-    trainModel = std::make_shared<TrainingModel>(nullptr, db);
+    trainModel = std::make_shared<QMTrainingModel>(nullptr, db);
     trainModel->select();
 
     emit updateInitializeModels(2);
 
-    trainDataModel = std::make_shared<TrainingDataModel>(nullptr, db);
+    trainDataModel = std::make_shared<QMTrainingDataModel>(nullptr, db);
     trainDataModel->select();
 
     emit updateInitializeModels(3);
 
-    funcGroupModel = std::make_shared<FunctionGroupModel>(nullptr, db);
+    funcGroupModel = std::make_shared<QMFunctionGroupModel>(nullptr, db);
     funcGroupModel->select();
 
     emit updateInitializeModels(4);
 
-    trainGroupModel = std::make_shared<TrainingGroupModel>(nullptr, db);
+    trainGroupModel = std::make_shared<QMTrainingGroupModel>(nullptr, db);
     trainGroupModel->select();
 
     emit updateInitializeModels(5);
 
-    trainDataStateModel = std::make_shared<TrainingDataStateModel>(nullptr, db);
+    trainDataStateModel = std::make_shared<QMTrainingDataStateModel>(nullptr, db);
     trainDataStateModel->select();
 
     emit updateInitializeModels(6);
 
-    employeeModel = std::make_shared<EmployeeModel>(nullptr, db);
+    employeeModel = std::make_shared<QMEmployeeModel>(nullptr, db);
     employeeModel->select();
 
     emit updateInitializeModels(7);
 
-    employeeFuncModel = std::make_shared<EmployeeFunctionModel>(nullptr, db);
+    employeeFuncModel = std::make_shared<QMEmployeeFunctionModel>(nullptr, db);
     employeeFuncModel->select();
 
     emit updateInitializeModels(8);
 
-    qualiModel = std::make_shared<QualificationMatrixModel>(nullptr, db);
+    qualiModel = std::make_shared<QMQualificationMatrixModel>(nullptr, db);
     qualiModel->select();
 
     emit updateInitializeModels(9);
 
-    trainExceptionModel = std::make_shared<TrainingExceptionModel>(nullptr, db);
+    trainExceptionModel = std::make_shared<QMTrainingExceptionModel>(nullptr, db);
     trainExceptionModel->select();
 
     emit updateInitializeModels(10);
@@ -199,7 +199,7 @@ void QMDataManager::initializeModels(QSqlDatabase &db)
 
     emit updateInitializeModels(11);
 
-    infoModel = std::make_shared<InfoModel>(nullptr, db);
+    infoModel = std::make_shared<QMInfoModel>(nullptr, db);
 
     // Inform all customer about the update.
     emit updateInitializeModels(13);

@@ -1,5 +1,5 @@
 //
-// infomodel.h is part of QualificationMatrix
+// qminfomodel.h is part of QualificationMatrix
 //
 // QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of
 // the GNU General Public License as published by the Free Software Foundation, either version 3 of
@@ -13,14 +13,14 @@
 // If not, see <http://www.gnu.org/licenses/>.
 //
 
-#ifndef INFOMODEL_H
-#define INFOMODEL_H
+#ifndef QMINFOMODEL_H
+#define QMINFOMODEL_H
 
 #include "qmsqlrelationaltablemodel.h"
 
 /// Model for database information.
 /// \author Christian Kr, Copyright 2020
-class InfoModel: public QMSqlRelationalTableModel
+class QMInfoModel: public QMSqlRelationalTableModel
 {
 Q_OBJECT
 
@@ -28,7 +28,7 @@ public:
     /// Constructor
     /// \param parent Parent object for qt system.
     /// \param db The database object to work with.
-    InfoModel(QObject *parent = nullptr, QSqlDatabase db = QSqlDatabase());
+    explicit QMInfoModel(QObject *parent = nullptr, QSqlDatabase db = QSqlDatabase());
 };
 
-#endif // INFOMODEL_H
+#endif // QMINFOMODEL_H

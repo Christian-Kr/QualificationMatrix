@@ -1,5 +1,5 @@
 //
-// functiongroupmodel.cpp is part of QualificationMatrix
+// qmfunctionmodel.cpp is part of QualificationMatrix
 //
 // QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of
 // the GNU General Public License as published by the Free Software Foundation, either version 3 of
@@ -13,18 +13,22 @@
 // If not, see <http://www.gnu.org/licenses/>.
 //
 
-#include "functiongroupmodel.h"
+#include "qmfunctionmodel.h"
 
-FunctionGroupModel::FunctionGroupModel(QObject *parent, QSqlDatabase db)
-    : QSqlTableModel(parent, db)
+#include <QDebug>
+
+QMFunctionModel::QMFunctionModel(QObject *parent, const QSqlDatabase &db)
+    : QSqlRelationalTableModel(parent, db)
 {
     // The name of the Table.
-    setTable("FuncGroup");
+    setTable("Func");
 
     // The edit and join mode/strategy.
+    setJoinMode(QSqlRelationalTableModel::LeftJoin);
     setEditStrategy(QSqlTableModel::OnManualSubmit);
 
-    // Specifiy header data of table.
+    // Specify header data of table.
     setHeaderData(1, Qt::Horizontal, tr("Name"));
-    setHeaderData(2, Qt::Horizontal, tr("Farbe"));
+    setHeaderData(2, Qt::Horizontal, tr("Gruppe"));
+    setRelation(2, QSqlRelation("FuncGroup", "id", "name"));
 }

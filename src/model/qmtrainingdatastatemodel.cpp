@@ -1,5 +1,5 @@
 //
-// trainingmodel.cpp is part of QualificationMatrix
+// qmtrainingdatastatemodel.cpp is part of QualificationMatrix
 //
 // QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of
 // the GNU General Public License as published by the Free Software Foundation, either version 3 of
@@ -13,22 +13,17 @@
 // If not, see <http://www.gnu.org/licenses/>.
 //
 
-#include "trainingmodel.h"
+#include "qmtrainingdatastatemodel.h"
 
-TrainingModel::TrainingModel(QObject *parent, QSqlDatabase db)
-    : QSqlRelationalTableModel(parent, db)
+QMTrainingDataStateModel::QMTrainingDataStateModel(QObject *parent, const QSqlDatabase &db)
+    : QSqlTableModel(parent, db)
 {
     // The name of the Table.
-    setTable("Train");
+    setTable("TrainDataState");
 
     // The edit and join mode/strategy.
-    setJoinMode(QSqlRelationalTableModel::LeftJoin);
     setEditStrategy(QSqlTableModel::OnManualSubmit);
 
     // Specifiy header data of table.
     setHeaderData(1, Qt::Horizontal, tr("Name"));
-    setHeaderData(2, Qt::Horizontal, tr("Gruppe"));
-    setRelation(2, QSqlRelation("TrainGroup", "id", "name"));
-    setHeaderData(3, Qt::Horizontal, tr("Intervall"));
-    setHeaderData(4, Qt::Horizontal, tr("Rechtlich Notwendig"));
 }

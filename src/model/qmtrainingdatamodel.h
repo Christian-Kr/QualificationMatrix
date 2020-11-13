@@ -1,5 +1,5 @@
 //
-// trainingexceptionmodel.h is part of QualificationMatrix
+// qmtrainingdatamodel.h is part of QualificationMatrix
 //
 // QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of
 // the GNU General Public License as published by the Free Software Foundation, either version 3 of
@@ -13,24 +13,23 @@
 // If not, see <http://www.gnu.org/licenses/>.
 //
 
-#ifndef TRAININGEXCEPTIONMODEL_H
-#define TRAININGEXCEPTIONMODEL_H
+#ifndef QMTRAININGDATAMODEL_H
+#define QMTRAININGDATAMODEL_H
 
-#include <QSqlRelationalTableModel>
+#include "qmsqlrelationaltablemodel.h"
 
-/**
- * @brief Training exception data table in sql.
- * @author Christian Kr, Copyright (c) 2020
- */
-class TrainingExceptionModel: public QSqlRelationalTableModel
+/// Employee training data table in sql.
+/// \author Christian Kr, Copyright 2020
+class QMTrainingDataModel: public QMSqlRelationalTableModel
 {
 Q_OBJECT
 
 public:
-    /**
-     * @brief Constructor - Override from QSqlRelationalTableModel.
-     */
-    TrainingExceptionModel(QObject *parent = nullptr, QSqlDatabase db = QSqlDatabase());
+    /// Constructor - Override from QSqlRelationalTableModel.
+    /// \param parent
+    /// \param db
+    explicit QMTrainingDataModel(
+        QObject *parent = nullptr, const QSqlDatabase &db = QSqlDatabase());
 };
 
-#endif // TRAININGEXCEPTIONMODEL_H
+#endif // QMTRAININGDATAMODEL_H

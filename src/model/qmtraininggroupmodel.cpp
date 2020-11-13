@@ -1,5 +1,5 @@
 //
-// trainingdatamodel.cpp is part of QualificationMatrix
+// qmtraininggroupmodel.cpp is part of QualificationMatrix
 //
 // QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of
 // the GNU General Public License as published by the Free Software Foundation, either version 3 of
@@ -13,26 +13,18 @@
 // If not, see <http://www.gnu.org/licenses/>.
 //
 
-#include "trainingdatamodel.h"
+#include "qmtraininggroupmodel.h"
 
-TrainingDataModel::TrainingDataModel(QObject *parent, QSqlDatabase db)
-    : QMSqlRelationalTableModel(parent, db)
+QMTrainingGroupModel::QMTrainingGroupModel(QObject *parent, QSqlDatabase db)
+    : QSqlTableModel(parent, db)
 {
     // The name of the Table.
-    setTable("TrainData");
+    setTable("TrainGroup");
 
     // The edit and join mode/strategy.
-    setJoinMode(QSqlRelationalTableModel::LeftJoin);
     setEditStrategy(QSqlTableModel::OnManualSubmit);
 
     // Specifiy header data of table.
-    setHeaderData(1, Qt::Horizontal, tr("Mitarbeiter"));
-    setRelation(1, QSqlRelation("Employee", "id", "name"));
-    setHeaderData(2, Qt::Horizontal, tr("Schulung"));
-    setRelation(2, QSqlRelation("Train", "id", "name"));
-    setHeaderData(3, Qt::Horizontal, tr("Schulungsdatum"));
-    setHeaderData(4, Qt::Horizontal, tr("Status"));
-    setRelation(4, QSqlRelation("TrainDataState", "id", "name"));
-    setHeaderData(5, Qt::Horizontal, tr("Datei"));
-    setRelation(5, QSqlRelation("Files", "id", "name"));
+    setHeaderData(1, Qt::Horizontal, tr("Name"));
+    setHeaderData(2, Qt::Horizontal, tr("Farbe"));
 }

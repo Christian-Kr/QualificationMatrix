@@ -1,5 +1,5 @@
 //
-// qualificationmatrixmodel.h is part of QualificationMatrix
+// qminfomodel.cpp is part of QualificationMatrix
 //
 // QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of
 // the GNU General Public License as published by the Free Software Foundation, either version 3 of
@@ -13,24 +13,16 @@
 // If not, see <http://www.gnu.org/licenses/>.
 //
 
-#ifndef QUALIFICATIONMATRIXMODEL_H
-#define QUALIFICATIONMATRIXMODEL_H
+#include "qminfomodel.h"
 
-#include <QSqlRelationalTableModel>
-
-/**
- * @brief Qaulification matrix data table in sql.
- * @author Christian Kr, Copyright (c) 2020
- */
-class QualificationMatrixModel: public QSqlRelationalTableModel
+QMInfoModel::QMInfoModel(QObject *parent, QSqlDatabase db)
+    : QMSqlRelationalTableModel(parent, db)
 {
-Q_OBJECT
+    setTable("Info");
 
-public:
-    /**
-     * @brief Constructor - Override from QSqlRelationalTableModel.
-     */
-    QualificationMatrixModel(QObject *parent = nullptr, QSqlDatabase db = QSqlDatabase());
-};
+    setJoinMode(QSqlRelationalTableModel::LeftJoin);
+    setEditStrategy(QSqlTableModel::OnManualSubmit);
 
-#endif // QUALIFICATIONMATRIXMODEL_H
+    setHeaderData(1, Qt::Horizontal, tr("Name"));
+    setHeaderData(2, Qt::Horizontal, tr("Wert"));
+}

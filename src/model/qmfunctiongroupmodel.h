@@ -1,5 +1,5 @@
 //
-// traininggroupmodel.cpp is part of QualificationMatrix
+// qmfunctiongroupmodel.h is part of QualificationMatrix
 //
 // QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of
 // the GNU General Public License as published by the Free Software Foundation, either version 3 of
@@ -13,18 +13,23 @@
 // If not, see <http://www.gnu.org/licenses/>.
 //
 
-#include "traininggroupmodel.h"
+#ifndef QMFUNCTIONGROUPMODEL_H
+#define QMFUNCTIONGROUPMODEL_H
 
-TrainingGroupModel::TrainingGroupModel(QObject *parent, QSqlDatabase db)
-    : QSqlTableModel(parent, db)
+#include <QSqlTableModel>
+
+/// Employee function group table in sql.
+/// \author Christian Kr, Copyright 2020
+class QMFunctionGroupModel: public QSqlTableModel
 {
-    // The name of the Table.
-    setTable("TrainGroup");
+Q_OBJECT
 
-    // The edit and join mode/strategy.
-    setEditStrategy(QSqlTableModel::OnManualSubmit);
+public:
+    /// Constructor - Override from QSqlTableModel.
+    /// \param parent
+    /// \param db
+    explicit QMFunctionGroupModel(
+        QObject *parent = nullptr, const QSqlDatabase &db = QSqlDatabase());
+};
 
-    // Specifiy header data of table.
-    setHeaderData(1, Qt::Horizontal, tr("Name"));
-    setHeaderData(2, Qt::Horizontal, tr("Farbe"));
-}
+#endif // QMFUNCTIONGROUPMODEL_H

@@ -1,5 +1,5 @@
 //
-// csqlrelationaltablemodel.cpp is part of QualificationMatrix
+// qmsqlrelationaltablemodel.cpp is part of QualificationMatrix
 //
 // QualificationMatrix is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
