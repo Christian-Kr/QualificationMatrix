@@ -1,5 +1,5 @@
 //
-// qualimatrixwidget.cpp is part of QualificationMatrix
+// qmqualimatrixwidget.cpp is part of QualificationMatrix
 //
 // QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of
 // the GNU General Public License as published by the Free Software Foundation, either version 3 of
@@ -24,11 +24,9 @@
 #include <QSqlTableModel>
 #include <QSqlRelationalTableModel>
 #include <QColor>
-#include <QTableView>
 #include <QDebug>
 #include <QHeaderView>
 #include <QWidget>
-#include <QProgressDialog>
 
 QMQualiMatrixWidget::QMQualiMatrixWidget(QWidget *parent)
     : QWidget(parent), ui(new Ui::QMQualiMatrixWidget), qualiMatrixModel(nullptr), funcModel
