@@ -27,15 +27,21 @@
 #include <QDebug>
 #include <QHeaderView>
 #include <QWidget>
+#include <QTimer>
 
 QMQualiMatrixWidget::QMQualiMatrixWidget(QWidget *parent)
     : QWidget(parent), ui(new Ui::QMQualiMatrixWidget), qualiMatrixModel(nullptr), funcModel
     (nullptr),
-      trainModel(nullptr), funcGroupModel(nullptr), trainGroupModel(nullptr),
-      qualiMatrixFuncFilterModel(new QSortFilterProxyModel(this))
+    trainModel(nullptr), funcGroupModel(nullptr), trainGroupModel(nullptr),
+    qualiMatrixFuncFilterModel(new QSortFilterProxyModel(this)),
+    lockModeTimer(new QTimer(this))
 {
     ui->setupUi(this);
     ui->bgWidget->setStyleSheet("background-color: white;");
+
+    lockModeTimer->setSingleShot(true);
+    lockModeTimer->setInterval(10000);
+    connect(lockModeTimer, &QTimer::timeout, this, &QMQualiMatrixWidget::enableLocked);
 
     // initial settings for table view
     ui->tvQualiMatrix->setItemDelegate(new QMQualiMatrixDelegate());
@@ -127,9 +133,10 @@ void QMQualiMatrixWidget::updateHeaderCache()
 
 void QMQualiMatrixWidget::updateColors()
 {
-    QMQualiMatrixDelegate *matrixDelegate = dynamic_cast<QMQualiMatrixDelegate *>(ui->tvQualiMatrix
-        ->itemDelegate());
-    if (matrixDelegate != nullptr) {
+    auto matrixDelegate = dynamic_cast<QMQualiMatrixDelegate *>(
+        ui->tvQualiMatrix->itemDelegate());
+    if (matrixDelegate != nullptr)
+    {
         matrixDelegate->updateColors();
     }
 }
@@ -138,11 +145,18 @@ void QMQualiMatrixWidget::switchLockMode()
 {
     ui->tbLock->setChecked(ui->tbLock->isChecked());
 
-    if (!ui->tbLock->isChecked()) {
+    if (!ui->tbLock->isChecked())
+    {
         ui->tvQualiMatrix->setEditTriggers(QAbstractItemView::NoEditTriggers);
     }
-    else {
+    else
+    {
         ui->tvQualiMatrix->setEditTriggers(QAbstractItemView::DoubleClicked);
+
+        // After lock mode has been opened, start a timer to trigger the end of editing at a
+        // specific time.
+        lockModeTimer->stop();
+        lockModeTimer->start();
     }
 }
 

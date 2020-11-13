@@ -71,6 +71,8 @@ private:
     std::shared_ptr<QSqlTableModel> trainGroupModel;
 
     QSortFilterProxyModel *qualiMatrixFuncFilterModel;
+
+    QTimer *lockModeTimer;
 };
 
 #endif // QMQUALIMATRIXWIDGET_H
