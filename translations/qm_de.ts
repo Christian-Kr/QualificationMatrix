@@ -1447,38 +1447,56 @@ Bug-Reports: Fehler können direkt auf GitHub gemeldet werden oderper E-Mail an 
     <name>QMQualiMatrixSettingsWidget</name>
     <message>
         <location filename="../ui/qmqualimatrixsettingswidget.ui" line="14"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixsettingswidget.h" line="143"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixsettingswidget.h" line="212"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixsettingswidget.ui" line="20"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixsettingswidget.h" line="144"/>
-        <source>Schulungen von unten nach oben schreiben</source>
+        <location filename="../ui/qmqualimatrixsettingswidget.ui" line="28"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixsettingswidget.h" line="213"/>
+        <source>Schulungen von unten nach oben</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixsettingswidget.ui" line="29"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixsettingswidget.h" line="145"/>
-        <source>Height of horizontal header / Pixel</source>
+        <location filename="../ui/qmqualimatrixsettingswidget.ui" line="40"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixsettingswidget.h" line="214"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#424242;&quot;&gt;In der Qualifikationsmatrix werden die Schulungen am oberen Rand von unten nach oben geschrieben.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixsettingswidget.ui" line="50"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixsettingswidget.h" line="146"/>
-        <source>Width of vertical header / Pixel</source>
+        <location filename="../ui/qmqualimatrixsettingswidget.ui" line="57"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixsettingswidget.h" line="215"/>
+        <source>Höhe der horizontalen Leiste / Pixel:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixsettingswidget.ui" line="71"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixsettingswidget.h" line="147"/>
-        <source>Farbe des Gitters</source>
+        <location filename="../ui/qmqualimatrixsettingswidget.ui" line="94"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixsettingswidget.h" line="216"/>
+        <source>Höhe der vertikalen Leiste / Pixel:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixsettingswidget.ui" line="95"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixsettingswidget.h" line="149"/>
-        <source>Farbe der Selektion</source>
+        <location filename="../ui/qmqualimatrixsettingswidget.ui" line="136"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixsettingswidget.h" line="217"/>
+        <source>Farbe des Gitters:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmqualimatrixsettingswidget.ui" line="176"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixsettingswidget.h" line="219"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#424242;&quot;&gt;Die Farbe des Gitters.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmqualimatrixsettingswidget.ui" line="198"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixsettingswidget.h" line="220"/>
+        <source>Farbe der Selektion:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmqualimatrixsettingswidget.ui" line="238"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixsettingswidget.h" line="222"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#424242;&quot;&gt;Hintergrundfarbe der selektierten Zellen.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1587,50 +1605,50 @@ Bug-Reports: Fehler können direkt auf GitHub gemeldet werden oderper E-Mail an 
     <name>QMQualiResultSettingsWidget</name>
     <message>
         <location filename="../ui/qmqualiresultsettingswidget.ui" line="14"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultsettingswidget.h" line="170"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultsettingswidget.h" line="192"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmqualiresultsettingswidget.ui" line="20"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultsettingswidget.h" line="171"/>
-        <source>Ignoriere Funktionen und Schulungen &amp;mit nachfolgendem Text</source>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultsettingswidget.h" line="193"/>
+        <source>Ignorieren von Schulungseinträgen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualiresultsettingswidget.ui" line="33"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultsettingswidget.h" line="172"/>
-        <source>Text</source>
+        <location filename="../ui/qmqualiresultsettingswidget.ui" line="37"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultsettingswidget.h" line="194"/>
+        <source>Text:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualiresultsettingswidget.ui" line="43"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultsettingswidget.h" line="173"/>
+        <location filename="../ui/qmqualiresultsettingswidget.ui" line="47"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultsettingswidget.h" line="195"/>
         <source>Hinzufügen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualiresultsettingswidget.ui" line="50"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultsettingswidget.h" line="174"/>
+        <location filename="../ui/qmqualiresultsettingswidget.ui" line="54"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultsettingswidget.h" line="196"/>
         <source>Entfernen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualiresultsettingswidget.ui" line="69"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultsettingswidget.h" line="175"/>
-        <source>Hintergrundfarbe für Status &quot;Gut&quot;</source>
+        <location filename="../ui/qmqualiresultsettingswidget.ui" line="76"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultsettingswidget.h" line="197"/>
+        <source>Hintergrundfarbe für Status &quot;Gut&quot;:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualiresultsettingswidget.ui" line="93"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultsettingswidget.h" line="177"/>
-        <source>Hintergrundfarbe für Status &quot;Ausreichend&quot;</source>
+        <location filename="../ui/qmqualiresultsettingswidget.ui" line="116"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultsettingswidget.h" line="199"/>
+        <source>Hintergrundfarbe für Status &quot;Ausreichend&quot;:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualiresultsettingswidget.ui" line="117"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultsettingswidget.h" line="179"/>
-        <source>Hintergrundfarbe für Status &quot;Schlecht&quot;</source>
+        <location filename="../ui/qmqualiresultsettingswidget.ui" line="156"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultsettingswidget.h" line="201"/>
+        <source>Hintergrundfarbe für Status &quot;Schlecht&quot;:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

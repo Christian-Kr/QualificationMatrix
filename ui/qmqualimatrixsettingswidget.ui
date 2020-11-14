@@ -6,27 +6,55 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>577</width>
-    <height>613</height>
+    <width>696</width>
+    <height>677</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <property name="verticalSpacing">
+    <number>20</number>
+   </property>
    <item row="0" column="0">
-    <widget class="QCheckBox" name="cbWriteTrainBottomToTop">
-     <property name="text">
-      <string>Schulungen von unten nach oben schreiben</string>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="spacing">
+      <number>5</number>
      </property>
-    </widget>
+     <item>
+      <widget class="QCheckBox" name="cbWriteTrainBottomToTop">
+       <property name="text">
+        <string>Schulungen von unten nach oben</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#424242;&quot;&gt;In der Qualifikationsmatrix werden die Schulungen am oberen Rand von unten nach oben geschrieben.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item row="1" column="0">
-    <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="2,0">
+    <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="0,0,0">
+     <property name="spacing">
+      <number>5</number>
+     </property>
      <item>
       <widget class="QLabel" name="label_6">
        <property name="text">
-        <string>Height of horizontal header / Pixel</string>
+        <string>Höhe der horizontalen Leiste / Pixel:</string>
        </property>
       </widget>
      </item>
@@ -40,14 +68,30 @@
        </property>
       </widget>
      </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
     </layout>
    </item>
    <item row="2" column="0">
-    <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="2,0">
+    <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="0,0,0">
+     <property name="spacing">
+      <number>5</number>
+     </property>
      <item>
       <widget class="QLabel" name="label_5">
        <property name="text">
-        <string>Width of vertical header / Pixel</string>
+        <string>Höhe der vertikalen Leiste / Pixel:</string>
        </property>
       </widget>
      </item>
@@ -61,51 +105,140 @@
        </property>
       </widget>
      </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
     </layout>
    </item>
    <item row="3" column="0">
-    <layout class="QHBoxLayout" name="horizontalLayout_8" stretch="2,0">
+    <layout class="QVBoxLayout" name="verticalLayout_3">
+     <property name="spacing">
+      <number>5</number>
+     </property>
      <item>
-      <widget class="QLabel" name="label_7">
-       <property name="text">
-        <string>Farbe des Gitters</string>
+      <layout class="QHBoxLayout" name="horizontalLayout_8" stretch="0,0,0">
+       <property name="spacing">
+        <number>5</number>
        </property>
-      </widget>
+       <item>
+        <widget class="QLabel" name="label_7">
+         <property name="text">
+          <string>Farbe des Gitters:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pbGridColor">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
      </item>
      <item>
-      <widget class="QPushButton" name="pbGridColor">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
+      <widget class="QLabel" name="label_2">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
        </property>
        <property name="text">
-        <string/>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#424242;&quot;&gt;Die Farbe des Gitters.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
     </layout>
    </item>
    <item row="4" column="0">
-    <layout class="QHBoxLayout" name="horizontalLayout_10" stretch="2,0">
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <property name="spacing">
+      <number>5</number>
+     </property>
      <item>
-      <widget class="QLabel" name="label_8">
-       <property name="text">
-        <string>Farbe der Selektion</string>
+      <layout class="QHBoxLayout" name="horizontalLayout_10" stretch="0,0,0">
+       <property name="spacing">
+        <number>5</number>
        </property>
-      </widget>
+       <item>
+        <widget class="QLabel" name="label_8">
+         <property name="text">
+          <string>Farbe der Selektion:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pbSelectionColor">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
      </item>
      <item>
-      <widget class="QPushButton" name="pbSelectionColor">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
+      <widget class="QLabel" name="label_3">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
        </property>
        <property name="text">
-        <string/>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#424242;&quot;&gt;Hintergrundfarbe der selektierten Zellen.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
