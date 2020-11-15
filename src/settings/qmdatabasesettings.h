@@ -18,6 +18,8 @@
 
 #include "qmsettings.h"
 
+#include <memory>
+
 class QMInfoModel;
 
 /// \brief only a wrapper to data from an sql table model

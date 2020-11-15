@@ -258,7 +258,11 @@ void QMQualiResultWidget::paintPdfRequest(QPrinter *printer)
     // Create new table object and format it.
     QTextTable *table = cursor.insertTable(model->rowCount() + 1, model->columnCount() + 1);
     QTextTableFormat tableFormat = table->format();
-    tableFormat.setBorderCollapse(true); // Is not available in lower qt versions.
+
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
+    tableFormat.setBorderCollapse(true);
+#endif
+
     tableFormat.setCellPadding(2);
     tableFormat.setHeaderRowCount(1);
     table->setFormat(tableFormat);

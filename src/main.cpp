@@ -22,8 +22,15 @@
 #include <QTranslator>
 #include <QLibraryInfo>
 #include <QDir>
+#include <QtGlobal>
 
 #include <QDebug>
+
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
+#define DEPR_ENDL Qt::endl
+#else
+#define DEPR_ENDL endl
+#endif
 
 /// Initialize the main window state with saved data.
 /// \param mainWin The main window object to initialize.
@@ -147,7 +154,7 @@ void customMessageHandler(QtMsgType type, const QMessageLogContext &, const QStr
             txt += QString(" Debug: %1").arg(msg);
 
             QTextStream ts(stdout);
-            ts << txt << Qt::endl;
+            ts << txt << DEPR_ENDL;
 
             return;
         }
@@ -170,12 +177,12 @@ void customMessageHandler(QtMsgType type, const QMessageLogContext &, const QStr
     if (opened)
     {
         QTextStream ts(&out);
-        ts << txt << Qt::endl;
+        ts << txt << DEPR_ENDL;
     }
     else
     {
         QTextStream ts(stdout);
-        ts << txt << Qt::endl;
+        ts << txt << DEPR_ENDL;
     }
 
     out.close();
