@@ -68,7 +68,7 @@
       <widget class="QLabel" name="label">
        <property name="font">
         <font>
-         <pointsize>12</pointsize>
+         <pointsize>9</pointsize>
         </font>
        </property>
        <property name="text">
@@ -132,7 +132,7 @@
       <widget class="QLabel" name="label_6">
        <property name="font">
         <font>
-         <pointsize>12</pointsize>
+         <pointsize>9</pointsize>
         </font>
        </property>
        <property name="text">
@@ -161,7 +161,7 @@
       <widget class="QLabel" name="label_5">
        <property name="font">
         <font>
-         <pointsize>12</pointsize>
+         <pointsize>9</pointsize>
         </font>
        </property>
        <property name="text">
@@ -190,7 +190,7 @@
       <widget class="QLabel" name="label_7">
        <property name="font">
         <font>
-         <pointsize>12</pointsize>
+         <pointsize>9</pointsize>
         </font>
        </property>
        <property name="text">
@@ -273,7 +273,7 @@
        </property>
        <property name="font">
         <font>
-         <pointsize>12</pointsize>
+         <pointsize>9</pointsize>
         </font>
        </property>
        <property name="text">
@@ -309,7 +309,7 @@
            <widget class="QLabel" name="label_9">
             <property name="font">
              <font>
-              <pointsize>12</pointsize>
+              <pointsize>9</pointsize>
              </font>
             </property>
             <property name="text">
