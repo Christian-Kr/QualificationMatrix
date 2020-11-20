@@ -15,6 +15,7 @@
 
 #include "qmdatabaseupdatedialog.h"
 #include "ui_qmdatabaseupdatedialog.h"
+#include "model/qmdatamanager.h"
 
 #include <QSqlDatabase>
 #include <QSqlQuery>
@@ -95,6 +96,9 @@ void QMDatabaseUpdateDialog::updateUi()
     {
         ui->laCurrentVersion->setText(tr("Nicht vorhanden!"));
     }
+
+    ui->laNeededVersion->setText(
+        QString("%1.%2").arg(QMDataManager::getMajor()).arg(QMDataManager::getMinor()));
 }
 
 void QMDatabaseUpdateDialog::reject()

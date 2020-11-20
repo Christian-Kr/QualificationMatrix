@@ -46,8 +46,14 @@ protected:
     virtual void reject() override;
 
 private:
+    /// Check all scripts that needs to be called for an appropriate update.
+    void checkUpdateScripts();
+
     /// Read version from database.
     void readDatabaseVersion();
+
+    /// Read script files and create list widget.
+    void initScriptFiles();
 
     /// Updates the ui, which means basically  the text parts in the ui elements.
     void updateUi();

@@ -33,11 +33,6 @@
 #include <QSqlQuery>
 #include <QDebug>
 
-// minimum version db must have, otherwise the software won't work with it - 0, 0 means no version
-// table or entry is available, cause the first version doesn't include this information
-#define DB_MIN_MAJOR 1
-#define DB_MIN_MINOR 0
-
 // maximum version that exist with the release of this software version - the software cannot work
 // with versions higher than this
 #define DB_CUR_MAJOR 1
@@ -87,7 +82,7 @@ bool QMDataManager::testVersion(QSqlDatabase &db)
         }
     }
 
-    if (major == DB_MIN_MAJOR && minor == DB_MIN_MINOR)
+    if (major == QMDataManager::getMajor() && minor == QMDataManager::getMinor())
     {
         return true;
     }

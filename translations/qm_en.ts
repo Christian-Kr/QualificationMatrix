@@ -4,7 +4,7 @@
 <context>
     <name>QMDataManager</name>
     <message>
-        <location filename="../src/model/qmdatamanager.cpp" line="197"/>
+        <location filename="../src/model/qmdatamanager.cpp" line="192"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
@@ -131,45 +131,45 @@
 <context>
     <name>QMDatabaseUpdateDialog</name>
     <message>
-        <location filename="../ui/qmdatabaseupdatedialog.ui" line="14"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmdatabaseupdatedialog.h" line="124"/>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/qmdatabaseupdatedialog.ui" line="22"/>
+        <location filename="../ui/qmdatabaseupdatedialog.ui" line="59"/>
         <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmdatabaseupdatedialog.h" line="125"/>
         <source>Notwendig:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmdatabaseupdatedialog.ui" line="29"/>
-        <location filename="../ui/qmdatabaseupdatedialog.ui" line="47"/>
+        <location filename="../ui/qmdatabaseupdatedialog.ui" line="48"/>
+        <location filename="../ui/qmdatabaseupdatedialog.ui" line="66"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmdatabaseupdatedialog.h" line="124"/>
         <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmdatabaseupdatedialog.h" line="126"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmdatabaseupdatedialog.h" line="128"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmdatabaseupdatedialog.ui" line="40"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmdatabaseupdatedialog.h" line="127"/>
+        <location filename="../ui/qmdatabaseupdatedialog.ui" line="41"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmdatabaseupdatedialog.h" line="123"/>
         <source>Aktuell:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmdatabaseupdatedialog.ui" line="62"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmdatabaseupdatedialog.h" line="129"/>
+        <location filename="../ui/qmdatabaseupdatedialog.ui" line="20"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmdatabaseupdatedialog.h" line="121"/>
+        <source>Datenbank aktualisieren</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmdatabaseupdatedialog.ui" line="32"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmdatabaseupdatedialog.h" line="122"/>
         <source>Version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmdatabaseupdatedialog.ui" line="81"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmdatabaseupdatedialog.h" line="130"/>
-        <source>Skripte</source>
+        <location filename="../ui/qmdatabaseupdatedialog.ui" line="82"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmdatabaseupdatedialog.h" line="127"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Die Datenbank wird auf die aktuell notwendige Version aktualisiert. Dafür wird zusätzlich ein Backup der aktuellen Datenbank angelegt um gegebenenfalls bei einem Fehler den ursprünglichen Zustand wieder herzustellen.&lt;/p&gt;&lt;p&gt;Möchten Sie die Datenbank aktualisieren?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/database/qmdatabaseupdatedialog.cpp" line="96"/>
+        <location filename="../src/database/qmdatabaseupdatedialog.cpp" line="97"/>
         <source>Nicht vorhanden!</source>
         <translation type="unfinished"></translation>
     </message>

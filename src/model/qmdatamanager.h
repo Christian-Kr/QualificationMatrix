@@ -19,6 +19,11 @@
 #include <QObject>
 #include <memory>
 
+// minimum version db must have, otherwise the software won't work with it - 0, 0 means no version
+// table or entry is available, cause the first version doesn't include this information
+#define DB_MIN_MAJOR 1
+#define DB_MIN_MINOR 0
+
 // Forward declaration
 class QSqlRelationalTableModel;
 class QSqlDatabase;
@@ -58,6 +63,9 @@ public:
             instance = nullptr;
         }
     }
+
+    static int getMinor() { return DB_MIN_MINOR; }
+    static int getMajor() { return DB_MIN_MAJOR; }
 
     // Delete functions that should not be used, cause of singleton pattern. They should be deleted
     // public for better error message if anything goes wrong.
