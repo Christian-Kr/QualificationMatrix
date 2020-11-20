@@ -46,12 +46,18 @@ protected:
     virtual void reject() override;
 
 private:
+    /// Read version from database.
+    void readDatabaseVersion();
+
     /// Updates the ui, which means basically  the text parts in the ui elements.
     void updateUi();
 
     Ui::QMDatabaseUpdateDialog *ui;
 
     QString dbName;
+
+    int major;
+    int minor;
 };
 
 #endif // DATABASEUPDATEDIALOG_H

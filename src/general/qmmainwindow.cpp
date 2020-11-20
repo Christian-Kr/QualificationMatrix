@@ -26,6 +26,7 @@
 #include "settings/qmapplicationsettings.h"
 #include "traindata/qmtraindatadialog.h"
 #include "database/qmdatabasedialog.h"
+#include "database/qmdatabaseupdatedialog.h"
 
 #include <QProgressDialog>
 #include <QDesktopWidget>
@@ -226,6 +227,11 @@ void QMMainWindow::initAfterDatabaseOpened()
         {
             closeDatabase();
             return;
+        }
+        else
+        {
+            QMDatabaseUpdateDialog updaterDialog("default", this);
+            updaterDialog.exec();
         }
 
         // TODO: Try to update the database.
