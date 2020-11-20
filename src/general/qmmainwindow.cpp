@@ -27,6 +27,7 @@
 #include "traindata/qmtraindatadialog.h"
 #include "database/qmdatabasedialog.h"
 #include "database/qmdatabaseupdatedialog.h"
+#include "database/qmdatabaseupdater.h"
 
 #include <QProgressDialog>
 #include <QDesktopWidget>
@@ -235,8 +236,8 @@ void QMMainWindow::initAfterDatabaseOpened()
             return;
         }
 
-        // TODO: Update database.
-
+        QMDatabaseUpdater databaseUpdater;
+        databaseUpdater.updateDatabase(db);
     }
 
     // After database has been loaded and version is ok, load the database models and informate

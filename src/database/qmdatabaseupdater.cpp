@@ -14,48 +14,108 @@
 //
 
 #include "qmdatabaseupdater.h"
+#include "model/qmdatamanager.h"
 
 #include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QVariant>
+#include <QFileInfo>
+#include <QDir>
+
+#include <QDebug>
 
 QMDatabaseUpdater::QMDatabaseUpdater(QObject *parent)
     : QObject(parent)
-{}
-
-bool QMDatabaseUpdater::updateDatabase(QSqlDatabase &db)
 {
-    if (!db.isOpen()) {
+    majorSource = -1;
+    minorSource = -1;
+
+    majorTarget = -1;
+    minorTarget = -1;
+}
+
+bool QMDatabaseUpdater::updateDatabase(const QSqlDatabase &db)
+{
+    if (!db.isOpen())
+    {
         return false;
     }
 
-    // get database version
+    // Get source version.
+    readDatabaseVersion(db);
+
+    // Get target version.
+    majorTarget = QMDataManager::getMajor();
+    minorTarget = QMDataManager::getMinor();
+
+    // Get list of all scripts as string. Extract only the numbers as a list and sort them.
+    auto scripts = getUpdateScriptNames();
+    qDebug() << scripts;
+
+    // Decide which script to run
+
+    // Run the scripts for update
 
     return false;
 }
 
-// void QMDatabaseUpdater::initVersionScriptFiles()
-//{
-//    QFileInfo pathInfo("database");
+void QMDatabaseUpdater::readDatabaseVersion(const QSqlDatabase &db)
+{
+    if (!db.isOpen())
+    {
+        return;
+    }
 
-//    if (!pathInfo.isDir() || !pathInfo.exists()) {
-//        QMessageBox::critical(
-//            this,
-//            tr("Datenbank Updater"),
-//            tr("Der notwendige Datenbankordner mit den Updateskripten ist nicht verfügbar.")
-//        );
-//        return;
-//    }
+    QSqlQuery query(db);
+    QString queryText =
+        "SELECT name, value FROM Info "
+        "WHERE name == \"version_minor\" OR name == \"version_major\"";
 
-//    // get a list of all scripts
+    if (!query.exec(queryText))
+    {
+        return;
+    }
 
-//    QStringList filters;
-//    filters << QString("sql_*.sql");
+    majorSource = -1;
+    minorSource = -1;
 
-//    QDir databaseDir(pathInfo.absoluteFilePath());
-//    databaseDir.setNameFilters(filters);
-//    databaseDir.setSorting(QDir::Name);
-//    QFileInfoList updateScriptList = databaseDir.entryInfoList();
+    while (query.next())
+    {
+        if (query.value("name").toString() == "version_major")
+        {
+            majorSource = query.value("value").toInt();
+            continue;
+        }
 
-//    for (int i = 0; i < updateScriptList.size(); i++) {
-//        ui->lwVersion->addItem(updateScriptList.at(i).fileName());
-//    }
-//}
+        if (query.value("name").toString() == "version_minor")
+        {
+            minorSource = query.value("value").toInt();
+            continue;
+        }
+
+        if (minorSource != -1 && majorSource != -1)
+        {
+            break;
+        }
+    }
+}
+
+QStringList QMDatabaseUpdater::getUpdateScriptNames()
+{
+    QFileInfo pathInfo("database");
+
+    if (!pathInfo.isDir() || !pathInfo.exists())
+    {
+        qWarning() << "could not find update scripts folder";
+        return {};
+    }
+
+    QStringList filters;
+    filters << QString("sql_*.sql");
+
+    QDir databaseDir(pathInfo.absoluteFilePath());
+    databaseDir.setNameFilters(filters);
+    databaseDir.setSorting(QDir::Name);
+
+    return databaseDir.entryList();
+}

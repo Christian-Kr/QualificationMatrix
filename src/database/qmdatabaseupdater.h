@@ -42,7 +42,21 @@ signals:
 public slots:
     /// \brief includes all steps before and after updating the database
     /// \param db needs to be opened already
-    bool updateDatabase(QSqlDatabase &db);
+    bool updateDatabase(const QSqlDatabase &db);
+
+private:
+    /// Read the database version.
+    void readDatabaseVersion(const QSqlDatabase &db);
+
+    /// Get a list of all scripts available to update the sql database.
+    /// \return A list with all found script names.
+    static QStringList getUpdateScriptNames();
+
+    int majorSource;
+    int minorSource;
+
+    int majorTarget;
+    int minorTarget;
 };
 
 #endif // QMDATABASEUPDATER_H
