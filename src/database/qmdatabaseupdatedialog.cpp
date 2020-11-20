@@ -1,5 +1,5 @@
 //
-// qmdatabasedialog.cpp is part of QualificationMatrix
+// qmdatabaseupdatedialog.cpp is part of QualificationMatrix
 //
 // QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of
 // the GNU General Public License as published by the Free Software Foundation, either version 3 of
@@ -15,7 +15,6 @@
 
 #include "qmdatabaseupdatedialog.h"
 #include "ui_qmdatabaseupdatedialog.h"
-#include "settings/qmapplicationsettings.h"
 
 #include <QSqlDatabase>
 #include <QFileDialog>
