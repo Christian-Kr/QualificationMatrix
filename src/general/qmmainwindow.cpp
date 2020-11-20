@@ -216,25 +216,27 @@ void QMMainWindow::initAfterDatabaseOpened()
     // the database should be updated or not.
     if (!dm->testVersion(db))
     {
-        auto res = QMessageBox::question(
+        auto resMb = QMessageBox::question(
             this, tr("Datenbank laden"), tr(
                 "Die Version der Datenbank entspricht nicht der Vorgabe. Möchten Sie versuchen"
-                " die Datenbank zu aktualisieren?"
-            ), QMessageBox::Yes | QMessageBox::No
-        );
+                " die Datenbank zu aktualisieren?"), QMessageBox::Yes | QMessageBox::No);
 
-        if (res == QMessageBox::No)
+        if (resMb != QMessageBox::Yes)
         {
             closeDatabase();
             return;
         }
-        else
+
+        auto resUd = QMDatabaseUpdateDialog("default", this).exec();
+
+        if (resUd != QDialog::Accepted)
         {
-            QMDatabaseUpdateDialog updaterDialog("default", this);
-            updaterDialog.exec();
+            closeDatabase();
+            return;
         }
 
-        // TODO: Try to update the database.
+        // TODO: Update database.
+
     }
 
     // After database has been loaded and version is ok, load the database models and informate

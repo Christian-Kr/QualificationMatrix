@@ -21,9 +21,6 @@ QMDatabaseUpdater::QMDatabaseUpdater(QObject *parent)
     : QObject(parent)
 {}
 
-QMDatabaseUpdater::~QMDatabaseUpdater()
-{}
-
 bool QMDatabaseUpdater::updateDatabase(QSqlDatabase &db)
 {
     if (!db.isOpen()) {

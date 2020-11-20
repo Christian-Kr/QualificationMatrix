@@ -20,23 +20,26 @@
 
 class QSqlDatabase;
 
+/// Update a database to a current version.
+/// \author Christian Kr, Copyright 2020
 class QMDatabaseUpdater: public QObject
 {
 Q_OBJECT
 
 public:
+    /// Constructor
+    /// \param parent The parent obejct for the qt system.
     explicit QMDatabaseUpdater(QObject *parent = nullptr);
 
-    ~QMDatabaseUpdater();
+    /// Destructor
+    ~QMDatabaseUpdater() override = default;
 
 signals:
-
     /// \brief always when an update will be send while updating a database
     /// \param msg what is the progress doing now
     void updateProgressState(QString msg);
 
 public slots:
-
     /// \brief includes all steps before and after updating the database
     /// \param db needs to be opened already
     bool updateDatabase(QSqlDatabase &db);
