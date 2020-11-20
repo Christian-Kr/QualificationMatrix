@@ -105,3 +105,8 @@ void QMDatabaseUpdateDialog::reject()
 {
     QDialog::reject();
 }
+
+void QMDatabaseUpdateDialog::accept()
+{
+    QDialog::accept();
+}
