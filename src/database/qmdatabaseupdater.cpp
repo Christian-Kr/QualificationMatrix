@@ -50,7 +50,7 @@ bool QMDatabaseUpdater::updateDatabase(const QSqlDatabase &db)
 
     // Get list of all scripts as string. Extract only the numbers as a list and sort them.
     auto scripts = getUpdateScriptNames();
-    qDebug() << scripts;
+    scripts.sort();
 
     // Decide which script to run
 
