@@ -143,6 +143,47 @@
     </message>
 </context>
 <context>
+    <name>QMDatabaseUpdateDialog</name>
+    <message>
+        <location filename="../ui/qmdatabaseupdatedialog.ui" line="14"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmdatabaseupdatedialog.h" line="124"/>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmdatabaseupdatedialog.ui" line="22"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmdatabaseupdatedialog.h" line="125"/>
+        <source>Notwendig:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmdatabaseupdatedialog.ui" line="29"/>
+        <location filename="../ui/qmdatabaseupdatedialog.ui" line="47"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmdatabaseupdatedialog.h" line="126"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmdatabaseupdatedialog.h" line="128"/>
+        <source>TextLabel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmdatabaseupdatedialog.ui" line="40"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmdatabaseupdatedialog.h" line="127"/>
+        <source>Aktuell:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmdatabaseupdatedialog.ui" line="62"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmdatabaseupdatedialog.h" line="129"/>
+        <source>Version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmdatabaseupdatedialog.ui" line="81"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmdatabaseupdatedialog.h" line="130"/>
+        <source>Skripte</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QMEmployeeDetailsDialog</name>
     <message>
         <location filename="../ui/qmemployeedetailsdialog.ui" line="14"/>
