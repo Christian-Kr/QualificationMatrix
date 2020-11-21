@@ -236,6 +236,8 @@ void QMMainWindow::initAfterDatabaseOpened()
             return;
         }
 
+        // TODO: Create backup if something fails. Therefore ask for path to save a database copy.
+
         QMDatabaseUpdater databaseUpdater;
         databaseUpdater.updateDatabase(db);
     }

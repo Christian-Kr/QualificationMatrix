@@ -34,6 +34,16 @@ public:
     /// Destructor
     ~QMDatabaseUpdater() override = default;
 
+    /// Parse major number from script name string.
+    /// \param scriptName The name of the script which includes the number by definition.
+    /// \return Major number or -1 if conversion fails.
+    static int getMajorFromScriptName(const QString &scriptName);
+
+    /// Parse minor number from script name string.
+    /// \param scriptName The name of the script which includes the number by definition.
+    /// \return Major number or -1 if conversion fails.
+    static int getMinorFromScriptName(const QString &scriptName);
+
 signals:
     /// \brief always when an update will be send while updating a database
     /// \param msg what is the progress doing now
@@ -45,6 +55,12 @@ public slots:
     bool updateDatabase(const QSqlDatabase &db);
 
 private:
+    /// Run the given script on the database.
+    /// \param db The database to run the script on.
+    /// \param scriptName The name of the script to run.
+    /// \return True if success, else false.
+    static bool runScriptOnDatabase(const QSqlDatabase &db, const QString &sciptName);
+
     /// Read the database version.
     void readDatabaseVersion(const QSqlDatabase &db);
 

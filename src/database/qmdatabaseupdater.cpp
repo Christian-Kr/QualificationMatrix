@@ -18,7 +18,6 @@
 
 #include <QSqlDatabase>
 #include <QSqlQuery>
-#include <QVariant>
 #include <QFileInfo>
 #include <QDir>
 
@@ -52,11 +51,113 @@ bool QMDatabaseUpdater::updateDatabase(const QSqlDatabase &db)
     auto scripts = getUpdateScriptNames();
     scripts.sort();
 
-    // Decide which script to run
+    // Go through the scripts from first to last and see whether it should be run or not.
+    for (int i = 0; i < scripts.size(); i++)
+    {
+        auto &scriptName = scripts.at(i);
+        int tmpMajor = QMDatabaseUpdater::getMajorFromScriptName(scriptName);
+        int tmpMinor = QMDatabaseUpdater::getMinorFromScriptName(scriptName);
 
-    // Run the scripts for update
+        if (tmpMajor < 0 && tmpMinor < 0)
+        {
+            qWarning() << "cannot update database due to unreadable major and/or minor version";
+            return false;
+        }
 
-    return false;
+        // Continue if the major number of the script is smaller than the database major number or
+        // bigger than the target version number.
+        if (tmpMajor < majorSource &&
+            tmpMajor > majorTarget)
+        {
+            continue;
+        }
+
+        // If the major number is equal and the minor number of the script is equal or smaller
+        // continue.
+        if ((tmpMajor == majorSource && tmpMinor <= minorSource) ||
+            (tmpMajor == majorTarget && tmpMinor > minorSource))
+        {
+            continue;
+        }
+
+        // Try to run script to database for an update.
+        emit updateProgressState(tr("Update to version %1.%2").arg(tmpMajor).arg(tmpMinor));
+
+        if (!QMDatabaseUpdater::runScriptOnDatabase(db, scriptName))
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+bool QMDatabaseUpdater::runScriptOnDatabase(const QSqlDatabase &db, const QString &scriptName)
+{
+    QFileInfo scriptFileInfo(QDir("database"), scriptName);
+
+    if (!scriptFileInfo.exists() || !scriptFileInfo.isFile())
+    {
+        qWarning() << "script file" << scriptName << "does not exist";
+        return false;
+    }
+
+    QFile scriptFile(scriptFileInfo.absoluteFilePath());
+
+    if (!scriptFile.open(QIODevice::Text | QIODevice::ReadOnly))
+    {
+        qWarning() << "cannot open script file" << scriptName;
+        return false;
+    }
+
+    QTextStream scriptStream(&scriptFile);
+    auto fullScript = scriptStream.readAll();
+
+    auto queries = fullScript.split(";");
+    QSqlQuery sqlQuery(db);
+
+    for (int i = 0; i < queries.size(); i++)
+    {
+        if (!sqlQuery.exec(queries.at(i)))
+        {
+            qWarning() << "cannot run query on database from script file" << scriptName;
+            return false;
+        }
+    }
+
+    return true;
+}
+
+int QMDatabaseUpdater::getMajorFromScriptName(const QString &scriptName)
+{
+    auto tmp = scriptName.split("_");
+    bool ok;
+    int tmpMajor = tmp.at(1).toInt(&ok);
+
+    if (ok)
+    {
+        return tmpMajor;
+    }
+    else
+    {
+        return -1;
+    }
+}
+
+int QMDatabaseUpdater::getMinorFromScriptName(const QString &scriptName)
+{
+    auto tmp = scriptName.split("_");
+    bool ok;
+    int tmpMinor = tmp.at(1).toInt(&ok);
+
+    if (ok)
+    {
+        return tmpMinor;
+    }
+    else
+    {
+        return -1;
+    }
 }
 
 void QMDatabaseUpdater::readDatabaseVersion(const QSqlDatabase &db)
