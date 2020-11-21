@@ -765,6 +765,41 @@ Die Aktion wird abgebrochen.</source>
     </message>
 </context>
 <context>
+    <name>QMFileDialog</name>
+    <message>
+        <location filename="../ui/qmfiledialog.ui" line="14"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmfiledialog.h" line="168"/>
+        <source>Dateien</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmfiledialog.ui" line="22"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmfiledialog.h" line="169"/>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmfiledialog.ui" line="29"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmfiledialog.h" line="170"/>
+        <source>Typ</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmfiledialog.ui" line="55"/>
+        <location filename="../ui/qmfiledialog.ui" line="72"/>
+        <location filename="../ui/qmfiledialog.ui" line="98"/>
+        <location filename="../ui/qmfiledialog.ui" line="115"/>
+        <location filename="../ui/qmfiledialog.ui" line="132"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmfiledialog.h" line="171"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmfiledialog.h" line="172"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmfiledialog.h" line="173"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmfiledialog.h" line="174"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmfiledialog.h" line="175"/>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QMFuncSettingsWidget</name>
     <message>
         <location filename="../ui/qmfuncsettingswidget.ui" line="14"/>

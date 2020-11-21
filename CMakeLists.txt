@@ -95,6 +95,7 @@ add_executable(QualificationMatrix WIN32
     src/model/qmtrainingexceptionmodel.cpp
     src/model/qminfomodel.cpp
     src/general/qmprogresslogdialog.cpp
+    src/file/qmfiledialog.cpp
     ui/qmemployeesettingswidget.ui
     ui/qmfuncsettingswidget.ui
     ui/qmmainwindow.ui
@@ -111,7 +112,8 @@ add_executable(QualificationMatrix WIN32
     ui/qmgeneralsettingswidget.ui
     ui/qmqualimatrixsettingswidget.ui
     ui/qmqualiresultsettingswidget.ui
-    ui/qmdatabaseupdatedialog.ui)
+    ui/qmdatabaseupdatedialog.ui
+    ui/qmfiledialog.ui)
 
 # copy database directory to binary
 add_custom_command(
