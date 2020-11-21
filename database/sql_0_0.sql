@@ -1,6 +1,6 @@
 -- TrainDataState definition
 
-CREATE TABLE "TrainDataState" (
+CREATE TABLE IF NOT EXISTS "TrainDataState" (
 	"id"	INTEGER,
 	"name"	TEXT,
 	PRIMARY KEY("id")
@@ -8,7 +8,7 @@ CREATE TABLE "TrainDataState" (
 
 -- Shift definition
 
-CREATE TABLE "Shift" (
+CREATE TABLE IF NOT EXISTS "Shift" (
 	"id"	INTEGER,
 	"name"	TEXT NOT NULL,
 	PRIMARY KEY("id")
@@ -16,7 +16,7 @@ CREATE TABLE "Shift" (
 
 -- QualiState definition
 
-CREATE TABLE "QualiState" (
+CREATE TABLE IF NOT EXISTS "QualiState" (
 	"id"	INTEGER,
 	"name"	TEXT,
 	PRIMARY KEY("id")
@@ -24,7 +24,7 @@ CREATE TABLE "QualiState" (
 
 -- Info definition
 
-CREATE TABLE "Info" (
+CREATE TABLE IF NOT EXISTS "Info" (
 	"id"	INTEGER,
 	"name"	TEXT,
 	"value"	TEXT,
@@ -36,7 +36,7 @@ INSERT INTO "Info" ("name", "value") VALUES("MINOR", "0");
 
 -- FuncGroup definition
 
-CREATE TABLE "FuncGroup" (
+CREATE TABLE IF NOT EXISTS "FuncGroup" (
 	"id"	INTEGER,
 	"name"	TEXT,
 	"color"	TEXT,
@@ -45,7 +45,7 @@ CREATE TABLE "FuncGroup" (
 
 -- TrainGroup definition
 
-CREATE TABLE "TrainGroup" (
+CREATE TABLE IF NOT EXISTS "TrainGroup" (
 	"id"	INTEGER,
 	"name"	TEXT,
 	"color"	TEXT,
@@ -54,7 +54,7 @@ CREATE TABLE "TrainGroup" (
 
 -- Employee definition
 
-CREATE TABLE "Employee" (
+CREATE TABLE IF NOT EXISTS "Employee" (
 	"id"	INTEGER,
 	"name"	TEXT NOT NULL,
 	"shift"	INTEGER NOT NULL,
@@ -64,7 +64,7 @@ CREATE TABLE "Employee" (
 
 -- Train definition
 
-CREATE TABLE "Train" (
+CREATE TABLE IF NOT EXISTS "Train" (
 	"id"	INTEGER,
 	"name"	TEXT,
 	"group"	INTEGER,
@@ -76,7 +76,7 @@ CREATE TABLE "Train" (
 
 -- TrainData definition
 
-CREATE TABLE "TrainData" (
+CREATE TABLE IF NOT EXISTS "TrainData" (
 	"id"	INTEGER,
 	"employee"	INTEGER,
 	"train"	INTEGER,
@@ -90,7 +90,7 @@ CREATE TABLE "TrainData" (
 
 -- TrainException definition
 
-CREATE TABLE `TrainException` (
+CREATE TABLE IF NOT EXISTS `TrainException` (
 	"id"	INTEGER,
 	"employee"	INTEGER,
 	"train"	INTEGER,
@@ -102,7 +102,7 @@ CREATE TABLE `TrainException` (
 
 -- Func definition
 
-CREATE TABLE "Func" (
+CREATE TABLE IF NOT EXISTS "Func" (
 	"id"	INTEGER,
 	"name"	TEXT,
 	"group"	INTEGER,
@@ -112,7 +112,7 @@ CREATE TABLE "Func" (
 
 -- EmployeeFunc definition
 
-CREATE TABLE "EmployeeFunc" (
+CREATE TABLE IF NOT EXISTS "EmployeeFunc" (
 	"id"	INTEGER,
 	"employee"	INTEGER,
 	"func"	INTEGER,
@@ -123,7 +123,7 @@ CREATE TABLE "EmployeeFunc" (
 
 -- QualiData definition
 
-CREATE TABLE "QualiData" (
+CREATE TABLE IF NOT EXISTS "QualiData" (
 	"id"	INTEGER,
 	"func"	INTEGER,
 	"train"	INTEGER,

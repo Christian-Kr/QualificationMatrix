@@ -267,7 +267,7 @@
 <context>
     <name>QMDataManager</name>
     <message>
-        <location filename="../src/model/qmdatamanager.cpp" line="192"/>
+        <location filename="../src/model/qmdatamanager.cpp" line="191"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
@@ -440,7 +440,7 @@
 <context>
     <name>QMDatabaseUpdater</name>
     <message>
-        <location filename="../src/database/qmdatabaseupdater.cpp" line="84"/>
+        <location filename="../src/database/qmdatabaseupdater.cpp" line="85"/>
         <source>Update to version %1.%2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1203,7 +1203,7 @@ Die Aktion wird abgebrochen.</source>
     <message>
         <location filename="../ui/qmmainwindow.ui" line="20"/>
         <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="175"/>
-        <location filename="../src/general/qmmainwindow.cpp" line="499"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="528"/>
         <source>QualificationMatrix</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1349,42 +1349,42 @@ Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="264"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="279"/>
         <source>Datenbank verbunden</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="275"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="304"/>
         <source>Datenbank</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="275"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="304"/>
         <source>Daten abrufen...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="280"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="309"/>
         <source>Schulungsresultat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="280"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="309"/>
         <source>Berechnung...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="365"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="394"/>
         <source>Qualifizierungsergebnis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="368"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="397"/>
         <source>Qualifizierungsmatrix</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="285"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="314"/>
         <source>Qualifikationsmatrix</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1396,33 +1396,44 @@ Jetzt trennen?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="245"/>
-        <location filename="../src/general/qmmainwindow.cpp" line="255"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="247"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="285"/>
+        <source>Datenbank-Backup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/general/qmmainwindow.cpp" line="248"/>
+        <source>Es konnte kein Backup erstellt werden. Da für eine Aktualisierung ein Backup notwendig ist, wird die Aktion abgebrochen und die Datenbank geschlossen.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/general/qmmainwindow.cpp" line="260"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="270"/>
         <source>Datenbank aktualisieren</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="246"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="261"/>
         <source>Die Datenbank konnte nicht vollständig aktualisiert werden. Der Fehler ist kritisch. Bitte spielen Sie das vorher angelegte Backup ein. Die Datenbank wird geschlossen und nicht weiter verarbeitet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="256"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="271"/>
         <source>Die Aktualisierung der Datenbank war erfolgreich. Bitte heben Sie das erstellte Backup für einen späteren Fall auf.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="285"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="314"/>
         <source>Cache aufbauen...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="384"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="413"/>
         <source>Über QualificationMatrix</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="385"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="414"/>
         <source>Copyright (c) 2020 by Christian Kr
 Version:	0.1-Alpha
 Lizenz:	GNU GENERAL PUBLIC LICENSE Version 3
@@ -1435,57 +1446,57 @@ Bug-Reports: Fehler können direkt auf GitHub gemeldet werden oderper E-Mail an 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="404"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="433"/>
         <source>Backup anlegen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="404"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="433"/>
         <source>Der angegebene Ordner in den Einstellungen ist kein Verzeichnis,  existiert nicht oder ist nicht beschreibbar.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="440"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="469"/>
         <source>Backup löschen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="441"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="470"/>
         <source>Die Backupdatei konnte nicht gelöscht werden und wird übersprungen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="453"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="482"/>
         <source>Backup erstellen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="454"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="483"/>
         <source>Die Backupdatei konnte nicht kopiert werden und wird übersprungen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="470"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="499"/>
         <source>Datenbank schließen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="471"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="500"/>
         <source>Soll die verbundene Datenbank wirklich geschlossen werden? (Nicht gespeicherte Daten gehen verloren!)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="500"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="529"/>
         <source>Datenbank getrennt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="594"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="623"/>
         <source>Öffne Sql-Datei</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="594"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="623"/>
         <source>Sql (*.sql)</source>
         <translation type="unfinished"></translation>
     </message>

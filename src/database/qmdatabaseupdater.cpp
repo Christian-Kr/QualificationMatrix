@@ -18,6 +18,7 @@
 
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QSqlError>
 #include <QFileInfo>
 #include <QDir>
 
@@ -118,9 +119,18 @@ bool QMDatabaseUpdater::runScriptOnDatabase(const QSqlDatabase &db, const QStrin
 
     for (int i = 0; i < queries.size(); i++)
     {
+        auto query = queries.at(i).simplified();
+
+        if (query.isEmpty())
+        {
+            continue;
+        }
+
         if (!sqlQuery.exec(queries.at(i)))
         {
             qWarning() << "cannot run query on database from script file" << scriptName;
+            qWarning() << queries.at(i);
+            qWarning() << sqlQuery.lastError().text();
             return false;
         }
     }
@@ -148,7 +158,7 @@ int QMDatabaseUpdater::getMinorFromScriptName(const QString &scriptName)
 {
     auto tmp = scriptName.split("_");
     bool ok;
-    int tmpMinor = tmp.at(1).toInt(&ok);
+    int tmpMinor = tmp.at(2).toInt(&ok);
 
     if (ok)
     {

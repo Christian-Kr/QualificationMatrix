@@ -286,11 +286,13 @@ bool QMMainWindow::saveSingleDatabaseBackup(const QSqlDatabase &db)
 
     if (fileName.isEmpty())
     {
+        qWarning() << "no database backup name has been choosen";
         return false;
     }
 
     if (!QFile::copy(db.databaseName(), fileName))
     {
+        qWarning() << "cannot create a copy of database";
         return false;
     }
 

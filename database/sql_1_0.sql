@@ -1,6 +1,6 @@
 -- Info definition
 
-CREATE TABLE "Info" (
+CREATE TABLE IF NOT EXISTS "Info" (
     "id"        INTEGER,
     "name"      TEXT,
     "value"     TEXT,
@@ -13,7 +13,7 @@ INSERT INTO "Info" ("name", "value") VALUES("file_location", "external");
 
 -- Files definition
 
-CREATE TABLE "File" (
+CREATE TABLE IF NOT EXISTS "File" (
     "id"    INTEGER,
     "name"      TEXT,
     "type"      TEXT,
@@ -24,7 +24,7 @@ CREATE TABLE "File" (
 
 -- TraiDataFile links TrainData and File extries
 
-CREATE TABLE "TrainDataFile" (
+CREATE TABLE IF NOT EXISTS "TrainDataFile" (
     "id"            INTEGER,
     "train_data"    INTEGER,
     "file"          INTEGER,

@@ -16,7 +16,6 @@
 #include "qmdatamanager.h"
 #include "qualimatrix/qmqualimatrixmodel.h"
 #include "qualiresult/qmqualiresultmodel.h"
-#include "qmsqlrelationaltablemodel.h"
 #include "qmfunctionmodel.h"
 #include "qmtrainingmodel.h"
 #include "qmtrainingdatamodel.h"
