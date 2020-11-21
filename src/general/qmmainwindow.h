@@ -31,6 +31,7 @@ class QProgressDialog;
 class QMQualiResultWidget;
 class QMQualiMatrixWidget;
 class QTranslator;
+class QSqlDatabase;
 
 /// Main windows class for this application.
 /// \author Christian Kr, Copyright 2020
@@ -111,6 +112,11 @@ public slots:
 
     /// Create an empty database with initial emtpy structure.
     void createEmptyDatabase();
+
+    /// Save a database backup.
+    /// \param db The database to save.
+    /// \return True if success, else false.
+    bool saveSingleDatabaseBackup(const QSqlDatabase &db);
 
 protected:
     /// Override from QMainWindow. This function will be called on closeing the widget.

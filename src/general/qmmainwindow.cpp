@@ -236,10 +236,41 @@ void QMMainWindow::initAfterDatabaseOpened()
             return;
         }
 
-        // TODO: Create backup if something fails. Therefore ask for path to save a database copy.
+        // A database backup should only be run, when the database is a local one. On a remote
+        // database the administrator of the database system has to take care of backups. For now,
+        // only a database with the QSQLITE driver is a local one.
+        if (db.driverName() == "QSQLITE")
+        {
+            if (!saveSingleDatabaseBackup(db))
+            {
+                QMessageBox::critical(
+                    this, tr("Datenbank-Backup"),
+                    tr("Es konnte kein Backup erstellt werden. Da für eine Aktualisierung ein "
+                       "Backup notwendig ist, wird die Aktion abgebrochen und die Datenbank "
+                       "geschlossen."));
+                closeDatabase();
+                return;
+            }
+        }
 
         QMDatabaseUpdater databaseUpdater;
-        databaseUpdater.updateDatabase(db);
+        if (!databaseUpdater.updateDatabase(db))
+        {
+            QMessageBox::critical(
+                this, tr("Datenbank aktualisieren"),
+                tr("Die Datenbank konnte nicht vollständig aktualisiert werden. Der Fehler ist "
+                   "kritisch. Bitte spielen Sie das vorher angelegte Backup ein. Die Datenbank "
+                   "wird geschlossen und nicht weiter verarbeitet."));
+            closeDatabase();
+            return;
+        }
+        else
+        {
+            QMessageBox::information(
+                this, tr("Datenbank aktualisieren"),
+                tr("Die Aktualisierung der Datenbank war erfolgreich. Bitte heben Sie das "
+                   "erstellte Backup für einen späteren Fall auf."));
+        }
     }
 
     // After database has been loaded and version is ok, load the database models and informate
@@ -247,6 +278,23 @@ void QMMainWindow::initAfterDatabaseOpened()
     dm->initializeModels(db);
     ui->statusbar->showMessage(tr("Datenbank verbunden"));
     setWindowTitle("QualificationMatrix - " + db.databaseName());
+}
+
+bool QMMainWindow::saveSingleDatabaseBackup(const QSqlDatabase &db)
+{
+    auto fileName = QFileDialog::getSaveFileName(this, tr("Datenbank-Backup"), QDir::homePath());
+
+    if (fileName.isEmpty())
+    {
+        return false;
+    }
+
+    if (!QFile::copy(db.databaseName(), fileName))
+    {
+        return false;
+    }
+
+    return true;
 }
 
 void QMMainWindow::beforeInitializeModels(int maxSteps)
