@@ -31,6 +31,9 @@ CREATE TABLE "Info" (
 	PRIMARY KEY("id")
 );
 
+INSERT INTO "Info" ("name", "value") VALUES("MAJOR", "0");
+INSERT INTO "Info" ("name", "value") VALUES("MINOR", "0");
+
 -- FuncGroup definition
 
 CREATE TABLE "FuncGroup" (

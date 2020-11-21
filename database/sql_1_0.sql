@@ -7,8 +7,8 @@ CREATE TABLE "Info" (
     PRIMARY KEY("id")
 );
 
-INSERT INTO "Info" ("name", "value") VALUES("MAJOR", "1");
-INSERT INTO "Info" ("name", "value") VALUES("MINOR", "0");
+-- Add option in info for file_location, which is necessary for certificates
+
 INSERT INTO "Info" ("name", "value") VALUES("file_location", "external");
 
 -- Files definition
@@ -36,3 +36,8 @@ CREATE TABLE "TrainDataFile" (
 -- Change Train to implement legally_necessary entries
 
 ALTER TABLE "Train" ADD COLUMN "legally_necessary" INTEGER;
+
+-- Update version of database
+
+UPDATE "Info" SET "value" = "1" WHERE "name" = "MAJOR";
+UPDATE "Info" SET "value" = "0" WHERE "name" = "MINOR";

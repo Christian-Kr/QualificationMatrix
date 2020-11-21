@@ -52,7 +52,7 @@ bool QMDataManager::testVersion(QSqlDatabase &db)
     QSqlQuery query(db);
     QString queryText =
         "SELECT name, value FROM Info "
-        "WHERE name == \"version_minor\" OR name == \"version_major\"";
+        "WHERE name == \"MINOR\" OR name == \"MAJOR\"";
 
     if (!query.exec(queryText))
     {
@@ -64,13 +64,13 @@ bool QMDataManager::testVersion(QSqlDatabase &db)
 
     while (query.next())
     {
-        if (query.value("name").toString() == "version_major")
+        if (query.value("name").toString() == "MAJOR")
         {
             major = query.value("value").toInt();
             continue;
         }
 
-        if (query.value("name").toString() == "version_minor")
+        if (query.value("name").toString() == "MINOR")
         {
             minor = query.value("value").toInt();
             continue;
