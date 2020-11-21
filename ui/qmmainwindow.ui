@@ -76,7 +76,7 @@
      <x>0</x>
      <y>0</y>
      <width>1177</width>
-     <height>30</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_Datei">
@@ -103,8 +103,15 @@
     <addaction name="actSettings"/>
     <addaction name="actCreateEmptyDatabase"/>
    </widget>
+   <widget class="QMenu" name="menuNachweise">
+    <property name="title">
+     <string>Nachweise</string>
+    </property>
+    <addaction name="actManageCertificate"/>
+   </widget>
    <addaction name="menu_Datei"/>
    <addaction name="menuExtras"/>
+   <addaction name="menuNachweise"/>
    <addaction name="menuHilfe"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -232,6 +239,11 @@
    </property>
    <property name="text">
     <string>Englisch</string>
+   </property>
+  </action>
+  <action name="actManageCertificate">
+   <property name="text">
+    <string>Verwalten</string>
    </property>
   </action>
  </widget>
@@ -367,6 +379,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actManageCertificate</sender>
+   <signal>triggered()</signal>
+   <receiver>QMMainWindow</receiver>
+   <slot>manageCertificate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>588</x>
+     <y>370</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>showAbout()</slot>
@@ -381,5 +409,6 @@
   <slot>showTrainData()</slot>
   <slot>closeDatabase()</slot>
   <slot>createEmptyDatabase()</slot>
+  <slot>manageCertificate()</slot>
  </slots>
 </ui>

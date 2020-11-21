@@ -118,6 +118,9 @@ public slots:
     /// \return True if success, else false.
     bool saveSingleDatabaseBackup(const QSqlDatabase &db);
 
+    /// Open dialog for managing the certificate files.
+    void manageCertificate();
+
 protected:
     /// Override from QMainWindow. This function will be called on closeing the widget.
     /// \param event The close event object that will be created.

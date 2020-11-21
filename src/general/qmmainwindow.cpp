@@ -28,6 +28,7 @@
 #include "database/qmdatabasedialog.h"
 #include "database/qmdatabaseupdatedialog.h"
 #include "database/qmdatabaseupdater.h"
+#include "file/qmfiledialog.h"
 
 #include <QProgressDialog>
 #include <QDesktopWidget>
@@ -643,4 +644,10 @@ void QMMainWindow::createEmptyDatabase()
     }
 
     QSqlDatabase::removeDatabase("tmp");
+}
+
+void QMMainWindow::manageCertificate()
+{
+    QMFileDialog fileDialog(this);
+    fileDialog.exec();
 }
