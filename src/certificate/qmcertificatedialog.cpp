@@ -163,6 +163,8 @@ bool QMCertificateDialog::saveFileExternal(QFile &file)
     }
 
     qWarning() << "file copied to" << fullFilePath;
+
+    return true;
 }
 
 bool QMCertificateDialog::saveFileInternal(QFile &file)
