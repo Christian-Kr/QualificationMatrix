@@ -23,6 +23,7 @@
 #include <QMessageBox>
 #include <QDialogButtonBox>
 #include <QPushButton>
+#include <QKeyEvent>
 
 QMTrainDataDialog::QMTrainDataDialog(QWidget *parent)
     : QDialog(parent), ui(new Ui::QMTrainDataDialog)
@@ -117,4 +118,14 @@ void QMTrainDataDialog::reject()
     }
 
     QDialog::reject();
+}
+
+void QMTrainDataDialog::keyPressEvent(QKeyEvent *event)
+{
+    if (event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
+    {
+        return;
+    }
+
+    QDialog::keyPressEvent(event);
 }

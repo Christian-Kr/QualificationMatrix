@@ -52,6 +52,10 @@ public slots:
     /// The apply button has been pressed.
     void apply();
 
+protected:
+    /// Override from QDialog.
+    void keyPressEvent(QKeyEvent *event);
+
 private:
     Ui::QMTrainDataDialog *ui;
 };

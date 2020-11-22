@@ -24,6 +24,7 @@
 #include <QCryptographicHash>
 #include <QDate>
 #include <QMessageBox>
+#include <QKeyEvent>
 
 #include <QDebug>
 
@@ -212,4 +213,14 @@ QString QMCertificateDialog::saveFileExternal(QFile &file)
 bool QMCertificateDialog::saveFileInternal(QFile &file)
 {
     return false;
+}
+
+void QMCertificateDialog::keyPressEvent(QKeyEvent *event)
+{
+    if (event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
+    {
+        return;
+    }
+
+    QDialog::keyPressEvent(event);
 }

@@ -264,49 +264,49 @@
     <name>QMCertificateDialog</name>
     <message>
         <location filename="../ui/qmcertificatedialog.ui" line="14"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="158"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="160"/>
         <source>Nachweise verwalten</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmcertificatedialog.ui" line="29"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="160"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="162"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmcertificatedialog.ui" line="22"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="159"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="161"/>
         <source>Typ</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmcertificatedialog.ui" line="43"/>
         <location filename="../ui/qmcertificatedialog.ui" line="63"/>
-        <location filename="../ui/qmcertificatedialog.ui" line="87"/>
-        <location filename="../ui/qmcertificatedialog.ui" line="104"/>
-        <location filename="../ui/qmcertificatedialog.ui" line="121"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="161"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="162"/>
+        <location filename="../ui/qmcertificatedialog.ui" line="94"/>
+        <location filename="../ui/qmcertificatedialog.ui" line="111"/>
+        <location filename="../ui/qmcertificatedialog.ui" line="128"/>
         <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="163"/>
         <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="164"/>
         <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="165"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="166"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="167"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="103"/>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="138"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="104"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="139"/>
         <source>Nachweis hinzufügen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="103"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="104"/>
         <source>All files (*.*);;JPEG (*.jpg *.jpeg);;PDF (*.pdf)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="139"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="140"/>
         <source>Der Nachweis konnte nicht hinzugefügt werden. Bitte informieren Sie den Entwickler.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2153,24 +2153,24 @@ Sind Sie sich sicher?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatadialog.cpp" line="69"/>
+        <location filename="../src/traindata/qmtraindatadialog.cpp" line="70"/>
         <source>Schulungsdaten - Speichern</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatadialog.cpp" line="70"/>
+        <location filename="../src/traindata/qmtraindatadialog.cpp" line="71"/>
         <source>Die Änderungen werden in die Datenbank geschrieben.
 
 Sind Sie sicher?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatadialog.cpp" line="103"/>
+        <location filename="../src/traindata/qmtraindatadialog.cpp" line="104"/>
         <source>Schulungsdaten - Zurücksetzen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatadialog.cpp" line="104"/>
+        <location filename="../src/traindata/qmtraindatadialog.cpp" line="105"/>
         <source>Alle Änderungen werden unwiderruflich verworfen!
 
 Sind Sie sicher?</source>

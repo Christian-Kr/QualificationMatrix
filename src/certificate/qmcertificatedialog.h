@@ -52,6 +52,9 @@ protected:
     /// Override from QDialog.
     void closeEvent(QCloseEvent *event) override;
 
+    /// Override from QDialog.
+    void keyPressEvent(QKeyEvent *event) override;
+
 public slots:
     /// Add a new certificate.
     void addCertificate();
