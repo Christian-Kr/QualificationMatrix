@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS "Info" (
 -- Add option in info for file_location, which is necessary for certificates
 
 INSERT INTO "Info" ("name", "value") VALUES("certificate_location", "external");
+INSERT INTO "Info" ("name", "value") VALUES("certificate_location_path", "");
 
 -- Certificate definition
 
@@ -19,6 +20,7 @@ CREATE TABLE IF NOT EXISTS "Certificate" (
     "type"      TEXT,
     "path"      TEXT,
     "binary"    BLOB,
+    "md5_hash"  TEXT,
     PRIMARY KEY("id")
 );
 
