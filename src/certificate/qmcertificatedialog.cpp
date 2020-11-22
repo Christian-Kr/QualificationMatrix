@@ -25,6 +25,8 @@
 #include <QDate>
 #include <QMessageBox>
 #include <QKeyEvent>
+#include <QDesktopServices>
+#include <QTemporaryFile>
 
 #include <QDebug>
 
@@ -236,6 +238,46 @@ void QMCertificateDialog::keyPressEvent(QKeyEvent *event)
     }
 
     QDialog::keyPressEvent(event);
+}
+
+void QMCertificateDialog::showCertificate()
+{
+    auto modelIndex = ui->tvFiles->selectionModel()->selectedRows();
+
+    if (modelIndex.size() != 1)
+    {
+        QMessageBox::information(
+            this, tr("Nachweis anzeigen"), tr("Es wurde kein Eintrag selektiert."));
+        return;
+    }
+
+    // Handle related to extern/internal. Create a temporary file and open it.
+    auto dm = QMDataManager::getInstance();
+    auto row = modelIndex.at(0).row();
+
+    if (dm->getCertificateLocation() == CertLoc::EXTERNAL)
+    {
+        QString fileName = nameFilterModel->data(nameFilterModel->index(row, 3)).toString();
+        QString md5 = nameFilterModel->data(nameFilterModel->index(row, 5)).toString();
+        QString type = nameFilterModel->data(nameFilterModel->index(row, 2)).toString();
+        QFile file(fileName);
+        file.open(QIODevice::ReadOnly);
+
+        QTemporaryFile temp(QDir::tempPath() + "/" + md5 + "XXXXXX" + "." + type, this);
+        temp.setAutoRemove(false);
+        temp.open();
+
+        temp.write(file.readAll());
+        file.close();
+
+        qDebug() << temp.fileName();
+
+        QDesktopServices::openUrl(QUrl::fromLocalFile(temp.fileName()));
+    }
+    else
+    {
+
+    }
 }
 
 void QMCertificateDialog::removeCertificate()

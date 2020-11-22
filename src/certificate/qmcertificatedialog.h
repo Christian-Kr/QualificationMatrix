@@ -71,6 +71,9 @@ public slots:
     /// Reset the content of the filter.
     void resetFilter();
 
+    /// Show the current selected certificate.
+    void showCertificate();
+
 private:
     /// Save the given file external: Copy to file system structure.
     /// \param file File to save external.
