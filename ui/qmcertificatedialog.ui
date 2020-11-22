@@ -218,8 +218,25 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>tbRemove</sender>
+   <signal>clicked()</signal>
+   <receiver>QMCertificateDialog</receiver>
+   <slot>removeCertificate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>442</x>
+     <y>141</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>235</x>
+     <y>204</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>addCertificate()</slot>
+  <slot>removeCertificate()</slot>
  </slots>
 </ui>

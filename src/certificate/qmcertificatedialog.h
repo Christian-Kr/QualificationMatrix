@@ -59,6 +59,9 @@ public slots:
     /// Add a new certificate.
     void addCertificate();
 
+    /// Remove an existing and selected certificate.
+    void removeCertificate();
+
     /// Update the models, cause they might have changed.
     void updateData();
 
@@ -80,6 +83,7 @@ private:
     QSortFilterProxyModel *nameFilterModel;
 
     std::shared_ptr<QSqlTableModel> certificateModel;
+    std::shared_ptr<QSqlTableModel> trainDataCertificateModel;
 };
 
 #endif // QMCERTIFICATEDIALOG_H

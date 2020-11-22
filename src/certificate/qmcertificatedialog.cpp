@@ -68,6 +68,7 @@ void QMCertificateDialog::updateData()
     // Get the model data.
     auto dm = QMDataManager::getInstance();
     certificateModel = dm->getCertificateModel();
+    trainDataCertificateModel = dm->getTrainDataCertificateModel();
 
     // Update filter models.
     typeFilterModel->setSourceModel(certificateModel.get());
@@ -235,4 +236,46 @@ void QMCertificateDialog::keyPressEvent(QKeyEvent *event)
     }
 
     QDialog::keyPressEvent(event);
+}
+
+void QMCertificateDialog::removeCertificate()
+{
+    auto res = QMessageBox::question(
+        this, tr("Nachweis entfernen"),
+        tr("Die Aktion kann zu Schulungseinträgen ohne Nachweis führen. Fortfahren?"),
+        QMessageBox::Yes | QMessageBox::No);
+
+    if (res != QMessageBox::Yes)
+    {
+        return;
+    }
+
+    auto modelIndex = ui->tvFiles->selectionModel()->selectedRows();
+
+    if (modelIndex.size() != 1)
+    {
+        QMessageBox::information(
+            this, tr("Nachweis entfernen"), tr("Es wurde kein Eintrag selektiert."));
+        return;
+    }
+
+    // Look if there is any entry in train data, that has this certificate and delete the entries.
+    auto row = modelIndex.at(0).row();
+    auto certId = nameFilterModel->data(nameFilterModel->index(row, 0)).toInt();
+
+    for (int i = 0; i < trainDataCertificateModel->rowCount(); i++)
+    {
+        auto corrId = trainDataCertificateModel->data(
+            trainDataCertificateModel->index(i, 2)).toInt();
+
+        if (corrId == certId)
+        {
+            trainDataCertificateModel->removeRow(i);
+        }
+    }
+
+    trainDataCertificateModel->submitAll();
+
+    nameFilterModel->removeRow(row);
+    certificateModel->submitAll();
 }
