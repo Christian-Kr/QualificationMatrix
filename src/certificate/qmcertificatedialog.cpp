@@ -147,7 +147,7 @@ bool QMCertificateDialog::saveFileExternal(const QFile &file)
 
     if (!fullPath.exists())
     {
-        if (!fullPath.mkpath(fullPath.absoluteFilePath()))
+        if (!fullPath.mkpath(fullPath.absolutePath()))
         {
             qWarning() << "cannot create path" << fullPath.absolutePath();
             return false;
