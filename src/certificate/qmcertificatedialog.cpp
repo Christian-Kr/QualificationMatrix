@@ -129,7 +129,7 @@ void QMCertificateDialog::addCertificate()
     }
 }
 
-bool QMCertificateDialog::saveFileExternal(const QFile &file)
+bool QMCertificateDialog::saveFileExternal(QFile &file)
 {
     auto dm = QMDataManager::getInstance();
     auto path = dm->getCertificateLocationPath();
@@ -154,7 +154,7 @@ bool QMCertificateDialog::saveFileExternal(const QFile &file)
         }
     }
 
-    auto fullFilePath = fullPath.absoluteFilePath() + QDir::separator() + file.fileName();
+    auto fullFilePath = fullPath.absolutePath() + QDir::separator() + file.fileName();
 
     if (!file.copy(fullFilePath))
     {
@@ -165,7 +165,7 @@ bool QMCertificateDialog::saveFileExternal(const QFile &file)
     qWarning() << "file copied to" << fullFilePath;
 }
 
-bool QMCertificateDialog::saveFileInternal(const QFile &file)
+bool QMCertificateDialog::saveFileInternal(QFile &file)
 {
     return false;
 }
