@@ -34,7 +34,11 @@
       <widget class="QLineEdit" name="leName"/>
      </item>
      <item row="1" column="1">
-      <widget class="QComboBox" name="cbType"/>
+      <widget class="QComboBox" name="cbType">
+       <property name="insertPolicy">
+        <enum>QComboBox::NoInsert</enum>
+       </property>
+      </widget>
      </item>
      <item row="1" column="2">
       <spacer name="horizontalSpacer">

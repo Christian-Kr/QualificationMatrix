@@ -648,5 +648,6 @@ void QMMainWindow::createEmptyDatabase()
 void QMMainWindow::manageCertificate()
 {
     QMCertificateDialog certDialog(this);
+    certDialog.updateData();
     certDialog.exec();
 }

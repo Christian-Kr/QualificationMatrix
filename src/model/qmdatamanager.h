@@ -105,6 +105,8 @@ public:
     sp_relTableModel getTrainExceptionModel() { return trainExceptionModel; }
     sp_tableModel getShiftModel() { return shiftModel; }
     sp_tableModel getInfoModel() { return infoModel; }
+    sp_tableModel getCertificateModel() { return certificateModel; }
+    sp_tableModel getTrainDataCertificateModel() { return trainDataCertificateModel; }
 
     /// QSqlTableModel dirty test
     bool isAnyDirty() const;
@@ -131,6 +133,8 @@ private:
     sp_tableModel shiftModel;
     sp_tableModel trainDataStateModel;
     sp_tableModel infoModel;
+    sp_tableModel trainDataCertificateModel;
+    sp_tableModel certificateModel;
 
     // These models are custom ones. They won't get updated as an object itself, but they are based
     // on the basic models above. So the basic models have to be updated inside the quali models.

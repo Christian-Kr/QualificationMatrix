@@ -19,6 +19,10 @@
 #include <QDialog>
 #include <memory>
 
+// Forward declaration.
+class QSqlTableModel;
+class QSortFilterProxyModel;
+
 QT_BEGIN_NAMESPACE
 namespace Ui
 {
@@ -40,8 +44,23 @@ public:
     /// Destructor
     ~QMCertificateDialog() override;
 
+public slots:
+    /// Update the models, cause they might have changed.
+    void updateData();
+
+    /// Update table with filter from ui components.
+    void updateFilter();
+
+    /// Reset the content of the filter.
+    void resetFilter();
+
 private:
     Ui::QMCertificateDialog *ui;
+
+    QSortFilterProxyModel *typeFilterModel;
+    QSortFilterProxyModel *nameFilterModel;
+
+    std::shared_ptr<QSqlTableModel> certificateModel;
 };
 
 #endif // QMCERTIFICATEDIALOG_H

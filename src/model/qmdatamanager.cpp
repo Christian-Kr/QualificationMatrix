@@ -27,6 +27,8 @@
 #include "qmqualificationmatrixmodel.h"
 #include "qmtrainingexceptionmodel.h"
 #include "qminfomodel.h"
+#include "qmcertificatemodel.h"
+#include "qmtraindatacertificatemodel.h"
 
 #include <QSqlRelationalTableModel>
 #include <QSqlQuery>
@@ -194,6 +196,11 @@ void QMDataManager::initializeModels(QSqlDatabase &db)
     emit updateInitializeModels(11);
 
     infoModel = std::make_shared<QMInfoModel>(nullptr, db);
+
+    emit updateInitializeModels(12);
+
+    certificateModel = std::make_shared<QMCertificateModel>(nullptr, db);
+    trainDataCertificateModel = std::make_shared<QMTrainDataCertificateModel>(nullptr, db);
 
     // Inform all customer about the update.
     emit updateInitializeModels(13);
