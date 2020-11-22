@@ -79,7 +79,7 @@
    <item row="1" column="0">
     <widget class="QTableView" name="tvFiles">
      <property name="editTriggers">
-      <set>QAbstractItemView::NoEditTriggers</set>
+      <set>QAbstractItemView::SelectedClicked</set>
      </property>
      <property name="selectionBehavior">
       <enum>QAbstractItemView::SelectRows</enum>
