@@ -121,7 +121,7 @@ void QMCertificateDialog::addCertificate()
 
     if (dm->getCertificateLocation() == CertLoc::EXTERNAL)
     {
-        saveFileExternal(file);
+        QMCertificateDialog::saveFileExternal(file);
     }
     else
     {
