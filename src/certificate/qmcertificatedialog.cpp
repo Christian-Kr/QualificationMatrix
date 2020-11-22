@@ -16,11 +16,14 @@
 #include "qmcertificatedialog.h"
 #include "ui_qmcertificatedialog.h"
 #include "model/qmdatamanager.h"
-#include "model/qmcertificatemodel.h"
 #include "settings/qmapplicationsettings.h"
 
 #include <QSqlTableModel>
 #include <QSortFilterProxyModel>
+#include <QFileDialog>
+#include <QCryptographicHash>
+
+#include <QDebug>
 
 QMCertificateDialog::QMCertificateDialog(QWidget *parent)
     : QDialog(parent)
@@ -89,4 +92,27 @@ void QMCertificateDialog::resetFilter()
 {
     ui->cbType->setCurrentText("");
     ui->leName->setText("");
+}
+
+void QMCertificateDialog::addCertificate()
+{
+    auto fileName = QFileDialog::getOpenFileName(
+        this, tr("Nachweis hinzufügen"), tr("All files (*.*);;JPEG (*.jpg *.jpeg);;PDF (*.pdf)" ));
+
+    if (fileName.isEmpty())
+    {
+        return;
+    }
+
+    QFile file(fileName);
+
+    if (!file.isReadable() || !file.exists())
+    {
+        qWarning() << "certificate file does not exist or is not readable" << fileName;
+        return;
+    }
+
+    auto hash = QString(QCryptographicHash::hash(file.readAll(), QCryptographicHash::Md5));
+
+    TODO: Finish
 }

@@ -22,6 +22,7 @@
 // Forward declaration.
 class QSqlTableModel;
 class QSortFilterProxyModel;
+class QFile;
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -52,6 +53,9 @@ protected:
     void closeEvent(QCloseEvent *event) override;
 
 public slots:
+    /// Add a new certificate.
+    void addCertificate();
+
     /// Update the models, cause they might have changed.
     void updateData();
 

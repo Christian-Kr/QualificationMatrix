@@ -294,6 +294,16 @@
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="97"/>
+        <source>Nachweis hinzufügen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="97"/>
+        <source>All files (*.*);;JPEG (*.jpg *.jpeg);;PDF (*.pdf)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QMCertificateModel</name>
