@@ -78,10 +78,19 @@ public:
     /// \return Certification location from enumeration type CertLoc.
     CertLoc getCertificateLocation() { return certLoc; }
 
+    /// Get the location of the certificates. The setting is found in "Info" table.
+    /// \return Certification location from enumeration type CertLoc.
+    QString getCertificateLocationPath() { return certLocPath; }
+
     /// Read the certification location setting from table.
     /// \param db Database to work on.
     /// \return True if setting could be found and read, else false.
     bool readCertificateLocation(const QSqlDatabase &db);
+
+    /// Read the certification location path setting from table.
+    /// \param db Database to work on.
+    /// \return True if setting could be found and read, else false.
+    bool readCertificateLocationPath(const QSqlDatabase &db);
 
     // Delete functions that should not be used, cause of singleton pattern. They should be deleted
     // public for better error message if anything goes wrong.
@@ -178,6 +187,7 @@ private:
     static QMDataManager *instance;
 
     CertLoc certLoc;
+    QString certLocPath;
 };
 
 #endif // QMDATAMANAGER_H

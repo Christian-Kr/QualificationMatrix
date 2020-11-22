@@ -335,3 +335,39 @@ bool QMDataManager::readCertificateLocation(const QSqlDatabase &db)
 
     return false;
 }
+
+bool QMDataManager::readCertificateLocationPath(const QSqlDatabase &db)
+{
+    QSqlQuery query(db);
+    QString queryText =
+        "SELECT name, value FROM Info "
+        "WHERE name == \"certificate_location\"";
+
+    if (!query.exec(queryText))
+    {
+        qWarning() << "cannot execute query";
+        qWarning() << query.lastError().text();
+        return false;
+    }
+
+    auto found = false;
+    while (query.next())
+    {
+        if (query.value("name").toString() == "certificate_location")
+        {
+            found = true;
+            auto value = query.value("value").toString();
+            certLocPath = value;
+
+            break;
+        }
+    }
+
+    if (!found)
+    {
+        qWarning() << "cannot find certificate location path setting";
+        return false;
+    }
+
+    return false;
+}
