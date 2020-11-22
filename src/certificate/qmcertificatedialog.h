@@ -73,8 +73,8 @@ private:
 
     /// Save the given file external: Copy to file system structure.
     /// \param file File to save external.
-    /// \return True if success, else false.
-    static bool saveFileExternal(QFile &file);
+    /// \return New file name if success, else empty string.
+    static QString saveFileExternal(QFile &file);
 
     Ui::QMCertificateDialog *ui;
 

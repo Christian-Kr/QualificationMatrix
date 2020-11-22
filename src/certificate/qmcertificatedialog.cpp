@@ -23,6 +23,7 @@
 #include <QFileDialog>
 #include <QCryptographicHash>
 #include <QDate>
+#include <QMessageBox>
 
 #include <QDebug>
 
@@ -107,6 +108,7 @@ void QMCertificateDialog::addCertificate()
     }
 
     QFile file(fileName);
+    file.open(QIODevice::ReadOnly);
 
     if (!file.isReadable() || !file.exists())
     {
@@ -121,50 +123,78 @@ void QMCertificateDialog::addCertificate()
 
     if (dm->getCertificateLocation() == CertLoc::EXTERNAL)
     {
-        QMCertificateDialog::saveFileExternal(file);
+        if (QMCertificateDialog::saveFileExternal(file).isEmpty())
+        {
+            QMessageBox::warning(
+                this, tr("Nachweis hinzufügen"),
+                tr("Der Nachweis konnte nicht hinzugefügt werden. Bitte informieren Sie den "
+                   "Entwickler."));
+            return;
+        }
     }
     else
     {
-        saveFileInternal(file);
+        if (!QMCertificateDialog::saveFileInternal(file))
+        {
+
+        }
     }
 }
 
-bool QMCertificateDialog::saveFileExternal(QFile &file)
+QString QMCertificateDialog::saveFileExternal(QFile &file)
 {
     auto dm = QMDataManager::getInstance();
-    auto path = dm->getCertificateLocationPath();
 
     // The path is relative to the database location. This should make sure, that the external
     // files are located in direct vicinity to the database.
 
-    path = path + QDir::separator() + "certificates" + QDir::separator();
+    auto db = QSqlDatabase::database("default", false);
+    auto dbPath = QFileInfo(db.databaseName()).absolutePath();
+    auto certPath = dbPath + QDir::separator() + "certificates";
+
+    // Create certificate path if it does not exist.
+    if (!QDir(certPath).exists())
+    {
+        if (!QDir(certPath).mkpath(certPath))
+        {
+            qWarning() << "cannot create path" << certPath;
+            return {};
+        }
+    }
 
     // Inside this base directory, the file should be save in the following structure:
     // certificates/<current year>/<current month>/<current day>/<filename>
 
     auto insidePath = QDate::currentDate().toString(Qt::ISODate).replace("-", QDir::separator());
-    QDir fullPath(path + insidePath);
+    auto fullPath = certPath + QDir::separator() + insidePath;
 
-    if (!fullPath.exists())
+    if (!QDir(fullPath).exists())
     {
-        if (!fullPath.mkpath(fullPath.absolutePath()))
+        if (!QDir(fullPath).mkpath(fullPath))
         {
-            qWarning() << "cannot create path" << fullPath.absolutePath();
-            return false;
+            qWarning() << "cannot create path" << fullPath;
+            return {};
         }
     }
 
-    auto fullFilePath = fullPath.absolutePath() + QDir::separator() + file.fileName();
+    auto certFileInfo = QFileInfo(file.fileName());
+    auto hash = QString(QCryptographicHash::hash(file.readAll(), QCryptographicHash::Md5).toHex());
+    auto fullFileName = fullPath + QDir::separator() + hash + "." + certFileInfo.completeSuffix();
 
-    if (!file.copy(fullFilePath))
+    if (QDir(fullFileName).exists())
     {
-        qWarning() << "cannot copy file to" << fullFilePath;
-        return false;
+        qWarning() << "file does already exist" << fullFileName;
+        return {};
     }
 
-    qWarning() << "file copied to" << fullFilePath;
+    // Copy file to target.
+    if (!file.copy(fullFileName))
+    {
+        qWarning() << "cannot copy file to" << fullFileName;
+        return {};
+    }
 
-    return true;
+    return fullFileName;
 }
 
 bool QMCertificateDialog::saveFileInternal(QFile &file)

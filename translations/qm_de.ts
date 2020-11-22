@@ -299,13 +299,19 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="102"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="103"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="129"/>
         <source>Nachweis hinzufügen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="102"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="103"/>
         <source>All files (*.*);;JPEG (*.jpg *.jpeg);;PDF (*.pdf)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="130"/>
+        <source>Der Nachweis konnte nicht hinzugefügt werden. Bitte informieren Sie den Entwickler.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
