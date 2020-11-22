@@ -69,11 +69,6 @@ public slots:
     void resetFilter();
 
 private:
-    /// Save the given file internal: Writing to database blob.
-    /// \param file File to save internal.
-    /// \return True if success, else false.
-    bool saveFileInternal(QFile &file);
-
     /// Save the given file external: Copy to file system structure.
     /// \param file File to save external.
     /// \return New file name if success, else empty string.

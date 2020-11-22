@@ -118,6 +118,7 @@ void QMCertificateDialog::addCertificate()
     }
 
     auto hash = QString(QCryptographicHash::hash(file.readAll(), QCryptographicHash::Md5).toHex());
+    file.seek(0);
 
     // If we are here, adding a new file was basically ok. Now create a new model entry.
     int rowIndex = certificateModel->rowCount();
@@ -133,7 +134,9 @@ void QMCertificateDialog::addCertificate()
 
     if (dm->getCertificateLocation() == CertLoc::EXTERNAL)
     {
-        if (QMCertificateDialog::saveFileExternal(file).isEmpty())
+        auto certificateFileName = QMCertificateDialog::saveFileExternal(file);
+
+        if (certificateFileName.isEmpty())
         {
             QMessageBox::warning(
                 this, tr("Nachweis hinzufügen"),
@@ -142,13 +145,25 @@ void QMCertificateDialog::addCertificate()
             certificateModel->revertRow(rowIndex);
             return;
         }
+
+        certificateModel->setData(certificateModel->index(rowIndex, 3), certificateFileName);
     }
     else
     {
-        if (!QMCertificateDialog::saveFileInternal(file))
+        auto blob = file.readAll();
+        file.seek(0);
+
+        if (blob.isEmpty())
         {
+            QMessageBox::warning(
+                this, tr("Nachweis hinzufügen"),
+                tr("Der Nachweis konnte nicht hinzugefügt werden. Bitte informieren Sie den "
+                   "Entwickler."));
             certificateModel->revertRow(rowIndex);
+            return;
         }
+
+        certificateModel->setData(certificateModel->index(rowIndex, 4), blob);
     }
 
     certificateModel->submitAll();
@@ -194,6 +209,8 @@ QString QMCertificateDialog::saveFileExternal(QFile &file)
     auto hash = QString(QCryptographicHash::hash(file.readAll(), QCryptographicHash::Md5).toHex());
     auto fullFileName = fullPath + QDir::separator() + hash + "." + certFileInfo.completeSuffix();
 
+    file.seek(0);
+
     if (QDir(fullFileName).exists())
     {
         qWarning() << "file does already exist" << fullFileName;
@@ -208,11 +225,6 @@ QString QMCertificateDialog::saveFileExternal(QFile &file)
     }
 
     return fullFileName;
-}
-
-bool QMCertificateDialog::saveFileInternal(QFile &file)
-{
-    return false;
 }
 
 void QMCertificateDialog::keyPressEvent(QKeyEvent *event)

@@ -54,7 +54,7 @@ public slots:
 
 protected:
     /// Override from QDialog.
-    void keyPressEvent(QKeyEvent *event);
+    void keyPressEvent(QKeyEvent *event) override;
 
 private:
     Ui::QMTrainDataDialog *ui;
