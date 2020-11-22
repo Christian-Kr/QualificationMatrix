@@ -276,7 +276,7 @@ void QMCertificateDialog::showCertificate()
     }
     else
     {
-
+        // TODO: Handle internal.
     }
 }
 
@@ -314,6 +314,15 @@ void QMCertificateDialog::removeCertificate()
         {
             trainDataCertificateModel->removeRow(i);
         }
+    }
+
+    // Remove the file if external system is on.
+    auto dm = QMDataManager::getInstance();
+
+    if (dm->getCertificateLocation() == CertLoc::EXTERNAL)
+    {
+        QString fileName = nameFilterModel->data(nameFilterModel->index(row, 3)).toString();
+        QFile::remove(fileName);
     }
 
     trainDataCertificateModel->submitAll();
