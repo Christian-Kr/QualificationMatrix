@@ -35,6 +35,13 @@ class QualiMatrixModel;
 typedef std::shared_ptr<QSqlRelationalTableModel> sp_relTableModel;
 typedef std::shared_ptr<QSqlTableModel> sp_tableModel;
 
+// Enumerations
+enum class CertLoc
+{
+    INTERNAL,
+    EXTERNAL
+};
+
 /// Manager for data including models.
 /// \author Christian Kr, Copyright 2020
 class QMDataManager: public QObject
@@ -66,6 +73,15 @@ public:
 
     static int getMinor() { return DB_MIN_MINOR; }
     static int getMajor() { return DB_MIN_MAJOR; }
+
+    /// Get the location of the certificates. The setting is found in "Info" table.
+    /// \return Certification location from enumeration type CertLoc.
+    CertLoc getCertificateLocation() { return certLoc; }
+
+    /// Read the certification location setting from table.
+    /// \param db Database to work on.
+    /// \return True if setting could be found and read, else false.
+    bool readCertificateLocation(const QSqlDatabase &db);
 
     // Delete functions that should not be used, cause of singleton pattern. They should be deleted
     // public for better error message if anything goes wrong.
@@ -160,6 +176,8 @@ signals:
 
 private:
     static QMDataManager *instance;
+
+    CertLoc certLoc;
 };
 
 #endif // QMDATAMANAGER_H

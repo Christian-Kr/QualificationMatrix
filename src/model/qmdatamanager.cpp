@@ -32,6 +32,7 @@
 
 #include <QSqlRelationalTableModel>
 #include <QSqlQuery>
+#include <QSqlError>
 #include <QDebug>
 
 // maximum version that exist with the release of this software version - the software cannot work
@@ -44,6 +45,8 @@ QMDataManager *QMDataManager::instance = nullptr;
 QMDataManager::QMDataManager()
     : QObject()
 {
+    certLoc = CertLoc::EXTERNAL;
+
     qualiResultModel = std::make_shared<QMQualiResultModel>();
     qualiMatrixModel = std::make_shared<QualiMatrixModel>();
 }
@@ -210,6 +213,9 @@ void QMDataManager::initializeModels(QSqlDatabase &db)
 
     // Inform that everything is finish and every was informed.
     emit afterInitializeModels();
+
+    // Read some settings from the new database info table.
+    readCertificateLocation(db);
 }
 
 bool QMDataManager::isAnyDirty() const
@@ -276,6 +282,55 @@ bool QMDataManager::isAnyDirty() const
         {
             return true;
         }
+    }
+
+    return false;
+}
+
+bool QMDataManager::readCertificateLocation(const QSqlDatabase &db)
+{
+    QSqlQuery query(db);
+    QString queryText =
+        "SELECT name, value FROM Info "
+        "WHERE name == \"certificate_location\"";
+
+    if (!query.exec(queryText))
+    {
+        qWarning() << "cannot execute query";
+        qWarning() << query.lastError().text();
+        return false;
+    }
+
+    auto found = false;
+    while (query.next())
+    {
+        if (query.value("name").toString() == "certificate_location")
+        {
+            found = true;
+            auto value = query.value("value").toString();
+
+            if (value == "internal")
+            {
+                certLoc = CertLoc::INTERNAL;
+            }
+            else if (value == "external")
+            {
+                certLoc = CertLoc::EXTERNAL;
+            }
+            else
+            {
+                qWarning() << "wrong value for certificate location setting in table";
+                return false;
+            }
+
+            break;
+        }
+    }
+
+    if (!found)
+    {
+        qWarning() << "cannot find certificate location setting";
+        return false;
     }
 
     return false;
