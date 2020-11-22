@@ -203,7 +203,9 @@ void QMDataManager::initializeModels(QSqlDatabase &db)
     emit updateInitializeModels(12);
 
     certificateModel = std::make_shared<QMCertificateModel>(nullptr, db);
+    certificateModel->select();
     trainDataCertificateModel = std::make_shared<QMTrainDataCertificateModel>(nullptr, db);
+    trainDataCertificateModel->select();
 
     // Inform all customer about the update.
     emit updateInitializeModels(13);
