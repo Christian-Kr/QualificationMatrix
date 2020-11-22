@@ -38,7 +38,7 @@
       </widget>
      </item>
      <item row="1" column="2">
-      <widget class="QToolButton" name="tbrevert">
+      <widget class="QToolButton" name="tbResetFilter">
        <property name="text">
         <string>...</string>
        </property>
@@ -250,10 +250,44 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>tbFilter</sender>
+   <signal>clicked()</signal>
+   <receiver>QMCertificateDialog</receiver>
+   <slot>updateFilter()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>398</x>
+     <y>54</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>235</x>
+     <y>204</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tbResetFilter</sender>
+   <signal>clicked()</signal>
+   <receiver>QMCertificateDialog</receiver>
+   <slot>resetFilter()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>356</x>
+     <y>54</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>235</x>
+     <y>204</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>addCertificate()</slot>
   <slot>removeCertificate()</slot>
   <slot>showCertificate()</slot>
+  <slot>updateFilter()</slot>
+  <slot>resetFilter()</slot>
  </slots>
 </ui>
