@@ -265,7 +265,7 @@
     <message>
         <location filename="../ui/qmcertificatedialog.ui" line="14"/>
         <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="161"/>
-        <source>Dateien</source>
+        <source>Nachweise verwalten</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
