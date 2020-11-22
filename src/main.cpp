@@ -98,9 +98,9 @@ void initApplicationStyle()
 }
 
 /// Install the translator into the qt application. If the loading or installing of the
-/// translation file fails, a warning message will be send for documentation.
-/// \param name The name of the translator file.
-/// \param path The path, where the tranaltor file could be found.
+/// translation certificate fails, a warning message will be send for documentation.
+/// \param name The name of the translator certificate.
+/// \param path The path, where the tranaltor certificate could be found.
 void installTranslator(const QString &name, const QString &path)
 {
     auto translator = new QTranslator();
@@ -108,24 +108,24 @@ void installTranslator(const QString &name, const QString &path)
 
     if (loaded)
     {
-        // Info: Installing file fails, if there is no translation in ts file itself.
+        // Info: Installing certificate fails, if there is no translation in ts certificate itself.
         auto installed = QApplication::installTranslator(translator);
 
         if (!installed)
         {
-            qWarning() << "cannot install language file" << name << "in" << path;
+            qWarning() << "cannot install language certificate" << name << "in" << path;
         }
     }
     else
     {
-        qWarning() << "cannot load custom language file" << name << "in" << path;
+        qWarning() << "cannot load custom language certificate" << name << "in" << path;
     }
 }
 
 /// Initialize the application with the translation files (custom and qt-based).
 void initApplicationTranslation()
 {
-    // TODO: for unknown reason, the translation file cannot be loaded
+    // TODO: for unknown reason, the translation certificate cannot be loaded
 
     auto &settings = QMApplicationSettings::getInstance();
     auto lang = settings.read("General/Lang", "de").toString();
@@ -138,8 +138,8 @@ void initApplicationTranslation()
     installTranslator("qtbase_" + lang, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
 }
 
-/// Take all messages coming from qWarning, qDebug etc. and write them into a log file. In
-/// general, all message will be written into a log file. If this log file is not writeable, the
+/// Take all messages coming from qWarning, qDebug etc. and write them into a log certificate. In
+/// general, all message will be written into a log certificate. If this log certificate is not writeable, the
 /// message will be printed on stdout. Debug messages will always only be printed on stdout.
 /// \param type The message type (debug, warning etc.).
 /// \param msg The message to display/log.
@@ -194,7 +194,7 @@ void customMessageHandler(QtMsgType type, const QMessageLogContext &, const QStr
 /// \return Zero if exit success, else -1.
 int main(int argc, char *argv[])
 {
-    // General information, used by qt - example: QSettings file naming
+    // General information, used by qt - example: QSettings certificate naming
     QCoreApplication::setOrganizationName("Kr");
     QCoreApplication::setOrganizationDomain("Kr");
     QCoreApplication::setApplicationName("QualificationMatrix");

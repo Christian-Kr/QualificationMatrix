@@ -48,10 +48,10 @@ public:
     ~QMQualiResultWidget() override;
 
 public slots:
-    /// Prints the qualification result to a pdf file.
+    /// Prints the qualification result to a pdf certificate.
     void printToPDF();
 
-    /// Save table to csv file.
+    /// Save table to csv certificate.
     void saveToCsv();
 
     /// Update calculation with all filters.

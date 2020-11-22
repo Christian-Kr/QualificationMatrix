@@ -265,6 +265,41 @@
     </message>
 </context>
 <context>
+    <name>QMCertificateDialog</name>
+    <message>
+        <location filename="../ui/qmcertificatedialog.ui" line="14"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="161"/>
+        <source>Dateien</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmcertificatedialog.ui" line="22"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="162"/>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmcertificatedialog.ui" line="29"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="163"/>
+        <source>Typ</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmcertificatedialog.ui" line="55"/>
+        <location filename="../ui/qmcertificatedialog.ui" line="72"/>
+        <location filename="../ui/qmcertificatedialog.ui" line="96"/>
+        <location filename="../ui/qmcertificatedialog.ui" line="113"/>
+        <location filename="../ui/qmcertificatedialog.ui" line="130"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="164"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="165"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="166"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="167"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="168"/>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QMDataManager</name>
     <message>
         <location filename="../src/model/qmdatamanager.cpp" line="191"/>
@@ -767,29 +802,21 @@ Die Aktion wird abgebrochen.</source>
 <context>
     <name>QMFileDialog</name>
     <message>
-        <location filename="../ui/qmfiledialog.ui" line="14"/>
         <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmfiledialog.h" line="161"/>
         <source>Dateien</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmfiledialog.ui" line="22"/>
         <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmfiledialog.h" line="162"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmfiledialog.ui" line="29"/>
         <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmfiledialog.h" line="163"/>
         <source>Typ</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmfiledialog.ui" line="55"/>
-        <location filename="../ui/qmfiledialog.ui" line="72"/>
-        <location filename="../ui/qmfiledialog.ui" line="96"/>
-        <location filename="../ui/qmfiledialog.ui" line="113"/>
-        <location filename="../ui/qmfiledialog.ui" line="130"/>
         <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmfiledialog.h" line="164"/>
         <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmfiledialog.h" line="165"/>
         <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmfiledialog.h" line="166"/>
@@ -1538,12 +1565,12 @@ Bug-Reports: Fehler können direkt auf GitHub gemeldet werden oderper E-Mail an 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="624"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="623"/>
         <source>Öffne Sql-Datei</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="624"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="623"/>
         <source>Sql (*.sql)</source>
         <translation type="unfinished"></translation>
     </message>

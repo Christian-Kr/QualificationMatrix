@@ -38,7 +38,7 @@ public:
     ~QMGeneralSettingsWidget() override;
 
     /// This slot has to be implemented by parent class. When calling this function, it should
-    /// take a QSettings object or data Model (bspw. SqlModel) to save every changes to a file
+    /// take a QSettings object or data Model (bspw. SqlModel) to save every changes to a certificate
     /// based system.
     void saveSettings() override;
 
@@ -49,10 +49,10 @@ public:
     void loadSettings() override;
 
 public slots:
-    /// Open a file dialog and choose the path for the backups.
+    /// Open a certificate dialog and choose the path for the backups.
     void chooseBackupPath();
 
-    /// Open a fiel dialog and choose a centrized config file.
+    /// Open a fiel dialog and choose a centrized config certificate.
     void chooseCentralizedSettingsFile();
 
 private:

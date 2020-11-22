@@ -39,7 +39,7 @@ foreach (_ts_file ${TS_FILES})
     # create a target that depends on the generated files
     add_custom_target(translate_${_ts_name} DEPENDS ${_ts_file})
 
-    # attach the custom target for this ts file to the parent target
+    # attach the custom target for this ts certificate to the parent target
     add_dependencies(translations translate_${_ts_name})
 endforeach ()
 
@@ -95,7 +95,7 @@ add_executable(QualificationMatrix WIN32
     src/model/qmtrainingexceptionmodel.cpp
     src/model/qminfomodel.cpp
     src/general/qmprogresslogdialog.cpp
-    src/file/qmfiledialog.cpp
+    src/certificate/qmcertificatedialog.cpp
     ui/qmemployeesettingswidget.ui
     ui/qmfuncsettingswidget.ui
     ui/qmmainwindow.ui
@@ -113,7 +113,7 @@ add_executable(QualificationMatrix WIN32
     ui/qmqualimatrixsettingswidget.ui
     ui/qmqualiresultsettingswidget.ui
     ui/qmdatabaseupdatedialog.ui
-    ui/qmfiledialog.ui)
+    ui/qmcertificatedialog.ui)
 
 # copy database directory to binary
 add_custom_command(

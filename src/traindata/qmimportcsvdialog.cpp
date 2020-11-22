@@ -90,7 +90,7 @@ void QMImportCsvDialog::openBackupFile()
 
 void QMImportCsvDialog::accept()
 {
-    // Open the file to import.
+    // Open the certificate to import.
     QFile importFile(ui->leImportFile->text());
     if (!importFile.open(QFile::ReadOnly) || !importFile.exists() || !importFile.isReadable())
     {
@@ -122,7 +122,7 @@ void QMImportCsvDialog::handleErrorLine(QString &line)
     if (!backupFile.open(QFile::Append))
     {
         // TODO: How to handle this error?
-        qDebug() << "ERROR: Could not open file for saving.";
+        qDebug() << "ERROR: Could not open certificate for saving.";
     }
 
     QTextStream backupStream(&backupFile);
@@ -138,7 +138,7 @@ bool QMImportCsvDialog::checkBackupFile()
 
         if (!fileInfo.exists())
         {
-            // If the file does not exist, try to create it.
+            // If the certificate does not exist, try to create it.
             QFile file(ui->leBackupFile->text());
             if (!file.open(QFile::ReadWrite))
             {
@@ -155,7 +155,7 @@ bool QMImportCsvDialog::checkBackupFile()
             file.close();
         }
 
-        // The file might have been created, so update the file info object. The file must be
+        // The certificate might have been created, so update the certificate info object. The certificate must be
         // writable.
         fileInfo = QFileInfo(ui->leBackupFile->text());
         if (!fileInfo.isWritable())
@@ -174,7 +174,7 @@ bool QMImportCsvDialog::checkBackupFile()
 
 void QMImportCsvDialog::parseCsv(QFile &importFile)
 {
-    // Before importing process starts it should be testes wheather the backup file exist or not.
+    // Before importing process starts it should be testes wheather the backup certificate exist or not.
     // This test might be redundant, but is important for running a save process. Otherwise backup
     // data are not available and import process might have failures without the ability to detect
     // where it happens. (When a backup ist wanted.)
@@ -186,10 +186,10 @@ void QMImportCsvDialog::parseCsv(QFile &importFile)
     QTextStream importStream(&importFile);
     int skipLines = 1;
 
-    // There are two ways of reading data. First one is to read in the full file and then parse
-    // data. This might ba a problem, when the file is very big. Second way is to read in line by
-    // line and progress every line directly. This might take a bit more time, when the file is
-    // small, but will be more efficient when the file is big.
+    // There are two ways of reading data. First one is to read in the full certificate and then parse
+    // data. This might ba a problem, when the certificate is very big. Second way is to read in line by
+    // line and progress every line directly. This might take a bit more time, when the certificate is
+    // small, but will be more efficient when the certificate is big.
     // We go on with the second way here. This might change or extend in future.
     while (!importStream.atEnd())
     {
@@ -202,7 +202,7 @@ void QMImportCsvDialog::parseCsv(QFile &importFile)
             continue;
         }
 
-        // The format of the file should be fixed for now. In future there should be a way to
+        // The format of the certificate should be fixed for now. In future there should be a way to
         // define which data exist in which column.
         //
         // The second point is, that data might have two columns for names. One column for the

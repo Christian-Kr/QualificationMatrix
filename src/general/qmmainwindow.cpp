@@ -28,7 +28,7 @@
 #include "database/qmdatabasedialog.h"
 #include "database/qmdatabaseupdatedialog.h"
 #include "database/qmdatabaseupdater.h"
-#include "file/qmfiledialog.h"
+#include "certificate/qmcertificatedialog.h"
 
 #include <QProgressDialog>
 #include <QDesktopWidget>
@@ -473,7 +473,7 @@ bool QMMainWindow::runAutoBackup(const QString &fileName)
         }
     }
 
-    // Create new backup file.
+    // Create new backup certificate.
     QString newName = QDateTime::currentDateTime().toString("yyyy-MM-dd-hh-mm-ss");
     newName = preName + "-" + newName + ".qmsql";
     QFile copyFile(fileName);
@@ -594,7 +594,7 @@ void QMMainWindow::showSettings()
 
 void QMMainWindow::createEmptyDatabase()
 {
-    // For a local database as a file, it will be created. For a remote database, the database have
+    // For a local database as a certificate, it will be created. For a remote database, the database have
     // to exist. Then this function will only create the needed tables.
 
     // Create a temporary database connection.
@@ -615,11 +615,10 @@ void QMMainWindow::createEmptyDatabase()
         if (!db.open())
         {
             QSqlDatabase::removeDatabase("tmp");
-
             return;
         }
 
-        // Open sql file for query.
+        // Open sql certificate for query.
         QString fileName = QFileDialog::getOpenFileName(
             this, tr("Öffne Sql-Datei"), QDir::homePath(), tr("Sql (*.sql)"));
         if (fileName.isEmpty())
@@ -648,6 +647,6 @@ void QMMainWindow::createEmptyDatabase()
 
 void QMMainWindow::manageCertificate()
 {
-    QMFileDialog fileDialog(this);
-    fileDialog.exec();
+    QMCertificateDialog certDialog(this);
+    certDialog.exec();
 }

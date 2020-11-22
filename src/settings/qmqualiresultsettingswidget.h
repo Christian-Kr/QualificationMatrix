@@ -38,7 +38,7 @@ public:
     ~QMQualiResultSettingsWidget() override;
 
     /// This slot has to be implemented by parent class. When calling this function, it should
-    /// take a QSettings object or data Model (bspw. SqlModel) to save every changes to a file
+    /// take a QSettings object or data Model (bspw. SqlModel) to save every changes to a certificate
     /// based system.
     void saveSettings() override;
 

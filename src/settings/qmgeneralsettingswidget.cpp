@@ -77,7 +77,7 @@ void QMGeneralSettingsWidget::loadSettings()
 void QMGeneralSettingsWidget::initLanguageFiles()
 {
     // Get a list of all language files. For now, files will only be searched in path, where the
-    // executable exist. The format of the file must be qm_<lang>.qm.
+    // executable exist. The format of the certificate must be qm_<lang>.qm.
 
     QDir langDir("");
     QStringList filters;

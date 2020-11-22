@@ -1,5 +1,5 @@
 //
-// qmfiledialog.h is part of QualificationMatrix
+// qmcertificatedialog.h is part of QualificationMatrix
 //
 // QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of
 // the GNU General Public License as published by the Free Software Foundation, either version 3 of
@@ -13,8 +13,8 @@
 // If not, see <http://www.gnu.org/licenses/>.
 //
 
-#ifndef QMFILEDIALOG_H
-#define QMFILEDIALOG_H
+#ifndef QMCERTIFICATEDIALOG_H
+#define QMCERTIFICATEDIALOG_H
 
 #include <QDialog>
 #include <memory>
@@ -22,26 +22,26 @@
 QT_BEGIN_NAMESPACE
 namespace Ui
 {
-class QMFileDialog;
+class QMCertificateDialog;
 }
 QT_END_NAMESPACE
 
 /// Show certificate files and manage them.
 /// \author Christian Kr, Copyright 2020
-class QMFileDialog: public QDialog
+class QMCertificateDialog: public QDialog
 {
 Q_OBJECT
 
 public:
     /// Constructor
     /// \param parent The parent object of the widgt. This is important for a modal dialog.
-    explicit QMFileDialog(QWidget *parent = nullptr);
+    explicit QMCertificateDialog(QWidget *parent = nullptr);
 
     /// Destructor
-    ~QMFileDialog() override;
+    ~QMCertificateDialog() override;
 
 private:
-    Ui::QMFileDialog *ui;
+    Ui::QMCertificateDialog *ui;
 };
 
-#endif // QMFILEDIALOG_H
+#endif // QMCERTIFICATEDIALOG_H

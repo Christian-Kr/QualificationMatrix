@@ -155,7 +155,7 @@ void QMApplicationSettings::write(const QString &name, const QVariant &value)
     // manually by an external editor.
 
 //    // If there is a higher priority to central one, settings existing in central one should not
-//    // be written at all, if there is no write permission to central file.
+//    // be written at all, if there is no write permission to central certificate.
 //
 //    if (priority == QMApplicationSettings::CENTRAL)
 //    {

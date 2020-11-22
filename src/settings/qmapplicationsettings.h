@@ -20,10 +20,10 @@
 
 class QSettings;
 
-/// \brief Class for application wide settings on the file system.
+/// \brief Class for application wide settings on the certificate system.
 ///
 /// This settings class implement the application wide settings with centralized feature. It is only
-/// for file based settings and for application NOT database related settings.
+/// for certificate based settings and for application NOT database related settings.
 ///
 /// (example: Color of qm grid is an application setting! Files on filesystem or in sql table blobb
 /// is an database setting, cause the database structure depend on it! It behaves like model and
@@ -32,7 +32,7 @@ class QSettings;
 /// The object of this class is a singleton, cause there is only one application to run and
 /// therefore only one application wide settings.
 ///
-/// The centralized setting can only be set in local. Cause this file always exist.
+/// The centralized setting can only be set in local. Cause this certificate always exist.
 class QMApplicationSettings: public QMSettings
 {
 Q_OBJECT

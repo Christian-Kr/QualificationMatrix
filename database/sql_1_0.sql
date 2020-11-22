@@ -9,11 +9,11 @@ CREATE TABLE IF NOT EXISTS "Info" (
 
 -- Add option in info for file_location, which is necessary for certificates
 
-INSERT INTO "Info" ("name", "value") VALUES("file_location", "external");
+INSERT INTO "Info" ("name", "value") VALUES("certificate_location", "external");
 
--- Files definition
+-- Certificate definition
 
-CREATE TABLE IF NOT EXISTS "File" (
+CREATE TABLE IF NOT EXISTS "Certificate" (
     "id"    INTEGER,
     "name"      TEXT,
     "type"      TEXT,
@@ -22,15 +22,15 @@ CREATE TABLE IF NOT EXISTS "File" (
     PRIMARY KEY("id")
 );
 
--- TraiDataFile links TrainData and File extries
+-- TraiDataCertificate links TrainData and File extries
 
-CREATE TABLE IF NOT EXISTS "TrainDataFile" (
+CREATE TABLE IF NOT EXISTS "TrainDataCertificate" (
     "id"            INTEGER,
     "train_data"    INTEGER,
-    "file"          INTEGER,
+    "certificate"   INTEGER,
     PRIMARY KEY("id"),
-    FOREIGN KEY("train_data")   REFERENCES "TrainData"("id"),
-    FOREIGN KEY("file")         REFERENCES "File"("id")
+    FOREIGN KEY("train_data")       REFERENCES "TrainData"("id"),
+    FOREIGN KEY("certificate")      REFERENCES "Certificate"("id")
 );
 
 -- Change Train to implement legally_necessary entries

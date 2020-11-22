@@ -161,7 +161,7 @@ void QMQualiResultWidget::filterVisibilityChanged()
 
 void QMQualiResultWidget::saveToCsv()
 {
-    // Ask where to save the csv file.
+    // Ask where to save the csv certificate.
     QString fileName = QFileDialog::getSaveFileName(
         this, tr("Qualifizierungsresultat speichern"), QDir::homePath(),
         tr("Comma-separated values (*.csv)"));
@@ -170,7 +170,7 @@ void QMQualiResultWidget::saveToCsv()
         return;
     }
 
-    // Open file for writing and write the whole content to the file.
+    // Open certificate for writing and write the whole content to the certificate.
     QFile csvFile(fileName);
 
     if (!csvFile.open(QFile::ReadWrite))

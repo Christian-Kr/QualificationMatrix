@@ -99,7 +99,7 @@ public slots:
 
     /// Run the auto backup, which includes multiple steps.
     /// TODO: Put this function into a separate class.
-    /// \param fileName The file name of the new backup file.
+    /// \param fileName The certificate name of the new backup certificate.
     /// \return True if success, else false.
     bool runAutoBackup(const QString &fileName);
 

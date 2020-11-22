@@ -48,7 +48,7 @@ QMSettingsDialog::QMSettingsDialog(QWidget *parent)
     initStackWidgets();
     initTreeWidgets();
 
-    // Load general settings from settings file.
+    // Load general settings from settings certificate.
     loadSettings();
 
     // After loading all settings, signal has been called, that changed the settingsChanged state

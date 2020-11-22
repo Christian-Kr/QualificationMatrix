@@ -96,13 +96,13 @@ bool QMDataManager::testTableStructure(QSqlDatabase &db)
 
 // bool QMDataManager::filesLocation(QSqlDatabase &db)
 //{
-//    // Files can be inside a central database or as part of sqlite in a local file structure
+//    // Files can be inside a central database or as part of sqlite in a local certificate structure
 //    place.
-//    // You should not use local file structure for a central database with access of many people,
+//    // You should not use local certificate structure for a central database with access of many people,
 //    // cause then files might not be found.
 
 //    // Switching the system should be done carefully too. The local folder needs to be an equal
-//    // path for every user. In best case, this folder is next to the sqlite database file.
+//    // path for every user. In best case, this folder is next to the sqlite database certificate.
 
 //        QSqlQuery query(db);
 //    QString queryText = "SELECT name, value FROM Info"

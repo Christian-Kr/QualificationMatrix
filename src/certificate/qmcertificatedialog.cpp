@@ -13,17 +13,17 @@
 // If not, see <http://www.gnu.org/licenses/>.
 //
 
-#include "qmfiledialog.h"
-#include "ui_qmfiledialog.h"
+#include "qmcertificatedialog.h"
+#include "ui_qmcertificatedialog.h"
 
-QMFileDialog::QMFileDialog(QWidget *parent)
+QMCertificateDialog::QMCertificateDialog(QWidget *parent)
     : QDialog(parent)
 {
-    ui = new Ui::QMFileDialog;
+    ui = new Ui::QMCertificateDialog;
     ui->setupUi(this);
 }
 
-QMFileDialog::~QMFileDialog()
+QMCertificateDialog::~QMCertificateDialog()
 {
     delete ui;
 }

@@ -32,7 +32,7 @@ class QFile;
 class QSqlTableModel;
 class QSqlRelationalTableModel;
 
-/// Dialog and business logic for import data from csv file. In future the business logic should
+/// Dialog and business logic for import data from csv certificate. In future the business logic should
 /// be implemented inside the QMDataManager.
 /// \author Christian Kr, Copyright 2020
 class QMImportCsvDialog: public QDialog
@@ -48,10 +48,10 @@ public:
     ~QMImportCsvDialog() override;
 
 public slots:
-    /// Open the file path from a open dialog window.
+    /// Open the certificate path from a open dialog window.
     void openImportFile();
 
-    /// Open the file path from a open dialog window.
+    /// Open the certificate path from a open dialog window.
     void openBackupFile();
 
     /// Start the process of importing.
@@ -61,15 +61,15 @@ public slots:
     void updateData();
 
 private:
-    /// Parse the csv file and import data.
-    /// \param importFile The file object which should already be opened.
+    /// Parse the csv certificate and import data.
+    /// \param importFile The certificate object which should already be opened.
     void parseCsv(QFile &importFile);
 
-    /// Handles a string line from file, when an error occured.
+    /// Handles a string line from certificate, when an error occured.
     /// \param line
     void handleErrorLine(QString &line);
 
-    /// Check the backup file for existence and writablility.
+    /// Check the backup certificate for existence and writablility.
     /// \return True if everything ok, else false.
     bool checkBackupFile();
 

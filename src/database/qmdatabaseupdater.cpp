@@ -99,7 +99,7 @@ bool QMDatabaseUpdater::runScriptOnDatabase(const QSqlDatabase &db, const QStrin
 
     if (!scriptFileInfo.exists() || !scriptFileInfo.isFile())
     {
-        qWarning() << "script file" << scriptName << "does not exist";
+        qWarning() << "script certificate" << scriptName << "does not exist";
         return false;
     }
 
@@ -107,7 +107,7 @@ bool QMDatabaseUpdater::runScriptOnDatabase(const QSqlDatabase &db, const QStrin
 
     if (!scriptFile.open(QIODevice::Text | QIODevice::ReadOnly))
     {
-        qWarning() << "cannot open script file" << scriptName;
+        qWarning() << "cannot open script certificate" << scriptName;
         return false;
     }
 
@@ -128,7 +128,7 @@ bool QMDatabaseUpdater::runScriptOnDatabase(const QSqlDatabase &db, const QStrin
 
         if (!sqlQuery.exec(queries.at(i)))
         {
-            qWarning() << "cannot run query on database from script file" << scriptName;
+            qWarning() << "cannot run query on database from script certificate" << scriptName;
             qWarning() << queries.at(i);
             qWarning() << sqlQuery.lastError().text();
             return false;

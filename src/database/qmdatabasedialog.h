@@ -46,7 +46,7 @@ public slots:
     /// is a stacked widget and needs to be updated, related to the type (LOCAL or REMOTE).
     void updateTypeWidget();
 
-    /// Choose a file for local database types.
+    /// Choose a certificate for local database types.
     void chooseDatabaseFile();
 
     /// Changes the connection (connected -> disconnected; disconnected -> connected).
