@@ -22,6 +22,7 @@
 #include <QSortFilterProxyModel>
 #include <QFileDialog>
 #include <QCryptographicHash>
+#include <QDate>
 
 #include <QDebug>
 
@@ -115,5 +116,56 @@ void QMCertificateDialog::addCertificate()
 
     auto hash = QString(QCryptographicHash::hash(file.readAll(), QCryptographicHash::Md5));
 
-    // TODO: Finish
+    // Handle related to extern/internal.
+    auto dm = QMDataManager::getInstance();
+
+    if (dm->getCertificateLocation() == CertLoc::EXTERNAL)
+    {
+        saveFileExternal(file);
+    }
+    else
+    {
+        saveFileInternal(file);
+    }
+}
+
+bool QMCertificateDialog::saveFileExternal(const QFile &file)
+{
+    auto dm = QMDataManager::getInstance();
+    auto path = dm->getCertificateLocationPath();
+
+    // The path is relative to the database location. This should make sure, that the external
+    // files are located in direct vicinity to the database.
+
+    path = path + QDir::separator() + "certificates" + QDir::separator();
+
+    // Inside this base directory, the file should be save in the following structure:
+    // certificates/<current year>/<current month>/<current day>/<filename>
+
+    auto insidePath = QDate::currentDate().toString(Qt::ISODate).replace("-", QDir::separator());
+    QDir fullPath(path + insidePath);
+
+    if (!fullPath.exists())
+    {
+        if (!fullPath.mkpath(fullPath.absoluteFilePath()))
+        {
+            qWarning() << "cannot create path" << fullPath.absolutePath();
+            return false;
+        }
+    }
+
+    auto fullFilePath = fullPath.absoluteFilePath() + QDir::separator() + file.fileName();
+
+    if (!file.copy(fullFilePath))
+    {
+        qWarning() << "cannot copy file to" << fullFilePath;
+        return false;
+    }
+
+    qWarning() << "file copied to" << fullFilePath;
+}
+
+bool QMCertificateDialog::saveFileInternal(const QFile &file)
+{
+    return false;
 }
