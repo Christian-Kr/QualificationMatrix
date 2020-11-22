@@ -268,33 +268,33 @@
     <name>QMCertificateDialog</name>
     <message>
         <location filename="../ui/qmcertificatedialog.ui" line="14"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="164"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="165"/>
         <source>Nachweise verwalten</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmcertificatedialog.ui" line="29"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="166"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="167"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmcertificatedialog.ui" line="22"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="165"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="166"/>
         <source>Typ</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmcertificatedialog.ui" line="43"/>
-        <location filename="../ui/qmcertificatedialog.ui" line="63"/>
-        <location filename="../ui/qmcertificatedialog.ui" line="94"/>
-        <location filename="../ui/qmcertificatedialog.ui" line="111"/>
-        <location filename="../ui/qmcertificatedialog.ui" line="128"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="167"/>
+        <location filename="../ui/qmcertificatedialog.ui" line="46"/>
+        <location filename="../ui/qmcertificatedialog.ui" line="66"/>
+        <location filename="../ui/qmcertificatedialog.ui" line="97"/>
+        <location filename="../ui/qmcertificatedialog.ui" line="114"/>
+        <location filename="../ui/qmcertificatedialog.ui" line="131"/>
         <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="168"/>
         <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="169"/>
         <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="170"/>
         <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="171"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="172"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
