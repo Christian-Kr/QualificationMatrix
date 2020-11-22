@@ -114,5 +114,5 @@ void QMCertificateDialog::addCertificate()
 
     auto hash = QString(QCryptographicHash::hash(file.readAll(), QCryptographicHash::Md5));
 
-    TODO: Finish
+    // TODO: Finish
 }
