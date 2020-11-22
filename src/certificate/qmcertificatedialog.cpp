@@ -17,6 +17,7 @@
 #include "ui_qmcertificatedialog.h"
 #include "model/qmdatamanager.h"
 #include "model/qmcertificatemodel.h"
+#include "settings/qmapplicationsettings.h"
 
 #include <QSqlTableModel>
 #include <QSortFilterProxyModel>
@@ -38,6 +39,22 @@ QMCertificateDialog::QMCertificateDialog(QWidget *parent)
 QMCertificateDialog::~QMCertificateDialog()
 {
     delete ui;
+}
+
+void QMCertificateDialog::closeEvent(QCloseEvent *event)
+{
+    saveSettings();
+
+    QDialog::closeEvent(event);
+}
+
+void QMCertificateDialog::saveSettings()
+{
+    auto &settings = QMApplicationSettings::getInstance();
+
+    // Window settings.
+    settings.write("CertificateDialog/Width", width());
+    settings.write("CertificateDialog/Height", height());
 }
 
 void QMCertificateDialog::updateData()

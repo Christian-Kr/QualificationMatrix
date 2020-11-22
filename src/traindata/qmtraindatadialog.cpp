@@ -55,8 +55,8 @@ void QMTrainDataDialog::saveSettings()
     auto &settings = QMApplicationSettings::getInstance();
 
     // Window settings.
-    settings.write("QMTrainDataDialog/Width", width());
-    settings.write("QMTrainDataDialog/Height", height());
+    settings.write("TrainDataDialog/Width", width());
+    settings.write("TrainDataDialog/Height", height());
 }
 
 void QMTrainDataDialog::apply()

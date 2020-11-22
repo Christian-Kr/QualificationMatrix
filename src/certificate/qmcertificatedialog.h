@@ -44,6 +44,13 @@ public:
     /// Destructor
     ~QMCertificateDialog() override;
 
+    /// Save settings from the dialog.
+    void saveSettings();
+
+protected:
+    /// Override from QDialog.
+    void closeEvent(QCloseEvent *event) override;
+
 public slots:
     /// Update the models, cause they might have changed.
     void updateData();

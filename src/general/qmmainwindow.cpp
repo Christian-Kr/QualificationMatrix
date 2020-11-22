@@ -553,9 +553,9 @@ void QMMainWindow::saveSettings()
 void QMMainWindow::showTrainData()
 {
     auto &settings = QMApplicationSettings::getInstance();
-    auto varWidth = settings.read("QMTrainDataDialog/Width");
+    auto varWidth = settings.read("TrainDataDialog/Width");
     auto width = (varWidth.isNull()) ? 400 : varWidth.toInt();
-    auto varHeight = settings.read("QMTrainDataDialog/Height");
+    auto varHeight = settings.read("TrainDataDialog/Height");
     auto height = (varHeight.isNull()) ? 400 : varHeight.toInt();
 
     QMTrainDataDialog trainDataDialog(this);
@@ -647,7 +647,15 @@ void QMMainWindow::createEmptyDatabase()
 
 void QMMainWindow::manageCertificate()
 {
+    auto &settings = QMApplicationSettings::getInstance();
+    auto varWidth = settings.read("CertificateDialog/Width");
+    auto width = (varWidth.isNull()) ? 400 : varWidth.toInt();
+    auto varHeight = settings.read("CertificateDialog/Height");
+    auto height = (varHeight.isNull()) ? 400 : varHeight.toInt();
+
     QMCertificateDialog certDialog(this);
     certDialog.updateData();
+    certDialog.resize(width, height);
+    certDialog.setModal(true);
     certDialog.exec();
 }
