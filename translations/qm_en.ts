@@ -296,7 +296,7 @@
     </message>
     <message>
         <location filename="../src/certificate/qmcertificatedialog.cpp" line="103"/>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="129"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="138"/>
         <source>Nachweis hinzufügen</source>
         <translation type="unfinished"></translation>
     </message>
@@ -306,7 +306,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="130"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="139"/>
         <source>Der Nachweis konnte nicht hinzugefügt werden. Bitte informieren Sie den Entwickler.</source>
         <translation type="unfinished"></translation>
     </message>

@@ -1,5 +1,5 @@
 //
-// qmfiledialog.cpp is part of QualificationMatrix
+// qmcertificatedialog.cpp is part of QualificationMatrix
 //
 // QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of
 // the GNU General Public License as published by the Free Software Foundation, either version 3 of
@@ -116,7 +116,16 @@ void QMCertificateDialog::addCertificate()
         return;
     }
 
-    auto hash = QString(QCryptographicHash::hash(file.readAll(), QCryptographicHash::Md5));
+    auto hash = QString(QCryptographicHash::hash(file.readAll(), QCryptographicHash::Md5).toHex());
+
+    // If we are here, adding a new file was basically ok. Now create a new model entry.
+    int rowIndex = certificateModel->rowCount();
+    QFileInfo fileInfo(file.fileName());
+
+    certificateModel->insertRow(certificateModel->rowCount());
+    certificateModel->setData(certificateModel->index(rowIndex, 1), fileInfo.baseName());
+    certificateModel->setData(certificateModel->index(rowIndex, 2), fileInfo.completeSuffix());
+    certificateModel->setData(certificateModel->index(rowIndex, 5), hash);
 
     // Handle related to extern/internal.
     auto dm = QMDataManager::getInstance();
@@ -129,6 +138,7 @@ void QMCertificateDialog::addCertificate()
                 this, tr("Nachweis hinzufügen"),
                 tr("Der Nachweis konnte nicht hinzugefügt werden. Bitte informieren Sie den "
                    "Entwickler."));
+            certificateModel->revertRow(rowIndex);
             return;
         }
     }
@@ -136,9 +146,11 @@ void QMCertificateDialog::addCertificate()
     {
         if (!QMCertificateDialog::saveFileInternal(file))
         {
-
+            certificateModel->revertRow(rowIndex);
         }
     }
+
+    certificateModel->submitAll();
 }
 
 QString QMCertificateDialog::saveFileExternal(QFile &file)
