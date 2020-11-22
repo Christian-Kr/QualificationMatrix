@@ -299,12 +299,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="100"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="101"/>
         <source>Nachweis hinzufügen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="100"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="101"/>
         <source>All files (*.*);;JPEG (*.jpg *.jpeg);;PDF (*.pdf)</source>
         <translation type="unfinished"></translation>
     </message>

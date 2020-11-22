@@ -78,6 +78,7 @@ void QMCertificateDialog::updateData()
     ui->tvFiles->hideColumn(0);
     ui->tvFiles->hideColumn(3);
     ui->tvFiles->hideColumn(4);
+    ui->tvFiles->hideColumn(5);
 
     resetFilter();
 }
