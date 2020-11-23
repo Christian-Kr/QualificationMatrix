@@ -27,6 +27,7 @@
 #include <QMessageBox>
 #include <QFileInfo>
 #include <QTextStream>
+#include <QCryptographicHash>
 
 #include <QDebug>
 
@@ -70,7 +71,7 @@ void QMCertificateIntegrityCheckDialog::runCheck()
     if (logFileInfo.exists())
     {
         QMessageBox::warning(
-            this, tr("Nachweisdatenbank überprüfen"), tr("Die Log-Datei existiert bereits.");
+            this, tr("Nachweisdatenbank überprüfen"), tr("Die Log-Datei existiert bereits."));
         return;
     }
 
@@ -84,7 +85,41 @@ void QMCertificateIntegrityCheckDialog::runCheck()
 
     QTextStream logStream(&logFile);
 
-    // TODO: Generate a list of all files in directory for external files.
+    auto db = QSqlDatabase::database("default", false);
+    auto dbPath = QFileInfo(db.databaseName()).absolutePath();
+    auto certPath = dbPath + QDir::separator() + "certificates";
+
+    for (int i = 0; i < certificateModel->rowCount(); i++)
+    {
+        QString tmpCertPath = certificateModel->data(certificateModel->index(i, 3)).toString();
+
+        // Does the file really exist?
+        if (!QFileInfo(tmpCertPath).exists())
+        {
+            logStream << tr("Nachfolgende Datei fehlt:") << tmpCertPath << "\n";
+            continue;
+        }
+
+        // Make hash test.
+        if (recreateHash)
+        {
+            QFile tmpFile(tmpCertPath);
+            tmpFile.open(QIODevice::ReadOnly);
+
+            auto hash = QString(QCryptographicHash::hash(
+                tmpFile.readAll(), QCryptographicHash::Md5).toHex());
+
+            auto tmpHash = certificateModel->data(certificateModel->index(i, 5)).toString();
+
+            if (hash != tmpHash)
+            {
+                logStream << tr("Hash weicht ab:") << tmpCertPath << "\n";
+                continue;
+            }
+        }
+    }
+
+    logFile.close();
 }
 
 void QMCertificateIntegrityCheckDialog::openLogPath()
