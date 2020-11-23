@@ -44,14 +44,16 @@ QMTrainDataDetailsDialog::QMTrainDataDetailsDialog(
     // Load model.
     auto dm = QMDataManager::getInstance();
 
+    trainDataCertificationViewModel = dm->getTrainDataCertificateViewModel();
     trainDataCertificateModel = dm->getTrainDataCertificateModel();
     employeeModel = dm->getEmployeeModel();
     trainModel = dm->getTrainModel();
     trainDataStateModel = dm->getTrainDataStateModel();
+    certificateModel = dm->getCertificateModel();
 
-    trainDataCertFilterModel = new QSortFilterProxyModel(this);
-    trainDataCertFilterModel->setSourceModel(trainDataCertificateModel.get());
-    trainDataCertFilterModel->setFilterKeyColumn(1);
+    trainDataCertViewFilterModel = new QSortFilterProxyModel(this);
+    trainDataCertViewFilterModel->setSourceModel(trainDataCertificationViewModel.get());
+    trainDataCertViewFilterModel->setFilterKeyColumn(1);
 
     updateUi();
 }
@@ -86,10 +88,11 @@ void QMTrainDataDetailsDialog::updateUi()
     ui->cbState->setCurrentText(state);
 
     // Update the certificate ui elements.
-    ui->tvCertificates->setModel(trainDataCertFilterModel);
+    ui->tvCertificates->setModel(trainDataCertViewFilterModel);
     ui->tvCertificates->hideColumn(0);
     ui->tvCertificates->hideColumn(1);
-    trainDataCertFilterModel->setFilterFixedString(
+    ui->tvCertificates->hideColumn(2);
+    trainDataCertViewFilterModel->setFilterFixedString(
         QString::number(trainDataModelEdit->data(trainDataModelEdit->index(
             selRowEdit, 0)).toInt()));
 }
@@ -230,10 +233,10 @@ void QMTrainDataDetailsDialog::addCertificate()
     auto trainDataId = trainDataModelEdit->data(trainDataModelEdit->index(selRowEdit, 0)).toInt();
     auto certId = selId;
 
-    for (int i = 0; i < trainDataCertFilterModel->rowCount(); i++)
+    for (int i = 0; i < trainDataCertViewFilterModel->rowCount(); i++)
     {
-        auto tmpCertId = trainDataCertFilterModel->data(
-            trainDataCertFilterModel->index(i, 2)).toInt();
+        auto tmpCertId = trainDataCertViewFilterModel->data(
+            trainDataCertViewFilterModel->index(i, 2)).toInt();
 
         if (tmpCertId == certId)
         {
@@ -250,6 +253,7 @@ void QMTrainDataDetailsDialog::addCertificate()
     trainDataCertificateModel->setData(trainDataCertificateModel->index(row, 2), certId);
 
     trainDataCertificateModel->submitAll();
+    trainDataCertificationViewModel->select();
 }
 
 void QMTrainDataDetailsDialog::removeCertificate()
