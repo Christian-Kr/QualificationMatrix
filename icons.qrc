@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="/icons">
+    <file>icons/mail-attachment.svg</file>
     <file>icons/document-preview-archive.svg</file>
     <file>icons/view-list-details.svg</file>
     <file>icons/mail-attachment.svg</file>

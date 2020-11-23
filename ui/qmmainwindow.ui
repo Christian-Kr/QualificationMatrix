@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1177</width>
-    <height>741</height>
+    <width>622</width>
+    <height>518</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -75,7 +75,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1177</width>
+     <width>622</width>
      <height>24</height>
     </rect>
    </property>
@@ -107,11 +107,12 @@
     <property name="title">
      <string>Nachweise</string>
     </property>
+    <addaction name="actIntegrityCheck"/>
     <addaction name="actManageCertificate"/>
    </widget>
    <addaction name="menu_Datei"/>
-   <addaction name="menuExtras"/>
    <addaction name="menuNachweise"/>
+   <addaction name="menuExtras"/>
    <addaction name="menuHilfe"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -140,6 +141,7 @@
    <addaction name="actManageDatabase"/>
    <addaction name="actTrainData"/>
    <addaction name="actSettings"/>
+   <addaction name="actManageCertificate"/>
   </widget>
   <action name="actExit">
    <property name="text">
@@ -242,8 +244,17 @@
    </property>
   </action>
   <action name="actManageCertificate">
+   <property name="icon">
+    <iconset resource="../icons.qrc">
+     <normaloff>:/icons/icons/mail-attachment.svg</normaloff>:/icons/icons/mail-attachment.svg</iconset>
+   </property>
    <property name="text">
     <string>Verwalten</string>
+   </property>
+  </action>
+  <action name="actIntegrityCheck">
+   <property name="text">
+    <string>Automatische Prüfung</string>
    </property>
   </action>
  </widget>
@@ -395,6 +406,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actIntegrityCheck</sender>
+   <signal>triggered()</signal>
+   <receiver>QMMainWindow</receiver>
+   <slot>showIntegrityCheck()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>310</x>
+     <y>258</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>showAbout()</slot>
@@ -410,5 +437,6 @@
   <slot>closeDatabase()</slot>
   <slot>createEmptyDatabase()</slot>
   <slot>manageCertificate()</slot>
+  <slot>showIntegrityCheck()</slot>
  </slots>
 </ui>
