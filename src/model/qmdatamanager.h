@@ -132,6 +132,7 @@ public:
     sp_tableModel getInfoModel() { return infoModel; }
     sp_tableModel getCertificateModel() { return certificateModel; }
     sp_tableModel getTrainDataCertificateModel() { return trainDataCertificateModel; }
+    sp_tableModel getTrainDataCertificateViewModel() { return trainDataCertificateViewModel; }
 
     /// QSqlTableModel dirty test
     bool isAnyDirty() const;
@@ -159,6 +160,7 @@ private:
     sp_tableModel trainDataStateModel;
     sp_tableModel infoModel;
     sp_tableModel trainDataCertificateModel;
+    sp_tableModel trainDataCertificateViewModel;
     sp_tableModel certificateModel;
 
     // These models are custom ones. They won't get updated as an object itself, but they are based
