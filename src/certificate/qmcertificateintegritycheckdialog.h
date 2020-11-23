@@ -46,6 +46,9 @@ public:
     /// Save settings from the dialog.
     void saveSettings();
 
+    /// Accept dialog: Run check!
+    void accept() override;
+
 protected:
     /// Override from QDialog.
     void closeEvent(QCloseEvent *event) override;

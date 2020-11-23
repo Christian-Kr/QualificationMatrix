@@ -19,6 +19,7 @@
 #include "settings/qmapplicationsettings.h"
 
 #include <QSqlTableModel>
+#include <QKeyEvent>
 
 #include <QDebug>
 
