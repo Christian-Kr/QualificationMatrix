@@ -16,18 +16,15 @@
 #include "qmtraindatacertificatemodel.h"
 
 QMTrainDataCertificateModel::QMTrainDataCertificateModel(QObject *parent, QSqlDatabase db)
-    : QSqlRelationalTableModel(parent, db)
+    : QSqlTableModel(parent, db)
 {
     // The name of the Table.
     setTable("TrainDataCertificate");
 
     // The edit and join mode/strategy.
-    setJoinMode(QSqlRelationalTableModel::LeftJoin);
     setEditStrategy(QSqlTableModel::OnManualSubmit);
 
     // Specifiy header data of table.
     setHeaderData(1, Qt::Horizontal, tr("Schulung"));
-    setRelation(1, QSqlRelation("Train", "id", "name"));
     setHeaderData(2, Qt::Horizontal, tr("Nachweis"));
-    setRelation(2, QSqlRelation("Certificate", "id", "name"));
 }

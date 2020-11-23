@@ -26,6 +26,9 @@
 #include <QDialogButtonBox>
 #include <QPushButton>
 #include <QKeyEvent>
+#include <QSqlError>
+
+#include <QDebug>
 
 QMTrainDataDetailsDialog::QMTrainDataDetailsDialog(
     QSortFilterProxyModel *trainDataModel, int selRow, QWidget *parent)
@@ -247,16 +250,61 @@ void QMTrainDataDetailsDialog::addCertificate()
     }
 
     auto row = trainDataCertificateModel->rowCount();
-    trainDataCertificateModel->insertRow(row);
+
+    if (trainDataCertificateModel->insertRow(row))
+    {
+        qWarning() << "cannot add a new row";
+        qWarning() << trainDataCertificateModel->lastError().text();
+    }
 
     trainDataCertificateModel->setData(trainDataCertificateModel->index(row, 1), trainDataId);
     trainDataCertificateModel->setData(trainDataCertificateModel->index(row, 2), certId);
 
-    trainDataCertificateModel->submitAll();
+    if (trainDataCertificateModel->submitAll())
+    {
+        qWarning() << "cannot submit changes to database";
+        qWarning() << trainDataCertificateModel->lastError().text();
+    }
+
     trainDataCertificationViewModel->select();
 }
 
 void QMTrainDataDetailsDialog::removeCertificate()
 {
-    // TODO: Remove certificate and delete entry in traindatacertificate table.
+    auto modelIndex = ui->tvCertificates->selectionModel()->selectedRows();
+
+    if (modelIndex.size() != 1)
+    {
+        QMessageBox::information(
+            this, tr("Nachweis entfernen"), tr("Es wurde kein Eintrag selektiert."));
+        return;
+    }
+
+    auto row = modelIndex.at(0).row();
+    auto certCorrId = trainDataCertViewFilterModel->data(
+        trainDataCertViewFilterModel->index(row, 0)).toInt();
+    auto removeRow = -1;
+
+    // Get row in main certification correlation model.
+    for (int i = 0; i < trainDataCertificateModel->rowCount(); i++)
+    {
+        auto tmpCertCorrId = trainDataCertificateModel->data(
+            trainDataCertificateModel->index(i, 0)).toInt();
+
+        if (tmpCertCorrId == certCorrId)
+        {
+            removeRow = i;
+        }
+    }
+
+    if (removeRow == -1)
+    {
+        qWarning() << "cannot find correlation entry" << certCorrId;
+        return;
+    }
+
+    trainDataCertificateModel->removeRow(removeRow);
+    trainDataCertificateModel->submitAll();
+
+    trainDataCertificationViewModel->select();
 }

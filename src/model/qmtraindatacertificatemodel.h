@@ -16,12 +16,12 @@
 #ifndef QMTRAINDATACERTIFICATEMODEL_H
 #define QMTRAINDATACERTIFICATEMODEL_H
 
-#include <QSqlRelationalTableModel>
+#include <QSqlTableModel>
 
 /// Table for correlation of train data and certificates. This allow flexible handle of the nubmer
 /// of certificates for every train data entry.
 /// \author Christian Kr, Copyright 2020
-class QMTrainDataCertificateModel: public QSqlRelationalTableModel
+class QMTrainDataCertificateModel: public QSqlTableModel
 {
 Q_OBJECT
 
