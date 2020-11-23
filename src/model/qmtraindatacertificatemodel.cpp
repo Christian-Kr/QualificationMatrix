@@ -16,7 +16,7 @@
 #include "qmtraindatacertificatemodel.h"
 
 QMTrainDataCertificateModel::QMTrainDataCertificateModel(QObject *parent, QSqlDatabase db)
-    : QSqlTableModel(parent, db)
+    : QSqlRelationalTableModel(parent, db)
 {
     // The name of the Table.
     setTable("TrainDataCertificate");
@@ -25,6 +25,8 @@ QMTrainDataCertificateModel::QMTrainDataCertificateModel(QObject *parent, QSqlDa
     setEditStrategy(QSqlTableModel::OnManualSubmit);
 
     // Specifiy header data of table.
-    setHeaderData(1, Qt::Horizontal, tr("Schulungsnummer"));
-    setHeaderData(2, Qt::Horizontal, tr("Nachweisnummer"));
+    setHeaderData(1, Qt::Horizontal, tr("Schulung"));
+    setRelation(1, QSqlRelation("Train", "id", "name"));
+    setHeaderData(2, Qt::Horizontal, tr("Nachweis"));
+    setRelation(2, QSqlRelation("Certificate", "id", "name"));
 }

@@ -87,6 +87,8 @@ void QMTrainDataDetailsDialog::updateUi()
 
     // Update the certificate ui elements.
     ui->tvCertificates->setModel(trainDataCertFilterModel);
+    ui->tvCertificates->hideColumn(0);
+    ui->tvCertificates->hideColumn(1);
     trainDataCertFilterModel->setFilterFixedString(
         QString::number(trainDataModelEdit->data(trainDataModelEdit->index(
             selRowEdit, 0)).toInt()));

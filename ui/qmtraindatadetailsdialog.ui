@@ -60,7 +60,11 @@
    <item row="8" column="0" colspan="2">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QTableView" name="tvCertificates"/>
+      <widget class="QTableView" name="tvCertificates">
+       <attribute name="horizontalHeaderStretchLastSection">
+        <bool>true</bool>
+       </attribute>
+      </widget>
      </item>
      <item>
       <layout class="QVBoxLayout" name="verticalLayout">
