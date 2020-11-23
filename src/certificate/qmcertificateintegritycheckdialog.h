@@ -49,6 +49,9 @@ public:
     /// Accept dialog: Run check!
     void accept() override;
 
+    /// Run integrity check.
+    void runCheck();
+
 protected:
     /// Override from QDialog.
     void closeEvent(QCloseEvent *event) override;
@@ -59,6 +62,9 @@ protected:
 public slots:
     /// Update the models, cause they might have changed.
     void updateData();
+
+    /// Open a path for log file.
+    void openLogPath();
 
 private:
     Ui::QMCertificateIntegrityCheckDialog *ui;

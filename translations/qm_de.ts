@@ -346,6 +346,85 @@
     </message>
 </context>
 <context>
+    <name>QMCertificateIntegrityCheckDialog</name>
+    <message>
+        <location filename="../ui/qmcertificateintegritycheckdialog.ui" line="14"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificateintegritycheckdialog.h" line="170"/>
+        <source>Nachweisdatenbank überprüfen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmcertificateintegritycheckdialog.ui" line="20"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificateintegritycheckdialog.h" line="171"/>
+        <source>Nachweismodus</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmcertificateintegritycheckdialog.ui" line="33"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificateintegritycheckdialog.h" line="172"/>
+        <source>Allgemein</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmcertificateintegritycheckdialog.ui" line="42"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificateintegritycheckdialog.h" line="173"/>
+        <source>Hash neu erstellen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmcertificateintegritycheckdialog.ui" line="54"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificateintegritycheckdialog.h" line="174"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#424242;&quot;&gt;Für jede Datei wird der Hash neu erstellt und mit dem vorhandenen verglichen. Dadurch kann überprüft werden, ob sich die Nachweise geändert haben.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmcertificateintegritycheckdialog.ui" line="69"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificateintegritycheckdialog.h" line="175"/>
+        <source>Speicherort</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmcertificateintegritycheckdialog.ui" line="104"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificateintegritycheckdialog.h" line="176"/>
+        <source>Verweiste Dateien löschen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmcertificateintegritycheckdialog.ui" line="116"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificateintegritycheckdialog.h" line="177"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#424242;&quot;&gt;Im externen Modus werden Nachweisdateien die sich in der Dateistruktur befinden, aber nicht in der Datenbank, automatisch gelöscht.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmcertificateintegritycheckdialog.ui" line="137"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificateintegritycheckdialog.h" line="178"/>
+        <source>Log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmcertificateintegritycheckdialog.ui" line="149"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificateintegritycheckdialog.h" line="179"/>
+        <source>Öffnen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="64"/>
+        <source>Ordner für Log-Datei</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="105"/>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="107"/>
+        <source>Extern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="106"/>
+        <source>Intern</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QMCertificateModel</name>
     <message>
         <location filename="../src/model/qmcertificatemodel.cpp" line="28"/>
@@ -1338,250 +1417,256 @@ Die Aktion wird abgebrochen.</source>
     <name>QMMainWindow</name>
     <message>
         <location filename="../ui/qmmainwindow.ui" line="20"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="184"/>
-        <location filename="../src/general/qmmainwindow.cpp" line="529"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="193"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="530"/>
         <source>QualificationMatrix</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmmainwindow.ui" line="84"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="214"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="224"/>
         <source>&amp;Datei</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmmainwindow.ui" line="94"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="215"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="225"/>
         <source>Hi&amp;lfe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmmainwindow.ui" line="101"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="216"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="226"/>
         <source>Ex&amp;tras</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmmainwindow.ui" line="108"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="217"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="227"/>
         <source>Nachweise</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="120"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="218"/>
+        <location filename="../ui/qmmainwindow.ui" line="121"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="228"/>
         <source>toolBar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="146"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="185"/>
+        <location filename="../ui/qmmainwindow.ui" line="148"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="194"/>
         <source>&amp;Beenden</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="149"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="187"/>
+        <location filename="../ui/qmmainwindow.ui" line="151"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="196"/>
         <source>Ctrl+Q</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="158"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="189"/>
+        <location filename="../ui/qmmainwindow.ui" line="160"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="198"/>
         <source>&amp;Datenbank verwalten</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="161"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="191"/>
-        <location filename="../src/general/qmmainwindow.cpp" line="132"/>
+        <location filename="../ui/qmmainwindow.ui" line="163"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="200"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="133"/>
         <source>Datenbank verwalten</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="164"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="194"/>
+        <location filename="../ui/qmmainwindow.ui" line="166"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="203"/>
         <source>Ctrl+O</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="173"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="196"/>
+        <location filename="../ui/qmmainwindow.ui" line="175"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="205"/>
         <source>Datenbank &amp;schließen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="176"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="198"/>
+        <location filename="../ui/qmmainwindow.ui" line="178"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="207"/>
         <source>Ctrl+Y</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="185"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="200"/>
+        <location filename="../ui/qmmainwindow.ui" line="187"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="209"/>
         <source>&amp;Über QualificationMatrix</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="188"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="202"/>
+        <location filename="../ui/qmmainwindow.ui" line="190"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="211"/>
         <source>Ctrl+Shift+ß</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="197"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="204"/>
+        <location filename="../ui/qmmainwindow.ui" line="199"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="213"/>
         <source>&amp;Einstellungen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="202"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="205"/>
+        <location filename="../ui/qmmainwindow.ui" line="204"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="214"/>
         <source>Über &amp;Qt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="211"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="206"/>
+        <location filename="../ui/qmmainwindow.ui" line="213"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="215"/>
         <source>Schulungsdaten</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="214"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="208"/>
+        <location filename="../ui/qmmainwindow.ui" line="216"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="217"/>
         <source>Editor zum Bearbeiten der Schulungsdaten öffnen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="222"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="210"/>
+        <location filename="../ui/qmmainwindow.ui" line="224"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="219"/>
         <source>&amp;Leere Datebank erstellen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="233"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="211"/>
+        <location filename="../ui/qmmainwindow.ui" line="235"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="220"/>
         <source>Deutsch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="241"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="212"/>
+        <location filename="../ui/qmmainwindow.ui" line="243"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="221"/>
         <source>Englisch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="246"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="213"/>
+        <location filename="../ui/qmmainwindow.ui" line="252"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="222"/>
         <source>Verwalten</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="116"/>
-        <source>Datenbankverbindung</source>
+        <location filename="../ui/qmmainwindow.ui" line="257"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="223"/>
+        <source>Automatische Prüfung</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/general/qmmainwindow.cpp" line="117"/>
+        <source>Datenbankverbindung</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/general/qmmainwindow.cpp" line="118"/>
         <source>Die Datenbank konnte nicht geöffnet werden, überprüfen Sie ihre Einstellungen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="222"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="223"/>
         <source>Datenbank laden</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="222"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="223"/>
         <source>Die Version der Datenbank entspricht nicht der Vorgabe. Möchten Sie versuchen die Datenbank zu aktualisieren?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="280"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="281"/>
         <source>Datenbank verbunden</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="305"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="306"/>
         <source>Datenbank</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="305"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="306"/>
         <source>Daten abrufen...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="310"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="311"/>
         <source>Schulungsresultat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="310"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="311"/>
         <source>Berechnung...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="395"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="396"/>
         <source>Qualifizierungsergebnis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="398"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="399"/>
         <source>Qualifizierungsmatrix</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="315"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="316"/>
         <source>Qualifikationsmatrix</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="133"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="134"/>
         <source>Es besteht bereits eine Verbindung zu einer Datenbank.
 
 Jetzt trennen?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="248"/>
-        <location filename="../src/general/qmmainwindow.cpp" line="286"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="249"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="287"/>
         <source>Datenbank-Backup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="249"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="250"/>
         <source>Es konnte kein Backup erstellt werden. Da für eine Aktualisierung ein Backup notwendig ist, wird die Aktion abgebrochen und die Datenbank geschlossen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="261"/>
-        <location filename="../src/general/qmmainwindow.cpp" line="271"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="262"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="272"/>
         <source>Datenbank aktualisieren</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="262"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="263"/>
         <source>Die Datenbank konnte nicht vollständig aktualisiert werden. Der Fehler ist kritisch. Bitte spielen Sie das vorher angelegte Backup ein. Die Datenbank wird geschlossen und nicht weiter verarbeitet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="272"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="273"/>
         <source>Die Aktualisierung der Datenbank war erfolgreich. Bitte heben Sie das erstellte Backup für einen späteren Fall auf.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="315"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="316"/>
         <source>Cache aufbauen...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="414"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="415"/>
         <source>Über QualificationMatrix</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="415"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="416"/>
         <source>Copyright (c) 2020 by Christian Kr
 Version:	0.1-Alpha
 Lizenz:	GNU GENERAL PUBLIC LICENSE Version 3
@@ -1594,57 +1679,57 @@ Bug-Reports: Fehler können direkt auf GitHub gemeldet werden oderper E-Mail an 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="434"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="435"/>
         <source>Backup anlegen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="434"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="435"/>
         <source>Der angegebene Ordner in den Einstellungen ist kein Verzeichnis,  existiert nicht oder ist nicht beschreibbar.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="470"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="471"/>
         <source>Backup löschen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="471"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="472"/>
         <source>Die Backupdatei konnte nicht gelöscht werden und wird übersprungen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="483"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="484"/>
         <source>Backup erstellen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="484"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="485"/>
         <source>Die Backupdatei konnte nicht kopiert werden und wird übersprungen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="500"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="501"/>
         <source>Datenbank schließen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="501"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="502"/>
         <source>Soll die verbundene Datenbank wirklich geschlossen werden? (Nicht gespeicherte Daten gehen verloren!)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="530"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="531"/>
         <source>Datenbank getrennt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="623"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="624"/>
         <source>Öffne Sql-Datei</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="623"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="624"/>
         <source>Sql (*.sql)</source>
         <translation type="unfinished"></translation>
     </message>

@@ -1,5 +1,5 @@
 //
-// mainwindow.h is part of QualificationMatrix
+// qmmainwindow.h is part of QualificationMatrix
 //
 // QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of
 // the GNU General Public License as published by the Free Software Foundation, either version 3 of
@@ -120,6 +120,9 @@ public slots:
 
     /// Open dialog for managing the certificate files.
     void manageCertificate();
+
+    /// Show dialog for certificate integrity check.
+    void showCertificateIntegrityCheck();
 
 protected:
     /// Override from QMainWindow. This function will be called on closeing the widget.

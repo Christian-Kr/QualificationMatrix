@@ -20,6 +20,13 @@
 
 #include <QSqlTableModel>
 #include <QKeyEvent>
+#include <QFileDialog>
+#include <QDir>
+#include <QFile>
+#include <QDate>
+#include <QMessageBox>
+#include <QFileInfo>
+#include <QTextStream>
 
 #include <QDebug>
 
@@ -39,9 +46,64 @@ QMCertificateIntegrityCheckDialog::~QMCertificateIntegrityCheckDialog()
 
 void QMCertificateIntegrityCheckDialog::accept()
 {
-    // TODO: Run check.
+    saveSettings();
+
+    runCheck();
 
     QDialog::accept();
+}
+
+void QMCertificateIntegrityCheckDialog::runCheck()
+{
+    // Check data of ui elements.
+    auto deleteUnlinkedFiles = ui->cbDeleteUnlinkedFiles->isChecked();
+    auto recreateHash = ui->cbRecreateHash->isChecked();
+    auto logFilePath = ui->leLogPath->text();
+
+    // Open log file.
+    auto fileName =
+        logFilePath + QDir::separator() + "log_" +
+        QDate::currentDate().toString(Qt::DateFormat::ISODate) + ".txt";
+    QFileInfo logFileInfo(fileName);
+    QFile logFile(fileName);
+
+    if (logFileInfo.exists())
+    {
+        QMessageBox::warning(
+            this, tr("Nachweisdatenbank überprüfen"), tr("Die Log-Datei existiert bereits.");
+        return;
+    }
+
+    if (!logFile.open(QIODevice::ReadWrite))
+    {
+        QMessageBox::warning(
+            this, tr("Nachweisdatenbank überprüfen"),
+            tr("Die Log-Datei konnte nicht zum Schreiben geöffnet werden."));
+        return;
+    }
+
+    QTextStream logStream(&logFile);
+
+    // TODO: Generate a list of all files in directory for external files.
+}
+
+void QMCertificateIntegrityCheckDialog::openLogPath()
+{
+    auto logPath = QFileDialog::getExistingDirectory(
+        this, tr("Ordner für Log-Datei"), QDir::homePath());
+
+    if (logPath.isEmpty())
+    {
+        return;
+    }
+
+    if (!QDir(logPath).exists())
+    {
+        qWarning() << "path does not exist, although it should";
+        return;
+    }
+
+    ui->leLogPath->setText(logPath);
 }
 
 void QMCertificateIntegrityCheckDialog::closeEvent(QCloseEvent *event)
@@ -64,8 +126,14 @@ void QMCertificateIntegrityCheckDialog::updateData()
 {
     // Get the model data.
     auto dm = QMDataManager::getInstance();
-
     certificateModel = dm->getCertificateModel();
+
+    // Set ui.
+    ui->cbCertificateMode->clear();
+    ui->cbCertificateMode->addItem(tr("Extern"));
+    ui->cbCertificateMode->addItem(tr("Intern"));
+    ui->cbCertificateMode->setCurrentText(tr("Extern"));
+    ui->cbCertificateMode->setEnabled(false);
 }
 
 void QMCertificateIntegrityCheckDialog::keyPressEvent(QKeyEvent *event)

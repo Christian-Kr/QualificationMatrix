@@ -1,5 +1,5 @@
 //
-// mainwindow.cpp is part of QualificationMatrix
+// qmmainwindow.cpp is part of QualificationMatrix
 //
 // QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of
 // the GNU General Public License as published by the Free Software Foundation, either version 3 of
@@ -29,6 +29,7 @@
 #include "database/qmdatabaseupdatedialog.h"
 #include "database/qmdatabaseupdater.h"
 #include "certificate/qmcertificatedialog.h"
+#include "certificate/qmcertificateintegritycheckdialog.h"
 
 #include <QProgressDialog>
 #include <QDesktopWidget>
@@ -648,6 +649,7 @@ void QMMainWindow::createEmptyDatabase()
 void QMMainWindow::manageCertificate()
 {
     auto &settings = QMApplicationSettings::getInstance();
+
     auto varWidth = settings.read("CertificateDialog/Width");
     auto width = (varWidth.isNull()) ? 400 : varWidth.toInt();
     auto varHeight = settings.read("CertificateDialog/Height");
@@ -658,4 +660,20 @@ void QMMainWindow::manageCertificate()
     certDialog.resize(width, height);
     certDialog.setModal(true);
     certDialog.exec();
+}
+
+void QMMainWindow::showCertificateIntegrityCheck()
+{
+    auto &settings = QMApplicationSettings::getInstance();
+
+    auto varWidth = settings.read("CertificateIntegrityCheckDialog/Width");
+    auto width = (varWidth.isNull()) ? 400 : varWidth.toInt();
+    auto varHeight = settings.read("CertificateIntegrityCheckDialog/Height");
+    auto height = (varHeight.isNull()) ? 400 : varHeight.toInt();
+
+    QMCertificateIntegrityCheckDialog certIntCheckDialog(this);
+    certIntCheckDialog.updateData();
+    certIntCheckDialog.resize(width, height);
+    certIntCheckDialog.setModal(true);
+    certIntCheckDialog.exec();
 }
