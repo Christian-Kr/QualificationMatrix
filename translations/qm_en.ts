@@ -345,77 +345,99 @@
     <name>QMCertificateIntegrityCheckDialog</name>
     <message>
         <location filename="../ui/qmcertificateintegritycheckdialog.ui" line="14"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificateintegritycheckdialog.h" line="170"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificateintegritycheckdialog.h" line="171"/>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="74"/>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="81"/>
         <source>Nachweisdatenbank überprüfen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmcertificateintegritycheckdialog.ui" line="20"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificateintegritycheckdialog.h" line="171"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificateintegritycheckdialog.h" line="172"/>
         <source>Nachweismodus</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmcertificateintegritycheckdialog.ui" line="33"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificateintegritycheckdialog.h" line="172"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificateintegritycheckdialog.h" line="173"/>
         <source>Allgemein</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmcertificateintegritycheckdialog.ui" line="42"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificateintegritycheckdialog.h" line="173"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificateintegritycheckdialog.h" line="174"/>
         <source>Hash neu erstellen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmcertificateintegritycheckdialog.ui" line="54"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificateintegritycheckdialog.h" line="174"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificateintegritycheckdialog.h" line="175"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#424242;&quot;&gt;Für jede Datei wird der Hash neu erstellt und mit dem vorhandenen verglichen. Dadurch kann überprüft werden, ob sich die Nachweise geändert haben.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmcertificateintegritycheckdialog.ui" line="69"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificateintegritycheckdialog.h" line="175"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificateintegritycheckdialog.h" line="176"/>
         <source>Speicherort</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmcertificateintegritycheckdialog.ui" line="104"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificateintegritycheckdialog.h" line="176"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificateintegritycheckdialog.h" line="177"/>
         <source>Verweiste Dateien löschen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmcertificateintegritycheckdialog.ui" line="116"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificateintegritycheckdialog.h" line="177"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificateintegritycheckdialog.h" line="178"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#424242;&quot;&gt;Im externen Modus werden Nachweisdateien die sich in der Dateistruktur befinden, aber nicht in der Datenbank, automatisch gelöscht.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmcertificateintegritycheckdialog.ui" line="137"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificateintegritycheckdialog.h" line="178"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificateintegritycheckdialog.h" line="179"/>
         <source>Log</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmcertificateintegritycheckdialog.ui" line="149"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificateintegritycheckdialog.h" line="179"/>
+        <location filename="../ui/qmcertificateintegritycheckdialog.ui" line="153"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificateintegritycheckdialog.h" line="180"/>
         <source>Öffnen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="64"/>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="74"/>
+        <source>Die Log-Datei existiert bereits.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="82"/>
+        <source>Die Log-Datei konnte nicht zum Schreiben geöffnet werden.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="99"/>
+        <source>Nachfolgende Datei fehlt:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="116"/>
+        <source>Hash weicht ab:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="128"/>
         <source>Ordner für Log-Datei</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="105"/>
-        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="107"/>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="168"/>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="170"/>
         <source>Extern</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="106"/>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="169"/>
         <source>Intern</source>
         <translation type="unfinished"></translation>
     </message>
