@@ -1,21 +1,23 @@
 <RCC>
-    <qresource prefix="/icons">
-        <file>icons/user-group-properties.svg</file>
-        <file>icons/edit-reset.svg</file>
-        <file>icons/update-none.svg</file>
-        <file>icons/text-csv.svg</file>
-        <file>icons/application-pdf.svg</file>
-        <file>icons/view-filter.svg</file>
-        <file>icons/list-add-user.svg</file>
-        <file>icons/list-add.svg</file>
-        <file>icons/list-remove-user.svg</file>
-        <file>icons/list-remove.svg</file>
-        <file>icons/opendatabase.svg</file>
-        <file>icons/traindata.svg</file>
-        <file>icons/qm.svg</file>
-        <file>icons/properties.svg</file>
-        <file>icons/print.svg</file>
-        <file>icons/document-decrypt.svg</file>
-        <file>icons/document-encrypted.svg</file>
-    </qresource>
+  <qresource prefix="/icons">
+    <file>icons/view-list-details.svg</file>
+    <file>icons/mail-attachment.svg</file>
+    <file>icons/user-group-properties.svg</file>
+    <file>icons/edit-reset.svg</file>
+    <file>icons/update-none.svg</file>
+    <file>icons/text-csv.svg</file>
+    <file>icons/application-pdf.svg</file>
+    <file>icons/view-filter.svg</file>
+    <file>icons/list-add-user.svg</file>
+    <file>icons/list-add.svg</file>
+    <file>icons/list-remove-user.svg</file>
+    <file>icons/list-remove.svg</file>
+    <file>icons/opendatabase.svg</file>
+    <file>icons/traindata.svg</file>
+    <file>icons/qm.svg</file>
+    <file>icons/properties.svg</file>
+    <file>icons/print.svg</file>
+    <file>icons/document-decrypt.svg</file>
+    <file>icons/document-encrypted.svg</file>
+  </qresource>
 </RCC>
