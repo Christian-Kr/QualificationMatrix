@@ -15,12 +15,14 @@ INSERT INTO "Info" ("name", "value") VALUES("certificate_location_path", "");
 -- Certificate definition
 
 CREATE TABLE IF NOT EXISTS "Certificate" (
-    "id"    INTEGER,
-    "name"      TEXT,
-    "type"      TEXT,
-    "path"      TEXT,
-    "binary"    BLOB,
-    "md5_hash"  TEXT,
+    "id"            INTEGER,
+    "name"          TEXT,
+    "type"          TEXT,
+    "path"          TEXT,
+    "binary"        BLOB,
+    "md5_hash"      TEXT,
+    "add_date"      TEXT,
+    "train_date"    TEXT,
     PRIMARY KEY("id")
 );
 

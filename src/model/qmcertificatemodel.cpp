@@ -28,4 +28,6 @@ QMCertificateModel::QMCertificateModel(QObject *parent, QSqlDatabase db)
     setHeaderData(1, Qt::Horizontal, tr("Name"));
     setHeaderData(2, Qt::Horizontal, tr("Typ"));
     setHeaderData(3, Qt::Horizontal, tr("Pfad"));
+    setHeaderData(6, Qt::Horizontal, tr("Hinzugefügt"));
+    setHeaderData(7, Qt::Horizontal, tr("Schulungstag"));
 }
