@@ -37,6 +37,19 @@ CREATE TABLE IF NOT EXISTS "TrainDataCertificate" (
     FOREIGN KEY("certificate")      REFERENCES "Certificate"("id")
 );
 
+-- Create view to make handling more easy.
+
+CREATE VIEW IF NOT EXISTS TrainDataCertificateView AS
+	SELECT
+       TrainDataCertificate.id,
+       TrainDataCertificate.train_data,
+       TrainDataCertificate.certificate,
+       Certificate.name,
+       Certificate.md5_hash
+	FROM
+        TrainDataCertificate
+    LEFT JOIN Certificate ON TrainDataCertificate.certificate = Certificate.id;
+
 -- Change Train to implement legally_necessary entries
 
 ALTER TABLE "Train" ADD COLUMN "legally_necessary" INTEGER;
