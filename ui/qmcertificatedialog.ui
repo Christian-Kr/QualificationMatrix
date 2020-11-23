@@ -132,7 +132,7 @@
        </property>
        <property name="icon">
         <iconset resource="../icons.qrc">
-         <normaloff>:/icons/icons/traindata.svg</normaloff>:/icons/icons/traindata.svg</iconset>
+         <normaloff>:/icons/icons/document-preview-archive.svg</normaloff>:/icons/icons/document-preview-archive.svg</iconset>
        </property>
        <property name="iconSize">
         <size>
