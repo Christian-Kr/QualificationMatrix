@@ -653,7 +653,7 @@ void QMMainWindow::manageCertificate()
     auto varHeight = settings.read("CertificateDialog/Height");
     auto height = (varHeight.isNull()) ? 400 : varHeight.toInt();
 
-    QMCertificateDialog certDialog(this);
+    QMCertificateDialog certDialog(Mode::MANAGE, this);
     certDialog.updateData();
     certDialog.resize(width, height);
     certDialog.setModal(true);

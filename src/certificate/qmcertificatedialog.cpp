@@ -30,23 +30,46 @@
 
 #include <QDebug>
 
-QMCertificateDialog::QMCertificateDialog(QWidget *parent)
+QMCertificateDialog::QMCertificateDialog(Mode mode, QWidget *parent)
     : QDialog(parent)
 {
     ui = new Ui::QMCertificateDialog;
     ui->setupUi(this);
 
+    runMode = mode;
+    selectedId = -1;
+
     typeFilterModel = new QSortFilterProxyModel(this);
     nameFilterModel = new QSortFilterProxyModel(this);
 
-    // Connect to data manager, to know when model reinitialization has been done.
-    connect(QMDataManager::getInstance(), &QMDataManager::modelsInitialized, this,
-        &QMCertificateDialog::updateData);
+    if (runMode == Mode::MANAGE)
+    {
+        ui->buttonBox->setStandardButtons(QDialogButtonBox::Close);
+        setWindowTitle(tr("Nachweise verwalten"));
+    }
+    else
+    {
+        ui->buttonBox->setStandardButtons(QDialogButtonBox::Ok);
+        setWindowTitle(tr("Nachweis auswählen"));
+    }
 }
 
 QMCertificateDialog::~QMCertificateDialog()
 {
     delete ui;
+}
+
+void QMCertificateDialog::accept()
+{
+    auto modelIndex = ui->tvFiles->selectionModel()->selectedRows();
+
+    if (modelIndex.size() > 0)
+    {
+        auto row = modelIndex.at(0).row();
+        selectedId = nameFilterModel->data(nameFilterModel->index(row, 0)).toInt();
+    }
+
+    QDialog::accept();
 }
 
 void QMCertificateDialog::closeEvent(QCloseEvent *event)

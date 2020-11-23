@@ -17,6 +17,7 @@
 #include "ui_qmtraindatadetailsdialog.h"
 #include "settings/qmapplicationsettings.h"
 #include "model/qmdatamanager.h"
+#include "certificate/qmcertificatedialog.h"
 
 #include <memory>
 #include <QSqlRelationalTableModel>
@@ -189,4 +190,26 @@ void QMTrainDataDetailsDialog::keyPressEvent(QKeyEvent *event)
     }
 
     QDialog::keyPressEvent(event);
+}
+
+void QMTrainDataDetailsDialog::addCertificate()
+{
+    // TODO: Add certificate with the manage dialog in different mode (getting back the id).
+    auto &settings = QMApplicationSettings::getInstance();
+
+    auto varWidth = settings.read("CertificateDialog/Width");
+    auto width = (varWidth.isNull()) ? 400 : varWidth.toInt();
+    auto varHeight = settings.read("CertificateDialog/Height");
+    auto height = (varHeight.isNull()) ? 400 : varHeight.toInt();
+
+    QMCertificateDialog certDialog(Mode::CHOOSE, this);
+    certDialog.updateData();
+    certDialog.resize(width, height);
+    certDialog.setModal(true);
+    certDialog.exec();
+}
+
+void QMTrainDataDetailsDialog::removeCertificate()
+{
+    // TODO: Remove certificate and delete entry in traindatacertificate table.
 }

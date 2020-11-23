@@ -64,6 +64,12 @@ public slots:
     /// The apply button has been pressed.
     void apply();
 
+    /// Add an existing certificate.
+    void addCertificate();
+
+    /// Remove an existing certificate.
+    void removeCertificate();
+
 protected:
     /// Override from QDialog.
     void keyPressEvent(QKeyEvent *event) override;

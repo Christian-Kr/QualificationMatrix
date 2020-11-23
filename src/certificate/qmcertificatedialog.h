@@ -31,7 +31,18 @@ class QMCertificateDialog;
 }
 QT_END_NAMESPACE
 
-/// Show certificate files and manage them.
+/// Enumeration definitions
+enum class Mode
+{
+    CHOOSE,
+    MANAGE
+};
+
+/// Show certificate files and manage them. The dialog can handle different modes. In "CHOOSE"
+/// mode, the dialog save a selection, which can be claaed later. Also the name on the buttons
+/// will be different, so that the user can determine which mode is running and what he has to do.
+/// Neverless, in both modes, one can manage (search, filter, add, remove, preview, ...)
+/// different certificates.
 /// \author Christian Kr, Copyright 2020
 class QMCertificateDialog: public QDialog
 {
@@ -40,13 +51,17 @@ Q_OBJECT
 public:
     /// Constructor
     /// \param parent The parent object of the widgt. This is important for a modal dialog.
-    explicit QMCertificateDialog(QWidget *parent = nullptr);
+    /// \param mode The ode of the dialog to choose.
+    explicit QMCertificateDialog(Mode mode = Mode::MANAGE, QWidget *parent = nullptr);
 
     /// Destructor
     ~QMCertificateDialog() override;
 
     /// Save settings from the dialog.
     void saveSettings();
+
+    /// Return the selected entry id.
+    int getSelectedId() { return selectedId; }
 
 protected:
     /// Override from QDialog.
@@ -74,6 +89,9 @@ public slots:
     /// Show the current selected certificate.
     void showCertificate();
 
+    /// Override from QDialog.
+    void accept() override;
+
 private:
     /// Save the given file external: Copy to file system structure.
     /// \param file File to save external.
@@ -81,6 +99,10 @@ private:
     static QString saveFileExternal(QFile &file);
 
     Ui::QMCertificateDialog *ui;
+
+    Mode runMode;
+
+    int selectedId;
 
     QSortFilterProxyModel *typeFilterModel;
     QSortFilterProxyModel *nameFilterModel;
