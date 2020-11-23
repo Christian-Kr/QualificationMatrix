@@ -72,6 +72,10 @@ private:
     /// Update ui data from models.
     void updateUi();
 
+    /// Check data for unvalid entries.
+    /// \return True is check is ok, else false.
+    bool checkData() const;
+
     Ui::QMTrainDataDetailsDialog *ui;
 
     int selRowEdit;

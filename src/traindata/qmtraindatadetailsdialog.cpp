@@ -99,33 +99,57 @@ void QMTrainDataDetailsDialog::saveSettings()
 
 void QMTrainDataDetailsDialog::apply()
 {
-    // Test whether data train model is dirty or not.
-    auto dm = QMDataManager::getInstance();
-    if (dm->getTrainDataModel()->isDirty())
-    {
-        auto res = QMessageBox::question(
-            this, tr("Schulungsdaten - Speichern"),
-            tr("Die Änderungen werden in die Datenbank geschrieben.\n\nSind Sie sicher?"),
-            QMessageBox::Yes | QMessageBox::No);
+    // Set model content to values in ui elements.
+    auto employeeId = employeeModel->data(
+        employeeModel->index(ui->cbEmployee->currentIndex(), 0)).toInt();
+    trainDataModelEdit->setData(trainDataModelEdit->index(selRowEdit, 1), employeeId);
 
-        if (res == QMessageBox::Yes)
-        {
-            // Save all changes to the model.
-            dm->getTrainDataModel()->submitAll();
-        }
-        else
-        {
-            // Don't save changes and got back to the dialog.
-            return;
-        }
+    auto trainId = trainModel->data(
+        trainModel->index(ui->cbTraining->currentIndex(), 0)).toInt();
+    trainDataModelEdit->setData(trainDataModelEdit->index(selRowEdit, 2), trainId);
+
+    trainDataModelEdit->setData(
+        trainDataModelEdit->index(selRowEdit, 3),
+        ui->cwDate->selectedDate().toString(Qt::DateFormat::ISODate));
+
+    auto trainDataModelEditId = trainDataModelEdit->data(
+        trainDataModelEdit->index(ui->cbState->currentIndex(), 0)).toInt();
+    trainDataModelEdit->setData(trainDataModelEdit->index(selRowEdit, 4), trainDataModelEditId);
+}
+
+bool QMTrainDataDetailsDialog::checkData() const
+{
+    auto employeeName = ui->cbEmployee->currentText();
+
+    if (ui->cbEmployee->findText(employeeName) == -1)
+    {
+        return false;
     }
+
+    auto trainName = ui->cbTraining->currentText();
+
+    if (ui->cbTraining->findText(trainName) == -1)
+    {
+        return false;
+    }
+
+    return true;
 }
 
 void QMTrainDataDetailsDialog::accept()
 {
     saveSettings();
-    apply();
 
+    if (!checkData())
+    {
+        QMessageBox::information(
+            this, tr("Daten validieren"),
+            tr("Der Mitarbeiter oder die Schulung existiert nicht. Bitte wählen Sie existierende "
+               "Einträge."));
+        return;
+    }
+
+    apply();
     QDialog::accept();
 }
 

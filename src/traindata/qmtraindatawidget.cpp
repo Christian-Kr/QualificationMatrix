@@ -20,6 +20,7 @@
 #include "qmdatedelegate.h"
 #include "qmimportcsvdialog.h"
 #include "qmtraindatadetailsdialog.h"
+#include "settings/qmapplicationsettings.h"
 
 #include <QMessageBox>
 #include <QDebug>
@@ -246,9 +247,15 @@ void QMTrainDataWidget::showTrainDataDetails()
 
     auto modelIndex = modelIndexList.at(0);
 
+    auto &settings = QMApplicationSettings::getInstance();
+
+    auto varWidth = settings.read("TrainDataDetailsDialog/Width");
+    auto width = (varWidth.isNull()) ? 400 : varWidth.toInt();
+    auto varHeight = settings.read("TrainDataDetailsDialog/Height");
+    auto height = (varHeight.isNull()) ? 400 : varHeight.toInt();
+
     QMTrainDataDetailsDialog detailsDialog(trainDataStateFilterModel, modelIndex.row(), this);
+    detailsDialog.resize(width, height);
     detailsDialog.setModal(true);
     detailsDialog.exec();
-
-    trainDataModel->submitAll();
 }
