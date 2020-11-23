@@ -20,25 +20,65 @@
 
 #include <memory>
 #include <QSqlRelationalTableModel>
+#include <QSortFilterProxyModel>
 #include <QMessageBox>
 #include <QDialogButtonBox>
 #include <QPushButton>
 #include <QKeyEvent>
 
-QMTrainDataDetailsDialog::QMTrainDataDetailsDialog(QWidget *parent)
+QMTrainDataDetailsDialog::QMTrainDataDetailsDialog(
+    QSortFilterProxyModel *trainDataModel, int selRow, QWidget *parent)
     : QDialog(parent)
 {
     ui = new Ui::QMTrainDataDetailsDialog();
     ui->setupUi(this);
 
+    selRowEdit = selRow;
+    trainDataModelEdit = trainDataModel;
+
     // Build connections.
     QPushButton *applyButton = ui->buttonBox->button(QDialogButtonBox::Apply);
     connect(applyButton, &QPushButton::clicked, this, &QMTrainDataDetailsDialog::apply);
+
+    // Load model.
+    auto dm = QMDataManager::getInstance();
+
+    trainDataCertificateModel = dm->getTrainDataCertificateModel();
+    employeeModel = dm->getEmployeeModel();
+    trainModel = dm->getTrainModel();
+    trainDataStateModel = dm->getTrainDataStateModel();
+
+    updateUi();
 }
 
 QMTrainDataDetailsDialog::~QMTrainDataDetailsDialog()
 {
     delete ui;
+}
+
+void QMTrainDataDetailsDialog::updateUi()
+{
+    ui->cbEmployee->setModel(employeeModel.get());
+    ui->cbEmployee->setModelColumn(1);
+    ui->cbState->setModel(trainDataStateModel.get());
+    ui->cbState->setModelColumn(1);
+    ui->cbTraining->setModel(trainModel.get());
+    ui->cbTraining->setModelColumn(1);
+
+    // Set model content to values in ui elements.
+    auto employeeName = trainDataModelEdit->data(
+        trainDataModelEdit->index(selRowEdit, 1)).toString();
+    auto trainName = trainDataModelEdit->data(
+        trainDataModelEdit->index(selRowEdit, 2)).toString();
+    auto date = trainDataModelEdit->data(
+        trainDataModelEdit->index(selRowEdit, 3)).toString();
+    auto state = trainDataModelEdit->data(
+        trainDataModelEdit->index(selRowEdit, 4)).toString();
+
+    ui->cbEmployee->setCurrentText(employeeName);
+    ui->cbTraining->setCurrentText(trainName);
+    ui->cwDate->setSelectedDate(QDate::fromString(date, Qt::DateFormat::ISODate));
+    ui->cbState->setCurrentText(state);
 }
 
 void QMTrainDataDetailsDialog::closeEvent(QCloseEvent *event)

@@ -18,6 +18,15 @@
 
 #include <QDialog>
 
+// Forward declaration.
+class QSqlRelationalTableModel;
+class QSortFilterProxyModel;
+class QSqlTableModel;
+
+// Typedefs
+typedef std::shared_ptr<QSqlRelationalTableModel> sp_relTableModel;
+typedef std::shared_ptr<QSqlTableModel> sp_tableModel;
+
 namespace Ui
 {
 class QMTrainDataDetailsDialog;
@@ -30,7 +39,10 @@ Q_OBJECT
 public:
     /// Constructor
     /// \param parent
-    explicit QMTrainDataDetailsDialog(QWidget *parent = nullptr);
+    /// \param selRow Selected row in trainDataModel to edit.
+    /// \param trainDataModel Model to edit.
+    explicit QMTrainDataDetailsDialog(
+        QSortFilterProxyModel *trainDataModel, int selRow, QWidget *parent = nullptr);
 
     /// Destructor
     ~QMTrainDataDetailsDialog() override;
@@ -57,7 +69,18 @@ protected:
     void keyPressEvent(QKeyEvent *event) override;
 
 private:
+    /// Update ui data from models.
+    void updateUi();
+
     Ui::QMTrainDataDetailsDialog *ui;
+
+    int selRowEdit;
+
+    QSortFilterProxyModel *trainDataModelEdit;
+    sp_tableModel trainDataCertificateModel;
+    sp_relTableModel employeeModel;
+    sp_relTableModel trainModel;
+    sp_tableModel trainDataStateModel;
 };
 
 #endif // QMTRAINDATADETAILSDIALOG_H

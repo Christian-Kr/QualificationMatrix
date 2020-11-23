@@ -19,6 +19,7 @@
 #include "delegate/qmproxysqlrelationaldelegate.h"
 #include "qmdatedelegate.h"
 #include "qmimportcsvdialog.h"
+#include "qmtraindatadetailsdialog.h"
 
 #include <QMessageBox>
 #include <QDebug>
@@ -229,4 +230,25 @@ void QMTrainDataWidget::deleteSelected()
 
     // Delete all selected entries.
     trainDataStateFilterModel->removeRow(idxList.first().row());
+}
+
+void QMTrainDataWidget::showTrainDataDetails()
+{
+    auto modelIndexList = ui->tvTrainData->selectionModel()->selectedRows();
+
+    if (modelIndexList.size() != 1)
+    {
+        QMessageBox::information(
+            this, tr("Schulungseintrag"),
+            tr("Es muss gneau ein Eintrag selektiert sein um Details anzuzeigen."));
+        return;
+    }
+
+    auto modelIndex = modelIndexList.at(0);
+
+    QMTrainDataDetailsDialog detailsDialog(trainDataStateFilterModel, modelIndex.row(), this);
+    detailsDialog.setModal(true);
+    detailsDialog.exec();
+
+    trainDataModel->submitAll();
 }

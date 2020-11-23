@@ -17,7 +17,6 @@
 #define QMTRAINDATAWIDGET_H
 
 #include <QWidget>
-
 #include <memory>
 
 // Forward declarations for faster compiling.
@@ -63,6 +62,9 @@ public slots:
 
     /// Show the import csv dialog.
     void importCsv();
+
+    /// Show dialog to edit the current selected entry.
+    void showTrainDataDetails();
 
 private:
     Ui::QMTrainDataWidget *ui;
