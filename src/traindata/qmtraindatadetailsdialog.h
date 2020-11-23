@@ -1,5 +1,5 @@
 //
-// qmtraindatadialog.h is part of QualificationMatrix
+// qmtraindatadetailsdialog.h is part of QualificationMatrix
 //
 // QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of
 // the GNU General Public License as published by the Free Software Foundation, either version 3 of
@@ -13,27 +13,27 @@
 // If not, see <http://www.gnu.org/licenses/>.
 //
 
-#ifndef QMTRAINDATADIALOG_H
-#define QMTRAINDATADIALOG_H
+#ifndef QMTRAINDATADETAILSDIALOG_H
+#define QMTRAINDATADETAILSDIALOG_H
 
 #include <QDialog>
 
 namespace Ui
 {
-class QMTrainDataDialog;
+class QMTrainDataDetailsDialog;
 }
 
-class QMTrainDataDialog: public QDialog
+class QMTrainDataDetailsDialog: public QDialog
 {
 Q_OBJECT
 
 public:
     /// Constructor
     /// \param parent
-    explicit QMTrainDataDialog(QWidget *parent = nullptr);
+    explicit QMTrainDataDetailsDialog(QWidget *parent = nullptr);
 
     /// Destructor
-    ~QMTrainDataDialog() override;
+    ~QMTrainDataDetailsDialog() override;
 
     /// Save settings of the dialog before it closes.
     void saveSettings();
@@ -57,7 +57,7 @@ protected:
     void keyPressEvent(QKeyEvent *event) override;
 
 private:
-    Ui::QMTrainDataDialog *ui;
+    Ui::QMTrainDataDetailsDialog *ui;
 };
 
-#endif // QMTRAINDATADIALOG_H
+#endif // QMTRAINDATADETAILSDIALOG_H

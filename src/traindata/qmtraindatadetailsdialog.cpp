@@ -1,5 +1,5 @@
 //
-// qmtraindatadialog.cpp is part of QualificationMatrix
+// qmtraindatadetailsdialog.cpp is part of QualificationMatrix
 //
 // QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of
 // the GNU General Public License as published by the Free Software Foundation, either version 3 of
@@ -13,8 +13,8 @@
 // If not, see <http://www.gnu.org/licenses/>.
 //
 
-#include "qmtraindatadialog.h"
-#include "ui_qmtraindatadialog.h"
+#include "qmtraindatadetailsdialog.h"
+#include "ui_qmtraindatadetailsdialog.h"
 #include "settings/qmapplicationsettings.h"
 #include "model/qmdatamanager.h"
 
@@ -25,42 +25,39 @@
 #include <QPushButton>
 #include <QKeyEvent>
 
-QMTrainDataDialog::QMTrainDataDialog(QWidget *parent)
-    : QDialog(parent), ui(new Ui::QMTrainDataDialog)
+QMTrainDataDetailsDialog::QMTrainDataDetailsDialog(QWidget *parent)
+    : QDialog(parent)
 {
+    ui = new Ui::QMTrainDataDetailsDialog();
     ui->setupUi(this);
-
-    // Update data. They should be available before. This might include, that this dialog should
-    // not be opened, when no database has been loaded.
-    ui->wiTrainData->updateData();
 
     // Build connections.
     QPushButton *applyButton = ui->buttonBox->button(QDialogButtonBox::Apply);
-    connect(applyButton, &QPushButton::clicked, this, &QMTrainDataDialog::apply);
+    connect(applyButton, &QPushButton::clicked, this, &QMTrainDataDetailsDialog::apply);
 }
 
-QMTrainDataDialog::~QMTrainDataDialog()
+QMTrainDataDetailsDialog::~QMTrainDataDetailsDialog()
 {
     delete ui;
 }
 
-void QMTrainDataDialog::closeEvent(QCloseEvent *event)
+void QMTrainDataDetailsDialog::closeEvent(QCloseEvent *event)
 {
     saveSettings();
 
     QDialog::closeEvent(event);
 }
 
-void QMTrainDataDialog::saveSettings()
+void QMTrainDataDetailsDialog::saveSettings()
 {
     auto &settings = QMApplicationSettings::getInstance();
 
     // Window settings.
-    settings.write("TrainDataDialog/Width", width());
-    settings.write("TrainDataDialog/Height", height());
+    settings.write("TrainDataDetailsDialog/Width", width());
+    settings.write("TrainDataDetailsDialog/Height", height());
 }
 
-void QMTrainDataDialog::apply()
+void QMTrainDataDetailsDialog::apply()
 {
     // Test whether data train model is dirty or not.
     auto dm = QMDataManager::getInstance();
@@ -84,7 +81,7 @@ void QMTrainDataDialog::apply()
     }
 }
 
-void QMTrainDataDialog::accept()
+void QMTrainDataDetailsDialog::accept()
 {
     saveSettings();
     apply();
@@ -92,7 +89,7 @@ void QMTrainDataDialog::accept()
     QDialog::accept();
 }
 
-void QMTrainDataDialog::reject()
+void QMTrainDataDetailsDialog::reject()
 {
     saveSettings();
 
@@ -120,7 +117,7 @@ void QMTrainDataDialog::reject()
     QDialog::reject();
 }
 
-void QMTrainDataDialog::keyPressEvent(QKeyEvent *event)
+void QMTrainDataDetailsDialog::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
     {
