@@ -87,6 +87,8 @@ private:
     int selRowEdit;
 
     QSortFilterProxyModel *trainDataModelEdit;
+    QSortFilterProxyModel *trainDataCertFilterModel;
+
     sp_tableModel trainDataCertificateModel;
     sp_relTableModel employeeModel;
     sp_relTableModel trainModel;

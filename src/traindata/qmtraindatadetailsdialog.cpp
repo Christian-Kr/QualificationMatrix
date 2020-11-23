@@ -49,6 +49,10 @@ QMTrainDataDetailsDialog::QMTrainDataDetailsDialog(
     trainModel = dm->getTrainModel();
     trainDataStateModel = dm->getTrainDataStateModel();
 
+    trainDataCertFilterModel = new QSortFilterProxyModel(this);
+    trainDataCertFilterModel->setSourceModel(trainDataCertificateModel.get());
+    trainDataCertFilterModel->setFilterKeyColumn(1);
+
     updateUi();
 }
 
@@ -80,6 +84,12 @@ void QMTrainDataDetailsDialog::updateUi()
     ui->cbTraining->setCurrentText(trainName);
     ui->cwDate->setSelectedDate(QDate::fromString(date, Qt::DateFormat::ISODate));
     ui->cbState->setCurrentText(state);
+
+    // Update the certificate ui elements.
+    ui->tvCertificates->setModel(trainDataCertFilterModel);
+    trainDataCertFilterModel->setFilterFixedString(
+        QString::number(trainDataModelEdit->data(trainDataModelEdit->index(
+            selRowEdit, 0)).toInt()));
 }
 
 void QMTrainDataDetailsDialog::closeEvent(QCloseEvent *event)
@@ -207,6 +217,37 @@ void QMTrainDataDetailsDialog::addCertificate()
     certDialog.resize(width, height);
     certDialog.setModal(true);
     certDialog.exec();
+
+    auto selId = certDialog.getSelectedId();
+
+    if (selId == -1)
+    {
+        return;
+    }
+
+    auto trainDataId = trainDataModelEdit->data(trainDataModelEdit->index(selRowEdit, 0)).toInt();
+    auto certId = selId;
+
+    for (int i = 0; i < trainDataCertFilterModel->rowCount(); i++)
+    {
+        auto tmpCertId = trainDataCertFilterModel->data(
+            trainDataCertFilterModel->index(i, 2)).toInt();
+
+        if (tmpCertId == certId)
+        {
+            QMessageBox::information(
+                this, tr("Nachweis anhängen"), tr("Der Nachweis existiert bereits."));
+            return;
+        }
+    }
+
+    auto row = trainDataCertificateModel->rowCount();
+    trainDataCertificateModel->insertRow(row);
+
+    trainDataCertificateModel->setData(trainDataCertificateModel->index(row, 1), trainDataId);
+    trainDataCertificateModel->setData(trainDataCertificateModel->index(row, 2), certId);
+
+    trainDataCertificateModel->submitAll();
 }
 
 void QMTrainDataDetailsDialog::removeCertificate()
