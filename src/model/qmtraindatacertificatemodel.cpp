@@ -22,6 +22,7 @@ QMTrainDataCertificateModel::QMTrainDataCertificateModel(QObject *parent, QSqlDa
     setTable("TrainDataCertificate");
 
     // The edit and join mode/strategy.
+    setJoinMode(QSqlRelationalTableModel::LeftJoin);
     setEditStrategy(QSqlTableModel::OnManualSubmit);
 
     // Specifiy header data of table.
