@@ -101,6 +101,7 @@ add_executable(QualificationMatrix WIN32
     src/general/qmprogresslogdialog.cpp
     src/certificate/qmcertificatedialog.cpp
     src/certificate/qmcertificateintegritycheckdialog.cpp
+    src/signinglist/qmsigninglistdialog.cpp
     ui/qmemployeesettingswidget.ui
     ui/qmfuncsettingswidget.ui
     ui/qmmainwindow.ui
