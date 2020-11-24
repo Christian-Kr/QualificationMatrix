@@ -25,6 +25,7 @@
 #include <QDirIterator>
 #include <QFile>
 #include <QDate>
+#include <QDateTime>
 #include <QMessageBox>
 #include <QFileInfo>
 #include <QTextStream>
@@ -65,7 +66,7 @@ void QMCertificateIntegrityCheckDialog::runCheck()
     // Open log file.
     auto logFileName =
         logFilePath + QDir::separator() + "log_" +
-        QDate::currentDate().toString(Qt::DateFormat::ISODate) + ".txt";
+        QDateTime::currentDateTime().toString("yyyy-MM-dd_hh-mm-ss") + ".txt";
     QFileInfo logFileInfo(logFileName);
     QFile logFile(logFileName);
 
