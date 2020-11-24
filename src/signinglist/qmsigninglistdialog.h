@@ -70,9 +70,9 @@ public slots:
 private:
     Ui::QMSigningListDialog *ui;
 
-    std::shared_ptr<QSqlTableModel> employeeModel;
+    std::shared_ptr<QSqlRelationalTableModel> employeeModel;
     std::shared_ptr<QSqlTableModel> shiftModel;
-    std::shared_ptr<QSqlTableModel> trainModel;
+    std::shared_ptr<QSqlRelationalTableModel> trainModel;
     std::shared_ptr<QSqlRelationalTableModel> trainDataModel;
 };
 

@@ -21,6 +21,8 @@
 #include <QDate>
 #include <QMessageBox>
 #include <QKeyEvent>
+#include <QSqlRelationalTableModel>
+#include <QSqlTableModel>
 
 #include <QDebug>
 
@@ -29,6 +31,8 @@ QMSigningListDialog::QMSigningListDialog(QWidget *parent)
 {
     ui = new Ui::QMSigningListDialog;
     ui->setupUi(this);
+
+    updateData();
 }
 
 QMSigningListDialog::~QMSigningListDialog()
@@ -61,6 +65,20 @@ void QMSigningListDialog::updateData()
 {
     // Get the model data.
     auto dm = QMDataManager::getInstance();
+
+    employeeModel = dm->getEmployeeModel();
+    shiftModel = dm->getShiftModel();
+    trainModel = dm->getTrainModel();
+
+    // Set ui elements.
+    ui->cbTraining->setModel(trainModel.get());
+    ui->cbTraining->setModelColumn(1);
+
+    ui->cbEmployeeGroup->setModel(shiftModel.get());
+    ui->cbEmployeeGroup->setModelColumn(1);
+
+    ui->cbSingleEmployee->setModel(employeeModel.get());
+    ui->cbSingleEmployee->setModelColumn(1);
 }
 
 void QMSigningListDialog::keyPressEvent(QKeyEvent *event)
