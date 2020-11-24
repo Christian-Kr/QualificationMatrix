@@ -120,7 +120,8 @@ add_executable(QualificationMatrix WIN32
     ui/qmdatabaseupdatedialog.ui
     ui/qmcertificatedialog.ui
     ui/qmtraindatadetailsdialog.ui
-    ui/qmcertificateintegritycheckdialog.ui)
+    ui/qmcertificateintegritycheckdialog.ui
+    ui/qmsigninglistdialog.ui)
 
 # copy database directory to binary
 add_custom_command(
