@@ -42,6 +42,8 @@ QMSigningListDialog::~QMSigningListDialog()
 
 void QMSigningListDialog::accept()
 {
+    saveSettings();
+
     QDialog::accept();
 }
 
