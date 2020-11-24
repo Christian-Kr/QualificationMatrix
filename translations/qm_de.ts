@@ -350,8 +350,8 @@
     <message>
         <location filename="../ui/qmcertificateintegritycheckdialog.ui" line="14"/>
         <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificateintegritycheckdialog.h" line="171"/>
-        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="75"/>
-        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="82"/>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="76"/>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="83"/>
         <source>Nachweisdatenbank überprüfen</source>
         <translation type="unfinished"></translation>
     </message>
@@ -410,53 +410,53 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="75"/>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="76"/>
         <source>Die Log-Datei existiert bereits.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="83"/>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="84"/>
         <source>Die Log-Datei konnte nicht zum Schreiben geöffnet werden.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="103"/>
-        <source>Nachfolgende Datei fehlt:</source>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="104"/>
+        <source>Nachfolgende Datei fehlt: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="120"/>
-        <source>Hash weicht ab:</source>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="121"/>
+        <source>Hash weicht ab: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="148"/>
-        <source>Datei existiert nicht in der Tabelle:</source>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="149"/>
+        <source>Datei existiert nicht in der Tabelle: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="154"/>
-        <source>Datei gelöscht:</source>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="155"/>
+        <source>Datei gelöscht: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="158"/>
-        <source>Datei konnte nicht gelöscht werden:</source>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="159"/>
+        <source>Datei konnte nicht gelöscht werden: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="170"/>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="171"/>
         <source>Ordner für Log-Datei</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="210"/>
-        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="212"/>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="211"/>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="213"/>
         <source>Extern</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="211"/>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="212"/>
         <source>Intern</source>
         <translation type="unfinished"></translation>
     </message>
