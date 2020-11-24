@@ -48,6 +48,9 @@ public:
     ~QMMainWindow() override;
 
 public slots:
+    /// Show the dialog to create a signing list.
+    void showCreateSigningList();
+
     /// Show the about dialog of this application.
     void showAbout();
 

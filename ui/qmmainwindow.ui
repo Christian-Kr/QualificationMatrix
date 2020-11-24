@@ -109,6 +109,7 @@
     </property>
     <addaction name="actIntegrityCheck"/>
     <addaction name="actManageCertificate"/>
+    <addaction name="actCreateSigningList"/>
    </widget>
    <addaction name="menu_Datei"/>
    <addaction name="menuNachweise"/>
@@ -255,6 +256,11 @@
   <action name="actIntegrityCheck">
    <property name="text">
     <string>Automatische Prüfung</string>
+   </property>
+  </action>
+  <action name="actCreateSigningList">
+   <property name="text">
+    <string>Unterschriftenliste erstellen</string>
    </property>
   </action>
  </widget>
@@ -422,6 +428,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actCreateSigningList</sender>
+   <signal>triggered()</signal>
+   <receiver>QMMainWindow</receiver>
+   <slot>showCreateSigningList()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>310</x>
+     <y>258</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>showAbout()</slot>
@@ -438,5 +460,6 @@
   <slot>createEmptyDatabase()</slot>
   <slot>manageCertificate()</slot>
   <slot>showCertificateIntegrityCheck()</slot>
+  <slot>showCreateSigningList()</slot>
  </slots>
 </ui>

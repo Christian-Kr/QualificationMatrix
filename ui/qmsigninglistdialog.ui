@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>690</width>
-    <height>551</height>
+    <width>697</width>
+    <height>565</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Unterschriftenliste erstellen</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_4">
    <item>
@@ -72,6 +72,13 @@
         </spacer>
        </item>
       </layout>
+     </item>
+     <item>
+      <widget class="Line" name="line_3">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+      </widget>
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
@@ -157,6 +164,9 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="insertPolicy">
+            <enum>QComboBox::NoInsert</enum>
+           </property>
           </widget>
          </item>
          <item row="1" column="3">
@@ -184,6 +194,9 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="insertPolicy">
+            <enum>QComboBox::NoInsert</enum>
+           </property>
           </widget>
          </item>
         </layout>
@@ -201,6 +214,13 @@
       </layout>
      </item>
      <item>
+      <widget class="Line" name="line_2">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
         <widget class="QLabel" name="label_5">
@@ -216,7 +236,11 @@
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="cbTraining"/>
+        <widget class="QComboBox" name="cbTraining">
+         <property name="insertPolicy">
+          <enum>QComboBox::NoInsert</enum>
+         </property>
+        </widget>
        </item>
        <item>
         <widget class="QLabel" name="label_6">

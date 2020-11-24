@@ -30,6 +30,7 @@
 #include "database/qmdatabaseupdater.h"
 #include "certificate/qmcertificatedialog.h"
 #include "certificate/qmcertificateintegritycheckdialog.h"
+#include "signinglist/qmsigninglistdialog.h"
 
 #include <QProgressDialog>
 #include <QDesktopWidget>
@@ -672,8 +673,22 @@ void QMMainWindow::showCertificateIntegrityCheck()
     auto height = (varHeight.isNull()) ? 400 : varHeight.toInt();
 
     QMCertificateIntegrityCheckDialog certIntCheckDialog(this);
-    certIntCheckDialog.updateData();
     certIntCheckDialog.resize(width, height);
     certIntCheckDialog.setModal(true);
     certIntCheckDialog.exec();
+}
+
+void QMMainWindow::showCreateSigningList()
+{
+    auto &settings = QMApplicationSettings::getInstance();
+
+    auto varWidth = settings.read("SigningListDialog/Width");
+    auto width = (varWidth.isNull()) ? 400 : varWidth.toInt();
+    auto varHeight = settings.read("SigningListDialog/Height");
+    auto height = (varHeight.isNull()) ? 400 : varHeight.toInt();
+
+    QMSigningListDialog signingListDialog(this);
+    signingListDialog.resize(width, height);
+    signingListDialog.setModal(true);
+    signingListDialog.exec();
 }
