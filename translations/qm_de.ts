@@ -350,8 +350,8 @@
     <message>
         <location filename="../ui/qmcertificateintegritycheckdialog.ui" line="14"/>
         <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificateintegritycheckdialog.h" line="171"/>
-        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="74"/>
-        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="81"/>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="75"/>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="82"/>
         <source>Nachweisdatenbank überprüfen</source>
         <translation type="unfinished"></translation>
     </message>
@@ -410,38 +410,53 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="74"/>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="75"/>
         <source>Die Log-Datei existiert bereits.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="82"/>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="83"/>
         <source>Die Log-Datei konnte nicht zum Schreiben geöffnet werden.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="99"/>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="103"/>
         <source>Nachfolgende Datei fehlt:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="116"/>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="120"/>
         <source>Hash weicht ab:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="128"/>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="148"/>
+        <source>Datei existiert nicht in der Tabelle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="154"/>
+        <source>Datei gelöscht:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="158"/>
+        <source>Datei konnte nicht gelöscht werden:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="170"/>
         <source>Ordner für Log-Datei</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="168"/>
-        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="170"/>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="210"/>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="212"/>
         <source>Extern</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="169"/>
+        <location filename="../src/certificate/qmcertificateintegritycheckdialog.cpp" line="211"/>
         <source>Intern</source>
         <translation type="unfinished"></translation>
     </message>
