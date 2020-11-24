@@ -22,6 +22,7 @@
 #include <QKeyEvent>
 #include <QFileDialog>
 #include <QDir>
+#include <QDirIterator>
 #include <QFile>
 #include <QDate>
 #include <QMessageBox>
@@ -62,11 +63,11 @@ void QMCertificateIntegrityCheckDialog::runCheck()
     auto logFilePath = ui->leLogPath->text();
 
     // Open log file.
-    auto fileName =
+    auto logFileName =
         logFilePath + QDir::separator() + "log_" +
         QDate::currentDate().toString(Qt::DateFormat::ISODate) + ".txt";
-    QFileInfo logFileInfo(fileName);
-    QFile logFile(fileName);
+    QFileInfo logFileInfo(logFileName);
+    QFile logFile(logFileName);
 
     if (logFileInfo.exists())
     {
@@ -89,6 +90,9 @@ void QMCertificateIntegrityCheckDialog::runCheck()
     auto dbPath = QFileInfo(db.databaseName()).absolutePath();
     auto certPath = dbPath + QDir::separator() + "certificates";
 
+    // This is the first check: Go through all the entries in table Certificates and look if
+    // every file exist. Additionally (if wanted) generated an md5 hash tag and compare it to the
+    // saved on in the table (column "md5_hash").
     for (int i = 0; i < certificateModel->rowCount(); i++)
     {
         QString tmpCertPath = certificateModel->data(certificateModel->index(i, 3)).toString();
@@ -96,7 +100,7 @@ void QMCertificateIntegrityCheckDialog::runCheck()
         // Does the file really exist?
         if (!QFileInfo(tmpCertPath).exists())
         {
-            logStream << tr("Nachfolgende Datei fehlt:") << tmpCertPath << "\n";
+            logStream << tr("Nachfolgende Datei fehlt: ") << tmpCertPath << "\n";
             continue;
         }
 
@@ -113,8 +117,46 @@ void QMCertificateIntegrityCheckDialog::runCheck()
 
             if (hash != tmpHash)
             {
-                logStream << tr("Hash weicht ab:") << tmpCertPath << "\n";
+                logStream << tr("Hash weicht ab: ") << tmpCertPath << "\n";
                 continue;
+            }
+        }
+    }
+
+    // This is the second check. Go through all files on the file system and search for files that
+    // are not part of the table Certificates.
+    QDirIterator it(certPath, QDir::Files, QDirIterator::Subdirectories);
+
+    while (it.hasNext())
+    {
+        QString fileName = it.next();
+        auto found = false;
+
+        for (int i = 0; i < certificateModel->rowCount(); i++)
+        {
+            QString tmpCertPath = certificateModel->data(certificateModel->index(i, 3)).toString();
+
+            if (fileName == tmpCertPath)
+            {
+                found = true;
+                break;
+            }
+        }
+
+        if (!found)
+        {
+            logStream << tr("Datei existiert nicht in der Tabelle: ") << fileName;
+
+            if (deleteUnlinkedFiles)
+            {
+                if (QFile::remove(fileName))
+                {
+                    logStream << tr("Datei gelöscht: ") << fileName;
+                }
+                else
+                {
+                    logStream << tr("Datei konnte nicht gelöscht werden: ") << fileName;
+                }
             }
         }
     }
