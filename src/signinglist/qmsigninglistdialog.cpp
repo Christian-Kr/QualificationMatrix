@@ -17,12 +17,15 @@
 #include "ui_qmsigninglistdialog.h"
 #include "model/qmdatamanager.h"
 #include "settings/qmapplicationsettings.h"
+#include "signinglist/qmsigninglistdocument.h"
 
 #include <QDate>
 #include <QMessageBox>
 #include <QKeyEvent>
 #include <QSqlRelationalTableModel>
 #include <QSqlTableModel>
+#include <QPrinter>
+#include <QPrintPreviewDialog>
 
 #include <QDebug>
 
@@ -43,6 +46,7 @@ QMSigningListDialog::~QMSigningListDialog()
 void QMSigningListDialog::accept()
 {
     saveSettings();
+    printToPDF();
 
     QDialog::accept();
 }
@@ -101,4 +105,62 @@ void QMSigningListDialog::removeEmployee()
 void QMSigningListDialog::addEmployee()
 {
 
+}
+
+void QMSigningListDialog::printToPDF()
+{
+    // Set up default printer.
+    auto printer = new QPrinter();
+    printer->setPageOrientation(QPageLayout::Orientation::Portrait);
+
+    // Call printer dialog.
+    QPrintPreviewDialog previewDialog(printer, this);
+    connect(
+        &previewDialog, &QPrintPreviewDialog::paintRequested, this,
+        &QMSigningListDialog::paintPdfRequest);
+    previewDialog.exec();
+}
+
+void QMSigningListDialog::paintPdfRequest(QPrinter *printer)
+{
+    // TODO: Support multiple pages when table is too long.
+    QMSigningListDocument document;
+
+    // Get all employees of the group.
+    QStringList employees;
+
+    if (ui->cbEmployeeGroup->findText(ui->cbEmployeeGroup->currentText()) < 0)
+    {
+        QMessageBox::warning(
+            this, tr("Unterschriftenliste drucken"), tr("Gruppe nicht gültig."));
+        return;
+    }
+
+    for (int i = 0; i < employeeModel->rowCount(); i++)
+    {
+        QString employeeName = employeeModel->data(employeeModel->index(i, 1)).toString();
+        QString groupName = employeeModel->data(employeeModel->index(i, 2)).toString();
+
+        if (groupName == ui->cbEmployeeGroup->currentText())
+        {
+            employees.append(employeeName);
+        }
+    }
+
+    for (int i = 0; i < ui->lwEmployees->count(); i++)
+    {
+        QString employeeName = ui->lwEmployees->item(i)->text();
+        employees.append(employeeName);
+    }
+
+    document.setEmployees(employees);
+    document.setTrainer(ui->leTrainer->text());
+    document.setOrganisationName(ui->leOrganisation->text());
+    document.setTrainingContents(ui->leTrainDetails->text());
+    document.setTrainingDate(ui->cwDate->selectedDate());
+    document.setTrainingName(ui->cbTraining->currentText());
+    document.createDocument();
+
+    // Default printer settings.
+    document.print(printer);
 }

@@ -17,6 +17,11 @@
 #define QMSIGNINGLISTDOCUMENT_H
 
 #include <QTextDocument>
+#include <QDate>
+
+// Forward declaration.
+class QString;
+class QStringList;
 
 /// Class with design for signing lists.
 /// \author Christian Kr, Copyright 2020
@@ -32,8 +37,40 @@ public:
     /// Destructor
     ~QMSigningListDocument() override = default;
 
-private:
+    /// Set the employees.
+    /// \param employees List with employees to print.
+    void setEmployees(QStringList employees) { this->employees = employees; }
 
+    /// Set the trainer name.
+    /// \param trainer Name of the trainer.
+    void setTrainer(QString trainer) { this->trainer = trainer; }
+
+    /// Set the organisation doing the training.
+    /// \param organisation The organisation doing the training.
+    void setOrganisationName(QString organisation) { this->organisation = organisation; }
+
+    /// Set the name of the training.
+    /// \param train The training name.
+    void setTrainingName(QString train) { this->train = train; }
+
+    /// Set the description of the training contents.
+    /// \param contents The contents of the training.
+    void setTrainingContents(QString contents) { this->contents = contents; }
+
+    /// Set date of the training.
+    /// \param date The date of the training.
+    void setTrainingDate(QDate date) { this->date = date; }
+
+    /// Create the document with all the content.
+    void createDocument();
+
+private:
+    QStringList employees;
+    QString trainer;
+    QString organisation;
+    QString train;
+    QString contents;
+    QDate date;
 };
 
 

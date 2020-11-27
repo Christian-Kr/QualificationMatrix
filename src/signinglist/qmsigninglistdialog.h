@@ -22,6 +22,7 @@
 // Forward declaration.
 class QSqlTableModel;
 class QSqlRelationalTableModel;
+class QPrinter;
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -66,6 +67,12 @@ public slots:
 
     /// Override from QDialog.
     void accept() override;
+
+    /// Print list to pdf.
+    void printToPDF();
+
+    /// Request function for the pdf creation of painter object.
+    void paintPdfRequest(QPrinter *printer);
 
 private:
     Ui::QMSigningListDialog *ui;
