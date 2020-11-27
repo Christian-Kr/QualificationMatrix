@@ -32,6 +32,10 @@
 #define DEPR_ENDL endl
 #endif
 
+#define RELEASE_STATE "beta"
+#define VERSION_MAJOR 0
+#define VERSION_MINOR 1
+
 /// Initialize the main window state with saved data.
 /// \param mainWin The main window object to initialize.
 void initShowMainWindow(QMainWindow &mainWin)
@@ -197,8 +201,16 @@ int main(int argc, char *argv[])
     // General information, used by qt - example: QSettings certificate naming
     QCoreApplication::setOrganizationName("Kr");
     QCoreApplication::setOrganizationDomain("Kr");
-    QCoreApplication::setApplicationName("QualificationMatrix");
-    QCoreApplication::setApplicationVersion("1.0");
+    QCoreApplication::setApplicationVersion(QString("%1.%2").arg(VERSION_MAJOR).arg(VERSION_MINOR));
+
+    if (QString(RELEASE_STATE).compare("release") == 0)
+    {
+        QCoreApplication::setApplicationName(QString("QualificationMatrix_%1").arg(RELEASE_STATE));
+    }
+    else
+    {
+        QCoreApplication::setApplicationName(QString("QualificationMatrix"));
+    }
 
     // Create application and main window object.
     QApplication a(argc, argv);
