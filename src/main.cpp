@@ -203,7 +203,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationDomain("Kr");
     QCoreApplication::setApplicationVersion(QString("%1.%2").arg(VERSION_MAJOR).arg(VERSION_MINOR));
 
-    if (QString(RELEASE_STATE).compare("release") == 0)
+    if (QString(RELEASE_STATE).compare("beta") == 0)
     {
         QCoreApplication::setApplicationName(QString("QualificationMatrix_%1").arg(RELEASE_STATE));
     }
