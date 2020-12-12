@@ -62,6 +62,9 @@ public slots:
     /// Add a new employee.
     void addEmployee();
 
+    /// Add new employees from group.
+    void addEmployeeFromGroup();
+
     /// Remove an existing and selected employee.
     void removeEmployee();
 
@@ -75,6 +78,11 @@ public slots:
     void paintPdfRequest(QPrinter *printer);
 
 private:
+    /// Test whether the employee list on the dialog contains the given employee name.
+    /// \param employeeName Name of the employee to test.
+    /// \return True if the employee already exist, else false.
+    bool listContainsEmployee(const QString &employeeName) const;
+
     Ui::QMSigningListDialog *ui;
 
     std::shared_ptr<QSqlRelationalTableModel> employeeModel;

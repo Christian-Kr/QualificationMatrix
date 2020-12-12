@@ -107,6 +107,36 @@ void QMSigningListDialog::addEmployee()
 
 }
 
+void QMSigningListDialog::addEmployeeFromGroup()
+{
+    for (int i = 0; i < employeeModel->rowCount(); i++)
+    {
+        QString employeeName = employeeModel->data(employeeModel->index(i, 1)).toString();
+        QString groupName = employeeModel->data(employeeModel->index(i, 2)).toString();
+
+        if (groupName == ui->cbEmployeeGroup->currentText())
+        {
+            if (!listContainsEmployee(employeeName))
+            {
+                ui->lwEmployees->addItem(employeeName);
+            }
+        }
+    }
+}
+
+bool QMSigningListDialog::listContainsEmployee(const QString &employeeName) const
+{
+    for (int i = 0; i < ui->lwEmployees->count(); i++)
+    {
+        if (employeeName == ui->lwEmployees->item(i)->text())
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 void QMSigningListDialog::printToPDF()
 {
     // Set up default printer.
@@ -134,17 +164,6 @@ void QMSigningListDialog::paintPdfRequest(QPrinter *printer)
         QMessageBox::warning(
             this, tr("Unterschriftenliste drucken"), tr("Gruppe nicht gültig."));
         return;
-    }
-
-    for (int i = 0; i < employeeModel->rowCount(); i++)
-    {
-        QString employeeName = employeeModel->data(employeeModel->index(i, 1)).toString();
-        QString groupName = employeeModel->data(employeeModel->index(i, 2)).toString();
-
-        if (groupName == ui->cbEmployeeGroup->currentText())
-        {
-            employees.append(employeeName);
-        }
     }
 
     for (int i = 0; i < ui->lwEmployees->count(); i++)
