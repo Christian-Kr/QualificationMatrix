@@ -104,7 +104,12 @@ void QMSigningListDialog::removeEmployee()
 
 void QMSigningListDialog::addEmployee()
 {
+    QString employeeName = ui->cbSingleEmployee->currentText();
 
+    if (!listContainsEmployee(employeeName))
+    {
+        ui->lwEmployees->addItem(employeeName);
+    }
 }
 
 void QMSigningListDialog::addEmployeeFromGroup()
