@@ -2384,12 +2384,12 @@ Sind Sie sich sicher?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="165"/>
+        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="170"/>
         <source>Unterschriftenliste drucken</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="165"/>
+        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="170"/>
         <source>Gruppe nicht gültig.</source>
         <translation type="unfinished"></translation>
     </message>
