@@ -76,7 +76,7 @@ QMMainWindow::~QMMainWindow()
     delete ui;
 }
 
-void QMMainWindow::initConnections()
+void QMMainWindow::initConnections() const
 {
     auto dm = QMDataManager::getInstance();
 

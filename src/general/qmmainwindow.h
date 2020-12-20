@@ -134,7 +134,7 @@ protected:
 
 private:
     /// Initialize the connection of Qt's signal/slot concept.
-    void initConnections();
+    void initConnections() const;
 
     /// Initialize database information.
     void initDatabaseSettings();
