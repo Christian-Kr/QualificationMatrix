@@ -17,6 +17,7 @@
 #define QMTRAINDATADETAILSDIALOG_H
 
 #include <QDialog>
+#include <memory>
 
 // Forward declaration.
 class QSqlRelationalTableModel;
