@@ -164,12 +164,28 @@ void QMDatabaseDialog::chooseDatabaseFile()
     auto &settings = QMApplicationSettings::getInstance();
     auto defaultDir = settings.read("localdb/defaultopendir", QDir::homePath()).toString();
 
-    auto fileName = QFileDialog::getOpenFileName(
-        this, tr("Öffne lokale Datenbank"), defaultDir, tr("Datenbank (*.qmsql)"));
+    // Create a custom QFileDialog, cause the FileMode can not be set in static versions.
+    QFileDialog fileDialog(this);
+    fileDialog.setFileMode(QFileDialog::AnyFile);
+    fileDialog.setWindowTitle(tr("Öffne lokale Datenbank"));
+    fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
+    fileDialog.setNameFilter(tr("Datenbank (*.qmsql)"));
 
-    if (!fileName.isEmpty())
+    fileDialog.exec();
+
+    auto fileName = fileDialog.selectedFiles();
+    if (fileName.size() > 1)
     {
-        ui->leLocalFile->setText(fileName);
+        QMessageBox::information(
+            this, tr("Lokale Datenbank öffnen"),
+            tr("Es darf nicht mehr als eine Datenbank ausgewählt werden."));
+
+        return;
+    }
+
+    if (fileName.size() == 1)
+    {
+        ui->leLocalFile->setText(fileName.first());
     }
 }
 
