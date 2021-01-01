@@ -69,7 +69,6 @@ CREATE TABLE IF NOT EXISTS "Train" (
 	"name"	TEXT,
 	"group"	INTEGER,
 	"interval"	INTEGER,
-	"legaly_necessary" INTEGER,
 	PRIMARY KEY("id"),
 	FOREIGN KEY("group") REFERENCES "TrainGroup"("id")
 );
