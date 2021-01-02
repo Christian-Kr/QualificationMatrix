@@ -203,7 +203,8 @@ void QMQualiMatrixHeaderView::paintSection(
         {
             painter->rotate(90);
             painter->drawText(
-                40, 0, sizeHint().height() - 20, sizeHint().width(), Qt::AlignVCenter,
+                40, -sizeHint().width(), sizeHint().height() - 20, sizeHint().width(),
+                Qt::AlignVCenter,
                 model()->headerData(logicalIndex, Qt::Orientation::Horizontal).toString());
         }
     }
