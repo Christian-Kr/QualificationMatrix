@@ -256,3 +256,72 @@ void QMEmployeeSettingsWidget::removeEmployee()
 
     settingsChanged();
 }
+
+void QMEmployeeSettingsWidget::addEmployeeGroup()
+{
+    // Add a new temp row to the model.
+    shiftModel->insertRow(shiftModel->rowCount());
+
+    // Set a default group name and start editor.
+    shiftModel->setData(
+            shiftModel->index(shiftModel->rowCount() - 1, 1), tr("Gruppenname eingeben"));
+
+    // Start editing the name.
+    ui->tvEmployeeGroups->scrollToBottom();
+    ui->tvEmployeeGroups->edit(shiftModel->index(shiftModel->rowCount() - 1, 1));
+
+    emit settingsChanged();
+}
+
+void QMEmployeeSettingsWidget::removeEmployeeGroup()
+{
+    // Get the selected model index.
+    auto selectedIndex = ui->tvEmployeeGroups->selectionModel()->currentIndex();
+    if (!selectedIndex.isValid())
+    {
+        QMessageBox::information(
+                this, tr("Mitarbeitergruppe löschen"),
+                tr("Es wurde keine gültige Gruppe ausgewählt."));
+        return;
+    }
+
+    // Get the selected group name.
+    auto selectedGroupName = shiftModel->data(shiftModel->index(selectedIndex.row(), 1)).toString();
+
+    // Do not delete when entries in employee model have a reference to the group. This will only
+    // search for the name as a text and not for the unique id!
+    auto found = false;
+
+    for (int i = 0; i < employeeModel->rowCount(); i++)
+    {
+        auto employeeGroupName = employeeModel->data(employeeModel->index(i, 2)).toString();
+
+        if (selectedGroupName == employeeGroupName)
+        {
+            found = true;
+            break;
+        }
+    }
+
+    if (found)
+    {
+        QMessageBox::critical(
+                this, tr("Mitarbeitergruppe löschen"),
+                tr("Es existieren Verweise auf die Gruppe in den"
+                   " Mitarbeiterdefinitionen. Bitte löschen Sie zuerst die entsprechenden Verweise"
+                   " oder ändern Sie deren Gruppenzugehörigkeit."
+                   "\n\nDie Aktion wird abgebrochen."));
+        return;
+    }
+
+    // Delete the entry.
+    if (!shiftModel->removeRow(selectedIndex.row()))
+    {
+        QMessageBox::critical(
+                this, tr("Mitarbeitergruppe löschen"),
+                tr("Die Mitarbeitergruppe konnte aus einem unbekannten Grund nicht gelöscht"
+                   " werden. Bitte informieren Sie den Entwickler zur Fehlerbehebung."));
+    }
+
+    emit settingsChanged();
+}

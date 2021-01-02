@@ -64,6 +64,12 @@ public slots:
     /// Remove a selected employee.
     void removeEmployee();
 
+    /// Add a new employee group.
+    void addEmployeeGroup();
+
+    /// Remove a selected employee group.
+    void removeEmployeeGroup();
+
     /// Updates all data that exist are needed.
     void updateData();
 

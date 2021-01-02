@@ -29,7 +29,7 @@
    <item row="0" column="0" rowspan="2" colspan="2">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <property name="documentMode">
       <bool>true</bool>
@@ -330,7 +330,7 @@
          <item>
           <layout class="QVBoxLayout" name="verticalLayout_2">
            <item>
-            <widget class="QToolButton" name="tbFuncGroupsAdd">
+            <widget class="QToolButton" name="tbEmployeeGroupsAdd">
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -356,7 +356,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QToolButton" name="tbFuncGroupsRemove">
+            <widget class="QToolButton" name="tbEmployeeGroupsRemove">
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -504,19 +504,47 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>tbEmployeeGroupsAdd</sender>
+   <signal>clicked()</signal>
+   <receiver>QMEmployeeSettingsWidget</receiver>
+   <slot>addEmployeeGroup()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>802</x>
+     <y>68</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>409</x>
+     <y>337</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tbEmployeeGroupsRemove</sender>
+   <signal>clicked()</signal>
+   <receiver>QMEmployeeSettingsWidget</receiver>
+   <slot>removeEmployeeGroup()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>802</x>
+     <y>103</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>409</x>
+     <y>337</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>addEmployee()</slot>
-  <slot>addFunc()</slot>
-  <slot>addTrainException()</slot>
   <slot>removeEmployee()</slot>
-  <slot>removeFunc()</slot>
-  <slot>removeTrainException()</slot>
-  <slot>employeeChanged(QString)</slot>
-  <slot>shiftChanged(QString)</slot>
   <slot>renameEmployee()</slot>
   <slot>updateFilter()</slot>
   <slot>revertChanges()</slot>
   <slot>showEmployeeDetails()</slot>
+  <slot>addEmployeeGroup()</slot>
+  <slot>removeEmployeeGroup()</slot>
  </slots>
 </ui>
