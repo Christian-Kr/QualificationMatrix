@@ -32,6 +32,8 @@
 #include <QDebug>
 #include <QSortFilterProxyModel>
 #include <QCloseEvent>
+#include <QScrollArea>
+#include <QScrollBar>
 
 QMSettingsDialog::QMSettingsDialog(QWidget *parent)
     : QDialog(parent)
@@ -81,7 +83,11 @@ void QMSettingsDialog::initStackWidgets()
 
 void QMSettingsDialog::appendConnectSettingsWidget(QMSettingsWidget *settingsWidget)
 {
-    ui->swSettingGroups->addWidget(settingsWidget);
+    auto *scrollArea = new QScrollArea();
+    scrollArea->setWidget(settingsWidget);
+    scrollArea->setWidgetResizable(true);
+
+    ui->swSettingGroups->addWidget(scrollArea);
     connect(settingsWidget, &QMSettingsWidget::settingsChanged, this,
         &QMSettingsDialog::settingsChanged);
 }
@@ -177,10 +183,17 @@ void QMSettingsDialog::apply()
         return;
     }
 
-    auto settingsWidget = dynamic_cast<QMSettingsWidget *>(widget);
+    auto scrollArea = dynamic_cast<QScrollArea *>(widget);
+    if (scrollArea == nullptr)
+    {
+        qWarning() << "loadSettings: dynamic_cast failed to QScrollArea";
+        return;
+    }
+
+    auto settingsWidget = dynamic_cast<QMSettingsWidget *>(scrollArea->widget());
     if (settingsWidget == nullptr)
     {
-        qWarning() << "loadSettings: dynamic_cast failed";
+        qWarning() << "loadSettings: dynamic_cast failed to QMSettingsWidget";
         return;
     }
 
@@ -206,10 +219,17 @@ void QMSettingsDialog::loadSettings()
             continue;
         }
 
-        auto settingsWidget = dynamic_cast<QMSettingsWidget *>(widget);
+        auto scrollArea = dynamic_cast<QScrollArea *>(widget);
+        if (scrollArea == nullptr)
+        {
+            qWarning() << "loadSettings: dynamic_cast failed to QScrollArea";
+            return;
+        }
+
+        auto settingsWidget = dynamic_cast<QMSettingsWidget *>(scrollArea->widget());
         if (settingsWidget == nullptr)
         {
-            qWarning() << "loadSettings: dynamic_cast failed";
+            qWarning() << "loadSettings: dynamic_cast failed to QMSettingsWidget";
             continue;
         }
 
@@ -244,14 +264,21 @@ void QMSettingsDialog::saveSettings()
         auto widget = ui->swSettingGroups->widget(i);
         if (widget == nullptr)
         {
-            qWarning() << "saveSettings: widget does not exist";
+            qWarning() << "loadSettings: widget does not exist";
             continue;
         }
 
-        auto settingsWidget = dynamic_cast<QMSettingsWidget *>(widget);
+        auto scrollArea = dynamic_cast<QScrollArea *>(widget);
+        if (scrollArea == nullptr)
+        {
+            qWarning() << "loadSettings: dynamic_cast failed to QScrollArea";
+            return;
+        }
+
+        auto settingsWidget = dynamic_cast<QMSettingsWidget *>(scrollArea->widget());
         if (settingsWidget == nullptr)
         {
-            qWarning() << "saveSettings: dynamic_cast failed";
+            qWarning() << "loadSettings: dynamic_cast failed to QMSettingsWidget";
             continue;
         }
 
@@ -260,45 +287,6 @@ void QMSettingsDialog::saveSettings()
 
     changed = false;
     ui->pbApply->setEnabled(false);
-}
-
-bool QMSettingsDialog::saveSettingsGroup(const int group)
-{
-    auto &settings = QMApplicationSettings::getInstance();
-
-    switch (group) {
-        case 0:
-            // general
-
-
-            return true;
-        case 1:
-
-
-            return true;
-        case 2:
-
-            return true;
-        default:
-            return saveSettingsGroupDatabase(group);
-    }
-}
-
-bool QMSettingsDialog::saveSettingsGroupDatabase(const int group)
-{
-    // Ask if you really want to save, cause we have changes to database.
-    auto res = QMessageBox::question(
-        this, tr("Anwenden"),
-        tr("Eventuelle Änderungen an der Datenbank werden jetzt geschrieben."
-           "\n\nSind Sie sich sicher?"), QMessageBox::Yes | QMessageBox::No);
-
-    if (res == QMessageBox::Yes)
-    {
-        dynamic_cast<QMSettingsWidget *>(ui->swSettingGroups->widget(group))->saveSettings();
-        return true;
-    }
-
-    return false;
 }
 
 void QMSettingsDialog::changeSettingsGroup(QTreeWidgetItem *item, const int)
@@ -319,10 +307,17 @@ void QMSettingsDialog::changeSettingsGroup(QTreeWidgetItem *item, const int)
             return;
         }
 
-        auto settingsWidget = dynamic_cast<QMSettingsWidget *>(widget);
+        auto scrollArea = dynamic_cast<QScrollArea *>(widget);
+        if (scrollArea == nullptr)
+        {
+            qWarning() << "loadSettings: dynamic_cast failed to QScrollArea";
+            return;
+        }
+
+        auto settingsWidget = dynamic_cast<QMSettingsWidget *>(scrollArea->widget());
         if (settingsWidget == nullptr)
         {
-            qWarning() << "changeSettingsGroup: dynamic_cast failed";
+            qWarning() << "changeSettingsGroup: dynamic_cast failed to QMSettingsWidget";
             return;
         }
 
@@ -371,9 +366,24 @@ bool QMSettingsDialog::resetSettingsGroup(const int group)
         return true;
     }
 
-    auto settingWidget = dynamic_cast<QMSettingsWidget *>(ui->swSettingGroups->widget(group));
-    if (settingWidget == nullptr)
+    auto widget = ui->swSettingGroups->widget(group);
+    if (widget == nullptr)
     {
+        qWarning() << "changeSettingsGroup: widget does not exist";
+        return false;
+    }
+
+    auto scrollArea = dynamic_cast<QScrollArea *>(widget);
+    if (scrollArea == nullptr)
+    {
+        qWarning() << "loadSettings: dynamic_cast failed to QScrollArea";
+        return false;
+    }
+
+    auto settingsWidget = dynamic_cast<QMSettingsWidget *>(scrollArea->widget());
+    if (settingsWidget == nullptr)
+    {
+        qWarning() << "changeSettingsGroup: dynamic_cast failed to QMSettingsWidget";
         return false;
     }
 
@@ -385,7 +395,7 @@ bool QMSettingsDialog::resetSettingsGroup(const int group)
 
     if (res == QMessageBox::Yes)
     {
-        settingWidget->revertChanges();
+        settingsWidget->revertChanges();
         return true;
     }
 
