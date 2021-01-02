@@ -32,7 +32,6 @@
 #include <QDebug>
 #include <QSortFilterProxyModel>
 #include <QCloseEvent>
-#include <QStyleFactory>
 
 QMSettingsDialog::QMSettingsDialog(QWidget *parent)
     : QDialog(parent)
