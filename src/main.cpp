@@ -143,8 +143,9 @@ void initApplicationTranslation()
 }
 
 /// Take all messages coming from qWarning, qDebug etc. and write them into a log certificate. In
-/// general, all message will be written into a log certificate. If this log certificate is not writeable, the
-/// message will be printed on stdout. Debug messages will always only be printed on stdout.
+/// general, all message will be written into a log certificate. If this log certificate is not
+/// writeable, the message will be printed on stdout. Debug messages will always only be printed on
+/// stdout.
 /// \param type The message type (debug, warning etc.).
 /// \param msg The message to display/log.
 void customMessageHandler(QtMsgType type, const QMessageLogContext &, const QString &msg)
