@@ -22,6 +22,10 @@ CREATE TABLE IF NOT EXISTS "QualiState" (
 	PRIMARY KEY("id")
 );
 
+INSERT INTO "QualiState" ("name") VALUES("Pflicht");
+INSERT INTO "QualiState" ("name") VALUES("Angebot");
+INSERT INTO "QualiState" ("name") VALUES("Sonstiges");
+
 -- Info definition
 
 CREATE TABLE IF NOT EXISTS "Info" (
