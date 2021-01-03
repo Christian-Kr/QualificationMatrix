@@ -70,6 +70,7 @@ void QMQualiMatrixWidget::updateFilter()
 
     // Rebuild cache of model.
     qualiMatrixModel->buildCache();
+    ui->tvQualiMatrix->update();
 }
 
 void QMQualiMatrixWidget::updateData()
