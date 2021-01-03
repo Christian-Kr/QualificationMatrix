@@ -52,6 +52,9 @@ public slots:
     /// Update the cache for legally necessary information.
     void updateTrainLegallyNecessary();
 
+    /// Update the colors from config.
+    void updateColors();
+
 private:
     int horSectionHeight;
     int vertSectionWidth;
@@ -59,6 +62,9 @@ private:
     QHash<QString, QString> *funcGroupColorCache;
     QHash<QString, QString> *trainGroupColorCache;
     QHash<QString, bool> *trainLegallyNecessaryCache;
+
+    QColor gridColor;
+    QColor selectionColor;
 };
 
 #endif // QMQUALIMATRIXHEADERVIEW_H

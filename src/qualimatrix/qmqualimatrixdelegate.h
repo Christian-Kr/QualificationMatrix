@@ -29,8 +29,6 @@ public:
      */
     explicit QMQualiMatrixDelegate(QWidget *parent = nullptr);
 
-    ~QMQualiMatrixDelegate();
-
     /**
      * @brief override from QStyleItemDelegate
      */

@@ -24,10 +24,14 @@
 #include <QDebug>
 
 QMQualiMatrixHeaderView::QMQualiMatrixHeaderView(Qt::Orientation orientation, QWidget *parent)
-    : QHeaderView(orientation, parent), horSectionHeight(0), vertSectionWidth(0),
+    : QHeaderView(orientation, parent),
+    horSectionHeight(0),
+    vertSectionWidth(0),
     funcGroupColorCache(new QHash<QString, QString>()),
     trainGroupColorCache(new QHash<QString, QString>()),
-    trainLegallyNecessaryCache(new QHash<QString, bool>())
+    trainLegallyNecessaryCache(new QHash<QString, bool>()),
+    gridColor(QColor("#ffffff")),
+    selectionColor(QColor("#ffffff"))
 {
     setSectionResizeMode(QHeaderView::Fixed);
     setDefaultSectionSize(30);
@@ -38,6 +42,8 @@ QMQualiMatrixHeaderView::QMQualiMatrixHeaderView(Qt::Orientation orientation, QW
     horSectionHeight = settings.read("QualiMatrix/HorHeaderHeight", 200).toInt();
 
     connect(&settings, SIGNAL(settingsChanged()), this, SLOT(updateSizeSettings()));
+
+    updateColors();
 }
 
 QMQualiMatrixHeaderView::~QMQualiMatrixHeaderView()
@@ -145,23 +151,33 @@ void QMQualiMatrixHeaderView::updateSizeSettings()
         horSectionHeight = tmpHorSectionHeight;
         emit geometriesChanged();
     }
+
+    updateColors();
+}
+
+void QMQualiMatrixHeaderView::updateColors()
+{
+    QMApplicationSettings &settings = QMApplicationSettings::getInstance();
+    selectionColor = QColor(settings.read("QualiMatrix/SelectionColor", "#ffffff").toString());
+    gridColor = QColor(settings.read("QualiMatrix/GridColor", "#ffffff").toString());
 }
 
 void QMQualiMatrixHeaderView::paintSection(
     QPainter *painter, const QRect &rect, int logicalIndex) const
 {
     auto &settings = QMApplicationSettings::getInstance();
-    auto selectionColor = settings.read("QualiMatrix/SelectionColor", "#ffffff").toString();
 
     QFont font;
     font.setPointSize(10);
 
     if (orientation() == Qt::Orientation::Horizontal)
     {
+        painter->setPen(gridColor);
+
         if (selectionModel()->currentIndex().column() == logicalIndex)
         {
             painter->setBrush(QBrush(QColor(selectionColor)));
-            painter->drawRect(rect.x() + 1, rect.y(), rect.width() - 2, rect.height() - 2);
+            painter->drawRect(rect);
             painter->setBrush(QBrush(QColor(Qt::white)));
         }
         else
@@ -169,12 +185,12 @@ void QMQualiMatrixHeaderView::paintSection(
             auto trainGroupColor = trainGroupColorCache->value(
                 model()->headerData(logicalIndex, Qt::Orientation::Horizontal).toString(),
                 "#ffffff");
-            painter->setPen(QPen(QColor(trainGroupColor)));
             painter->setBrush(QBrush(QColor(trainGroupColor)));
-            painter->drawRect(rect.x(), rect.y(), rect.width(), rect.height());
+            painter->drawRect(rect);
             painter->setBrush(QBrush(QColor(Qt::white)));
-            painter->setPen(QPen(QColor(Qt::black)));
         }
+
+        painter->setPen(QPen(QColor(Qt::black)));
 
         auto trainLegallyNecessary = trainLegallyNecessaryCache->value(
             model()->headerData(logicalIndex, Qt::Orientation::Horizontal).toString(), false);
@@ -182,7 +198,7 @@ void QMQualiMatrixHeaderView::paintSection(
         if (trainLegallyNecessary)
         {
             painter->setBrush(QBrush(QColor("#F0F0F0")));
-            painter->drawRect(rect.x() + 1, rect.y(), rect.width() - 2, 30);
+            painter->drawRect(rect.x(), rect.y(), rect.width(), 30);
             painter->drawText(
                 rect.x() + 1, rect.y(), rect.width() - 2, 30, Qt::AlignCenter, tr("RN"));
             painter->setBrush(QBrush(QColor(Qt::white)));
@@ -210,10 +226,12 @@ void QMQualiMatrixHeaderView::paintSection(
     }
     else
     {
+        painter->setPen(gridColor);
+
         if (selectionModel()->currentIndex().row() == logicalIndex)
         {
             painter->setBrush(QBrush(QColor(selectionColor)));
-            painter->drawRect(rect.x(), rect.y() + 1, rect.width() - 2, rect.height() - 2);
+            painter->drawRect(rect);
             painter->setBrush(QBrush(QColor(Qt::white)));
         }
         else
@@ -221,12 +239,13 @@ void QMQualiMatrixHeaderView::paintSection(
             QString funcGroupColor = funcGroupColorCache->value(
                 model()->headerData(logicalIndex, Qt::Orientation::Vertical).toString(), "#ffffff"
             );
-            painter->setPen(QPen(QColor(funcGroupColor)));
             painter->setBrush(QBrush(QColor(funcGroupColor)));
-            painter->drawRect(rect.x(), rect.y(), rect.width(), rect.height());
+            painter->drawRect(rect);
             painter->setBrush(QBrush(QColor(Qt::white)));
-            painter->setPen(QPen(QColor(Qt::black)));
         }
+
+        painter->setPen(QPen(QColor(Qt::black)));
+
         painter->translate(rect.x(), rect.y());
         painter->setFont(font);
         painter->drawText(

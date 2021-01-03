@@ -29,9 +29,6 @@ QMQualiMatrixDelegate::QMQualiMatrixDelegate(QWidget *parent)
     updateColors();
 }
 
-QMQualiMatrixDelegate::~QMQualiMatrixDelegate()
-{}
-
 void QMQualiMatrixDelegate::updateColors()
 {
     QMApplicationSettings &settings = QMApplicationSettings::getInstance();
