@@ -121,16 +121,21 @@ void QMSigningListDocument::createDocument()
     cursor.insertText(tr("Datum"), textFormat);
     cursor.movePosition(QTextCursor::NextCell);
 
+    // Format header cells.
+    QTextTableCell cell = employeeTable->cellAt(0, 0);
+
+    // Set background of header.
+    format = cell.format();
+    format.setBackground(QColor("#d9d9d9"));
+
+    cell.setFormat(format);
+    employeeTable->cellAt(0, 1).setFormat(format);
+    employeeTable->cellAt(0, 2).setFormat(format);
+    employeeTable->cellAt(0, 3).setFormat(format);
+
     // Go through all header cells and set them.
     for (int i = 1; i < employees.size() + 1; i++)
     {
-        QTextTableCell cell = employeeTable->cellAt(0, i - 1);
-
-        // Set background of header.
-        QTextCharFormat format = cell.format();
-        format.setBackground(QColor("#d9d9d9"));
-        cell.setFormat(format);
-
         if (i > 0)
         {
             cursor.insertText(QString::number(i), textFormat);
