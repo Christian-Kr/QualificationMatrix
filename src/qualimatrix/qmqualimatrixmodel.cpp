@@ -24,11 +24,15 @@
 #include <QSqlQuery>
 
 QualiMatrixModel::QualiMatrixModel(QObject *parent)
-    : QAbstractTableModel(parent), funcModel(nullptr), trainModel(nullptr), qualiModel(nullptr),
-      funcFilterModel(new QSortFilterProxyModel(this)),
-      trainFilterModel(new QSortFilterProxyModel(this)),
-      funcFilterGroupModel(new QSortFilterProxyModel(this)),
-      trainFilterGroupModel(new QSortFilterProxyModel(this)), cache(new QHash<QString, QString>())
+    : QAbstractTableModel(parent),
+    funcModel(nullptr),
+    trainModel(nullptr),
+    qualiModel(nullptr),
+    funcFilterModel(new QSortFilterProxyModel(this)),
+    trainFilterModel(new QSortFilterProxyModel(this)),
+    funcFilterGroupModel(new QSortFilterProxyModel(this)),
+    trainFilterGroupModel(new QSortFilterProxyModel(this)), cache(new QHash<QString, QString>()),
+    trainFilterLegalModel(new QSortFilterProxyModel(this))
 {
 }
 
@@ -52,7 +56,9 @@ void QualiMatrixModel::updateModels()
 
     trainFilterGroupModel->setSourceModel(trainModel.get());
     trainFilterGroupModel->setFilterKeyColumn(2);
-    trainFilterModel->setSourceModel(trainFilterGroupModel);
+    trainFilterLegalModel->setSourceModel(trainFilterGroupModel);
+    trainFilterLegalModel->setFilterKeyColumn(4);
+    trainFilterModel->setSourceModel(trainFilterLegalModel);
     trainFilterModel->setFilterKeyColumn(1);
 
     emit headerDataChanged(Qt::Orientation::Horizontal, 0, trainFilterModel->rowCount() - 1);
@@ -233,4 +239,16 @@ void QualiMatrixModel::setFuncFilter(const QString &filter)
 void QualiMatrixModel::setTrainFilter(const QString &filter)
 {
     trainFilterModel->setFilterFixedString(filter);
+}
+
+void QualiMatrixModel::setTrainLegalFilter(bool filter)
+{
+    if (filter)
+    {
+        trainFilterLegalModel->setFilterFixedString("1");
+    }
+    else
+    {
+        trainFilterLegalModel->setFilterFixedString("");
+    }
 }

@@ -77,6 +77,9 @@ void QMQualiMatrixWidget::updateFilter()
     qualiMatrixModel->setFuncGroupFilter(ui->cbFuncGroupFilter->currentText());
     qualiMatrixModel->setTrainGroupFilter(ui->cbTrainGroupFilter->currentText());
 
+    // Legal filter depends on checkbox.
+    qualiMatrixModel->setTrainLegalFilter(ui->cbLegal->isChecked());
+
     // Rebuild cache of model.
     qualiMatrixModel->buildCache();
     ui->tvQualiMatrix->clearSelection();

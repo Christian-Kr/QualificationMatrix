@@ -110,6 +110,10 @@ public:
      */
     void setTrainGroupFilter(const QString &filter);
 
+    /// Set the filter for legally necessary trainings.
+    /// \param filter True if activate, else false.
+    void setTrainLegalFilter(bool filter);
+
     /**
      * @brief Due to performance reasons, use caching of model data.
      */
@@ -151,6 +155,7 @@ private:
     QSortFilterProxyModel *trainFilterModel;
     QSortFilterProxyModel *funcFilterGroupModel;
     QSortFilterProxyModel *trainFilterGroupModel;
+    QSortFilterProxyModel *trainFilterLegalModel;
 
     QHash<QString, QString> *cache;
 };
