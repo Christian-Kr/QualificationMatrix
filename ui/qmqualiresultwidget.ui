@@ -37,6 +37,26 @@
       </widget>
      </item>
      <item>
+      <widget class="QToolButton" name="tbUpdate">
+       <property name="text">
+        <string>Aktualisieren</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../icons.qrc">
+         <normaloff>:/icons/icons/update-none.svg</normaloff>:/icons/icons/update-none.svg</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>22</width>
+         <height>22</height>
+        </size>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonTextBesideIcon</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
       <spacer name="horizontalSpacer_2">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -309,26 +329,6 @@
              <property name="icon">
               <iconset resource="../icons.qrc">
                <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>22</width>
-               <height>22</height>
-              </size>
-             </property>
-             <property name="toolButtonStyle">
-              <enum>Qt::ToolButtonTextBesideIcon</enum>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QToolButton" name="tbUpdate">
-             <property name="text">
-              <string>Aktualisieren</string>
-             </property>
-             <property name="icon">
-              <iconset resource="../icons.qrc">
-               <normaloff>:/icons/icons/update-none.svg</normaloff>:/icons/icons/update-none.svg</iconset>
              </property>
              <property name="iconSize">
               <size>
