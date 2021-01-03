@@ -245,7 +245,6 @@ void QMQualiResultWidget::printToPDF()
 
 void QMQualiResultWidget::paintPdfRequest(QPrinter *printer)
 {
-    // TODO: Support multiple pages when table is too long.
     QTextDocument document;
     QTextCursor cursor(&document);
     QSortFilterProxyModel *model = qualiResultFilterTState;
@@ -285,6 +284,8 @@ void QMQualiResultWidget::paintPdfRequest(QPrinter *printer)
         cursor.movePosition(QTextCursor::NextCell);
     }
 
+    auto &settings = QMApplicationSettings::getInstance();
+
     // Put data of the model into the table and style them.
     for (int i = 0; i < model->rowCount(); i++)
     {
@@ -299,6 +300,25 @@ void QMQualiResultWidget::paintPdfRequest(QPrinter *printer)
             {
                 format.setBackground(QColor("#f2f2f2"));
             }
+
+            // For better readability fill the whole row with state color.
+            auto state = model->data(model->index(i, 7 - 1)).toString();
+            if (state == "Schlecht")
+            {
+                format.setBackground(
+                        QColor(settings.read("QualiResult/BadColor", "#ffffff").toString()));
+            }
+            else if (state == "Ausreichend")
+            {
+                format.setBackground(
+                        QColor(settings.read("QualiResult/EnoughColor", "#ffffff").toString()));
+            }
+            else if (state == "Gut")
+            {
+                format.setBackground(
+                        QColor(settings.read("QualiResult/OkColor", "#ffffff").toString()));
+            }
+
 
             cell.setFormat(format);
 
