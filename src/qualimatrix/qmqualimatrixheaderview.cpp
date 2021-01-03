@@ -184,10 +184,14 @@ void QMQualiMatrixHeaderView::paintSection(
         {
             auto trainGroupColor = trainGroupColorCache->value(
                 model()->headerData(logicalIndex, Qt::Orientation::Horizontal).toString(),
-                "#ffffff");
-            painter->setBrush(QBrush(QColor(trainGroupColor)));
-            painter->drawRect(rect);
-            painter->setBrush(QBrush(QColor(Qt::white)));
+                "no");
+
+            if (trainGroupColor != "no")
+            {
+                painter->setBrush(QBrush(QColor(trainGroupColor)));
+                painter->drawRect(rect);
+                painter->setBrush(QBrush(QColor(Qt::white)));
+            }
         }
 
         painter->setPen(QPen(QColor(Qt::black)));
@@ -237,11 +241,15 @@ void QMQualiMatrixHeaderView::paintSection(
         else
         {
             QString funcGroupColor = funcGroupColorCache->value(
-                model()->headerData(logicalIndex, Qt::Orientation::Vertical).toString(), "#ffffff"
+                model()->headerData(logicalIndex, Qt::Orientation::Vertical).toString(), "no"
             );
-            painter->setBrush(QBrush(QColor(funcGroupColor)));
-            painter->drawRect(rect);
-            painter->setBrush(QBrush(QColor(Qt::white)));
+
+            if (funcGroupColor != "no")
+            {
+                painter->setBrush(QBrush(QColor(funcGroupColor)));
+                painter->drawRect(rect);
+                painter->setBrush(QBrush(QColor(Qt::white)));
+            }
         }
 
         painter->setPen(QPen(QColor(Qt::black)));
