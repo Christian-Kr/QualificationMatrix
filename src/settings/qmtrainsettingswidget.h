@@ -105,6 +105,15 @@ public slots:
      */
     void filterTrain();
 
+    /// Remove a training date state.
+    void removeTrainState();
+
+    /// Add a new training data state.
+    void addTrainState();
+
+    // Revert changes to all training data states.
+    void revertTrainStates();
+
 private:
     /**
      * @brief Search for references in models to the given training.
@@ -117,6 +126,8 @@ private:
 
     std::shared_ptr<QSqlRelationalTableModel> trainModel;
     std::shared_ptr<QSqlTableModel> trainGroupModel;
+    std::shared_ptr<QSqlTableModel> trainDataStateModel;
+    std::shared_ptr<QSqlRelationalTableModel> trainDataModel;
 
     QSortFilterProxyModel *trainFilterModel;
 };

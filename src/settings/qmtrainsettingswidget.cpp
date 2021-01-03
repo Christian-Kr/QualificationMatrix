@@ -24,8 +24,13 @@
 #include <QMessageBox>
 
 QMTrainSettingsWidget::QMTrainSettingsWidget(QWidget *parent)
-    : QMSettingsWidget(parent), ui(new Ui::QMTrainSettingsWidget), trainModel(nullptr),
-    trainGroupModel(nullptr), trainFilterModel(new QSortFilterProxyModel(this))
+    : QMSettingsWidget(parent),
+    ui(new Ui::QMTrainSettingsWidget),
+    trainModel(nullptr),
+    trainGroupModel(nullptr),
+    trainDataStateModel(nullptr),
+    trainDataModel(nullptr),
+    trainFilterModel(new QSortFilterProxyModel(this))
 {
     ui->setupUi(this);
 
@@ -42,6 +47,12 @@ QMTrainSettingsWidget::QMTrainSettingsWidget(QWidget *parent)
     ui->tvTrainGroups->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft);
     ui->tvTrainGroups->verticalHeader()->setVisible(true);
     ui->tvTrainGroups->setItemDelegateForColumn(2, new QMColorChooserDelegate(this));
+
+    ui->tvTrainState->horizontalHeader()->setStretchLastSection(false);
+    ui->tvTrainState->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    ui->tvTrainState->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft);
+    ui->tvTrainState->verticalHeader()->setVisible(true);
+    ui->tvTrainState->setItemDelegateForColumn(2, new QMColorChooserDelegate(this));
 }
 
 QMTrainSettingsWidget::~QMTrainSettingsWidget()
@@ -53,6 +64,7 @@ void QMTrainSettingsWidget::saveSettings()
 {
     trainModel->submitAll();
     trainGroupModel->submitAll();
+    trainDataStateModel->submitAll();
 
     // Other tables have to be updated.
     QMDataManager::getInstance()->getQualiModel()->select();
@@ -68,6 +80,7 @@ void QMTrainSettingsWidget::revertChanges()
 {
     trainModel->revertAll();
     trainGroupModel->revertAll();
+    trainDataStateModel->revertAll();
 }
 
 void QMTrainSettingsWidget::updateData()
@@ -77,6 +90,8 @@ void QMTrainSettingsWidget::updateData()
 
     trainModel = dm->getTrainModel();
     trainGroupModel = dm->getTrainGroupModel();
+    trainDataStateModel = dm->getTrainDataStateModel();
+    trainDataModel = dm->getTrainDataModel();
 
     // Set filter model.
     trainFilterModel->setSourceModel(trainModel.get());
@@ -89,14 +104,19 @@ void QMTrainSettingsWidget::updateData()
     ui->tvTrainGroups->setModel(trainGroupModel.get());
     ui->tvTrainGroups->hideColumn(0);
 
+    ui->tvTrainState->setModel(trainDataStateModel.get());
+    ui->tvTrainState->hideColumn(0);
+
     // Build connections of the new models.
     connect(
-        trainModel.get(), &QAbstractItemModel::dataChanged, this, &QMSettingsWidget::settingsChanged
-    );
+        trainModel.get(), &QAbstractItemModel::dataChanged, this,
+        &QMSettingsWidget::settingsChanged);
     connect(
         trainGroupModel.get(), &QAbstractItemModel::dataChanged, this,
-        &QMSettingsWidget::settingsChanged
-    );
+        &QMSettingsWidget::settingsChanged);
+    connect(
+        trainDataStateModel.get(), &QAbstractItemModel::dataChanged, this,
+        &QMSettingsWidget::settingsChanged);
 }
 
 void QMTrainSettingsWidget::filterTrain()
@@ -219,6 +239,22 @@ void QMTrainSettingsWidget::revertTrain()
     trainModel->revertAll();
 }
 
+void QMTrainSettingsWidget::revertTrainStates()
+{
+    int res = QMessageBox::question(
+            this, tr("Änderungen zurücksetzen"), tr(
+                    "Alle temporären Änderungen an den Status gehen verloren."
+                    "\n\nSind Sie sich sicher?"
+            ), QMessageBox::Yes | QMessageBox::No
+    );
+    if (res == QMessageBox::No) {
+        return;
+    }
+
+    // Reset temporary changes.
+    trainDataStateModel->revertAll();
+}
+
 void QMTrainSettingsWidget::addTrainGroups()
 {
     // Add a new temp row to the model.
@@ -234,6 +270,27 @@ void QMTrainSettingsWidget::addTrainGroups()
     // Start editing the name.
     ui->tvTrainGroups->scrollToBottom();
     ui->tvTrainGroups->edit(trainGroupModel->index(trainGroupModel->rowCount() - 1, 1));
+
+    emit settingsChanged();
+}
+
+void QMTrainSettingsWidget::addTrainState()
+{
+    // Add a new temp row to the model.
+    trainDataStateModel->insertRow(trainDataStateModel->rowCount());
+
+    // Set a default color.
+    trainDataStateModel->setData(
+            trainDataStateModel->index(trainDataStateModel->rowCount() - 1, 2), "#000000");
+
+    // Set a default status name and start editor.
+    trainDataStateModel->setData(
+            trainDataStateModel->index(trainDataStateModel->rowCount() - 1, 1),
+            tr("Statusname eingeben"));
+
+    // Start editing the name.
+    ui->tvTrainState->scrollToBottom();
+    ui->tvTrainState->edit(trainDataStateModel->index(trainDataStateModel->rowCount() - 1, 1));
 
     emit settingsChanged();
 }
@@ -280,6 +337,57 @@ void QMTrainSettingsWidget::removeTrainGroups()
                 "Die Schulungsgruppe konnte aus einem unbekannten Grund nicht gelöscht"
                 " werden. Bitte informieren Sie den Entwickler zur Fehlerbehebung."
             ));
+    }
+
+    emit settingsChanged();
+}
+
+void QMTrainSettingsWidget::removeTrainState()
+{
+    // Get the selected model index.
+    QModelIndex selectedIndex = ui->tvTrainState->selectionModel()->currentIndex();
+    if (!selectedIndex.isValid())
+    {
+        QMessageBox::information(
+                this, tr("Schulungsstatus löschen"),
+                tr("Es wurde kein gültiger Status ausgewählt."));
+        return;
+    }
+
+    // Get the selected state name.
+    QString selectedStateName = trainDataStateModel->data(
+            trainDataStateModel->index(selectedIndex.row(), 1)).toString();
+
+    // Do not delete when entries in train data model have a reference to the state.
+    bool found = false;
+    for (int i = 0; i < trainDataModel->rowCount(); i++)
+    {
+        QString trainStateName = trainDataModel->data(trainDataModel->index(i, 4)).toString();
+        if (selectedStateName == trainStateName) {
+            found = true;
+            break;
+        }
+    }
+
+    if (found)
+    {
+        QMessageBox::critical(
+                this, tr("Schulungsstatus löschen"),
+                tr("Es existieren Verweise auf den Status in den"
+                    " Schulungsdaten. Bitte löschen Sie zuerst den entsprechende Schulungssatz"
+                    " oder ändern Sie deren Statuszugehörigkeit."
+                    "\n\nDie Aktion wird abgebrochen."));
+        return;
+    }
+
+    // Delete the entry.
+    if (!trainDataStateModel->removeRow(selectedIndex.row()))
+    {
+        QMessageBox::critical(
+                this, tr("Schulungsstatus löschen"), tr(
+                        "Der Status konnte aus einem unbekannten Grund nicht gelöscht"
+                        " werden. Bitte informieren Sie den Entwickler zur Fehlerbehebung."
+                ));
     }
 
     emit settingsChanged();

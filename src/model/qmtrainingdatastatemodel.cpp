@@ -26,4 +26,5 @@ QMTrainingDataStateModel::QMTrainingDataStateModel(QObject *parent, const QSqlDa
 
     // Specifiy header data of table.
     setHeaderData(1, Qt::Horizontal, tr("Name"));
+    setHeaderData(2, Qt::Horizontal, tr("Farbe"));
 }
