@@ -58,3 +58,7 @@ ALTER TABLE "Train" ADD COLUMN "legally_necessary" INTEGER;
 
 UPDATE "Info" SET "value" = "1" WHERE "name" = "MAJOR";
 UPDATE "Info" SET "value" = "0" WHERE "name" = "MINOR";
+
+-- Add column to TrainDataState for colors.
+
+ALTER TABLE "TrainDataState" ADD COLUMN "color" TEXT;
