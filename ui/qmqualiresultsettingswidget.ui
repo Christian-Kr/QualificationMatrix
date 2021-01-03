@@ -15,14 +15,17 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
-    <widget class="QCheckBox" name="checkBox">
+    <widget class="QCheckBox" name="cbQualiResIgnore">
      <property name="text">
       <string>Ignorieren von Schulungseinträgen</string>
      </property>
     </widget>
    </item>
    <item row="1" column="0">
-    <widget class="QGroupBox" name="cbQualiResIgnore">
+    <widget class="QGroupBox" name="qualiResIgnore">
+     <property name="title">
+      <string>Ignorierte Einträge</string>
+     </property>
      <property name="checkable">
       <bool>false</bool>
      </property>
@@ -210,7 +213,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>294</x>
-     <y>146</y>
+     <y>22</y>
     </hint>
     <hint type="destinationlabel">
      <x>294</x>
@@ -291,6 +294,38 @@
     <hint type="sourcelabel">
      <x>539</x>
      <y>362</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>294</x>
+     <y>304</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbAddIgnore</sender>
+   <signal>clicked()</signal>
+   <receiver>QMQualiResultSettingsWidget</receiver>
+   <slot>emitSettingsChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>421</x>
+     <y>91</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>294</x>
+     <y>304</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbRemoveIgnore</sender>
+   <signal>clicked()</signal>
+   <receiver>QMQualiResultSettingsWidget</receiver>
+   <slot>emitSettingsChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>521</x>
+     <y>91</y>
     </hint>
     <hint type="destinationlabel">
      <x>294</x>
