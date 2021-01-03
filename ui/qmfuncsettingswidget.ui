@@ -15,16 +15,16 @@
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <property name="leftMargin">
-    <number>0</number>
+    <number>5</number>
    </property>
    <property name="topMargin">
-    <number>0</number>
+    <number>5</number>
    </property>
    <property name="rightMargin">
-    <number>0</number>
+    <number>5</number>
    </property>
    <property name="bottomMargin">
-    <number>0</number>
+    <number>5</number>
    </property>
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabWidget">
@@ -95,7 +95,7 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset>
+              <iconset resource="../icons.qrc">
                <normaloff>:/icons/icons/view-filter.svg</normaloff>:/icons/icons/view-filter.svg</iconset>
              </property>
              <property name="iconSize">
@@ -133,14 +133,14 @@
              <attribute name="verticalHeaderVisible">
               <bool>false</bool>
              </attribute>
-             <attribute name="verticalHeaderMinimumSectionSize">
-              <number>30</number>
-             </attribute>
              <attribute name="verticalHeaderDefaultSectionSize">
               <number>30</number>
              </attribute>
              <attribute name="verticalHeaderHighlightSections">
               <bool>false</bool>
+             </attribute>
+             <attribute name="verticalHeaderMinimumSectionSize">
+              <number>30</number>
              </attribute>
              <attribute name="verticalHeaderShowSortIndicator" stdset="0">
               <bool>false</bool>
@@ -164,7 +164,7 @@
                 <string/>
                </property>
                <property name="icon">
-                <iconset>
+                <iconset resource="../icons.qrc">
                  <normaloff>:/icons/icons/list-add.svg</normaloff>:/icons/icons/list-add.svg</iconset>
                </property>
                <property name="iconSize">
@@ -190,7 +190,7 @@
                 <string/>
                </property>
                <property name="icon">
-                <iconset>
+                <iconset resource="../icons.qrc">
                  <normaloff>:/icons/icons/list-remove.svg</normaloff>:/icons/icons/list-remove.svg</iconset>
                </property>
                <property name="iconSize">
@@ -282,14 +282,14 @@
            <attribute name="verticalHeaderVisible">
             <bool>false</bool>
            </attribute>
-           <attribute name="verticalHeaderMinimumSectionSize">
-            <number>30</number>
-           </attribute>
            <attribute name="verticalHeaderDefaultSectionSize">
             <number>30</number>
            </attribute>
            <attribute name="verticalHeaderHighlightSections">
             <bool>false</bool>
+           </attribute>
+           <attribute name="verticalHeaderMinimumSectionSize">
+            <number>30</number>
            </attribute>
            <attribute name="verticalHeaderShowSortIndicator" stdset="0">
             <bool>false</bool>
@@ -313,7 +313,7 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset>
+              <iconset resource="../icons.qrc">
                <normaloff>:/icons/icons/list-add.svg</normaloff>:/icons/icons/list-add.svg</iconset>
              </property>
              <property name="iconSize">
@@ -339,7 +339,7 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset>
+              <iconset resource="../icons.qrc">
                <normaloff>:/icons/icons/list-remove.svg</normaloff>:/icons/icons/list-remove.svg</iconset>
              </property>
              <property name="iconSize">
