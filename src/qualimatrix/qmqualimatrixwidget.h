@@ -44,7 +44,16 @@ public:
     /// Destructor
     ~QMQualiMatrixWidget() override;
 
+    /// Load settings
+    void loadSettings();
+
 public slots:
+
+    /// The visibility state of the filter widget has changed.
+    void filterVisibilityChanged();
+
+    /// Change the filter widget visibility.
+    void switchFilterVisibility();
 
     /// \brief update by loading data from datamanager
     void updateData();

@@ -19,6 +19,7 @@
 #include "model/qmdatamanager.h"
 #include "qmqualimatrixdelegate.h"
 #include "qmqualimatrixheaderview.h"
+#include "settings/qmapplicationsettings.h"
 
 #include <QSortFilterProxyModel>
 #include <QSqlTableModel>
@@ -37,7 +38,7 @@ QMQualiMatrixWidget::QMQualiMatrixWidget(QWidget *parent)
     lockModeTimer(new QTimer(this))
 {
     ui->setupUi(this);
-    ui->bgWidget->setStyleSheet("background-color: white;");
+    ui->tvQualiMatrix->setStyleSheet("background-color: white;");
 
     lockModeTimer->setSingleShot(true);
     lockModeTimer->setInterval(10000);
@@ -53,11 +54,19 @@ QMQualiMatrixWidget::QMQualiMatrixWidget(QWidget *parent)
     // default edit mode - not editable
     ui->tbLock->setChecked(false);
     ui->tvQualiMatrix->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    loadSettings();
 }
 
 QMQualiMatrixWidget::~QMQualiMatrixWidget()
 {
     delete ui;
+}
+
+void QMQualiMatrixWidget::loadSettings()
+{
+    QMApplicationSettings &settings = QMApplicationSettings::getInstance();
+    ui->dwFilter->setVisible(settings.read("QualiMatrix/ShowFilter", true).toBool());
 }
 
 void QMQualiMatrixWidget::updateFilter()
@@ -73,6 +82,26 @@ void QMQualiMatrixWidget::updateFilter()
     ui->tvQualiMatrix->clearSelection();
     ui->tvQualiMatrix->selectionModel()->clearCurrentIndex();
     ui->tvQualiMatrix->update();
+}
+
+void QMQualiMatrixWidget::filterVisibilityChanged()
+{
+    if (ui->dwFilter->isVisible())
+    {
+        ui->tbFilterVisible->setVisible(false);
+    }
+    else
+    {
+        ui->tbFilterVisible->setVisible(true);
+    }
+
+    QMApplicationSettings &settings = QMApplicationSettings::getInstance();
+    settings.write("QualiMatrix/ShowFilter", ui->dwFilter->isVisible());
+}
+
+void QMQualiMatrixWidget::switchFilterVisibility()
+{
+    ui->dwFilter->setVisible(!ui->dwFilter->isVisible());
 }
 
 void QMQualiMatrixWidget::updateData()
