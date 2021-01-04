@@ -1218,7 +1218,7 @@ Die Aktion wird abgebrochen.</source>
     <message>
         <location filename="../ui/qmmainwindow.ui" line="20"/>
         <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="198"/>
-        <location filename="../src/general/qmmainwindow.cpp" line="531"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="548"/>
         <source>QualificationMatrix</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1393,37 +1393,60 @@ Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="307"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="294"/>
+        <source>Backup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/general/qmmainwindow.cpp" line="295"/>
+        <source>Das Backup konnte nicht erfolgreich durchgeführt werden.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/general/qmmainwindow.cpp" line="322"/>
         <source>Datenbank</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="307"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="322"/>
         <source>Daten abrufen...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="312"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="327"/>
         <source>Schulungsresultat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="312"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="327"/>
         <source>Berechnung...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="397"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="412"/>
         <source>Qualifizierungsergebnis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="400"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="415"/>
         <source>Qualifizierungsmatrix</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="317"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="432"/>
+        <source>Copyright (c) 2020 by Christian Kr
+Version:	0.1-Alpha
+Lizenz:	GNU GENERAL PUBLIC LICENSE Version 3
+
+Eine Kopie der Lizenz wird mit dem Quellcode der Software mitgeliefert (COPYING.txt)
+
+https://github.com/Christian-Kr/QualificationMatrix
+
+Bug-Reports: Fehler können direkt auf GitHub gemeldet werden oder per E-Mail an CerebrosuS_aedd_gmx.net</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/general/qmmainwindow.cpp" line="332"/>
         <source>Qualifikationsmatrix</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1436,7 +1459,7 @@ Jetzt trennen?</source>
     </message>
     <message>
         <location filename="../src/general/qmmainwindow.cpp" line="250"/>
-        <location filename="../src/general/qmmainwindow.cpp" line="288"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="303"/>
         <source>Datenbank-Backup</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1462,80 +1485,67 @@ Jetzt trennen?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="317"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="332"/>
         <source>Cache aufbauen...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="416"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="431"/>
         <source>Über QualificationMatrix</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="417"/>
-        <source>Copyright (c) 2020 by Christian Kr
-Version:	0.1-Alpha
-Lizenz:	GNU GENERAL PUBLIC LICENSE Version 3
-
-Eine Kopie der Lizenz wird mit dem Quellcode der Software mitgeliefert (COPYING.txt)
-
-https://github.com/Christian-Kr/QualificationMatrix
-
-Bug-Reports: Fehler können direkt auf GitHub gemeldet werden oderper E-Mail an CerebrosuS_aedd_gmx.net</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="436"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="451"/>
         <source>Backup anlegen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="436"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="451"/>
         <source>Der angegebene Ordner in den Einstellungen ist kein Verzeichnis,  existiert nicht oder ist nicht beschreibbar.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="472"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="489"/>
         <source>Backup löschen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="473"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="490"/>
         <source>Die Backupdatei konnte nicht gelöscht werden und wird übersprungen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="485"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="502"/>
         <source>Backup erstellen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="486"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="503"/>
         <source>Die Backupdatei konnte nicht kopiert werden und wird übersprungen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="502"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="519"/>
         <source>Datenbank schließen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="503"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="520"/>
         <source>Soll die verbundene Datenbank wirklich geschlossen werden? (Nicht gespeicherte Daten gehen verloren!)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="532"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="549"/>
         <source>Datenbank getrennt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="625"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="642"/>
         <source>Öffne Sql-Datei</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="625"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="642"/>
         <source>Sql (*.sql)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1560,6 +1570,14 @@ Bug-Reports: Fehler können direkt auf GitHub gemeldet werden oderper E-Mail an 
     <message>
         <location filename="../src/qualimatrix/qmqualimatrixheaderview.cpp" line="207"/>
         <source>RN</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QMQualiMatrixModel</name>
+    <message>
+        <location filename="../src/qualimatrix/qmqualimatrixmodel.cpp" line="151"/>
+        <source>P = Pflicht; A = Angebot; S = Sonstiges</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2314,44 +2332,44 @@ Sind Sie sich sicher?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatadetailsdialog.cpp" line="165"/>
+        <location filename="../src/traindata/qmtraindatadetailsdialog.cpp" line="171"/>
         <source>Daten validieren</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatadetailsdialog.cpp" line="166"/>
+        <location filename="../src/traindata/qmtraindatadetailsdialog.cpp" line="172"/>
         <source>Der Mitarbeiter oder die Schulung existiert nicht. Bitte wählen Sie existierende Einträge.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatadetailsdialog.cpp" line="184"/>
+        <location filename="../src/traindata/qmtraindatadetailsdialog.cpp" line="190"/>
         <source>Schulungsdaten - Zurücksetzen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatadetailsdialog.cpp" line="185"/>
+        <location filename="../src/traindata/qmtraindatadetailsdialog.cpp" line="191"/>
         <source>Alle Änderungen werden unwiderruflich verworfen!
 
 Sind Sie sicher?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatadetailsdialog.cpp" line="247"/>
+        <location filename="../src/traindata/qmtraindatadetailsdialog.cpp" line="253"/>
         <source>Nachweis anhängen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatadetailsdialog.cpp" line="247"/>
+        <location filename="../src/traindata/qmtraindatadetailsdialog.cpp" line="253"/>
         <source>Der Nachweis existiert bereits.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatadetailsdialog.cpp" line="279"/>
+        <location filename="../src/traindata/qmtraindatadetailsdialog.cpp" line="285"/>
         <source>Nachweis entfernen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatadetailsdialog.cpp" line="279"/>
+        <location filename="../src/traindata/qmtraindatadetailsdialog.cpp" line="285"/>
         <source>Es wurde kein Eintrag selektiert.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2854,14 +2872,6 @@ Sind Sie sich sicher?</source>
     <message>
         <location filename="../src/model/qmtrainingmodel.cpp" line="33"/>
         <source>Rechtlich Notwendig</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>QualiMatrixModel</name>
-    <message>
-        <location filename="../src/qualimatrix/qmqualimatrixmodel.cpp" line="151"/>
-        <source>P = Pflicht; A = Angebot; S = Sonstiges</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
