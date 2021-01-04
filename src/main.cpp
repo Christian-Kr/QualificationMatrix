@@ -15,6 +15,7 @@
 
 #include "general/qmmainwindow.h"
 #include "settings/qmapplicationsettings.h"
+#include "config.h"
 
 #include <QApplication>
 #include <QWindow>
@@ -31,10 +32,6 @@
 #else
 #define DEPR_ENDL endl
 #endif
-
-#define RELEASE_STATE "beta"
-#define VERSION_MAJOR 0
-#define VERSION_MINOR 1
 
 /// Initialize the main window state with saved data.
 /// \param mainWin The main window object to initialize.

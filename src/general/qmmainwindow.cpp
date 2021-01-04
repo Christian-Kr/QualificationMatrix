@@ -16,6 +16,7 @@
 #include "qmmainwindow.h"
 #include "ui_qmmainwindow.h"
 
+#include "config.h"
 #include "settings/qmsettingsdialog.h"
 #include "qualimatrix/qmqualimatrixmodel.h"
 #include "qualimatrix/qmqualimatrixheaderview.h"
@@ -430,7 +431,7 @@ void QMMainWindow::showAbout()
     QMessageBox::about(
         this, tr("Über QualificationMatrix"),
         tr("Copyright (c) 2020 by Christian Kr"
-           "\nVersion:\t0.1-Alpha"
+           "\nVersion:\t" VERSION_MAJOR "." VERSION_MINOR " " RELEASE_STATE " // " BUILD
            "\nLizenz:\tGNU GENERAL PUBLIC LICENSE Version 3"
            "\n\nEine Kopie der Lizenz wird mit dem Quellcode der Software mitgeliefert"
            " (COPYING.txt)"
