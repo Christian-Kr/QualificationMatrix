@@ -281,6 +281,21 @@ void QMMainWindow::initAfterDatabaseOpened()
     dm->initializeModels(db);
     ui->statusbar->showMessage(tr("Datenbank verbunden"));
     setWindowTitle("QualificationMatrix - " + db.databaseName());
+
+    // Make an database backup from the auto system if wanted. Backup should only be run if the
+    // driver is QSQLITE, cause this one is file based.
+    auto &settings = QMApplicationSettings::getInstance();
+    auto autoBackup = settings.read("Database/LocalAutoBackup", false).toBool();
+    if (autoBackup && db.driverName() == "QSQLITE")
+    {
+        if (!runAutoBackup())
+        {
+            QMessageBox::warning(
+                    this, tr("Backup"),
+                    tr("Das Backup konnte nicht erfolgreich durchgeführt werden."));
+            return;
+        }
+    }
 }
 
 bool QMMainWindow::saveSingleDatabaseBackup(const QSqlDatabase &db)
@@ -424,10 +439,10 @@ void QMMainWindow::showAbout()
            " per E-Mail an CerebrosuS_aedd_gmx.net"));
 }
 
-bool QMMainWindow::runAutoBackup(const QString &fileName)
+bool QMMainWindow::runAutoBackup()
 {
     // Look if the path exist.
-    QMApplicationSettings &settings = QMApplicationSettings::getInstance();
+    auto &settings = QMApplicationSettings::getInstance();
     QFileInfo pathInfo(settings.read("Database/LocalBackupPath").toString());
 
     if (!pathInfo.isDir() || !pathInfo.exists() || !pathInfo.isWritable())
@@ -442,7 +457,9 @@ bool QMMainWindow::runAutoBackup(const QString &fileName)
     }
 
     // Get a list of all backup files for the given database.
-    QString preName = fileName.split("/").last().split(".").first();
+    auto db = QSqlDatabase::database("default", false);
+
+    QString preName = db.databaseName().split("/").last().split(".").first();
     QDir backupDir(pathInfo.absoluteFilePath());
     QStringList filters;
     filters << QString(preName + "-*.qmsql");
@@ -475,10 +492,10 @@ bool QMMainWindow::runAutoBackup(const QString &fileName)
         }
     }
 
-    // Create new backup certificate.
+    // Create new backup file.
     QString newName = QDateTime::currentDateTime().toString("yyyy-MM-dd-hh-mm-ss");
     newName = preName + "-" + newName + ".qmsql";
-    QFile copyFile(fileName);
+    QFile copyFile(db.databaseName());
     if (!copyFile.copy(pathInfo.absoluteFilePath() + QDir::separator() + newName))
     {
         QMessageBox::critical(

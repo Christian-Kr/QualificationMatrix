@@ -102,9 +102,8 @@ public slots:
 
     /// Run the auto backup, which includes multiple steps.
     /// TODO: Put this function into a separate class.
-    /// \param fileName The certificate name of the new backup certificate.
     /// \return True if success, else false.
-    bool runAutoBackup(const QString &fileName);
+    bool runAutoBackup();
 
     /// Shows the database dialog to manage the database information.
     void manageDatabase();
