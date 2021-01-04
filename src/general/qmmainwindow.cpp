@@ -421,7 +421,7 @@ void QMMainWindow::showAbout()
            " (COPYING.txt)"
            "\n\nhttps://github.com/Christian-Kr/QualificationMatrix"
            "\n\nBug-Reports: Fehler können direkt auf GitHub gemeldet werden oder"
-           "per E-Mail an CerebrosuS_aedd_gmx.net"));
+           " per E-Mail an CerebrosuS_aedd_gmx.net"));
 }
 
 bool QMMainWindow::runAutoBackup(const QString &fileName)
