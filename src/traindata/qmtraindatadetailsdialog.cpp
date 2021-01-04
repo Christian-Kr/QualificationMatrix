@@ -120,37 +120,43 @@ void QMTrainDataDetailsDialog::apply()
 {
     // Set model content to values in ui elements.
     auto employeeId = employeeModel->data(
-        employeeModel->index(ui->cbEmployee->currentIndex(), 0)).toInt();
+            employeeModel->index(ui->cbEmployee->currentIndex(), 0)).toInt();
     trainDataModelEdit->setData(trainDataModelEdit->index(selRowEdit, 1), employeeId);
 
     auto trainId = trainModel->data(
-        trainModel->index(ui->cbTraining->currentIndex(), 0)).toInt();
+            trainModel->index(ui->cbTraining->currentIndex(), 0)).toInt();
     trainDataModelEdit->setData(trainDataModelEdit->index(selRowEdit, 2), trainId);
 
     trainDataModelEdit->setData(
-        trainDataModelEdit->index(selRowEdit, 3),
-        ui->cwDate->selectedDate().toString(Qt::DateFormat::ISODate));
+            trainDataModelEdit->index(selRowEdit, 3),
+            ui->cwDate->selectedDate().toString(Qt::DateFormat::ISODate));
 
-    auto trainDataModelEditId = trainDataModelEdit->data(
-        trainDataModelEdit->index(ui->cbState->currentIndex(), 0)).toInt();
-    trainDataModelEdit->setData(trainDataModelEdit->index(selRowEdit, 4), trainDataModelEditId);
+    auto trainDataStateId = trainDataStateModel->data(
+            trainDataStateModel->index(ui->cbState->currentIndex(), 0)).toInt();
+    trainDataModelEdit->setData(trainDataModelEdit->index(selRowEdit, 4), trainDataStateId);
 }
 
 bool QMTrainDataDetailsDialog::checkData() const
 {
     auto employeeName = ui->cbEmployee->currentText();
+    auto employeeId = ui->cbEmployee->findText(employeeName);
 
-    if (ui->cbEmployee->findText(employeeName) == -1)
+    if (employeeId == -1)
     {
         return false;
     }
+
+    ui->cbEmployee->setCurrentIndex(employeeId);
 
     auto trainName = ui->cbTraining->currentText();
+    auto trainId = ui->cbTraining->findText(trainName);
 
-    if (ui->cbTraining->findText(trainName) == -1)
+    if (trainId == -1)
     {
         return false;
     }
+
+    ui->cbTraining->setCurrentIndex(trainId);
 
     return true;
 }
