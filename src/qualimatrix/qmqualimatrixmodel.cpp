@@ -23,7 +23,7 @@
 #include <QSortFilterProxyModel>
 #include <QSqlQuery>
 
-QualiMatrixModel::QualiMatrixModel(QObject *parent)
+QMQualiMatrixModel::QMQualiMatrixModel(QObject *parent)
     : QAbstractTableModel(parent),
     funcModel(nullptr),
     trainModel(nullptr),
@@ -36,12 +36,12 @@ QualiMatrixModel::QualiMatrixModel(QObject *parent)
 {
 }
 
-QualiMatrixModel::~QualiMatrixModel()
+QMQualiMatrixModel::~QMQualiMatrixModel()
 {
     delete cache;
 }
 
-void QualiMatrixModel::updateModels()
+void QMQualiMatrixModel::updateModels()
 {
     auto dm = QMDataManager::getInstance();
     funcModel = dm->getFuncModel();
@@ -68,7 +68,7 @@ void QualiMatrixModel::updateModels()
     buildCache();
 }
 
-void QualiMatrixModel::buildCache()
+void QMQualiMatrixModel::buildCache()
 {
     emit beforeBuildCache(funcFilterModel->rowCount() * trainFilterModel->rowCount());
 
@@ -91,7 +91,7 @@ void QualiMatrixModel::buildCache()
     emit afterBuildCache();
 }
 
-QVariant QualiMatrixModel::headerData(int section, Qt::Orientation orientation, int) const
+QVariant QMQualiMatrixModel::headerData(int section, Qt::Orientation orientation, int) const
 {
     switch (orientation) {
         case Qt::Orientation::Horizontal:
@@ -103,7 +103,7 @@ QVariant QualiMatrixModel::headerData(int section, Qt::Orientation orientation, 
     return QVariant();
 }
 
-bool QualiMatrixModel::setHeaderData(
+bool QMQualiMatrixModel::setHeaderData(
     int section, Qt::Orientation orientation, const QVariant &value, int role
 )
 {
@@ -116,7 +116,7 @@ bool QualiMatrixModel::setHeaderData(
     return false;
 }
 
-int QualiMatrixModel::rowCount(const QModelIndex &parent) const
+int QMQualiMatrixModel::rowCount(const QModelIndex &parent) const
 {
     if (parent.isValid()) {
         return 0;
@@ -125,7 +125,7 @@ int QualiMatrixModel::rowCount(const QModelIndex &parent) const
     return funcFilterModel->rowCount();
 }
 
-int QualiMatrixModel::columnCount(const QModelIndex &parent) const
+int QMQualiMatrixModel::columnCount(const QModelIndex &parent) const
 {
     if (parent.isValid()) {
         return 0;
@@ -134,7 +134,7 @@ int QualiMatrixModel::columnCount(const QModelIndex &parent) const
     return trainFilterModel->rowCount();
 }
 
-QVariant QualiMatrixModel::data(const QModelIndex &index, int role) const
+QVariant QMQualiMatrixModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid()) {
         return QVariant();
@@ -154,7 +154,7 @@ QVariant QualiMatrixModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-int QualiMatrixModel::qualiStateRowFromFuncTrain(const int &funcRow, const int &trainRow) const
+int QMQualiMatrixModel::qualiStateRowFromFuncTrain(const int &funcRow, const int &trainRow) const
 {
     QString funcName = funcFilterModel->data(funcFilterModel->index(funcRow, 1)).toString();
     QString trainName = trainFilterModel->data(trainFilterModel->index(trainRow, 1)).toString();
@@ -171,7 +171,7 @@ int QualiMatrixModel::qualiStateRowFromFuncTrain(const int &funcRow, const int &
     return -1;
 }
 
-bool QualiMatrixModel::setData(const QModelIndex &index, const QVariant &value, int role)
+bool QMQualiMatrixModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     if (qualiModel == nullptr || funcModel == nullptr || trainModel == nullptr) {
         return false;
@@ -213,7 +213,7 @@ bool QualiMatrixModel::setData(const QModelIndex &index, const QVariant &value, 
     return false;
 }
 
-Qt::ItemFlags QualiMatrixModel::flags(const QModelIndex &index) const
+Qt::ItemFlags QMQualiMatrixModel::flags(const QModelIndex &index) const
 {
     if (!index.isValid())
         return Qt::NoItemFlags;
@@ -221,27 +221,27 @@ Qt::ItemFlags QualiMatrixModel::flags(const QModelIndex &index) const
     return Qt::ItemIsEditable | Qt::ItemIsSelectable | Qt::ItemIsEnabled;
 }
 
-void QualiMatrixModel::setFuncGroupFilter(const QString &filter)
+void QMQualiMatrixModel::setFuncGroupFilter(const QString &filter)
 {
     funcFilterGroupModel->setFilterFixedString(filter);
 }
 
-void QualiMatrixModel::setTrainGroupFilter(const QString &filter)
+void QMQualiMatrixModel::setTrainGroupFilter(const QString &filter)
 {
     trainFilterGroupModel->setFilterFixedString(filter);
 }
 
-void QualiMatrixModel::setFuncFilter(const QString &filter)
+void QMQualiMatrixModel::setFuncFilter(const QString &filter)
 {
     funcFilterModel->setFilterFixedString(filter);
 }
 
-void QualiMatrixModel::setTrainFilter(const QString &filter)
+void QMQualiMatrixModel::setTrainFilter(const QString &filter)
 {
     trainFilterModel->setFilterFixedString(filter);
 }
 
-void QualiMatrixModel::setTrainLegalFilter(bool filter)
+void QMQualiMatrixModel::setTrainLegalFilter(bool filter)
 {
     if (filter)
     {

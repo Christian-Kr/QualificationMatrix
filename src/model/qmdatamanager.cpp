@@ -49,7 +49,7 @@ QMDataManager::QMDataManager()
     certLoc = CertLoc::EXTERNAL;
 
     qualiResultModel = std::make_shared<QMQualiResultModel>();
-    qualiMatrixModel = std::make_shared<QualiMatrixModel>();
+    qualiMatrixModel = std::make_shared<QMQualiMatrixModel>();
 }
 
 bool QMDataManager::testVersion(QSqlDatabase &db)

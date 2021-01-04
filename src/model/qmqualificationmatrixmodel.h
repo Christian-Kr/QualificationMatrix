@@ -16,13 +16,13 @@
 #ifndef QMQUALIFICATIONMATRIXMODEL_H
 #define QMQUALIFICATIONMATRIXMODEL_H
 
-#include <QSqlRelationalTableModel>
+#include "qmsqlrelationaltablemodel.h"
 
 /**
  * @brief Qaulification matrix data table in sql.
  * @author Christian Kr, Copyright (c) 2020
  */
-class QMQualificationMatrixModel: public QSqlRelationalTableModel
+class QMQualificationMatrixModel: public QMSqlRelationalTableModel
 {
 Q_OBJECT
 

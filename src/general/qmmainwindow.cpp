@@ -369,15 +369,15 @@ void QMMainWindow::afterInitializeModels()
     auto dm = QMDataManager::getInstance();
 
     connect(
-        dm->getQualiMatrixModel().get(), &QualiMatrixModel::beforeBuildCache, this,
+        dm->getQualiMatrixModel().get(), &QMQualiMatrixModel::beforeBuildCache, this,
         &QMMainWindow::beforeQualiMatrixBuildCache);
 
     connect(
-        dm->getQualiMatrixModel().get(), &QualiMatrixModel::updateBuildCache, this,
+        dm->getQualiMatrixModel().get(), &QMQualiMatrixModel::updateBuildCache, this,
         &QMMainWindow::updateProgress);
 
     connect(
-        dm->getQualiMatrixModel().get(), &QualiMatrixModel::afterBuildCache, this,
+        dm->getQualiMatrixModel().get(), &QMQualiMatrixModel::afterBuildCache, this,
         &QMMainWindow::closeProgress);
 
     connect(

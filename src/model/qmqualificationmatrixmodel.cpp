@@ -16,7 +16,7 @@
 #include "qmqualificationmatrixmodel.h"
 
 QMQualificationMatrixModel::QMQualificationMatrixModel(QObject *parent, const QSqlDatabase &db)
-    : QSqlRelationalTableModel(parent, db)
+    : QMSqlRelationalTableModel(parent, db)
 {
     // The name of the Table.
     setTable("QualiData");

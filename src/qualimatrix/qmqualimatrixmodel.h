@@ -29,7 +29,7 @@ class QSortFilterProxyModel;
  * @brief a model for holding the table view data representation
  * @author Christian Kr, Copyright (c) 2020
  */
-class QualiMatrixModel: public QAbstractTableModel
+class QMQualiMatrixModel: public QAbstractTableModel
 {
 Q_OBJECT
 
@@ -38,9 +38,9 @@ public:
      * @brief Constructor
      * @param parent
      */
-    explicit QualiMatrixModel(QObject *parent = nullptr);
+    explicit QMQualiMatrixModel(QObject *parent = nullptr);
 
-    ~QualiMatrixModel() override;
+    ~QMQualiMatrixModel() override;
 
     /**
      * @brief Override from QAbstractTableModel

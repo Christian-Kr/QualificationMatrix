@@ -25,7 +25,7 @@ QMSqlRelationalTableModel::QMSqlRelationalTableModel(QObject *parent, QSqlDataba
 
 bool QMSqlRelationalTableModel::select()
 {
-    emit afterSelect();
+    emit beforeSelect();
 
     auto i = 0;
     auto res = QSqlRelationalTableModel::select();

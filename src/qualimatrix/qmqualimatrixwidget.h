@@ -20,7 +20,7 @@
 #include <memory>
 
 // Forward declaration
-class QualiMatrixModel;
+class QMQualiMatrixModel;
 class QSortFilterProxyModel;
 class QSqlTableModel;
 class QSqlRelationalTableModel;
@@ -73,7 +73,7 @@ public slots:
 private:
     Ui::QMQualiMatrixWidget *ui;
 
-    std::shared_ptr<QualiMatrixModel> qualiMatrixModel;
+    std::shared_ptr<QMQualiMatrixModel> qualiMatrixModel;
     std::shared_ptr<QSqlRelationalTableModel> funcModel;
     std::shared_ptr<QSqlRelationalTableModel> trainModel;
     std::shared_ptr<QSqlTableModel> funcGroupModel;
