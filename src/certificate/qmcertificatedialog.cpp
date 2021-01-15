@@ -126,7 +126,8 @@ void QMCertificateDialog::resetFilter()
 void QMCertificateDialog::addCertificate()
 {
     auto fileName = QFileDialog::getOpenFileName(
-        this, tr("Nachweis hinzufügen"), tr("All files (*.*);;JPEG (*.jpg *.jpeg);;PDF (*.pdf)" ));
+        this, tr("Nachweis hinzufügen"), QDir::homePath(),
+        tr("All files (*.*);;JPEG (*.jpg *.jpeg);;PDF (*.pdf)" ));
 
     if (fileName.isEmpty())
     {
