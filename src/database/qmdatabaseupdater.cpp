@@ -67,7 +67,7 @@ bool QMDatabaseUpdater::updateDatabase(const QSqlDatabase &db)
 
         // Continue if the major number of the script is smaller than the database major number or
         // bigger than the target version number.
-        if (tmpMajor < majorSource &&
+        if (tmpMajor < majorSource ||
             tmpMajor > majorTarget)
         {
             continue;
@@ -76,7 +76,7 @@ bool QMDatabaseUpdater::updateDatabase(const QSqlDatabase &db)
         // If the major number is equal and the minor number of the script is equal or smaller
         // continue.
         if ((tmpMajor == majorSource && tmpMinor <= minorSource) ||
-            (tmpMajor == majorTarget && tmpMinor > minorSource))
+            (tmpMajor == majorTarget && tmpMinor > minorTarget))
         {
             continue;
         }
@@ -157,8 +157,19 @@ int QMDatabaseUpdater::getMajorFromScriptName(const QString &scriptName)
 int QMDatabaseUpdater::getMinorFromScriptName(const QString &scriptName)
 {
     auto tmp = scriptName.split("_");
+    if (tmp.size() < 3)
+    {
+        return -1;
+    }
+
+    tmp = tmp.at(2).split(".");
+    if (tmp.size() < 1)
+    {
+        return -1;
+    }
+
     bool ok;
-    int tmpMinor = tmp.at(2).toInt(&ok);
+    int tmpMinor = tmp.at(0).toInt(&ok);
 
     if (ok)
     {

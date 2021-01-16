@@ -36,11 +36,6 @@
 #include <QSqlError>
 #include <QDebug>
 
-// maximum version that exist with the release of this software version - the software cannot work
-// with versions higher than this
-#define DB_CUR_MAJOR 1
-#define DB_CUR_MINOR 0
-
 QMDataManager *QMDataManager::instance = nullptr;
 
 QMDataManager::QMDataManager()
