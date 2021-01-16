@@ -66,8 +66,6 @@ void QMSigningListDialog::accept()
 {
     saveSettings();
     printToPDF();
-
-    QDialog::accept();
 }
 
 void QMSigningListDialog::closeEvent(QCloseEvent *event)
