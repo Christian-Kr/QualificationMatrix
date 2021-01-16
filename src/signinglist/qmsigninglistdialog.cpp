@@ -119,7 +119,13 @@ void QMSigningListDialog::keyPressEvent(QKeyEvent *event)
 
 void QMSigningListDialog::removeEmployee()
 {
+    auto row = ui->lwEmployees->currentRow();
+    if (row < 0)
+    {
+        return;
+    }
 
+    ui->lwEmployees->takeItem(row);
 }
 
 void QMSigningListDialog::addEmployee()
