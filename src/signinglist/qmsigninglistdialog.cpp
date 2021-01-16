@@ -205,6 +205,7 @@ void QMSigningListDialog::paintPdfRequest(QPrinter *printer)
     document.setTrainingContents(ui->leTrainDetails->text());
     document.setTrainingDate(ui->cwDate->selectedDate());
     document.setTrainingName(ui->cbTraining->currentText());
+    document.setImagePath(ui->leImagePath->text());
     document.createDocument();
 
     // Default printer settings.

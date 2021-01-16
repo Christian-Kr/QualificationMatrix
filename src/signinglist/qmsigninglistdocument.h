@@ -61,6 +61,10 @@ public:
     /// \param date The date of the training.
     void setTrainingDate(QDate date) { this->date = date; }
 
+    /// Set path of image.
+    /// \param path
+    void setImagePath(QString path) { imagePath = path; }
+
     /// Create the document with all the content.
     void createDocument();
 
@@ -71,6 +75,7 @@ private:
     QString train;
     QString contents;
     QDate date;
+    QString imagePath;
 };
 
 

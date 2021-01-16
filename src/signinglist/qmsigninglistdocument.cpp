@@ -43,7 +43,7 @@ void QMSigningListDocument::createDocument()
     table->setFormat(tableFormat);
 
     // Fill header table with text.
-    cursor.insertText(tr("<Bild>"));
+    cursor.insertImage(imagePath);
     cursor.movePosition(QTextCursor::NextCell);
     cursor.insertText(tr("Unterweisungsprotokoll"));
     cursor.movePosition(QTextCursor::NextCell);
