@@ -38,7 +38,7 @@ QMEmployeeSettingsWidget::QMEmployeeSettingsWidget(QWidget *parent)
 
     // Set initial settings for ui elements.
     ui->tvEmployee->horizontalHeader()->setSectionResizeMode(
-            QHeaderView::ResizeMode::Interactive);
+            QHeaderView::ResizeMode::ResizeToContents);
     ui->tvEmployee->verticalHeader()->setSectionResizeMode(
             QHeaderView::ResizeMode::ResizeToContents);
     ui->tvEmployee->verticalHeader()->setVisible(true);
