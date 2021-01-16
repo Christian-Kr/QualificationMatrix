@@ -2,6 +2,22 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="en_US">
 <context>
+    <name>QMBooleanDelegate</name>
+    <message>
+        <location filename="../src/delegate/qmbooleandelegate.cpp" line="35"/>
+        <location filename="../src/delegate/qmbooleandelegate.cpp" line="54"/>
+        <location filename="../src/delegate/qmbooleandelegate.cpp" line="100"/>
+        <source>Ja</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/delegate/qmbooleandelegate.cpp" line="39"/>
+        <location filename="../src/delegate/qmbooleandelegate.cpp" line="54"/>
+        <source>Nein</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QMCertificateDialog</name>
     <message>
         <location filename="../ui/qmcertificatedialog.ui" line="14"/>
@@ -43,41 +59,41 @@
     </message>
     <message>
         <location filename="../src/certificate/qmcertificatedialog.cpp" line="129"/>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="167"/>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="184"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="168"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="185"/>
         <source>Nachweis hinzufügen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="129"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="130"/>
         <source>All files (*.*);;JPEG (*.jpg *.jpeg);;PDF (*.pdf)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="168"/>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="185"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="169"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="186"/>
         <source>Der Nachweis konnte nicht hinzugefügt werden. Bitte informieren Sie den Entwickler.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="272"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="273"/>
         <source>Nachweis anzeigen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="308"/>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="322"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="309"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="323"/>
         <source>Nachweis entfernen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="309"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="310"/>
         <source>Die Aktion kann zu Schulungseinträgen ohne Nachweis führen. Fortfahren?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="272"/>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="322"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="273"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="323"/>
         <source>Es wurde kein Eintrag selektiert.</source>
         <translation type="unfinished"></translation>
     </message>
