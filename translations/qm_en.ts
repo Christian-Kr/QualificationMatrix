@@ -2186,12 +2186,12 @@ Sind Sie sich sicher?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="192"/>
+        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="190"/>
         <source>Unterschriftenliste drucken</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="192"/>
+        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="190"/>
         <source>Gruppe nicht gültig.</source>
         <translation type="unfinished"></translation>
     </message>
