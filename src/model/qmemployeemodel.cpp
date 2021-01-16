@@ -48,3 +48,15 @@ QVariant QMEmployeeModel::data(const QModelIndex &index, int role) const
 
     return QSqlRelationalTableModel::data(index, role);
 }
+
+Qt::ItemFlags QMEmployeeModel::flags(const QModelIndex &index) const
+{
+    bool activated = QSqlRelationalTableModel::data(
+            this->index(index.row(), 3), Qt::DisplayRole).toBool();
+    if (!activated)
+    {
+        return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
+    }
+
+    return QSqlRelationalTableModel::flags(index);
+}

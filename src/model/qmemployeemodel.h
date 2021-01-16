@@ -35,6 +35,11 @@ public:
     /// \param role
     /// \return
     QVariant data(const QModelIndex &index, int role) const override;
+
+    /// Override from QSqlRelationalTableModel
+    /// \param index
+    /// \return
+    Qt::ItemFlags flags(const QModelIndex &index) const override;
 };
 
 #endif // QMEMPLOYEEMODEL_H
