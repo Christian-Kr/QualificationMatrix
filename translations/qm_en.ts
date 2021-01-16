@@ -4,15 +4,15 @@
 <context>
     <name>QMBooleanDelegate</name>
     <message>
-        <location filename="../src/delegate/qmbooleandelegate.cpp" line="35"/>
-        <location filename="../src/delegate/qmbooleandelegate.cpp" line="54"/>
-        <location filename="../src/delegate/qmbooleandelegate.cpp" line="100"/>
+        <location filename="../src/delegate/qmbooleandelegate.cpp" line="40"/>
+        <location filename="../src/delegate/qmbooleandelegate.cpp" line="77"/>
+        <location filename="../src/delegate/qmbooleandelegate.cpp" line="123"/>
         <source>Ja</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/delegate/qmbooleandelegate.cpp" line="39"/>
-        <location filename="../src/delegate/qmbooleandelegate.cpp" line="54"/>
+        <location filename="../src/delegate/qmbooleandelegate.cpp" line="44"/>
+        <location filename="../src/delegate/qmbooleandelegate.cpp" line="77"/>
         <source>Nein</source>
         <translation type="unfinished"></translation>
     </message>
@@ -245,7 +245,7 @@
 <context>
     <name>QMDataManager</name>
     <message>
-        <location filename="../src/model/qmdatamanager.cpp" line="197"/>
+        <location filename="../src/model/qmdatamanager.cpp" line="192"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
@@ -437,136 +437,154 @@
     <name>QMEmployeeDetailsDialog</name>
     <message>
         <location filename="../ui/qmemployeedetailsdialog.ui" line="14"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeedetailsdialog.h" line="242"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeedetailsdialog.h" line="254"/>
         <source>Mitarbeiterdetails</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmemployeedetailsdialog.ui" line="20"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeedetailsdialog.h" line="243"/>
+        <location filename="../ui/qmemployeedetailsdialog.ui" line="157"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeedetailsdialog.h" line="265"/>
         <source>Mitarbeiter:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmemployeedetailsdialog.ui" line="39"/>
-        <location filename="../ui/qmemployeedetailsdialog.ui" line="65"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeedetailsdialog.h" line="244"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeedetailsdialog.h" line="246"/>
+        <location filename="../ui/qmemployeedetailsdialog.ui" line="150"/>
+        <location filename="../ui/qmemployeedetailsdialog.ui" line="190"/>
+        <location filename="../ui/qmemployeedetailsdialog.ui" line="341"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeedetailsdialog.h" line="264"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeedetailsdialog.h" line="267"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeedetailsdialog.h" line="278"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmemployeedetailsdialog.ui" line="46"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeedetailsdialog.h" line="245"/>
+        <location filename="../ui/qmemployeedetailsdialog.ui" line="164"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeedetailsdialog.h" line="266"/>
         <source>Gruppe:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmemployeedetailsdialog.ui" line="87"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeedetailsdialog.h" line="247"/>
+        <location filename="../ui/qmemployeedetailsdialog.ui" line="28"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeedetailsdialog.h" line="255"/>
         <source>Funktionen des Mitarbeiters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmemployeedetailsdialog.ui" line="132"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeedetailsdialog.h" line="249"/>
+        <location filename="../ui/qmemployeedetailsdialog.ui" line="73"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeedetailsdialog.h" line="257"/>
         <source>Hinzufügen einer neuen Funktion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmemployeedetailsdialog.ui" line="135"/>
-        <location filename="../ui/qmemployeedetailsdialog.ui" line="256"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeedetailsdialog.h" line="251"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeedetailsdialog.h" line="260"/>
+        <location filename="../ui/qmemployeedetailsdialog.ui" line="76"/>
+        <location filename="../ui/qmemployeedetailsdialog.ui" line="266"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeedetailsdialog.h" line="259"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeedetailsdialog.h" line="272"/>
         <source>Hinzufügen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmemployeedetailsdialog.ui" line="158"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeedetailsdialog.h" line="253"/>
+        <location filename="../ui/qmemployeedetailsdialog.ui" line="99"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeedetailsdialog.h" line="261"/>
         <source>Entfernen einer selektierten Funktion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmemployeedetailsdialog.ui" line="161"/>
-        <location filename="../ui/qmemployeedetailsdialog.ui" line="288"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeedetailsdialog.h" line="255"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeedetailsdialog.h" line="264"/>
+        <location filename="../ui/qmemployeedetailsdialog.ui" line="102"/>
+        <location filename="../ui/qmemployeedetailsdialog.ui" line="298"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeedetailsdialog.h" line="263"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeedetailsdialog.h" line="276"/>
         <source>Entfernen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmemployeedetailsdialog.ui" line="205"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeedetailsdialog.h" line="256"/>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="219"/>
+        <location filename="../ui/qmemployeedetailsdialog.ui" line="215"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeedetailsdialog.h" line="268"/>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="233"/>
         <source>Schulungsausnahmen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmemployeedetailsdialog.ui" line="253"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeedetailsdialog.h" line="258"/>
+        <location filename="../ui/qmemployeedetailsdialog.ui" line="263"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeedetailsdialog.h" line="270"/>
         <source>Hinzufügen einer neuen Schulungsausnahme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmemployeedetailsdialog.ui" line="285"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeedetailsdialog.h" line="262"/>
+        <location filename="../ui/qmemployeedetailsdialog.ui" line="295"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeedetailsdialog.h" line="274"/>
         <source>Entfernen einer selektierten Schulungsausnahme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="110"/>
+        <location filename="../ui/qmemployeedetailsdialog.ui" line="334"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeedetailsdialog.h" line="277"/>
+        <source>Status:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="50"/>
+        <source>Aktiv</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="50"/>
+        <source>Inaktiv</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="124"/>
         <source>Speichern</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="111"/>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="125"/>
         <source>Sollen die Änderungen jetzt in die Datenbank geschrieben werden?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="143"/>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="157"/>
         <source>Funktion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="144"/>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="158"/>
         <source>Es gibt keinen Grund, eine Funktion zu einem Mitarbeiter hinzuzufügen, wenn keine Funktion existiert.
 
 Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="167"/>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="181"/>
         <source>Schulungsausnahme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="167"/>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="181"/>
         <source>Es gibt keinen Grund, eine Schulungsausnahme zu definieren, wenn keine Schulung existiert.
 
 Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="189"/>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="203"/>
         <source>Erklärung über den Grund eintragen!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="201"/>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="215"/>
         <source>Funktionszugehörigkeit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="202"/>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="216"/>
         <source>Bitte selektieren Sie genau eine Funktion um Sie zu entfernen.
 
 Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="220"/>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="234"/>
         <source>Bitte selektieren Sie genau eine Ausnahme um Sie zu entfernen.
 
 Die Aktion wird abgebrochen.</source>
@@ -584,13 +602,18 @@ Die Aktion wird abgebrochen.</source>
 <context>
     <name>QMEmployeeModel</name>
     <message>
-        <location filename="../src/model/qmemployeemodel.cpp" line="29"/>
+        <location filename="../src/model/qmemployeemodel.cpp" line="31"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/model/qmemployeemodel.cpp" line="30"/>
+        <location filename="../src/model/qmemployeemodel.cpp" line="32"/>
         <source>Gruppe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/model/qmemployeemodel.cpp" line="34"/>
+        <source>Aktiviert</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -598,185 +621,151 @@ Die Aktion wird abgebrochen.</source>
     <name>QMEmployeeSettingsWidget</name>
     <message>
         <location filename="../ui/qmemployeesettingswidget.ui" line="14"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="258"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="255"/>
         <source>Mitarbeiter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmemployeesettingswidget.ui" line="39"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="279"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="276"/>
         <source>Daten</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmemployeesettingswidget.ui" line="92"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="260"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="257"/>
         <source>Funktionen Filtern</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmemployeesettingswidget.ui" line="167"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="264"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="261"/>
         <source>Neuen Mitarbeiter hinzufügen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmemployeesettingswidget.ui" line="170"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="266"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="263"/>
         <source>Hinzufügen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmemployeesettingswidget.ui" line="199"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="268"/>
-        <source>Aktuell selektierten Mitarbeiter entfernen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/qmemployeesettingswidget.ui" line="202"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="270"/>
-        <source>Entfernen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/qmemployeesettingswidget.ui" line="219"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="272"/>
+        <location filename="../ui/qmemployeesettingswidget.ui" line="207"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="269"/>
         <source>Details des aktuell selektierten Mitarbeiters anzeigen und bearbeiten</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmemployeesettingswidget.ui" line="222"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="274"/>
+        <location filename="../ui/qmemployeesettingswidget.ui" line="190"/>
+        <location filename="../ui/qmemployeesettingswidget.ui" line="210"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="267"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="271"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmemployeesettingswidget.ui" line="245"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="276"/>
+        <location filename="../ui/qmemployeesettingswidget.ui" line="187"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="265"/>
+        <source>Deaktivieren des selektierten Mitarbeiters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmemployeesettingswidget.ui" line="233"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="273"/>
         <source>Alle Änderungen an Mitarbeiter und Gruppen zurücksetzen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmemployeesettingswidget.ui" line="285"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="288"/>
+        <location filename="../ui/qmemployeesettingswidget.ui" line="273"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="285"/>
         <source>Gruppen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmemployeesettingswidget.ui" line="341"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="281"/>
+        <location filename="../ui/qmemployeesettingswidget.ui" line="329"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="278"/>
         <source>Hinzufügen einer neuen Funktionsgruppe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmemployeesettingswidget.ui" line="367"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="285"/>
+        <location filename="../ui/qmemployeesettingswidget.ui" line="355"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="282"/>
         <source>Entfernen einer selektierten Funktionsgruppe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="127"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="132"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="149"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="165"/>
         <source>Mitarbeiterdetails</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="127"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="132"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="165"/>
         <source>Es muss genau ein Mitarbeiter in der Tabelle selektiert sein.
 
 Die Aktion wird abgebrochen!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="153"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="150"/>
+        <source>Details sind für deaktivierte Mitarbeiter nicht erlaubt.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="183"/>
+        <source>Mitarbeiter deaktivieren</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="184"/>
+        <source>Ein deaktivierter Mitarbeiter kann nurnoch vom Administrator in der Datenbank aktiviert werden!
+
+Sind Sie sich sicher?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="203"/>
         <source>Mitarbeiter hinzufügen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="153"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="203"/>
         <source>Der Mitarbeiter konnt enciht hinzugefügt werden. Bitte informieren Sie den den Entwickler.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="163"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="213"/>
         <source>Name eingeben</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="195"/>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="208"/>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="222"/>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="236"/>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="248"/>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="255"/>
-        <source>Mitarbeiter entfernen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="195"/>
-        <source>Der Mitarbeiter konnte nicht gefunden werden.
-
-Die Aktion wird abgebrochen.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="208"/>
-        <source>In den Schulungsdaten befinden sich Einträge mit dem Mitarbeiter, er kann daher nicht gelöscht werden.
-
-Die Aktion wird abgebrochen.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="222"/>
-        <source>In den Daten der Schulungsausnahmen befinden sich Einträge mit dem Mitarbeiter, er kann daher nicht gelöscht werden.
-
-Die Aktion wird abgebrochen.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="236"/>
-        <source>In den Daten der Mitarbeiterfunktionen befinden sich Einträge mit dem Mitarbeiter, er kann daher nicht gelöscht werden.
-
-Die Aktion wird abgebrochen.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="248"/>
-        <source>Der Mitarbeiter konnte aus einem unbekannten Grund nicht entfernt werden.
-
-Die Aktion wird abgebrochen.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="255"/>
-        <source>Der Mitarbeiter wurde entfernt.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="267"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="227"/>
         <source>Gruppenname eingeben</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="283"/>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="309"/>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="321"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="243"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="269"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="281"/>
         <source>Mitarbeitergruppe löschen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="284"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="244"/>
         <source>Es wurde keine gültige Gruppe ausgewählt.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="310"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="270"/>
         <source>Es existieren Verweise auf die Gruppe in den Mitarbeiterdefinitionen. Bitte löschen Sie zuerst die entsprechenden Verweise oder ändern Sie deren Gruppenzugehörigkeit.
 
 Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="322"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="282"/>
         <source>Die Mitarbeitergruppe konnte aus einem unbekannten Grund nicht gelöscht werden. Bitte informieren Sie den Entwickler zur Fehlerbehebung.</source>
         <translation type="unfinished"></translation>
     </message>
