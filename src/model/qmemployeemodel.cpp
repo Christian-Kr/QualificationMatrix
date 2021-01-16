@@ -15,6 +15,8 @@
 
 #include "qmemployeemodel.h"
 
+#include <QColor>
+
 QMEmployeeModel::QMEmployeeModel(QObject *parent, const QSqlDatabase &db)
     : QSqlRelationalTableModel(parent, db)
 {
@@ -30,4 +32,19 @@ QMEmployeeModel::QMEmployeeModel(QObject *parent, const QSqlDatabase &db)
     setHeaderData(2, Qt::Horizontal, tr("Gruppe"));
     setRelation(2, QSqlRelation("Shift", "id", "name"));
     setHeaderData(3, Qt::Horizontal, tr("Aktiviert"));
+}
+
+QVariant QMEmployeeModel::data(const QModelIndex &index, int role) const
+{
+    bool activated = QSqlRelationalTableModel::data(
+            this->index(index.row(), 3), Qt::DisplayRole).toBool();
+    if (!activated)
+    {
+        if (role == Qt::BackgroundRole)
+        {
+            return QVariant(QColor("#F8E6E0"));
+        }
+    }
+
+    return QSqlRelationalTableModel::data(index, role);
 }
