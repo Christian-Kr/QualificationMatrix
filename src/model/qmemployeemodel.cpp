@@ -21,17 +21,17 @@ QMEmployeeModel::QMEmployeeModel(QObject *parent, const QSqlDatabase &db)
     : QSqlRelationalTableModel(parent, db)
 {
     // The name of the Table.
-    setTable("Employee");
+    QSqlRelationalTableModel::setTable("Employee");
 
     // The edit and join mode/strategy.
-    setJoinMode(QSqlRelationalTableModel::LeftJoin);
-    setEditStrategy(QSqlTableModel::OnManualSubmit);
+    QSqlRelationalTableModel::setJoinMode(QSqlRelationalTableModel::LeftJoin);
+    QSqlRelationalTableModel::setEditStrategy(QSqlTableModel::OnManualSubmit);
 
     // Specifiy header data of table.
-    setHeaderData(1, Qt::Horizontal, tr("Name"));
-    setHeaderData(2, Qt::Horizontal, tr("Gruppe"));
-    setRelation(2, QSqlRelation("Shift", "id", "name"));
-    setHeaderData(3, Qt::Horizontal, tr("Aktiviert"));
+    QSqlRelationalTableModel::setHeaderData(1, Qt::Horizontal, tr("Name"));
+    QSqlRelationalTableModel::setHeaderData(2, Qt::Horizontal, tr("Gruppe"));
+    QSqlRelationalTableModel::setRelation(2, QSqlRelation("Shift", "id", "name"));
+    QSqlRelationalTableModel::setHeaderData(3, Qt::Horizontal, tr("Aktiviert"));
 }
 
 QVariant QMEmployeeModel::data(const QModelIndex &index, int role) const
