@@ -2101,89 +2101,111 @@ Sind Sie sich sicher?</source>
     <name>QMSigningListDialog</name>
     <message>
         <location filename="../ui/qmsigninglistdialog.ui" line="14"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="294"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="322"/>
         <source>Unterschriftenliste erstellen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmsigninglistdialog.ui" line="24"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="299"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="329"/>
         <source>Allgemein</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmsigninglistdialog.ui" line="32"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="295"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="323"/>
         <source>Schulungsdurchführender</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmsigninglistdialog.ui" line="42"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="296"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="324"/>
         <source>Organisation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmsigninglistdialog.ui" line="52"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="297"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="325"/>
         <source>Geplante Schulungseinträge erstellen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmsigninglistdialog.ui" line="63"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="298"/>
+        <location filename="../ui/qmsigninglistdialog.ui" line="92"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="328"/>
         <source>Datum</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmsigninglistdialog.ui" line="92"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="305"/>
+        <location filename="../ui/qmsigninglistdialog.ui" line="63"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="326"/>
+        <source>Bild</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmsigninglistdialog.ui" line="79"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="327"/>
+        <source>Öffnen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmsigninglistdialog.ui" line="108"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="335"/>
         <source>Mitarbeiter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmsigninglistdialog.ui" line="150"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="302"/>
+        <location filename="../ui/qmsigninglistdialog.ui" line="166"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="332"/>
         <source>Einzel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmsigninglistdialog.ui" line="110"/>
-        <location filename="../ui/qmsigninglistdialog.ui" line="157"/>
-        <location filename="../ui/qmsigninglistdialog.ui" line="192"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="300"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="303"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="304"/>
+        <location filename="../ui/qmsigninglistdialog.ui" line="126"/>
+        <location filename="../ui/qmsigninglistdialog.ui" line="173"/>
+        <location filename="../ui/qmsigninglistdialog.ui" line="208"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="330"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="333"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="334"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmsigninglistdialog.ui" line="143"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="301"/>
+        <location filename="../ui/qmsigninglistdialog.ui" line="159"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="331"/>
         <source>Gruppe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmsigninglistdialog.ui" line="240"/>
-        <location filename="../ui/qmsigninglistdialog.ui" line="254"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="306"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="308"/>
+        <location filename="../ui/qmsigninglistdialog.ui" line="256"/>
+        <location filename="../ui/qmsigninglistdialog.ui" line="270"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="336"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="338"/>
         <source>Schulung</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmsigninglistdialog.ui" line="271"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="307"/>
+        <location filename="../ui/qmsigninglistdialog.ui" line="287"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="337"/>
         <source>Details der Inhalte</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="170"/>
+        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="53"/>
+        <source>Öffne Bilddatei</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="53"/>
+        <source>Image Files (*.png *.jpg *.bmp)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="192"/>
         <source>Unterschriftenliste drucken</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="170"/>
+        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="192"/>
         <source>Gruppe nicht gültig.</source>
         <translation type="unfinished"></translation>
     </message>
