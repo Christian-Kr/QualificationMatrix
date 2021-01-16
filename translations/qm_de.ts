@@ -1555,6 +1555,57 @@ Version:	</source>
     </message>
 </context>
 <context>
+    <name>QMNewCertificateDialog</name>
+    <message>
+        <location filename="../ui/qmnewcertificatedialog.ui" line="14"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmnewcertificatedialog.h" line="129"/>
+        <location filename="../src/certificate/qmnewcertificatedialog.cpp" line="77"/>
+        <source>Nachweis hinzufügen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmnewcertificatedialog.ui" line="20"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmnewcertificatedialog.h" line="130"/>
+        <source>Schulung</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmnewcertificatedialog.ui" line="37"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmnewcertificatedialog.h" line="131"/>
+        <source>Mitarbeiter&amp;gruppe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmnewcertificatedialog.ui" line="54"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmnewcertificatedialog.h" line="132"/>
+        <source>Mitarbeiter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmnewcertificatedialog.ui" line="71"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmnewcertificatedialog.h" line="133"/>
+        <source>Nachweis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmnewcertificatedialog.ui" line="81"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmnewcertificatedialog.h" line="134"/>
+        <source>Öffnen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmnewcertificatedialog.ui" line="88"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmnewcertificatedialog.h" line="135"/>
+        <source>Datum der Schulung</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/certificate/qmnewcertificatedialog.cpp" line="78"/>
+        <source>All files (*.*);;JPEG (*.jpg *.jpeg);;PDF (*.pdf)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QMProgressLogDialog</name>
     <message>
         <location filename="../ui/qmprogresslogdialog.ui" line="14"/>
