@@ -25,29 +25,43 @@
 #include <QMessageBox>
 
 QMEmployeeDetailsDialog::QMEmployeeDetailsDialog(
-    QString employeeId, QString employeeName, QString employeeGroup, QWidget *parent)
-    : QDialog(parent), ui(new Ui::QMEmployeeDetailsDialog), id(employeeId), name(employeeName),
-      group(employeeGroup), funcModel(nullptr), employeeFuncModel(nullptr), trainModel(nullptr),
-      trainExceptionModel(nullptr), shiftModel(nullptr),
-      employeeFilterModel(new QSortFilterProxyModel()),
-      employeeFuncFilterModel(new QSortFilterProxyModel()),
-      trainExceptionFilterModel(new QSortFilterProxyModel())
+        QString employeeId, QString employeeName, QString employeeGroup, bool activated,
+        QWidget *parent)
+    : QDialog(parent),
+    ui(new Ui::QMEmployeeDetailsDialog),
+    id(employeeId),
+    name(employeeName),
+    group(employeeGroup),
+    active(activated),
+    funcModel(nullptr),
+    employeeFuncModel(nullptr),
+    trainModel(nullptr),
+    trainExceptionModel(nullptr),
+    shiftModel(nullptr),
+    employeeFilterModel(new QSortFilterProxyModel()),
+    employeeFuncFilterModel(new QSortFilterProxyModel()),
+    trainExceptionFilterModel(new QSortFilterProxyModel())
 {
     ui->setupUi(this);
 
     // Set initial settings for ui elements.
     ui->laEmployeeGroup->setText(group);
     ui->laEmployeeName->setText(name);
+    ui->laActivated->setText((active) ? tr("Aktiv") : tr("Inaktiv"));
 
     ui->tvEmployeeFunc->horizontalHeader()->setStretchLastSection(true);
-    ui->tvEmployeeFunc->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    ui->tvEmployeeFunc->horizontalHeader()->setSectionResizeMode(
+            QHeaderView::ResizeToContents);
     ui->tvEmployeeFunc->horizontalHeader()->setVisible(false);
-    ui->tvEmployeeFunc->setItemDelegateForColumn(2, new QMProxySqlRelationalDelegate());
+    ui->tvEmployeeFunc->setItemDelegateForColumn(
+            2, new QMProxySqlRelationalDelegate());
 
     ui->tvTrainException->horizontalHeader()->setStretchLastSection(false);
-    ui->tvTrainException->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    ui->tvTrainException->horizontalHeader()->setSectionResizeMode(
+            QHeaderView::ResizeToContents);
     ui->tvTrainException->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft);
-    ui->tvTrainException->setItemDelegateForColumn(2, new QMProxySqlRelationalDelegate());
+    ui->tvTrainException->setItemDelegateForColumn(
+            2, new QMProxySqlRelationalDelegate());
 }
 
 QMEmployeeDetailsDialog::~QMEmployeeDetailsDialog()

@@ -47,8 +47,8 @@ public:
      * @param employeeGroup The employees' group.
      */
     explicit QMEmployeeDetailsDialog(
-        QString employeeId, QString employeeName, QString employeeGroup, QWidget *parent = nullptr
-    );
+        QString employeeId, QString employeeName, QString employeeGroup, bool activated,
+        QWidget *parent = nullptr);
 
     ~QMEmployeeDetailsDialog() override;
 
@@ -105,6 +105,7 @@ private:
     QString id;
     QString name;
     QString group;
+    bool active;
 
     std::shared_ptr<QSqlRelationalTableModel> funcModel;
     std::shared_ptr<QSqlRelationalTableModel> employeeFuncModel;

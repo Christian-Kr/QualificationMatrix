@@ -138,8 +138,9 @@ void QMEmployeeSettingsWidget::showEmployeeDetails()
     QString id = employeeFilterModel->data(employeeFilterModel->index(row, 0)).toString();
     QString name = employeeFilterModel->data(employeeFilterModel->index(row, 1)).toString();
     QString group = employeeFilterModel->data(employeeFilterModel->index(row, 2)).toString();
+    bool activated = employeeFilterModel->data(employeeFilterModel->index(row, 3)).toBool();
 
-    QMEmployeeDetailsDialog employeeDetailsDialog(id, name, group, this);
+    QMEmployeeDetailsDialog employeeDetailsDialog(id, name, group, activated, this);
     employeeDetailsDialog.updateData();
     employeeDetailsDialog.exec();
 }
