@@ -635,81 +635,81 @@ Die Aktion wird abgebrochen.</source>
     <name>QMEmployeeSettingsWidget</name>
     <message>
         <location filename="../ui/qmemployeesettingswidget.ui" line="14"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="263"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="264"/>
         <source>Mitarbeiter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmemployeesettingswidget.ui" line="39"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="285"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="286"/>
         <source>Daten</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmemployeesettingswidget.ui" line="65"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="264"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="265"/>
         <source>Deaktivierte Mitarbeiter ausblenden</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmemployeesettingswidget.ui" line="99"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="266"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="267"/>
         <source>Funktionen Filtern</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmemployeesettingswidget.ui" line="174"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="270"/>
+        <location filename="../ui/qmemployeesettingswidget.ui" line="177"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="271"/>
         <source>Neuen Mitarbeiter hinzufügen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmemployeesettingswidget.ui" line="177"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="272"/>
+        <location filename="../ui/qmemployeesettingswidget.ui" line="180"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="273"/>
         <source>Hinzufügen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmemployeesettingswidget.ui" line="214"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="278"/>
+        <location filename="../ui/qmemployeesettingswidget.ui" line="217"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="279"/>
         <source>Details des aktuell selektierten Mitarbeiters anzeigen und bearbeiten</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmemployeesettingswidget.ui" line="197"/>
-        <location filename="../ui/qmemployeesettingswidget.ui" line="217"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="276"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="280"/>
+        <location filename="../ui/qmemployeesettingswidget.ui" line="200"/>
+        <location filename="../ui/qmemployeesettingswidget.ui" line="220"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="277"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="281"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmemployeesettingswidget.ui" line="194"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="274"/>
+        <location filename="../ui/qmemployeesettingswidget.ui" line="197"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="275"/>
         <source>Deaktivieren des selektierten Mitarbeiters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmemployeesettingswidget.ui" line="240"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="282"/>
+        <location filename="../ui/qmemployeesettingswidget.ui" line="243"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="283"/>
         <source>Alle Änderungen an Mitarbeiter und Gruppen zurücksetzen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmemployeesettingswidget.ui" line="280"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="294"/>
+        <location filename="../ui/qmemployeesettingswidget.ui" line="283"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="295"/>
         <source>Gruppen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmemployeesettingswidget.ui" line="336"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="287"/>
+        <location filename="../ui/qmemployeesettingswidget.ui" line="339"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="288"/>
         <source>Hinzufügen einer neuen Funktionsgruppe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmemployeesettingswidget.ui" line="362"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="291"/>
+        <location filename="../ui/qmemployeesettingswidget.ui" line="365"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeesettingswidget.h" line="292"/>
         <source>Entfernen einer selektierten Funktionsgruppe</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1714,42 +1714,42 @@ Version:	</source>
 <context>
     <name>QMQualiResultModel</name>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="297"/>
+        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="298"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="299"/>
+        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="300"/>
         <source>Funktion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="301"/>
+        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="302"/>
         <source>Schulung</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="303"/>
+        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="304"/>
         <source>Notwendigkeit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="305"/>
+        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="306"/>
         <source>Letzte Schulung</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="307"/>
+        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="308"/>
         <source>Nächste Schulung</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="309"/>
+        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="310"/>
         <source>Status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="311"/>
+        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="312"/>
         <source>Schulungsstatus</source>
         <translation type="unfinished"></translation>
     </message>
