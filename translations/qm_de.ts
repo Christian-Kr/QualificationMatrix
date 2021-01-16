@@ -2213,11 +2213,6 @@ Sind Sie sich sicher?</source>
 <context>
     <name>QMSigningListDocument</name>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="46"/>
-        <source>&lt;Bild&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="48"/>
         <source>Unterweisungsprotokoll</source>
         <translation type="unfinished"></translation>
