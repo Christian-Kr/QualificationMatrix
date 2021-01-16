@@ -26,6 +26,7 @@
 #include <QSqlTableModel>
 #include <QPrinter>
 #include <QPrintPreviewDialog>
+#include <QFileDialog>
 
 #include <QDebug>
 
@@ -36,11 +37,29 @@ QMSigningListDialog::QMSigningListDialog(QWidget *parent)
     ui->setupUi(this);
 
     updateData();
+
+    auto &settings = QMApplicationSettings::getInstance();
+    ui->leImagePath->setText(settings.read("SigningListDialog/ImagePath", "").toString());
 }
 
 QMSigningListDialog::~QMSigningListDialog()
 {
     delete ui;
+}
+
+void QMSigningListDialog::openImage()
+{
+    auto imagePath = QFileDialog::getOpenFileName(
+            this, tr("Öffne Bilddatei"), QDir::homePath(), tr("Image Files (*.png *.jpg *.bmp)"));
+
+    if (imagePath.isEmpty())
+    {
+        return;
+    }
+    else
+    {
+        ui->leImagePath->setText(imagePath);
+    }
 }
 
 void QMSigningListDialog::accept()
@@ -65,6 +84,9 @@ void QMSigningListDialog::saveSettings()
     // Window settings.
     settings.write("SigningListDialog/Width", width());
     settings.write("SigningListDialog/Height", height());
+
+    // Image path.
+    settings.write("SigningListDialog/ImagePath", ui->leImagePath->text());
 }
 
 void QMSigningListDialog::updateData()

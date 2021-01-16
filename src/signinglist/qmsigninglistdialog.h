@@ -77,6 +77,9 @@ public slots:
     /// Request function for the pdf creation of painter object.
     void paintPdfRequest(QPrinter *printer);
 
+    /// Open the image
+    void openImage();
+
 private:
     /// Test whether the employee list on the dialog contains the given employee name.
     /// \param employeeName Name of the employee to test.
