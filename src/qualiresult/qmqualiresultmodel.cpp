@@ -107,8 +107,9 @@ bool QMQualiResultModel::updateQualiInfo(
         QString name = employeeModel->data(employeeModel->index(i, 1)).toString();
         QString employeeGroup = employeeModel->data(employeeModel->index(i, 2)).toString();
         QString id = employeeModel->data(employeeModel->index(i, 0)).toString();
+        bool activated = employeeModel->data(employeeModel->index(i, 3)).toBool();
 
-        if (!filterName.isEmpty() && !name.contains(filterName))
+        if ((!filterName.isEmpty() && !name.contains(filterName)) || !activated)
         {
             continue;
         }
