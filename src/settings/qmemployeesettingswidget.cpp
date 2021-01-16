@@ -143,6 +143,14 @@ void QMEmployeeSettingsWidget::showEmployeeDetails()
     QString group = employeeFilterModel->data(employeeFilterModel->index(row, 2)).toString();
     bool activated = employeeFilterModel->data(employeeFilterModel->index(row, 3)).toBool();
 
+    if (!activated)
+    {
+        QMessageBox::information(
+                this, tr("Mitarbeiterdetails"),
+                tr("Details sind für deaktivierte Mitarbeiter nicht erlaubt."));
+        return;
+    }
+
     QMEmployeeDetailsDialog employeeDetailsDialog(id, name, group, activated, this);
     employeeDetailsDialog.updateData();
     employeeDetailsDialog.exec();
