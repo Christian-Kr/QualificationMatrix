@@ -58,6 +58,10 @@ public:
     void loadSettings() override;
 
 public slots:
+    /// Hide or show employees that are deactivated.
+    /// \param state State of checkbox
+    void switchDeactivatedVisibility(bool state);
+
     /// Deactivates the selected employee.
     void deactivate();
 
@@ -86,15 +90,10 @@ private:
     Ui::QMEmployeeSettingsWidget *ui;
 
     std::shared_ptr<QSqlRelationalTableModel> employeeModel;
-    std::shared_ptr<QSqlRelationalTableModel> funcModel;
-    std::shared_ptr<QSqlRelationalTableModel> employeeFuncModel;
-    std::shared_ptr<QSqlRelationalTableModel> trainModel;
-    std::shared_ptr<QSqlRelationalTableModel> trainExceptionModel;
     std::shared_ptr<QSqlTableModel> shiftModel;
 
     QSortFilterProxyModel *employeeFilterModel;
-    QSortFilterProxyModel *employeeFuncFilterModel;
-    QSortFilterProxyModel *trainExceptionFilterModel;
+    QSortFilterProxyModel *employeeActivatedFilterModel;
 };
 
 #endif // QMEMPLOYEESETTINGSWIDGET_H

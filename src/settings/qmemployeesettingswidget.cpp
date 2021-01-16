@@ -27,12 +27,12 @@
 #include <QModelIndexList>
 
 QMEmployeeSettingsWidget::QMEmployeeSettingsWidget(QWidget *parent)
-    : QMSettingsWidget(parent), ui(new Ui::QMEmployeeSettingsWidget), employeeModel(nullptr),
-      funcModel(nullptr), employeeFuncModel(nullptr), trainModel(nullptr),
-      trainExceptionModel(nullptr), shiftModel(nullptr),
-      employeeFilterModel(new QSortFilterProxyModel()),
-      employeeFuncFilterModel(new QSortFilterProxyModel()),
-      trainExceptionFilterModel(new QSortFilterProxyModel())
+    : QMSettingsWidget(parent),
+    ui(new Ui::QMEmployeeSettingsWidget),
+    employeeModel(nullptr),
+    shiftModel(nullptr),
+    employeeFilterModel(new QSortFilterProxyModel(this)),
+    employeeActivatedFilterModel(new QSortFilterProxyModel(this))
 {
     ui->setupUi(this);
 
@@ -63,13 +63,12 @@ void QMEmployeeSettingsWidget::updateData()
     auto dm = QMDataManager::getInstance();
 
     employeeModel = dm->getEmployeeModel();
-    employeeFuncModel = dm->getEmployeeFuncModel();
-    trainModel = dm->getTrainModel();
-    funcModel = dm->getFuncModel();
-    trainExceptionModel = dm->getTrainExceptionModel();
     shiftModel = dm->getShiftModel();
 
-    employeeFilterModel->setSourceModel(employeeModel.get());
+    employeeActivatedFilterModel->setSourceModel(employeeModel.get());
+    employeeActivatedFilterModel->setFilterKeyColumn(3);
+
+    employeeFilterModel->setSourceModel(employeeActivatedFilterModel);
     employeeFilterModel->setFilterKeyColumn(1);
 
     // Update the views.
@@ -82,14 +81,6 @@ void QMEmployeeSettingsWidget::updateData()
     // Build connections of the new models.
     connect(
         employeeModel.get(), &QAbstractItemModel::dataChanged, this,
-        &QMSettingsWidget::settingsChanged
-    );
-    connect(
-        employeeFuncModel.get(), &QAbstractItemModel::dataChanged, this,
-        &QMSettingsWidget::settingsChanged
-    );
-    connect(
-        trainExceptionModel.get(), &QAbstractItemModel::dataChanged, this,
         &QMSettingsWidget::settingsChanged
     );
 }
@@ -121,6 +112,15 @@ void QMEmployeeSettingsWidget::resetFilter()
 void QMEmployeeSettingsWidget::updateFilter()
 {
     employeeFilterModel->setFilterFixedString(ui->leEmployeeFilter->text());
+
+    if (ui->cbHideDeactivated->isChecked())
+    {
+        employeeActivatedFilterModel->setFilterFixedString("1");
+    }
+    else
+    {
+        employeeActivatedFilterModel->setFilterFixedString("");
+    }
 }
 
 void QMEmployeeSettingsWidget::showEmployeeDetails()
@@ -284,4 +284,9 @@ void QMEmployeeSettingsWidget::removeEmployeeGroup()
     }
 
     emit settingsChanged();
+}
+
+void QMEmployeeSettingsWidget::switchDeactivatedVisibility(bool)
+{
+    updateFilter();
 }
