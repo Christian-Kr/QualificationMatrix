@@ -13,34 +13,46 @@
 // If not, see <http://www.gnu.org/licenses/>.
 //
 
-#ifndef QMCHECKBOXDELEGATE_H
-#define QMCHECKBOXDELEGATE_H
+#ifndef QMBOOLEANDELEGATE_H
+#define QMBOOLEANDELEGATE_H
 
-#include <QItemDelegate>
+#include <QStyledItemDelegate>
 
 /// Gives the ability to use a checkbox for boolean entries.
 /// \author Christian Kr, Copyright 2020
-class QMCheckBoxDelegate: public QItemDelegate
+class QMBooleanDelegate: public QStyledItemDelegate
 {
 Q_OBJECT
 
 public:
-    /// Override from QItemDelegate.
+    /// Override from QStyledItemDelegate.
     /// \param painter
     /// \param option
     /// \param index
     void paint(
-        QPainter *painter, const QStyleOptionViewItem &option,
-        const QModelIndex &index) const override;
+            QPainter *painter, const QStyleOptionViewItem &option,
+            const QModelIndex &index) const override;
 
-    /// Override from QItemDelegate.
-    /// \param index
-    /// \param event
-    /// \param model
+    /// Override from QStyledItemDelegate
+    /// \param aParent
     /// \param option
-    bool editorEvent(
-        QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option,
-        const QModelIndex &index) override;
+    /// \param index
+    /// \return
+    QWidget *createEditor(
+            QWidget *aParent, const QStyleOptionViewItem &option,
+            const QModelIndex &index) const override;
+
+    /// Override from QStyledItemDelegate
+    /// \param editor
+    /// \param index
+    void setEditorData(QWidget *editor, const QModelIndex &index) const override;
+
+    /// Override from QStyledItemDelegate
+    /// \param editor
+    /// \param model
+    /// \param index
+    void setModelData(
+            QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const override;
 };
 
-#endif // QMCHECKBOXDELEGATE_H
+#endif // QMBOOLEANDELEGATE_H

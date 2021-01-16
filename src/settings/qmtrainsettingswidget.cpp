@@ -18,7 +18,7 @@
 #include "model/qmdatamanager.h"
 #include "delegate/qmproxysqlrelationaldelegate.h"
 #include "delegate/qmcolorchooserdelegate.h"
-#include "delegate/qmcheckboxdelegate.h"
+#include "delegate/qmbooleandelegate.h"
 
 #include <QSqlTableModel>
 #include <QMessageBox>
@@ -40,7 +40,7 @@ QMTrainSettingsWidget::QMTrainSettingsWidget(QWidget *parent)
     ui->tvTrain->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft);
     ui->tvTrain->verticalHeader()->setVisible(true);
     ui->tvTrain->setItemDelegateForColumn(2, new QMProxySqlRelationalDelegate(ui->tvTrain));
-    ui->tvTrain->setItemDelegateForColumn(4, new QMCheckBoxDelegate());
+    ui->tvTrain->setItemDelegateForColumn(4, new QMBooleanDelegate());
 
     ui->tvTrainGroups->horizontalHeader()->setStretchLastSection(false);
     ui->tvTrainGroups->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);

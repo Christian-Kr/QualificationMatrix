@@ -82,7 +82,7 @@ add_executable(QualificationMatrix WIN32
     src/database/qmdatabasedialog.cpp
     src/database/qmdatabaseupdatedialog.cpp
     src/database/qmdatabaseupdater.cpp
-    src/delegate/qmcheckboxdelegate.cpp
+        src/delegate/qmbooleandelegate.cpp
     src/settings/qmemployeedetailsdialog.cpp
     src/model/qmfunctionmodel.cpp
     src/model/qmtrainingmodel.cpp
