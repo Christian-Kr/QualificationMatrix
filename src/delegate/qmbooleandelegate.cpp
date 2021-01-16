@@ -22,6 +22,11 @@
 
 #include <QDebug>
 
+QMBooleanDelegate::QMBooleanDelegate(QObject *parent)
+    : QStyledItemDelegate(parent),
+    editable(true)
+{}
+
 void QMBooleanDelegate::paint(
     QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
@@ -43,9 +48,27 @@ void QMBooleanDelegate::paint(
             QStyle::CE_ItemViewItem, &itemOption, painter, nullptr);
 }
 
+bool QMBooleanDelegate::editorEvent(
+        QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option,
+        const QModelIndex &index)
+{
+    if (!editable)
+    {
+        event->ignore();
+        return false;
+    }
+
+    return QStyledItemDelegate::editorEvent(event, model, option, index);
+}
+
 QWidget *QMBooleanDelegate::createEditor(
         QWidget *aParent, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
+    if (!editable)
+    {
+        return nullptr;
+    }
+
     // Create a combo box with "Yes" and "No". This will be the standard combo box. There cannot be
     // anything else for handling boolean values in this application.
 

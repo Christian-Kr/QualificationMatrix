@@ -25,6 +25,10 @@ class QMBooleanDelegate: public QStyledItemDelegate
 Q_OBJECT
 
 public:
+    /// Constructor
+    /// \param
+    QMBooleanDelegate(QObject *parent = nullptr);
+
     /// Override from QStyledItemDelegate.
     /// \param painter
     /// \param option
@@ -53,6 +57,22 @@ public:
     /// \param index
     void setModelData(
             QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const override;
+
+    /// Set editable state for delegate.
+    /// \param value Yes if editable, else false.
+    void setEditable(bool value) { editable = value; }
+
+    /// Override from QStyledItemDelegate
+    /// \param event
+    /// \param model
+    /// \param option
+    /// \param index
+    bool editorEvent(
+            QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option,
+            const QModelIndex &index) override;
+
+private:
+    bool editable;
 };
 
 #endif // QMBOOLEANDELEGATE_H

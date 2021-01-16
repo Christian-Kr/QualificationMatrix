@@ -43,7 +43,10 @@ QMEmployeeSettingsWidget::QMEmployeeSettingsWidget(QWidget *parent)
             QHeaderView::ResizeMode::ResizeToContents);
     ui->tvEmployee->verticalHeader()->setVisible(true);
     ui->tvEmployee->setItemDelegateForColumn(2, new QMProxySqlRelationalDelegate());
-    ui->tvEmployee->setItemDelegateForColumn(3, new QMBooleanDelegate());
+
+    auto booleanDelegate = new QMBooleanDelegate(this);
+    booleanDelegate->setEditable(false);
+    ui->tvEmployee->setItemDelegateForColumn(3, booleanDelegate);
 
     ui->tvEmployeeGroups->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tvEmployeeGroups->verticalHeader()->setVisible(true);
