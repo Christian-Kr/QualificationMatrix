@@ -58,6 +58,9 @@ public:
     void loadSettings() override;
 
 public slots:
+    /// Deactivates the selected employee.
+    void deactivate();
+
     /// Add a new employee.
     void addEmployee();
 

@@ -145,6 +145,42 @@ void QMEmployeeSettingsWidget::showEmployeeDetails()
     employeeDetailsDialog.exec();
 }
 
+void QMEmployeeSettingsWidget::deactivate()
+{
+    QModelIndexList indexes = ui->tvEmployee->selectionModel()->selectedRows();
+
+    if (indexes.size() != 1) {
+        QMessageBox::critical(
+                this, tr("Mitarbeiterdetails"), tr(
+                        "Es muss genau ein Mitarbeiter in der Tabelle selektiert sein."
+                        "\n\nDie Aktion wird abgebrochen!"
+                ));
+
+        return;
+    }
+
+    int row = indexes.first().row();
+    QString id = employeeFilterModel->data(employeeFilterModel->index(row, 0)).toString();
+    bool activated = employeeFilterModel->data(employeeFilterModel->index(row, 3)).toBool();
+
+    if (!activated)
+    {
+        return;
+    }
+
+    auto answer = QMessageBox::warning(
+            this, tr("Mitarbeiter deaktivieren"),
+            tr("Ein deaktivierter Mitarbeiter kann nurnoch vom Administrator in der Datenbank"
+               " aktiviert werden!\n\nSind Sie sich sicher?"), QMessageBox::Yes | QMessageBox::No);
+
+    if (answer != QMessageBox::Yes)
+    {
+        return;
+    }
+
+    employeeFilterModel->setData(employeeFilterModel->index(row, 3), false);
+}
+
 void QMEmployeeSettingsWidget::addEmployee()
 {
     // Reset the filter. Otherwise, they might be a new employee no one can see.
