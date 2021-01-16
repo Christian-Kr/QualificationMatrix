@@ -29,4 +29,5 @@ QMEmployeeModel::QMEmployeeModel(QObject *parent, const QSqlDatabase &db)
     setHeaderData(1, Qt::Horizontal, tr("Name"));
     setHeaderData(2, Qt::Horizontal, tr("Gruppe"));
     setRelation(2, QSqlRelation("Shift", "id", "name"));
+    setHeaderData(3, Qt::Horizontal, tr("Aktiviert"));
 }

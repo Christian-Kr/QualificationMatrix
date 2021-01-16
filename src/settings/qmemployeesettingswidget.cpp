@@ -36,12 +36,13 @@ QMEmployeeSettingsWidget::QMEmployeeSettingsWidget(QWidget *parent)
     ui->setupUi(this);
 
     // Set initial settings for ui elements.
-    ui->tvEmployee->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeMode::Interactive);
+    ui->tvEmployee->horizontalHeader()->setSectionResizeMode(
+            QHeaderView::ResizeMode::Interactive);
     ui->tvEmployee->verticalHeader()->setSectionResizeMode(
-        QHeaderView::ResizeMode::ResizeToContents
-    );
+            QHeaderView::ResizeMode::ResizeToContents);
     ui->tvEmployee->verticalHeader()->setVisible(true);
-    ui->tvEmployee->setItemDelegateForColumn(2, new QMProxySqlRelationalDelegate());
+    ui->tvEmployee->setItemDelegateForColumn(
+            2, new QMProxySqlRelationalDelegate());
 
     ui->tvEmployeeGroups->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tvEmployeeGroups->verticalHeader()->setVisible(true);
@@ -70,6 +71,7 @@ void QMEmployeeSettingsWidget::updateData()
     // Update the views.
     ui->tvEmployee->setModel(employeeFilterModel);
     ui->tvEmployee->hideColumn(0);
+    ui->tvEmployee->hideColumn(3);
 
     ui->tvEmployeeGroups->setModel(shiftModel.get());
     ui->tvEmployeeGroups->hideColumn(0);
