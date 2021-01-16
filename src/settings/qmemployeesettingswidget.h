@@ -64,9 +64,6 @@ public slots:
     /// Add a new employee.
     void addEmployee();
 
-    /// Remove a selected employee.
-    void removeEmployee();
-
     /// Add a new employee group.
     void addEmployeeGroup();
 
