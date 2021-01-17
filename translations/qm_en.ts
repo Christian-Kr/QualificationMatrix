@@ -22,7 +22,7 @@
     <message>
         <location filename="../ui/qmcertificatedialog.ui" line="14"/>
         <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmcertificatedialog.h" line="172"/>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="48"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="49"/>
         <source>Nachweise verwalten</source>
         <translation type="unfinished"></translation>
     </message>
@@ -53,47 +53,41 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="53"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="54"/>
         <source>Nachweis auswählen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="129"/>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="168"/>
         <location filename="../src/certificate/qmcertificatedialog.cpp" line="185"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="202"/>
         <source>Nachweis hinzufügen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="130"/>
-        <source>All files (*.*);;JPEG (*.jpg *.jpeg);;PDF (*.pdf)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="169"/>
         <location filename="../src/certificate/qmcertificatedialog.cpp" line="186"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="203"/>
         <source>Der Nachweis konnte nicht hinzugefügt werden. Bitte informieren Sie den Entwickler.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="273"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="290"/>
         <source>Nachweis anzeigen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="309"/>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="323"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="326"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="340"/>
         <source>Nachweis entfernen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="310"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="327"/>
         <source>Die Aktion kann zu Schulungseinträgen ohne Nachweis führen. Fortfahren?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="273"/>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="323"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="290"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="340"/>
         <source>Es wurde kein Eintrag selektiert.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1544,49 +1538,73 @@ Version:	</source>
     <name>QMNewCertificateDialog</name>
     <message>
         <location filename="../ui/qmnewcertificatedialog.ui" line="14"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmnewcertificatedialog.h" line="129"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmnewcertificatedialog.h" line="134"/>
+        <location filename="../src/certificate/qmnewcertificatedialog.cpp" line="63"/>
         <location filename="../src/certificate/qmnewcertificatedialog.cpp" line="77"/>
+        <location filename="../src/certificate/qmnewcertificatedialog.cpp" line="92"/>
+        <location filename="../src/certificate/qmnewcertificatedialog.cpp" line="110"/>
+        <location filename="../src/certificate/qmnewcertificatedialog.cpp" line="155"/>
         <source>Nachweis hinzufügen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmnewcertificatedialog.ui" line="20"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmnewcertificatedialog.h" line="130"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmnewcertificatedialog.h" line="135"/>
         <source>Schulung</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmnewcertificatedialog.ui" line="37"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmnewcertificatedialog.h" line="131"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmnewcertificatedialog.h" line="136"/>
         <source>Mitarbeiter&amp;gruppe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmnewcertificatedialog.ui" line="54"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmnewcertificatedialog.h" line="132"/>
-        <source>Mitarbeiter</source>
+        <location filename="../ui/qmnewcertificatedialog.ui" line="57"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmnewcertificatedialog.h" line="137"/>
+        <source>Mi&amp;tarbeiter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmnewcertificatedialog.ui" line="71"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmnewcertificatedialog.h" line="133"/>
+        <location filename="../ui/qmnewcertificatedialog.ui" line="77"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmnewcertificatedialog.h" line="138"/>
         <source>Nachweis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmnewcertificatedialog.ui" line="81"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmnewcertificatedialog.h" line="134"/>
+        <location filename="../ui/qmnewcertificatedialog.ui" line="91"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmnewcertificatedialog.h" line="139"/>
         <source>Öffnen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmnewcertificatedialog.ui" line="88"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmnewcertificatedialog.h" line="135"/>
+        <location filename="../ui/qmnewcertificatedialog.ui" line="98"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmnewcertificatedialog.h" line="140"/>
         <source>Datum der Schulung</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/certificate/qmnewcertificatedialog.cpp" line="63"/>
+        <source>Die eingetragene Schulung existiert nicht.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/certificate/qmnewcertificatedialog.cpp" line="78"/>
+        <source>Der eingetragene Mitarbeiter existiert nicht.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/certificate/qmnewcertificatedialog.cpp" line="93"/>
+        <source>Die eingetragene Mitarbeitergruppe existiert nicht.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/certificate/qmnewcertificatedialog.cpp" line="110"/>
+        <source>Es wurde kein Zertifikat ausgewählt.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/certificate/qmnewcertificatedialog.cpp" line="156"/>
         <source>All files (*.*);;JPEG (*.jpg *.jpeg);;PDF (*.pdf)</source>
         <translation type="unfinished"></translation>
     </message>
