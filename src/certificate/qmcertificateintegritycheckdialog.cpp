@@ -34,7 +34,7 @@
 #include <QDebug>
 
 QMCertificateIntegrityCheckDialog::QMCertificateIntegrityCheckDialog(QWidget *parent)
-    : QDialog(parent)
+    : QMDialog(parent)
 {
     ui = new Ui::QMCertificateIntegrityCheckDialog;
     ui->setupUi(this);
@@ -184,13 +184,6 @@ void QMCertificateIntegrityCheckDialog::openLogPath()
     ui->leLogPath->setText(logPath);
 }
 
-void QMCertificateIntegrityCheckDialog::closeEvent(QCloseEvent *event)
-{
-    saveSettings();
-
-    QDialog::closeEvent(event);
-}
-
 void QMCertificateIntegrityCheckDialog::saveSettings()
 {
     auto &settings = QMApplicationSettings::getInstance();
@@ -212,14 +205,4 @@ void QMCertificateIntegrityCheckDialog::updateData()
     ui->cbCertificateMode->addItem(tr("Intern"));
     ui->cbCertificateMode->setCurrentText(tr("Extern"));
     ui->cbCertificateMode->setEnabled(false);
-}
-
-void QMCertificateIntegrityCheckDialog::keyPressEvent(QKeyEvent *event)
-{
-    if (event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
-    {
-        return;
-    }
-
-    QDialog::keyPressEvent(event);
 }

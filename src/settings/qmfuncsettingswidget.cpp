@@ -16,8 +16,8 @@
 #include "qmfuncsettingswidget.h"
 #include "ui_qmfuncsettingswidget.h"
 #include "model/qmdatamanager.h"
-#include "delegate/qmproxysqlrelationaldelegate.h"
-#include "delegate/qmcolorchooserdelegate.h"
+#include "framework/qmproxysqlrelationaldelegate.h"
+#include "framework/qmcolorchooserdelegate.h"
 
 #include <QSqlTableModel>
 #include <QMessageBox>

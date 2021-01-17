@@ -16,7 +16,7 @@
 #ifndef QMCERTIFICATEDIALOG_H
 #define QMCERTIFICATEDIALOG_H
 
-#include <QDialog>
+#include "framework/qmdialog.h"
 #include <memory>
 
 // Forward declaration.
@@ -44,7 +44,7 @@ enum class Mode
 /// Neverless, in both modes, one can manage (search, filter, add, remove, preview, ...)
 /// different certificates.
 /// \author Christian Kr, Copyright 2020
-class QMCertificateDialog: public QDialog
+class QMCertificateDialog: public QMDialog
 {
 Q_OBJECT
 
@@ -57,18 +57,11 @@ public:
     /// Destructor
     ~QMCertificateDialog() override;
 
-    /// Save settings from the dialog.
-    void saveSettings();
+    /// Override from QMDialog.
+    void saveSettings() override;
 
     /// Return the selected entry id.
     int getSelectedId() { return selectedId; }
-
-protected:
-    /// Override from QDialog.
-    void closeEvent(QCloseEvent *event) override;
-
-    /// Override from QDialog.
-    void keyPressEvent(QKeyEvent *event) override;
 
 public slots:
     /// Add a new certificate.

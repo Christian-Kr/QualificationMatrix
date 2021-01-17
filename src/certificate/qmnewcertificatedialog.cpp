@@ -22,16 +22,14 @@
 #include <QSortFilterProxyModel>
 #include <QFileDialog>
 #include <QCryptographicHash>
-#include <QDate>
 #include <QMessageBox>
 #include <QKeyEvent>
-#include <QDesktopServices>
 #include <QTemporaryFile>
 
 #include <QDebug>
 
 QMNewCertificateDialog::QMNewCertificateDialog(QWidget *parent)
-    : QDialog(parent)
+    : QMDialog(parent)
 {
     ui = new Ui::QMNewCertificateDialog;
     ui->setupUi(this);
@@ -114,13 +112,6 @@ bool QMNewCertificateDialog::checkInputData()
     return true;
 }
 
-void QMNewCertificateDialog::closeEvent(QCloseEvent *event)
-{
-    saveSettings();
-
-    QDialog::closeEvent(event);
-}
-
 void QMNewCertificateDialog::saveSettings()
 {
     auto &settings = QMApplicationSettings::getInstance();
@@ -172,16 +163,6 @@ void QMNewCertificateDialog::openCertificatePath()
     file.close();
     ui->leCertificatePath->setText(fileName);
     certPath = fileName;
-}
-
-void QMNewCertificateDialog::keyPressEvent(QKeyEvent *event)
-{
-    if (event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
-    {
-        return;
-    }
-
-    QDialog::keyPressEvent(event);
 }
 
 void QMNewCertificateDialog::switchEmployeeSelection()

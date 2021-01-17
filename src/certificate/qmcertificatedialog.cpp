@@ -32,7 +32,7 @@
 #include <QDebug>
 
 QMCertificateDialog::QMCertificateDialog(Mode mode, QWidget *parent)
-    : QDialog(parent)
+    : QMDialog(parent)
 {
     ui = new Ui::QMCertificateDialog;
     ui->setupUi(this);
@@ -71,13 +71,6 @@ void QMCertificateDialog::accept()
     }
 
     QDialog::accept();
-}
-
-void QMCertificateDialog::closeEvent(QCloseEvent *event)
-{
-    saveSettings();
-
-    QDialog::closeEvent(event);
 }
 
 void QMCertificateDialog::saveSettings()
@@ -268,16 +261,6 @@ QString QMCertificateDialog::saveFileExternal(QFile &file)
     }
 
     return fullFileName;
-}
-
-void QMCertificateDialog::keyPressEvent(QKeyEvent *event)
-{
-    if (event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
-    {
-        return;
-    }
-
-    QDialog::keyPressEvent(event);
 }
 
 void QMCertificateDialog::showCertificate()

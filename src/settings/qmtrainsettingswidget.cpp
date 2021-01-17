@@ -16,9 +16,9 @@
 #include "qmtrainsettingswidget.h"
 #include "ui_qmtrainsettingswidget.h"
 #include "model/qmdatamanager.h"
-#include "delegate/qmproxysqlrelationaldelegate.h"
-#include "delegate/qmcolorchooserdelegate.h"
-#include "delegate/qmbooleandelegate.h"
+#include "framework/qmproxysqlrelationaldelegate.h"
+#include "framework/qmcolorchooserdelegate.h"
+#include "framework/qmbooleandelegate.h"
 
 #include <QSqlTableModel>
 #include <QMessageBox>

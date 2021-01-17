@@ -16,7 +16,7 @@
 #ifndef QMSIGNINGLISTDIALOG_H
 #define QMSIGNINGLISTDIALOG_H
 
-#include <QDialog>
+#include "framework/qmdialog.h"
 #include <memory>
 
 // Forward declaration.
@@ -33,7 +33,7 @@ QT_END_NAMESPACE
 
 /// Sett different proprties to start creating a signing list.
 /// \author Christian Kr, Copyright 2020
-class QMSigningListDialog: public QDialog
+class QMSigningListDialog: public QMDialog
 {
 Q_OBJECT
 
@@ -45,15 +45,8 @@ public:
     /// Destructor
     ~QMSigningListDialog() override;
 
-    /// Save settings from the dialog.
-    void saveSettings();
-
-protected:
-    /// Override from QDialog.
-    void closeEvent(QCloseEvent *event) override;
-
-    /// Override from QDialog.
-    void keyPressEvent(QKeyEvent *event) override;
+    /// Override from QMDialog.
+    void saveSettings() override;
 
 public slots:
     /// Update data (models).

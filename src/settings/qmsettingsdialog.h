@@ -16,7 +16,7 @@
 #ifndef QMSETTINGSDIALOG_H
 #define QMSETTINGSDIALOG_H
 
-#include <QDialog>
+#include "framework/qmdialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -31,7 +31,7 @@ class QMSettingsWidget;
 
 /// Handling the settings dialog and all of its children.
 /// \author Christian Kr, Copyright 2020
-class QMSettingsDialog: public QDialog
+class QMSettingsDialog: public QMDialog
 {
 Q_OBJECT
 
@@ -95,8 +95,8 @@ private:
     /// Will be called after recieving the show event of the dialog.
     void windowLoaded();
 
-    /// Save all settings in one step.
-    void saveSettings();
+    /// Override from QMDialog.
+    void saveSettings() override;
 
     /// Load all settings into the widgets and control elements in one step.
     void loadSettings();

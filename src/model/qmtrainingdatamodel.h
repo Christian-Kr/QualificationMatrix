@@ -16,7 +16,7 @@
 #ifndef QMTRAININGDATAMODEL_H
 #define QMTRAININGDATAMODEL_H
 
-#include "qmsqlrelationaltablemodel.h"
+#include "framework/qmsqlrelationaltablemodel.h"
 
 /// Employee training data table in sql.
 /// \author Christian Kr, Copyright 2020

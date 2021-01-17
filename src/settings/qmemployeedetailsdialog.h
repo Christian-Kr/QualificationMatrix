@@ -16,7 +16,7 @@
 #ifndef QMEMPLOYEEDETAILSDIALOG_H
 #define QMEMPLOYEEDETAILSDIALOG_H
 
-#include <QDialog>
+#include "framework/qmdialog.h"
 
 #include <memory>
 #include <QSortFilterProxyModel>
@@ -34,7 +34,7 @@ class QMEmployeeDetailsDialog;
  * @brief Show details about an employee and lets change some settings.
  * @author Christian Kr, Copyright (c) 2020
  */
-class QMEmployeeDetailsDialog: public QDialog
+class QMEmployeeDetailsDialog: public QMDialog
 {
 Q_OBJECT
 

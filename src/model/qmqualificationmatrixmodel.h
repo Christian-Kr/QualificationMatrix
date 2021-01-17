@@ -16,7 +16,7 @@
 #ifndef QMQUALIFICATIONMATRIXMODEL_H
 #define QMQUALIFICATIONMATRIXMODEL_H
 
-#include "qmsqlrelationaltablemodel.h"
+#include "framework/qmsqlrelationaltablemodel.h"
 
 /**
  * @brief Qaulification matrix data table in sql.
