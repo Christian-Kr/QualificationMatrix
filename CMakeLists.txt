@@ -52,6 +52,7 @@ add_executable(QualificationMatrix WIN32
     src/model/qmdatamanager.cpp
     src/traindata/qmdatedelegate.cpp
     src/main.cpp
+    src/framework/qmdialog.cpp
     src/general/qmmainwindow.cpp
     src/delegate/qmproxysqlrelationaldelegate.cpp
     src/qualimatrix/qmqualimatrixdelegate.cpp
