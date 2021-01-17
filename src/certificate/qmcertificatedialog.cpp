@@ -17,6 +17,7 @@
 #include "ui_qmcertificatedialog.h"
 #include "model/qmdatamanager.h"
 #include "settings/qmapplicationsettings.h"
+#include "qmnewcertificatedialog.h"
 
 #include <QSqlTableModel>
 #include <QSortFilterProxyModel>
@@ -125,6 +126,10 @@ void QMCertificateDialog::resetFilter()
 
 void QMCertificateDialog::addCertificate()
 {
+    QMNewCertificateDialog newCertDialog(this);
+    newCertDialog.setModal(true);
+    newCertDialog.exec();
+    return;
     auto fileName = QFileDialog::getOpenFileName(
         this, tr("Nachweis hinzufügen"), QDir::homePath(),
         tr("All files (*.*);;JPEG (*.jpg *.jpeg);;PDF (*.pdf)" ));
