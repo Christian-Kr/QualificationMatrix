@@ -26,7 +26,8 @@
 #include <QKeyEvent>
 
 QMTrainDataDialog::QMTrainDataDialog(QWidget *parent)
-    : QDialog(parent), ui(new Ui::QMTrainDataDialog)
+    : QMDialog(parent),
+    ui(new Ui::QMTrainDataDialog)
 {
     ui->setupUi(this);
 
@@ -42,13 +43,6 @@ QMTrainDataDialog::QMTrainDataDialog(QWidget *parent)
 QMTrainDataDialog::~QMTrainDataDialog()
 {
     delete ui;
-}
-
-void QMTrainDataDialog::closeEvent(QCloseEvent *event)
-{
-    saveSettings();
-
-    QDialog::closeEvent(event);
 }
 
 void QMTrainDataDialog::saveSettings()
@@ -118,14 +112,4 @@ void QMTrainDataDialog::reject()
     }
 
     QDialog::reject();
-}
-
-void QMTrainDataDialog::keyPressEvent(QKeyEvent *event)
-{
-    if (event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
-    {
-        return;
-    }
-
-    QDialog::keyPressEvent(event);
 }

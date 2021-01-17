@@ -16,14 +16,14 @@
 #ifndef QMTRAINDATADIALOG_H
 #define QMTRAINDATADIALOG_H
 
-#include <QDialog>
+#include "framework/qmdialog.h"
 
 namespace Ui
 {
 class QMTrainDataDialog;
 }
 
-class QMTrainDataDialog: public QDialog
+class QMTrainDataDialog: public QMDialog
 {
 Q_OBJECT
 
@@ -35,12 +35,8 @@ public:
     /// Destructor
     ~QMTrainDataDialog() override;
 
-    /// Save settings of the dialog before it closes.
-    void saveSettings();
-
-    /// Override from QDialog.
-    /// \param event
-    void closeEvent(QCloseEvent *event) override;
+    /// Override from QMDialog.
+    void saveSettings() override;
 
     /// Override from QDialog.
     void accept() override;
@@ -51,10 +47,6 @@ public:
 public slots:
     /// The apply button has been pressed.
     void apply();
-
-protected:
-    /// Override from QDialog.
-    void keyPressEvent(QKeyEvent *event) override;
 
 private:
     Ui::QMTrainDataDialog *ui;

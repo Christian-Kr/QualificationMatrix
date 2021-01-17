@@ -31,7 +31,7 @@
 #include <QDebug>
 
 QMSigningListDialog::QMSigningListDialog(QWidget *parent)
-    : QDialog(parent)
+    : QMDialog(parent)
 {
     ui = new Ui::QMSigningListDialog;
     ui->setupUi(this);
@@ -68,13 +68,6 @@ void QMSigningListDialog::accept()
     printToPDF();
 }
 
-void QMSigningListDialog::closeEvent(QCloseEvent *event)
-{
-    saveSettings();
-
-    QDialog::closeEvent(event);
-}
-
 void QMSigningListDialog::saveSettings()
 {
     auto &settings = QMApplicationSettings::getInstance();
@@ -105,16 +98,6 @@ void QMSigningListDialog::updateData()
 
     ui->cbSingleEmployee->setModel(employeeModel.get());
     ui->cbSingleEmployee->setModelColumn(1);
-}
-
-void QMSigningListDialog::keyPressEvent(QKeyEvent *event)
-{
-    if (event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
-    {
-        return;
-    }
-
-    QDialog::keyPressEvent(event);
 }
 
 void QMSigningListDialog::removeEmployee()

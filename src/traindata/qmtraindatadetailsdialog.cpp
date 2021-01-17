@@ -31,8 +31,8 @@
 #include <QDebug>
 
 QMTrainDataDetailsDialog::QMTrainDataDetailsDialog(
-    QSortFilterProxyModel *trainDataModel, int selRow, QWidget *parent)
-    : QDialog(parent)
+        QSortFilterProxyModel *trainDataModel, int selRow, QWidget *parent)
+    : QMDialog(parent)
 {
     ui = new Ui::QMTrainDataDetailsDialog();
     ui->setupUi(this);
@@ -98,13 +98,6 @@ void QMTrainDataDetailsDialog::updateUi()
     trainDataCertViewFilterModel->setFilterFixedString(
         QString::number(trainDataModelEdit->data(trainDataModelEdit->index(
             selRowEdit, 0)).toInt()));
-}
-
-void QMTrainDataDetailsDialog::closeEvent(QCloseEvent *event)
-{
-    saveSettings();
-
-    QDialog::closeEvent(event);
 }
 
 void QMTrainDataDetailsDialog::saveSettings()
@@ -204,16 +197,6 @@ void QMTrainDataDetailsDialog::reject()
     }
 
     QDialog::reject();
-}
-
-void QMTrainDataDetailsDialog::keyPressEvent(QKeyEvent *event)
-{
-    if (event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
-    {
-        return;
-    }
-
-    QDialog::keyPressEvent(event);
 }
 
 void QMTrainDataDetailsDialog::addCertificate()

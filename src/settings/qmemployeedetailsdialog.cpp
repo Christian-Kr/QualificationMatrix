@@ -27,7 +27,7 @@
 QMEmployeeDetailsDialog::QMEmployeeDetailsDialog(
         QString employeeId, QString employeeName, QString employeeGroup, bool activated,
         QWidget *parent)
-    : QDialog(parent),
+    : QMDialog(parent),
     ui(new Ui::QMEmployeeDetailsDialog),
     id(employeeId),
     name(employeeName),

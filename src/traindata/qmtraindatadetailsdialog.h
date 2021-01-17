@@ -16,7 +16,7 @@
 #ifndef QMTRAINDATADETAILSDIALOG_H
 #define QMTRAINDATADETAILSDIALOG_H
 
-#include <QDialog>
+#include "framework/qmdialog.h"
 #include <memory>
 
 // Forward declaration.
@@ -33,7 +33,7 @@ namespace Ui
 class QMTrainDataDetailsDialog;
 }
 
-class QMTrainDataDetailsDialog: public QDialog
+class QMTrainDataDetailsDialog: public QMDialog
 {
 Q_OBJECT
 
@@ -48,12 +48,8 @@ public:
     /// Destructor
     ~QMTrainDataDetailsDialog() override;
 
-    /// Save settings of the dialog before it closes.
-    void saveSettings();
-
-    /// Override from QDialog.
-    /// \param event
-    void closeEvent(QCloseEvent *event) override;
+    /// Override from QMDialog.
+    void saveSettings() override;
 
     /// Override from QDialog.
     void accept() override;
@@ -70,10 +66,6 @@ public slots:
 
     /// Remove an existing certificate.
     void removeCertificate();
-
-protected:
-    /// Override from QDialog.
-    void keyPressEvent(QKeyEvent *event) override;
 
 private:
     /// Update ui data from models.

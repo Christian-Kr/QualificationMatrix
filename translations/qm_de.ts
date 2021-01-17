@@ -2269,12 +2269,12 @@ Sind Sie sich sicher?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="196"/>
+        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="179"/>
         <source>Unterschriftenliste drucken</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="196"/>
+        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="179"/>
         <source>Gruppe nicht gültig.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2422,44 +2422,44 @@ Sind Sie sich sicher?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatadetailsdialog.cpp" line="171"/>
+        <location filename="../src/traindata/qmtraindatadetailsdialog.cpp" line="164"/>
         <source>Daten validieren</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatadetailsdialog.cpp" line="172"/>
+        <location filename="../src/traindata/qmtraindatadetailsdialog.cpp" line="165"/>
         <source>Der Mitarbeiter oder die Schulung existiert nicht. Bitte wählen Sie existierende Einträge.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatadetailsdialog.cpp" line="190"/>
+        <location filename="../src/traindata/qmtraindatadetailsdialog.cpp" line="183"/>
         <source>Schulungsdaten - Zurücksetzen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatadetailsdialog.cpp" line="191"/>
+        <location filename="../src/traindata/qmtraindatadetailsdialog.cpp" line="184"/>
         <source>Alle Änderungen werden unwiderruflich verworfen!
 
 Sind Sie sicher?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatadetailsdialog.cpp" line="253"/>
+        <location filename="../src/traindata/qmtraindatadetailsdialog.cpp" line="236"/>
         <source>Nachweis anhängen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatadetailsdialog.cpp" line="253"/>
+        <location filename="../src/traindata/qmtraindatadetailsdialog.cpp" line="236"/>
         <source>Der Nachweis existiert bereits.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatadetailsdialog.cpp" line="285"/>
+        <location filename="../src/traindata/qmtraindatadetailsdialog.cpp" line="268"/>
         <source>Nachweis entfernen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatadetailsdialog.cpp" line="285"/>
+        <location filename="../src/traindata/qmtraindatadetailsdialog.cpp" line="268"/>
         <source>Es wurde kein Eintrag selektiert.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2473,24 +2473,24 @@ Sind Sie sicher?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatadialog.cpp" line="70"/>
+        <location filename="../src/traindata/qmtraindatadialog.cpp" line="64"/>
         <source>Schulungsdaten - Speichern</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatadialog.cpp" line="71"/>
+        <location filename="../src/traindata/qmtraindatadialog.cpp" line="65"/>
         <source>Die Änderungen werden in die Datenbank geschrieben.
 
 Sind Sie sicher?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatadialog.cpp" line="104"/>
+        <location filename="../src/traindata/qmtraindatadialog.cpp" line="98"/>
         <source>Schulungsdaten - Zurücksetzen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatadialog.cpp" line="105"/>
+        <location filename="../src/traindata/qmtraindatadialog.cpp" line="99"/>
         <source>Alle Änderungen werden unwiderruflich verworfen!
 
 Sind Sie sicher?</source>

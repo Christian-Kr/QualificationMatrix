@@ -36,7 +36,7 @@
 #include <QScrollBar>
 
 QMSettingsDialog::QMSettingsDialog(QWidget *parent)
-    : QDialog(parent)
+    : QMDialog(parent)
 {
     ui = new Ui::QMSettingsDialog;
     ui->setupUi(this);
