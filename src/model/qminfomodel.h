@@ -16,7 +16,7 @@
 #ifndef QMINFOMODEL_H
 #define QMINFOMODEL_H
 
-#include "qmsqlrelationaltablemodel.h"
+#include "framework/qmsqlrelationaltablemodel.h"
 
 /// Model for database information.
 /// \author Christian Kr, Copyright 2020
