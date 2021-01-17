@@ -126,25 +126,29 @@ void QMCertificateDialog::resetFilter()
 
 void QMCertificateDialog::addCertificate()
 {
-    QMNewCertificateDialog newCertDialog(this);
-    newCertDialog.setModal(true);
-    newCertDialog.exec();
-    return;
-    auto fileName = QFileDialog::getOpenFileName(
-        this, tr("Nachweis hinzufügen"), QDir::homePath(),
-        tr("All files (*.*);;JPEG (*.jpg *.jpeg);;PDF (*.pdf)" ));
+    // Get data from user.
+    auto &settings = QMApplicationSettings::getInstance();
 
-    if (fileName.isEmpty())
+    auto width = settings.read("NewCertificateDialog/Width", 400).toInt();
+    auto height = settings.read("NewCertificateDialog/Height", 600).toInt();
+
+    QMNewCertificateDialog newCertDialog(this);
+    newCertDialog.resize(width, height);
+    newCertDialog.setModal(true);
+
+    if (newCertDialog.exec() != QDialog::Accepted)
     {
         return;
     }
 
-    QFile file(fileName);
+    // Insert certificate.
+    QFile file(newCertDialog.getCertPath());
     file.open(QIODevice::ReadOnly);
 
     if (!file.isReadable() || !file.exists())
     {
-        qWarning() << "certificate file does not exist or is not readable" << fileName;
+        qWarning() << "certificate file does not exist or is not readable"
+                << newCertDialog.getCertPath();
         return;
     }
 
@@ -156,9 +160,17 @@ void QMCertificateDialog::addCertificate()
     QFileInfo fileInfo(file.fileName());
 
     certificateModel->insertRow(certificateModel->rowCount());
-    certificateModel->setData(certificateModel->index(rowIndex, 1), fileInfo.baseName());
+
+    // Create the name and set it.
+    QString name =
+            newCertDialog.getTrain() + "_" + newCertDialog.getEmployee() +
+            newCertDialog.getEmployeeGroup() + "_" + newCertDialog.getTrainDate();
+    certificateModel->setData(certificateModel->index(rowIndex, 1), name);
     certificateModel->setData(certificateModel->index(rowIndex, 2), fileInfo.completeSuffix());
     certificateModel->setData(certificateModel->index(rowIndex, 5), hash);
+    certificateModel->setData(
+            certificateModel->index(rowIndex, 6), QDate::currentDate().toString("yyyyMMdd"));
+    certificateModel->setData(certificateModel->index(rowIndex, 7), newCertDialog.getTrainDate());
 
     // Handle related to extern/internal.
     auto dm = QMDataManager::getInstance();

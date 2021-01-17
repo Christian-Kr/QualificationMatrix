@@ -20,6 +20,7 @@
 #include <memory>
 
 // Forward declaration.
+class QSqlRelationalTableModel;
 class QSqlTableModel;
 
 QT_BEGIN_NAMESPACE
@@ -62,6 +63,10 @@ public:
     /// \return Name of the training date
     QString getTrainDate() { return trainDate; }
 
+    /// Get cert path
+    /// \return Path of the certification path
+    QString getCertPath() { return certPath; }
+
     /// Update database model data.
     void updateData();
 
@@ -79,16 +84,25 @@ public slots:
     /// Override from QDialog.
     void accept() override;
 
+    /// Make controls editable if corresponding radio button is selected.
+    void switchEmployeeSelection();
+
 private:
+    /// Check the data in the ui elements to be valid.
+    /// \return True if ok, else false.
+    bool checkInputData();
+
     Ui::QMNewCertificateDialog *ui;
 
     QString employeeGroup;
     QString employee;
     QString train;
     QString trainDate;
+    QString certPath;
 
-    std::shared_ptr<QSqlTableModel> certificateModel;
-    std::shared_ptr<QSqlTableModel> trainDataCertificateModel;
+    std::shared_ptr<QSqlRelationalTableModel> trainModel;
+    std::shared_ptr<QSqlRelationalTableModel> employeeModel;
+    std::shared_ptr<QSqlTableModel> employeeGroupModel;
 };
 
 #endif // QMNEWCERTIFICATEDIALOG_H

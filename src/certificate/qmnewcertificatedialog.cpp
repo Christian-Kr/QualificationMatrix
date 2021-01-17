@@ -18,7 +18,7 @@
 #include "model/qmdatamanager.h"
 #include "settings/qmapplicationsettings.h"
 
-#include <QSqlTableModel>
+#include <QSqlRelationalTableModel>
 #include <QSortFilterProxyModel>
 #include <QFileDialog>
 #include <QCryptographicHash>
@@ -35,6 +35,8 @@ QMNewCertificateDialog::QMNewCertificateDialog(QWidget *parent)
 {
     ui = new Ui::QMNewCertificateDialog;
     ui->setupUi(this);
+
+    updateData();
 }
 
 QMNewCertificateDialog::~QMNewCertificateDialog()
@@ -44,7 +46,72 @@ QMNewCertificateDialog::~QMNewCertificateDialog()
 
 void QMNewCertificateDialog::accept()
 {
+    if (!checkInputData())
+    {
+        return;
+    }
+
     QDialog::accept();
+}
+
+bool QMNewCertificateDialog::checkInputData()
+{
+    // Training name
+    if (ui->cbTrain->findText(ui->cbTrain->currentText()) == -1)
+    {
+        QMessageBox::information(
+                this, tr("Nachweis hinzufügen"), tr("Die eingetragene Schulung existiert nicht."));
+        return false;
+    }
+    else
+    {
+        train = ui->cbTrain->currentText();
+    }
+
+    // Employee
+    if (ui->rbEmployee->isChecked())
+    {
+        if (ui->cbEmployee->findText(ui->cbEmployee->currentText()) == -1)
+        {
+            QMessageBox::information(
+                    this, tr("Nachweis hinzufügen"),
+                    tr("Der eingetragene Mitarbeiter existiert nicht."));
+            return false;
+        }
+        else
+        {
+            employee = ui->cbEmployee->currentText();
+            employeeGroup = "";
+        }
+    }
+    else
+    {
+        if (ui->cbEmployeeGroup->findText(ui->cbEmployeeGroup->currentText()) == -1)
+        {
+            QMessageBox::information(
+                    this, tr("Nachweis hinzufügen"),
+                    tr("Die eingetragene Mitarbeitergruppe existiert nicht."));
+            return false;
+        }
+        else
+        {
+            employee = "";
+            employeeGroup = ui->cbEmployeeGroup->currentText();;
+        }
+    }
+
+    // Datum
+    trainDate = ui->cwTrainDate->selectedDate().toString("yyyyMMdd");
+
+    // Certificate path
+    if (ui->leCertificatePath->text().isEmpty())
+    {
+        QMessageBox::information(
+                this, tr("Nachweis hinzufügen"), tr("Es wurde kein Zertifikat ausgewählt."));
+        return false;
+    }
+
+    return true;
 }
 
 void QMNewCertificateDialog::closeEvent(QCloseEvent *event)
@@ -67,8 +134,19 @@ void QMNewCertificateDialog::updateData()
 {
     // Get the model data.
     auto dm = QMDataManager::getInstance();
-    certificateModel = dm->getCertificateModel();
-    trainDataCertificateModel = dm->getTrainDataCertificateModel();
+    trainModel = dm->getTrainModel();
+    employeeModel = dm->getEmployeeModel();
+    employeeGroupModel = dm->getShiftModel();
+
+    // Set model to ui elements.
+    ui->cbTrain->setModel(trainModel.get());
+    ui->cbTrain->setModelColumn(1);
+
+    ui->cbEmployee->setModel(employeeModel.get());
+    ui->cbEmployee->setModelColumn(1);
+
+    ui->cbEmployeeGroup->setModel(employeeGroupModel.get());
+    ui->cbEmployeeGroup->setModelColumn(1);
 }
 
 void QMNewCertificateDialog::openCertificatePath()
@@ -91,7 +169,9 @@ void QMNewCertificateDialog::openCertificatePath()
         return;
     }
 
-
+    file.close();
+    ui->leCertificatePath->setText(fileName);
+    certPath = fileName;
 }
 
 void QMNewCertificateDialog::keyPressEvent(QKeyEvent *event)
@@ -102,4 +182,18 @@ void QMNewCertificateDialog::keyPressEvent(QKeyEvent *event)
     }
 
     QDialog::keyPressEvent(event);
+}
+
+void QMNewCertificateDialog::switchEmployeeSelection()
+{
+    if (ui->rbEmployee->isChecked())
+    {
+        ui->cbEmployee->setEnabled(true);
+        ui->cbEmployeeGroup->setEnabled(false);
+    }
+    else
+    {
+        ui->cbEmployee->setEnabled(false);
+        ui->cbEmployeeGroup->setEnabled(true);
+    }
 }

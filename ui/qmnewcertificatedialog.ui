@@ -36,6 +36,9 @@
      <property name="text">
       <string>Mitarbeiter&amp;gruppe</string>
      </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
     </widget>
    </item>
    <item row="3" column="0" colspan="2">
@@ -51,12 +54,15 @@
    <item row="4" column="0" colspan="2">
     <widget class="QRadioButton" name="rbEmployee">
      <property name="text">
-      <string>Mitarbeiter</string>
+      <string>Mi&amp;tarbeiter</string>
      </property>
     </widget>
    </item>
    <item row="5" column="0" colspan="2">
     <widget class="QComboBox" name="cbEmployee">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="editable">
       <bool>true</bool>
      </property>
@@ -73,7 +79,11 @@
     </widget>
    </item>
    <item row="7" column="0">
-    <widget class="QLineEdit" name="leCertificatePath"/>
+    <widget class="QLineEdit" name="leCertificatePath">
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
    </item>
    <item row="7" column="1">
     <widget class="QPushButton" name="pbOpenCertificate">
@@ -154,8 +164,41 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>rbEmployee</sender>
+   <signal>clicked()</signal>
+   <receiver>QMNewCertificateDialog</receiver>
+   <slot>switchEmployeeSelection()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>225</x>
+     <y>162</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>225</x>
+     <y>322</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>rbEmployeeGroup</sender>
+   <signal>clicked()</signal>
+   <receiver>QMNewCertificateDialog</receiver>
+   <slot>switchEmployeeSelection()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>225</x>
+     <y>88</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>225</x>
+     <y>322</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>openCertificatePath()</slot>
+  <slot>switchEmployeeSelection()</slot>
  </slots>
 </ui>
