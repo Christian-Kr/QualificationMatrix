@@ -16,8 +16,7 @@
 #ifndef QMIMPORTCSVDIALOG_H
 #define QMIMPORTCSVDIALOG_H
 
-#include <QDialog>
-
+#include "framework/qmdialog.h"
 #include <memory>
 
 QT_BEGIN_NAMESPACE
@@ -27,15 +26,14 @@ class QMImportCsvDialog;
 }
 QT_END_NAMESPACE
 
-// Forward delcaration for faster compiling.
 class QFile;
 class QSqlTableModel;
 class QSqlRelationalTableModel;
 
-/// Dialog and business logic for import data from csv certificate. In future the business logic should
-/// be implemented inside the QMDataManager.
+/// Dialog and business logic for import data from csv certificate. In future the business logic
+/// should be implemented inside the QMDataManager.
 /// \author Christian Kr, Copyright 2020
-class QMImportCsvDialog: public QDialog
+class QMImportCsvDialog: public QMDialog
 {
 Q_OBJECT
 

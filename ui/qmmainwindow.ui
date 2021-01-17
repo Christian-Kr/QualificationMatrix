@@ -101,7 +101,6 @@
      <string>Ex&amp;tras</string>
     </property>
     <addaction name="actSettings"/>
-    <addaction name="actCreateEmptyDatabase"/>
    </widget>
    <widget class="QMenu" name="menuNachweise">
     <property name="title">
@@ -457,7 +456,6 @@
   <slot>showAboutQt()</slot>
   <slot>showTrainData()</slot>
   <slot>closeDatabase()</slot>
-  <slot>createEmptyDatabase()</slot>
   <slot>manageCertificate()</slot>
   <slot>showCertificateIntegrityCheck()</slot>
   <slot>showCreateSigningList()</slot>

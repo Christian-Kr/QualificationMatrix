@@ -50,7 +50,7 @@ qt5_add_translation(QM_FILES ${TS_FILES})
 add_executable(QualificationMatrix WIN32
     icons.qrc
     src/model/qmdatamanager.cpp
-    src/traindata/qmdatedelegate.cpp
+    src/framework/qmdatedelegate.cpp
     src/main.cpp
     src/framework/qmdialog.cpp
     src/general/qmmainwindow.cpp

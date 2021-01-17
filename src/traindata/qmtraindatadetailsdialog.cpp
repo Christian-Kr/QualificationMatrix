@@ -31,7 +31,7 @@
 #include <QDebug>
 
 QMTrainDataDetailsDialog::QMTrainDataDetailsDialog(
-        QSortFilterProxyModel *trainDataModel, int selRow, QWidget *parent)
+    QSortFilterProxyModel *trainDataModel, int selRow, QWidget *parent)
     : QMDialog(parent)
 {
     ui = new Ui::QMTrainDataDetailsDialog();

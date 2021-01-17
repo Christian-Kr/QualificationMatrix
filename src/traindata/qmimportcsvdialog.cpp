@@ -29,15 +29,19 @@
 #include <QDate>
 
 QMImportCsvDialog::QMImportCsvDialog(QWidget *parent)
-    : QDialog(parent), ui(new Ui::QMImportCsvDialog), trainModel(nullptr), employeeModel(nullptr),
-    shiftModel(nullptr), trainGroupModel(nullptr), trainDataStateModel(nullptr),
+    : QMDialog(parent),
+    ui(new Ui::QMImportCsvDialog),
+    trainModel(nullptr),
+    employeeModel(nullptr),
+    shiftModel(nullptr),
+    trainGroupModel(nullptr),
+    trainDataStateModel(nullptr),
     trainDataModel(nullptr)
 {
     ui->setupUi(this);
 
     // Update model data. Calling this method here is dangerous, cause there might be no model
     // data at the moment. There need to be an extra check in this class.
-    // TODO: Make more memory save.
     updateData();
 }
 
@@ -56,7 +60,7 @@ void QMImportCsvDialog::updateData()
     trainDataStateModel = dm->getTrainDataStateModel();
     trainDataModel = dm->getTrainDataModel();
 
-    // Set view.
+    // Set view
     ui->cbDefaultTrainGroup->setModel(trainGroupModel.get());
     ui->cbDefaultTrainGroup->setModelColumn(1);
 
@@ -96,11 +100,10 @@ void QMImportCsvDialog::accept()
     {
         qDebug() << "Function:" << __FUNCTION__ << "-" << ui->leImportFile->text();
         QMessageBox::critical(
-            this, tr("Importieren"), tr(
-                "Die Import-Datei existiert nicht oder ist nicht lesbar. Bitte wählen Sie "
-                "eine existierende Datei, die lesbar ist."
-                "\n\nDie Aktion wird abgebrochen."
-            ));
+            this, tr("Importieren"),
+            tr("Die Import-Datei existiert nicht oder ist nicht lesbar. Bitte wählen Sie "
+               "eine existierende Datei, die lesbar ist."
+               "\n\nDie Aktion wird abgebrochen."));
         return;
     }
 
@@ -109,8 +112,6 @@ void QMImportCsvDialog::accept()
 
 void QMImportCsvDialog::handleErrorLine(QString &line)
 {
-    qDebug() << "MESSAGE: Line to backup: " << line;
-
     if (!ui->gbcSaveNotImported->isChecked())
     {
         // Setting tells, that nothing should happen with the error line. This might be a problem
@@ -121,8 +122,7 @@ void QMImportCsvDialog::handleErrorLine(QString &line)
     QFile backupFile(ui->leBackupFile->text());
     if (!backupFile.open(QFile::Append))
     {
-        // TODO: How to handle this error?
-        qDebug() << "ERROR: Could not open certificate for saving.";
+        qCritical() << "ERROR: Could not open certificate for saving.";
     }
 
     QTextStream backupStream(&backupFile);
@@ -135,7 +135,6 @@ bool QMImportCsvDialog::checkBackupFile()
     if (ui->gbcSaveNotImported->isChecked())
     {
         QFileInfo fileInfo(ui->leBackupFile->text());
-
         if (!fileInfo.exists())
         {
             // If the certificate does not exist, try to create it.
@@ -143,15 +142,15 @@ bool QMImportCsvDialog::checkBackupFile()
             if (!file.open(QFile::ReadWrite))
             {
                 QMessageBox::critical(
-                    this, tr("Importieren"), tr(
-                        "Die Backup-Datei existiert nicht und konnte auch nicht erstellt"
-                        " werden. Bitte korrigieren Sie ihre Berechtigungen im Dateisystem"
-                        " oder wählen Sie eine existierende Datei mit "
-                        " Schreibberechtigungen."
-                        "\n\nDie Aktion wird abgebrochen."
-                    ));
+                    this, tr("Importieren"),
+                    tr("Die Backup-Datei existiert nicht und konnte auch nicht erstellt"
+                       " werden. Bitte korrigieren Sie ihre Berechtigungen im Dateisystem"
+                       " oder wählen Sie eine existierende Datei mit "
+                       " Schreibberechtigungen."
+                       "\n\nDie Aktion wird abgebrochen."));
                 return false;
             }
+
             file.close();
         }
 
@@ -161,14 +160,14 @@ bool QMImportCsvDialog::checkBackupFile()
         if (!fileInfo.isWritable())
         {
             QMessageBox::critical(
-                this, tr("Importieren"), tr(
-                    "Sie verfügen über keine Schreiberechtigungne für die Backup-Datei."
-                    " Bitte überprüfen Sie die Berechtigungen."
-                    "\n\nDie Aktion wird abgebrochen."
-                ));
+                this, tr("Importieren"),
+                tr("Sie verfügen über keine Schreiberechtigungne für die Backup-Datei."
+                   " Bitte überprüfen Sie die Berechtigungen."
+                   "\n\nDie Aktion wird abgebrochen."));
             return false;
         }
     }
+
     return true;
 }
 
@@ -242,9 +241,9 @@ void QMImportCsvDialog::parseCsv(QFile &importFile)
                 else if (ui->cbCheckForUmlauts->isChecked())
                 {
                     // Check again with umlauts.
-                    QString firstName = columns.at(0);
+                    auto firstName = columns.at(0);
                     firstName = firstName.replace("ae", "ä").replace("ue", "ü").replace("oe", "ö");
-                    QString lastName = columns.at(1);
+                    auto lastName = columns.at(1);
                     lastName = lastName.replace("ae", "ä").replace("ue", "ü").replace("oe", "ö");
                     if (name.contains(firstName) && name.contains(lastName))
                     {
@@ -268,7 +267,7 @@ void QMImportCsvDialog::parseCsv(QFile &importFile)
                 }
                 else if (ui->cbCheckForUmlauts->isChecked())
                 {
-                    QString fullName = columns.at(0);
+                    auto fullName = columns.at(0);
                     fullName = fullName.replace("ae", "ä").replace("ue", "ü").replace("oe", "ö");
                     if (name == fullName)
                     {
@@ -318,7 +317,7 @@ void QMImportCsvDialog::parseCsv(QFile &importFile)
         // Parsing the date is way more complex. There shouldn't be any " or ' sign. So it should
         // not be declared as a string. The date should also be written in iso format.
         // TODO: Support more locale formats of date.
-        QDate date = QDate::fromString(columns.at(0), "dd.MM.yyyy");
+        auto date = QDate::fromString(columns.at(0), "dd.MM.yyyy");
         columns.removeFirst();
         if (!date.isValid())
         {
@@ -329,9 +328,9 @@ void QMImportCsvDialog::parseCsv(QFile &importFile)
 
         // Get the first column for training name and search for existing. At the end, remove the
         // the column from the list.
-        int colTrainStateName = trainDataStateModel->fieldIndex("name");
-        int colTrainStateId = trainDataStateModel->fieldIndex("id");
-        int primaryKeyTrainStateName = -1;
+        auto colTrainStateName = trainDataStateModel->fieldIndex("name");
+        auto colTrainStateId = trainDataStateModel->fieldIndex("id");
+        auto primaryKeyTrainStateName = -1;
         for (int i = 0; i < trainDataStateModel->rowCount(); i++)
         {
             QString name = trainDataStateModel
@@ -356,7 +355,7 @@ void QMImportCsvDialog::parseCsv(QFile &importFile)
 
         // Finally create the data train model entry.
         trainDataModel->insertRow(trainDataModel->rowCount());
-        int rowNew = trainDataModel->rowCount() - 1;
+        auto rowNew = trainDataModel->rowCount() - 1;
 
         trainDataModel->setData(trainDataModel->index(rowNew, 1), primaryKeyEmployeeName);
         trainDataModel->setData(trainDataModel->index(rowNew, 2), primaryKeyTrainName);

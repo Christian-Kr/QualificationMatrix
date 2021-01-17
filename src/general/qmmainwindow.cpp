@@ -555,8 +555,6 @@ bool QMMainWindow::closeDatabase()
 void QMMainWindow::closeEvent(QCloseEvent *event)
 {
     QMainWindow::closeEvent(event);
-
-    // TODO: Implement further close action.
     saveSettings();
 }
 
@@ -610,59 +608,6 @@ void QMMainWindow::showSettings()
     // the result should be reseted.
     qualiResultWidget->resetFilter();
     qualiResultWidget->resetModel();
-}
-
-void QMMainWindow::createEmptyDatabase()
-{
-    // For a local database as a certificate, it will be created. For a remote database, the database have
-    // to exist. Then this function will only create the needed tables.
-
-    // Create a temporary database connection.
-    // TODO: Won't work anymore, cause the api of QDatabaseDialog has changed.
-    QMDatabaseDialog databaseDialog("tmp", this);
-    if (databaseDialog.exec() != QDialog::DialogCode::Accepted)
-    {
-        return;
-    }
-
-    if (!QSqlDatabase::contains("tmp"))
-    {
-        return;
-    }
-
-    {
-        QSqlDatabase db = QSqlDatabase::database("tmp");
-        if (!db.open())
-        {
-            QSqlDatabase::removeDatabase("tmp");
-            return;
-        }
-
-        // Open sql certificate for query.
-        QString fileName = QFileDialog::getOpenFileName(
-            this, tr("Öffne Sql-Datei"), QDir::homePath(), tr("Sql (*.sql)"));
-        if (fileName.isEmpty())
-        {
-            db.close();
-            QSqlDatabase::removeDatabase("tmp");
-
-            return;
-        }
-
-        QSqlQuery query(db);
-        QFile fileSql(fileName);
-        fileSql.open(QIODevice::Text | QIODevice::ReadWrite);
-        QString script = QTextStream(&fileSql).readAll();
-        QStringList statements = script.split(";");
-        for (int i = 0; i < statements.size(); i++)
-        {
-            qDebug() << query.exec(statements.at(i)) << query.lastError().text();
-        }
-
-        db.close();
-    }
-
-    QSqlDatabase::removeDatabase("tmp");
 }
 
 void QMMainWindow::manageCertificate()

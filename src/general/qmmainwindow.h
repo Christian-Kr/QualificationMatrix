@@ -112,9 +112,6 @@ public slots:
     /// \return True if it could be load and open from settings, else false.
     bool manageDatabaseFromSettings();
 
-    /// Create an empty database with initial emtpy structure.
-    void createEmptyDatabase();
-
     /// Save a database backup.
     /// \param db The database to save.
     /// \return True if success, else false.

@@ -33,6 +33,9 @@ namespace Ui
 class QMTrainDataDetailsDialog;
 }
 
+/// Show details of a train data entry that make editing more easy and allow changing of the
+/// certificates corresponding to a training.
+/// \author Christian Kr, Copyright 2021
 class QMTrainDataDetailsDialog: public QMDialog
 {
 Q_OBJECT

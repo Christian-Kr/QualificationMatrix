@@ -17,7 +17,7 @@
 #include "ui_qmtraindatawidget.h"
 #include "model/qmdatamanager.h"
 #include "framework/qmproxysqlrelationaldelegate.h"
-#include "qmdatedelegate.h"
+#include "framework/qmdatedelegate.h"
 #include "qmimportcsvdialog.h"
 #include "qmtraindatadetailsdialog.h"
 #include "settings/qmapplicationsettings.h"

@@ -78,9 +78,6 @@ void initShowMainWindow(QMainWindow &mainWin)
         auto savedWidth = settings.read("MainWin/Width", 500).toInt();
         auto savedHeight = settings.read("MainWin/Height", 500).toInt();
 
-        // TODO: Centering a window on screen might be different in a cross platform manner. Test
-        //  the code on Windows and Linux, to be sure it works with multiple screens and centering.
-
         mainWin.resize(savedWidth, savedHeight);
         mainWin.move(
             screen->geometry().x() + (screen->geometry().width() - savedWidth) / 2,
