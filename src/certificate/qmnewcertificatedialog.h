@@ -16,7 +16,7 @@
 #ifndef QMNEWCERTIFICATEDIALOG_H
 #define QMNEWCERTIFICATEDIALOG_H
 
-#include <QDialog>
+#include "framework/qmdialog.h"
 #include <memory>
 
 // Forward declaration.
@@ -32,7 +32,7 @@ QT_END_NAMESPACE
 
 /// Take all information to add a new certificate.
 /// \author Christian Kr, Copyright 2020
-class QMNewCertificateDialog: public QDialog
+class QMNewCertificateDialog: public QMDialog
 {
 Q_OBJECT
 
@@ -44,8 +44,8 @@ public:
     /// Destructor
     ~QMNewCertificateDialog() override;
 
-    /// Save settings from the dialog.
-    void saveSettings();
+    /// Override from QMDialog.
+    void saveSettings() override;
 
     /// Get employee
     /// \return Name of the employee
@@ -69,13 +69,6 @@ public:
 
     /// Update database model data.
     void updateData();
-
-protected:
-    /// Override from QDialog.
-    void closeEvent(QCloseEvent *event) override;
-
-    /// Override from QDialog.
-    void keyPressEvent(QKeyEvent *event) override;
 
 public slots:
     /// Open certificate path file.

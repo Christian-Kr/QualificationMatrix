@@ -16,7 +16,7 @@
 #ifndef QMCERTIFICATEINTEGRITYCHECKDIALOG_H
 #define QMCERTIFICATEINTEGRITYCHECKDIALOG_H
 
-#include <QDialog>
+#include "framework/qmdialog.h"
 #include <memory>
 
 // Forward declaration.
@@ -31,7 +31,7 @@ QT_END_NAMESPACE
 
 /// Show dialog for integrity check of certificate database.
 /// \author Christian Kr, Copyright 2020
-class QMCertificateIntegrityCheckDialog: public QDialog
+class QMCertificateIntegrityCheckDialog: public QMDialog
 {
 Q_OBJECT
 
@@ -43,21 +43,14 @@ public:
     /// Destructor
     ~QMCertificateIntegrityCheckDialog() override;
 
-    /// Save settings from the dialog.
-    void saveSettings();
+    /// Override from QMDialog.
+    void saveSettings() override;
 
     /// Accept dialog: Run check!
     void accept() override;
 
     /// Run integrity check.
     void runCheck();
-
-protected:
-    /// Override from QDialog.
-    void closeEvent(QCloseEvent *event) override;
-
-    /// Override from QDialog.
-    void keyPressEvent(QKeyEvent *event) override;
 
 public slots:
     /// Update the models, cause they might have changed.

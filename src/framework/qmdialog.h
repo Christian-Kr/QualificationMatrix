@@ -20,7 +20,7 @@
 
 /// General dialog class which implements functionalities, that should be available in all other
 /// dialogs.
-/// \author Christian Kr <CerebrosuS_aedd_gmx.net>
+/// \author Christian Kr, Copyright 2020
 class QMDialog: public QDialog
 {
 Q_OBJECT
