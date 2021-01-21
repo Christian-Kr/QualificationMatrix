@@ -55,7 +55,7 @@ Qt::ItemFlags QMEmployeeModel::flags(const QModelIndex &index) const
             this->index(index.row(), 3), Qt::DisplayRole).toBool();
     if (!activated)
     {
-        return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
+        return Qt::ItemIsEditable | Qt::ItemIsSelectable;
     }
 
     return QSqlRelationalTableModel::flags(index);

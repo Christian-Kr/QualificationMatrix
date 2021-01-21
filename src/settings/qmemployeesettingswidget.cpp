@@ -210,6 +210,8 @@ void QMEmployeeSettingsWidget::addEmployee()
 
     // Set the new employee name in edit mode.
     employeeModel->setData(
+        employeeModel->index(employeeModel->rowCount() - 1, 3), 1);
+    employeeModel->setData(
         employeeModel->index(employeeModel->rowCount() - 1, 1), tr("Name eingeben"));
     ui->tvEmployee->edit(employeeFilterModel->index(employeeModel->rowCount() - 1, 1));
 
