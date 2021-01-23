@@ -753,7 +753,7 @@
     <message>
         <location filename="../ui/qmemployeedetailsdialog.ui" line="215"/>
         <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmemployeedetailsdialog.h" line="268"/>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="233"/>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="235"/>
         <source>Schulungsausnahmen</source>
         <translation type="unfinished"></translation>
     </message>
@@ -786,58 +786,58 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="124"/>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="126"/>
         <source>Speichern</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="125"/>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="127"/>
         <source>Sollen die Änderungen jetzt in die Datenbank geschrieben werden?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="157"/>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="159"/>
         <source>Funktion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="158"/>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="160"/>
         <source>Es gibt keinen Grund, eine Funktion zu einem Mitarbeiter hinzuzufügen, wenn keine Funktion existiert.
 
 Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="181"/>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="183"/>
         <source>Schulungsausnahme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="181"/>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="183"/>
         <source>Es gibt keinen Grund, eine Schulungsausnahme zu definieren, wenn keine Schulung existiert.
 
 Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="203"/>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="205"/>
         <source>Erklärung über den Grund eintragen!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="215"/>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="217"/>
         <source>Funktionszugehörigkeit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="216"/>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="218"/>
         <source>Bitte selektieren Sie genau eine Funktion um Sie zu entfernen.
 
 Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="234"/>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="236"/>
         <source>Bitte selektieren Sie genau eine Ausnahme um Sie zu entfernen.
 
 Die Aktion wird abgebrochen.</source>
@@ -995,36 +995,36 @@ Sind Sie sich sicher?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="213"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="215"/>
         <source>Name eingeben</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="227"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="229"/>
         <source>Gruppenname eingeben</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="243"/>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="269"/>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="281"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="245"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="271"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="283"/>
         <source>Mitarbeitergruppe löschen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="244"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="246"/>
         <source>Es wurde keine gültige Gruppe ausgewählt.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="270"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="272"/>
         <source>Es existieren Verweise auf die Gruppe in den Mitarbeiterdefinitionen. Bitte löschen Sie zuerst die entsprechenden Verweise oder ändern Sie deren Gruppenzugehörigkeit.
 
 Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="282"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="284"/>
         <source>Die Mitarbeitergruppe konnte aus einem unbekannten Grund nicht gelöscht werden. Bitte informieren Sie den Entwickler zur Fehlerbehebung.</source>
         <translation type="unfinished"></translation>
     </message>
