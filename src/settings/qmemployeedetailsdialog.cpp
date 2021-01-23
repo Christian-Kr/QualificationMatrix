@@ -82,11 +82,13 @@ void QMEmployeeDetailsDialog::updateData()
 
     employeeFuncFilterModel->setSourceModel(employeeFuncModel.get());
     employeeFuncFilterModel->setFilterKeyColumn(1);
-    employeeFuncFilterModel->setFilterFixedString(name);
+    employeeFuncFilterModel->setFilterRegExp(
+        QRegExp("^" + name + "$", Qt::CaseInsensitive, QRegExp::RegExp));
 
     trainExceptionFilterModel->setSourceModel(trainExceptionModel.get());
     trainExceptionFilterModel->setFilterKeyColumn(1);
-    trainExceptionFilterModel->setFilterFixedString(name);
+    trainExceptionFilterModel->setFilterRegExp(
+        QRegExp("^" + name + "$", Qt::CaseInsensitive, QRegExp::RegExp));
 
     // Update the views.
     ui->tvEmployeeFunc->setModel(employeeFuncFilterModel);
