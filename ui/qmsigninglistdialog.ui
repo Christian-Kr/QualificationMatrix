@@ -48,6 +48,9 @@
          </item>
          <item>
           <widget class="QCheckBox" name="cbCreateTrainDataEntries">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="text">
             <string>Geplante Schulungseinträge erstellen</string>
            </property>
