@@ -17,7 +17,7 @@
    <item>
     <widget class="QTabWidget" name="twGroups">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="taGeneral">
       <attribute name="title">
@@ -223,6 +223,23 @@
             </widget>
            </item>
            <item>
+            <widget class="QToolButton" name="tbClear">
+             <property name="text">
+              <string>...</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../icons.qrc">
+               <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>22</width>
+               <height>22</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item>
             <spacer name="verticalSpacer_2">
              <property name="orientation">
               <enum>Qt::Vertical</enum>
@@ -409,6 +426,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>tbClear</sender>
+   <signal>clicked()</signal>
+   <receiver>QMSigningListDialog</receiver>
+   <slot>clearList()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>436</x>
+     <y>197</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>236</x>
+     <y>328</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <designerdata>
   <property name="gridDeltaX">
@@ -432,5 +465,6 @@
   <slot>removeEmployee()</slot>
   <slot>addEmployeeFromGroup()</slot>
   <slot>openImage()</slot>
+  <slot>clearList()</slot>
  </slots>
 </ui>

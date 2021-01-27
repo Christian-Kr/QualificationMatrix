@@ -100,6 +100,11 @@ void QMSigningListDialog::updateData()
     ui->cbSingleEmployee->setModelColumn(1);
 }
 
+void QMSigningListDialog::clearList()
+{
+    ui->lwEmployees->clear();
+}
+
 void QMSigningListDialog::removeEmployee()
 {
     auto row = ui->lwEmployees->currentRow();

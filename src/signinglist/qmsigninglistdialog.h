@@ -73,6 +73,9 @@ public slots:
     /// Open the image
     void openImage();
 
+    /// Clear signing list
+    void clearList();
+
 private:
     /// Test whether the employee list on the dialog contains the given employee name.
     /// \param employeeName Name of the employee to test.
