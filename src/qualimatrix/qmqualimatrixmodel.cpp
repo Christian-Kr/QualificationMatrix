@@ -56,6 +56,7 @@ void QMQualiMatrixModel::updateModels()
 
     trainFilterGroupModel->setSourceModel(trainModel.get());
     trainFilterGroupModel->setFilterKeyColumn(2);
+    trainFilterGroupModel->sort(2);
     trainFilterLegalModel->setSourceModel(trainFilterGroupModel);
     trainFilterLegalModel->setFilterKeyColumn(4);
     trainFilterModel->setSourceModel(trainFilterLegalModel);
