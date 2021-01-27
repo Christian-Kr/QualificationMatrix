@@ -229,7 +229,7 @@ void QMQualiMatrixModel::setFuncGroupFilter(const QString &filter)
 
 void QMQualiMatrixModel::setTrainGroupFilter(const QString &filter)
 {
-    trainFilterGroupModel->setFilterFixedString(filter);
+    trainFilterGroupModel->setFilterRegExp(filter);
 }
 
 void QMQualiMatrixModel::setFuncFilter(const QString &filter)
