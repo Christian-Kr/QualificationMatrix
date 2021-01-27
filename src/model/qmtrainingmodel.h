@@ -16,11 +16,11 @@
 #ifndef QMTRAININGMODEL_H
 #define QMTRAININGMODEL_H
 
-#include <QSqlRelationalTableModel>
+#include "framework/qmsqlrelationaltablemodel.h"
 
 /// Employee training table in sql.
 /// \author Christian Kr, Copyright 2020
-class QMTrainingModel: public QSqlRelationalTableModel
+class QMTrainingModel: public QMSqlRelationalTableModel
 {
 Q_OBJECT
 
