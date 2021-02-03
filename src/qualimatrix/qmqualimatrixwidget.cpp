@@ -127,6 +127,14 @@ void QMQualiMatrixWidget::updateData()
 
     // Update the views.
     ui->tvQualiMatrix->setModel(qualiMatrixModel.get());
+
+    // After setting the new model, the connection fo the selection model has to be reset.
+    ui->tvQualiMatrix->selectionModel()->disconnect(this,
+        SLOT(QMQualiMatrixWidget::selectionChanged()));
+    connect(
+        ui->tvQualiMatrix->selectionModel(), &QItemSelectionModel::currentChanged,
+        this, &QMQualiMatrixWidget::selectionChanged);
+
     ui->cbFuncGroupFilter->setModel(funcGroupModel.get());
     ui->cbFuncGroupFilter->setModelColumn(1);
 
@@ -186,7 +194,8 @@ void QMQualiMatrixWidget::switchLockMode()
     }
     else
     {
-        ui->tvQualiMatrix->setEditTriggers(QAbstractItemView::DoubleClicked);
+        ui->tvQualiMatrix->setEditTriggers(
+            QAbstractItemView::DoubleClicked | QAbstractItemView::EditKeyPressed);
 
         // After lock mode has been opened, start a timer to trigger the end of editing at a
         // specific time.
@@ -199,4 +208,19 @@ void QMQualiMatrixWidget::enableLocked()
 {
     ui->tbLock->setChecked(false);
     ui->tvQualiMatrix->setEditTriggers(QAbstractItemView::NoEditTriggers);
+}
+
+void QMQualiMatrixWidget::selectionChanged(
+    const QModelIndex & current, const QModelIndex & previous)
+{
+    extendDisableLocked();
+}
+
+void QMQualiMatrixWidget::extendDisableLocked()
+{
+    if (lockModeTimer->isActive())
+    {
+        lockModeTimer->stop();
+        lockModeTimer->start();
+    }
 }

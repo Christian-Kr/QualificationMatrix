@@ -70,6 +70,14 @@ public slots:
 
     void enableLocked();
 
+    /// Gets called when the selected cell changes.
+    /// \param current
+    /// \param previous
+    void selectionChanged(const QModelIndex & current, const QModelIndex & previous);
+
+    /// Extend the disable locked mode.
+    void extendDisableLocked();
+
 private:
     Ui::QMQualiMatrixWidget *ui;
 
