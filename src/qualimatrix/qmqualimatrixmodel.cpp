@@ -223,8 +223,8 @@ bool QMQualiMatrixModel::setData(const QModelIndex &index, const QVariant &value
                     qCritical() << "existing cache entry can not be removed";
                 }
             }
-            else {
-
+            else
+            {
                 qualiModel->setData(qualiModel->index(qualiStateRow, 3), tmpValue);
                 qualiModel->submitAll();
 
