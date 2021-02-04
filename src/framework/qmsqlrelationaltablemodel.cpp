@@ -42,3 +42,37 @@ bool QMSqlRelationalTableModel::select()
     emit afterSelect();
     return res;
 }
+
+void QMSqlRelationalTableModel::fetchAllSub() const
+{
+    for (int i = 0; i < columnCount(); i++)
+    {
+        QSqlTableModel *subModel = relationModel(2);
+        if (subModel == nullptr)
+        {
+            continue;
+        }
+
+        while(subModel->canFetchMore())
+        {
+            subModel->fetchMore();
+        }
+    }
+}
+
+QVariant QMSqlRelationalTableModel::data(const QModelIndex &index, int role) const
+{
+    // Before gettin any data be sure that sub model have fetched all data.
+    fetchAllSub();
+
+    return QSqlRelationalTableModel::data(index, role);
+}
+
+bool QMSqlRelationalTableModel::setData(
+        const QModelIndex &index, const QVariant &value, int role)
+{
+    // Before gettin any data be sure that sub model have fetched all data.
+    fetchAllSub();
+
+    return QSqlRelationalTableModel::setData(index, value, role);
+}

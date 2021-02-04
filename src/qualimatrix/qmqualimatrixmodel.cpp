@@ -195,7 +195,12 @@ bool QMQualiMatrixModel::setData(const QModelIndex &index, const QVariant &value
             qualiModel->setData(qualiModel->index(rowNew, 1), funcNameID);
             qualiModel->setData(qualiModel->index(rowNew, 2), trainNameID);
             qualiModel->setData(qualiModel->index(rowNew, 3), tmpValue);
-            qualiModel->submitAll();
+
+            if (!qualiModel->submitAll())
+            {
+                qCritical() << "could not add new entry to database";
+                return false;
+            }
 
             // Create a new entry in cache, to prevent from rebuild the whole cache. Cause there is
             // no entry in the table - which has now been added - there should not be an entry in
@@ -226,7 +231,12 @@ bool QMQualiMatrixModel::setData(const QModelIndex &index, const QVariant &value
             else
             {
                 qualiModel->setData(qualiModel->index(qualiStateRow, 3), tmpValue);
-                qualiModel->submitAll();
+
+                if (!qualiModel->submitAll())
+                {
+                    qCritical() << "could not add new entry to database";
+                    return false;
+                }
 
                 // Set the entry in the cache.
                 QString key = QString("%1_%2").arg(index.row()).arg(index.column());

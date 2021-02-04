@@ -34,6 +34,15 @@ public:
     /// \return True is selection was successful, else false.
     bool select() override;
 
+    /// Fetch all rows from relation tables.
+    void fetchAllSub() const;
+
+    /// Override from QSqlRelationalTableModel.
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+
+    /// Override from QSqlRelationalTableModel.
+    bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
+
 signals:
     /// Emited before select.
     void beforeSelect();
