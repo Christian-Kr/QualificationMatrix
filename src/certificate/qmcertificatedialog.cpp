@@ -183,6 +183,17 @@ void QMCertificateDialog::addCertificate()
         }
 
         certificateModel->setData(certificateModel->index(rowIndex, 3), certificateFileName);
+
+        if (!certificateModel->submitAll())
+        {
+            QMessageBox::warning(
+                    this, tr("Nachweis hinzufügen"),
+                    tr("Der Nachweis konnte hinzugefügt aber die Tabelle nicht aktualisiert werden. "
+                       "Bitte informieren Sie den Entwickler. Die Datei und der Eintrag werden "
+                       "wieder entfernt."));
+            certificateModel->revertAll();
+            QFile::remove(certificateFileName);
+        }
     }
     else
     {
@@ -200,9 +211,16 @@ void QMCertificateDialog::addCertificate()
         }
 
         certificateModel->setData(certificateModel->index(rowIndex, 4), blob);
+        if (!certificateModel->submitAll())
+        {
+            QMessageBox::warning(
+                    this, tr("Nachweis hinzufügen"),
+                    tr("Der Nachweis konnte hinzugefügt aber die Tabelle nicht aktualisiert werden. "
+                       "Bitte informieren Sie den Entwickler. Die Datei und der Eintrag werden "
+                       "wieder entfernt."));
+            certificateModel->revertAll();
+        }
     }
-
-    certificateModel->submitAll();
 }
 
 QString QMCertificateDialog::saveFileExternal(QFile &file)
