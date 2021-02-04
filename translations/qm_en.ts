@@ -59,35 +59,43 @@
     </message>
     <message>
         <location filename="../src/certificate/qmcertificatedialog.cpp" line="178"/>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="195"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="190"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="206"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="217"/>
         <source>Nachweis hinzufügen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/certificate/qmcertificatedialog.cpp" line="179"/>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="196"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="207"/>
         <source>Der Nachweis konnte nicht hinzugefügt werden. Bitte informieren Sie den Entwickler.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="273"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="191"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="218"/>
+        <source>Der Nachweis konnte hinzugefügt aber die Tabelle nicht aktualisiert werden. Bitte informieren Sie den Entwickler. Die Datei und der Eintrag werden wieder entfernt.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="291"/>
         <source>Nachweis anzeigen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="309"/>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="323"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="327"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="341"/>
         <source>Nachweis entfernen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="310"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="328"/>
         <source>Die Aktion kann zu Schulungseinträgen ohne Nachweis führen. Fortfahren?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="273"/>
-        <location filename="../src/certificate/qmcertificatedialog.cpp" line="323"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="291"/>
+        <location filename="../src/certificate/qmcertificatedialog.cpp" line="341"/>
         <source>Es wurde kein Eintrag selektiert.</source>
         <translation type="unfinished"></translation>
     </message>
