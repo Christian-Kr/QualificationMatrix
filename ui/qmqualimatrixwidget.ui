@@ -51,10 +51,10 @@
      <property name="cornerButtonEnabled">
       <bool>false</bool>
      </property>
-     <attribute name="horizontalHeaderMinimumSectionSize">
+     <attribute name="horizontalHeaderDefaultSectionSize">
       <number>30</number>
      </attribute>
-     <attribute name="horizontalHeaderDefaultSectionSize">
+     <attribute name="horizontalHeaderMinimumSectionSize">
       <number>30</number>
      </attribute>
     </widget>
@@ -117,7 +117,7 @@
         </size>
        </property>
        <property name="shortcut">
-        <string>Meta+L</string>
+        <string>Ctrl+L</string>
        </property>
        <property name="checkable">
         <bool>true</bool>
