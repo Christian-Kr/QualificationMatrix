@@ -26,6 +26,7 @@
 #include "qualiresult/qmqualiresultwidget.h"
 #include "settings/qmapplicationsettings.h"
 #include "traindata/qmtraindatadialog.h"
+#include "traindata/qmtraindatawidget.h"
 #include "database/qmdatabasedialog.h"
 #include "database/qmdatabaseupdatedialog.h"
 #include "database/qmdatabaseupdater.h"
@@ -63,6 +64,7 @@ QMMainWindow::QMMainWindow(QWidget *parent)
     // Creating widgets here, doesn't mean they will be shown on startup.
     qualiResultWidget = std::make_unique<QMQualiResultWidget>();
     qualiMatrixWidget = std::make_unique<QMQualiMatrixWidget>();
+    trainDataWidget = std::make_unique<QMTrainDataWidget>();
 
     initConnections();
 
@@ -414,6 +416,9 @@ void QMMainWindow::afterInitializeModels()
 
     qualiMatrixWidget->updateData();
     ui->twQualiMatrix->addTab(qualiMatrixWidget.get(), tr("Qualifizierungsmatrix"));
+
+    trainDataWidget->updateData();
+    ui->twQualiMatrix->addTab(trainDataWidget.get(), tr("Schulungsdaten"));
 
     // Unlock all ui elements.
     ui->actSettings->setEnabled(true);

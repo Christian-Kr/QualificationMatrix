@@ -30,6 +30,7 @@ QT_END_NAMESPACE
 class QProgressDialog;
 class QMQualiResultWidget;
 class QMQualiMatrixWidget;
+class QMTrainDataWidget;
 class QTranslator;
 class QSqlDatabase;
 
@@ -151,6 +152,7 @@ private:
     std::unique_ptr<QProgressDialog> progressDialog;
     std::unique_ptr<QMQualiResultWidget> qualiResultWidget;
     std::unique_ptr<QMQualiMatrixWidget> qualiMatrixWidget;
+    std::unique_ptr<QMTrainDataWidget> trainDataWidget;
 };
 
 #endif // QMMAINWINDOW_H
