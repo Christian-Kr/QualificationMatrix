@@ -248,7 +248,10 @@
      <normaloff>:/icons/icons/mail-attachment.svg</normaloff>:/icons/icons/mail-attachment.svg</iconset>
    </property>
    <property name="text">
-    <string>&amp;Verwalten</string>
+    <string>&amp;Nachweise verwalten</string>
+   </property>
+   <property name="toolTip">
+    <string>Nachweise verwalten</string>
    </property>
   </action>
   <action name="actIntegrityCheck">
