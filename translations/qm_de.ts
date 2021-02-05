@@ -1724,12 +1724,6 @@ Version:	</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="120"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="242"/>
-        <source>Meta+L</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../ui/qmqualimatrixwidget.ui" line="151"/>
         <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="245"/>
         <source>Funktion</source>
@@ -1763,6 +1757,12 @@ Version:	</source>
         <location filename="../ui/qmqualimatrixwidget.ui" line="73"/>
         <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="239"/>
         <source>Filtern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="120"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="242"/>
+        <source>Ctrl+L</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
