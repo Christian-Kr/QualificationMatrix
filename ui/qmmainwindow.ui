@@ -76,7 +76,7 @@
      <x>0</x>
      <y>0</y>
      <width>622</width>
-     <height>24</height>
+     <height>34</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_Datei">
@@ -104,7 +104,7 @@
    </widget>
    <widget class="QMenu" name="menuNachweise">
     <property name="title">
-     <string>Nachweise</string>
+     <string>&amp;Nachweise</string>
     </property>
     <addaction name="actIntegrityCheck"/>
     <addaction name="actManageCertificate"/>
@@ -139,7 +139,6 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actManageDatabase"/>
-   <addaction name="actTrainData"/>
    <addaction name="actSettings"/>
    <addaction name="actManageCertificate"/>
   </widget>
@@ -249,17 +248,17 @@
      <normaloff>:/icons/icons/mail-attachment.svg</normaloff>:/icons/icons/mail-attachment.svg</iconset>
    </property>
    <property name="text">
-    <string>Verwalten</string>
+    <string>&amp;Verwalten</string>
    </property>
   </action>
   <action name="actIntegrityCheck">
    <property name="text">
-    <string>Automatische Prüfung</string>
+    <string>&amp;Automatische Prüfung</string>
    </property>
   </action>
   <action name="actCreateSigningList">
    <property name="text">
-    <string>Unterschriftenliste erstellen</string>
+    <string>&amp;Unterschriftenliste erstellen</string>
    </property>
   </action>
  </widget>
