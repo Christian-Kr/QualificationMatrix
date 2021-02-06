@@ -43,6 +43,16 @@ public:
     /// Override from QSqlRelationalTableModel.
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
 
+    /// Fetch all sub data exceeding 255 limit.
+    /// \param value
+    void setFetchAll(bool value) { doFetchAll = value; }
+    bool getFetchAll() const { return doFetchAll; }
+
+    /// Fetch all sub data (relation tables) exceeding 255 limit.
+    /// \param value
+    void setFetchAllSub(bool value) { doFetchAllSub = value; }
+    bool getFetchAllSub() const { return doFetchAllSub; }
+
 signals:
     /// Emited before select.
     void beforeSelect();
@@ -53,6 +63,15 @@ signals:
     /// Emited when fetch will be run.
     /// \param currentStep Current number of fetch running.
     void nextSelect(int currentStep);
+
+private:
+    /// If true, fetch all data exceeding the 255 limit of the tables.
+    bool doFetchAll;
+
+    /// If true, fetch all data exceeding the 255 limit for sub table models. This is important
+    /// for all relational table models only. The tables of relations will be created with
+    /// QTable, which also has the limit of 255.
+    bool doFetchAllSub;
 };
 
 #endif // QMSQLRELATIONALTABLEMODEL_H

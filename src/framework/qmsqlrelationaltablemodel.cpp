@@ -21,7 +21,14 @@
 
 QMSqlRelationalTableModel::QMSqlRelationalTableModel(QObject *parent, QSqlDatabase db)
     : QSqlRelationalTableModel(parent, db)
-{}
+{
+    // Fetching all sub data exceeding 255 should be true by default. This makes sure, that
+    // relations work with big data sets.
+    doFetchAllSub = true;
+
+    // Fetching all data exceeding 255 can be true by default to make model work fully.
+    doFetchAll = true;
+}
 
 bool QMSqlRelationalTableModel::select()
 {
@@ -30,7 +37,7 @@ bool QMSqlRelationalTableModel::select()
     auto i = 0;
     auto res = QSqlRelationalTableModel::select();
 
-    while (canFetchMore())
+    while (doFetchAll && canFetchMore())
     {
         i++;
         fetchMore();
@@ -47,7 +54,7 @@ void QMSqlRelationalTableModel::fetchAllSub() const
 {
     for (int i = 0; i < columnCount(); i++)
     {
-        QSqlTableModel *subModel = relationModel(2);
+        QSqlTableModel *subModel = relationModel(i);
         if (subModel == nullptr)
         {
             continue;
@@ -63,7 +70,10 @@ void QMSqlRelationalTableModel::fetchAllSub() const
 QVariant QMSqlRelationalTableModel::data(const QModelIndex &index, int role) const
 {
     // Before gettin any data be sure that sub model have fetched all data.
-    fetchAllSub();
+    if (doFetchAllSub)
+    {
+        fetchAllSub();
+    }
 
     return QSqlRelationalTableModel::data(index, role);
 }
