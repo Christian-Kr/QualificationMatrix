@@ -56,7 +56,7 @@ public:
 public slots:
     /// Test for need of new select. Based on the models changed in application.
     /// \param sender The sending model object indicating whether the reciever needs to be updated.
-    virtual void otherModelChanged(QObject *sender) = 0;
+    virtual void otherModelChanged(QObject *sender) {};
 
 signals:
     /// Emited before select.

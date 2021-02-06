@@ -32,3 +32,8 @@ QMTrainingModel::QMTrainingModel(QObject *parent, QSqlDatabase db)
     setHeaderData(3, Qt::Horizontal, tr("Intervall"));
     setHeaderData(4, Qt::Horizontal, tr("Rechtlich Notwendig"));
 }
+
+void QMTrainingModel::otherModelChanged(QObject *sender)
+{
+    // TODO: Test what object the saender is and update model.
+}

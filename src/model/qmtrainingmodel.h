@@ -29,6 +29,10 @@ public:
     /// \param parent
     /// \param db
     explicit QMTrainingModel(QObject *parent = nullptr, QSqlDatabase db = QSqlDatabase());
+
+    /// Override from QMSqlRelationalTableModel.
+    /// \param sender The sending model object indicating whether the reciever needs to be updated.
+    void otherModelChanged(QObject *sender) override;
 };
 
 #endif // QMTRAININGMODEL_H
