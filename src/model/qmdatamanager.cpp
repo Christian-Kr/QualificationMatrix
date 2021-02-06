@@ -371,3 +371,8 @@ bool QMDataManager::readCertificateLocationPath(const QSqlDatabase &db)
 
     return false;
 }
+
+void QMDataManager::sendModelChangedInformation(QObject *sender)
+{
+    emit modelChanged(sender);
+}

@@ -168,6 +168,10 @@ private:
     std::shared_ptr<QMQualiResultModel> qualiResultModel;
     std::shared_ptr<QMQualiMatrixModel> qualiMatrixModel;
 
+    /// Send a signal to all connected models.
+    /// \param sender The sender of the information (mostly object calling this function).
+    void sendModelChangedInformation(QObject *sender);
+
 signals:
     /// Whent he models will be initialized, this signal gets emited. This is useful to inform
     /// every customer of the shared pointer models, that they might have been changed. So the
@@ -184,6 +188,10 @@ signals:
     /// Emited while models will be initialized.
     /// \param currentStep Current number of initializing model.
     void updateInitializeModels(int currentSteps);
+
+    /// Informate all registered models, that an table has been changed.
+    /// \param sender The object sending the signal.
+    void modelChanged(QObject *sender);
 
 private:
     static QMDataManager *instance;
