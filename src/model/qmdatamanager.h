@@ -137,6 +137,10 @@ public:
     /// QSqlTableModel dirty test
     bool isAnyDirty() const;
 
+    /// Send a signal to all connected models.
+    /// \param sender The sender of the information (mostly object calling this function).
+    void sendModelChangedInformation(QObject *sender);
+
 private:
     /// Constructor
     QMDataManager();
@@ -167,10 +171,6 @@ private:
     // on the basic models above. So the basic models have to be updated inside the quali models.
     std::shared_ptr<QMQualiResultModel> qualiResultModel;
     std::shared_ptr<QMQualiMatrixModel> qualiMatrixModel;
-
-    /// Send a signal to all connected models.
-    /// \param sender The sender of the information (mostly object calling this function).
-    void sendModelChangedInformation(QObject *sender);
 
 signals:
     /// Whent he models will be initialized, this signal gets emited. This is useful to inform

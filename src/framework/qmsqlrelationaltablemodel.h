@@ -53,6 +53,11 @@ public:
     void setFetchAllSub(bool value) { doFetchAllSub = value; }
     bool getFetchAllSub() const { return doFetchAllSub; }
 
+public slots:
+    /// Test for need of new select. Based on the models changed in application.
+    /// \param sender The sending model object indicating whether the reciever needs to be updated.
+    virtual void otherModelChanged(QObject *sender) = 0;
+
 signals:
     /// Emited before select.
     void beforeSelect();

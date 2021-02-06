@@ -14,6 +14,7 @@
 //
 
 #include "qmsqlrelationaltablemodel.h"
+#include "model/qmdatamanager.h"
 
 #include <QDebug>
 
@@ -26,6 +27,13 @@ QMSqlRelationalTableModel::QMSqlRelationalTableModel(QObject *parent, QSqlDataba
 
     // Fetching all data exceeding 255 can be true by default to make model work fully.
     doFetchAll = true;
+
+    // When creating a new object. Build a connection to the datamanager, to be informed of changes
+    // in other models. A derived class can then decide whether a new selection should be done
+    // or not, based on the sending object. The connection will be destroyed, when the object will
+    // be deleted.
+    auto dm = QMDataManager::getInstance();
+    connect(dm, &QMDataManager::modelChanged, this, &QMSqlRelationalTableModel::otherModelChanged);
 }
 
 bool QMSqlRelationalTableModel::select()
@@ -82,5 +90,14 @@ bool QMSqlRelationalTableModel::setData(
     // Before gettin any data be sure that sub model have fetched all data.
     fetchAllSub();
 
-    return QSqlRelationalTableModel::setData(index, value, role);
+    bool res = QSqlRelationalTableModel::setData(index, value, role);
+
+    // If change has been done, informate other models about the change.
+    if (res)
+    {
+        auto dm = QMDataManager::getInstance();
+        dm->sendModelChangedInformation(this);
+    }
+
+    return res;
 }
