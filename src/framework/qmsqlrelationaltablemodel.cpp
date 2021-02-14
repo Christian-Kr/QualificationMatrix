@@ -18,15 +18,16 @@
 
 #include <QDebug>
 
-QMSqlRelationalTableModel::QMSqlRelationalTableModel(QObject *parent, QSqlDatabase db)
+QMSqlRelationalTableModel::QMSqlRelationalTableModel(QObject *parent, QSqlDatabase db,
+    bool doFetchAll, bool doFetchAllSub)
     : QSqlRelationalTableModel(parent, db)
 {
     // Fetching all sub data exceeding 255 should be true by default. This makes sure, that
     // relations work with big data sets.
-    doFetchAllSub = true;
+    this->doFetchAllSub = doFetchAll;
 
     // Fetching all data exceeding 255 can be true by default to make model work fully.
-    doFetchAll = true;
+    this->doFetchAll = doFetchAllSub;
 
     // When creating a new object. Build a connection to the datamanager, to be informed of changes
     // in other models. A derived class can then decide whether a new selection should be done
