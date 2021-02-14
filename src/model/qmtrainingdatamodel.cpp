@@ -23,7 +23,7 @@ QMTrainingDataModel::QMTrainingDataModel(QObject *parent, const QSqlDatabase &db
 
     // The edit and join mode/strategy.
     setJoinMode(QSqlRelationalTableModel::LeftJoin);
-    setEditStrategy(QSqlTableModel::OnManualSubmit);
+    setEditStrategy(QSqlTableModel::OnFieldChange);
 
     // Specifiy header data of table.
     setHeaderData(1, Qt::Horizontal, tr("Mitarbeiter"));
