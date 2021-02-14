@@ -77,15 +77,27 @@ void QMQualiMatrixModel::buildCache()
     // Clear all data in cache.
     cache->clear();
 
+    // Build a temporary cache from qualiModel. This will improve overall update speed.
+    QHash<QString, QString> tmpCache;
+    for (int i = 0; i < qualiModel->rowCount(); i++) {
+        QString qualiDataFunc = qualiModel->data(qualiModel->index(i, 1)).toString();
+        QString qualiDataTrain = qualiModel->data(qualiModel->index(i, 2)).toString();
+        QString qualiStateRow = qualiModel->data(qualiModel->index(i, 3)).toString();
+        tmpCache.insert(QString("%1_%2").arg(qualiDataFunc).arg(qualiDataTrain), qualiStateRow);
+    }
+
+    // Now create main cache.
     for (int i = 0; i < funcFilterModel->rowCount(); i++) {
         for (int j = 0; j < trainFilterModel->rowCount(); j++) {
             emit updateBuildCache(i * trainFilterModel->rowCount() + j);
 
-            int qualiStateRow = qualiStateRowFromFuncTrain(i, j);
-            if (qualiStateRow >= 0) {
-                cache->insert(
-                    QString("%1_%2").arg(i).arg(j),
-                    qualiModel->data(qualiModel->index(qualiStateRow, 3)).toString());
+            QString qualiDataFunc = funcFilterModel->data(funcFilterModel->index(i, 1)).toString();
+            QString qualiDataTrain = trainFilterModel->data(trainFilterModel->index(j, 1))
+                .toString();
+
+            QString key = QString("%1_%2").arg(qualiDataFunc).arg(qualiDataTrain);
+            if (tmpCache.contains(key)) {
+                cache->insert(QString("%1_%2").arg(i).arg(j), tmpCache.value(key));
             }
         }
     }
