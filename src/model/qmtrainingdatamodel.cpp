@@ -36,8 +36,3 @@ QMTrainingDataModel::QMTrainingDataModel(QObject *parent, const QSqlDatabase &db
     setHeaderData(5, Qt::Horizontal, tr("Datei"));
     setRelation(5, QSqlRelation("Files", "id", "name"));
 }
-
-void QMTrainingDataModel::otherModelChanged(QObject *sender)
-{
-    // TODO: Test what object the saender is and update model.
-}
