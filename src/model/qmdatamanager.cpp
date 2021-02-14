@@ -23,6 +23,7 @@
 #include "qmtraininggroupmodel.h"
 #include "qmtrainingdatastatemodel.h"
 #include "qmemployeemodel.h"
+#include "qmemployeeviewmodel.h"
 #include "qmemployeefunctionmodel.h"
 #include "qmqualificationmatrixmodel.h"
 #include "qmtrainingexceptionmodel.h"
@@ -132,7 +133,7 @@ bool QMDataManager::testTableStructure(QSqlDatabase &db)
 
 void QMDataManager::initializeModels(QSqlDatabase &db)
 {
-    emit beforeInitializeModels(13);
+    emit beforeInitializeModels(14);
 
     // Initialize all models with the given database object.
 
@@ -205,8 +206,13 @@ void QMDataManager::initializeModels(QSqlDatabase &db)
     trainDataCertificateViewModel = std::make_shared<QMTrainDataCertificateViewModel>(nullptr, db);
     trainDataCertificateViewModel->select();
 
-    // Inform all customer about the update.
     emit updateInitializeModels(13);
+
+    employeeViewModel = std::make_shared<QMEmployeeViewModel>(nullptr, db);
+    employeeViewModel->select();
+
+    // Inform all customer about the update.
+    emit updateInitializeModels(14);
 
     // Inform all customer about the update.
     emit modelsInitialized();

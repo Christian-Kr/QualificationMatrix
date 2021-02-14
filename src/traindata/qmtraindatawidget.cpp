@@ -64,7 +64,7 @@ void QMTrainDataWidget::updateData()
 {
     // Get the model data.
     auto dm = QMDataManager::getInstance();
-    employeeModel = dm->getEmployeeModel();
+    employeeModel = dm->getEmployeeViewModel();
     trainModel = dm->getTrainModel();
     trainDataModel = dm->getTrainDataModel();
     trainDataStateModel = dm->getTrainDataStateModel();

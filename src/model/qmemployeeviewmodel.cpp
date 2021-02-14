@@ -32,30 +32,3 @@ QMEmployeeViewModel::QMEmployeeViewModel(QObject *parent, const QSqlDatabase &db
     QSqlRelationalTableModel::setHeaderData(2, Qt::Horizontal, tr("Gruppe"));
     QSqlRelationalTableModel::setRelation(2, QSqlRelation("Shift", "id", "name"));
 }
-
-QVariant QMEmployeeViewModel::data(const QModelIndex &index, int role) const
-{
-    bool activated = QMSqlRelationalTableModel::data(
-            this->index(index.row(), 3), Qt::DisplayRole).toBool();
-    if (!activated)
-    {
-        if (role == Qt::BackgroundRole)
-        {
-            return QVariant(QColor("#F8E6E0"));
-        }
-    }
-
-    return QMSqlRelationalTableModel::data(index, role);
-}
-
-Qt::ItemFlags QMEmployeeViewModel::flags(const QModelIndex &index) const
-{
-    bool activated = QMSqlRelationalTableModel::data(
-            this->index(index.row(), 3), Qt::DisplayRole).toBool();
-    if (!activated)
-    {
-        return Qt::ItemIsEditable | Qt::ItemIsSelectable;
-    }
-
-    return QMSqlRelationalTableModel::flags(index);
-}
