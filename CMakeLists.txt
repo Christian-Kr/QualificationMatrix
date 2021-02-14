@@ -67,7 +67,7 @@ add_executable(QualificationMatrix WIN32
     src/settings/qmsettingswidget.cpp
     src/settings/qmsettings.cpp
     src/settings/qmapplicationsettings.cpp
-        src/framework/qmcolorchooserdelegate.cpp
+    src/framework/qmcolorchooserdelegate.cpp
     src/settings/qmtrainsettingswidget.cpp
     src/settings/qmdatabasesettings.cpp
     src/settings/qmgeneralsettingswidget.cpp
@@ -78,12 +78,12 @@ add_executable(QualificationMatrix WIN32
     src/traindata/qmtraindatawidget.cpp
     src/traindata/qmimportcsvdialog.cpp
     src/traindata/qmtraindatadetailsdialog.cpp
-        src/framework/qmsqlrelationaltablemodel.cpp
+    src/framework/qmsqlrelationaltablemodel.cpp
     src/traindata/qmtraindatadialog.cpp
     src/database/qmdatabasedialog.cpp
     src/database/qmdatabaseupdatedialog.cpp
     src/database/qmdatabaseupdater.cpp
-        src/framework/qmbooleandelegate.cpp
+    src/framework/qmbooleandelegate.cpp
     src/settings/qmemployeedetailsdialog.cpp
     src/model/qmfunctionmodel.cpp
     src/model/qmtrainingmodel.cpp
@@ -92,6 +92,7 @@ add_executable(QualificationMatrix WIN32
     src/model/qmtraininggroupmodel.cpp
     src/model/qmtrainingdatastatemodel.cpp
     src/model/qmemployeemodel.cpp
+    src/model/qmemployeeviewmodel.cpp
     src/model/qmemployeefunctionmodel.cpp
     src/model/qmqualificationmatrixmodel.cpp
     src/model/qmtrainingexceptionmodel.cpp
