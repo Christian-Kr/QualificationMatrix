@@ -85,7 +85,7 @@ void QMSigningListDialog::updateData()
     // Get the model data.
     auto dm = QMDataManager::getInstance();
 
-    employeeModel = dm->getEmployeeModel();
+    employeeModel = dm->getEmployeeViewModel();
     shiftModel = dm->getShiftModel();
     trainModel = dm->getTrainModel();
 

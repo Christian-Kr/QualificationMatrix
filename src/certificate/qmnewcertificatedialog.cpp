@@ -126,7 +126,7 @@ void QMNewCertificateDialog::updateData()
     // Get the model data.
     auto dm = QMDataManager::getInstance();
     trainModel = dm->getTrainModel();
-    employeeModel = dm->getEmployeeModel();
+    employeeModel = dm->getEmployeeViewModel();
     employeeGroupModel = dm->getShiftModel();
 
     // Set model to ui elements.

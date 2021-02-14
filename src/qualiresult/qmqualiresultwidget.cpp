@@ -73,7 +73,7 @@ void QMQualiResultWidget::updateData()
     funcModel = dm->getFuncModel();
     trainModel = dm->getTrainModel();
     trainDataStateModel = dm->getTrainDataStateModel();
-    employeeModel = dm->getEmployeeModel();
+    employeeModel = dm->getEmployeeViewModel();
     employeeGroupModel = dm->getShiftModel();
 
     qualiResultFilterTRState->setSourceModel(qualiResultModel.get());
