@@ -97,6 +97,16 @@ void QMTrainDataWidget::updateData()
     ui->cbFilterState->setModel(trainDataStateModel.get());
     ui->cbFilterState->setModelColumn(1);
 
+    // Details dock widget.
+    ui->cbEmployee->setModel(employeeModel.get());
+    ui->cbEmployee->setModelColumn(1);
+
+    ui->cbTraining->setModel(trainModel.get());
+    ui->cbTraining->setModelColumn(1);
+
+    ui->cbState->setModel(trainDataStateModel.get());
+    ui->cbState->setModelColumn(1);
+
     resetFilter();
 }
 
