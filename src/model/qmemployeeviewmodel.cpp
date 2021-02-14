@@ -15,8 +15,6 @@
 
 #include "qmemployeeviewmodel.h"
 
-#include <QColor>
-
 QMEmployeeViewModel::QMEmployeeViewModel(QObject *parent, const QSqlDatabase &db)
     : QMSqlRelationalTableModel(parent, db)
 {
