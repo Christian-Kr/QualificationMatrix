@@ -29,6 +29,7 @@
 #include <QModelIndexList>
 #include <QSortFilterProxyModel>
 #include <QProgressDialog>
+#include <QItemSelection>
 
 QMTrainDataWidget::QMTrainDataWidget(QWidget *parent)
     : QWidget(parent), ui(new Ui::QMTrainDataWidget), employeeModel(nullptr), trainModel(nullptr),
@@ -84,6 +85,8 @@ void QMTrainDataWidget::updateData()
     ui->tvTrainData->hideColumn(0);
     ui->tvTrainData->setItemDelegate(new QMProxySqlRelationalDelegate());
     ui->tvTrainData->setItemDelegateForColumn(3, new DateDelegate());
+    connect(ui->tvTrainData->selectionModel(), &QItemSelectionModel::selectionChanged, this,
+        &QMTrainDataWidget::trainDataSelectionChanged);
 
     ui->cbFilterEmployee->setModel(employeeModel.get());
     ui->cbFilterEmployee->setModelColumn(1);
@@ -233,7 +236,7 @@ void QMTrainDataWidget::deleteSelected()
     trainDataStateFilterModel->removeRow(idxList.first().row());
 }
 
-void QMTrainDataWidget::showTrainDataDetails()
+void QMTrainDataWidget::showTrainDataDetailsDialog()
 {
     auto modelIndexList = ui->tvTrainData->selectionModel()->selectedRows();
 
@@ -258,4 +261,28 @@ void QMTrainDataWidget::showTrainDataDetails()
     detailsDialog.resize(width, height);
     detailsDialog.setModal(true);
     detailsDialog.exec();
+}
+
+void QMTrainDataWidget::showTrainDataDetails()
+{
+    auto modelIndexList = ui->tvTrainData->selectionModel()->selectedRows();
+
+    if (modelIndexList.size() != 1)
+    {
+        QMessageBox::information(
+            this, tr("Schulungseintrag"),
+            tr("Es muss gneau ein Eintrag selektiert sein um Details anzuzeigen."));
+        return;
+    }
+
+    auto modelIndex = modelIndexList.at(0);
+
+    // Show the details docked widget (might be invisible).
+    ui->dwTrainDataDetails->setVisible(true);
+}
+
+void QMTrainDataWidget::trainDataSelectionChanged(const QItemSelection &selected,
+    const QItemSelection &deselected)
+{
+    showTrainDataDetails();
 }

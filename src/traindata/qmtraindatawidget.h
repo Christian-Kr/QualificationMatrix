@@ -24,6 +24,7 @@ class QSqlRelationalTableModel;
 class QSqlTableModel;
 class QSortFilterProxyModel;
 class QProgressDialog;
+class QItemSelection;
 
 namespace Ui
 {
@@ -64,7 +65,14 @@ public slots:
     void importCsv();
 
     /// Show dialog to edit the current selected entry.
+    void showTrainDataDetailsDialog();
+
+    /// Show details in train data docked widget.
     void showTrainDataDetails();
+
+    /// Selection of trainDataTable changed.
+    void trainDataSelectionChanged(const QItemSelection &selected,
+        const QItemSelection &deselected);
 
 private:
     Ui::QMTrainDataWidget *ui;
