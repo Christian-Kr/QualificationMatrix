@@ -55,7 +55,7 @@ void DateDelegate::updateEditorGeometry(
 void DateDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const
 {
     auto de = dynamic_cast<QDateEdit *>(editor);
-    de->setDate(QDate::fromString(index.data().toString()));
+    de->setDate(QDate::fromString(index.data().toString(), "yyyy-MM-dd"));
 }
 
 void DateDelegate::setModelData(
