@@ -85,6 +85,7 @@ void QMTrainDataWidget::updateData()
     ui->tvTrainData->hideColumn(0);
     ui->tvTrainData->setItemDelegate(new QMProxySqlRelationalDelegate());
     ui->tvTrainData->setItemDelegateForColumn(3, new DateDelegate());
+    ui->tvTrainData->selectionModel()->disconnect(this);
     connect(ui->tvTrainData->selectionModel(), &QItemSelectionModel::selectionChanged, this,
         &QMTrainDataWidget::trainDataSelectionChanged);
 
@@ -289,6 +290,47 @@ void QMTrainDataWidget::showTrainDataDetails()
 
     // Show the details docked widget (might be invisible).
     ui->dwTrainDataDetails->setVisible(true);
+
+    // Set train data row to dock widget elements.
+    auto employee = trainDataStateFilterModel->data(trainDataStateFilterModel->index(
+        modelIndex.row(), 1)).toString();
+    auto idx = ui->cbEmployee->findText(employee, Qt::MatchExactly);
+
+    if (idx == -1)
+    {
+        ui->dwTrainDataDetails->setVisible(false);
+        return;
+    }
+
+    ui->cbEmployee->setCurrentIndex(idx);
+
+    auto training = trainDataStateFilterModel->data(trainDataStateFilterModel->index(
+        modelIndex.row(), 2)).toString();
+    idx = ui->cbTraining->findText(training, Qt::MatchExactly);
+
+    if (idx == -1)
+    {
+        ui->dwTrainDataDetails->setVisible(false);
+        return;
+    }
+
+    ui->cbTraining->setCurrentIndex(idx);
+
+    auto date = trainDataStateFilterModel->data(trainDataStateFilterModel->index(
+        modelIndex.row(), 3)).toString();
+    ui->cwDate->setSelectedDate(QDate::fromString(date, "yyyy-MM-dd"));
+
+    auto state = trainDataStateFilterModel->data(trainDataStateFilterModel->index(
+        modelIndex.row(), 4)).toString();
+    idx = ui->cbState->findText(state, Qt::MatchExactly);
+
+    if (idx == -1)
+    {
+        ui->dwTrainDataDetails->setVisible(false);
+        return;
+    }
+
+    ui->cbState->setCurrentIndex(idx);
 }
 
 void QMTrainDataWidget::trainDataSelectionChanged(const QItemSelection &selected,

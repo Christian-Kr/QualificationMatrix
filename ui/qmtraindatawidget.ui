@@ -273,6 +273,9 @@
              <property name="editable">
               <bool>true</bool>
              </property>
+             <property name="maxVisibleItems">
+              <number>20</number>
+             </property>
              <property name="insertPolicy">
               <enum>QComboBox::NoInsert</enum>
              </property>
@@ -296,6 +299,9 @@
             <widget class="QComboBox" name="cbTraining">
              <property name="editable">
               <bool>true</bool>
+             </property>
+             <property name="maxVisibleItems">
+              <number>20</number>
              </property>
              <property name="insertPolicy">
               <enum>QComboBox::NoInsert</enum>
@@ -338,6 +344,9 @@
            </item>
            <item>
             <widget class="QComboBox" name="cbState">
+             <property name="maxVisibleItems">
+              <number>20</number>
+             </property>
              <property name="insertPolicy">
               <enum>QComboBox::NoInsert</enum>
              </property>
