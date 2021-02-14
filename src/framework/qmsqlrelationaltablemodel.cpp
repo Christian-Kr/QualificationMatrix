@@ -24,10 +24,10 @@ QMSqlRelationalTableModel::QMSqlRelationalTableModel(QObject *parent, QSqlDataba
 {
     // Fetching all sub data exceeding 255 should be true by default. This makes sure, that
     // relations work with big data sets.
-    this->doFetchAllSub = doFetchAll;
+    this->doFetchAllSub = doFetchAllSub;
 
     // Fetching all data exceeding 255 can be true by default to make model work fully.
-    this->doFetchAll = doFetchAllSub;
+    this->doFetchAll = doFetchAll;
 
     // When creating a new object. Build a connection to the datamanager, to be informed of changes
     // in other models. A derived class can then decide whether a new selection should be done
