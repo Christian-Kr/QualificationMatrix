@@ -49,6 +49,9 @@ QMTrainDataWidget::QMTrainDataWidget(QWidget *parent)
     // Connect to data manager, to know when model reinitialization has been done.
     connect(QMDataManager::getInstance(), &QMDataManager::modelsInitialized, this,
         &QMTrainDataWidget::updateData);
+
+    // Default date
+    ui->deDateFilterTo->setDate(QDate::currentDate());
 }
 
 QMTrainDataWidget::~QMTrainDataWidget()
@@ -115,8 +118,12 @@ void QMTrainDataWidget::updateData()
 void QMTrainDataWidget::updateFilter()
 {
     auto filter = QString("relTblAl_1.name LIKE '%%1%' AND relTblAl_2.name LIKE '%%2%' "
-        "AND relTblAl_4.name LIKE '%%3%'").arg(ui->cbFilterEmployee->currentText()).arg(
-        ui->cbFilterTrain->currentText()).arg(ui->cbFilterState->currentText());
+        "AND date > '%3' AND date < '%4' AND relTblAl_4.name LIKE '%%5%'")
+        .arg(ui->cbFilterEmployee->currentText())
+        .arg(ui->cbFilterTrain->currentText())
+        .arg(ui->deDateFilterFrom->text())
+        .arg(ui->deDateFilterTo->text())
+        .arg(ui->cbFilterState->currentText());
     trainDataModel->setFilter(filter);
 }
 
