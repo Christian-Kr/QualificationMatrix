@@ -114,14 +114,10 @@ void QMTrainDataWidget::updateData()
 
 void QMTrainDataWidget::updateFilter()
 {
-    //trainFilterModel->setFilterFixedString(ui->cbFilterTrain->currentText());
-    //trainDataStateFilterModel->setFilterFixedString(ui->cbFilterState->currentText());
     auto filter = QString("relTblAl_1.name LIKE '%%1%' AND relTblAl_2.name LIKE '%%2%' "
         "AND relTblAl_4.name LIKE '%%3%'").arg(ui->cbFilterEmployee->currentText()).arg(
         ui->cbFilterTrain->currentText()).arg(ui->cbFilterState->currentText());
     trainDataModel->setFilter(filter);
-
-    qDebug() << trainDataModel->query().lastQuery();
 }
 
 void QMTrainDataWidget::resetFilter()
