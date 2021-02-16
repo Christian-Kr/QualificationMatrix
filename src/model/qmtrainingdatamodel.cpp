@@ -35,4 +35,7 @@ QMTrainingDataModel::QMTrainingDataModel(QObject *parent, const QSqlDatabase &db
     setRelation(4, QSqlRelation("TrainDataState", "id", "name"));
     setHeaderData(5, Qt::Horizontal, tr("Datei"));
     setRelation(5, QSqlRelation("Files", "id", "name"));
+
+    // Default sort.
+    setSort(3, Qt::DescendingOrder);
 }
