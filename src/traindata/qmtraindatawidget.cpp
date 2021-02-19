@@ -314,6 +314,7 @@ void QMTrainDataWidget::showTrainDataDetails()
 
     if (idx == -1)
     {
+        emit messageAvailable(tr("Der Mitarbeiter existiert nicht oder ist deaktiviert"));
         ui->dwTrainDataDetails->setVisible(false);
         return;
     }
@@ -326,6 +327,7 @@ void QMTrainDataWidget::showTrainDataDetails()
 
     if (idx == -1)
     {
+        emit messageAvailable(tr("Die Schulung existiert nicht oder ist deaktiviert"));
         ui->dwTrainDataDetails->setVisible(false);
         return;
     }
@@ -342,6 +344,7 @@ void QMTrainDataWidget::showTrainDataDetails()
 
     if (idx == -1)
     {
+        emit messageAvailable(tr("Der Schulungsstatus existiert nicht oder ist deaktiviert"));
         ui->dwTrainDataDetails->setVisible(false);
         return;
     }

@@ -74,6 +74,11 @@ public slots:
     void trainDataSelectionChanged(const QItemSelection &selected,
         const QItemSelection &deselected);
 
+signals:
+    /// There is a short message that should be displayed.
+    /// \param msg
+    void messageAvailable(QString msg);
+
 private:
     Ui::QMTrainDataWidget *ui;
 

@@ -54,6 +54,7 @@
 #include <QTextStream>
 #include <QTranslator>
 #include <QWindow>
+#include <QStatusBar>
 
 QMMainWindow::QMMainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -72,11 +73,20 @@ QMMainWindow::QMMainWindow(QWidget *parent)
     // startup, follow it. Otherwise show the manage database dialog, cause the application is not
     // useful if there is no database loaded.
     initDatabaseSettings();
+
+    // Create different connections.
+    connect(trainDataWidget.get(), &QMTrainDataWidget::messageAvailable, this,
+            &QMMainWindow::showShortMessage);
 }
 
 QMMainWindow::~QMMainWindow()
 {
     delete ui;
+}
+
+void QMMainWindow::showShortMessage(QString msg)
+{
+    ui->statusbar->showMessage(msg, 2000);
 }
 
 void QMMainWindow::initConnections() const
