@@ -181,54 +181,69 @@ void QMTrainDataWidget::addSingleEntry()
     trainDataModel->insertRow(selRow, QModelIndex());
 
     // If only one line exist. Add a new line with default values. If there are more than one line
-    // available, user the values of the last entry as default.
+    // available, use the values of the last entry as default.
     if (trainDataModel->rowCount() == 1 || selRow == 0)
     {
-        trainDataModel->setData(
-            trainDataModel->index(selRow, 1), employeeModel->data(employeeModel->index(0, 0)));
-        trainDataModel->setData(
-            trainDataModel->index(selRow, 2), trainModel->data(trainModel->index(0, 0)));
-        trainDataModel->setData(trainDataModel->index(selRow, 3), "2020.01.01");
-        trainDataModel->setData(
-            trainDataModel->index(selRow, 4),
-            trainDataStateModel->data(trainDataStateModel->index(0, 0)));
+        trainDataModel->setData(trainDataModel->index(selRow, 1),
+                employeeModel->data(employeeModel->index(0, 0)));
+        trainDataModel->setData(trainDataModel->index(selRow, 2),
+                trainModel->data(trainModel->index(0, 0)));
+        trainDataModel->setData(trainDataModel->index(selRow, 3), "2020-01-01");
+        trainDataModel->setData(trainDataModel->index(selRow, 4),
+                trainDataStateModel->data(trainDataStateModel->index(0, 0)));
     }
     else
     {
         QModelIndexList indexes = employeeModel->match(
             employeeModel->index(0, employeeModel->fieldIndex("name")), Qt::DisplayRole,
-            trainDataModel->data(trainDataModel->index(selRow - 1, 1)), Qt::MatchFixedString
-        );
+            trainDataModel->data(trainDataModel->index(selRow - 1, 1)), 1, Qt::MatchFixedString);
+
         if (indexes.size() == 1)
         {
-            trainDataModel->setData(
-                trainDataModel->index(selRow, 1),
-                employeeModel->data(employeeModel->index(indexes.first().row(), 0)));
+            trainDataModel->setData(trainDataModel->index(selRow, 1),
+                    employeeModel->data(employeeModel->index(indexes.first().row(), 0)));
+        }
+        else
+        {
+            // If no employee has been found, the last entry might be a deactivated employee. Just
+            // give an information to the user about it.
+            emit messageAvailable(tr("Der Mitarbeiter existiert nicht oder ist deaktiviert"));
+            trainDataModel->setData(trainDataModel->index(selRow, 1),
+                    employeeModel->data(employeeModel->index(0, 0)));
         }
 
         indexes = trainModel->match(
-            trainModel->index(0, trainModel->fieldIndex("name")), Qt::DisplayRole,
-            trainDataModel->data(trainDataModel->index(selRow - 1, 2)), Qt::MatchFixedString
-        );
+                trainModel->index(0, trainModel->fieldIndex("name")), Qt::DisplayRole,
+                trainDataModel->data(trainDataModel->index(selRow - 1, 2)), 1,
+                Qt::MatchFixedString);
+
         if (indexes.size() == 1)
         {
-            trainDataModel->setData(
-                trainDataModel->index(selRow, 2),
-                trainModel->data(trainModel->index(indexes.first().row(), 0)));
+            trainDataModel->setData(trainDataModel->index(selRow, 2),
+                    trainModel->data(trainModel->index(indexes.first().row(), 0)));
+        }
+        else
+        {
+            // If no training has been found, the last entry might be a deactivated training. Just
+            // give an information to the user about it.
+            emit messageAvailable(tr("Die Schulung existiert nicht oder ist deaktiviert"));
+            trainDataModel->setData(trainDataModel->index(selRow, 1),
+                    trainModel->data(trainModel->index(0, 0)));
         }
 
-        trainDataModel->setData(
-            trainDataModel->index(selRow, 3), trainModel->data(trainModel->index(selRow - 1, 3)));
+        trainDataModel->setData(trainDataModel->index(selRow, 3),
+                trainDataModel->data(trainDataModel->index(selRow - 1, 3)));
 
         indexes = trainDataStateModel->match(
-            trainDataStateModel->index(0, trainModel->fieldIndex("name")), Qt::DisplayRole,
-            trainDataModel->data(trainDataModel->index(selRow - 1, 4)), Qt::MatchFixedString
-        );
+                trainDataStateModel->index(0, trainModel->fieldIndex("name")), Qt::DisplayRole,
+                trainDataModel->data(trainDataModel->index(selRow - 1, 4)), 1,
+                Qt::MatchFixedString);
+
         if (indexes.size() == 1)
         {
-            trainDataModel->setData(
-                trainDataModel->index(selRow, 4),
-                trainDataStateModel->data(trainDataStateModel->index(indexes.first().row(), 0)));
+            trainDataModel->setData(trainDataModel->index(selRow, 4),
+                    trainDataStateModel->data(
+                            trainDataStateModel->index(indexes.first().row(), 0)));
         }
     }
 
