@@ -279,9 +279,7 @@ void QMTrainDataWidget::showTrainDataDetailsDialog()
 
     if (modelIndexList.size() != 1)
     {
-        QMessageBox::information(
-            this, tr("Schulungseintrag"),
-            tr("Es muss gneau ein Eintrag selektiert sein um Details anzuzeigen."));
+        emit messageAvailable(tr("Details werden nur bei genau einer Selektion angezeigt"));
         return;
     }
 
@@ -306,9 +304,8 @@ void QMTrainDataWidget::showTrainDataDetails()
 
     if (modelIndexList.size() != 1)
     {
-        QMessageBox::information(
-            this, tr("Schulungseintrag"),
-            tr("Es muss gneau ein Eintrag selektiert sein um Details anzuzeigen."));
+        emit messageAvailable(tr("Details werden nur bei genau einer Selektion angezeigt"));
+        ui->dwTrainDataDetails->setVisible(false);
         return;
     }
 
@@ -319,7 +316,7 @@ void QMTrainDataWidget::showTrainDataDetails()
 
     // Set train data row to dock widget elements.
     auto employee = trainDataStateFilterModel->data(trainDataStateFilterModel->index(
-        modelIndex.row(), 1)).toString();
+            modelIndex.row(), 1)).toString();
     auto idx = ui->cbEmployee->findText(employee, Qt::MatchExactly);
 
     if (idx == -1)
