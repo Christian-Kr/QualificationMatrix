@@ -23,7 +23,6 @@
 #include "settings/qmapplicationsettings.h"
 
 #include <QMessageBox>
-#include <QDebug>
 #include <QSqlRecord>
 #include <QSqlField>
 #include <QModelIndexList>
@@ -32,12 +31,19 @@
 #include <QItemSelection>
 #include <QSqlQuery>
 
+#include <QDebug>
+
 QMTrainDataWidget::QMTrainDataWidget(QWidget *parent)
-    : QWidget(parent), ui(new Ui::QMTrainDataWidget), employeeModel(nullptr), trainModel(nullptr),
-    trainDataModel(nullptr), trainDataStateModel(nullptr),
+    : QWidget(parent),
+    ui(new Ui::QMTrainDataWidget),
+    employeeModel(nullptr),
+    trainModel(nullptr),
+    trainDataModel(nullptr),
+    trainDataStateModel(nullptr),
     employeeFilterModel(new QSortFilterProxyModel(this)),
     trainFilterModel(new QSortFilterProxyModel(this)),
-    trainDataStateFilterModel(new QSortFilterProxyModel(this)), progressDialog(nullptr)
+    trainDataStateFilterModel(new QSortFilterProxyModel(this)),
+    progressDialog(nullptr)
 {
     ui->setupUi(this);
 
