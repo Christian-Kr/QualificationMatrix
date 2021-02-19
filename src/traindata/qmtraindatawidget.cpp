@@ -352,5 +352,8 @@ void QMTrainDataWidget::showTrainDataDetails()
 void QMTrainDataWidget::trainDataSelectionChanged(const QItemSelection &selected,
     const QItemSelection &deselected)
 {
-    showTrainDataDetails();
+    if (selected.indexes().size() > 0)
+    {
+        showTrainDataDetails();
+    }
 }
