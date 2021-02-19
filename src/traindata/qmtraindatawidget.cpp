@@ -255,22 +255,16 @@ void QMTrainDataWidget::deleteSelected()
 {
     // For the seletion of entries in train data, there is no special need of restriction. Cause
     // there is no table in the structure that is connected ti primary key of it.
-    QModelIndexList idxList = ui->tvTrainData->selectionModel()->selectedRows();
+    auto idxList = ui->tvTrainData->selectionModel()->selectedRows();
     if (idxList.isEmpty())
     {
-        QMessageBox::information(
-            this, tr("Eintrag löschen"),
-            tr("Es muss zumindest ein Eintrag selektiert werden, der gelöscht werden kann."
-               "\n\nDie Aktion wird abgebrochen."));
+        emit messageAvailable(tr("Kein Eintrag zum Löschen selektiert"));
         return;
     }
 
     if (idxList.size() != 1)
     {
-        QMessageBox::information(
-            this, tr("Eintrag löschen"),
-            tr("Aktuell sind mehrere Einträge selektiert, bitte selektieren Sie genau einen"
-               " Eintrag zum Löschen.\n\nDie Aktion wird abgebrochen."));
+        emit messageAvailable(tr("Zum Löschen darf nur genau ein Eintrag selektiert sein"));
         return;
     }
 
