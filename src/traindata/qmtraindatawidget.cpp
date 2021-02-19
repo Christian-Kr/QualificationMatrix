@@ -56,8 +56,9 @@ QMTrainDataWidget::QMTrainDataWidget(QWidget *parent)
     connect(QMDataManager::getInstance(), &QMDataManager::modelsInitialized, this,
         &QMTrainDataWidget::updateData);
 
-    // Default date
+    // Default settings on start.
     ui->deDateFilterTo->setDate(QDate::currentDate());
+    ui->dwTrainDataDetails->setVisible(false);
 }
 
 QMTrainDataWidget::~QMTrainDataWidget()
