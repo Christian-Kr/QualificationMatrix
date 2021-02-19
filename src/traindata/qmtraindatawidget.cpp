@@ -275,7 +275,8 @@ void QMTrainDataWidget::deleteSelected()
     }
 
     // Delete all selected entries.
-    trainDataStateFilterModel->removeRow(idxList.first().row());
+    trainDataModel->removeRow(idxList.first().row());
+    trainDataModel->select();
 }
 
 void QMTrainDataWidget::showTrainDataDetailsDialog()
