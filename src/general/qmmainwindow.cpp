@@ -30,6 +30,7 @@
 #include "database/qmdatabasedialog.h"
 #include "database/qmdatabaseupdatedialog.h"
 #include "database/qmdatabaseupdater.h"
+#include "framework/qminfolabel.h"
 #include "certificate/qmcertificatedialog.h"
 #include "certificate/qmcertificateintegritycheckdialog.h"
 #include "signinglist/qmsigninglistdialog.h"
@@ -55,10 +56,10 @@
 #include <QTranslator>
 #include <QWindow>
 #include <QStatusBar>
+#include <QLabel>
 
 QMMainWindow::QMMainWindow(QWidget *parent)
-    : QMainWindow(parent)
-{
+    : QMainWindow(parent) {
     ui = new Ui::QMMainWindow;
     ui->setupUi(this);
 
@@ -75,18 +76,15 @@ QMMainWindow::QMMainWindow(QWidget *parent)
     initDatabaseSettings();
 
     // Create different connections.
-    connect(trainDataWidget.get(), &QMTrainDataWidget::messageAvailable, this,
-            &QMMainWindow::showShortMessage);
+    connect(trainDataWidget.get(), &QMTrainDataWidget::infoMessageAvailable, ui->laInfo,
+            &QMInfoLabel::showInfoMessage);
+    connect(trainDataWidget.get(), &QMTrainDataWidget::warnMessageAvailable, ui->laInfo,
+            &QMInfoLabel::showWarnMessage);
 }
 
 QMMainWindow::~QMMainWindow()
 {
     delete ui;
-}
-
-void QMMainWindow::showShortMessage(QString msg)
-{
-    ui->statusbar->showMessage(msg, 2000);
 }
 
 void QMMainWindow::initConnections() const

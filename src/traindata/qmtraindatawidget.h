@@ -77,7 +77,11 @@ public slots:
 signals:
     /// There is a short message that should be displayed.
     /// \param msg
-    void messageAvailable(QString msg);
+    void infoMessageAvailable(QString msg);
+
+    /// There is a short warn message that should be displayed.
+    /// \param msg
+    void warnMessageAvailable(QString msg);
 
 private:
     Ui::QMTrainDataWidget *ui;

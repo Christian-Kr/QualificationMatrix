@@ -64,10 +64,6 @@ public slots:
     /// Show the dialog for manipulate the traning data.
     void showTrainData();
 
-    /// Show a short message. (Just for few seconds in the status bar.)
-    /// \param msg
-    void showShortMessage(QString msg);
-
     /// Show a progress dialog to informate about a working progress.
     /// \param title The title of the progress dialog.
     /// \param text The text to give the user an information about the work that will be done.

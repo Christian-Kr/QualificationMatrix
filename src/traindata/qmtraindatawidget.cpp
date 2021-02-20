@@ -119,6 +119,12 @@ void QMTrainDataWidget::updateData()
     ui->cbState->setModel(trainDataStateModel.get());
     ui->cbState->setModelColumn(1);
 
+    // If have to many entries available, informa the user.
+    if (trainDataModel->canFetchMore())
+    {
+        emit warnMessageAvailable(tr("Mehr als 255 Ergebnisse an Schulungsdaten verfügbar"));
+    }
+
     resetFilter();
 }
 
@@ -132,6 +138,12 @@ void QMTrainDataWidget::updateFilter()
         .arg(ui->deDateFilterTo->text())
         .arg(ui->cbFilterState->currentText());
     trainDataModel->setFilter(filter);
+
+    // If have to many entries available, informa the user.
+    if (trainDataModel->canFetchMore())
+    {
+        emit warnMessageAvailable(tr("Mehr als 255 Ergebnisse an Schulungsdaten verfügbar"));
+    }
 }
 
 void QMTrainDataWidget::resetFilter()
@@ -207,7 +219,7 @@ void QMTrainDataWidget::addSingleEntry()
         {
             // If no employee has been found, the last entry might be a deactivated employee. Just
             // give an information to the user about it.
-            emit messageAvailable(tr("Der Mitarbeiter existiert nicht oder ist deaktiviert"));
+            emit infoMessageAvailable(tr("Der Mitarbeiter existiert nicht oder ist deaktiviert"));
             trainDataModel->setData(trainDataModel->index(selRow, 1),
                     employeeModel->data(employeeModel->index(0, 0)));
         }
@@ -226,7 +238,7 @@ void QMTrainDataWidget::addSingleEntry()
         {
             // If no training has been found, the last entry might be a deactivated training. Just
             // give an information to the user about it.
-            emit messageAvailable(tr("Die Schulung existiert nicht oder ist deaktiviert"));
+            emit infoMessageAvailable(tr("Die Schulung existiert nicht oder ist deaktiviert"));
             trainDataModel->setData(trainDataModel->index(selRow, 1),
                     trainModel->data(trainModel->index(0, 0)));
         }
@@ -258,13 +270,13 @@ void QMTrainDataWidget::deleteSelected()
     auto idxList = ui->tvTrainData->selectionModel()->selectedRows();
     if (idxList.isEmpty())
     {
-        emit messageAvailable(tr("Kein Eintrag zum Löschen selektiert"));
+        emit infoMessageAvailable(tr("Kein Eintrag zum Löschen selektiert"));
         return;
     }
 
     if (idxList.size() != 1)
     {
-        emit messageAvailable(tr("Zum Löschen darf nur genau ein Eintrag selektiert sein"));
+        emit infoMessageAvailable(tr("Zum Löschen darf nur genau ein Eintrag selektiert sein"));
         return;
     }
 
@@ -279,7 +291,7 @@ void QMTrainDataWidget::showTrainDataDetailsDialog()
 
     if (modelIndexList.size() != 1)
     {
-        emit messageAvailable(tr("Details werden nur bei genau einer Selektion angezeigt"));
+        emit infoMessageAvailable(tr("Details werden nur bei genau einer Selektion angezeigt"));
         return;
     }
 
@@ -304,7 +316,7 @@ void QMTrainDataWidget::showTrainDataDetails()
 
     if (modelIndexList.size() != 1)
     {
-        emit messageAvailable(tr("Details werden nur bei genau einer Selektion angezeigt"));
+        emit infoMessageAvailable(tr("Details werden nur bei genau einer Selektion angezeigt"));
         ui->dwTrainDataDetails->setVisible(false);
         return;
     }
@@ -321,7 +333,7 @@ void QMTrainDataWidget::showTrainDataDetails()
 
     if (idx == -1)
     {
-        emit messageAvailable(tr("Der Mitarbeiter existiert nicht oder ist deaktiviert"));
+        emit infoMessageAvailable(tr("Der Mitarbeiter existiert nicht oder ist deaktiviert"));
         ui->dwTrainDataDetails->setVisible(false);
         return;
     }
@@ -334,7 +346,7 @@ void QMTrainDataWidget::showTrainDataDetails()
 
     if (idx == -1)
     {
-        emit messageAvailable(tr("Die Schulung existiert nicht oder ist deaktiviert"));
+        emit infoMessageAvailable(tr("Die Schulung existiert nicht oder ist deaktiviert"));
         ui->dwTrainDataDetails->setVisible(false);
         return;
     }
@@ -351,7 +363,7 @@ void QMTrainDataWidget::showTrainDataDetails()
 
     if (idx == -1)
     {
-        emit messageAvailable(tr("Der Schulungsstatus existiert nicht oder ist deaktiviert"));
+        emit infoMessageAvailable(tr("Der Schulungsstatus existiert nicht oder ist deaktiviert"));
         ui->dwTrainDataDetails->setVisible(false);
         return;
     }
