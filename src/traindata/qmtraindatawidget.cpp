@@ -22,7 +22,6 @@
 #include "qmtraindatadetailsdialog.h"
 #include "settings/qmapplicationsettings.h"
 
-#include <QMessageBox>
 #include <QSqlRecord>
 #include <QSqlField>
 #include <QModelIndexList>
@@ -157,21 +156,13 @@ void QMTrainDataWidget::addSingleEntry()
 {
     if (trainModel->rowCount() < 1 || employeeModel->rowCount() < 1)
     {
-        QMessageBox::critical(
-            this, tr("Eintrag hinzufügen"),
-            tr("Es gibt keine definierte Schulung und/oder keinen definierten Mitarbeiter."
-               " Bitte definieren Sie beides zuerst in den Einstellungen."
-               "\n\nDie Aktion wird abgebrochen."));
+        emit warnMessageAvailable(tr("Keine Schulung verfügbar"));
         return;
     }
 
     if (trainDataStateModel->rowCount() < 1)
     {
-        QMessageBox::critical(
-            this, tr("Eintrag hinzufügen"),
-            tr("Es gibt keinen Status der zugeordnet werden könnte. Bitte definieren Sie"
-               " in den Einstellungen zuerst einen Status für die Schulungseinträge."
-               "\n\nDie Aktion wird abgebrochen."));
+        emit warnMessageAvailable(tr("Kein Schulungsstatus verfügbar"));
         return;
     }
 

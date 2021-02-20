@@ -2042,26 +2042,26 @@ Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="166"/>
-        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="179"/>
-        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="227"/>
+        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="171"/>
+        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="184"/>
+        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="232"/>
         <source>Qualifizierungsresultat speichern</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="167"/>
+        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="172"/>
         <source>Comma-separated values (*.csv)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="179"/>
+        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="184"/>
         <source>Datei konnte nicht zum Schreiben geöffnet werden. Bitte prüfen Sie die Berechtigungen.
 
 Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="228"/>
+        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="233"/>
         <source>Die Daten wurden erfolgreich gespeichert.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2656,8 +2656,6 @@ Sind Sie sicher?</source>
     <message>
         <location filename="../ui/qmtraindatawidget.ui" line="543"/>
         <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmtraindatawidget.h" line="471"/>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="161"/>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="171"/>
         <source>Eintrag hinzufügen</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2696,55 +2694,51 @@ Sind Sie sicher?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="125"/>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="145"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="124"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="144"/>
         <source>Mehr als 255 Ergebnisse an Schulungsdaten verfügbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="162"/>
-        <source>Es gibt keine definierte Schulung und/oder keinen definierten Mitarbeiter. Bitte definieren Sie beides zuerst in den Einstellungen.
-
-Die Aktion wird abgebrochen.</source>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="159"/>
+        <source>Keine Schulung verfügbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="172"/>
-        <source>Es gibt keinen Status der zugeordnet werden könnte. Bitte definieren Sie in den Einstellungen zuerst einen Status für die Schulungseinträge.
-
-Die Aktion wird abgebrochen.</source>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="165"/>
+        <source>Kein Schulungsstatus verfügbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="222"/>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="336"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="213"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="327"/>
         <source>Der Mitarbeiter existiert nicht oder ist deaktiviert</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="241"/>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="349"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="232"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="340"/>
         <source>Die Schulung existiert nicht oder ist deaktiviert</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="273"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="264"/>
         <source>Kein Eintrag zum Löschen selektiert</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="279"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="270"/>
         <source>Zum Löschen darf nur genau ein Eintrag selektiert sein</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="294"/>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="319"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="285"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="310"/>
         <source>Details werden nur bei genau einer Selektion angezeigt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="366"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="357"/>
         <source>Der Schulungsstatus existiert nicht oder ist deaktiviert</source>
         <translation type="unfinished"></translation>
     </message>
