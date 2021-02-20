@@ -26,7 +26,6 @@
 #include <QSqlField>
 #include <QModelIndexList>
 #include <QSortFilterProxyModel>
-#include <QProgressDialog>
 #include <QItemSelection>
 #include <QSqlQuery>
 
@@ -41,8 +40,7 @@ QMTrainDataWidget::QMTrainDataWidget(QWidget *parent)
     trainDataStateModel(nullptr),
     employeeFilterModel(new QSortFilterProxyModel(this)),
     trainFilterModel(new QSortFilterProxyModel(this)),
-    trainDataStateFilterModel(new QSortFilterProxyModel(this)),
-    progressDialog(nullptr)
+    trainDataStateFilterModel(new QSortFilterProxyModel(this))
 {
     ui->setupUi(this);
 

@@ -94,8 +94,6 @@ private:
     QSortFilterProxyModel *employeeFilterModel;
     QSortFilterProxyModel *trainFilterModel;
     QSortFilterProxyModel *trainDataStateFilterModel;
-
-    QProgressDialog *progressDialog;
 };
 
 #endif // QMTRAINDATAWIDGET_H
