@@ -34,10 +34,15 @@
 #include <QTextStream>
 
 QMQualiResultWidget::QMQualiResultWidget(QWidget *parent)
-    : QWidget(parent), ui(new Ui::QMQualiResultWidget), qualiResultModel(nullptr), funcModel
-    (nullptr),
-    trainModel(nullptr), employeeModel(nullptr), employeeGroupModel(nullptr),
-    trainDataStateModel(nullptr), qualiResultFilterTRState(new QSortFilterProxyModel(this)),
+    : QWidget(parent),
+    ui(new Ui::QMQualiResultWidget),
+    qualiResultModel(nullptr),
+    funcModel(nullptr),
+    trainModel(nullptr),
+    employeeModel(nullptr),
+    employeeGroupModel(nullptr),
+    trainDataStateModel(nullptr),
+    qualiResultFilterTRState(new QSortFilterProxyModel(this)),
     qualiResultFilterTState(new QSortFilterProxyModel(this))
 {
     ui->setupUi(this);
