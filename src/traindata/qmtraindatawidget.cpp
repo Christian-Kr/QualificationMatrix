@@ -18,6 +18,7 @@
 #include "model/qmdatamanager.h"
 #include "framework/qmproxysqlrelationaldelegate.h"
 #include "framework/qmdatedelegate.h"
+#include "certificate/qmcertificatedialog.h"
 #include "qmimportcsvdialog.h"
 #include "qmtraindatadetailsdialog.h"
 #include "settings/qmapplicationsettings.h"
@@ -28,6 +29,7 @@
 #include <QSortFilterProxyModel>
 #include <QItemSelection>
 #include <QSqlQuery>
+#include <QSqlError>
 
 #include <QDebug>
 
@@ -340,4 +342,115 @@ void QMTrainDataWidget::trainDataSelectionChanged(const QItemSelection &selected
     {
         showTrainDataCertificates();
     }
+}
+
+void QMTrainDataWidget::addCertificate()
+{
+    // In order to add a certificate, the general certificate will be used. This dialog has a
+    // special mode, which returns the id of a selected certificate. With this system, it is also
+    // possible to upload new certificate.
+    auto &settings = QMApplicationSettings::getInstance();
+
+    auto varWidth = settings.read("CertificateDialog/Width");
+    auto width = (varWidth.isNull()) ? 400 : varWidth.toInt();
+    auto varHeight = settings.read("CertificateDialog/Height");
+    auto height = (varHeight.isNull()) ? 400 : varHeight.toInt();
+
+    QMCertificateDialog certDialog(Mode::CHOOSE, this);
+    certDialog.updateData();
+    certDialog.resize(width, height);
+    certDialog.setModal(true);
+    certDialog.exec();
+
+    // Get the certificate id.
+    auto selId = certDialog.getSelectedId();
+
+    if (selId == -1)
+    {
+        emit infoMessageAvailable(tr("Keinen gültigen Nachweis ausgewählt"));
+        return;
+    }
+
+    // Get the train data id.
+    auto modelIndexList = ui->tvTrainData->selectionModel()->selectedRows();
+
+    if (modelIndexList.size() != 1)
+    {
+        emit warnMessageAvailable(tr("Kein Schulungseintrag ausgewählt"));
+        return;
+    }
+
+    auto modelIndex = modelIndexList.at(0);
+    auto trainDataId = trainDataModel->data(trainDataModel->index(modelIndex.row(), 0)).toInt();
+    auto certId = selId;
+
+    // Test whether the certificate id already exist.
+    for (int i = 0; i < trainDataCertViewModel->rowCount(); i++)
+    {
+        auto tmpCertId = trainDataCertViewModel->data(trainDataCertViewModel->index(i, 2)).toInt();
+        if (tmpCertId == certId)
+        {
+            emit infoMessageAvailable(tr("Nachweis ist bereits angehängt"));
+            return;
+        }
+    }
+
+    auto row = trainDataCertModel->rowCount();
+
+    if (trainDataCertModel->insertRow(row))
+    {
+        qWarning() << "cannot add a new row";
+        qWarning() << trainDataCertModel->lastError().text();
+    }
+
+    trainDataCertModel->setData(trainDataCertModel->index(row, 1), trainDataId);
+    trainDataCertModel->setData(trainDataCertModel->index(row, 2), certId);
+
+    if (trainDataCertModel->submitAll())
+    {
+        qWarning() << "cannot submit changes to database";
+        qWarning() << trainDataCertModel->lastError().text();
+    }
+
+    trainDataCertModel->select();
+    trainDataCertViewModel->select();
+}
+
+void QMTrainDataWidget::removeCertificate()
+{
+    auto modelIndexList = ui->tvCertificates->selectionModel()->selectedRows();
+
+    if (modelIndexList.size() != 1)
+    {
+        emit infoMessageAvailable(tr("Kein Schulungsnachweis ausgewählt"));
+        return;
+    }
+
+    // Get primary key id from train data certificate correlation table.
+    auto modelIndex = modelIndexList.at(0);
+    auto trainDataCertId = trainDataCertViewModel->data(
+        trainDataCertViewModel->index(modelIndex.row(), 0)).toInt();
+
+    trainDataCertModel->setFilter(QString("id=%1").arg(trainDataCertId));
+
+    if (trainDataCertModel->rowCount() != 1)
+    {
+        emit warnMessageAvailable(tr("Es existiert kein Korrelationseintrag mit der id"));
+        return;
+    }
+
+    // From this point, only one row (0) should exist.
+    if (!trainDataCertModel->removeRow(0))
+    {
+        emit warnMessageAvailable(tr("Korrelationseintrag kann nicht gelöscht werden"));
+        return;
+    }
+
+    if (!trainDataCertModel->submitAll())
+    {
+        emit warnMessageAvailable(tr("Korrelationseintrag kann nicht gelöscht werden"));
+        return;
+    }
+
+    trainDataCertViewModel->select();
 }

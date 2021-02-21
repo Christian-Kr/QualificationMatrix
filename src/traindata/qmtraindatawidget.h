@@ -80,6 +80,12 @@ public slots:
     void trainDataSelectionChanged(const QItemSelection &selected,
         const QItemSelection &deselected);
 
+    /// Add a certificate to a train data entry.
+    void addCertificate();
+
+    /// Remove a certificate from a train data entry.
+    void removeCertificate();
+
 signals:
     /// There is a short message that should be displayed.
     /// \param msg
