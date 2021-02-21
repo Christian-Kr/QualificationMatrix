@@ -60,13 +60,27 @@ QMQualiMatrixWidget::QMQualiMatrixWidget(QWidget *parent)
 
 QMQualiMatrixWidget::~QMQualiMatrixWidget()
 {
+    // Save settings before deleting the object.
+    saveSettings();
+
     delete ui;
 }
 
 void QMQualiMatrixWidget::loadSettings()
 {
-    QMApplicationSettings &settings = QMApplicationSettings::getInstance();
+    auto &settings = QMApplicationSettings::getInstance();
+
     ui->dwFilter->setVisible(settings.read("QualiMatrix/ShowFilter", true).toBool());
+    filterVisibilityChanged();
+
+    ui->splitter->restoreState(settings.read("QualiMatrix/FilterSplitter").toByteArray());
+}
+
+void QMQualiMatrixWidget::saveSettings()
+{
+    auto &settings = QMApplicationSettings::getInstance();
+
+    settings.write("QualiMatrix/FilterSplitter", ui->splitter->saveState());
 }
 
 void QMQualiMatrixWidget::updateFilter()
@@ -91,20 +105,21 @@ void QMQualiMatrixWidget::filterVisibilityChanged()
 {
     if (ui->dwFilter->isVisible())
     {
-        ui->tbFilterVisible->setVisible(false);
+        ui->tbFilterVisible->setText(tr("Filter ausblenden"));
     }
     else
     {
-        ui->tbFilterVisible->setVisible(true);
+        ui->tbFilterVisible->setText(tr("Filter einblenden"));
     }
-
-    QMApplicationSettings &settings = QMApplicationSettings::getInstance();
-    settings.write("QualiMatrix/ShowFilter", ui->dwFilter->isVisible());
 }
 
 void QMQualiMatrixWidget::switchFilterVisibility()
 {
     ui->dwFilter->setVisible(!ui->dwFilter->isVisible());
+
+    auto &settings = QMApplicationSettings::getInstance();
+
+    settings.write("QualiMatrix/ShowFilter", ui->dwFilter->isVisible());
 }
 
 void QMQualiMatrixWidget::updateData()

@@ -47,6 +47,9 @@ public:
     /// Load settings
     void loadSettings();
 
+    /// Save settings
+    void saveSettings();
+
 public slots:
 
     /// The visibility state of the filter widget has changed.
