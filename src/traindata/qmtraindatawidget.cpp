@@ -130,6 +130,7 @@ void QMTrainDataWidget::updateData()
     ui->tvCertificates->hideColumn(0);
     ui->tvCertificates->hideColumn(1);
     ui->tvCertificates->hideColumn(2);
+    ui->tvCertificates->hideColumn(4);
 
     // If have to many entries available, informa the user.
     if (trainDataModel->canFetchMore())
