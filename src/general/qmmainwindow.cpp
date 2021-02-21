@@ -25,7 +25,6 @@
 #include "qualimatrix/qmqualimatrixwidget.h"
 #include "qualiresult/qmqualiresultwidget.h"
 #include "settings/qmapplicationsettings.h"
-#include "traindata/qmtraindatadialog.h"
 #include "traindata/qmtraindatawidget.h"
 #include "database/qmdatabasedialog.h"
 #include "database/qmdatabaseupdatedialog.h"
@@ -579,20 +578,6 @@ void QMMainWindow::saveSettings()
     settings.write("MainWin/Width", width());
     settings.write("MainWin/Height", height());
     settings.write("MainWin/Maximized", windowState().testFlag(Qt::WindowMaximized));
-}
-
-void QMMainWindow::showTrainData()
-{
-    auto &settings = QMApplicationSettings::getInstance();
-    auto varWidth = settings.read("TrainDataDialog/Width");
-    auto width = (varWidth.isNull()) ? 400 : varWidth.toInt();
-    auto varHeight = settings.read("TrainDataDialog/Height");
-    auto height = (varHeight.isNull()) ? 400 : varHeight.toInt();
-
-    QMTrainDataDialog trainDataDialog(this);
-    trainDataDialog.resize(width, height);
-    trainDataDialog.setModal(true);
-    trainDataDialog.exec();
 }
 
 void QMMainWindow::showSettings()

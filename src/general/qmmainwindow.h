@@ -61,9 +61,6 @@ public slots:
     /// Show the central settings dialog of this application.
     void showSettings();
 
-    /// Show the dialog for manipulate the traning data.
-    void showTrainData();
-
     /// Show a progress dialog to informate about a working progress.
     /// \param title The title of the progress dialog.
     /// \param text The text to give the user an information about the work that will be done.

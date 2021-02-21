@@ -70,9 +70,6 @@ public slots:
     /// Show the import csv dialog.
     void importCsv();
 
-    /// Show dialog to edit the current selected entry.
-    void showTrainDataDetailsDialog();
-
     /// Show certificates in train data docked widget.
     void showTrainDataCertificates();
 

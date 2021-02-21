@@ -83,7 +83,7 @@
      <x>0</x>
      <y>0</y>
      <width>622</width>
-     <height>34</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_Datei">
@@ -364,22 +364,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>actTrainData</sender>
-   <signal>triggered()</signal>
-   <receiver>QMMainWindow</receiver>
-   <slot>showTrainData()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>433</x>
-     <y>431</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>actCloseDatabase</sender>
    <signal>triggered()</signal>
    <receiver>QMMainWindow</receiver>
@@ -470,7 +454,6 @@
   <slot>switchTrainFilter(bool)</slot>
   <slot>printToPDF()</slot>
   <slot>showAboutQt()</slot>
-  <slot>showTrainData()</slot>
   <slot>closeDatabase()</slot>
   <slot>manageCertificate()</slot>
   <slot>showCertificateIntegrityCheck()</slot>

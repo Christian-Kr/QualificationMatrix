@@ -77,10 +77,8 @@ add_executable(QualificationMatrix WIN32
     src/qualiresult/qmqualiresultwidget.cpp
     src/traindata/qmtraindatawidget.cpp
     src/traindata/qmimportcsvdialog.cpp
-    src/traindata/qmtraindatadetailsdialog.cpp
     src/framework/qmsqlrelationaltablemodel.cpp
     src/framework/qminfolabel.cpp
-    src/traindata/qmtraindatadialog.cpp
     src/database/qmdatabasedialog.cpp
     src/database/qmdatabaseupdatedialog.cpp
     src/database/qmdatabaseupdater.cpp
@@ -116,7 +114,6 @@ add_executable(QualificationMatrix WIN32
     ui/qmtraindatawidget.ui
     ui/qmtrainsettingswidget.ui
     ui/qmimportcsvdialog.ui
-    ui/qmtraindatadialog.ui
     ui/qmdatabasedialog.ui
     ui/qmemployeedetailsdialog.ui
     ui/qmprogresslogdialog.ui
@@ -125,7 +122,6 @@ add_executable(QualificationMatrix WIN32
     ui/qmqualiresultsettingswidget.ui
     ui/qmdatabaseupdatedialog.ui
     ui/qmcertificatedialog.ui
-    ui/qmtraindatadetailsdialog.ui
     ui/qmcertificateintegritycheckdialog.ui
     ui/qmsigninglistdialog.ui
     ui/qmnewcertificatedialog.ui

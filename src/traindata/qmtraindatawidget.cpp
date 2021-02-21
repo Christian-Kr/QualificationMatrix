@@ -20,7 +20,6 @@
 #include "framework/qmdatedelegate.h"
 #include "certificate/qmcertificatedialog.h"
 #include "qmimportcsvdialog.h"
-#include "qmtraindatadetailsdialog.h"
 #include "settings/qmapplicationsettings.h"
 
 #include <QSqlRecord>
@@ -325,31 +324,6 @@ void QMTrainDataWidget::deleteSelected()
     // Delete all selected entries.
     trainDataModel->removeRow(modelIndex.row());
     trainDataModel->select();
-}
-
-void QMTrainDataWidget::showTrainDataDetailsDialog()
-{
-    auto modelIndexList = ui->tvTrainData->selectionModel()->selectedRows();
-
-    if (modelIndexList.size() != 1)
-    {
-        emit infoMessageAvailable(tr("Details werden nur bei genau einer Selektion angezeigt"));
-        return;
-    }
-
-    auto modelIndex = modelIndexList.at(0);
-
-    auto &settings = QMApplicationSettings::getInstance();
-
-    auto varWidth = settings.read("TrainDataDetailsDialog/Width");
-    auto width = (varWidth.isNull()) ? 400 : varWidth.toInt();
-    auto varHeight = settings.read("TrainDataDetailsDialog/Height");
-    auto height = (varHeight.isNull()) ? 400 : varHeight.toInt();
-
-    QMTrainDataDetailsDialog detailsDialog(trainDataStateFilterModel, modelIndex.row(), this);
-    detailsDialog.resize(width, height);
-    detailsDialog.setModal(true);
-    detailsDialog.exec();
 }
 
 void QMTrainDataWidget::showTrainDataCertificates()
