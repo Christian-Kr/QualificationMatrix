@@ -74,10 +74,10 @@ public slots:
 
     /// Informate before models will be initialized in datamanager (time expensive).
     /// \param maxSteps Number of models that will be initialized.
-    void beforeInitializeModels(int maxSteps);
+    void beforeInitModels(int maxSteps);
 
     /// Informate that all models have been initialized in data manager.
-    void afterInitializeModels();
+    void afterInitModels();
 
     /// Informate before the qualimatrix cache will be build (time expensive).
     /// \param maxSteps Maximum number of steps in progress.
@@ -89,7 +89,7 @@ public slots:
 
     /// Only call when progressdialog object has been created and dialog is visible.
     /// \param currentStep Needs be lower than maximum step.
-    void updateProgress(int currentStep);
+    void updateInitModels(int currentStep);
 
     /// Should only be called after progressdialog has been shown.
     void closeProgress();
@@ -127,8 +127,9 @@ protected:
     void closeEvent(QCloseEvent *event) override;
 
 private:
-    /// Initialize the connection of Qt's signal/slot concept.
-    void initConnections() const;
+    /// Initialize the data manager which handles the models. This includes building the
+    /// connections to react on signals.
+    void initDataManager() const;
 
     /// Initialize database information.
     void initDatabaseSettings();

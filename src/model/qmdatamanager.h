@@ -182,14 +182,14 @@ signals:
 
     /// Emited before models will be initialized.
     /// \param maxSteps Maximum number of initializing models.
-    void beforeInitializeModels(int maxSteps);
+    void beforeInitModels(int maxSteps);
 
     /// Emited after models have been initialized and everyone has been iformed about it.
-    void afterInitializeModels();
+    void afterInitModels();
 
     /// Emited while models will be initialized.
     /// \param currentStep Current number of initializing model.
-    void updateInitializeModels(int currentSteps);
+    void updateInitModels(int currentSteps);
 
     /// Informate all registered models, that an table has been changed.
     /// \param sender The object sending the signal.

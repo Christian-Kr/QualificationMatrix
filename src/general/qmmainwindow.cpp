@@ -55,30 +55,20 @@
 #include <QTranslator>
 #include <QWindow>
 #include <QStatusBar>
-#include <QLabel>
 
 QMMainWindow::QMMainWindow(QWidget *parent)
-    : QMainWindow(parent) {
+    : QMainWindow(parent)
+{
     ui = new Ui::QMMainWindow;
     ui->setupUi(this);
 
-    // Creating widgets here, doesn't mean they will be shown on startup.
-    qualiResultWidget = std::make_unique<QMQualiResultWidget>();
-    qualiMatrixWidget = std::make_unique<QMQualiMatrixWidget>();
-    trainDataWidget = std::make_unique<QMTrainDataWidget>();
-
-    initConnections();
+    // Initialize the data manager, which is responsible for the models.
+    initDataManager();
 
     // Load database on startup. If there are some settings for automatic loading of database on
-    // startup, follow it. Otherwise show the manage database dialog, cause the application is not
-    // useful if there is no database loaded.
+    // startup, follow them. Otherwise show the manage database dialog, cause the application is
+    // not useful if there is no database loaded.
     initDatabaseSettings();
-
-    // Create different connections.
-    connect(trainDataWidget.get(), &QMTrainDataWidget::infoMessageAvailable, ui->laInfo,
-            &QMInfoLabel::showInfoMessage);
-    connect(trainDataWidget.get(), &QMTrainDataWidget::warnMessageAvailable, ui->laInfo,
-            &QMInfoLabel::showWarnMessage);
 }
 
 QMMainWindow::~QMMainWindow()
@@ -86,14 +76,13 @@ QMMainWindow::~QMMainWindow()
     delete ui;
 }
 
-void QMMainWindow::initConnections() const
+void QMMainWindow::initDataManager() const
 {
     auto dm = QMDataManager::getInstance();
 
-    connect(dm, &QMDataManager::beforeInitializeModels, this,
-        &QMMainWindow::beforeInitializeModels);
-    connect(dm, &QMDataManager::updateInitializeModels, this, &QMMainWindow::updateProgress);
-    connect(dm, &QMDataManager::afterInitializeModels, this, &QMMainWindow::afterInitializeModels);
+    connect(dm, &QMDataManager::beforeInitModels, this, &QMMainWindow::beforeInitModels);
+    connect(dm, &QMDataManager::updateInitModels, this, &QMMainWindow::updateInitModels);
+    connect(dm, &QMDataManager::afterInitModels, this, &QMMainWindow::afterInitModels);
 }
 
 void QMMainWindow::initDatabaseSettings()
@@ -124,9 +113,9 @@ bool QMMainWindow::manageDatabaseFromSettings()
     // database itself.
     if (!db.open())
     {
-        QMessageBox::critical(
-            this, tr("Datenbankverbindung"),
+        QMessageBox::critical(this, tr("Datenbankverbindung"),
             tr("Die Datenbank konnte nicht geöffnet werden, überprüfen Sie ihre Einstellungen."));
+
         return false;
     }
 
@@ -140,9 +129,8 @@ void QMMainWindow::manageDatabase()
     // Before the dialog for managing a database will be shown, close a currently loaded one.
     if (QSqlDatabase::contains("default") && QSqlDatabase::database("default", false).isOpen())
     {
-        auto res = QMessageBox::question(
-            this, tr("Datenbank verwalten"),
-            tr("Es besteht bereits eine Verbindung zu einer Datenbank.\n\nJetzt trennen?"),
+        auto res = QMessageBox::question(this, tr("Datenbank verwalten"),
+            tr("Es besteht bereits eine Verbindung zu einer Datenbank. Jetzt trennen?"),
             QMessageBox::Yes | QMessageBox::No);
 
         if (res == QMessageBox::No)
@@ -230,10 +218,9 @@ void QMMainWindow::initAfterDatabaseOpened()
     // the database should be updated or not.
     if (!dm->testVersion(db))
     {
-        auto resMb = QMessageBox::question(
-            this, tr("Datenbank laden"), tr(
-                "Die Version der Datenbank entspricht nicht der Vorgabe. Möchten Sie versuchen"
-                " die Datenbank zu aktualisieren?"), QMessageBox::Yes | QMessageBox::No);
+        auto resMb = QMessageBox::question(this, tr("Datenbank laden"),
+            tr("Die Version der Datenbank entspricht nicht der Vorgabe. Möchten Sie versuchen"
+               " die Datenbank zu aktualisieren?"), QMessageBox::Yes | QMessageBox::No);
 
         if (resMb != QMessageBox::Yes)
         {
@@ -256,11 +243,11 @@ void QMMainWindow::initAfterDatabaseOpened()
         {
             if (!saveSingleDatabaseBackup(db))
             {
-                QMessageBox::critical(
-                    this, tr("Datenbank-Backup"),
+                QMessageBox::critical(this, tr("Datenbank-Backup"),
                     tr("Es konnte kein Backup erstellt werden. Da für eine Aktualisierung ein "
                        "Backup notwendig ist, wird die Aktion abgebrochen und die Datenbank "
                        "geschlossen."));
+
                 closeDatabase();
                 return;
             }
@@ -269,25 +256,24 @@ void QMMainWindow::initAfterDatabaseOpened()
         QMDatabaseUpdater databaseUpdater;
         if (!databaseUpdater.updateDatabase(db))
         {
-            QMessageBox::critical(
-                this, tr("Datenbank aktualisieren"),
+            QMessageBox::critical(this, tr("Datenbank aktualisieren"),
                 tr("Die Datenbank konnte nicht vollständig aktualisiert werden. Der Fehler ist "
                    "kritisch. Bitte spielen Sie das vorher angelegte Backup ein. Die Datenbank "
                    "wird geschlossen und nicht weiter verarbeitet."));
+
             closeDatabase();
             return;
         }
         else
         {
-            QMessageBox::information(
-                this, tr("Datenbank aktualisieren"),
+            QMessageBox::information(this, tr("Datenbank aktualisieren"),
                 tr("Die Aktualisierung der Datenbank war erfolgreich. Bitte heben Sie das "
                    "erstellte Backup für einen späteren Fall auf."));
         }
     }
 
     // After database has been loaded and version is ok, load the database models and informate
-    // the user about that.
+    // the user about it.
     dm->initializeModels(db);
     ui->statusbar->showMessage(tr("Datenbank verbunden"));
     setWindowTitle("QualificationMatrix - " + db.databaseName());
@@ -296,13 +282,14 @@ void QMMainWindow::initAfterDatabaseOpened()
     // driver is QSQLITE, cause this one is file based.
     auto &settings = QMApplicationSettings::getInstance();
     auto autoBackup = settings.read("Database/LocalAutoBackup", false).toBool();
+
     if (autoBackup && db.driverName() == "QSQLITE")
     {
         if (!runAutoBackup())
         {
-            QMessageBox::warning(
-                    this, tr("Backup"),
-                    tr("Das Backup konnte nicht erfolgreich durchgeführt werden."));
+            QMessageBox::warning(this, tr("Backup"),
+                tr("Das Backup konnte nicht erfolgreich durchgeführt werden."));
+
             return;
         }
     }
@@ -327,7 +314,7 @@ bool QMMainWindow::saveSingleDatabaseBackup(const QSqlDatabase &db)
     return true;
 }
 
-void QMMainWindow::beforeInitializeModels(int maxSteps)
+void QMMainWindow::beforeInitModels(int maxSteps)
 {
     showProgress(tr("Datenbank"), tr("Daten abrufen..."), 0, maxSteps);
 }
@@ -342,8 +329,8 @@ void QMMainWindow::beforeQualiMatrixBuildCache(int maxSteps)
     showProgress(tr("Qualifikationsmatrix"), tr("Cache aufbauen..."), 0, maxSteps);
 }
 
-void QMMainWindow::showProgress(
-    const QString &title, const QString &text, const int &minSteps, const int &maxSteps)
+void QMMainWindow::showProgress(const QString &title, const QString &text, const int &minSteps,
+    const int &maxSteps)
 {
     // The progress dialog object will be recreated on every use, cause it would show up by itself
     // when ui does not react for view seconds (qt related).
@@ -362,7 +349,7 @@ void QMMainWindow::showProgress(
     progressDialog->setVisible(true);
 }
 
-void QMMainWindow::updateProgress(int currentStep)
+void QMMainWindow::updateInitModels(int currentStep)
 {
     progressDialog->setValue(currentStep);
 
@@ -381,43 +368,48 @@ void QMMainWindow::closeProgress()
     }
 }
 
-void QMMainWindow::afterInitializeModels()
+void QMMainWindow::afterInitModels()
 {
     closeProgress();
 
     // All models are initialized now. The quali matrix models and the quali result models have
     // action that might take a long time. Therefore each of them needs to be connected to
-    // functions showing progress dialogs. Exaclty the same as "initializeModels".
+    // functions showing progress dialogs.
 
-    // todo: why are the connections build here and not before?
+    // Create widgets.
+    qualiResultWidget = std::make_unique<QMQualiResultWidget>();
+    qualiMatrixWidget = std::make_unique<QMQualiMatrixWidget>();
+    trainDataWidget = std::make_unique<QMTrainDataWidget>();
 
+    // Build progress connections.
     auto dm = QMDataManager::getInstance();
 
-    connect(
-        dm->getQualiMatrixModel().get(), &QMQualiMatrixModel::beforeBuildCache, this,
+    connect(dm->getQualiMatrixModel().get(), &QMQualiMatrixModel::beforeBuildCache, this,
         &QMMainWindow::beforeQualiMatrixBuildCache);
 
-    connect(
-        dm->getQualiMatrixModel().get(), &QMQualiMatrixModel::updateBuildCache, this,
-        &QMMainWindow::updateProgress);
+    connect(dm->getQualiMatrixModel().get(), &QMQualiMatrixModel::updateBuildCache, this,
+        &QMMainWindow::updateInitModels);
 
-    connect(
-        dm->getQualiMatrixModel().get(), &QMQualiMatrixModel::afterBuildCache, this,
+    connect(dm->getQualiMatrixModel().get(), &QMQualiMatrixModel::afterBuildCache, this,
         &QMMainWindow::closeProgress);
 
-    connect(
-        dm->getQualiResultModel().get(), &QMQualiResultModel::beforeUpdateQualiInfo, this,
+    connect(dm->getQualiResultModel().get(), &QMQualiResultModel::beforeUpdateQualiInfo, this,
         &QMMainWindow::beforeQualiResultCalculation);
 
-    connect(
-        dm->getQualiResultModel().get(), &QMQualiResultModel::updateUpdateQualiInfo, this,
-        &QMMainWindow::updateProgress);
+    connect(dm->getQualiResultModel().get(), &QMQualiResultModel::updateUpdateQualiInfo, this,
+        &QMMainWindow::updateInitModels);
 
-    connect(
-        dm->getQualiResultModel().get(), &QMQualiResultModel::afterUpdateQualiInfo, this,
+    connect(dm->getQualiResultModel().get(), &QMQualiResultModel::afterUpdateQualiInfo, this,
         &QMMainWindow::closeProgress);
 
-    // After the models have been initialized and connected, the widgets need to be set up.
+    // Build message connections.
+    connect(trainDataWidget.get(), &QMTrainDataWidget::infoMessageAvailable, ui->laInfo,
+        &QMInfoLabel::showInfoMessage);
+
+    connect(trainDataWidget.get(), &QMTrainDataWidget::warnMessageAvailable, ui->laInfo,
+        &QMInfoLabel::showWarnMessage);
+
+    // Set up the widgets.
     qualiResultWidget->updateData();
     ui->twQualiMatrix->addTab(qualiResultWidget.get(), tr("Qualifizierungsergebnis"));
 
@@ -429,7 +421,6 @@ void QMMainWindow::afterInitializeModels()
 
     // Unlock all ui elements.
     ui->actSettings->setEnabled(true);
-    ui->actTrainData->setEnabled(true);
     ui->actCloseDatabase->setEnabled(true);
 }
 
@@ -460,11 +451,9 @@ bool QMMainWindow::runAutoBackup()
 
     if (!pathInfo.isDir() || !pathInfo.exists() || !pathInfo.isWritable())
     {
-        QMessageBox::critical(
-            this, tr("Backup anlegen"), tr(
-                "Der angegebene Ordner in den Einstellungen ist kein Verzeichnis, "
-                " existiert nicht oder ist nicht beschreibbar."
-            ));
+        QMessageBox::critical(this, tr("Backup anlegen"),
+            tr("Der angegebene Ordner in den Einstellungen ist kein Verzeichnis, "
+               " existiert nicht oder ist nicht beschreibbar."));
 
         return false;
     }
@@ -498,8 +487,7 @@ bool QMMainWindow::runAutoBackup()
             QFile deleteFile(deleteFileInfo.absoluteFilePath());
             if (!deleteFile.remove())
             {
-                QMessageBox::critical(
-                    this, tr("Backup löschen"),
+                QMessageBox::critical(this, tr("Backup löschen"),
                     tr("Die Backupdatei konnte nicht gelöscht werden und wird übersprungen."));
             }
         }
@@ -511,8 +499,7 @@ bool QMMainWindow::runAutoBackup()
     QFile copyFile(db.databaseName());
     if (!copyFile.copy(pathInfo.absoluteFilePath() + QDir::separator() + newName))
     {
-        QMessageBox::critical(
-            this, tr("Backup erstellen"),
+        QMessageBox::critical(this, tr("Backup erstellen"),
             tr("Die Backupdatei konnte nicht kopiert werden und wird übersprungen."));
     }
 
@@ -528,8 +515,7 @@ bool QMMainWindow::closeDatabase()
 
         if (db.isOpen())
         {
-            auto res = QMessageBox::question(
-                this, tr("Datenbank schließen"),
+            auto res = QMessageBox::question(this, tr("Datenbank schließen"),
                 tr("Soll die verbundene Datenbank wirklich geschlossen werden? (Nicht gespeicherte"
                    " Daten gehen verloren!)"), QMessageBox::Yes | QMessageBox::No);
 
@@ -554,7 +540,6 @@ bool QMMainWindow::closeDatabase()
     // After database has been closed, everything needs to be deleted or locked.
     ui->twQualiMatrix->clear();
     ui->actSettings->setEnabled(false);
-    ui->actTrainData->setEnabled(false);
     ui->actCloseDatabase->setEnabled(false);
 
     // Set ui elements.
@@ -588,6 +573,7 @@ void QMMainWindow::showSettings()
 
     // If no database has been loaded, don't update anything.
     QSqlDatabase db = QSqlDatabase::database("default", false);
+
     if (!db.isOpen())
     {
         return;

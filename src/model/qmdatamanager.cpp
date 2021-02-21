@@ -133,59 +133,59 @@ bool QMDataManager::testTableStructure(QSqlDatabase &db)
 
 void QMDataManager::initializeModels(QSqlDatabase &db)
 {
-    emit beforeInitializeModels(14);
+    emit beforeInitModels(14);
 
     // Initialize all models with the given database object.
 
     funcModel = std::make_shared<QMFunctionModel>(this, db);
     funcModel->select();
 
-    emit updateInitializeModels(1);
+    emit updateInitModels(1);
 
     trainModel = std::make_shared<QMTrainingModel>(nullptr, db);
     trainModel->select();
 
-    emit updateInitializeModels(2);
+    emit updateInitModels(2);
 
     trainDataModel = std::make_shared<QMTrainingDataModel>(nullptr, db);
     trainDataModel->select();
 
-    emit updateInitializeModels(3);
+    emit updateInitModels(3);
 
     funcGroupModel = std::make_shared<QMFunctionGroupModel>(nullptr, db);
     funcGroupModel->select();
 
-    emit updateInitializeModels(4);
+    emit updateInitModels(4);
 
     trainGroupModel = std::make_shared<QMTrainingGroupModel>(nullptr, db);
     trainGroupModel->select();
 
-    emit updateInitializeModels(5);
+    emit updateInitModels(5);
 
     trainDataStateModel = std::make_shared<QMTrainingDataStateModel>(nullptr, db);
     trainDataStateModel->select();
 
-    emit updateInitializeModels(6);
+    emit updateInitModels(6);
 
     employeeModel = std::make_shared<QMEmployeeModel>(nullptr, db);
     employeeModel->select();
 
-    emit updateInitializeModels(7);
+    emit updateInitModels(7);
 
     employeeFuncModel = std::make_shared<QMEmployeeFunctionModel>(nullptr, db);
     employeeFuncModel->select();
 
-    emit updateInitializeModels(8);
+    emit updateInitModels(8);
 
     qualiModel = std::make_shared<QMQualificationMatrixModel>(nullptr, db);
     qualiModel->select();
 
-    emit updateInitializeModels(9);
+    emit updateInitModels(9);
 
     trainExceptionModel = std::make_shared<QMTrainingExceptionModel>(nullptr, db);
     trainExceptionModel->select();
 
-    emit updateInitializeModels(10);
+    emit updateInitModels(10);
 
     shiftModel = std::make_shared<QSqlTableModel>(nullptr, db);
     shiftModel->setTable("Shift");
@@ -193,11 +193,11 @@ void QMDataManager::initializeModels(QSqlDatabase &db)
     shiftModel->setHeaderData(1, Qt::Horizontal, tr("Name"));
     shiftModel->select();
 
-    emit updateInitializeModels(11);
+    emit updateInitModels(11);
 
     infoModel = std::make_shared<QMInfoModel>(nullptr, db);
 
-    emit updateInitializeModels(12);
+    emit updateInitModels(12);
 
     certificateModel = std::make_shared<QMCertificateModel>(nullptr, db);
     certificateModel->select();
@@ -206,19 +206,19 @@ void QMDataManager::initializeModels(QSqlDatabase &db)
     trainDataCertificateViewModel = std::make_shared<QMTrainDataCertificateViewModel>(nullptr, db);
     trainDataCertificateViewModel->select();
 
-    emit updateInitializeModels(13);
+    emit updateInitModels(13);
 
     employeeViewModel = std::make_shared<QMEmployeeViewModel>(nullptr, db);
     employeeViewModel->select();
 
     // Inform all customer about the update.
-    emit updateInitializeModels(14);
+    emit updateInitModels(14);
 
     // Inform all customer about the update.
     emit modelsInitialized();
 
     // Inform that everything is finish and every was informed.
-    emit afterInitializeModels();
+    emit afterInitModels();
 
     // Read some settings from the new database info table.
     readCertificateLocation(db);

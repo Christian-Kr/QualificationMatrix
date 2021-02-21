@@ -210,18 +210,6 @@
     <string>Über &amp;Qt</string>
    </property>
   </action>
-  <action name="actTrainData">
-   <property name="icon">
-    <iconset resource="../icons.qrc">
-     <normaloff>:/icons/icons/traindata.svg</normaloff>:/icons/icons/traindata.svg</iconset>
-   </property>
-   <property name="text">
-    <string>Schulungsdaten</string>
-   </property>
-   <property name="toolTip">
-    <string>Editor zum Bearbeiten der Schulungsdaten öffnen.</string>
-   </property>
-  </action>
   <action name="actCreateEmptyDatabase">
    <property name="enabled">
     <bool>true</bool>
