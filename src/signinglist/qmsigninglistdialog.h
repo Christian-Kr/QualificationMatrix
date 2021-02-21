@@ -76,6 +76,9 @@ public slots:
     /// Clear signing list
     void clearList();
 
+    /// Training changed.
+    void trainingChanged();
+
 private:
     /// Test whether the employee list on the dialog contains the given employee name.
     /// \param employeeName Name of the employee to test.

@@ -159,7 +159,7 @@ bool QMSigningListDialog::listContainsEmployee(const QString &employeeName) cons
 void QMSigningListDialog::printToPDF()
 {
     // First of all, test for must have fields.
-    if (ui->leTrainDetails->text().isEmpty())
+    if (ui->leTrainDetails->toPlainText().isEmpty())
     {
         QMessageBox::warning(this, tr("Unterschriftenliste erstellen"),
             tr("Bitte Details zu den Schulungsinhalten eingeben!"));
@@ -202,7 +202,7 @@ void QMSigningListDialog::paintPdfRequest(QPrinter *printer)
     document.setEmployees(employees);
     document.setTrainer(ui->leTrainer->text());
     document.setOrganisationName(ui->leOrganisation->text());
-    document.setTrainingContents(ui->leTrainDetails->text());
+    document.setTrainingContents(ui->leTrainDetails->toPlainText());
     document.setTrainingDate(ui->cwDate->selectedDate());
     document.setTrainingName(ui->cbTraining->currentText());
     document.setImagePath(ui->leImagePath->text());
@@ -210,4 +210,29 @@ void QMSigningListDialog::paintPdfRequest(QPrinter *printer)
 
     // Default printer settings.
     document.print(printer);
+}
+
+void QMSigningListDialog::trainingChanged()
+{
+    auto contentDesc = trainModel->data(
+        trainModel->index(ui->cbTraining->currentIndex(), 5)).toString();
+
+    if (contentDesc.isEmpty())
+    {
+        return;
+    }
+
+    if (!ui->leTrainDetails->toPlainText().isEmpty())
+    {
+        auto res = QMessageBox::question(this, tr("Unterschriftenliste"),
+            tr("Soll der existierende Inhalt der Schulungsdetails durch die Standardbeschreibung"
+               " in der Datenbank ersetzt werden?"), QMessageBox::Yes | QMessageBox::No);
+
+        if (res == QMessageBox::No)
+        {
+            return;
+        }
+    }
+
+    ui->leTrainDetails->setPlainText(contentDesc);
 }

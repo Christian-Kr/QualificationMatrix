@@ -17,7 +17,7 @@
    <item>
     <widget class="QTabWidget" name="twGroups">
      <property name="currentIndex">
-      <number>1</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="taGeneral">
       <attribute name="title">
@@ -323,17 +323,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="leTrainDetails">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-           </property>
-          </widget>
+          <widget class="QPlainTextEdit" name="leTrainDetails"/>
          </item>
         </layout>
        </item>
@@ -469,6 +459,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>cbTraining</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>QMSigningListDialog</receiver>
+   <slot>trainingChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>236</x>
+     <y>82</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>236</x>
+     <y>328</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <designerdata>
   <property name="gridDeltaX">
@@ -493,5 +499,6 @@
   <slot>addEmployeeFromGroup()</slot>
   <slot>openImage()</slot>
   <slot>clearList()</slot>
+  <slot>trainingChanged()</slot>
  </slots>
 </ui>
