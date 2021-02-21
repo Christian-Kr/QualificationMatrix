@@ -31,6 +31,7 @@ QMTrainingModel::QMTrainingModel(QObject *parent, QSqlDatabase db)
     setRelation(2, QSqlRelation("TrainGroup", "id", "name"));
     setHeaderData(3, Qt::Horizontal, tr("Intervall"));
     setHeaderData(4, Qt::Horizontal, tr("Rechtlich Notwendig"));
+    setHeaderData(5, Qt::Horizontal, tr("Inhalte"));
 }
 
 void QMTrainingModel::otherModelChanged(QObject *sender)

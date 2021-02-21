@@ -11,6 +11,10 @@ FROM
 WHERE
     Employee.active = 1;
 
+-- Add column to training for content description
+
+ALTER TABLE "Train" ADD COLUMN "content_description" TEXT;
+
 -- Update version of database
 
 UPDATE "Info" SET "value" = "1" WHERE "name" = "MAJOR";
