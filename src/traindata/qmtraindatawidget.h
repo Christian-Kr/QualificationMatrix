@@ -96,6 +96,8 @@ private:
     std::shared_ptr<QSqlRelationalTableModel> trainModel;
     std::shared_ptr<QSqlRelationalTableModel> trainDataModel;
     std::shared_ptr<QSqlTableModel> trainDataStateModel;
+    std::shared_ptr<QSqlTableModel> trainDataCertModel;
+    std::shared_ptr<QSqlTableModel> trainDataCertViewModel;
 
     QSortFilterProxyModel *employeeFilterModel;
     QSortFilterProxyModel *trainFilterModel;

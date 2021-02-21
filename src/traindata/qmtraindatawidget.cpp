@@ -34,10 +34,6 @@
 QMTrainDataWidget::QMTrainDataWidget(QWidget *parent)
     : QWidget(parent),
     ui(new Ui::QMTrainDataWidget),
-    employeeModel(nullptr),
-    trainModel(nullptr),
-    trainDataModel(nullptr),
-    trainDataStateModel(nullptr),
     employeeFilterModel(new QSortFilterProxyModel(this)),
     trainFilterModel(new QSortFilterProxyModel(this)),
     trainDataStateFilterModel(new QSortFilterProxyModel(this))
@@ -97,6 +93,8 @@ void QMTrainDataWidget::updateData()
     trainModel = dm->getTrainModel();
     trainDataModel = dm->getTrainDataModel();
     trainDataStateModel = dm->getTrainDataStateModel();
+    trainDataCertModel = dm->getTrainDataCertificateModel();
+    trainDataCertViewModel = dm->getTrainDataCertificateViewModel();
 
     // Update filter models.
     trainFilterModel->setSourceModel(trainDataModel.get());
@@ -125,6 +123,11 @@ void QMTrainDataWidget::updateData()
 
     ui->cbFilterState->setModel(trainDataStateModel.get());
     ui->cbFilterState->setModelColumn(1);
+
+    ui->tvCertificates->setModel(trainDataCertViewModel.get());
+    ui->tvCertificates->hideColumn(0);
+    ui->tvCertificates->hideColumn(1);
+    ui->tvCertificates->hideColumn(2);
 
     // If have to many entries available, informa the user.
     if (trainDataModel->canFetchMore())
@@ -321,6 +324,10 @@ void QMTrainDataWidget::showTrainDataCertificates()
     }
 
     auto modelIndex = modelIndexList.at(0);
+
+    // Get the train data id (primary key) and use it to filter the certificate table.
+    auto trainDataId = trainDataModel->data(trainDataModel->index(modelIndex.row(), 0)).toInt();
+    trainDataCertViewModel->setFilter(QString("train_data=%1").arg(trainDataId));
 
     // Show the details docked widget (might be invisible).
     ui->dwTrainDataCertificates->setVisible(true);
