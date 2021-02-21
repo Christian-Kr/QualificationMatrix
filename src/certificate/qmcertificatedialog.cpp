@@ -43,6 +43,10 @@ QMCertificateDialog::QMCertificateDialog(Mode mode, QWidget *parent)
     typeFilterModel = new QSortFilterProxyModel(this);
     nameFilterModel = new QSortFilterProxyModel(this);
 
+    ui->tvFiles->horizontalHeader()->setStretchLastSection(false);
+    ui->tvFiles->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    ui->tvFiles->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft);
+
     if (runMode == Mode::MANAGE)
     {
         ui->buttonBox->setStandardButtons(QDialogButtonBox::Close);
