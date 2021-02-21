@@ -111,6 +111,12 @@ void QMCertificateDialog::updateFilter()
     nameFilterModel->setFilterFixedString(ui->leName->text());
 }
 
+void QMCertificateDialog::setNameFilter(QString filter)
+{
+    ui->leName->setText(filter);
+    updateFilter();
+}
+
 void QMCertificateDialog::resetFilter()
 {
     ui->cbType->setCurrentText("");

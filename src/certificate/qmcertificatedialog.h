@@ -85,6 +85,10 @@ public slots:
     /// Override from QDialog.
     void accept() override;
 
+    /// Sets the name filter to the given text.
+    /// \param filter
+    void setNameFilter(QString filter);
+
 private:
     /// Save the given file external: Copy to file system structure.
     /// \param file File to save external.

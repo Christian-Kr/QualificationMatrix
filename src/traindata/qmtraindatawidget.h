@@ -83,6 +83,9 @@ public slots:
     /// Remove a certificate from a train data entry.
     void removeCertificate();
 
+    /// Show selected certificate.
+    void showCert();
+
 signals:
     /// There is a short message that should be displayed.
     /// \param msg

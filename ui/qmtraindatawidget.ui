@@ -253,7 +253,7 @@
        <property name="handleWidth">
         <number>10</number>
        </property>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <layout class="QHBoxLayout" name="horizontalLayout">
          <property name="rightMargin">
           <number>0</number>
@@ -473,6 +473,26 @@
                </widget>
               </item>
               <item>
+               <widget class="QToolButton" name="tbShowCert">
+                <property name="toolTip">
+                 <string>Im Nachweisdialog suchen</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset resource="../icons.qrc">
+                  <normaloff>:/icons/icons/document-preview-archive.svg</normaloff>:/icons/icons/document-preview-archive.svg</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>22</width>
+                  <height>22</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item>
                <spacer name="verticalSpacer_2">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
@@ -627,6 +647,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>tbShowCert</sender>
+   <signal>clicked()</signal>
+   <receiver>QMTrainDataWidget</receiver>
+   <slot>showCert()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>880</x>
+     <y>215</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>461</x>
+     <y>415</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>resetFilter()</slot>
@@ -638,5 +674,6 @@
   <slot>saveChanges()</slot>
   <slot>addCertificate()</slot>
   <slot>removeCertificate()</slot>
+  <slot>showCert()</slot>
  </slots>
 </ui>

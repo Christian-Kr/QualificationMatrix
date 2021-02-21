@@ -466,3 +466,33 @@ void QMTrainDataWidget::removeCertificate()
 
     trainDataCertViewModel->select();
 }
+
+void QMTrainDataWidget::showCert()
+{
+    auto modelIndexList = ui->tvCertificates->selectionModel()->selectedRows();
+
+    if (modelIndexList.size() != 1)
+    {
+        emit infoMessageAvailable(tr("Kein Schulungsnachweis ausgewählt"));
+        return;
+    }
+
+    auto modelIndex = modelIndexList.at(0);
+    auto certName = trainDataCertViewModel->data(
+        trainDataCertViewModel->index(modelIndex.row(), 3)).toString();
+
+    // Open certification dialog.
+    auto &settings = QMApplicationSettings::getInstance();
+
+    auto varWidth = settings.read("CertificateDialog/Width");
+    auto width = (varWidth.isNull()) ? 400 : varWidth.toInt();
+    auto varHeight = settings.read("CertificateDialog/Height");
+    auto height = (varHeight.isNull()) ? 400 : varHeight.toInt();
+
+    QMCertificateDialog certDialog(Mode::MANAGE, this);
+    certDialog.updateData();
+    certDialog.setNameFilter(certName);
+    certDialog.resize(width, height);
+    certDialog.setModal(true);
+    certDialog.exec();
+}
