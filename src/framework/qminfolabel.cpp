@@ -43,7 +43,7 @@ void QMInfoLabel::showWarnMessage(QString msg)
     timer->setInterval(5000);
 
     // Set the style for information message.
-    setStyleSheet("margin-left: 10px; margin-right: 10px;"
+    setStyleSheet("padding: 10px; margin-left: 10px; margin-right: 10px;"
           "background: rgba(255, 224, 179, 80%); border-style: solid; border-width: 1px; "
           "border-color: #000000;");
 
@@ -62,7 +62,7 @@ void QMInfoLabel::showInfoMessage(QString msg)
     timer->setInterval(3000);
 
     // Set the style for information message.
-    setStyleSheet("margin-left: 10px; margin-right: 10px;"
+    setStyleSheet("padding: 10px; margin-left: 10px; margin-right: 10px;"
           "background: rgba(160, 223, 250, 80%); border-style: solid; border-width: 1px; "
           "border-color: #000000;");
 
