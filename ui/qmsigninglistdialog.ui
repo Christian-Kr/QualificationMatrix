@@ -151,8 +151,17 @@
            <property name="editable">
             <bool>true</bool>
            </property>
+           <property name="maxVisibleItems">
+            <number>20</number>
+           </property>
            <property name="insertPolicy">
             <enum>QComboBox::NoInsert</enum>
+           </property>
+           <property name="sizeAdjustPolicy">
+            <enum>QComboBox::AdjustToMinimumContentsLength</enum>
+           </property>
+           <property name="minimumContentsLength">
+            <number>20</number>
            </property>
           </widget>
          </item>
@@ -198,8 +207,17 @@
            <property name="editable">
             <bool>true</bool>
            </property>
+           <property name="maxVisibleItems">
+            <number>20</number>
+           </property>
            <property name="insertPolicy">
             <enum>QComboBox::NoInsert</enum>
+           </property>
+           <property name="sizeAdjustPolicy">
+            <enum>QComboBox::AdjustToMinimumContentsLength</enum>
+           </property>
+           <property name="minimumContentsLength">
+            <number>20</number>
            </property>
           </widget>
          </item>
@@ -283,8 +301,17 @@
            <property name="editable">
             <bool>true</bool>
            </property>
+           <property name="maxVisibleItems">
+            <number>20</number>
+           </property>
            <property name="insertPolicy">
             <enum>QComboBox::NoInsert</enum>
+           </property>
+           <property name="sizeAdjustPolicy">
+            <enum>QComboBox::AdjustToMinimumContentsLength</enum>
+           </property>
+           <property name="minimumContentsLength">
+            <number>20</number>
            </property>
           </widget>
          </item>
