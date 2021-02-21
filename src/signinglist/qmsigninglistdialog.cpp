@@ -158,6 +158,14 @@ bool QMSigningListDialog::listContainsEmployee(const QString &employeeName) cons
 
 void QMSigningListDialog::printToPDF()
 {
+    // First of all, test for must have fields.
+    if (ui->leTrainDetails->text().isEmpty())
+    {
+        QMessageBox::warning(this, tr("Unterschriftenliste erstellen"),
+            tr("Bitte Details zu den Schulungsinhalten eingeben!"));
+        return;
+    }
+
     // Set up default printer.
     auto printer = new QPrinter();
     printer->setPageOrientation(QPageLayout::Orientation::Portrait);
