@@ -34,10 +34,7 @@
 
 QMTrainDataWidget::QMTrainDataWidget(QWidget *parent)
     : QWidget(parent),
-    ui(new Ui::QMTrainDataWidget),
-    employeeFilterModel(new QSortFilterProxyModel(this)),
-    trainFilterModel(new QSortFilterProxyModel(this)),
-    trainDataStateFilterModel(new QSortFilterProxyModel(this))
+    ui(new Ui::QMTrainDataWidget)
 {
     ui->setupUi(this);
 
@@ -97,18 +94,8 @@ void QMTrainDataWidget::updateData()
     trainDataCertModel = dm->getTrainDataCertificateModel();
     trainDataCertViewModel = dm->getTrainDataCertificateViewModel();
 
-    // Update filter models.
-    trainFilterModel->setSourceModel(trainDataModel.get());
-    trainFilterModel->setFilterKeyColumn(2);
-
-    employeeFilterModel->setSourceModel(trainFilterModel);
-    employeeFilterModel->setFilterKeyColumn(1);
-
-    trainDataStateFilterModel->setSourceModel(employeeFilterModel);
-    trainDataStateFilterModel->setFilterKeyColumn(4);
-
     // Update the views.
-    ui->tvTrainData->setModel(trainDataStateFilterModel);
+    ui->tvTrainData->setModel(trainDataModel.get());
     ui->tvTrainData->hideColumn(0);
     ui->tvTrainData->setItemDelegate(new QMProxySqlRelationalDelegate());
     ui->tvTrainData->setItemDelegateForColumn(3, new DateDelegate());

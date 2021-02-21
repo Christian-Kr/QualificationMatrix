@@ -22,7 +22,6 @@
 // Forward declarations for faster compiling.
 class QSqlRelationalTableModel;
 class QSqlTableModel;
-class QSortFilterProxyModel;
 class QProgressDialog;
 class QItemSelection;
 
@@ -104,10 +103,6 @@ private:
     std::shared_ptr<QSqlTableModel> trainDataStateModel;
     std::shared_ptr<QSqlTableModel> trainDataCertModel;
     std::shared_ptr<QSqlTableModel> trainDataCertViewModel;
-
-    QSortFilterProxyModel *employeeFilterModel;
-    QSortFilterProxyModel *trainFilterModel;
-    QSortFilterProxyModel *trainDataStateFilterModel;
 };
 
 #endif // QMTRAINDATAWIDGET_H
