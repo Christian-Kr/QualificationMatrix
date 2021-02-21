@@ -61,13 +61,27 @@ QMQualiResultWidget::QMQualiResultWidget(QWidget *parent)
 
 QMQualiResultWidget::~QMQualiResultWidget()
 {
+    // Save settings before deleting the object.
+    saveSettings();
+
     delete ui;
+}
+
+void QMQualiResultWidget::saveSettings()
+{
+    auto &settings = QMApplicationSettings::getInstance();
+
+    settings.write("QualiResult/FilterSplitter", ui->splitter->saveState());
 }
 
 void QMQualiResultWidget::loadSettings()
 {
-    QMApplicationSettings &settings = QMApplicationSettings::getInstance();
+    auto &settings = QMApplicationSettings::getInstance();
+
     ui->dwFilter->setVisible(settings.read("QualiResult/ShowFilter", true).toBool());
+    filterVisibilityChanged();
+
+    ui->splitter->restoreState(settings.read("QualiResult/FilterSplitter").toByteArray());
 }
 
 void QMQualiResultWidget::updateData()
@@ -147,21 +161,23 @@ void QMQualiResultWidget::updateFilterAndCalculate()
 void QMQualiResultWidget::switchFilterVisibility()
 {
     ui->dwFilter->setVisible(!ui->dwFilter->isVisible());
+
+    auto &settings = QMApplicationSettings::getInstance();
+
+    settings.write("QualiResult/ShowFilter", ui->dwFilter->isVisible());
+
 }
 
 void QMQualiResultWidget::filterVisibilityChanged()
 {
     if (ui->dwFilter->isVisible())
     {
-        ui->tbFilterVisible->setVisible(false);
+        ui->tbFilterVisible->setText(tr("Filter ausblenden"));
     }
     else
     {
-        ui->tbFilterVisible->setVisible(true);
+        ui->tbFilterVisible->setText(tr("Filter einblenden"));
     }
-
-    QMApplicationSettings &settings = QMApplicationSettings::getInstance();
-    settings.write("QualiResult/ShowFilter", ui->dwFilter->isVisible());
 }
 
 void QMQualiResultWidget::saveToCsv()

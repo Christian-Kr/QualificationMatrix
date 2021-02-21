@@ -69,6 +69,9 @@ public slots:
     /// Load settings for ui.
     void loadSettings();
 
+    /// Save settings
+    void saveSettings();
+
     /// Resets the model.
     void resetModel();
 

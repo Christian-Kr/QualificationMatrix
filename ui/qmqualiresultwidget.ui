@@ -25,6 +25,9 @@
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
+     <property name="handleWidth">
+      <number>10</number>
+     </property>
      <widget class="QDockWidget" name="dwFilter">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -40,15 +43,15 @@
       </property>
       <property name="maximumSize">
        <size>
-        <width>16777215</width>
-        <height>16777215</height>
+        <width>524287</width>
+        <height>524287</height>
        </size>
       </property>
       <property name="floating">
        <bool>false</bool>
       </property>
       <property name="features">
-       <set>QDockWidget::AllDockWidgetFeatures</set>
+       <set>QDockWidget::NoDockWidgetFeatures</set>
       </property>
       <property name="allowedAreas">
        <set>Qt::AllDockWidgetAreas</set>
