@@ -40,7 +40,6 @@ QMCertificateDialog::QMCertificateDialog(Mode mode, QWidget *parent)
     runMode = mode;
     selectedId = -1;
 
-    typeFilterModel = new QSortFilterProxyModel(this);
     nameFilterModel = new QSortFilterProxyModel(this);
 
     ui->tvFiles->horizontalHeader()->setStretchLastSection(false);
@@ -93,11 +92,7 @@ void QMCertificateDialog::updateData()
     certificateModel = dm->getCertificateModel();
     trainDataCertificateModel = dm->getTrainDataCertificateModel();
 
-    // Update filter models.
-    typeFilterModel->setSourceModel(certificateModel.get());
-    typeFilterModel->setFilterKeyColumn(2);
-
-    nameFilterModel->setSourceModel(typeFilterModel);
+    nameFilterModel->setSourceModel(certificateModel.get());
     nameFilterModel->setFilterKeyColumn(1);
 
     // Update the views. Only show name and type.
@@ -111,7 +106,6 @@ void QMCertificateDialog::updateData()
 
 void QMCertificateDialog::updateFilter()
 {
-    typeFilterModel->setFilterFixedString(ui->cbType->currentText());
     nameFilterModel->setFilterFixedString(ui->leName->text());
 }
 
@@ -123,7 +117,6 @@ void QMCertificateDialog::setNameFilter(QString filter)
 
 void QMCertificateDialog::resetFilter()
 {
-    ui->cbType->setCurrentText("");
     ui->leName->setText("");
 }
 

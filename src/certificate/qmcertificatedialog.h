@@ -101,7 +101,6 @@ private:
 
     int selectedId;
 
-    QSortFilterProxyModel *typeFilterModel;
     QSortFilterProxyModel *nameFilterModel;
 
     std::shared_ptr<QSqlTableModel> certificateModel;
