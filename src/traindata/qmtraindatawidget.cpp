@@ -270,23 +270,60 @@ void QMTrainDataWidget::addSingleEntry()
 
 void QMTrainDataWidget::deleteSelected()
 {
-    // For the seletion of entries in train data, there is no special need of restriction. Cause
-    // there is no table in the structure that is connected ti primary key of it.
-    auto idxList = ui->tvTrainData->selectionModel()->selectedRows();
-    if (idxList.isEmpty())
+    // Deleting a training data entry needs to delete all certificate correlations that might be
+    // connected.
+
+    auto modelIndexList = ui->tvTrainData->selectionModel()->selectedRows();
+    if (modelIndexList.isEmpty())
     {
         emit infoMessageAvailable(tr("Kein Eintrag zum Löschen selektiert"));
         return;
     }
 
-    if (idxList.size() != 1)
+    if (modelIndexList.size() != 1)
     {
         emit infoMessageAvailable(tr("Zum Löschen darf nur genau ein Eintrag selektiert sein"));
         return;
     }
 
+    auto modelIndex = modelIndexList.at(0);
+
+    // Delete all entries in tvCertificate. Therefore select a row and run removeCertificate, till
+    // model has no entries left. It is important to be sure that the certificate correlation model
+    // has been filtered. Otherwise other entries might be deleted. Therefore make a check before
+    // running the deletion process.
+
+    auto trainDataId = trainDataModel->data(trainDataModel->index(modelIndex.row(), 0)).toInt();
+
+    for (int i = 0; i < trainDataCertViewModel->rowCount(); i++)
+    {
+        // Get the train_data id.
+        auto trainDataCertId = trainDataCertViewModel->data(
+            trainDataCertViewModel->index(i, 1)).toInt();
+
+        if (trainDataCertId != trainDataId)
+        {
+            emit warnMessageAvailable(tr("Unzureichende Plausibilitätsprüfung vor der Löschung"));
+            return;
+        }
+    }
+
+    // Check was ok, start with selecting rows in tvCertificates and delete them.
+    while (trainDataCertViewModel->rowCount())
+    {
+        ui->tvCertificates->selectRow(0);
+        removeCertificate();
+    }
+
+    // Make a check at the end.
+    if (trainDataCertViewModel->rowCount() > 0)
+    {
+        emit warnMessageAvailable(tr("Es konnten nicht alle Schulungsnachweise gelöscht werden"));
+        return;
+    }
+
     // Delete all selected entries.
-    trainDataModel->removeRow(idxList.first().row());
+    trainDataModel->removeRow(modelIndex.row());
     trainDataModel->select();
 }
 
