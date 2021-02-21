@@ -79,9 +79,9 @@ void initShowMainWindow(QMainWindow &mainWin)
         auto savedHeight = settings.read("MainWin/Height", 500).toInt();
 
         mainWin.resize(savedWidth, savedHeight);
-        mainWin.move(
-            screen->geometry().x() + (screen->geometry().width() - savedWidth) / 2,
+        mainWin.move(screen->geometry().x() + (screen->geometry().width() - savedWidth) / 2,
             screen->geometry().y() + (screen->geometry().height() - savedHeight) / 2);
+
         mainWin.show();
     }
 }
@@ -123,8 +123,6 @@ void installTranslator(const QString &name, const QString &path)
 /// Initialize the application with the translation files (custom and qt-based).
 void initApplicationTranslation()
 {
-    // TODO: for unknown reason, the translation certificate cannot be loaded
-
     auto &settings = QMApplicationSettings::getInstance();
     auto lang = settings.read("General/Lang", "de").toString();
 
