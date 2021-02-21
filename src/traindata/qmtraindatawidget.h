@@ -46,6 +46,12 @@ public:
     ~QMTrainDataWidget() override;
 
 public slots:
+    /// Load settings.
+    void loadSettings();
+
+    /// Save settings.
+    void saveSettings();
+
     /// Update the models, cause they might have changed.
     void updateData();
 

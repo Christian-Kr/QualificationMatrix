@@ -56,11 +56,31 @@ QMTrainDataWidget::QMTrainDataWidget(QWidget *parent)
     // Default settings on start.
     ui->deDateFilterTo->setDate(QDate::currentDate());
     ui->dwTrainDataCertificates->setVisible(false);
+
+    // Load settings on start.
+    loadSettings();
 }
 
 QMTrainDataWidget::~QMTrainDataWidget()
 {
+    // Before deleting the object, save settings.
+    saveSettings();
+
     delete ui;
+}
+
+void QMTrainDataWidget::loadSettings()
+{
+    auto &settings = QMApplicationSettings::getInstance();
+
+    ui->splitter->restoreState(settings.read("TrainData/CertificatesSplitter").toByteArray());
+}
+
+void QMTrainDataWidget::saveSettings()
+{
+    auto &settings = QMApplicationSettings::getInstance();
+
+    settings.write("TrainData/CertificatesSplitter", ui->splitter->saveState());
 }
 
 void QMTrainDataWidget::importCsv()
