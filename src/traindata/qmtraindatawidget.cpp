@@ -55,7 +55,7 @@ QMTrainDataWidget::QMTrainDataWidget(QWidget *parent)
 
     // Default settings on start.
     ui->deDateFilterTo->setDate(QDate::currentDate());
-    ui->dwTrainDataDetails->setVisible(false);
+    ui->dwTrainDataCertificates->setVisible(false);
 }
 
 QMTrainDataWidget::~QMTrainDataWidget()
@@ -105,16 +105,6 @@ void QMTrainDataWidget::updateData()
 
     ui->cbFilterState->setModel(trainDataStateModel.get());
     ui->cbFilterState->setModelColumn(1);
-
-    // Details dock widget.
-    ui->cbEmployee->setModel(employeeModel.get());
-    ui->cbEmployee->setModelColumn(1);
-
-    ui->cbTraining->setModel(trainModel.get());
-    ui->cbTraining->setModelColumn(1);
-
-    ui->cbState->setModel(trainDataStateModel.get());
-    ui->cbState->setModelColumn(1);
 
     // If have to many entries available, informa the user.
     if (trainDataModel->canFetchMore())
@@ -299,65 +289,21 @@ void QMTrainDataWidget::showTrainDataDetailsDialog()
     detailsDialog.exec();
 }
 
-void QMTrainDataWidget::showTrainDataDetails()
+void QMTrainDataWidget::showTrainDataCertificates()
 {
     auto modelIndexList = ui->tvTrainData->selectionModel()->selectedRows();
 
     if (modelIndexList.size() != 1)
     {
         emit infoMessageAvailable(tr("Details werden nur bei genau einer Selektion angezeigt"));
-        ui->dwTrainDataDetails->setVisible(false);
+        ui->dwTrainDataCertificates->setVisible(false);
         return;
     }
 
     auto modelIndex = modelIndexList.at(0);
 
     // Show the details docked widget (might be invisible).
-    ui->dwTrainDataDetails->setVisible(true);
-
-    // Set train data row to dock widget elements.
-    auto employee = trainDataStateFilterModel->data(trainDataStateFilterModel->index(
-            modelIndex.row(), 1)).toString();
-    auto idx = ui->cbEmployee->findText(employee, Qt::MatchExactly);
-
-    if (idx == -1)
-    {
-        emit infoMessageAvailable(tr("Der Mitarbeiter existiert nicht oder ist deaktiviert"));
-        ui->dwTrainDataDetails->setVisible(false);
-        return;
-    }
-
-    ui->cbEmployee->setCurrentIndex(idx);
-
-    auto training = trainDataStateFilterModel->data(trainDataStateFilterModel->index(
-        modelIndex.row(), 2)).toString();
-    idx = ui->cbTraining->findText(training, Qt::MatchExactly);
-
-    if (idx == -1)
-    {
-        emit infoMessageAvailable(tr("Die Schulung existiert nicht oder ist deaktiviert"));
-        ui->dwTrainDataDetails->setVisible(false);
-        return;
-    }
-
-    ui->cbTraining->setCurrentIndex(idx);
-
-    auto date = trainDataStateFilterModel->data(trainDataStateFilterModel->index(
-        modelIndex.row(), 3)).toString();
-    ui->cwDate->setSelectedDate(QDate::fromString(date, "yyyy-MM-dd"));
-
-    auto state = trainDataStateFilterModel->data(trainDataStateFilterModel->index(
-        modelIndex.row(), 4)).toString();
-    idx = ui->cbState->findText(state, Qt::MatchExactly);
-
-    if (idx == -1)
-    {
-        emit infoMessageAvailable(tr("Der Schulungsstatus existiert nicht oder ist deaktiviert"));
-        ui->dwTrainDataDetails->setVisible(false);
-        return;
-    }
-
-    ui->cbState->setCurrentIndex(idx);
+    ui->dwTrainDataCertificates->setVisible(true);
 }
 
 void QMTrainDataWidget::trainDataSelectionChanged(const QItemSelection &selected,
@@ -365,6 +311,6 @@ void QMTrainDataWidget::trainDataSelectionChanged(const QItemSelection &selected
 {
     if (selected.indexes().size() > 0)
     {
-        showTrainDataDetails();
+        showTrainDataCertificates();
     }
 }

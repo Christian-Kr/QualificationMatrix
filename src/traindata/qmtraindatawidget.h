@@ -67,8 +67,8 @@ public slots:
     /// Show dialog to edit the current selected entry.
     void showTrainDataDetailsDialog();
 
-    /// Show details in train data docked widget.
-    void showTrainDataDetails();
+    /// Show certificates in train data docked widget.
+    void showTrainDataCertificates();
 
     /// Selection of trainDataTable changed.
     void trainDataSelectionChanged(const QItemSelection &selected,
