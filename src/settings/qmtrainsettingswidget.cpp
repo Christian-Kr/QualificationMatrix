@@ -35,8 +35,6 @@ QMTrainSettingsWidget::QMTrainSettingsWidget(QWidget *parent)
     ui->setupUi(this);
 
     // Set initial settings for ui elements.
-    ui->tvTrain->horizontalHeader()->setStretchLastSection(false);
-    ui->tvTrain->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     ui->tvTrain->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft);
     ui->tvTrain->verticalHeader()->setVisible(true);
     ui->tvTrain->setItemDelegateForColumn(2, new QMProxySqlRelationalDelegate(ui->tvTrain));

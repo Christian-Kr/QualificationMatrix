@@ -121,8 +121,11 @@
              <property name="sortingEnabled">
               <bool>true</bool>
              </property>
+             <attribute name="horizontalHeaderMinimumSectionSize">
+              <number>200</number>
+             </attribute>
              <attribute name="horizontalHeaderDefaultSectionSize">
-              <number>150</number>
+              <number>200</number>
              </attribute>
              <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
               <bool>true</bool>
@@ -133,14 +136,14 @@
              <attribute name="verticalHeaderVisible">
               <bool>false</bool>
              </attribute>
+             <attribute name="verticalHeaderMinimumSectionSize">
+              <number>30</number>
+             </attribute>
              <attribute name="verticalHeaderDefaultSectionSize">
               <number>30</number>
              </attribute>
              <attribute name="verticalHeaderHighlightSections">
               <bool>false</bool>
-             </attribute>
-             <attribute name="verticalHeaderMinimumSectionSize">
-              <number>30</number>
              </attribute>
              <attribute name="verticalHeaderShowSortIndicator" stdset="0">
               <bool>false</bool>
@@ -308,14 +311,14 @@
            <attribute name="verticalHeaderVisible">
             <bool>false</bool>
            </attribute>
+           <attribute name="verticalHeaderMinimumSectionSize">
+            <number>30</number>
+           </attribute>
            <attribute name="verticalHeaderDefaultSectionSize">
             <number>30</number>
            </attribute>
            <attribute name="verticalHeaderHighlightSections">
             <bool>false</bool>
-           </attribute>
-           <attribute name="verticalHeaderMinimumSectionSize">
-            <number>30</number>
            </attribute>
            <attribute name="verticalHeaderShowSortIndicator" stdset="0">
             <bool>false</bool>
@@ -481,14 +484,14 @@
            <attribute name="verticalHeaderVisible">
             <bool>false</bool>
            </attribute>
+           <attribute name="verticalHeaderMinimumSectionSize">
+            <number>30</number>
+           </attribute>
            <attribute name="verticalHeaderDefaultSectionSize">
             <number>30</number>
            </attribute>
            <attribute name="verticalHeaderHighlightSections">
             <bool>false</bool>
-           </attribute>
-           <attribute name="verticalHeaderMinimumSectionSize">
-            <number>30</number>
            </attribute>
            <attribute name="verticalHeaderShowSortIndicator" stdset="0">
             <bool>false</bool>
