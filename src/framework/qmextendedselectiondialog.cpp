@@ -19,6 +19,8 @@
 #include <QAbstractTableModel>
 #include <QSortFilterProxyModel>
 
+#include <QDebug>
+
 QMExtendedSelectionDialog::QMExtendedSelectionDialog(QWidget *parent, QAbstractTableModel *model,
     int column)
     : QMDialog(parent)
@@ -48,7 +50,7 @@ QMExtendedSelectionDialog::QMExtendedSelectionDialog(QWidget *parent, QAbstractT
     }
 }
 
-QModelIndexList QMExtendedSelectionDialog::getSelected() const
+QModelIndexList QMExtendedSelectionDialog::getFilterSelected() const
 {
     return ui->tvSelection->selectionModel()->selectedRows();
 }
@@ -61,4 +63,46 @@ void QMExtendedSelectionDialog::loadSettings()
 void QMExtendedSelectionDialog::saveSettings()
 {
     // TODO: Save settings
+}
+
+void QMExtendedSelectionDialog::updateFilter()
+{
+    filterModel->setFilterFixedString(ui->leFilter->text());
+}
+
+bool QMExtendedSelectionDialog::isReverse() const
+{
+    return ui->cbReverse->isChecked();
+}
+
+QString QMExtendedSelectionDialog::getRegExpText() const
+{
+    auto modelIndexList = getFilterSelected();
+
+    QString prefix = isReverse() ? "^(?!" : "^(";
+    QString finalValue;
+
+    if (modelIndexList.size() == 1)
+    {
+        QModelIndex modelIndex = modelIndexList.at(0);
+        finalValue = prefix + filterModel->data(
+            filterModel->index(modelIndex.row(), 1)).toString() + ")";
+    }
+    else
+    {
+        // Only > 1 possible
+        QStringList valueList;
+
+        for (int i = 0; i < modelIndexList.size(); i++)
+        {
+            QModelIndex modelIndex = modelIndexList.at(i);
+            auto value = filterModel->data(filterModel->index(modelIndex.row(), 1)).toString();
+
+            valueList << value;
+        }
+
+        finalValue = prefix + valueList.join("|") + ")";
+    }
+
+    return finalValue;
 }

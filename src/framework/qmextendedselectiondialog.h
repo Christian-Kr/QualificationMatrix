@@ -49,7 +49,24 @@ public:
     void loadSettings() override;
 
     /// Get the number of rows selected.
-    QModelIndexList getSelected() const;
+    /// \return The selected index list of the filter model.
+    QModelIndexList getFilterSelected() const;
+
+    /// Get the filter model. This object will be destroyed on object deletion.
+    /// \return The filter model that is created temporary inside this object.
+    QSortFilterProxyModel* getFilterModel() { return filterModel; }
+
+    /// Should the selection be reversed.
+    /// \return True if reversed, else false.
+    bool isReverse() const;
+
+    /// Get the regular expression text of the selection.
+    /// \return The regular expression text.
+    QString getRegExpText() const;
+
+public slots:
+    /// Update filter.
+    void updateFilter();
 
 private:
     Ui::QMExtendedSelectionDialog *ui;
