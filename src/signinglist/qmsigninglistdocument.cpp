@@ -33,8 +33,8 @@ void QMSigningListDocument::createDocument()
     setDefaultFont(font);
 
     // Build header table.
-    QTextTable *table = cursor.insertTable(3, 3);
-    table->mergeCells(0, 0, 3, 2);
+    QTextTable *table = cursor.insertTable(4, 3);
+    table->mergeCells(0, 0, 4, 2);
 
     QTextTableFormat tableFormat = table->format();
     tableFormat.setCellPadding(2);
@@ -45,11 +45,13 @@ void QMSigningListDocument::createDocument()
     // Fill header table with text.
     cursor.insertImage(imagePath);
     cursor.movePosition(QTextCursor::NextCell);
-    cursor.insertText(tr("Unterweisungsprotokoll"));
+    cursor.insertHtml(tr("<b>Unterweisungsprotokoll</b>"));
     cursor.movePosition(QTextCursor::NextCell);
     cursor.insertText(tr("Unterweisung am: %1").arg(date.toString("dd.MM.yyyy")));
     cursor.movePosition(QTextCursor::NextCell);
     cursor.insertText(tr("Unterweisung durch: %1").arg(trainer));
+    cursor.movePosition(QTextCursor::NextCell);
+    cursor.insertText(tr("Unterschrift:"));
 
     // Build info table.
     cursor.movePosition(QTextCursor::NextBlock);
@@ -70,14 +72,14 @@ void QMSigningListDocument::createDocument()
 
     // Fill header table with text.
     QTextCharFormat textFormat;
-    textFormat.setFontPointSize(14);
+    textFormat.setFontPointSize(12);
     cursor.insertText(tr("Thema: "), textFormat);
     cursor.movePosition(QTextCursor::NextCell);
 
     cursor.insertText(train, textFormat);
     cursor.movePosition(QTextCursor::NextCell);
 
-    textFormat.setFontPointSize(12);
+    textFormat.setFontPointSize(10);
     cursor.insertText(tr("Inhalte: "), textFormat);
     cursor.movePosition(QTextCursor::NextCell);
 
