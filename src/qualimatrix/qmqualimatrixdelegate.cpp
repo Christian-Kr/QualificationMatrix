@@ -21,30 +21,32 @@
 #include <QPen>
 #include <QComboBox>
 
-#include <QDebug>
-
 QMQualiMatrixDelegate::QMQualiMatrixDelegate(QWidget *parent)
-    : QStyledItemDelegate(parent), gridColor(QColor("#ffffff")), selectionColor(QColor("#ffffff"))
+    : QStyledItemDelegate(parent),
+    gridColor(QColor("#ffffff")),
+    selectionColor(QColor("#ffffff"))
 {
     updateColors();
 }
 
 void QMQualiMatrixDelegate::updateColors()
 {
-    QMApplicationSettings &settings = QMApplicationSettings::getInstance();
+    auto &settings = QMApplicationSettings::getInstance();
     selectionColor = QColor(settings.read("QualiMatrix/SelectionColor", "#ffffff").toString());
     gridColor = QColor(settings.read("QualiMatrix/GridColor", "#ffffff").toString());
 }
 
-void QMQualiMatrixDelegate::paint(
-    QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index
-) const
+void QMQualiMatrixDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
+    const QModelIndex &index) const
 {
-    QString value = index.data().toString();
-    if (option.state & QStyle::State_Selected) {
+    auto value = index.data().toString();
+
+    if (option.state & QStyle::State_Selected)
+    {
         painter->setBrush(selectionColor);
     }
-    else {
+    else
+    {
         if (value == "Pflicht") {
             painter->setBrush(QColor("#ffcccc"));
         }
@@ -62,10 +64,11 @@ void QMQualiMatrixDelegate::paint(
     painter->setPen(gridColor);
     painter->drawRect(option.rect);
 
-    if (!value.isEmpty()) {
+    if (!value.isEmpty())
+    {
         value = value.at(0);
-        painter->drawRect(
-            option.rect.x(), option.rect.y(), option.rect.width(), option.rect.height());
+        painter->drawRect(option.rect.x(), option.rect.y(), option.rect.width(),
+            option.rect.height());
         painter->setPen(Qt::black);
         painter->drawText(option.rect, Qt::AlignCenter, value);
     }
@@ -76,22 +79,22 @@ QSize QMQualiMatrixDelegate::sizeHint(const QStyleOptionViewItem &, const QModel
     return QSize(30, 30);
 }
 
-QWidget *QMQualiMatrixDelegate::createEditor(
-    QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &
-) const
+QWidget *QMQualiMatrixDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option,
+    const QModelIndex &) const
 {
-    QComboBox *cb = new QComboBox(parent);
+    auto cb = new QComboBox(parent);
+
     cb->addItem("Entfernen");
     cb->addItem("Pflicht");
     cb->addItem("Angebot");
     cb->addItem("Sonstiges");
     cb->setGeometry(option.rect);
+
     return cb;
 }
 
-void QMQualiMatrixDelegate::updateEditorGeometry(
-    QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &
-) const
+void QMQualiMatrixDelegate::updateEditorGeometry(QWidget *editor,
+    const QStyleOptionViewItem &option, const QModelIndex &) const
 {
     editor->setMinimumWidth(100);
     editor->setGeometry(option.rect);
@@ -99,19 +102,22 @@ void QMQualiMatrixDelegate::updateEditorGeometry(
 
 void QMQualiMatrixDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const
 {
-    QComboBox *cb = dynamic_cast<QComboBox *>(editor);
+    auto cb = dynamic_cast<QComboBox *>(editor);
+
     cb->setCurrentText(index.data(Qt::DisplayRole).toString());
 }
 
-void QMQualiMatrixDelegate::setModelData(
-    QWidget *editor, QAbstractItemModel *model, const QModelIndex &index
-) const
+void QMQualiMatrixDelegate::setModelData(QWidget *editor, QAbstractItemModel *model,
+    const QModelIndex &index) const
 {
-    QComboBox *cb = dynamic_cast<QComboBox *>(editor);
-    if (cb->currentIndex() == 0) {
+    auto cb = dynamic_cast<QComboBox *>(editor);
+
+    if (cb->currentIndex() == 0)
+    {
         model->setData(index, -1, Qt::EditRole);
     }
-    else {
+    else
+    {
         model->setData(index, cb->currentIndex(), Qt::EditRole);
     }
 }

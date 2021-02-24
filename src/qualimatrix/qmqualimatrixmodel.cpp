@@ -32,7 +32,8 @@ QMQualiMatrixModel::QMQualiMatrixModel(QObject *parent)
     funcFilterModel(new QSortFilterProxyModel(this)),
     trainFilterModel(new QSortFilterProxyModel(this)),
     funcFilterGroupModel(new QSortFilterProxyModel(this)),
-    trainFilterGroupModel(new QSortFilterProxyModel(this)), cache(new QHash<QString, QString>()),
+    trainFilterGroupModel(new QSortFilterProxyModel(this)),
+    cache(new QHash<QString, QString>()),
     trainFilterLegalModel(new QSortFilterProxyModel(this))
 {
 }
@@ -79,24 +80,29 @@ void QMQualiMatrixModel::buildCache()
 
     // Build a temporary cache from qualiModel. This will improve overall update speed.
     QHash<QString, QString> tmpCache;
-    for (int i = 0; i < qualiModel->rowCount(); i++) {
-        QString qualiDataFunc = qualiModel->data(qualiModel->index(i, 1)).toString();
-        QString qualiDataTrain = qualiModel->data(qualiModel->index(i, 2)).toString();
-        QString qualiStateRow = qualiModel->data(qualiModel->index(i, 3)).toString();
+    for (int i = 0; i < qualiModel->rowCount(); i++)
+    {
+        auto qualiDataFunc = qualiModel->data(qualiModel->index(i, 1)).toString();
+        auto qualiDataTrain = qualiModel->data(qualiModel->index(i, 2)).toString();
+        auto qualiStateRow = qualiModel->data(qualiModel->index(i, 3)).toString();
+
         tmpCache.insert(QString("%1_%2").arg(qualiDataFunc).arg(qualiDataTrain), qualiStateRow);
     }
 
     // Now create main cache.
-    for (int i = 0; i < funcFilterModel->rowCount(); i++) {
-        for (int j = 0; j < trainFilterModel->rowCount(); j++) {
+    for (int i = 0; i < funcFilterModel->rowCount(); i++)
+    {
+        for (int j = 0; j < trainFilterModel->rowCount(); j++)
+        {
             emit updateBuildCache(i * trainFilterModel->rowCount() + j);
 
             QString qualiDataFunc = funcFilterModel->data(funcFilterModel->index(i, 1)).toString();
             QString qualiDataTrain = trainFilterModel->data(trainFilterModel->index(j, 1))
                 .toString();
-
             QString key = QString("%1_%2").arg(qualiDataFunc).arg(qualiDataTrain);
-            if (tmpCache.contains(key)) {
+
+            if (tmpCache.contains(key))
+            {
                 cache->insert(QString("%1_%2").arg(i).arg(j), tmpCache.value(key));
             }
         }
@@ -107,7 +113,8 @@ void QMQualiMatrixModel::buildCache()
 
 QVariant QMQualiMatrixModel::headerData(int section, Qt::Orientation orientation, int) const
 {
-    switch (orientation) {
+    switch (orientation)
+    {
         case Qt::Orientation::Horizontal:
             return trainFilterModel->data(trainFilterModel->index(section, 1));
         case Qt::Orientation::Vertical:
@@ -117,11 +124,11 @@ QVariant QMQualiMatrixModel::headerData(int section, Qt::Orientation orientation
     return QVariant();
 }
 
-bool QMQualiMatrixModel::setHeaderData(
-    int section, Qt::Orientation orientation, const QVariant &value, int role
-)
+bool QMQualiMatrixModel::setHeaderData(int section, Qt::Orientation orientation,
+    const QVariant &value, int role)
 {
-    if (value != headerData(section, orientation, role)) {
+    if (value != headerData(section, orientation, role))
+    {
         // FIXME: Implement me!
         emit headerDataChanged(orientation, section, section);
         return true;
@@ -132,7 +139,8 @@ bool QMQualiMatrixModel::setHeaderData(
 
 int QMQualiMatrixModel::rowCount(const QModelIndex &parent) const
 {
-    if (parent.isValid()) {
+    if (parent.isValid())
+    {
         return 0;
     }
 
@@ -150,18 +158,23 @@ int QMQualiMatrixModel::columnCount(const QModelIndex &parent) const
 
 QVariant QMQualiMatrixModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid()) {
+    if (!index.isValid())
+    {
         return QVariant();
     }
 
-    if (role == Qt::DisplayRole || role == Qt::EditRole) {
+    if (role == Qt::DisplayRole || role == Qt::EditRole)
+    {
         QString key = QString("%1_%2").arg(index.row()).arg(index.column());
-        if (cache->contains(key)) {
+
+        if (cache->contains(key))
+        {
             return QVariant(cache->value(key));
         }
     }
 
-    if (role == Qt::ToolTipRole) {
+    if (role == Qt::ToolTipRole)
+    {
         return tr("P = Pflicht; A = Angebot; S = Sonstiges");
     }
 
@@ -170,12 +183,13 @@ QVariant QMQualiMatrixModel::data(const QModelIndex &index, int role) const
 
 int QMQualiMatrixModel::qualiStateRowFromFuncTrain(const int &funcRow, const int &trainRow) const
 {
-    QString funcName = funcFilterModel->data(funcFilterModel->index(funcRow, 1)).toString();
-    QString trainName = trainFilterModel->data(trainFilterModel->index(trainRow, 1)).toString();
+    auto funcName = funcFilterModel->data(funcFilterModel->index(funcRow, 1)).toString();
+    auto trainName = trainFilterModel->data(trainFilterModel->index(trainRow, 1)).toString();
 
-    for (int i = 0; i < qualiModel->rowCount(); i++) {
-        QString qualiDataFunc = qualiModel->data(qualiModel->index(i, 1)).toString();
-        QString qualiDataTrain = qualiModel->data(qualiModel->index(i, 2)).toString();
+    for (int i = 0; i < qualiModel->rowCount(); i++)
+    {
+        auto qualiDataFunc = qualiModel->data(qualiModel->index(i, 1)).toString();
+        auto qualiDataTrain = qualiModel->data(qualiModel->index(i, 2)).toString();
 
         if (funcName == qualiDataFunc && trainName == qualiDataTrain) {
             return i;
@@ -187,14 +201,16 @@ int QMQualiMatrixModel::qualiStateRowFromFuncTrain(const int &funcRow, const int
 
 bool QMQualiMatrixModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
-    if (qualiModel == nullptr || funcModel == nullptr || trainModel == nullptr) {
+    if (qualiModel == nullptr || funcModel == nullptr || trainModel == nullptr)
+    {
         return false;
     }
 
-    int tmpValue = value.toInt();
+    auto tmpValue = value.toInt();
 
     // If value is already the target value, exit.
-    if (data(index, role) != value) {
+    if (data(index, role) != value)
+    {
         int qualiStateRow = qualiStateRowFromFuncTrain(index.row(), index.column());
         if (qualiStateRow < 0) {
             // No entry found, create a new one
@@ -259,15 +275,19 @@ bool QMQualiMatrixModel::setData(const QModelIndex &index, const QVariant &value
 
         //buildCache();
         emit dataChanged(index, index, QVector<int>() << role);
+
         return true;
     }
+
     return false;
 }
 
 Qt::ItemFlags QMQualiMatrixModel::flags(const QModelIndex &index) const
 {
     if (!index.isValid())
+    {
         return Qt::NoItemFlags;
+    }
 
     return Qt::ItemIsEditable | Qt::ItemIsSelectable | Qt::ItemIsEnabled;
 }
