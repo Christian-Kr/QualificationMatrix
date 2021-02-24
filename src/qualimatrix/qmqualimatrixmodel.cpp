@@ -165,7 +165,7 @@ QVariant QMQualiMatrixModel::data(const QModelIndex &index, int role) const
 
     if (role == Qt::DisplayRole || role == Qt::EditRole)
     {
-        QString key = QString("%1_%2").arg(index.row()).arg(index.column());
+        auto key = QString("%1_%2").arg(index.row()).arg(index.column());
 
         if (cache->contains(key))
         {

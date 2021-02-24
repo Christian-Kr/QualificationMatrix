@@ -74,6 +74,10 @@ public:
 private:
     QColor gridColor;
     QColor selectionColor;
+    QColor pColor;
+    QColor aColor;
+    QColor sColor;
+    QColor whiteColor;
 };
 
 #endif // QMQUALIMATRIXDELEGATE_H

@@ -27,6 +27,11 @@ QMQualiMatrixDelegate::QMQualiMatrixDelegate(QWidget *parent)
     selectionColor(QColor("#ffffff"))
 {
     updateColors();
+
+    pColor = QColor("#ffcccc");
+    aColor = QColor("#cce6ff");
+    sColor = QColor("#ffe6cc");
+    whiteColor = QColor("#FFFFFF");
 }
 
 void QMQualiMatrixDelegate::updateColors()
@@ -48,16 +53,16 @@ void QMQualiMatrixDelegate::paint(QPainter *painter, const QStyleOptionViewItem 
     else
     {
         if (value == "Pflicht") {
-            painter->setBrush(QColor("#ffcccc"));
+            painter->setBrush(pColor);
         }
         else if (value == "Angebot") {
-            painter->setBrush(QColor("#cce6ff"));
+            painter->setBrush(aColor);
         }
         else if (value == "Sonstiges") {
-            painter->setBrush(QColor("#ffe6cc"));
+            painter->setBrush(sColor);
         }
         else {
-            painter->setBrush(QColor("#FFFFFF"));
+            painter->setBrush(whiteColor);
         }
     }
 
