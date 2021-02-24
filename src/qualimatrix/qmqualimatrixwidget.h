@@ -81,6 +81,9 @@ public slots:
     /// Extend the disable locked mode.
     void extendDisableLocked();
 
+    /// Run extended selection for training group.
+    void extSelTrainGroup();
+
 private:
     Ui::QMQualiMatrixWidget *ui;
 
