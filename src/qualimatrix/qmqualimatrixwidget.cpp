@@ -239,3 +239,8 @@ void QMQualiMatrixWidget::extendDisableLocked()
         lockModeTimer->start();
     }
 }
+
+void QMQualiMatrixWidget::extSelTrainGroup()
+{
+
+}
