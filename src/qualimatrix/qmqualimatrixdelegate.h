@@ -18,56 +18,57 @@
 
 #include <QStyledItemDelegate>
 
+/// Handle the style of every cell and its look & feel in qualification matrix.
+/// \author Christian Kr, Copyright 2021
 class QMQualiMatrixDelegate: public QStyledItemDelegate
 {
 Q_OBJECT
 
 public:
-    /**
-     * @brief constructor
-     * @param parent
-     */
+    /// Constructor
+    /// \param parent
     explicit QMQualiMatrixDelegate(QWidget *parent = nullptr);
 
-    /**
-     * @brief override from QStyleItemDelegate
-     */
-    void paint(
-        QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index
-    ) const;
+    /// Override from QStyleItemDelegate.
+    /// \param index
+    /// \param option
+    /// \param painter
+    void paint(QPainter *painter, const QStyleOptionViewItem &option,
+        const QModelIndex &index) const;
 
-    /**
-     * @brief override from QStyleItemDelegate
-     */
+    /// Override from QStyleItemDelegate.
+    /// \param index
+    /// \param option
+    /// \return
     QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
 
-    /**
-     * @brief override from QStyleItemDelegate
-     */
-    QWidget *createEditor(
-        QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index
-    ) const;
+    /// Override from QStyleItemDelegate.
+    /// \param index
+    /// \param option
+    /// \param parent
+    /// \return
+    QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option,
+        const QModelIndex &index) const;
 
-    /**
-     * @brief override from QStyleItemDelegate
-     */
+    /// Override from QStyleItemDelegate.
+    /// \param editor
+    /// \param index
     void setEditorData(QWidget *editor, const QModelIndex &index) const;
 
-    /**
-     * @brief override from QStyleItemDelegate
-     */
+    /// Override from QStyleItemDelegate.
+    /// \param editor
+    /// \param model
+    /// \param index
     void setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const;
 
-    /**
-     * @Brief override from QStyleItemDelegate
-     */
-    void updateEditorGeometry(
-        QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &index
-    ) const;
+    /// Override from QStyleItemDelegate.
+    /// \param index
+    /// \param editor
+    /// \param option
+    void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option,
+        const QModelIndex &index) const;
 
-    /**
-     * @brief Update the colors from config.
-     */
+    /// Update the colors from config.
     void updateColors();
 
 private:
