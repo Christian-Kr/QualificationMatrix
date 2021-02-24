@@ -243,7 +243,38 @@ void QMQualiMatrixWidget::extendDisableLocked()
 
 void QMQualiMatrixWidget::extSelTrainGroup()
 {
-    QMExtendedSelectionDialog extSelDialog(this);
+    QMExtendedSelectionDialog extSelDialog(this, trainGroupModel.get(), 1);
 
-    extSelDialog.exec();
+    auto res = extSelDialog.exec();
+    QModelIndexList modelIndexList = extSelDialog.getSelected();
+
+    if (modelIndexList.size() < 1 || res == QDialog::Rejected)
+    {
+        return;
+    }
+
+    QString finalValue;
+    if (modelIndexList.size() == 1)
+    {
+        QModelIndex modelIndex = modelIndexList.at(0);
+        finalValue = trainGroupModel->data(
+            trainGroupModel->index(modelIndex.row(), 1)).toString();
+    }
+    else
+    {
+        // Only > 1 possible
+        QStringList valueList;
+        for (int i = 0; i < modelIndexList.size(); i++)
+        {
+            QModelIndex modelIndex = modelIndexList.at(i);
+            auto value = trainGroupModel->data(
+                trainGroupModel->index(modelIndex.row(), 1)).toString();
+
+            valueList << value;
+        }
+
+        finalValue = "^(" + valueList.join("|") + ")";
+    }
+
+    ui->cbTrainGroupFilter->setCurrentText(finalValue);
 }

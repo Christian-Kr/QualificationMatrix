@@ -16,16 +16,41 @@
 #include "qmextendedselectiondialog.h"
 #include "ui_qmextendedselectiondialog.h"
 
-#include <QKeyEvent>
+#include <QAbstractTableModel>
+#include <QSortFilterProxyModel>
 
-QMExtendedSelectionDialog::QMExtendedSelectionDialog(QWidget *parent)
+QMExtendedSelectionDialog::QMExtendedSelectionDialog(QWidget *parent, QAbstractTableModel *model,
+    int column)
     : QMDialog(parent)
 {
     ui = new Ui::QMExtendedSelectionDialog;
     ui->setupUi(this);
 
-    /// Be sure only settings will be called, that are available during this state.
+    filterModel = new QSortFilterProxyModel(this);
+    filterModel->setSourceModel(model);
+    filterModel->setFilterKeyColumn(column);
+
+    // Be sure only settings will be called, that are available during this state.
     loadSettings();
+
+    // Set model to table view.
+    if (model != nullptr)
+    {
+        ui->tvSelection->setModel(filterModel);
+
+        for (int i = 0; i < model->columnCount(); i++)
+        {
+            if (i != column)
+            {
+                ui->tvSelection->hideColumn(i);
+            }
+        }
+    }
+}
+
+QModelIndexList QMExtendedSelectionDialog::getSelected() const
+{
+    return ui->tvSelection->selectionModel()->selectedRows();
 }
 
 void QMExtendedSelectionDialog::loadSettings()

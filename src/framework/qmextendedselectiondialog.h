@@ -18,10 +18,15 @@
 
 #include "framework/qmdialog.h"
 
+#include <QModelIndexList>
+
 namespace Ui
 {
     class QMExtendedSelectionDialog;
 }
+
+class QAbstractTableModel;
+class QSortFilterProxyModel;
 
 /// Dialog for extended selection in models.
 /// \author Christian Kr, Copyright 2020
@@ -32,7 +37,10 @@ Q_OBJECT
 public:
     /// Constructor
     /// \param parent
-    explicit QMExtendedSelectionDialog(QWidget *parent = nullptr);
+    /// \param tableModel The data model to show for selection.
+    /// \param column The column of the model to show.
+    explicit QMExtendedSelectionDialog(QWidget *parent = nullptr,
+        QAbstractTableModel *tableModel = nullptr, int column = 0);
 
     /// Will be called from closeEvent.
     void saveSettings() override;
@@ -40,8 +48,13 @@ public:
     /// Will be called from constructor.
     void loadSettings() override;
 
+    /// Get the number of rows selected.
+    QModelIndexList getSelected() const;
+
 private:
     Ui::QMExtendedSelectionDialog *ui;
+
+    QSortFilterProxyModel *filterModel;
 };
 
 #endif // QMEXTENDEDSELECTIONDIALOG_H
