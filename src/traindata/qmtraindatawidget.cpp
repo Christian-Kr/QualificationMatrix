@@ -166,44 +166,41 @@ void QMTrainDataWidget::addSingleEntry()
         return;
     }
 
-    // Before Adding a single entry, the filter has to be reset. Otherwise it might be possible,
-    // that the new entry is not visible.
-    resetFilter();
-    updateFilter();
-
-    // Remove selections.
-    ui->tvTrainData->selectionModel()->clear();
-
     // Get the current number and add the entry.
-    int selRow = trainDataModel->rowCount();
+    int selRow = 0;
     QModelIndexList selIdxList = ui->tvTrainData->selectionModel()->selectedRows();
     if (!selIdxList.isEmpty())
     {
         selRow = selIdxList.first().row();
     }
-    trainDataModel->insertRow(selRow, QModelIndex());
+
+    // Remove selections.
+    ui->tvTrainData->selectionModel()->clear();
+
+    // Always add entry at position zero.
+    trainDataModel->insertRow(0, QModelIndex());
 
     // If only one line exist. Add a new line with default values. If there are more than one line
     // available, use the values of the last entry as default.
     if (trainDataModel->rowCount() == 1 || selRow == 0)
     {
-        trainDataModel->setData(trainDataModel->index(selRow, 1),
+        trainDataModel->setData(trainDataModel->index(0, 1),
                 employeeModel->data(employeeModel->index(0, 0)));
-        trainDataModel->setData(trainDataModel->index(selRow, 2),
+        trainDataModel->setData(trainDataModel->index(0, 2),
                 trainModel->data(trainModel->index(0, 0)));
-        trainDataModel->setData(trainDataModel->index(selRow, 3), "2020-01-01");
-        trainDataModel->setData(trainDataModel->index(selRow, 4),
+        trainDataModel->setData(trainDataModel->index(0, 3), "2020-01-01");
+        trainDataModel->setData(trainDataModel->index(0, 4),
                 trainDataStateModel->data(trainDataStateModel->index(0, 0)));
     }
     else
     {
         QModelIndexList indexes = employeeModel->match(
             employeeModel->index(0, employeeModel->fieldIndex("name")), Qt::DisplayRole,
-            trainDataModel->data(trainDataModel->index(selRow - 1, 1)), 1, Qt::MatchFixedString);
+            trainDataModel->data(trainDataModel->index(selRow + 1, 1)), 1, Qt::MatchFixedString);
 
         if (indexes.size() == 1)
         {
-            trainDataModel->setData(trainDataModel->index(selRow, 1),
+            trainDataModel->setData(trainDataModel->index(0, 1),
                     employeeModel->data(employeeModel->index(indexes.first().row(), 0)));
         }
         else
@@ -211,18 +208,18 @@ void QMTrainDataWidget::addSingleEntry()
             // If no employee has been found, the last entry might be a deactivated employee. Just
             // give an information to the user about it.
             emit infoMessageAvailable(tr("Der Mitarbeiter existiert nicht oder ist deaktiviert"));
-            trainDataModel->setData(trainDataModel->index(selRow, 1),
+            trainDataModel->setData(trainDataModel->index(0, 1),
                     employeeModel->data(employeeModel->index(0, 0)));
         }
 
         indexes = trainModel->match(
                 trainModel->index(0, trainModel->fieldIndex("name")), Qt::DisplayRole,
-                trainDataModel->data(trainDataModel->index(selRow - 1, 2)), 1,
+                trainDataModel->data(trainDataModel->index(selRow + 1, 2)), 1,
                 Qt::MatchFixedString);
 
         if (indexes.size() == 1)
         {
-            trainDataModel->setData(trainDataModel->index(selRow, 2),
+            trainDataModel->setData(trainDataModel->index(0, 2),
                     trainModel->data(trainModel->index(indexes.first().row(), 0)));
         }
         else
@@ -230,28 +227,28 @@ void QMTrainDataWidget::addSingleEntry()
             // If no training has been found, the last entry might be a deactivated training. Just
             // give an information to the user about it.
             emit infoMessageAvailable(tr("Die Schulung existiert nicht oder ist deaktiviert"));
-            trainDataModel->setData(trainDataModel->index(selRow, 1),
+            trainDataModel->setData(trainDataModel->index(0, 1),
                     trainModel->data(trainModel->index(0, 0)));
         }
 
-        trainDataModel->setData(trainDataModel->index(selRow, 3),
-                trainDataModel->data(trainDataModel->index(selRow - 1, 3)));
+        trainDataModel->setData(trainDataModel->index(0, 3),
+                trainDataModel->data(trainDataModel->index(selRow + 1, 3)));
 
         indexes = trainDataStateModel->match(
                 trainDataStateModel->index(0, trainModel->fieldIndex("name")), Qt::DisplayRole,
-                trainDataModel->data(trainDataModel->index(selRow - 1, 4)), 1,
+                trainDataModel->data(trainDataModel->index(selRow + 1, 4)), 1,
                 Qt::MatchFixedString);
 
         if (indexes.size() == 1)
         {
-            trainDataModel->setData(trainDataModel->index(selRow, 4),
+            trainDataModel->setData(trainDataModel->index(0, 4),
                     trainDataStateModel->data(
                             trainDataStateModel->index(indexes.first().row(), 0)));
         }
     }
 
-    ui->tvTrainData->scrollToBottom();
-    ui->tvTrainData->selectRow(selRow);
+    ui->tvTrainData->scrollToTop();
+    ui->tvTrainData->selectRow(0);
 }
 
 void QMTrainDataWidget::deleteSelected()
