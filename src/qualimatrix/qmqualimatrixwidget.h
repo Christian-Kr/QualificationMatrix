@@ -84,6 +84,9 @@ public slots:
     /// Run extended selection for training group.
     void extSelTrainGroup();
 
+    /// Run extended selection for function group.
+    void extSelFuncGroup();
+
 private:
     Ui::QMQualiMatrixWidget *ui;
 

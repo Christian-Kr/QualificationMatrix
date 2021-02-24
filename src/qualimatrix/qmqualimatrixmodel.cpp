@@ -294,7 +294,7 @@ Qt::ItemFlags QMQualiMatrixModel::flags(const QModelIndex &index) const
 
 void QMQualiMatrixModel::setFuncGroupFilter(const QString &filter)
 {
-    funcFilterGroupModel->setFilterFixedString(filter);
+    funcFilterGroupModel->setFilterRegExp(filter);
 }
 
 void QMQualiMatrixModel::setTrainGroupFilter(const QString &filter)
