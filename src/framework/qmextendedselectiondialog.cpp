@@ -13,13 +13,17 @@
 // If not, see <http://www.gnu.org/licenses/>.
 //
 
-#include "framework/qmextendedselectiondialog.h"
+#include "qmextendedselectiondialog.h"
+#include "ui_qmextendedselectiondialog.h"
 
 #include <QKeyEvent>
 
 QMExtendedSelectionDialog::QMExtendedSelectionDialog(QWidget *parent)
     : QMDialog(parent)
 {
+    ui = new Ui::QMExtendedSelectionDialog;
+    ui->setupUi(this);
+
     /// Be sure only settings will be called, that are available during this state.
     loadSettings();
 }

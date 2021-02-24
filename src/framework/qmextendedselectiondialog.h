@@ -18,6 +18,11 @@
 
 #include "framework/qmdialog.h"
 
+namespace Ui
+{
+    class QMExtendedSelectionDialog;
+}
+
 /// Dialog for extended selection in models.
 /// \author Christian Kr, Copyright 2020
 class QMExtendedSelectionDialog: public QMDialog
@@ -34,6 +39,9 @@ public:
 
     /// Will be called from constructor.
     void loadSettings() override;
+
+private:
+    Ui::QMExtendedSelectionDialog *ui;
 };
 
 #endif // QMEXTENDEDSELECTIONDIALOG_H

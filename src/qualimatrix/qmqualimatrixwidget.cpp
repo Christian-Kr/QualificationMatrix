@@ -20,6 +20,7 @@
 #include "qmqualimatrixdelegate.h"
 #include "qmqualimatrixheaderview.h"
 #include "settings/qmapplicationsettings.h"
+#include "framework/qmextendedselectiondialog.h"
 
 #include <QSortFilterProxyModel>
 #include <QSqlTableModel>
@@ -242,5 +243,7 @@ void QMQualiMatrixWidget::extendDisableLocked()
 
 void QMQualiMatrixWidget::extSelTrainGroup()
 {
+    QMExtendedSelectionDialog extSelDialog(this);
 
+    extSelDialog.exec();
 }
