@@ -19,6 +19,7 @@
 #include "framework/qmproxysqlrelationaldelegate.h"
 #include "framework/qmcolorchooserdelegate.h"
 #include "framework/qmbooleandelegate.h"
+#include "framework/qmplaintexteditdelegate.h"
 
 #include <QSqlTableModel>
 #include <QMessageBox>
@@ -39,6 +40,7 @@ QMTrainSettingsWidget::QMTrainSettingsWidget(QWidget *parent)
     ui->tvTrain->verticalHeader()->setVisible(true);
     ui->tvTrain->setItemDelegateForColumn(2, new QMProxySqlRelationalDelegate(ui->tvTrain));
     ui->tvTrain->setItemDelegateForColumn(4, new QMBooleanDelegate());
+    ui->tvTrain->setItemDelegateForColumn(5, new QMPlainTextEditDelegate());
 
     ui->tvTrainGroups->horizontalHeader()->setStretchLastSection(false);
     ui->tvTrainGroups->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
@@ -98,6 +100,7 @@ void QMTrainSettingsWidget::updateData()
     // Update the views.
     ui->tvTrain->setModel(trainFilterModel);
     ui->tvTrain->hideColumn(0);
+    ui->tvTrain->setColumnWidth(5, 400);
 
     ui->tvTrainGroups->setModel(trainGroupModel.get());
     ui->tvTrainGroups->hideColumn(0);
@@ -106,14 +109,11 @@ void QMTrainSettingsWidget::updateData()
     ui->tvTrainState->hideColumn(0);
 
     // Build connections of the new models.
-    connect(
-        trainModel.get(), &QAbstractItemModel::dataChanged, this,
+    connect(trainModel.get(), &QAbstractItemModel::dataChanged, this,
         &QMSettingsWidget::settingsChanged);
-    connect(
-        trainGroupModel.get(), &QAbstractItemModel::dataChanged, this,
+    connect(trainGroupModel.get(), &QAbstractItemModel::dataChanged, this,
         &QMSettingsWidget::settingsChanged);
-    connect(
-        trainDataStateModel.get(), &QAbstractItemModel::dataChanged, this,
+    connect(trainDataStateModel.get(), &QAbstractItemModel::dataChanged, this,
         &QMSettingsWidget::settingsChanged);
 }
 

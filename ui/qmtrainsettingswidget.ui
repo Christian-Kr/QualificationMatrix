@@ -124,14 +124,11 @@
              <attribute name="horizontalHeaderMinimumSectionSize">
               <number>200</number>
              </attribute>
-             <attribute name="horizontalHeaderDefaultSectionSize">
-              <number>200</number>
-             </attribute>
              <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
               <bool>true</bool>
              </attribute>
              <attribute name="horizontalHeaderStretchLastSection">
-              <bool>false</bool>
+              <bool>true</bool>
              </attribute>
              <attribute name="verticalHeaderVisible">
               <bool>false</bool>

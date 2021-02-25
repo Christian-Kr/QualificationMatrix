@@ -39,7 +39,7 @@ QWidget *QMPlainTextEditDelegate::createEditor(QWidget *parent, const QStyleOpti
     const QModelIndex &) const
 {
     auto te = new QPlainTextEdit(parent);
-    te->setWordWrapMode(QTextOption::WordWrap);
+    te->setWordWrapMode(QTextOption::NoWrap);
 
     return te;
 }
