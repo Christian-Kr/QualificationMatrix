@@ -62,6 +62,10 @@ QMQualiMatrixWidget::QMQualiMatrixWidget(QWidget *parent)
 
     ui->dwTrainDetails->setVisible(false);
 
+    ui->splitter->setCollapsible(0, false);
+    ui->splitter->setCollapsible(1, false);
+    ui->splitter->setCollapsible(2, false);
+
     loadSettings();
 }
 

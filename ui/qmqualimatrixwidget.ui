@@ -25,6 +25,9 @@
      <property name="handleWidth">
       <number>10</number>
      </property>
+     <property name="childrenCollapsible">
+      <bool>true</bool>
+     </property>
      <widget class="QDockWidget" name="dwFilter">
       <property name="minimumSize">
        <size>
