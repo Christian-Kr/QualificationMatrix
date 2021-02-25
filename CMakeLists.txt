@@ -80,6 +80,7 @@ add_executable(QualificationMatrix WIN32
     src/framework/qmsqlrelationaltablemodel.cpp
     src/framework/qminfolabel.cpp
     src/framework/qmextendedselectiondialog.cpp
+    src/framework/qmplaintexteditdelegate.cpp
     src/database/qmdatabasedialog.cpp
     src/database/qmdatabaseupdatedialog.cpp
     src/database/qmdatabaseupdater.cpp
