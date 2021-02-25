@@ -52,9 +52,15 @@ QMQualiMatrixWidget::QMQualiMatrixWidget(QWidget *parent)
     ui->tvQualiMatrix->setVerticalHeader(
         new QMQualiMatrixHeaderView(Qt::Orientation::Vertical, this));
 
+    // Connect horizontal header.
+    connect(ui->tvQualiMatrix->horizontalHeader(), &QHeaderView::sectionClicked, this,
+        &QMQualiMatrixWidget::showTrainSectionHeaderInfo);
+
     // default edit mode - not editable
     ui->tbLock->setChecked(false);
     ui->tvQualiMatrix->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    ui->dwTrainDetails->setVisible(false);
 
     loadSettings();
 }
@@ -65,6 +71,44 @@ QMQualiMatrixWidget::~QMQualiMatrixWidget()
     saveSettings();
 
     delete ui;
+}
+
+void QMQualiMatrixWidget::showTrainSectionHeaderInfo(int logicalIndex)
+{
+    qDebug() << "Hier";
+    ui->dwTrainDetails->setVisible(true);
+    auto trainName = qualiMatrixModel->headerData(logicalIndex, Qt::Horizontal).toString();
+
+    for(int i = 0; i < trainModel->rowCount(); i++)
+    {
+        auto tmpValue = trainModel->data(trainModel->index(i, 1)).toString();
+        if (tmpValue == trainName)
+        {
+            ui->laName->setText(tmpValue);
+            ui->laGroup->setText(trainModel->data(trainModel->index(i, 2)).toString());
+
+            ui->laInterval->setText(trainModel->data(
+                trainModel->index(i, 3)).toString() + tr(" Jahr(e)"));
+
+            if (trainModel->data(trainModel->index(i, 4)).toInt() == 1)
+            {
+                ui->laLegallyNecessary->setText(tr("Ja"));
+            }
+            else
+            {
+                ui->laLegallyNecessary->setText(tr("Nein"));
+            }
+
+            ui->pteContent->setPlainText(trainModel->data(trainModel->index(i, 5)).toString());
+
+            break;
+        }
+    }
+}
+
+void QMQualiMatrixWidget::closeTrainDetails()
+{
+    ui->dwTrainDetails->setVisible(false);
 }
 
 void QMQualiMatrixWidget::loadSettings()

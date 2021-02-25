@@ -87,6 +87,13 @@ public slots:
     /// Run extended selection for function group.
     void extSelFuncGroup();
 
+    /// Show info dialog with given header index.
+    /// \param logicalIndex Logical header index.
+    void showTrainSectionHeaderInfo(int logicalIndex);
+
+    /// Close the train info widget.
+    void closeTrainDetails();
+
 private:
     Ui::QMQualiMatrixWidget *ui;
 

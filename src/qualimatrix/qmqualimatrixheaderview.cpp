@@ -37,6 +37,8 @@ QMQualiMatrixHeaderView::QMQualiMatrixHeaderView(Qt::Orientation orientation, QW
     setDefaultSectionSize(30);
     setStyleSheet("background-color: white;");
 
+    setSectionsClickable(true);
+
     QMApplicationSettings &settings = QMApplicationSettings::getInstance();
     vertSectionWidth = settings.read("QualiMatrix/VertHeaderWidth", 200).toInt();
     horSectionHeight = settings.read("QualiMatrix/HorHeaderHeight", 200).toInt();
@@ -273,3 +275,4 @@ QSize QMQualiMatrixHeaderView::sizeHint() const
         return {vertSectionWidth, 30};
     }
 }
+
