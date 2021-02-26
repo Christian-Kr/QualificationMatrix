@@ -32,9 +32,27 @@ void QMSigningListDocument::createDocument()
     font.setPointSize(8);
     setDefaultFont(font);
 
+    QTextTable *headerTable = cursor.insertTable(1, 1);
+
+    QTextTableFormat tableHeaderFormat = headerTable->format();
+    tableHeaderFormat.setCellPadding(10);
+    tableHeaderFormat.setBorderStyle(QTextFrameFormat::BorderStyle_None);
+    tableHeaderFormat.setWidth(QTextLength(QTextLength::PercentageLength, 100));
+    headerTable->setFormat(tableHeaderFormat);
+
+    QTextCharFormat textHeaderFormat;
+    textHeaderFormat.setFontPointSize(16);
+    QTextBlockFormat centerAlignment;
+    centerAlignment.setAlignment(Qt::AlignHCenter);
+
+    cursor.setBlockFormat(centerAlignment);
+    cursor.insertText(tr("Unterweisungsprotokoll"), textHeaderFormat);
+    cursor.movePosition(QTextCursor::NextBlock);
+    cursor.insertHtml("<br>");
+
     // Build header table.
-    QTextTable *table = cursor.insertTable(4, 3);
-    table->mergeCells(0, 0, 4, 2);
+    QTextTable *table = cursor.insertTable(3, 3);
+    table->mergeCells(0, 0, 3, 2);
 
     QTextTableFormat tableFormat = table->format();
     tableFormat.setCellPadding(2);
@@ -44,8 +62,6 @@ void QMSigningListDocument::createDocument()
 
     // Fill header table with text.
     cursor.insertImage(imagePath);
-    cursor.movePosition(QTextCursor::NextCell);
-    cursor.insertHtml(tr("<b>Unterweisungsprotokoll</b>"));
     cursor.movePosition(QTextCursor::NextCell);
     cursor.insertText(tr("Unterweisung am: %1").arg(date.toString("dd.MM.yyyy")));
     cursor.movePosition(QTextCursor::NextCell);

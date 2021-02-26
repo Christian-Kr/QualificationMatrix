@@ -2436,52 +2436,52 @@ Sind Sie sich sicher?</source>
 <context>
     <name>QMSigningListDocument</name>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="48"/>
-        <source>&lt;b&gt;Unterweisungsprotokoll&lt;/b&gt;</source>
+        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="49"/>
+        <source>Unterweisungsprotokoll</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="50"/>
+        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="66"/>
         <source>Unterweisung am: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="52"/>
+        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="68"/>
         <source>Unterweisung durch: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="54"/>
+        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="70"/>
         <source>Unterschrift:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="76"/>
+        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="92"/>
         <source>Thema: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="83"/>
+        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="99"/>
         <source>Inhalte: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="114"/>
+        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="130"/>
         <source>Nr.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="117"/>
+        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="133"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="120"/>
+        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="136"/>
         <source>Unterschrift</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="123"/>
+        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="139"/>
         <source>Datum</source>
         <translation type="unfinished"></translation>
     </message>
