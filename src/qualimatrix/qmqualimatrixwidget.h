@@ -87,6 +87,12 @@ public slots:
     /// Run extended selection for function group.
     void extSelFuncGroup();
 
+    /// Run extennded selection for functions.
+    void extSelFunc();
+
+    /// Run extended selection for trainings.
+    void extSelTrain();
+
     /// Show info dialog with given header index.
     /// \param logicalIndex Logical header index.
     void showTrainSectionHeaderInfo(int logicalIndex);

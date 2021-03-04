@@ -913,6 +913,38 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>tbExtSelTrain</sender>
+   <signal>clicked()</signal>
+   <receiver>QMQualiMatrixWidget</receiver>
+   <slot>extSelTrain()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>452</x>
+     <y>159</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>624</x>
+     <y>408</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tbExtSelFunc</sender>
+   <signal>clicked()</signal>
+   <receiver>QMQualiMatrixWidget</receiver>
+   <slot>extSelFunc()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>452</x>
+     <y>87</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>624</x>
+     <y>408</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>updateFilter()</slot>

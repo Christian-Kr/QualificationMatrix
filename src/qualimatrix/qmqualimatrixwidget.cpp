@@ -315,3 +315,31 @@ void QMQualiMatrixWidget::extSelFuncGroup()
 
     ui->cbFuncGroupFilter->setCurrentText(extSelDialog.getRegExpText());
 }
+
+void QMQualiMatrixWidget::extSelFunc()
+{
+    QMExtendedSelectionDialog extSelDialog(this, funcModel.get(), 1);
+    auto res = extSelDialog.exec();
+    auto modelIndexList = extSelDialog.getFilterSelected();
+
+    if (modelIndexList.size() < 1 || res == QDialog::Rejected)
+    {
+        return;
+    }
+
+    ui->cbFuncFilter->setCurrentText(extSelDialog.getRegExpText());
+}
+
+void QMQualiMatrixWidget::extSelTrain()
+{
+    QMExtendedSelectionDialog extSelDialog(this, trainModel.get(), 1);
+    auto res = extSelDialog.exec();
+    auto modelIndexList = extSelDialog.getFilterSelected();
+
+    if (modelIndexList.size() < 1 || res == QDialog::Rejected)
+    {
+        return;
+    }
+
+    ui->cbTrainFilter->setCurrentText(extSelDialog.getRegExpText());
+}
