@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1062</width>
-    <height>736</height>
+    <width>1249</width>
+    <height>818</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -57,20 +57,58 @@
          </widget>
         </item>
         <item row="1" column="0">
-         <widget class="QComboBox" name="cbFuncFilter">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="editable">
-           <bool>true</bool>
-          </property>
-          <property name="insertPolicy">
-           <enum>QComboBox::NoInsert</enum>
-          </property>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <item>
+           <widget class="QComboBox" name="cbFuncFilter">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="editable">
+             <bool>true</bool>
+            </property>
+            <property name="insertPolicy">
+             <enum>QComboBox::NoInsert</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="tbResetFunc">
+            <property name="text">
+             <string>...</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../icons.qrc">
+              <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>22</width>
+              <height>22</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="tbExtSelFunc">
+            <property name="text">
+             <string>...</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../icons.qrc">
+              <normaloff>:/icons/icons/view-list-details.svg</normaloff>:/icons/icons/view-list-details.svg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>22</width>
+              <height>22</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item row="2" column="0">
          <widget class="QLabel" name="label_2">
@@ -80,20 +118,58 @@
          </widget>
         </item>
         <item row="3" column="0">
-         <widget class="QComboBox" name="cbTrainFilter">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="editable">
-           <bool>true</bool>
-          </property>
-          <property name="insertPolicy">
-           <enum>QComboBox::NoInsert</enum>
-          </property>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <item>
+           <widget class="QComboBox" name="cbTrainFilter">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="editable">
+             <bool>true</bool>
+            </property>
+            <property name="insertPolicy">
+             <enum>QComboBox::NoInsert</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="tbResetTrain">
+            <property name="text">
+             <string>...</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../icons.qrc">
+              <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>22</width>
+              <height>22</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="tbExtSelTrain">
+            <property name="text">
+             <string>...</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../icons.qrc">
+              <normaloff>:/icons/icons/view-list-details.svg</normaloff>:/icons/icons/view-list-details.svg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>22</width>
+              <height>22</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item row="4" column="0">
          <widget class="QLabel" name="label_5">
@@ -117,6 +193,23 @@
             </property>
             <property name="insertPolicy">
              <enum>QComboBox::NoInsert</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="tbResetFuncGroup">
+            <property name="text">
+             <string>...</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../icons.qrc">
+              <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>22</width>
+              <height>22</height>
+             </size>
             </property>
            </widget>
           </item>
@@ -161,6 +254,23 @@
             </property>
             <property name="insertPolicy">
              <enum>QComboBox::NoInsert</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="tbResetTrainGroup">
+            <property name="text">
+             <string>...</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../icons.qrc">
+              <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>22</width>
+              <height>22</height>
+             </size>
             </property>
            </widget>
           </item>
@@ -715,6 +825,70 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>tbResetFunc</sender>
+   <signal>clicked()</signal>
+   <receiver>QMQualiMatrixWidget</receiver>
+   <slot>resetFunc()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>452</x>
+     <y>87</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>624</x>
+     <y>408</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tbResetFuncGroup</sender>
+   <signal>clicked()</signal>
+   <receiver>QMQualiMatrixWidget</receiver>
+   <slot>resetFuncGroup()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>412</x>
+     <y>231</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>624</x>
+     <y>408</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tbResetTrain</sender>
+   <signal>clicked()</signal>
+   <receiver>QMQualiMatrixWidget</receiver>
+   <slot>resetTrain()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>452</x>
+     <y>159</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>624</x>
+     <y>408</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tbResetTrainGroup</sender>
+   <signal>clicked()</signal>
+   <receiver>QMQualiMatrixWidget</receiver>
+   <slot>resetTrainGroup()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>412</x>
+     <y>303</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>624</x>
+     <y>408</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>updateFilter()</slot>
@@ -726,5 +900,11 @@
   <slot>extSelTrainGroup()</slot>
   <slot>extSelFuncGroup()</slot>
   <slot>closeTrainDetails()</slot>
+  <slot>resetFunc()</slot>
+  <slot>resetTrain()</slot>
+  <slot>resetFuncGroup()</slot>
+  <slot>resetTrainGroup()</slot>
+  <slot>extSelTrain()</slot>
+  <slot>extSelFunc()</slot>
  </slots>
 </ui>
