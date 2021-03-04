@@ -304,12 +304,12 @@ void QMQualiMatrixModel::setTrainGroupFilter(const QString &filter)
 
 void QMQualiMatrixModel::setFuncFilter(const QString &filter)
 {
-    funcFilterModel->setFilterFixedString(filter);
+    funcFilterModel->setFilterRegExp(filter);
 }
 
 void QMQualiMatrixModel::setTrainFilter(const QString &filter)
 {
-    trainFilterModel->setFilterFixedString(filter);
+    trainFilterModel->setFilterRegExp(filter);
 }
 
 void QMQualiMatrixModel::setTrainLegalFilter(bool filter)
