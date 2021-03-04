@@ -142,11 +142,7 @@ void QMQualiMatrixWidget::updateFilter()
     // Legal filter depends on checkbox.
     qualiMatrixModel->setTrainLegalFilter(ui->cbLegal->isChecked());
 
-    // Rebuild cache of model.
-    qualiMatrixModel->buildCache();
-    ui->tvQualiMatrix->clearSelection();
-    ui->tvQualiMatrix->selectionModel()->clearCurrentIndex();
-    ui->tvQualiMatrix->update();
+    updateModel();
 }
 
 void QMQualiMatrixWidget::filterVisibilityChanged()
@@ -300,6 +296,7 @@ void QMQualiMatrixWidget::extSelTrainGroup()
     }
 
     ui->cbTrainGroupFilter->setCurrentText(extSelDialog.getRegExpText());
+    updateFilter();
 }
 
 void QMQualiMatrixWidget::extSelFuncGroup()
@@ -314,6 +311,7 @@ void QMQualiMatrixWidget::extSelFuncGroup()
     }
 
     ui->cbFuncGroupFilter->setCurrentText(extSelDialog.getRegExpText());
+    updateFilter();
 }
 
 void QMQualiMatrixWidget::extSelFunc()
@@ -328,6 +326,7 @@ void QMQualiMatrixWidget::extSelFunc()
     }
 
     ui->cbFuncFilter->setCurrentText(extSelDialog.getRegExpText());
+    updateFilter();
 }
 
 void QMQualiMatrixWidget::extSelTrain()
@@ -342,4 +341,58 @@ void QMQualiMatrixWidget::extSelTrain()
     }
 
     ui->cbTrainFilter->setCurrentText(extSelDialog.getRegExpText());
+    updateFilter();
+}
+
+void QMQualiMatrixWidget::updateModel()
+{
+    // Rebuild cache of model.
+    qualiMatrixModel->buildCache();
+    ui->tvQualiMatrix->clearSelection();
+    ui->tvQualiMatrix->selectionModel()->clearCurrentIndex();
+    ui->tvQualiMatrix->update();
+}
+
+void QMQualiMatrixWidget::resetTrain()
+{
+    if (ui->cbTrainFilter->currentText().isEmpty())
+    {
+        return;
+    }
+
+    ui->cbTrainFilter->clearEditText();
+    updateFilter();
+}
+
+void QMQualiMatrixWidget::resetTrainGroup()
+{
+    if (ui->cbTrainGroupFilter->currentText().isEmpty())
+    {
+        return;
+    }
+
+    ui->cbTrainGroupFilter->clearEditText();
+    updateFilter();
+}
+
+void QMQualiMatrixWidget::resetFunc()
+{
+    if (ui->cbFuncFilter->currentText().isEmpty())
+    {
+        return;
+    }
+
+    ui->cbFuncFilter->clearEditText();
+    updateFilter();
+}
+
+void QMQualiMatrixWidget::resetFuncGroup()
+{
+    if (ui->cbFuncGroupFilter->currentText().isEmpty())
+    {
+        return;
+    }
+
+    ui->cbFuncGroupFilter->clearEditText();
+    updateFilter();
 }

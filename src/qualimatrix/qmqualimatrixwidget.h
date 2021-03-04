@@ -100,6 +100,21 @@ public slots:
     /// Close the train info widget.
     void closeTrainDetails();
 
+    /// Reset train filter.
+    void resetTrain();
+
+    /// Reset func filter.
+    void resetFunc();
+
+    /// Reset train group filter.
+    void resetTrainGroup();
+
+    /// Reset func group filter.
+    void resetFuncGroup();
+
+    /// Update the model and view.
+    void updateModel();
+
 private:
     Ui::QMQualiMatrixWidget *ui;
 
