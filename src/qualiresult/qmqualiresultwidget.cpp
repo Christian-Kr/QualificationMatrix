@@ -359,3 +359,33 @@ void QMQualiResultWidget::paintPdfRequest(QPrinter *printer)
     // Default printer settings.
     document.print(printer);
 }
+
+void QMQualiResultWidget::resetFunc()
+{
+    ui->cbFilterFunc->clearEditText();
+}
+
+void QMQualiResultWidget::resetTrain()
+{
+    ui->cbFilterTrain->clearEditText();
+}
+
+void QMQualiResultWidget::resetTrainState()
+{
+    ui->cbTrainStateFilter->clearEditText();
+}
+
+void QMQualiResultWidget::resetTrainResultState()
+{
+    ui->cbTrainResultState->clearEditText();
+}
+
+void QMQualiResultWidget::resetEmployee()
+{
+    ui->cbFilterEmployee->clearEditText();
+}
+
+void QMQualiResultWidget::resetEmployeeGroup()
+{
+    ui->cbFilterEmployeeGroup->clearEditText();
+}

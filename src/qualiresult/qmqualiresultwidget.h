@@ -78,6 +78,25 @@ public slots:
     /// Called when the visibility of the filter dock widget changed.
     void filterVisibilityChanged();
 
+    /// Reset func filter box.
+    void resetFunc();
+
+    /// Reset train filter box.
+    void resetTrain();
+
+    /// Reset train state filter box.
+    void resetTrainState();
+
+    /// Reset train result state filter box.
+    void resetTrainResultState();
+
+    /// Reset func employee box.
+    void resetEmployee();
+
+    /// Reset employee group filter box.
+    void resetEmployeeGroup();
+
+
 private:
     /// Create printer for pdf.
     /// \param printer The printer object to draw an.
