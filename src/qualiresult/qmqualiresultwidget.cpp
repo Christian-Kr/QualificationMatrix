@@ -339,8 +339,7 @@ void QMQualiResultWidget::paintPdfRequest(QPrinter *printer)
                 format.setBackground(
                         QColor(settings.read("QualiResult/OkColor", "#ffffff").toString()));
             }
-
-
+            
             cell.setFormat(format);
 
             // First number column.
