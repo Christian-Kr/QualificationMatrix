@@ -96,6 +96,8 @@ public slots:
     /// Reset employee group filter box.
     void resetEmployeeGroup();
 
+    /// Show extended filter dialog for employee.
+    void extSelEmployee();
 
 private:
     /// Create printer for pdf.

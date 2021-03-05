@@ -17,6 +17,7 @@
 #include "ui_qmqualiresultwidget.h"
 #include "model/qmdatamanager.h"
 #include "qmqualiresultmodel.h"
+#include "framework/qmextendedselectiondialog.h"
 #include "settings/qmapplicationsettings.h"
 
 #include <QSortFilterProxyModel>
@@ -387,4 +388,18 @@ void QMQualiResultWidget::resetEmployee()
 void QMQualiResultWidget::resetEmployeeGroup()
 {
     ui->cbFilterEmployeeGroup->clearEditText();
+}
+
+void QMQualiResultWidget::extSelEmployee()
+{
+    QMExtendedSelectionDialog extSelDialog(this, employeeModel.get(), 1);
+    auto res = extSelDialog.exec();
+    auto modelIndexList = extSelDialog.getFilterSelected();
+
+    if (modelIndexList.size() < 1 || res == QDialog::Rejected)
+    {
+        return;
+    }
+
+    ui->cbFilterEmployee->setCurrentText(extSelDialog.getRegExpText());
 }

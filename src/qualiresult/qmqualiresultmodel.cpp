@@ -22,10 +22,10 @@
 #include <QSqlQuery>
 #include <QSqlRecord>
 #include <QSqlError>
-#include <QDebug>
 #include <QList>
 #include <QDate>
 #include <QColor>
+#include <QSortFilterProxyModel>
 
 QMQualiResultModel::QMQualiResultModel(QObject *parent)
     : QAbstractTableModel(parent), funcModel(nullptr), trainModel(nullptr), trainDataModel(nullptr),
@@ -83,33 +83,42 @@ bool QMQualiResultModel::updateQualiInfo(
     const QString &filterName, const QString &filterFunc, const QString &filterTrain,
     const QString &filterEmployeeGroup)
 {
+    // This function will create its own model copies, for working with data. The data only need
+    // to be read, which reduces possible conflicts. All data gathered will be cached inside this
+    // model. That means, the model objects can be deleted after building the model here.
+
     if (funcModel == nullptr || trainModel == nullptr || employeeModel == nullptr ||
         employeeFuncModel == nullptr || qualiModel == nullptr || trainDataModel == nullptr)
     {
         return false;
     }
 
+    QSortFilterProxyModel filterEmployeeModel(this);
+    filterEmployeeModel.setSourceModel(employeeModel.get());
+    filterEmployeeModel.setFilterKeyColumn(1);
+    filterEmployeeModel.setFilterRegExp(filterName);
+
     resetModel();
 
     // Informate listener.
-    emit beforeUpdateQualiInfo(employeeModel->rowCount());
+    emit beforeUpdateQualiInfo(filterEmployeeModel.rowCount());
 
-    QMApplicationSettings &settings = QMApplicationSettings::getInstance();
-    QStringList ignoreList = settings.read("QualiResult/IgnoreList", QStringList()).toStringList();
-    bool doIgnore = settings.read("QualiResult/DoIgnore", true).toBool();
+    auto &settings = QMApplicationSettings::getInstance();
+    auto ignoreList = settings.read("QualiResult/IgnoreList", QStringList()).toStringList();
+    auto doIgnore = settings.read("QualiResult/DoIgnore", true).toBool();
 
-    for (int i = 0; i < employeeModel->rowCount(); i++)
+    for (int i = 0; i < filterEmployeeModel.rowCount(); i++)
     {
         // Informate listener.
         emit updateUpdateQualiInfo(i);
 
         // Build new data structure.
-        QString name = employeeModel->data(employeeModel->index(i, 1)).toString();
-        QString employeeGroup = employeeModel->data(employeeModel->index(i, 2)).toString();
-        QString id = employeeModel->data(employeeModel->index(i, 0)).toString();
-        bool activated = employeeModel->data(employeeModel->index(i, 3)).toBool();
+        QString name = filterEmployeeModel.data(filterEmployeeModel.index(i, 1)).toString();
+        QString employeeGroup = filterEmployeeModel.data(filterEmployeeModel.index(i, 2)).toString();
+        QString id = filterEmployeeModel.data(filterEmployeeModel.index(i, 0)).toString();
+        bool activated = filterEmployeeModel.data(filterEmployeeModel.index(i, 3)).toBool();
 
-        if ((!filterName.isEmpty() && !name.contains(filterName)) || !activated)
+        if (!activated)
         {
             continue;
         }

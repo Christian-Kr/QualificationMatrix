@@ -38,7 +38,7 @@
       <property name="minimumSize">
        <size>
         <width>300</width>
-        <height>522</height>
+        <height>572</height>
        </size>
       </property>
       <property name="maximumSize">
@@ -61,17 +61,10 @@
       </property>
       <widget class="QWidget" name="dockWidgetContents">
        <layout class="QGridLayout" name="gridLayout_2">
-        <item row="0" column="0">
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>Mitarbeiter</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_9">
+        <item row="3" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
           <item>
-           <widget class="QComboBox" name="cbFilterEmployee">
+           <widget class="QComboBox" name="cbFilterEmployeeGroup">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
               <horstretch>0</horstretch>
@@ -87,7 +80,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QToolButton" name="tbResetEmployee">
+           <widget class="QToolButton" name="tbResetEmployeeGroup">
             <property name="toolTip">
              <string>Zurücksetzen</string>
             </property>
@@ -108,14 +101,125 @@
           </item>
          </layout>
         </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="label_2">
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_3">
           <property name="text">
-           <string>Funktion</string>
+           <string>Schulung</string>
           </property>
          </widget>
         </item>
-        <item row="3" column="0">
+        <item row="10" column="0">
+         <widget class="QLabel" name="label_5">
+          <property name="text">
+           <string>Schulungsstatus</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_6">
+          <property name="text">
+           <string>Mitarbeitergruppe</string>
+          </property>
+         </widget>
+        </item>
+        <item row="11" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QComboBox" name="cbTrainStateFilter">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="editable">
+             <bool>true</bool>
+            </property>
+            <property name="insertPolicy">
+             <enum>QComboBox::NoInsert</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="tbResetTrainState">
+            <property name="toolTip">
+             <string>Zurücksetzen</string>
+            </property>
+            <property name="text">
+             <string>...</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../icons.qrc">
+              <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>22</width>
+              <height>22</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="13" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>130</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QToolButton" name="tbFilterReset">
+            <property name="text">
+             <string>Zurücksetzen</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../icons.qrc">
+              <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>22</width>
+              <height>22</height>
+             </size>
+            </property>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonTextBesideIcon</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="tbUpdate">
+            <property name="text">
+             <string>Aktualisieren</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../icons.qrc">
+              <normaloff>:/icons/icons/update-none.svg</normaloff>:/icons/icons/update-none.svg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>22</width>
+              <height>22</height>
+             </size>
+            </property>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonTextBesideIcon</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="7" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_8">
           <item>
            <widget class="QComboBox" name="cbFilterFunc">
@@ -155,12 +259,65 @@
           </item>
          </layout>
         </item>
-        <item row="4" column="0">
-         <widget class="QLabel" name="label_3">
-          <property name="text">
-           <string>Schulung</string>
-          </property>
-         </widget>
+        <item row="1" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_9">
+          <item>
+           <widget class="QComboBox" name="cbFilterEmployee">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="editable">
+             <bool>true</bool>
+            </property>
+            <property name="insertPolicy">
+             <enum>QComboBox::NoInsert</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="tbResetEmployee">
+            <property name="toolTip">
+             <string>Zurücksetzen</string>
+            </property>
+            <property name="text">
+             <string>...</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../icons.qrc">
+              <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>22</width>
+              <height>22</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="tbExtSelEmployee">
+            <property name="toolTip">
+             <string>Erweiterte Auswahl</string>
+            </property>
+            <property name="text">
+             <string>...</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../icons.qrc">
+              <normaloff>:/icons/icons/view-list-details.svg</normaloff>:/icons/icons/view-list-details.svg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>22</width>
+              <height>22</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item row="5" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_7">
@@ -202,57 +359,24 @@
           </item>
          </layout>
         </item>
-        <item row="6" column="0">
-         <widget class="QLabel" name="label_6">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label">
           <property name="text">
-           <string>Mitarbeitergruppe</string>
+           <string>Mitarbeiter</string>
           </property>
          </widget>
-        </item>
-        <item row="7" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_6">
-          <item>
-           <widget class="QComboBox" name="cbFilterEmployeeGroup">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="editable">
-             <bool>true</bool>
-            </property>
-            <property name="insertPolicy">
-             <enum>QComboBox::NoInsert</enum>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QToolButton" name="tbResetEmployeeGroup">
-            <property name="toolTip">
-             <string>Zurücksetzen</string>
-            </property>
-            <property name="text">
-             <string>...</string>
-            </property>
-            <property name="icon">
-             <iconset resource="../icons.qrc">
-              <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>22</width>
-              <height>22</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-         </layout>
         </item>
         <item row="8" column="0">
          <widget class="QLabel" name="label_4">
           <property name="text">
            <string>Ergebnisstatus</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="0">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Funktion</string>
           </property>
          </widget>
         </item>
@@ -314,54 +438,7 @@
           </item>
          </layout>
         </item>
-        <item row="10" column="0">
-         <widget class="QLabel" name="label_5">
-          <property name="text">
-           <string>Schulungsstatus</string>
-          </property>
-         </widget>
-        </item>
-        <item row="11" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_4">
-          <item>
-           <widget class="QComboBox" name="cbTrainStateFilter">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="editable">
-             <bool>true</bool>
-            </property>
-            <property name="insertPolicy">
-             <enum>QComboBox::NoInsert</enum>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QToolButton" name="tbResetTrainState">
-            <property name="toolTip">
-             <string>Zurücksetzen</string>
-            </property>
-            <property name="text">
-             <string>...</string>
-            </property>
-            <property name="icon">
-             <iconset resource="../icons.qrc">
-              <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>22</width>
-              <height>22</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="12" column="0">
+        <item row="14" column="0">
          <spacer name="verticalSpacer">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -374,42 +451,21 @@
           </property>
          </spacer>
         </item>
-        <item row="13" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout">
-          <item>
-           <spacer name="horizontalSpacer">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>130</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QToolButton" name="tbFilterReset">
-            <property name="text">
-             <string>Zurücksetzen</string>
-            </property>
-            <property name="icon">
-             <iconset resource="../icons.qrc">
-              <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>22</width>
-              <height>22</height>
-             </size>
-            </property>
-            <property name="toolButtonStyle">
-             <enum>Qt::ToolButtonTextBesideIcon</enum>
-            </property>
-           </widget>
-          </item>
-         </layout>
+        <item row="12" column="0">
+         <spacer name="verticalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </widget>
@@ -426,26 +482,6 @@
            <property name="icon">
             <iconset resource="../icons.qrc">
              <normaloff>:/icons/icons/view-filter.svg</normaloff>:/icons/icons/view-filter.svg</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>22</width>
-             <height>22</height>
-            </size>
-           </property>
-           <property name="toolButtonStyle">
-            <enum>Qt::ToolButtonTextBesideIcon</enum>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QToolButton" name="tbUpdate">
-           <property name="text">
-            <string>Aktualisieren</string>
-           </property>
-           <property name="icon">
-            <iconset resource="../icons.qrc">
-             <normaloff>:/icons/icons/update-none.svg</normaloff>:/icons/icons/update-none.svg</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -738,6 +774,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>tbExtSelEmployee</sender>
+   <signal>clicked()</signal>
+   <receiver>QMQualiResultWidget</receiver>
+   <slot>extSelEmployee()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>438</x>
+     <y>87</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>535</x>
+     <y>416</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>updateFilterAndCalculate()</slot>
@@ -752,5 +804,6 @@
   <slot>resetEmployeeGroup()</slot>
   <slot>resetTrainResultState()</slot>
   <slot>resetTrainState()</slot>
+  <slot>extSelEmployee()</slot>
  </slots>
 </ui>
