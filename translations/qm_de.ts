@@ -1771,167 +1771,167 @@ Version:	</source>
     <name>QMQualiMatrixWidget</name>
     <message>
         <location filename="../ui/qmqualimatrixwidget.ui" line="14"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="495"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="500"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmqualimatrixwidget.ui" line="48"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="496"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="501"/>
         <source>Filter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="55"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="497"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="376"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="539"/>
         <source>Funktion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="122"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="506"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="369"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="538"/>
         <source>Schulung</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="189"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="515"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="115"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="510"/>
         <source>Funktionsgruppe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="83"/>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="103"/>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="150"/>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="170"/>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="217"/>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="237"/>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="284"/>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="304"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="501"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="76"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="96"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="143"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="163"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="203"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="223"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="263"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="283"/>
         <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="505"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="510"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="509"/>
         <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="514"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="519"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="523"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="528"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="532"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="518"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="522"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="526"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="530"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="534"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="256"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="524"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="383"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="540"/>
         <source>Schulungsgruppe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="326"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="533"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="362"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="537"/>
         <source>Rechtlich notwendige Einträge</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="80"/>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="147"/>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="214"/>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="281"/>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="361"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="499"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="508"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="517"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="526"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="534"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="73"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="140"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="200"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="260"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="317"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="503"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="512"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="520"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="528"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="535"/>
         <source>Zurücksetzen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="100"/>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="167"/>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="234"/>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="301"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="503"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="512"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="521"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="530"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="93"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="160"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="220"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="280"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="507"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="516"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="524"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="532"/>
         <source>Erweiterte Auswahl</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="381"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="535"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="337"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="536"/>
         <source>Aktualisieren</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="416"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="536"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="432"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="541"/>
         <source>Filtern</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="463"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="539"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="479"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="544"/>
         <source>Ctrl+L</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="530"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="541"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="546"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="546"/>
         <source>Schulung - Details</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="548"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="542"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="564"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="547"/>
         <source>Name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="555"/>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="582"/>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="673"/>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="700"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="543"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="545"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="552"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="554"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="571"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="598"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="689"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="716"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="548"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="550"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="557"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="559"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="575"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="544"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="591"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="549"/>
         <source>Rechtlicht notwendig:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="599"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="546"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="615"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="551"/>
         <source>Inhalte:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="633"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="547"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="649"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="552"/>
         <source>Schließen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="636"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="549"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="652"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="554"/>
         <source>Ctrl+I</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="666"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="551"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="682"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="556"/>
         <source>Gruppe:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="693"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="553"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="709"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixwidget.h" line="558"/>
         <source>Intervall:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1964,42 +1964,42 @@ Version:	</source>
 <context>
     <name>QMQualiResultModel</name>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="298"/>
+        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="307"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="300"/>
+        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="309"/>
         <source>Funktion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="302"/>
+        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="311"/>
         <source>Schulung</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="304"/>
+        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="313"/>
         <source>Notwendigkeit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="306"/>
+        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="315"/>
         <source>Letzte Schulung</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="308"/>
+        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="317"/>
         <source>Nächste Schulung</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="310"/>
+        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="319"/>
         <source>Status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="312"/>
+        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="321"/>
         <source>Schulungsstatus</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2096,161 +2096,177 @@ Die Aktion wird abgebrochen.</source>
     <name>QMQualiResultWidget</name>
     <message>
         <location filename="../ui/qmqualiresultwidget.ui" line="20"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="383"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="415"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmqualiresultwidget.ui" line="60"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="384"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="416"/>
         <source>Filter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmqualiresultwidget.ui" line="67"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="385"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="417"/>
         <source>Mitarbeiter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmqualiresultwidget.ui" line="95"/>
-        <location filename="../ui/qmqualiresultwidget.ui" line="142"/>
-        <location filename="../ui/qmqualiresultwidget.ui" line="189"/>
-        <location filename="../ui/qmqualiresultwidget.ui" line="236"/>
-        <location filename="../ui/qmqualiresultwidget.ui" line="301"/>
-        <location filename="../ui/qmqualiresultwidget.ui" line="348"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="389"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="394"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="399"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="404"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="414"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="419"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="115"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="162"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="209"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="256"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="321"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="341"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="388"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="408"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="421"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="425"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="430"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="435"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="440"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="450"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="454"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="459"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="463"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualiresultwidget.ui" line="114"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="390"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="228"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="436"/>
         <source>Funktion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualiresultwidget.ui" line="161"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="395"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="181"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="431"/>
         <source>Schulung</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualiresultwidget.ui" line="208"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="400"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="134"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="426"/>
         <source>Mitarbeitergruppe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualiresultwidget.ui" line="255"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="405"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="112"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="338"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="405"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="423"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="452"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="461"/>
+        <source>Erweiterte Auswahl</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmqualiresultwidget.ui" line="275"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="441"/>
         <source>Ergebnisstatus</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualiresultwidget.ui" line="273"/>
-        <location filename="../ui/qmqualiresultwidget.ui" line="280"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="406"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="410"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="293"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="300"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="442"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="446"/>
         <source>Gut</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualiresultwidget.ui" line="285"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="407"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="305"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="443"/>
         <source>Ausreichend</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualiresultwidget.ui" line="290"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="408"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="310"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="444"/>
         <source>Schlecht</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualiresultwidget.ui" line="320"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="415"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="360"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="455"/>
         <source>Schulungsstatus</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmqualiresultwidget.ui" line="92"/>
-        <location filename="../ui/qmqualiresultwidget.ui" line="139"/>
-        <location filename="../ui/qmqualiresultwidget.ui" line="186"/>
-        <location filename="../ui/qmqualiresultwidget.ui" line="233"/>
-        <location filename="../ui/qmqualiresultwidget.ui" line="298"/>
-        <location filename="../ui/qmqualiresultwidget.ui" line="345"/>
-        <location filename="../ui/qmqualiresultwidget.ui" line="395"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="387"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="392"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="397"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="402"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="412"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="417"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="420"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="159"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="206"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="253"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="318"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="385"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="458"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="419"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="428"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="433"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="438"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="448"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="457"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="464"/>
         <source>Zurücksetzen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualiresultwidget.ui" line="424"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="421"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="520"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="466"/>
         <source>Filtern</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualiresultwidget.ui" line="444"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="422"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="478"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="465"/>
         <source>Aktualisieren</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualiresultwidget.ui" line="477"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="423"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="553"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="467"/>
         <source>CSV</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualiresultwidget.ui" line="497"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="424"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="573"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultwidget.h" line="468"/>
         <source>PDF</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="175"/>
+        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="176"/>
         <source>Filter ausblenden</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="179"/>
+        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="180"/>
         <source>Filter einblenden</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="187"/>
-        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="200"/>
-        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="248"/>
+        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="188"/>
+        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="201"/>
+        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="249"/>
         <source>Qualifizierungsresultat speichern</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="188"/>
+        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="189"/>
         <source>Comma-separated values (*.csv)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="200"/>
+        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="201"/>
         <source>Datei konnte nicht zum Schreiben geöffnet werden. Bitte prüfen Sie die Berechtigungen.
 
 Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="249"/>
+        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="250"/>
         <source>Die Daten wurden erfolgreich gespeichert.</source>
         <translation type="unfinished"></translation>
     </message>
