@@ -102,6 +102,12 @@ public slots:
     /// Show extended filter dialog for employee group.
     void extSelEmployeeGroup();
 
+    /// Show extended filter dialog for train result state.
+    void extSelTrainResultState();
+
+    /// Show extended filter dialog for train data state.
+    void extSelTrainDataState();
+
 private:
     /// Create printer for pdf.
     /// \param printer The printer object to draw an.

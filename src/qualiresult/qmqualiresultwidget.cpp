@@ -417,3 +417,31 @@ void QMQualiResultWidget::extSelEmployeeGroup()
 
     ui->cbFilterEmployeeGroup->setCurrentText(extSelDialog.getRegExpText());
 }
+
+void QMQualiResultWidget::extSelTrainResultState()
+{
+    QMExtendedSelectionDialog extSelDialog(this, ui->cbTrainResultState->model(), 0);
+    auto res = extSelDialog.exec();
+    auto modelIndexList = extSelDialog.getFilterSelected();
+
+    if (modelIndexList.size() < 1 || res == QDialog::Rejected)
+    {
+        return;
+    }
+
+    ui->cbTrainResultState->setCurrentText(extSelDialog.getRegExpText());
+}
+
+void QMQualiResultWidget::extSelTrainDataState()
+{
+    QMExtendedSelectionDialog extSelDialog(this, trainDataStateModel.get(), 1);
+    auto res = extSelDialog.exec();
+    auto modelIndexList = extSelDialog.getFilterSelected();
+
+    if (modelIndexList.size() < 1 || res == QDialog::Rejected)
+    {
+        return;
+    }
+
+    ui->cbTrainStateFilter->setCurrentText(extSelDialog.getRegExpText());
+}

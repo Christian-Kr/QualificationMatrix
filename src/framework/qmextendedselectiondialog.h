@@ -25,7 +25,7 @@ namespace Ui
     class QMExtendedSelectionDialog;
 }
 
-class QAbstractTableModel;
+class QAbstractItemModel;
 class QSortFilterProxyModel;
 
 /// Dialog for extended selection in models.
@@ -40,13 +40,7 @@ public:
     /// \param tableModel The data model to show for selection.
     /// \param column The column of the model to show.
     explicit QMExtendedSelectionDialog(QWidget *parent = nullptr,
-        QAbstractTableModel *tableModel = nullptr, int column = 0);
-
-    /// Will be called from closeEvent.
-    void saveSettings() override;
-
-    /// Will be called from constructor.
-    void loadSettings() override;
+        QAbstractItemModel *tableModel = nullptr, int column = 0);
 
     /// Get the number of rows selected.
     /// \return The selected index list of the filter model.

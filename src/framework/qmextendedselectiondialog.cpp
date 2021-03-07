@@ -21,7 +21,7 @@
 
 #include <QDebug>
 
-QMExtendedSelectionDialog::QMExtendedSelectionDialog(QWidget *parent, QAbstractTableModel *model,
+QMExtendedSelectionDialog::QMExtendedSelectionDialog(QWidget *parent, QAbstractItemModel *model,
     int column)
     : QMDialog(parent)
 {
@@ -55,16 +55,6 @@ QModelIndexList QMExtendedSelectionDialog::getFilterSelected() const
     return ui->tvSelection->selectionModel()->selectedRows();
 }
 
-void QMExtendedSelectionDialog::loadSettings()
-{
-    // TODO: Load settings
-}
-
-void QMExtendedSelectionDialog::saveSettings()
-{
-    // TODO: Save settings
-}
-
 void QMExtendedSelectionDialog::updateFilter()
 {
     filterModel->setFilterFixedString(ui->leFilter->text());
@@ -86,7 +76,7 @@ QString QMExtendedSelectionDialog::getRegExpText() const
     {
         QModelIndex modelIndex = modelIndexList.at(0);
         finalValue = prefix + filterModel->data(
-            filterModel->index(modelIndex.row(), 1)).toString() + ")";
+            filterModel->index(modelIndex.row(), filterModel->filterKeyColumn())).toString() + ")";
     }
     else
     {
@@ -96,7 +86,8 @@ QString QMExtendedSelectionDialog::getRegExpText() const
         for (int i = 0; i < modelIndexList.size(); i++)
         {
             QModelIndex modelIndex = modelIndexList.at(i);
-            auto value = filterModel->data(filterModel->index(modelIndex.row(), 1)).toString();
+            auto value = filterModel->data(
+                filterModel->index(modelIndex.row(), filterModel->filterKeyColumn())).toString();
 
             valueList << value;
         }
