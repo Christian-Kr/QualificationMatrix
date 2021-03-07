@@ -99,6 +99,9 @@ public slots:
     /// Show extended filter dialog for employee.
     void extSelEmployee();
 
+    /// Show extended filter dialog for employee group.
+    void extSelEmployeeGroup();
+
 private:
     /// Create printer for pdf.
     /// \param printer The printer object to draw an.

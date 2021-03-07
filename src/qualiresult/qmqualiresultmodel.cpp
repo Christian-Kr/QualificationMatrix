@@ -27,6 +27,8 @@
 #include <QColor>
 #include <QSortFilterProxyModel>
 
+#include <QDebug>
+
 QMQualiResultModel::QMQualiResultModel(QObject *parent)
     : QAbstractTableModel(parent), funcModel(nullptr), trainModel(nullptr), trainDataModel(nullptr),
     qualiModel(nullptr), employeeModel(nullptr), employeeFuncModel(nullptr),
@@ -41,7 +43,7 @@ void QMQualiResultModel::updateModels()
     funcModel = dm->getFuncModel();
     trainModel = dm->getTrainModel();
     qualiModel = dm->getQualiModel();
-    employeeModel = dm->getEmployeeModel();
+    employeeModel = dm->getEmployeeViewModel();
     employeeFuncModel = dm->getEmployeeFuncModel();
     trainDataModel = dm->getTrainDataModel();
     trainExceptionModel = dm->getTrainExceptionModel();
@@ -93,10 +95,17 @@ bool QMQualiResultModel::updateQualiInfo(
         return false;
     }
 
+    QSortFilterProxyModel filterEmployeeGroupModel(this);
+    filterEmployeeGroupModel.setSourceModel(employeeModel.get());
+    filterEmployeeGroupModel.setFilterKeyColumn(2);
+    filterEmployeeGroupModel.setFilterRegExp(filterEmployeeGroup);
+
     QSortFilterProxyModel filterEmployeeModel(this);
-    filterEmployeeModel.setSourceModel(employeeModel.get());
+    filterEmployeeModel.setSourceModel(&filterEmployeeGroupModel);
     filterEmployeeModel.setFilterKeyColumn(1);
     filterEmployeeModel.setFilterRegExp(filterName);
+
+    qDebug() << filterEmployeeModel.rowCount();
 
     resetModel();
 
@@ -114,19 +123,7 @@ bool QMQualiResultModel::updateQualiInfo(
 
         // Build new data structure.
         QString name = filterEmployeeModel.data(filterEmployeeModel.index(i, 1)).toString();
-        QString employeeGroup = filterEmployeeModel.data(filterEmployeeModel.index(i, 2)).toString();
         QString id = filterEmployeeModel.data(filterEmployeeModel.index(i, 0)).toString();
-        bool activated = filterEmployeeModel.data(filterEmployeeModel.index(i, 3)).toBool();
-
-        if (!activated)
-        {
-            continue;
-        }
-
-        if (!filterEmployeeGroup.isEmpty() && !employeeGroup.contains(filterEmployeeGroup))
-        {
-            continue;
-        }
 
         // get all functions as a list from an employee
         employeeFuncModel->setFilter("employee='" + id + "'");

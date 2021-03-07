@@ -403,3 +403,17 @@ void QMQualiResultWidget::extSelEmployee()
 
     ui->cbFilterEmployee->setCurrentText(extSelDialog.getRegExpText());
 }
+
+void QMQualiResultWidget::extSelEmployeeGroup()
+{
+    QMExtendedSelectionDialog extSelDialog(this, employeeGroupModel.get(), 1);
+    auto res = extSelDialog.exec();
+    auto modelIndexList = extSelDialog.getFilterSelected();
+
+    if (modelIndexList.size() < 1 || res == QDialog::Rejected)
+    {
+        return;
+    }
+
+    ui->cbFilterEmployeeGroup->setCurrentText(extSelDialog.getRegExpText());
+}
