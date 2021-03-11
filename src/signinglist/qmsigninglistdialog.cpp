@@ -166,6 +166,27 @@ void QMSigningListDialog::printToPDF()
         return;
     }
 
+    if (ui->leTrainer->text().isEmpty())
+    {
+        QMessageBox::warning(this, tr("Unterschriftenliste erstellen"),
+             tr("Bitte der Schulungsdurchführenden eintragen!"));
+        return;
+    }
+
+    if (ui->leOrganisation->text().isEmpty())
+    {
+        QMessageBox::warning(this, tr("Unterschriftenliste erstellen"),
+                             tr("Bitte die Schulungsorganisation eintragen!"));
+        return;
+    }
+
+    if (ui->lwEmployees->count() < 1)
+    {
+        QMessageBox::warning(this, tr("Unterschriftenliste erstellen"),
+                             tr("Bitte die mindestens einen Mitarbeiter eintragen!"));
+        return;
+    }
+
     // Set up default printer.
     auto printer = new QPrinter();
     printer->setPageOrientation(QPageLayout::Orientation::Portrait);
