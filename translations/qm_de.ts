@@ -2409,94 +2409,103 @@ Sind Sie sich sicher?</source>
     <name>QMSigningListDialog</name>
     <message>
         <location filename="../ui/qmsigninglistdialog.ui" line="14"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="334"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="353"/>
         <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="164"/>
+        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="171"/>
+        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="178"/>
+        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="185"/>
         <source>Unterschriftenliste erstellen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmsigninglistdialog.ui" line="24"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="341"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="360"/>
         <source>Allgemein</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmsigninglistdialog.ui" line="32"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="335"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="354"/>
         <source>Schulungsdurchführender</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmsigninglistdialog.ui" line="42"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="336"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="355"/>
         <source>Organisation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmsigninglistdialog.ui" line="55"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="337"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="356"/>
         <source>Geplante Schulungseinträge erstellen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmsigninglistdialog.ui" line="66"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="338"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="357"/>
         <source>Bild</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmsigninglistdialog.ui" line="82"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="339"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="358"/>
         <source>Öffnen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmsigninglistdialog.ui" line="95"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="340"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="359"/>
         <source>Datum</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmsigninglistdialog.ui" line="111"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="348"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="368"/>
         <source>Mitarbeiter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmsigninglistdialog.ui" line="129"/>
-        <location filename="../ui/qmsigninglistdialog.ui" line="185"/>
+        <location filename="../ui/qmsigninglistdialog.ui" line="117"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="361"/>
+        <source>Leerfelder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmsigninglistdialog.ui" line="180"/>
         <location filename="../ui/qmsigninglistdialog.ui" line="229"/>
-        <location filename="../ui/qmsigninglistdialog.ui" line="246"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="342"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="345"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="346"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="347"/>
+        <location filename="../ui/qmsigninglistdialog.ui" line="258"/>
+        <location filename="../ui/qmsigninglistdialog.ui" line="275"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="363"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="365"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="366"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="367"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmsigninglistdialog.ui" line="171"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="343"/>
+        <location filename="../ui/qmsigninglistdialog.ui" line="148"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="362"/>
         <source>Gruppe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmsigninglistdialog.ui" line="178"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="344"/>
+        <location filename="../ui/qmsigninglistdialog.ui" line="197"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="364"/>
         <source>Einzel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmsigninglistdialog.ui" line="281"/>
-        <location filename="../ui/qmsigninglistdialog.ui" line="295"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="349"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="351"/>
+        <location filename="../ui/qmsigninglistdialog.ui" line="308"/>
+        <location filename="../ui/qmsigninglistdialog.ui" line="322"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="369"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="371"/>
         <source>Schulung</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmsigninglistdialog.ui" line="321"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="350"/>
+        <location filename="../ui/qmsigninglistdialog.ui" line="348"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmsigninglistdialog.h" line="370"/>
         <source>Details der Inhalte</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2516,22 +2525,37 @@ Sind Sie sich sicher?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="192"/>
+        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="172"/>
+        <source>Bitte der Schulungsdurchführenden eintragen!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="179"/>
+        <source>Bitte die Schulungsorganisation eintragen!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="186"/>
+        <source>Bitte die mindestens einen Mitarbeiter eintragen!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="213"/>
         <source>Unterschriftenliste drucken</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="192"/>
+        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="213"/>
         <source>Gruppe nicht gültig.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="227"/>
+        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="249"/>
         <source>Unterschriftenliste</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="228"/>
+        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="250"/>
         <source>Soll der existierende Inhalt der Schulungsdetails durch die Standardbeschreibung in der Datenbank ersetzt werden?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2539,52 +2563,57 @@ Sind Sie sich sicher?</source>
 <context>
     <name>QMSigningListDocument</name>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="49"/>
+        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="69"/>
         <source>Unterweisungsprotokoll</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="66"/>
+        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="57"/>
         <source>Unterweisung am: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="68"/>
-        <source>Unterweisung durch: %1</source>
+        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="59"/>
+        <source>Organisation: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="70"/>
+        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="61"/>
+        <source>Unterweisender: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="63"/>
         <source>Unterschrift:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="92"/>
+        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="91"/>
         <source>Thema: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="99"/>
+        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="98"/>
         <source>Inhalte: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="130"/>
+        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="129"/>
         <source>Nr.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="133"/>
+        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="132"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="136"/>
+        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="135"/>
         <source>Unterschrift</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="139"/>
+        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="138"/>
         <source>Datum</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2758,79 +2787,79 @@ Sind Sie sich sicher?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="159"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="162"/>
         <source>Keine Schulung verfügbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="165"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="168"/>
         <source>Kein Schulungsstatus verfügbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="210"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="213"/>
         <source>Der Mitarbeiter existiert nicht oder ist deaktiviert</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="229"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="232"/>
         <source>Die Schulung existiert nicht oder ist deaktiviert</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="262"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="265"/>
         <source>Kein Eintrag zum Löschen selektiert</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="268"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="271"/>
         <source>Zum Löschen darf nur genau ein Eintrag selektiert sein</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="289"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="292"/>
         <source>Unzureichende Plausibilitätsprüfung vor der Löschung</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="304"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="307"/>
         <source>Es konnten nicht alle Schulungsnachweise gelöscht werden</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="319"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="322"/>
         <source>Details werden nur bei genau einer Selektion angezeigt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="366"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="369"/>
         <source>Keinen gültigen Nachweis ausgewählt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="375"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="378"/>
         <source>Kein Schulungseintrag ausgewählt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="389"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="392"/>
         <source>Nachweis ist bereits angehängt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="421"/>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="460"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="424"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="463"/>
         <source>Kein Schulungsnachweis ausgewählt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="434"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="437"/>
         <source>Es existiert kein Korrelationseintrag mit der id</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="441"/>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="447"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="444"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="450"/>
         <source>Korrelationseintrag kann nicht gelöscht werden</source>
         <translation type="unfinished"></translation>
     </message>
