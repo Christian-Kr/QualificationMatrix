@@ -143,6 +143,9 @@ void QMTrainDataWidget::updateFilter()
     {
         emit warnMessageAvailable(tr("Mehr als 255 Ergebnisse an Schulungsdaten verfügbar"));
     }
+
+    // Close an open certificate widget.
+    ui->dwTrainDataCertificates->setVisible(false);
 }
 
 void QMTrainDataWidget::resetFilter()
