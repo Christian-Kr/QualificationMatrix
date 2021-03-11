@@ -21,6 +21,7 @@
 QMSigningListDocument::QMSigningListDocument(QObject *parent)
     : QTextDocument(parent)
 {
+    emptyEmployees = 0;
 }
 
 void QMSigningListDocument::createDocument()
@@ -110,7 +111,7 @@ void QMSigningListDocument::createDocument()
     cursor.movePosition(QTextCursor::NextBlock);
     cursor.insertHtml("<br><br>");
     cursor.movePosition(QTextCursor::NextBlock);
-    QTextTable *employeeTable = cursor.insertTable(employees.size() + 1, 4);
+    QTextTable *employeeTable = cursor.insertTable(employees.size() + 1 + emptyEmployees, 4);
 
     QTextTableFormat employeeTableFormat = employeeTable->format();
     employeeTableFormat.setCellPadding(4);
@@ -152,14 +153,17 @@ void QMSigningListDocument::createDocument()
     employeeTable->cellAt(0, 3).setFormat(format);
 
     // Go through all header cells and set them.
-    for (int i = 1; i < employees.size() + 1; i++)
+    for (int i = 1; i < employees.size() + 1 + emptyEmployees; i++)
     {
         if (i > 0)
         {
             cursor.insertText(QString::number(i), textFormat);
             cursor.movePosition(QTextCursor::NextCell);
 
-            cursor.insertText(employees.at(i - 1), textFormat);
+            if (i < employees.size() + 1) {
+                cursor.insertText(employees.at(i - 1), textFormat);
+            }
+
             cursor.movePosition(QTextCursor::NextCell);
             cursor.movePosition(QTextCursor::NextCell);
             cursor.movePosition(QTextCursor::NextCell);

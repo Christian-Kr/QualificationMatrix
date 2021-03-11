@@ -199,6 +199,7 @@ void QMSigningListDialog::paintPdfRequest(QPrinter *printer)
         employees.append(employeeName);
     }
 
+    document.setEmptyEmployees(ui->spEmpty->value());
     document.setEmployees(employees);
     document.setTrainer(ui->leTrainer->text());
     document.setOrganisationName(ui->leOrganisation->text());

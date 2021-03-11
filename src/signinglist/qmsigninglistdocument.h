@@ -65,10 +65,15 @@ public:
     /// \param path
     void setImagePath(QString path) { imagePath = path; }
 
+    /// Set empty rows for unknown employees.
+    /// \param emptyEmployees
+    void setEmptyEmployees(int emptyEmployees) { this->emptyEmployees = emptyEmployees; }
+
     /// Create the document with all the content.
     void createDocument();
 
 private:
+    int emptyEmployees;
     QStringList employees;
     QString trainer;
     QString organisation;
