@@ -194,7 +194,7 @@ int main(int argc, char *argv[])
     // General information, used by qt - example: QSettings certificate naming
     QCoreApplication::setOrganizationName("Kr");
     QCoreApplication::setOrganizationDomain("Kr");
-    QCoreApplication::setApplicationVersion(QString("%1.%2").arg(VERSION_MAJOR).arg(VERSION_MINOR));
+    QCoreApplication::setApplicationVersion(QString("%1.%2").arg(VERSION_MAJOR, VERSION_MINOR));
 
     if (QString(RELEASE_STATE).compare("beta") == 0)
     {
