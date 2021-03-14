@@ -22,6 +22,7 @@
 #include "qmgeneralsettingswidget.h"
 #include "qmqualimatrixsettingswidget.h"
 #include "qmqualiresultsettingswidget.h"
+#include "framework/qmtreesettingsdelegate.h"
 
 #include <QWidget>
 #include <QSqlRelationalDelegate>
@@ -57,6 +58,7 @@ QMSettingsDialog::QMSettingsDialog(QWidget *parent)
     changed = false;
     ui->pbApply->setEnabled(false);
     ui->swSettingGroups->setCurrentIndex(0);
+    ui->twSettingGroups->setItemDelegate(new QMTreeSettingsDelegate(this, 25));
 }
 
 QMSettingsDialog::~QMSettingsDialog()

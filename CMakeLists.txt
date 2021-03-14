@@ -97,6 +97,7 @@ add_executable(QualificationMatrix WIN32
     src/framework/qminfolabel.cpp
     src/framework/qmextendedselectiondialog.cpp
     src/framework/qmplaintexteditdelegate.cpp
+    src/framework/qmtreesettingsdelegate.cpp
     src/database/qmdatabasedialog.cpp
     src/database/qmdatabaseupdatedialog.cpp
     src/database/qmdatabaseupdater.cpp
