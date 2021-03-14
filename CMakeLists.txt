@@ -1,26 +1,40 @@
+# -------------------------------------------------------------------------------------------------
+# General
+
+# Minimum version needd to work
 cmake_minimum_required(VERSION 3.13.0)
 
+# Name of the project
 project(QualificationMatrix)
 
+# Include the subdirectory
 include_directories(${QualificationMatrix_SOURCE_DIR}/src)
 
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-set(CMAKE_AUTOUIC ON)
-
-set(APP_ICON_RESOURCE_WINDOWS "qm_res.rc")
-set(CMAKE_AUTOUIC_SEARCH_PATHS ui)
-
+# If version of cmake is too old, current dir must be explicitly included.
 if (CMAKE_VERSION VERSION_LESS "3.7.0")
     set(CMAKE_INCLUDE_CURRENT_DIR ON)
 endif ()
 
+# General CPP macros
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# -------------------------------------------------------------------------------------------------
+# Standard macros for Qt
+
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTOUIC_SEARCH_PATHS ui)
+
 find_package(Qt5 COMPONENTS LinguistTools Widgets Sql PrintSupport REQUIRED)
 
+# Add application icon for windows.
+set(APP_ICON_RESOURCE_WINDOWS "qm_res.rc")
+
+# -------------------------------------------------------------------------------------------------
 # Translation
+
 set(TS_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/translations/qm_de.ts
     ${CMAKE_CURRENT_SOURCE_DIR}/translations/qm_en.ts)
@@ -46,7 +60,8 @@ endforeach ()
 
 qt5_add_translation(QM_FILES ${TS_FILES})
 
-# Create executable and link libraries.
+# -------------------------------------------------------------------------------------------------
+# Create executable and link libraries
 
 add_executable(QualificationMatrix WIN32
     icons.qrc
@@ -132,12 +147,17 @@ add_executable(QualificationMatrix WIN32
     src/config.h
     ${APP_ICON_RESOURCE_WINDOWS})
 
-# copy database directory to binary
+
+target_link_libraries(QualificationMatrix Qt5::Widgets Qt5::Sql Qt5::PrintSupport)
+
+# -------------------------------------------------------------------------------------------------
+# Deploy
+
+# Copy the database directory
 add_custom_command(
     TARGET QualificationMatrix PRE_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
     ${CMAKE_SOURCE_DIR}/database $<TARGET_FILE_DIR:QualificationMatrix>/database)
 
+# Copy translation files
 target_sources(QualificationMatrix PRIVATE ${QM_FILES})
-
-target_link_libraries(QualificationMatrix Qt5::Widgets Qt5::Sql Qt5::PrintSupport)
