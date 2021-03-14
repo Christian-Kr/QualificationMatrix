@@ -18,7 +18,6 @@
 #include "qmapplicationsettings.h"
 
 #include <QDir>
-#include <QFileInfoList>
 #include <QStyleFactory>
 #include <QFileDialog>
 
