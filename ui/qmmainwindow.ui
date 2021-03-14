@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>622</width>
-    <height>518</height>
+    <width>874</width>
+    <height>639</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -82,8 +82,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>622</width>
-     <height>24</height>
+     <width>874</width>
+     <height>30</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_Datei">
@@ -148,6 +148,7 @@
    <addaction name="actManageDatabase"/>
    <addaction name="actSettings"/>
    <addaction name="actManageCertificate"/>
+   <addaction name="actCreateSigningList"/>
   </widget>
   <action name="actExit">
    <property name="text">
@@ -255,6 +256,10 @@
    </property>
   </action>
   <action name="actCreateSigningList">
+   <property name="icon">
+    <iconset resource="../icons.qrc">
+     <normaloff>:/icons/icons/traindata.svg</normaloff>:/icons/icons/traindata.svg</iconset>
+   </property>
    <property name="text">
     <string>&amp;Unterschriftenliste erstellen</string>
    </property>
