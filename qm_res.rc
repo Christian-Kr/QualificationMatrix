@@ -1,3 +1,1 @@
-#include "shapes.h"
-
-ShapesIcon    ICON    qm.ico
+IDI_ICON1 ICON DISCARDABLE "qm.ico"
