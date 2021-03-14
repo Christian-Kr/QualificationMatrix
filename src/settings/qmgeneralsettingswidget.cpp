@@ -61,13 +61,13 @@ void QMGeneralSettingsWidget::loadSettings()
         }
     }
 
-    ui->cbCentralizedSettings->setChecked(settings.read("General/Centralized", false).toBool());
+    ui->gbCentralizedSettings->setChecked(settings.read("General/Centralized", false).toBool());
     ui->leCentralizedSettingsFile->setText(settings.read("General/CentralizedPath", "").toString());
 
     auto loadLastDatabase = settings.read("Database/LoadLastOnStartup", true).toBool();
     ui->cbLoadLastDatabase->setChecked(loadLastDatabase);
 
-    ui->cbAutoBackup->setChecked(settings.read("Database/LocalAutoBackup", false).toBool());
+    ui->gbAutoBackup->setChecked(settings.read("Database/LocalAutoBackup", false).toBool());
     ui->cbAutoBackupDelete->setChecked(
         settings.read("Database/LocalAutoBackupDelete", false).toBool());
     ui->leBackupPath->setText(settings.read("Database/LocalBackupPath", "").toString());
@@ -131,10 +131,10 @@ void QMGeneralSettingsWidget::saveSettings()
     auto &settings = QMApplicationSettings::getInstance();
 
     settings.write("General/CentralizedPath", ui->leCentralizedSettingsFile->text());
-    settings.write("General/Centralized", ui->cbCentralizedSettings->isChecked());
+    settings.write("General/Centralized", ui->gbCentralizedSettings->isChecked());
 
     settings.write("Database/LoadLastOnStartup", ui->cbLoadLastDatabase->isChecked());
-    settings.write("Database/LocalAutoBackup", ui->cbAutoBackup->isChecked());
+    settings.write("Database/LocalAutoBackup", ui->gbAutoBackup->isChecked());
     settings.write("Database/LocalAutoBackupDelete", ui->cbAutoBackupDelete->isChecked());
     settings.write("Database/LocalBackupPath", ui->leBackupPath->text());
     settings.write("Database/LocalBackupCount", ui->spBackupCount->value());

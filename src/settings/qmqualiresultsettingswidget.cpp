@@ -37,7 +37,7 @@ void QMQualiResultSettingsWidget::saveSettings()
     auto &settings = QMApplicationSettings::getInstance();
     QStringList ignoreList;
 
-    settings.write("QualiResult/DoIgnore", ui->cbQualiResIgnore->isChecked());
+    settings.write("QualiResult/DoIgnore", ui->gbQualiResIgnore->isChecked());
 
     for (int i = 0; i < ui->lwIgnoreList->count(); i++) {
         ignoreList.append(ui->lwIgnoreList->item(i)->data(Qt::DisplayRole).toString());
@@ -56,7 +56,7 @@ void QMQualiResultSettingsWidget::loadSettings()
 {
     auto &settings = QMApplicationSettings::getInstance();
 
-    ui->cbQualiResIgnore->setChecked(settings.read("QualiResult/DoIgnore", true).toBool());
+    ui->gbQualiResIgnore->setChecked(settings.read("QualiResult/DoIgnore", true).toBool());
 
     ui->lwIgnoreList->clear();
     ui->lwIgnoreList->addItems(settings.read("QualiResult/IgnoreList", "").toStringList());
