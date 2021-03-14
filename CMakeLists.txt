@@ -11,6 +11,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
+set(APP_ICON_RESOURCE_WINDOWS "${CMAKE_CURRENT_SOURCE_DIR}/qm_res.rc")
 set(CMAKE_AUTOUIC_SEARCH_PATHS ui)
 
 if (CMAKE_VERSION VERSION_LESS "3.7.0")
@@ -128,7 +129,8 @@ add_executable(QualificationMatrix WIN32
     ui/qmsigninglistdialog.ui
     ui/qmnewcertificatedialog.ui
     ui/qmextendedselectiondialog.ui
-    src/config.h)
+    src/config.h
+    ${APP_ICON_RESOURCE_WINDOWS})
 
 # copy database directory to binary
 add_custom_command(
