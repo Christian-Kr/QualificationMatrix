@@ -142,12 +142,8 @@ void QMProxySqlRelationalDelegate::setModelData(
 
     // current index in the combo box
     int currentItem = combo->currentIndex();
-    int childColIndex = childModel->fieldIndex(sqlModel->relation(index.column()).displayColumn());
     int childEditIndex = childModel->fieldIndex(sqlModel->relation(index.column()).indexColumn());
 
-    model->setData(
-        index, childModel->data(childModel->index(currentItem, childColIndex), Qt::DisplayRole),
-        Qt::DisplayRole);
     model->setData(
         index, childModel->data(childModel->index(currentItem, childEditIndex), Qt::DisplayRole),
         Qt::EditRole);
