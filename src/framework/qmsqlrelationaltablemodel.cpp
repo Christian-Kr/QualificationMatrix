@@ -88,9 +88,21 @@ QVariant QMSqlRelationalTableModel::data(const QModelIndex &index, int role) con
 bool QMSqlRelationalTableModel::setData(
         const QModelIndex &index, const QVariant &value, int role)
 {
-    // Before gettin any data be sure that sub model have fetched all data.
-    fetchAllSub();
+    // Before setting a value, look if it is a relational model. If so: Update all related table
+    // models.
+    QSqlTableModel *tableModel = relationModel(index.column());
+    if (tableModel != nullptr)
+    {
+        tableModel->select();
 
+        // Fetch all rows from related table model.
+        while (tableModel->canFetchMore())
+        {
+            tableModel->fetchMore();
+        }
+    }
+
+    // Set data of the entry.
     bool res = QSqlRelationalTableModel::setData(index, value, role);
 
     // If change has been done, informate other models about the change.

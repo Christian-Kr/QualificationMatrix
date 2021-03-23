@@ -1008,102 +1008,70 @@ Sind Sie sich sicher?</source>
     <name>QMGeneralSettingsWidget</name>
     <message>
         <location filename="../ui/qmgeneralsettingswidget.ui" line="14"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmgeneralsettingswidget.h" line="346"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmgeneralsettingswidget.h" line="264"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmgeneralsettingswidget.ui" line="45"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmgeneralsettingswidget.h" line="347"/>
-        <source>Aussehen:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/qmgeneralsettingswidget.ui" line="75"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmgeneralsettingswidget.h" line="348"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#424242;&quot;&gt;Ändert das Design der Anwendung. Welches Design verfügbar ist hängt von dem Betriebssystem ab. Zur übernahme der Einstellung ist ein Neustart der Anwendung notwendig.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/qmgeneralsettingswidget.ui" line="109"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmgeneralsettingswidget.h" line="349"/>
+        <location filename="../ui/qmgeneralsettingswidget.ui" line="189"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmgeneralsettingswidget.h" line="272"/>
         <source>Sprache:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmgeneralsettingswidget.ui" line="139"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmgeneralsettingswidget.h" line="350"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#424242;&quot;&gt;Zur übernahme der Einstellung ist ein Neustart der Anwendung notwendig.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/qmgeneralsettingswidget.ui" line="156"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmgeneralsettingswidget.h" line="351"/>
+        <location filename="../ui/qmgeneralsettingswidget.ui" line="26"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmgeneralsettingswidget.h" line="265"/>
         <source>Letzte Datenbank automatisch laden</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmgeneralsettingswidget.ui" line="168"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmgeneralsettingswidget.h" line="352"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#424242;&quot;&gt;Die zuletzt geöffnete und geladene Datenbank in dem Programm wird beim Starten automatisch geladen.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/qmgeneralsettingswidget.ui" line="185"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmgeneralsettingswidget.h" line="353"/>
+        <location filename="../ui/qmgeneralsettingswidget.ui" line="221"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmgeneralsettingswidget.h" line="273"/>
         <source>Zentralisierte Einstellungsdatei</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmgeneralsettingswidget.ui" line="197"/>
-        <location filename="../ui/qmgeneralsettingswidget.ui" line="316"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmgeneralsettingswidget.h" line="354"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmgeneralsettingswidget.h" line="360"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#424242;&quot;&gt;Legt eine priorisierte zentrale Einstellungadatei fest. Die Datei ist über die Software nicht beschreibbar. Zur Übernahme der Einstellung ist ein Neustart der Anwendung notwendig.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/qmgeneralsettingswidget.ui" line="233"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmgeneralsettingswidget.h" line="355"/>
+        <location filename="../ui/qmgeneralsettingswidget.ui" line="254"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmgeneralsettingswidget.h" line="274"/>
         <source>Datei:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmgeneralsettingswidget.ui" line="243"/>
-        <location filename="../ui/qmgeneralsettingswidget.ui" line="355"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmgeneralsettingswidget.h" line="356"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmgeneralsettingswidget.h" line="362"/>
+        <location filename="../ui/qmgeneralsettingswidget.ui" line="95"/>
+        <location filename="../ui/qmgeneralsettingswidget.ui" line="264"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmgeneralsettingswidget.h" line="269"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmgeneralsettingswidget.h" line="275"/>
         <source>Auswählen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmgeneralsettingswidget.ui" line="262"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmgeneralsettingswidget.h" line="357"/>
+        <location filename="../ui/qmgeneralsettingswidget.ui" line="38"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmgeneralsettingswidget.h" line="266"/>
         <source>Automatisierte Backups</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmgeneralsettingswidget.ui" line="280"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmgeneralsettingswidget.h" line="358"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#424242;&quot;&gt;Bei Aktivierung wird mit jedem Laden eine Datenbank ein Backup erstellt und im festgelegten Verzeichnis gespeichert. Dabei handelt es sich um eine reine Kopie.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <location filename="../ui/qmgeneralsettingswidget.ui" line="121"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmgeneralsettingswidget.h" line="270"/>
+        <source>Anzahl Backups</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmgeneralsettingswidget.ui" line="304"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmgeneralsettingswidget.h" line="359"/>
+        <location filename="../ui/qmgeneralsettingswidget.ui" line="170"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmgeneralsettingswidget.h" line="271"/>
+        <source>Style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmgeneralsettingswidget.ui" line="59"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmgeneralsettingswidget.h" line="267"/>
         <source>Backups automatisch löschen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmgeneralsettingswidget.ui" line="345"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmgeneralsettingswidget.h" line="361"/>
+        <location filename="../ui/qmgeneralsettingswidget.ui" line="85"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmgeneralsettingswidget.h" line="268"/>
         <source>Verzeichnis:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/qmgeneralsettingswidget.ui" line="375"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmgeneralsettingswidget.h" line="363"/>
-        <source>Anzahl der vorzuhaltenden Backups</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1279,153 +1247,153 @@ Die Aktion wird abgebrochen.</source>
     <name>QMMainWindow</name>
     <message>
         <location filename="../ui/qmmainwindow.ui" line="20"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="196"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="200"/>
         <location filename="../src/general/qmmainwindow.cpp" line="546"/>
         <source>QualificationMatrix</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmmainwindow.ui" line="74"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="227"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="231"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmmainwindow.ui" line="91"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="228"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="232"/>
         <source>&amp;Datei</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmmainwindow.ui" line="101"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="229"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="233"/>
         <source>Hi&amp;lfe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmmainwindow.ui" line="108"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="230"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="234"/>
         <source>Ex&amp;tras</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmmainwindow.ui" line="114"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="231"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="235"/>
         <source>&amp;Nachweise</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmmainwindow.ui" line="128"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="232"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="236"/>
         <source>toolBar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="154"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="197"/>
+        <location filename="../ui/qmmainwindow.ui" line="155"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="201"/>
         <source>&amp;Beenden</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="157"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="199"/>
+        <location filename="../ui/qmmainwindow.ui" line="158"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="203"/>
         <source>Ctrl+Q</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="166"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="201"/>
+        <location filename="../ui/qmmainwindow.ui" line="167"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="205"/>
         <source>&amp;Datenbank verwalten</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="169"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="203"/>
+        <location filename="../ui/qmmainwindow.ui" line="170"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="207"/>
         <location filename="../src/general/qmmainwindow.cpp" line="132"/>
         <source>Datenbank verwalten</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="172"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="206"/>
+        <location filename="../ui/qmmainwindow.ui" line="173"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="210"/>
         <source>Ctrl+O</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="181"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="208"/>
+        <location filename="../ui/qmmainwindow.ui" line="182"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="212"/>
         <source>Datenbank &amp;schließen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="184"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="210"/>
+        <location filename="../ui/qmmainwindow.ui" line="185"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="214"/>
         <source>Ctrl+Y</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="193"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="212"/>
+        <location filename="../ui/qmmainwindow.ui" line="194"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="216"/>
         <source>&amp;Über QualificationMatrix</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="196"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="214"/>
+        <location filename="../ui/qmmainwindow.ui" line="197"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="218"/>
         <source>Ctrl+Shift+ß</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="205"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="216"/>
+        <location filename="../ui/qmmainwindow.ui" line="206"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="220"/>
         <source>&amp;Einstellungen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="210"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="217"/>
+        <location filename="../ui/qmmainwindow.ui" line="211"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="221"/>
         <source>Über &amp;Qt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="218"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="218"/>
+        <location filename="../ui/qmmainwindow.ui" line="219"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="222"/>
         <source>&amp;Leere Datebank erstellen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="229"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="219"/>
+        <location filename="../ui/qmmainwindow.ui" line="230"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="223"/>
         <source>Deutsch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="237"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="220"/>
+        <location filename="../ui/qmmainwindow.ui" line="238"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="224"/>
         <source>Englisch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="246"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="221"/>
+        <location filename="../ui/qmmainwindow.ui" line="247"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="225"/>
         <source>&amp;Nachweise verwalten</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="249"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="223"/>
+        <location filename="../ui/qmmainwindow.ui" line="250"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="227"/>
         <source>Nachweise verwalten</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="254"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="225"/>
+        <location filename="../ui/qmmainwindow.ui" line="255"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="229"/>
         <source>&amp;Automatische Prüfung</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmmainwindow.ui" line="259"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="226"/>
+        <location filename="../ui/qmmainwindow.ui" line="264"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmmainwindow.h" line="230"/>
         <source>&amp;Unterschriftenliste erstellen</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1708,56 +1676,38 @@ Version:	</source>
     <name>QMQualiMatrixSettingsWidget</name>
     <message>
         <location filename="../ui/qmqualimatrixsettingswidget.ui" line="14"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixsettingswidget.h" line="212"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixsettingswidget.h" line="142"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixsettingswidget.ui" line="28"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixsettingswidget.h" line="213"/>
+        <location filename="../ui/qmqualimatrixsettingswidget.ui" line="26"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixsettingswidget.h" line="143"/>
         <source>Schulungen von unten nach oben</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixsettingswidget.ui" line="40"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixsettingswidget.h" line="214"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#424242;&quot;&gt;In der Qualifikationsmatrix werden die Schulungen am oberen Rand von unten nach oben geschrieben.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <location filename="../ui/qmqualimatrixsettingswidget.ui" line="39"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixsettingswidget.h" line="144"/>
+        <source>Höhe der vertikalen Leiste</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixsettingswidget.ui" line="57"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixsettingswidget.h" line="215"/>
-        <source>Höhe der horizontalen Leiste / Pixel:</source>
+        <location filename="../ui/qmqualimatrixsettingswidget.ui" line="68"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixsettingswidget.h" line="145"/>
+        <source>Farbe des Gitters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixsettingswidget.ui" line="94"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixsettingswidget.h" line="216"/>
-        <source>Höhe der vertikalen Leiste / Pixel:</source>
+        <location filename="../ui/qmqualimatrixsettingswidget.ui" line="107"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixsettingswidget.h" line="147"/>
+        <source>Farbe der Selektion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixsettingswidget.ui" line="136"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixsettingswidget.h" line="217"/>
-        <source>Farbe des Gitters:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/qmqualimatrixsettingswidget.ui" line="176"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixsettingswidget.h" line="219"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#424242;&quot;&gt;Die Farbe des Gitters.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/qmqualimatrixsettingswidget.ui" line="198"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixsettingswidget.h" line="220"/>
-        <source>Farbe der Selektion:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/qmqualimatrixsettingswidget.ui" line="238"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixsettingswidget.h" line="222"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#424242;&quot;&gt;Hintergrundfarbe der selektierten Zellen.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <location filename="../ui/qmqualimatrixsettingswidget.ui" line="185"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualimatrixsettingswidget.h" line="149"/>
+        <source>Höhe der horizontalen Leiste</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2008,56 +1958,50 @@ Version:	</source>
     <name>QMQualiResultSettingsWidget</name>
     <message>
         <location filename="../ui/qmqualiresultsettingswidget.ui" line="14"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultsettingswidget.h" line="194"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultsettingswidget.h" line="185"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualiresultsettingswidget.ui" line="20"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultsettingswidget.h" line="195"/>
+        <location filename="../ui/qmqualiresultsettingswidget.ui" line="29"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultsettingswidget.h" line="186"/>
+        <source>Farbe für Status &quot;Schlecht&quot;:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmqualiresultsettingswidget.ui" line="41"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultsettingswidget.h" line="187"/>
         <source>Ignorieren von Schulungseinträgen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualiresultsettingswidget.ui" line="27"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultsettingswidget.h" line="196"/>
-        <source>Ignorierte Einträge</source>
+        <location filename="../ui/qmqualiresultsettingswidget.ui" line="148"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultsettingswidget.h" line="193"/>
+        <source>Farbe für Status &quot;Gut&quot;:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualiresultsettingswidget.ui" line="40"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultsettingswidget.h" line="197"/>
+        <location filename="../ui/qmqualiresultsettingswidget.ui" line="161"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultsettingswidget.h" line="194"/>
+        <source>Farbe für Status &quot;Ausreichend&quot;:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmqualiresultsettingswidget.ui" line="67"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultsettingswidget.h" line="189"/>
         <source>Text:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualiresultsettingswidget.ui" line="50"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultsettingswidget.h" line="198"/>
+        <location filename="../ui/qmqualiresultsettingswidget.ui" line="77"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultsettingswidget.h" line="190"/>
         <source>Hinzufügen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualiresultsettingswidget.ui" line="57"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultsettingswidget.h" line="199"/>
+        <location filename="../ui/qmqualiresultsettingswidget.ui" line="84"/>
+        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultsettingswidget.h" line="191"/>
         <source>Entfernen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/qmqualiresultsettingswidget.ui" line="79"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultsettingswidget.h" line="200"/>
-        <source>Hintergrundfarbe für Status &quot;Gut&quot;:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/qmqualiresultsettingswidget.ui" line="119"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultsettingswidget.h" line="202"/>
-        <source>Hintergrundfarbe für Status &quot;Ausreichend&quot;:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/qmqualiresultsettingswidget.ui" line="159"/>
-        <location filename="../cmake-build-debug/QualificationMatrix_autogen/include/ui_qmqualiresultsettingswidget.h" line="204"/>
-        <source>Hintergrundfarbe für Status &quot;Schlecht&quot;:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2326,79 +2270,79 @@ Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmsettingsdialog.cpp" line="70"/>
+        <location filename="../src/settings/qmsettingsdialog.cpp" line="72"/>
         <source>Einstellung geändert</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmsettingsdialog.cpp" line="71"/>
+        <location filename="../src/settings/qmsettingsdialog.cpp" line="73"/>
         <source>Die neue Einstellung erfordert einen Neustart der Anwendung.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmsettingsdialog.cpp" line="104"/>
+        <location filename="../src/settings/qmsettingsdialog.cpp" line="106"/>
         <source>Allgemein</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmsettingsdialog.cpp" line="108"/>
+        <location filename="../src/settings/qmsettingsdialog.cpp" line="110"/>
         <source>Qualikationsmatrix</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmsettingsdialog.cpp" line="112"/>
+        <location filename="../src/settings/qmsettingsdialog.cpp" line="114"/>
         <source>Qualifizierungsergebnis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmsettingsdialog.cpp" line="116"/>
+        <location filename="../src/settings/qmsettingsdialog.cpp" line="118"/>
         <source>Datensätze</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmsettingsdialog.cpp" line="119"/>
+        <location filename="../src/settings/qmsettingsdialog.cpp" line="121"/>
         <source>Schulungen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmsettingsdialog.cpp" line="123"/>
+        <location filename="../src/settings/qmsettingsdialog.cpp" line="125"/>
         <source>Funktionen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmsettingsdialog.cpp" line="127"/>
+        <location filename="../src/settings/qmsettingsdialog.cpp" line="129"/>
         <source>Mitarbeiter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmsettingsdialog.cpp" line="145"/>
-        <location filename="../src/settings/qmsettingsdialog.cpp" line="299"/>
+        <location filename="../src/settings/qmsettingsdialog.cpp" line="147"/>
+        <location filename="../src/settings/qmsettingsdialog.cpp" line="301"/>
         <source>Einstellungen geändert</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmsettingsdialog.cpp" line="146"/>
-        <location filename="../src/settings/qmsettingsdialog.cpp" line="300"/>
+        <location filename="../src/settings/qmsettingsdialog.cpp" line="148"/>
+        <location filename="../src/settings/qmsettingsdialog.cpp" line="302"/>
         <source>Die Einstellungen wurden geändert, sollen sie gespeichert werden?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmsettingsdialog.cpp" line="162"/>
+        <location filename="../src/settings/qmsettingsdialog.cpp" line="164"/>
         <source>Einstellungen zurücksetzen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmsettingsdialog.cpp" line="163"/>
+        <location filename="../src/settings/qmsettingsdialog.cpp" line="165"/>
         <source>Die Einstellungen konnten nicht zurückgesetzt werden!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmsettingsdialog.cpp" line="392"/>
+        <location filename="../src/settings/qmsettingsdialog.cpp" line="394"/>
         <source>Zurücksetzen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmsettingsdialog.cpp" line="393"/>
+        <location filename="../src/settings/qmsettingsdialog.cpp" line="395"/>
         <source>Eventuelle Änderungen an der Datenbank werden jetzt zurückgesetzt.
 
 Sind Sie sich sicher?</source>
