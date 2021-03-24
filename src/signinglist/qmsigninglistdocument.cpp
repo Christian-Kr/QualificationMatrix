@@ -22,6 +22,7 @@ QMSigningListDocument::QMSigningListDocument(QObject *parent)
     : QTextDocument(parent)
 {
     emptyEmployees = 0;
+    sortType = EmployeeSort::SortNo;
 }
 
 void QMSigningListDocument::createDocument()
@@ -151,13 +152,61 @@ void QMSigningListDocument::createDocument()
     employeeTable->cellAt(0, 3).setFormat(format);
 
     // Sort the list of employees.
-    employees.sort(Qt::CaseInsensitive);
-    std::sort(employees.begin() , employees.end(),
-        [this]( const QString& test1 , const QString& test2 ) -> bool {
-        QString test1n = test1.split(" ").last();
-        QString test2n = test2.split(" ").last();
-        return test1n < test2n;
-    });
+    switch (sortType)
+    {
+    case EmployeeSort::SortFirstName:
+        std::sort(employees.begin(), employees.end(),
+        [this](const QString &test1, const QString &test2) -> bool {
+            QString test1n;
+            if (test1.contains("Dr"))
+            {
+                QStringList splitted = test1.split(" ");
+                if (splitted.size() > 1)
+                {
+                    test1n = splitted.at(1);
+                }
+                else
+                {
+                    test1n = splitted.first();
+                }
+            }
+            else
+            {
+                test1n = test1;
+            }
+
+            QString test2n;
+            if (test2.contains("Dr."))
+            {
+                QStringList splitted = test2.split(" ");
+                if (splitted.size() > 1)
+                {
+                    test2n = splitted.at(1);
+                }
+                else
+                {
+                    test2n = splitted.first();
+                }
+            }
+            else
+            {
+                test2n = test2.split(" ").first();
+            }
+
+            return test1n < test2n;
+        });
+        break;
+    case EmployeeSort::SortLastName:
+        std::sort(employees.begin(), employees.end(),
+        [this](const QString &test1, const QString &test2) -> bool {
+          QString test1n = test1.split(" ").last();
+          QString test2n = test2.split(" ").last();
+          return test1n < test2n;
+        });
+        break;
+    default:
+        break;
+    }
 
     // Go through all header cells and set them.
     for (int i = 1; i < employees.size() + 1 + emptyEmployees; i++)

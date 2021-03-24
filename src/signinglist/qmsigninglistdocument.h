@@ -23,6 +23,9 @@
 class QString;
 class QStringList;
 
+/// Enum for sort types of employee list.
+enum class EmployeeSort { SortNo = 0, SortFirstName = 1, SortLastName = 2 };
+
 /// Class with design for signing lists.
 /// \author Christian Kr, Copyright 2020
 class QMSigningListDocument: public QTextDocument
@@ -36,6 +39,10 @@ public:
 
     /// Destructor
     ~QMSigningListDocument() override = default;
+
+    /// Set sort type for employees.
+    /// \param sortType
+    void setSortType(EmployeeSort sortType) { this->sortType = sortType; }
 
     /// Set the employees.
     /// \param employees List with employees to print.
@@ -74,6 +81,7 @@ public:
 
 private:
     int emptyEmployees;
+    EmployeeSort sortType;
     QStringList employees;
     QString trainer;
     QString organisation;
