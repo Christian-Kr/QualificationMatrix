@@ -215,23 +215,42 @@ bool QMQualiMatrixModel::setData(const QModelIndex &index, const QVariant &value
         return true;
     }
 
+    // Try to get the row of the quali data entry with the given table index for function and training. If the result
+    // is smaller than 0, there might be no entry. In that case, a new entry has to be created.
+    auto qualiStateRow = qualiStateRowFromFuncTrain(index.row(), index.column());
 
-    int qualiStateRow = qualiStateRowFromFuncTrain(index.row(), index.column());
-    if (qualiStateRow < 0) {
-        // No entry found, create a new one
-        int rowNew = qualiModel->rowCount();
-        int funcNameID = funcFilterModel->data(funcFilterModel->index(index.row(), 0)).toInt();
-        int trainNameID = trainFilterModel->data(trainFilterModel->index(index.column(), 0))
-            .toInt();
+    if (qualiStateRow < 0)
+    {
+        // The new row id.
+        auto rowNew = qualiModel->rowCount();
 
-        qualiModel->insertRow(rowNew);
-        qualiModel->setData(qualiModel->index(rowNew, 1), funcNameID);
-        qualiModel->setData(qualiModel->index(rowNew, 2), trainNameID);
-        qualiModel->setData(qualiModel->index(rowNew, 3), tmpValue);
+        // Get the ids of the function and training for the new entry.
+        auto funcNameID = funcFilterModel->data(funcFilterModel->index(index.row(), 0)).toInt();
+        auto trainNameID = trainFilterModel->data(trainFilterModel->index(index.column(), 0)).toInt();
 
+        // If inserting a new row to the temporary table, do nothing and stop.
+        if (!qualiModel->insertRow(rowNew))
+        {
+            return false;
+        }
+
+        // If setting one value failed, stop setting the rest, delete the temporary row.
+        if (!qualiModel->setData(qualiModel->index(rowNew, 1), funcNameID) ||
+                !qualiModel->setData(qualiModel->index(rowNew, 2), trainNameID) ||
+                !qualiModel->setData(qualiModel->index(rowNew, 3), tmpValue))
+        {
+            qualiModel->removeRow(rowNew);
+            qCritical() << "could not set a value of a new entry to database";
+
+            return false;
+        }
+
+        // If the new temporary row cannot be written to the database, delete the temporary row.
         if (!qualiModel->submitAll())
         {
-            qCritical() << "could not add new entry to database";
+            qualiModel->removeRow(rowNew);
+            qCritical() << "writing new row to database failed";
+
             return false;
         }
 
@@ -245,11 +264,13 @@ bool QMQualiMatrixModel::setData(const QModelIndex &index, const QVariant &value
         }
         else
         {
-            cache->insert(
-                key, qualiModel->data(qualiModel->index(rowNew, 3)).toString());
+            cache->insert(key, qualiModel->data(qualiModel->index(rowNew, 3)).toString());
         }
-    } else {
-        if (tmpValue < 0) {
+    }
+    else
+    {
+        if (tmpValue < 0)
+        {
             // The receive value is negative, meaning to delete the line
             qualiModel->removeRow(qualiStateRow);
             qualiModel->submitAll();
@@ -273,8 +294,7 @@ bool QMQualiMatrixModel::setData(const QModelIndex &index, const QVariant &value
 
             // Set the entry in the cache.
             QString key = QString("%1_%2").arg(index.row()).arg(index.column());
-            cache->insert(
-                key, qualiModel->data(qualiModel->index(qualiStateRow, 3)).toString());
+            cache->insert(key, qualiModel->data(qualiModel->index(qualiStateRow, 3)).toString());
         }
     }
 
