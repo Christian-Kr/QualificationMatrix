@@ -599,6 +599,7 @@ void QMMainWindow::showSettings()
     dm->getQualiModel()->initModel();
     dm->getTrainDataModel()->initModel();
     trainDataWidget->updateData();
+    trainDataWidget->update();
 }
 
 void QMMainWindow::manageCertificate()

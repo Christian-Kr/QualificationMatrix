@@ -2439,85 +2439,85 @@ Sind Sie sich sicher?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="125"/>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="145"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="126"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="146"/>
         <source>Mehr als 255 Ergebnisse an Schulungsdaten verfügbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="163"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="164"/>
         <source>Keine Schulung verfügbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="169"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="170"/>
         <source>Kein Schulungsstatus verfügbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="214"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="215"/>
         <source>Der Mitarbeiter existiert nicht oder ist deaktiviert</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="233"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="234"/>
         <source>Die Schulung existiert nicht oder ist deaktiviert</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="266"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="267"/>
         <source>Kein Eintrag zum Löschen selektiert</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="272"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="273"/>
         <source>Zum Löschen darf nur genau ein Eintrag selektiert sein</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="293"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="294"/>
         <source>Unzureichende Plausibilitätsprüfung vor der Löschung</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="308"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="309"/>
         <source>Es konnten nicht alle Schulungsnachweise gelöscht werden</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="323"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="324"/>
         <source>Details werden nur bei genau einer Selektion angezeigt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="370"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="371"/>
         <source>Keinen gültigen Nachweis ausgewählt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="379"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="380"/>
         <source>Kein Schulungseintrag ausgewählt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="393"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="394"/>
         <source>Nachweis ist bereits angehängt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="425"/>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="464"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="426"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="465"/>
         <source>Kein Schulungsnachweis ausgewählt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="438"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="439"/>
         <source>Es existiert kein Korrelationseintrag mit der id</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="445"/>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="451"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="446"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="452"/>
         <source>Korrelationseintrag kann nicht gelöscht werden</source>
         <translation type="unfinished"></translation>
     </message>

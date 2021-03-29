@@ -120,6 +120,7 @@ void QMTrainDataWidget::updateData()
     ui->tvCertificates->hideColumn(4);
 
     // If have to many entries available, informa the user.
+    trainDataModel->select();
     if (trainDataModel->canFetchMore())
     {
         emit warnMessageAvailable(tr("Mehr als 255 Ergebnisse an Schulungsdaten verfügbar"));
