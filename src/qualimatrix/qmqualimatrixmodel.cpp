@@ -15,6 +15,7 @@
 
 #include "qmqualimatrixmodel.h"
 #include "model/qmdatamanager.h"
+#include "framework/qmsqlrelationaltablemodel.h"
 
 #include <QSqlRelationalTableModel>
 #include <QSqlRecord>

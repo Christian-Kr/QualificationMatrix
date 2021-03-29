@@ -148,6 +148,7 @@ void QMDataManager::initializeModels(QSqlDatabase &db)
     emit updateInitModels(2);
 
     trainDataModel = std::make_shared<QMTrainingDataModel>(nullptr, db);
+    trainDataModel->initModel();
     trainDataModel->select();
 
     emit updateInitModels(3);
@@ -178,6 +179,7 @@ void QMDataManager::initializeModels(QSqlDatabase &db)
     emit updateInitModels(8);
 
     qualiModel = std::make_shared<QMQualificationMatrixModel>(nullptr, db);
+    qualiModel->initModel();
     qualiModel->select();
 
     emit updateInitModels(9);

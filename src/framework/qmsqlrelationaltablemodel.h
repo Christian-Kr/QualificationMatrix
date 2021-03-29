@@ -35,9 +35,6 @@ public:
     /// \return True is selection was successful, else false.
     bool select() override;
 
-    /// Fetch all rows from relation tables.
-    void fetchAllSub() const;
-
     /// Override from QSqlRelationalTableModel.
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
@@ -53,6 +50,9 @@ public:
     /// \param value
     void setFetchAllSub(bool value) { doFetchAllSub = value; }
     bool getFetchAllSub() const { return doFetchAllSub; }
+
+    /// This function musst be implemented for the model to be recreated after clear.
+    virtual void initModel() {};
 
 public slots:
     /// Test for need of new select. Based on the models changed in application.

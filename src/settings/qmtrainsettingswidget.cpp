@@ -20,6 +20,7 @@
 #include "framework/qmcolorchooserdelegate.h"
 #include "framework/qmbooleandelegate.h"
 #include "framework/qmplaintexteditdelegate.h"
+#include "framework/qmsqlrelationaltablemodel.h"
 
 #include <QSqlTableModel>
 #include <QMessageBox>

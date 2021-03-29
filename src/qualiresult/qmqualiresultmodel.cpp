@@ -17,6 +17,7 @@
 #include "qmqualiresultrecord.h"
 #include "model/qmdatamanager.h"
 #include "settings/qmapplicationsettings.h"
+#include "framework/qmsqlrelationaltablemodel.h"
 
 #include <QSqlRelationalTableModel>
 #include <QSqlQuery>

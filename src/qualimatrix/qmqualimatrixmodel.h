@@ -20,9 +20,8 @@
 
 #include <memory>
 
-// forward declarations
+class QMSqlRelationalTableModel;
 class QSqlRelationalTableModel;
-
 class QSortFilterProxyModel;
 
 /**
@@ -149,7 +148,7 @@ private:
 
     std::shared_ptr<QSqlRelationalTableModel> funcModel;
     std::shared_ptr<QSqlRelationalTableModel> trainModel;
-    std::shared_ptr<QSqlRelationalTableModel> qualiModel;
+    std::shared_ptr<QMSqlRelationalTableModel> qualiModel;
 
     QSortFilterProxyModel *funcFilterModel;
     QSortFilterProxyModel *trainFilterModel;

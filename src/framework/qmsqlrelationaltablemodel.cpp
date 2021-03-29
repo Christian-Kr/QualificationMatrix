@@ -13,13 +13,14 @@
 // If not, see <http://www.gnu.org/licenses/>.
 //
 
-#include "qmsqlrelationaltablemodel.h"
+#include "framework/qmsqlrelationaltablemodel.h"
 #include "model/qmdatamanager.h"
 
 #include <QDebug>
+#include <QSqlRelationalTableModel>
 
-QMSqlRelationalTableModel::QMSqlRelationalTableModel(QObject *parent, QSqlDatabase db,
-    bool doFetchAll, bool doFetchAllSub)
+QMSqlRelationalTableModel::QMSqlRelationalTableModel(QObject *parent, QSqlDatabase db, bool doFetchAll, bool
+    doFetchAllSub)
     : QSqlRelationalTableModel(parent, db)
 {
     // Fetching all sub data exceeding 255 should be true by default. This makes sure, that
@@ -28,13 +29,6 @@ QMSqlRelationalTableModel::QMSqlRelationalTableModel(QObject *parent, QSqlDataba
 
     // Fetching all data exceeding 255 can be true by default to make model work fully.
     this->doFetchAll = doFetchAll;
-
-    // When creating a new object. Build a connection to the datamanager, to be informed of changes
-    // in other models. A derived class can then decide whether a new selection should be done
-    // or not, based on the sending object. The connection will be destroyed, when the object will
-    // be deleted.
-    auto dm = QMDataManager::getInstance();
-    connect(dm, &QMDataManager::modelChanged, this, &QMSqlRelationalTableModel::otherModelChanged);
 }
 
 bool QMSqlRelationalTableModel::select()
@@ -57,29 +51,17 @@ bool QMSqlRelationalTableModel::select()
     return res;
 }
 
-void QMSqlRelationalTableModel::fetchAllSub() const
-{
-    for (int i = 0; i < columnCount(); i++)
-    {
-        QSqlTableModel *subModel = relationModel(i);
-        if (subModel == nullptr)
-        {
-            continue;
-        }
-
-        while(subModel->canFetchMore())
-        {
-            subModel->fetchMore();
-        }
-    }
-}
-
 QVariant QMSqlRelationalTableModel::data(const QModelIndex &index, int role) const
 {
-    // Before gettin any data be sure that sub model have fetched all data.
-    if (doFetchAllSub)
+    // Before getting a value, look if it is a relational model. If so: Update all related table models.
+    QSqlTableModel *tableModel = relationModel(index.column());
+    if (tableModel != nullptr && doFetchAllSub)
     {
-        fetchAllSub();
+        // Fetch all rows from related table model.
+        while (tableModel->canFetchMore())
+        {
+            tableModel->fetchMore();
+        }
     }
 
     return QSqlRelationalTableModel::data(index, role);
@@ -88,13 +70,10 @@ QVariant QMSqlRelationalTableModel::data(const QModelIndex &index, int role) con
 bool QMSqlRelationalTableModel::setData(
         const QModelIndex &index, const QVariant &value, int role)
 {
-    // Before setting a value, look if it is a relational model. If so: Update all related table
-    // models.
+    // Before setting a value, look if it is a relational model. If so: Update all related table models.
     QSqlTableModel *tableModel = relationModel(index.column());
-    if (tableModel != nullptr)
+    if (tableModel != nullptr && doFetchAllSub)
     {
-        tableModel->select();
-
         // Fetch all rows from related table model.
         while (tableModel->canFetchMore())
         {

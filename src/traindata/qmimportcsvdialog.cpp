@@ -16,6 +16,7 @@
 #include "qmimportcsvdialog.h"
 #include "ui_qmimportcsvdialog.h"
 #include "model/qmdatamanager.h"
+#include "framework/qmsqlrelationaltablemodel.h"
 
 #include <QFileDialog>
 #include <QFile>

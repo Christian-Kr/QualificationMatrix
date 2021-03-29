@@ -224,7 +224,7 @@
 <context>
     <name>QMDataManager</name>
     <message>
-        <location filename="../src/model/qmdatamanager.cpp" line="193"/>
+        <location filename="../src/model/qmdatamanager.cpp" line="195"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
@@ -787,86 +787,86 @@ Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="107"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="108"/>
         <source>Funktion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="107"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="108"/>
         <source>Bevor eine Funktion hinzugefügt wird, muss eine Gruppe festgelegt werden.
 
 Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="128"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="129"/>
         <source>Funktionsname eingeben</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="144"/>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="155"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="145"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="156"/>
         <source>Funktion löschen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="144"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="145"/>
         <source>Es wurde keine gültige Funktion ausgewählt.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="155"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="156"/>
         <source>Es existieren Verweise auf die Funktion in den anderen Tabellen. Bitte löschen Sie zuerst die entsprechenden Verweise oder ändern Sie deren Funktionszugehörigkeit.
 
 Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="168"/>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="248"/>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="273"/>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="285"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="169"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="249"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="274"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="286"/>
         <source>Funktionsgruppe löschen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="168"/>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="286"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="169"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="287"/>
         <source>Die Funktionsgruppe konnte aus einem unbekannten Grund nicht gelöscht werden. Bitte informieren Sie den Entwickler zur Fehlerbehebung.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="209"/>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="296"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="210"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="297"/>
         <source>Änderungen zurücksetzen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="210"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="211"/>
         <source>Alle temporären Änderungen an den Funktionen gehen verloren.
 
 Sind Sie sich sicher?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="232"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="233"/>
         <source>Gruppenname eingeben</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="248"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="249"/>
         <source>Es wurde keine gültige Gruppe ausgewählt.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="274"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="275"/>
         <source>Es existieren Verweise auf die Funktionsgruppe in den Funktiondefinitionen. Bitte löschen Sie zuerst die entsprechende Funktion oder ändern Sie deren Gruppenzugehörigkeit.
 
 Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="297"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="298"/>
         <source>Alle temporären Änderungen an den Funktiongruppen gehen verloren.
 
 Sind Sie sich sicher?</source>
@@ -1050,44 +1050,44 @@ Sind Sie sich sicher?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmimportcsvdialog.cpp" line="74"/>
+        <location filename="../src/traindata/qmimportcsvdialog.cpp" line="75"/>
         <source>Import-Datei</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmimportcsvdialog.cpp" line="74"/>
-        <location filename="../src/traindata/qmimportcsvdialog.cpp" line="86"/>
+        <location filename="../src/traindata/qmimportcsvdialog.cpp" line="75"/>
+        <location filename="../src/traindata/qmimportcsvdialog.cpp" line="87"/>
         <source>Comma-separated values (*.csv)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmimportcsvdialog.cpp" line="86"/>
+        <location filename="../src/traindata/qmimportcsvdialog.cpp" line="87"/>
         <source>Backup-Datei</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmimportcsvdialog.cpp" line="103"/>
-        <location filename="../src/traindata/qmimportcsvdialog.cpp" line="145"/>
-        <location filename="../src/traindata/qmimportcsvdialog.cpp" line="163"/>
+        <location filename="../src/traindata/qmimportcsvdialog.cpp" line="104"/>
+        <location filename="../src/traindata/qmimportcsvdialog.cpp" line="146"/>
+        <location filename="../src/traindata/qmimportcsvdialog.cpp" line="164"/>
         <source>Importieren</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmimportcsvdialog.cpp" line="104"/>
+        <location filename="../src/traindata/qmimportcsvdialog.cpp" line="105"/>
         <source>Die Import-Datei existiert nicht oder ist nicht lesbar. Bitte wählen Sie eine existierende Datei, die lesbar ist.
 
 Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmimportcsvdialog.cpp" line="146"/>
+        <location filename="../src/traindata/qmimportcsvdialog.cpp" line="147"/>
         <source>Die Backup-Datei existiert nicht und konnte auch nicht erstellt werden. Bitte korrigieren Sie ihre Berechtigungen im Dateisystem oder wählen Sie eine existierende Datei mit  Schreibberechtigungen.
 
 Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmimportcsvdialog.cpp" line="164"/>
+        <location filename="../src/traindata/qmimportcsvdialog.cpp" line="165"/>
         <source>Sie verfügen über keine Schreiberechtigungne für die Backup-Datei. Bitte überprüfen Sie die Berechtigungen.
 
 Die Aktion wird abgebrochen.</source>
@@ -1111,7 +1111,7 @@ Die Aktion wird abgebrochen.</source>
     <name>QMMainWindow</name>
     <message>
         <location filename="../ui/qmmainwindow.ui" line="20"/>
-        <location filename="../src/general/qmmainwindow.cpp" line="546"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="547"/>
         <source>QualificationMatrix</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1162,7 +1162,7 @@ Die Aktion wird abgebrochen.</source>
     </message>
     <message>
         <location filename="../ui/qmmainwindow.ui" line="170"/>
-        <location filename="../src/general/qmmainwindow.cpp" line="132"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="133"/>
         <source>Datenbank verwalten</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1237,170 +1237,170 @@ Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="116"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="117"/>
         <source>Datenbankverbindung</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="117"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="118"/>
         <source>Die Datenbank konnte nicht geöffnet werden, überprüfen Sie ihre Einstellungen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="133"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="134"/>
         <source>Es besteht bereits eine Verbindung zu einer Datenbank. Jetzt trennen?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="221"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="222"/>
         <source>Datenbank laden</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="222"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="223"/>
         <source>Die Version der Datenbank entspricht nicht der Vorgabe. Möchten Sie versuchen die Datenbank zu aktualisieren?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="246"/>
-        <location filename="../src/general/qmmainwindow.cpp" line="300"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="247"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="301"/>
         <source>Datenbank-Backup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="247"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="248"/>
         <source>Es konnte kein Backup erstellt werden. Da für eine Aktualisierung ein Backup notwendig ist, wird die Aktion abgebrochen und die Datenbank geschlossen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="259"/>
-        <location filename="../src/general/qmmainwindow.cpp" line="269"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="260"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="270"/>
         <source>Datenbank aktualisieren</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="260"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="261"/>
         <source>Die Datenbank konnte nicht vollständig aktualisiert werden. Der Fehler ist kritisch. Bitte spielen Sie das vorher angelegte Backup ein. Die Datenbank wird geschlossen und nicht weiter verarbeitet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="270"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="271"/>
         <source>Die Aktualisierung der Datenbank war erfolgreich. Bitte heben Sie das erstellte Backup für einen späteren Fall auf.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="278"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="279"/>
         <source>Datenbank verbunden</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="290"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="291"/>
         <source>Backup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="291"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="292"/>
         <source>Das Backup konnte nicht erfolgreich durchgeführt werden.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="319"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="320"/>
         <source>Datenbank</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="319"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="320"/>
         <source>Daten abrufen...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="324"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="325"/>
         <source>Schulungsresultat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="324"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="325"/>
         <source>Berechnung...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="329"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="330"/>
         <source>Qualifikationsmatrix</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="329"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="330"/>
         <source>Cache aufbauen...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="414"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="415"/>
         <source>Qualifizierungsergebnis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="417"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="418"/>
         <source>Qualifizierungsmatrix</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="420"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="421"/>
         <source>Schulungsdaten</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="435"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="436"/>
         <source>Über QualificationMatrix</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="436"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="437"/>
         <source>Copyright (c) 2020 by Christian Kr
 Version:	</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="454"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="455"/>
         <source>Backup anlegen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="455"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="456"/>
         <source>Der angegebene Ordner in den Einstellungen ist kein Verzeichnis,  existiert nicht oder ist nicht beschreibbar.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="490"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="491"/>
         <source>Backup löschen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="491"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="492"/>
         <source>Die Backupdatei konnte nicht gelöscht werden und wird übersprungen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="502"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="503"/>
         <source>Backup erstellen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="503"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="504"/>
         <source>Die Backupdatei konnte nicht kopiert werden und wird übersprungen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="518"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="519"/>
         <source>Datenbank schließen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="519"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="520"/>
         <source>Soll die verbundene Datenbank wirklich geschlossen werden? (Nicht gespeicherte Daten gehen verloren!)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/general/qmmainwindow.cpp" line="547"/>
+        <location filename="../src/general/qmmainwindow.cpp" line="548"/>
         <source>Datenbank getrennt</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1497,7 +1497,7 @@ Version:	</source>
 <context>
     <name>QMQualiMatrixModel</name>
     <message>
-        <location filename="../src/qualimatrix/qmqualimatrixmodel.cpp" line="178"/>
+        <location filename="../src/qualimatrix/qmqualimatrixmodel.cpp" line="179"/>
         <source>P = Pflicht; A = Angebot; S = Sonstiges</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1699,42 +1699,42 @@ Version:	</source>
 <context>
     <name>QMQualiResultModel</name>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="304"/>
+        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="305"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="306"/>
+        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="307"/>
         <source>Funktion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="308"/>
+        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="309"/>
         <source>Schulung</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="310"/>
+        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="311"/>
         <source>Notwendigkeit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="312"/>
+        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="313"/>
         <source>Letzte Schulung</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="314"/>
+        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="315"/>
         <source>Nächste Schulung</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="316"/>
+        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="317"/>
         <source>Status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="318"/>
+        <location filename="../src/qualiresult/qmqualiresultmodel.cpp" line="319"/>
         <source>Schulungsstatus</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1962,17 +1962,17 @@ Aktion wird abgebrochen.</source>
 <context>
     <name>QMQualificationMatrixModel</name>
     <message>
-        <location filename="../src/model/qmqualificationmatrixmodel.cpp" line="29"/>
+        <location filename="../src/model/qmqualificationmatrixmodel.cpp" line="32"/>
         <source>Funktion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/model/qmqualificationmatrixmodel.cpp" line="31"/>
+        <location filename="../src/model/qmqualificationmatrixmodel.cpp" line="34"/>
         <source>Schulung</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/model/qmqualificationmatrixmodel.cpp" line="33"/>
+        <location filename="../src/model/qmqualificationmatrixmodel.cpp" line="36"/>
         <source>Status</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2439,85 +2439,85 @@ Sind Sie sich sicher?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="124"/>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="144"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="125"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="145"/>
         <source>Mehr als 255 Ergebnisse an Schulungsdaten verfügbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="162"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="163"/>
         <source>Keine Schulung verfügbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="168"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="169"/>
         <source>Kein Schulungsstatus verfügbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="213"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="214"/>
         <source>Der Mitarbeiter existiert nicht oder ist deaktiviert</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="232"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="233"/>
         <source>Die Schulung existiert nicht oder ist deaktiviert</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="265"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="266"/>
         <source>Kein Eintrag zum Löschen selektiert</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="271"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="272"/>
         <source>Zum Löschen darf nur genau ein Eintrag selektiert sein</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="292"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="293"/>
         <source>Unzureichende Plausibilitätsprüfung vor der Löschung</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="307"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="308"/>
         <source>Es konnten nicht alle Schulungsnachweise gelöscht werden</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="322"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="323"/>
         <source>Details werden nur bei genau einer Selektion angezeigt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="369"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="370"/>
         <source>Keinen gültigen Nachweis ausgewählt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="378"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="379"/>
         <source>Kein Schulungseintrag ausgewählt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="392"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="393"/>
         <source>Nachweis ist bereits angehängt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="424"/>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="463"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="425"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="464"/>
         <source>Kein Schulungsnachweis ausgewählt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="437"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="438"/>
         <source>Es existiert kein Korrelationseintrag mit der id</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="444"/>
-        <location filename="../src/traindata/qmtraindatawidget.cpp" line="450"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="445"/>
+        <location filename="../src/traindata/qmtraindatawidget.cpp" line="451"/>
         <source>Korrelationseintrag kann nicht gelöscht werden</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2605,127 +2605,127 @@ Sind Sie sich sicher?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="130"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="131"/>
         <source>Schulung</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="130"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="131"/>
         <source>Bevor eine Schulung hinzugefügt wird, muss eine Gruppe festgelegt werden.
 
 Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="151"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="152"/>
         <source>Schulungsname eingeben</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="166"/>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="176"/>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="188"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="167"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="177"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="189"/>
         <source>Schulung löschen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="166"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="167"/>
         <source>Es wurde keine gültige Schulung ausgewählt.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="176"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="177"/>
         <source>Es existieren Verweise auf die Schulung in den anderen Tabellen. Bitte löschen Sie zuerst die entsprechenden Verweise oder ändern Sie deren Schulungszugehörigkeit.
 
 Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="188"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="189"/>
         <source>Die Schulung konnte aus einem unbekannten Grund nicht gelöscht werden. Bitte informieren Sie den Entwickler zur Fehlerbehebung.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="227"/>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="243"/>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="397"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="228"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="244"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="398"/>
         <source>Änderungen zurücksetzen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="227"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="228"/>
         <source>Alle temporären Änderungen an den Schulungen gehen verloren.
 
 Sind Sie sich sicher?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="243"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="244"/>
         <source>Alle temporären Änderungen an den Status gehen verloren.
 
 Sind Sie sich sicher?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="266"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="267"/>
         <source>Gruppenname eingeben</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="287"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="288"/>
         <source>Statusname eingeben</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="302"/>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="322"/>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="334"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="303"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="323"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="335"/>
         <source>Schulungsgruppe löschen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="302"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="303"/>
         <source>Es wurde keine gültige Gruppe ausgewählt.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="322"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="323"/>
         <source>Es existieren Verweise auf die Schulungsgruppe in den Schulungsdefinitionen. Bitte löschen Sie zuerst die entsprechende Schulung oder ändern Sie deren Gruppenzugehörigkeit.
 
 Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="334"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="335"/>
         <source>Die Schulungsgruppe konnte aus einem unbekannten Grund nicht gelöscht werden. Bitte informieren Sie den Entwickler zur Fehlerbehebung.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="350"/>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="373"/>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="385"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="351"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="374"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="386"/>
         <source>Schulungsstatus löschen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="351"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="352"/>
         <source>Es wurde kein gültiger Status ausgewählt.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="374"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="375"/>
         <source>Es existieren Verweise auf den Status in den Schulungsdaten. Bitte löschen Sie zuerst den entsprechende Schulungssatz oder ändern Sie deren Statuszugehörigkeit.
 
 Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="385"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="386"/>
         <source>Der Status konnte aus einem unbekannten Grund nicht gelöscht werden. Bitte informieren Sie den Entwickler zur Fehlerbehebung.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="397"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="398"/>
         <source>Alle temporären Änderungen an den Schulungsgruppen gehen verloren.
 
 Sind Sie sich sicher?</source>
@@ -2735,27 +2735,27 @@ Sind Sie sich sicher?</source>
 <context>
     <name>QMTrainingDataModel</name>
     <message>
-        <location filename="../src/model/qmtrainingdatamodel.cpp" line="29"/>
+        <location filename="../src/model/qmtrainingdatamodel.cpp" line="32"/>
         <source>Mitarbeiter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/model/qmtrainingdatamodel.cpp" line="31"/>
+        <location filename="../src/model/qmtrainingdatamodel.cpp" line="34"/>
         <source>Schulung</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/model/qmtrainingdatamodel.cpp" line="33"/>
+        <location filename="../src/model/qmtrainingdatamodel.cpp" line="36"/>
         <source>Schulungsdatum</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/model/qmtrainingdatamodel.cpp" line="34"/>
+        <location filename="../src/model/qmtrainingdatamodel.cpp" line="37"/>
         <source>Status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/model/qmtrainingdatamodel.cpp" line="36"/>
+        <location filename="../src/model/qmtrainingdatamodel.cpp" line="39"/>
         <source>Datei</source>
         <translation type="unfinished"></translation>
     </message>

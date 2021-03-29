@@ -33,6 +33,7 @@
 #include "certificate/qmcertificatedialog.h"
 #include "certificate/qmcertificateintegritycheckdialog.h"
 #include "signinglist/qmsigninglistdialog.h"
+#include "framework/qmsqlrelationaltablemodel.h"
 
 #include <QProgressDialog>
 #include <QDesktopWidget>
@@ -592,6 +593,12 @@ void QMMainWindow::showSettings()
     // the result should be reseted.
     qualiResultWidget->resetFilter();
     qualiResultWidget->resetModel();
+
+    // Update models, that might have been changed.
+    auto dm = QMDataManager::getInstance();
+    dm->getQualiModel()->initModel();
+    dm->getTrainDataModel()->initModel();
+    trainDataWidget->updateData();
 }
 
 void QMMainWindow::manageCertificate()

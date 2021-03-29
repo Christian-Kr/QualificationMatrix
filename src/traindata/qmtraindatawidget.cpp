@@ -21,6 +21,7 @@
 #include "certificate/qmcertificatedialog.h"
 #include "qmimportcsvdialog.h"
 #include "settings/qmapplicationsettings.h"
+#include "framework/qmsqlrelationaltablemodel.h"
 
 #include <QSqlRecord>
 #include <QSqlField>

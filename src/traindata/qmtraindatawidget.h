@@ -20,6 +20,7 @@
 #include <memory>
 
 // Forward declarations for faster compiling.
+class QMSqlRelationalTableModel;
 class QSqlRelationalTableModel;
 class QSqlTableModel;
 class QProgressDialog;
@@ -99,7 +100,7 @@ private:
 
     std::shared_ptr<QSqlRelationalTableModel> employeeModel;
     std::shared_ptr<QSqlRelationalTableModel> trainModel;
-    std::shared_ptr<QSqlRelationalTableModel> trainDataModel;
+    std::shared_ptr<QMSqlRelationalTableModel> trainDataModel;
     std::shared_ptr<QSqlTableModel> trainDataStateModel;
     std::shared_ptr<QSqlTableModel> trainDataCertModel;
     std::shared_ptr<QSqlTableModel> trainDataCertViewModel;

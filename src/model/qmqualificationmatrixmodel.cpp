@@ -17,6 +17,9 @@
 
 QMQualificationMatrixModel::QMQualificationMatrixModel(QObject *parent, const QSqlDatabase &db)
     : QMSqlRelationalTableModel(parent, db)
+{}
+
+void QMQualificationMatrixModel::initModel()
 {
     // The name of the Table.
     setTable("QualiData");

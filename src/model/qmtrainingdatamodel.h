@@ -28,8 +28,10 @@ public:
     /// Constructor - Override from QSqlRelationalTableModel.
     /// \param parent
     /// \param db
-    explicit QMTrainingDataModel(
-        QObject *parent = nullptr, const QSqlDatabase &db = QSqlDatabase());
+    explicit QMTrainingDataModel(QObject *parent = nullptr, const QSqlDatabase &db = QSqlDatabase());
+
+    /// Override from QMSqlRelationalTableModel.
+    void initModel() override;
 };
 
 #endif // QMTRAININGDATAMODEL_H

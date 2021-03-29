@@ -18,6 +18,7 @@
 #include "model/qmdatamanager.h"
 #include "framework/qmproxysqlrelationaldelegate.h"
 #include "framework/qmcolorchooserdelegate.h"
+#include "framework/qmsqlrelationaltablemodel.h"
 
 #include <QSqlTableModel>
 #include <QMessageBox>

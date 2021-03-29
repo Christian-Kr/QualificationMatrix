@@ -21,6 +21,7 @@
 #include <memory>
 
 // Forward declarations
+class QMSqlRelationalTableModel;
 class QSqlRelationalTableModel;
 class QMQualiResultRecord;
 
@@ -133,7 +134,7 @@ private:
     std::shared_ptr<QSqlRelationalTableModel> funcModel;
     std::shared_ptr<QSqlRelationalTableModel> trainModel;
     std::shared_ptr<QSqlRelationalTableModel> trainDataModel;
-    std::shared_ptr<QSqlRelationalTableModel> qualiModel;
+    std::shared_ptr<QMSqlRelationalTableModel> qualiModel;
     std::shared_ptr<QSqlRelationalTableModel> employeeModel;
     std::shared_ptr<QSqlRelationalTableModel> employeeFuncModel;
     std::shared_ptr<QSqlRelationalTableModel> trainExceptionModel;

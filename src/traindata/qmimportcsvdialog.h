@@ -28,6 +28,7 @@ QT_END_NAMESPACE
 
 class QFile;
 class QSqlTableModel;
+class QMSqlRelationalTableModel;
 class QSqlRelationalTableModel;
 
 /// Dialog and business logic for import data from csv certificate. In future the business logic
@@ -78,7 +79,7 @@ private:
     std::shared_ptr<QSqlTableModel> shiftModel;
     std::shared_ptr<QSqlTableModel> trainGroupModel;
     std::shared_ptr<QSqlTableModel> trainDataStateModel;
-    std::shared_ptr<QSqlRelationalTableModel> trainDataModel;
+    std::shared_ptr<QMSqlRelationalTableModel> trainDataModel;
 };
 
 #endif // QMIMPORTCSVDIALOG_H

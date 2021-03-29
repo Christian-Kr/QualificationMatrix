@@ -70,11 +70,9 @@ QWidget *QMProxySqlRelationalDelegate::createEditor(
     auto combo = new QComboBox(aParent);
 
     // The table might have change and the childModel won't be reselected otherwise.
-    childModel->select();
     combo->setModel(childModel);
     combo->setEditable(true);
-    combo->setModelColumn(
-        childModel->fieldIndex(sqlModel->relation(index.column()).displayColumn()));
+    combo->setModelColumn(childModel->fieldIndex(sqlModel->relation(index.column()).displayColumn()));
     combo->installEventFilter(const_cast<QMProxySqlRelationalDelegate *>(this));
 
     return combo;
@@ -144,7 +142,8 @@ void QMProxySqlRelationalDelegate::setModelData(
     int currentItem = combo->currentIndex();
     int childEditIndex = childModel->fieldIndex(sqlModel->relation(index.column()).indexColumn());
 
-    model->setData(
-        index, childModel->data(childModel->index(currentItem, childEditIndex), Qt::DisplayRole),
+    qDebug() << childModel->data(childModel->index(currentItem, childEditIndex)).toInt();
+
+    model->setData(index, childModel->data(childModel->index(currentItem, childEditIndex), Qt::DisplayRole),
         Qt::EditRole);
 }

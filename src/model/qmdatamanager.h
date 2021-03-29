@@ -25,6 +25,7 @@
 #define DB_MIN_MINOR 2
 
 // Forward declaration
+class QMSqlRelationalTableModel;
 class QSqlRelationalTableModel;
 class QSqlDatabase;
 class QSqlTableModel;
@@ -118,7 +119,7 @@ public:
 
     sp_relTableModel getFuncModel() { return funcModel; }
     sp_relTableModel getTrainModel() { return trainModel; }
-    sp_relTableModel getTrainDataModel() { return trainDataModel; }
+    std::shared_ptr<QMSqlRelationalTableModel> getTrainDataModel() { return trainDataModel; }
     sp_tableModel getTrainGroupModel() { return trainGroupModel; }
     sp_tableModel getTrainDataStateModel() { return trainDataStateModel; }
     sp_tableModel getFuncGroupModel() { return funcGroupModel; }
@@ -126,7 +127,7 @@ public:
     sp_relTableModel getEmployeeFuncModel() { return employeeFuncModel; }
     std::shared_ptr<QMQualiResultModel> getQualiResultModel() { return qualiResultModel; }
     std::shared_ptr<QMQualiMatrixModel> getQualiMatrixModel() { return qualiMatrixModel; }
-    sp_relTableModel getQualiModel() { return qualiModel; }
+    std::shared_ptr<QMSqlRelationalTableModel> getQualiModel() { return qualiModel; }
     sp_relTableModel getTrainExceptionModel() { return trainExceptionModel; }
     sp_tableModel getShiftModel() { return shiftModel; }
     sp_tableModel getInfoModel() { return infoModel; }
@@ -154,12 +155,12 @@ private:
     // about that. (Get up to date objects.)
     sp_relTableModel funcModel;
     sp_relTableModel trainModel;
-    sp_relTableModel trainDataModel;
+    std::shared_ptr<QMSqlRelationalTableModel> trainDataModel;
     sp_tableModel trainGroupModel;
     sp_tableModel funcGroupModel;
     sp_relTableModel employeeModel;
     sp_relTableModel employeeFuncModel;
-    sp_relTableModel qualiModel;
+    std::shared_ptr<QMSqlRelationalTableModel> qualiModel;
     sp_relTableModel trainExceptionModel;
     sp_tableModel shiftModel;
     sp_tableModel trainDataStateModel;
