@@ -208,21 +208,62 @@ bool QMQualiMatrixModel::setData(const QModelIndex &index, const QVariant &value
 
     auto tmpValue = value.toInt();
 
-    // If value is already the target value, exit.
-    if (data(index, role) != value)
+    // If value is already the target value, exit. This means: If entry should be a must have and it already is, then
+    // there is no need for going further.
+    if (data(index, role) == value)
     {
-        int qualiStateRow = qualiStateRowFromFuncTrain(index.row(), index.column());
-        if (qualiStateRow < 0) {
-            // No entry found, create a new one
-            int rowNew = qualiModel->rowCount();
-            int funcNameID = funcFilterModel->data(funcFilterModel->index(index.row(), 0)).toInt();
-            int trainNameID = trainFilterModel->data(trainFilterModel->index(index.column(), 0))
-                .toInt();
+        return true;
+    }
 
-            qualiModel->insertRow(rowNew);
-            qualiModel->setData(qualiModel->index(rowNew, 1), funcNameID);
-            qualiModel->setData(qualiModel->index(rowNew, 2), trainNameID);
-            qualiModel->setData(qualiModel->index(rowNew, 3), tmpValue);
+
+    int qualiStateRow = qualiStateRowFromFuncTrain(index.row(), index.column());
+    if (qualiStateRow < 0) {
+        // No entry found, create a new one
+        int rowNew = qualiModel->rowCount();
+        int funcNameID = funcFilterModel->data(funcFilterModel->index(index.row(), 0)).toInt();
+        int trainNameID = trainFilterModel->data(trainFilterModel->index(index.column(), 0))
+            .toInt();
+
+        qualiModel->insertRow(rowNew);
+        qualiModel->setData(qualiModel->index(rowNew, 1), funcNameID);
+        qualiModel->setData(qualiModel->index(rowNew, 2), trainNameID);
+        qualiModel->setData(qualiModel->index(rowNew, 3), tmpValue);
+
+        if (!qualiModel->submitAll())
+        {
+            qCritical() << "could not add new entry to database";
+            return false;
+        }
+
+        // Create a new entry in cache, to prevent from rebuild the whole cache. Cause there is
+        // no entry in the table - which has now been added - there should not be an entry in
+        // the cache, till now.
+        QString key = QString("%1_%2").arg(index.row()).arg(index.column());
+        if (cache->contains(key))
+        {
+            qCritical() << "new entry exist in cache";
+        }
+        else
+        {
+            cache->insert(
+                key, qualiModel->data(qualiModel->index(rowNew, 3)).toString());
+        }
+    } else {
+        if (tmpValue < 0) {
+            // The receive value is negative, meaning to delete the line
+            qualiModel->removeRow(qualiStateRow);
+            qualiModel->submitAll();
+
+            // Delete the entry in the cache.
+            QString key = QString("%1_%2").arg(index.row()).arg(index.column());
+            if (!cache->remove(key))
+            {
+                qCritical() << "existing cache entry can not be removed";
+            }
+        }
+        else
+        {
+            qualiModel->setData(qualiModel->index(qualiStateRow, 3), tmpValue);
 
             if (!qualiModel->submitAll())
             {
@@ -230,56 +271,17 @@ bool QMQualiMatrixModel::setData(const QModelIndex &index, const QVariant &value
                 return false;
             }
 
-            // Create a new entry in cache, to prevent from rebuild the whole cache. Cause there is
-            // no entry in the table - which has now been added - there should not be an entry in
-            // the cache, till now.
+            // Set the entry in the cache.
             QString key = QString("%1_%2").arg(index.row()).arg(index.column());
-            if (cache->contains(key))
-            {
-                qCritical() << "new entry exist in cache";
-            }
-            else
-            {
-                cache->insert(
-                    key, qualiModel->data(qualiModel->index(rowNew, 3)).toString());
-            }
-        } else {
-            if (tmpValue < 0) {
-                // The receive value is negative, meaning to delete the line
-                qualiModel->removeRow(qualiStateRow);
-                qualiModel->submitAll();
-
-                // Delete the entry in the cache.
-                QString key = QString("%1_%2").arg(index.row()).arg(index.column());
-                if (!cache->remove(key))
-                {
-                    qCritical() << "existing cache entry can not be removed";
-                }
-            }
-            else
-            {
-                qualiModel->setData(qualiModel->index(qualiStateRow, 3), tmpValue);
-
-                if (!qualiModel->submitAll())
-                {
-                    qCritical() << "could not add new entry to database";
-                    return false;
-                }
-
-                // Set the entry in the cache.
-                QString key = QString("%1_%2").arg(index.row()).arg(index.column());
-                cache->insert(
-                    key, qualiModel->data(qualiModel->index(qualiStateRow, 3)).toString());
-            }
+            cache->insert(
+                key, qualiModel->data(qualiModel->index(qualiStateRow, 3)).toString());
         }
-
-        //buildCache();
-        emit dataChanged(index, index, QVector<int>() << role);
-
-        return true;
     }
 
-    return false;
+    //buildCache();
+    emit dataChanged(index, index, QVector<int>() << role);
+
+    return true;
 }
 
 Qt::ItemFlags QMQualiMatrixModel::flags(const QModelIndex &index) const
