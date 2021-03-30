@@ -94,41 +94,6 @@ bool QMDataManager::testTableStructure(QSqlDatabase &db)
     return true;
 }
 
-// bool QMDataManager::filesLocation(QSqlDatabase &db)
-//{
-//    // Files can be inside a central database or as part of sqlite in a local certificate structure
-//    place.
-//    // You should not use local certificate structure for a central database with access of many people,
-//    // cause then files might not be found.
-
-//    // Switching the system should be done carefully too. The local folder needs to be an equal
-//    // path for every user. In best case, this folder is next to the sqlite database certificate.
-
-//        QSqlQuery query(db);
-//    QString queryText = "SELECT name, value FROM Info"
-//            " WHERE name == \"version_minor\" OR name == \"version_major\"";
-
-//    if (!query.exec(queryText)) {
-//        return false;
-//    }
-
-//    while (query.next()) {
-//        if (query.value("name").toString() == "version_major") {
-//            major = query.value("value").toInt();
-//            continue;
-//        }
-
-//        if (query.value("name").toString() == "version_minor") {
-//            minor = query.value("value").toInt();
-//            continue;
-//        }
-
-//        if (minor != -1 && major != -1) {
-//            break;
-//        }
-//    }
-//}
-
 void QMDataManager::initializeModels(QSqlDatabase &db)
 {
     emit beforeInitModels(14);
