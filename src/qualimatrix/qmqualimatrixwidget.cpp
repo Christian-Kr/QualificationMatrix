@@ -37,7 +37,6 @@ QMQualiMatrixWidget::QMQualiMatrixWidget(QWidget *parent)
     lockModeTimer(new QTimer(this))
 {
     ui->setupUi(this);
-    ui->tvQualiMatrix->setStyleSheet("background-color: white;");
 
     lockModeTimer->setSingleShot(true);
     lockModeTimer->setInterval(10000);
