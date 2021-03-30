@@ -132,10 +132,12 @@ void initApplicationTranslation()
     installTranslator("qtbase_" + lang, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
 }
 
-/// Take all messages coming from qWarning, qDebug etc. and write them into a log certificate. In
-/// general, all message will be written into a log certificate. If this log certificate is not
-/// writeable, the message will be printed on stdout. Debug messages will always only be printed on
-/// stdout.
+/// Take all messages coming from qWarning, qDebug etc. and write them into a log certificate. In general, all message
+/// will be written into a log certificate. If this log certificate is not writeable, the message will be printed on
+/// stdout. Debug messages will always only be printed on stdout.
+///
+/// The certificate file will be create in user directory, to be readable and individual by every user.
+///
 /// \param type The message type (debug, warning etc.).
 /// \param msg The message to display/log.
 void customMessageHandler(QtMsgType type, const QMessageLogContext &, const QString &msg)
@@ -148,6 +150,7 @@ void customMessageHandler(QtMsgType type, const QMessageLogContext &, const QStr
         {
             txt += QString(" Debug: %1").arg(msg);
 
+            // Debug messages will also be written to the terminal window.
             QTextStream ts(stdout);
             ts << txt << DEPR_ENDL;
 
@@ -166,7 +169,7 @@ void customMessageHandler(QtMsgType type, const QMessageLogContext &, const QStr
             return;
     }
 
-    QFile out("log.txt");
+    QFile out(QDir::homePath() + QDir::separator() + "qm_log.txt");
     auto opened = out.open(QIODevice::WriteOnly | QIODevice::Append);
 
     if (opened)
