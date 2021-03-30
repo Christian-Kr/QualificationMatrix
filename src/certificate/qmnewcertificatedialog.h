@@ -18,6 +18,7 @@
 #include <memory>
 
 // Forward declaration.
+class QMSqlRelationalTableModel;
 class QSqlRelationalTableModel;
 class QSqlTableModel;
 
@@ -91,7 +92,7 @@ private:
     QString trainDate;
     QString certPath;
 
-    std::shared_ptr<QSqlRelationalTableModel> trainModel;
+    std::shared_ptr<QMSqlRelationalTableModel> trainModel;
     std::shared_ptr<QSqlRelationalTableModel> employeeModel;
     std::shared_ptr<QSqlTableModel> employeeGroupModel;
 };

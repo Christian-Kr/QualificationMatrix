@@ -15,6 +15,7 @@
 #include "ui_qmnewcertificatedialog.h"
 #include "model/qmdatamanager.h"
 #include "settings/qmapplicationsettings.h"
+#include "framework/qmsqlrelationaltablemodel.h"
 
 #include <QSqlRelationalTableModel>
 #include <QSortFilterProxyModel>

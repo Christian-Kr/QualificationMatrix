@@ -19,6 +19,7 @@
 
 // Forward declaration.
 class QSqlTableModel;
+class QMSqlRelationalTableModel;
 class QSqlRelationalTableModel;
 class QPrinter;
 
@@ -87,8 +88,8 @@ private:
 
     std::shared_ptr<QSqlRelationalTableModel> employeeModel;
     std::shared_ptr<QSqlTableModel> shiftModel;
-    std::shared_ptr<QSqlRelationalTableModel> trainModel;
-    std::shared_ptr<QSqlRelationalTableModel> trainDataModel;
+    std::shared_ptr<QMSqlRelationalTableModel> trainModel;
+    std::shared_ptr<QMSqlRelationalTableModel> trainDataModel;
 };
 
 #endif // QMSIGNINGLISTDIALOG_H

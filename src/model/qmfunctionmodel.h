@@ -14,11 +14,11 @@
 #ifndef QMFUNCTIONMODEL_H
 #define QMFUNCTIONMODEL_H
 
-#include <QSqlRelationalTableModel>
+#include "framework/qmsqlrelationaltablemodel.h"
 
 /// Sql model for the function table.
 /// \author Christian Kr, Copyright 2020
-class QMFunctionModel: public QSqlRelationalTableModel
+class QMFunctionModel: public QMSqlRelationalTableModel
 {
 Q_OBJECT
 
@@ -28,8 +28,8 @@ public:
     /// \param db The database to work with.
     explicit QMFunctionModel(QObject *parent = nullptr, const QSqlDatabase &db = QSqlDatabase());
 
-    /// Destructor
-    ~QMFunctionModel() override = default;
+    /// Override from QMSqlRelationalTableModel.
+    void initModel() override;
 };
 
 #endif // QMFUNCTIONMODEL_H

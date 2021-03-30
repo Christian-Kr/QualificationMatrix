@@ -16,7 +16,10 @@
 #include <QDebug>
 
 QMFunctionModel::QMFunctionModel(QObject *parent, const QSqlDatabase &db)
-    : QSqlRelationalTableModel(parent, db)
+    : QMSqlRelationalTableModel(parent, db)
+{}
+
+void QMFunctionModel::initModel()
 {
     // The name of the Table.
     setTable("Func");

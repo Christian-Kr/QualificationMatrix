@@ -17,6 +17,7 @@
 #include "qmqualiresultmodel.h"
 #include "framework/qmextendedselectiondialog.h"
 #include "settings/qmapplicationsettings.h"
+#include "framework/qmsqlrelationaltablemodel.h"
 
 #include <QSortFilterProxyModel>
 #include <QSqlRelationalTableModel>

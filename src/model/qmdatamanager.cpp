@@ -101,11 +101,13 @@ void QMDataManager::initializeModels(QSqlDatabase &db)
     // Initialize all models with the given database object.
 
     funcModel = std::make_shared<QMFunctionModel>(this, db);
+    funcModel->initModel();
     funcModel->select();
 
     emit updateInitModels(1);
 
     trainModel = std::make_shared<QMTrainingModel>(nullptr, db);
+    trainModel->initModel();
     trainModel->select();
 
     emit updateInitModels(2);

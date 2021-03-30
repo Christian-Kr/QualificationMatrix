@@ -224,7 +224,7 @@
 <context>
     <name>QMDataManager</name>
     <message>
-        <location filename="../src/model/qmdatamanager.cpp" line="193"/>
+        <location filename="../src/model/qmdatamanager.cpp" line="160"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
@@ -444,7 +444,7 @@
     </message>
     <message>
         <location filename="../ui/qmemployeedetailsdialog.ui" line="215"/>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="233"/>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="234"/>
         <source>Schulungsausnahmen</source>
         <translation type="unfinished"></translation>
     </message>
@@ -464,68 +464,68 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="48"/>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="49"/>
         <source>Aktiv</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="48"/>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="49"/>
         <source>Inaktiv</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="124"/>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="125"/>
         <source>Speichern</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="125"/>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="126"/>
         <source>Sollen die Änderungen jetzt in die Datenbank geschrieben werden?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="157"/>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="158"/>
         <source>Funktion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="158"/>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="159"/>
         <source>Es gibt keinen Grund, eine Funktion zu einem Mitarbeiter hinzuzufügen, wenn keine Funktion existiert.
 
 Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="181"/>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="182"/>
         <source>Schulungsausnahme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="181"/>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="182"/>
         <source>Es gibt keinen Grund, eine Schulungsausnahme zu definieren, wenn keine Schulung existiert.
 
 Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="203"/>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="204"/>
         <source>Erklärung über den Grund eintragen!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="215"/>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="216"/>
         <source>Funktionszugehörigkeit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="216"/>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="217"/>
         <source>Bitte selektieren Sie genau eine Funktion um Sie zu entfernen.
 
 Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="234"/>
+        <location filename="../src/settings/qmemployeedetailsdialog.cpp" line="235"/>
         <source>Bitte selektieren Sie genau eine Ausnahme um Sie zu entfernen.
 
 Die Aktion wird abgebrochen.</source>
@@ -889,12 +889,12 @@ Sind Sie sich sicher?</source>
 <context>
     <name>QMFunctionModel</name>
     <message>
-        <location filename="../src/model/qmfunctionmodel.cpp" line="29"/>
+        <location filename="../src/model/qmfunctionmodel.cpp" line="32"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/model/qmfunctionmodel.cpp" line="30"/>
+        <location filename="../src/model/qmfunctionmodel.cpp" line="33"/>
         <source>Gruppe</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1409,11 +1409,11 @@ Version:	</source>
     <name>QMNewCertificateDialog</name>
     <message>
         <location filename="../ui/qmnewcertificatedialog.ui" line="14"/>
-        <location filename="../src/certificate/qmnewcertificatedialog.cpp" line="59"/>
-        <location filename="../src/certificate/qmnewcertificatedialog.cpp" line="73"/>
-        <location filename="../src/certificate/qmnewcertificatedialog.cpp" line="88"/>
-        <location filename="../src/certificate/qmnewcertificatedialog.cpp" line="106"/>
-        <location filename="../src/certificate/qmnewcertificatedialog.cpp" line="144"/>
+        <location filename="../src/certificate/qmnewcertificatedialog.cpp" line="60"/>
+        <location filename="../src/certificate/qmnewcertificatedialog.cpp" line="74"/>
+        <location filename="../src/certificate/qmnewcertificatedialog.cpp" line="89"/>
+        <location filename="../src/certificate/qmnewcertificatedialog.cpp" line="107"/>
+        <location filename="../src/certificate/qmnewcertificatedialog.cpp" line="145"/>
         <source>Nachweis hinzufügen</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1448,27 +1448,27 @@ Version:	</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmnewcertificatedialog.cpp" line="59"/>
+        <location filename="../src/certificate/qmnewcertificatedialog.cpp" line="60"/>
         <source>Die eingetragene Schulung existiert nicht.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmnewcertificatedialog.cpp" line="74"/>
+        <location filename="../src/certificate/qmnewcertificatedialog.cpp" line="75"/>
         <source>Der eingetragene Mitarbeiter existiert nicht.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmnewcertificatedialog.cpp" line="89"/>
+        <location filename="../src/certificate/qmnewcertificatedialog.cpp" line="90"/>
         <source>Die eingetragene Mitarbeitergruppe existiert nicht.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmnewcertificatedialog.cpp" line="106"/>
+        <location filename="../src/certificate/qmnewcertificatedialog.cpp" line="107"/>
         <source>Es wurde kein Zertifikat ausgewählt.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/certificate/qmnewcertificatedialog.cpp" line="145"/>
+        <location filename="../src/certificate/qmnewcertificatedialog.cpp" line="146"/>
         <source>All files (*.*);;JPEG (*.jpg *.jpeg);;PDF (*.pdf)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1489,7 +1489,7 @@ Version:	</source>
 <context>
     <name>QMQualiMatrixHeaderView</name>
     <message>
-        <location filename="../src/qualimatrix/qmqualimatrixheaderview.cpp" line="207"/>
+        <location filename="../src/qualimatrix/qmqualimatrixheaderview.cpp" line="208"/>
         <source>RN</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1671,27 +1671,27 @@ Version:	</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualimatrix/qmqualimatrixwidget.cpp" line="91"/>
+        <location filename="../src/qualimatrix/qmqualimatrixwidget.cpp" line="92"/>
         <source> Jahr(e)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualimatrix/qmqualimatrixwidget.cpp" line="95"/>
+        <location filename="../src/qualimatrix/qmqualimatrixwidget.cpp" line="96"/>
         <source>Ja</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualimatrix/qmqualimatrixwidget.cpp" line="99"/>
+        <location filename="../src/qualimatrix/qmqualimatrixwidget.cpp" line="100"/>
         <source>Nein</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualimatrix/qmqualimatrixwidget.cpp" line="149"/>
+        <location filename="../src/qualimatrix/qmqualimatrixwidget.cpp" line="150"/>
         <source>Filter ausblenden</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualimatrix/qmqualimatrixwidget.cpp" line="153"/>
+        <location filename="../src/qualimatrix/qmqualimatrixwidget.cpp" line="154"/>
         <source>Filter einblenden</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1925,36 +1925,36 @@ Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="174"/>
+        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="175"/>
         <source>Filter ausblenden</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="178"/>
+        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="179"/>
         <source>Filter einblenden</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="186"/>
-        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="199"/>
-        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="247"/>
+        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="187"/>
+        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="200"/>
+        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="248"/>
         <source>Qualifizierungsresultat speichern</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="187"/>
+        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="188"/>
         <source>Comma-separated values (*.csv)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="199"/>
+        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="200"/>
         <source>Datei konnte nicht zum Schreiben geöffnet werden. Bitte prüfen Sie die Berechtigungen.
 
 Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="248"/>
+        <location filename="../src/qualiresult/qmqualiresultwidget.cpp" line="249"/>
         <source>Die Daten wurden erfolgreich gespeichert.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2088,10 +2088,10 @@ Sind Sie sich sicher?</source>
     <name>QMSigningListDialog</name>
     <message>
         <location filename="../ui/qmsigninglistdialog.ui" line="14"/>
-        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="162"/>
-        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="169"/>
-        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="176"/>
-        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="183"/>
+        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="163"/>
+        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="170"/>
+        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="177"/>
+        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="184"/>
         <source>Unterschriftenliste erstellen</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2190,52 +2190,52 @@ Sind Sie sich sicher?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="51"/>
+        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="52"/>
         <source>Öffne Bilddatei</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="51"/>
+        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="52"/>
         <source>Image Files (*.png *.jpg *.bmp)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="163"/>
+        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="164"/>
         <source>Bitte Details zu den Schulungsinhalten eingeben!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="170"/>
+        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="171"/>
         <source>Bitte der Schulungsdurchführenden eintragen!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="177"/>
+        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="178"/>
         <source>Bitte die Schulungsorganisation eintragen!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="184"/>
+        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="185"/>
         <source>Bitte die mindestens einen Mitarbeiter eintragen!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="211"/>
+        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="212"/>
         <source>Unterschriftenliste drucken</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="211"/>
+        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="212"/>
         <source>Gruppe nicht gültig.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="248"/>
+        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="249"/>
         <source>Unterschriftenliste</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="249"/>
+        <location filename="../src/signinglist/qmsigninglistdialog.cpp" line="250"/>
         <source>Soll der existierende Inhalt der Schulungsdetails durch die Standardbeschreibung in der Datenbank ersetzt werden?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2807,27 +2807,27 @@ Sind Sie sich sicher?</source>
 <context>
     <name>QMTrainingModel</name>
     <message>
-        <location filename="../src/model/qmtrainingmodel.cpp" line="27"/>
+        <location filename="../src/model/qmtrainingmodel.cpp" line="30"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/model/qmtrainingmodel.cpp" line="28"/>
+        <location filename="../src/model/qmtrainingmodel.cpp" line="31"/>
         <source>Gruppe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/model/qmtrainingmodel.cpp" line="30"/>
+        <location filename="../src/model/qmtrainingmodel.cpp" line="33"/>
         <source>Intervall</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/model/qmtrainingmodel.cpp" line="31"/>
+        <location filename="../src/model/qmtrainingmodel.cpp" line="34"/>
         <source>Rechtlich Notwendig</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/model/qmtrainingmodel.cpp" line="32"/>
+        <location filename="../src/model/qmtrainingmodel.cpp" line="35"/>
         <source>Inhalte</source>
         <translation type="unfinished"></translation>
     </message>

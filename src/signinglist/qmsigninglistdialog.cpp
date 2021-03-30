@@ -16,6 +16,7 @@
 #include "model/qmdatamanager.h"
 #include "settings/qmapplicationsettings.h"
 #include "signinglist/qmsigninglistdocument.h"
+#include "framework/qmsqlrelationaltablemodel.h"
 
 #include <QDate>
 #include <QMessageBox>

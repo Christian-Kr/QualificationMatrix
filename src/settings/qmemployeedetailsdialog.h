@@ -20,6 +20,7 @@
 #include <QSortFilterProxyModel>
 
 // Forward declaration for faster compiling.
+class QMSqlRelationalTableModel;
 class QSqlRelationalTableModel;
 class QSqlTableModel;
 
@@ -105,9 +106,9 @@ private:
     QString group;
     bool active;
 
-    std::shared_ptr<QSqlRelationalTableModel> funcModel;
+    std::shared_ptr<QMSqlRelationalTableModel> funcModel;
     std::shared_ptr<QSqlRelationalTableModel> employeeFuncModel;
-    std::shared_ptr<QSqlRelationalTableModel> trainModel;
+    std::shared_ptr<QMSqlRelationalTableModel> trainModel;
     std::shared_ptr<QSqlRelationalTableModel> trainExceptionModel;
     std::shared_ptr<QSqlTableModel> shiftModel;
 

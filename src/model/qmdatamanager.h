@@ -31,6 +31,7 @@ class QMQualiResultModel;
 class QMQualiMatrixModel;
 
 // Typedefs
+typedef std::shared_ptr<QMSqlRelationalTableModel> sp_qmRelTableModel;
 typedef std::shared_ptr<QSqlRelationalTableModel> sp_relTableModel;
 typedef std::shared_ptr<QSqlTableModel> sp_tableModel;
 
@@ -115,9 +116,9 @@ public:
     /// \return True if structure is ok, else false.
     static bool testTableStructure(QSqlDatabase &db);
 
-    sp_relTableModel getFuncModel() { return funcModel; }
-    sp_relTableModel getTrainModel() { return trainModel; }
-    std::shared_ptr<QMSqlRelationalTableModel> getTrainDataModel() { return trainDataModel; }
+    sp_qmRelTableModel getFuncModel() { return funcModel; }
+    sp_qmRelTableModel getTrainModel() { return trainModel; }
+    sp_qmRelTableModel getTrainDataModel() { return trainDataModel; }
     sp_tableModel getTrainGroupModel() { return trainGroupModel; }
     sp_tableModel getTrainDataStateModel() { return trainDataStateModel; }
     sp_tableModel getFuncGroupModel() { return funcGroupModel; }
@@ -125,7 +126,7 @@ public:
     sp_relTableModel getEmployeeFuncModel() { return employeeFuncModel; }
     std::shared_ptr<QMQualiResultModel> getQualiResultModel() { return qualiResultModel; }
     std::shared_ptr<QMQualiMatrixModel> getQualiMatrixModel() { return qualiMatrixModel; }
-    std::shared_ptr<QMSqlRelationalTableModel> getQualiModel() { return qualiModel; }
+    sp_qmRelTableModel getQualiModel() { return qualiModel; }
     sp_relTableModel getTrainExceptionModel() { return trainExceptionModel; }
     sp_tableModel getShiftModel() { return shiftModel; }
     sp_tableModel getInfoModel() { return infoModel; }
@@ -151,14 +152,14 @@ private:
     // Models as smart pointer (shared). They are needed all over the application. And they all use
     // this single model. The objects might change on database change. The customer has to take
     // about that. (Get up to date objects.)
-    sp_relTableModel funcModel;
-    sp_relTableModel trainModel;
-    std::shared_ptr<QMSqlRelationalTableModel> trainDataModel;
+    sp_qmRelTableModel funcModel;
+    sp_qmRelTableModel trainModel;
+    sp_qmRelTableModel trainDataModel;
     sp_tableModel trainGroupModel;
     sp_tableModel funcGroupModel;
     sp_relTableModel employeeModel;
     sp_relTableModel employeeFuncModel;
-    std::shared_ptr<QMSqlRelationalTableModel> qualiModel;
+    sp_qmRelTableModel qualiModel;
     sp_relTableModel trainExceptionModel;
     sp_tableModel shiftModel;
     sp_tableModel trainDataStateModel;

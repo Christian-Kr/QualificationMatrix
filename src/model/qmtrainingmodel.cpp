@@ -15,6 +15,9 @@
 
 QMTrainingModel::QMTrainingModel(QObject *parent, QSqlDatabase db)
     : QMSqlRelationalTableModel(parent, db)
+{}
+
+void QMTrainingModel::initModel()
 {
     // The name of the Table.
     setTable("Train");
@@ -30,9 +33,4 @@ QMTrainingModel::QMTrainingModel(QObject *parent, QSqlDatabase db)
     setHeaderData(3, Qt::Horizontal, tr("Intervall"));
     setHeaderData(4, Qt::Horizontal, tr("Rechtlich Notwendig"));
     setHeaderData(5, Qt::Horizontal, tr("Inhalte"));
-}
-
-void QMTrainingModel::otherModelChanged(QObject *sender)
-{
-    // TODO: Test what object the saender is and update model.
 }

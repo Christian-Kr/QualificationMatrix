@@ -14,6 +14,7 @@
 #include "qmqualimatrixheaderview.h"
 #include "settings/qmapplicationsettings.h"
 #include "model/qmdatamanager.h"
+#include "framework/qmsqlrelationaltablemodel.h"
 
 #include <QPainter>
 #include <QHash>

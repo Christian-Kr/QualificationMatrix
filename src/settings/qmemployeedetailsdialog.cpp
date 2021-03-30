@@ -15,6 +15,7 @@
 #include "ui_qmemployeedetailsdialog.h"
 #include "model/qmdatamanager.h"
 #include "framework/qmproxysqlrelationaldelegate.h"
+#include "framework/qmsqlrelationaltablemodel.h"
 
 #include <QDebug>
 #include <QInputDialog>

@@ -20,6 +20,7 @@
 
 // Forward declaration for faster compiling.
 class QMQualiResultModel;
+class QMSqlRelationalTableModel;
 class QSqlRelationalTableModel;
 class QSortFilterProxyModel;
 class QProgressDialog;
@@ -114,8 +115,8 @@ private:
     Ui::QMQualiResultWidget *ui;
 
     std::shared_ptr<QMQualiResultModel> qualiResultModel;
-    std::shared_ptr<QSqlRelationalTableModel> funcModel;
-    std::shared_ptr<QSqlRelationalTableModel> trainModel;
+    std::shared_ptr<QMSqlRelationalTableModel> funcModel;
+    std::shared_ptr<QMSqlRelationalTableModel> trainModel;
     std::shared_ptr<QSqlRelationalTableModel> employeeModel;
     std::shared_ptr<QSqlTableModel> employeeGroupModel;
     std::shared_ptr<QSqlTableModel> trainDataStateModel;
