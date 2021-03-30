@@ -64,9 +64,8 @@ QMMainWindow::QMMainWindow(QWidget *parent)
     // Initialize the data manager, which is responsible for the models.
     initDataManager();
 
-    // Load database on startup. If there are some settings for automatic loading of database on
-    // startup, follow them. Otherwise show the manage database dialog, cause the application is
-    // not useful if there is no database loaded.
+    // Load database on startup. If there are some settings for automatic loading of database on startup, follow them.
+    // Otherwise show the manage database dialog, cause the application is not useful if there is no database loaded.
     initDatabaseSettings();
 }
 
@@ -107,14 +106,12 @@ bool QMMainWindow::manageDatabaseFromSettings()
     loadDatabaseFromSettings("default");
     auto db = QSqlDatabase::database("default", false);
 
-    // If opening the database fails, show a message and stop automatic loading the database. If
-    // the opening fails, this could be due to wrong database information and/or failure in the
-    // database itself.
+    // If opening the database fails, show a message and stop automatic loading the database. If the opening fails,
+    // this could be due to wrong database information and/or failure in the database itself.
     if (!db.open())
     {
         QMessageBox::critical(this, tr("Datenbankverbindung"),
             tr("Die Datenbank konnte nicht geöffnet werden, überprüfen Sie ihre Einstellungen."));
-
         return false;
     }
 
@@ -140,8 +137,8 @@ void QMMainWindow::manageDatabase()
         closeDatabase();
     }
 
-    // The manage dialog will manipulate the data in QSqlDatabase. This is the buffer for the
-    // settings which will be saved in application settings afterwards.
+    // The manage dialog will manipulate the data in QSqlDatabase. This is the buffer for the settings which will be
+    // saved in application settings afterwards.
     QMDatabaseDialog databaseDialog("default", this);
     databaseDialog.exec();
 
@@ -155,8 +152,8 @@ void QMMainWindow::manageDatabase()
 
 void QMMainWindow::loadDatabaseFromSettings(const QString &dbName)
 {
-    // If a database with the name exist, remove it. This is needed, because the driver can only
-    // be set during object creation.
+    // If a database with the name exist, remove it. This is needed, because the driver can only be set during object
+    // creation.
     if (QSqlDatabase::contains(dbName))
     {
         closeDatabase();
@@ -213,8 +210,8 @@ void QMMainWindow::initAfterDatabaseOpened()
     auto db = QSqlDatabase::database("default", false);
     auto dm = QMDataManager::getInstance();
 
-    // If the version of the database doesn't fit the software version, show a message asking if
-    // the database should be updated or not.
+    // If the version of the database doesn't fit the software version, show a message asking if the database should
+    // be updated or not.
     if (!dm->testVersion(db))
     {
         auto resMb = QMessageBox::question(this, tr("Datenbank laden"),
@@ -235,18 +232,16 @@ void QMMainWindow::initAfterDatabaseOpened()
             return;
         }
 
-        // A database backup should only be run, when the database is a local one. On a remote
-        // database the administrator of the database system has to take care of backups. For now,
-        // only a database with the QSQLITE driver is a local one.
+        // A database backup should only be run, when the database is a local one. On a remote database the
+        // administrator of the database system has to take care of backups. For now, only a database with the QSQLITE
+        // driver is a local one.
         if (db.driverName() == "QSQLITE")
         {
             if (!saveSingleDatabaseBackup(db))
             {
                 QMessageBox::critical(this, tr("Datenbank-Backup"),
                     tr("Es konnte kein Backup erstellt werden. Da für eine Aktualisierung ein "
-                       "Backup notwendig ist, wird die Aktion abgebrochen und die Datenbank "
-                       "geschlossen."));
-
+                       "Backup notwendig ist, wird die Aktion abgebrochen und die Datenbank geschlossen."));
                 closeDatabase();
                 return;
             }
@@ -259,7 +254,6 @@ void QMMainWindow::initAfterDatabaseOpened()
                 tr("Die Datenbank konnte nicht vollständig aktualisiert werden. Der Fehler ist "
                    "kritisch. Bitte spielen Sie das vorher angelegte Backup ein. Die Datenbank "
                    "wird geschlossen und nicht weiter verarbeitet."));
-
             closeDatabase();
             return;
         }
@@ -271,14 +265,13 @@ void QMMainWindow::initAfterDatabaseOpened()
         }
     }
 
-    // After database has been loaded and version is ok, load the database models and informate
-    // the user about it.
+    // After database has been loaded and version is ok, load the database models and informate the user about it.
     dm->initializeModels(db);
     ui->statusbar->showMessage(tr("Datenbank verbunden"));
     setWindowTitle("QualificationMatrix - " + db.databaseName());
 
-    // Make an database backup from the auto system if wanted. Backup should only be run if the
-    // driver is QSQLITE, cause this one is file based.
+    // Make an database backup from the auto system if wanted. Backup should only be run if the driver is QSQLITE,
+    // cause this one is file based.
     auto &settings = QMApplicationSettings::getInstance();
     auto autoBackup = settings.read("Database/LocalAutoBackup", false).toBool();
 
@@ -286,9 +279,7 @@ void QMMainWindow::initAfterDatabaseOpened()
     {
         if (!runAutoBackup())
         {
-            QMessageBox::warning(this, tr("Backup"),
-                tr("Das Backup konnte nicht erfolgreich durchgeführt werden."));
-
+            QMessageBox::warning(this, tr("Backup"), tr("Das Backup konnte nicht erfolgreich durchgeführt werden."));
             return;
         }
     }
@@ -328,11 +319,10 @@ void QMMainWindow::beforeQualiMatrixBuildCache(int maxSteps)
     showProgress(tr("Qualifikationsmatrix"), tr("Cache aufbauen..."), 0, maxSteps);
 }
 
-void QMMainWindow::showProgress(const QString &title, const QString &text, const int &minSteps,
-    const int &maxSteps)
+void QMMainWindow::showProgress(const QString &title, const QString &text, const int &minSteps, const int &maxSteps)
 {
-    // The progress dialog object will be recreated on every use, cause it would show up by itself
-    // when ui does not react for view seconds (qt related).
+    // The progress dialog object will be recreated on every use, cause it would show up by itself when ui does not
+    // react for view seconds (qt related).
 
     if (progressDialog == nullptr)
     {
@@ -371,9 +361,8 @@ void QMMainWindow::afterInitModels()
 {
     closeProgress();
 
-    // All models are initialized now. The quali matrix models and the quali result models have
-    // action that might take a long time. Therefore each of them needs to be connected to
-    // functions showing progress dialogs.
+    // All models are initialized now. The quali matrix models and the quali result models have action that might take
+    // a long time. Therefore each of them needs to be connected to functions showing progress dialogs.
 
     // Create widgets.
     qualiResultWidget = std::make_unique<QMQualiResultWidget>();
@@ -451,9 +440,8 @@ bool QMMainWindow::runAutoBackup()
     if (!pathInfo.isDir() || !pathInfo.exists() || !pathInfo.isWritable())
     {
         QMessageBox::critical(this, tr("Backup anlegen"),
-            tr("Der angegebene Ordner in den Einstellungen ist kein Verzeichnis, "
+            tr("Der angegebene Ordner in den Einstellungen ist kein Verzeichnis,
                " existiert nicht oder ist nicht beschreibbar."));
-
         return false;
     }
 
@@ -468,9 +456,8 @@ bool QMMainWindow::runAutoBackup()
     backupDir.setSorting(QDir::Name);
     QFileInfoList backupFileList = backupDir.entryInfoList();
 
-    // If auto backup delete is on and too many backup files exist, delete the last x backups
-    // to fit the maximum number of backup counts. The files have a timestamp. Therefore the
-    // sorting is from oldest to newest.
+    // If auto backup delete is on and too many backup files exist, delete the last x backups to fit the maximum
+    // number of backup counts. The files have a timestamp. Therefore the sorting is from oldest to newest.
 
     auto varAutoBackupDelete = settings.read("Database/LocalAutoBackupDelete");
     auto autoBackupDelete = (varAutoBackupDelete.isNull()) ? false : varAutoBackupDelete.toBool();
@@ -578,8 +565,8 @@ void QMMainWindow::showSettings()
         return;
     }
 
-    // Reset text in filter, cause when the models will be updated by changed settings, it will
-    // reset the filter entries to the first model values.
+    // Reset text in filter, cause when the models will be updated by changed settings, it will reset the filter
+    // entries to the first model values.
 
     // For the quali matrix, the whole matrix needs to be reseted.
     qualiMatrixWidget->resetFilter();
@@ -587,8 +574,8 @@ void QMMainWindow::showSettings()
     qualiMatrixWidget->updateHeaderCache();
     qualiMatrixWidget->updateColors();
 
-    // For the quali result, reseting is not a good option, cause this might take a while. Instead
-    // the result should be reseted.
+    // For the quali result, reseting is not a good option, cause this might take a while. Instead the result should
+    // be reseted.
     qualiResultWidget->resetFilter();
     qualiResultWidget->resetModel();
 

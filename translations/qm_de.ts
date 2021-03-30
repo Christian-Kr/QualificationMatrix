@@ -1671,27 +1671,27 @@ Version:	</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualimatrix/qmqualimatrixwidget.cpp" line="92"/>
+        <location filename="../src/qualimatrix/qmqualimatrixwidget.cpp" line="91"/>
         <source> Jahr(e)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualimatrix/qmqualimatrixwidget.cpp" line="96"/>
+        <location filename="../src/qualimatrix/qmqualimatrixwidget.cpp" line="95"/>
         <source>Ja</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualimatrix/qmqualimatrixwidget.cpp" line="100"/>
+        <location filename="../src/qualimatrix/qmqualimatrixwidget.cpp" line="99"/>
         <source>Nein</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualimatrix/qmqualimatrixwidget.cpp" line="150"/>
+        <location filename="../src/qualimatrix/qmqualimatrixwidget.cpp" line="149"/>
         <source>Filter ausblenden</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/qualimatrix/qmqualimatrixwidget.cpp" line="154"/>
+        <location filename="../src/qualimatrix/qmqualimatrixwidget.cpp" line="153"/>
         <source>Filter einblenden</source>
         <translation type="unfinished"></translation>
     </message>
