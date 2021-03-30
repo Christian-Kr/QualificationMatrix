@@ -49,7 +49,15 @@ QMFuncSettingsWidget::~QMFuncSettingsWidget()
 void QMFuncSettingsWidget::saveSettings()
 {
     funcModel->submitAll();
-    funcGroupModel->submitAll();
+
+    if (funcGroupModel->isDirty())
+    {
+        funcGroupModel->submitAll();
+        funcModel->initModel();
+        funcModel->select();
+    }
+
+    updateTableView();
 }
 
 void QMFuncSettingsWidget::loadSettings()
@@ -73,14 +81,10 @@ void QMFuncSettingsWidget::updateData()
 
     // Set filter model.
     funcFilterModel->setSourceModel(funcModel.get());
-    funcFilterModel->setFilterKeyColumn(1);
 
     // Update the views.
     ui->tvFunc->setModel(funcFilterModel);
-    ui->tvFunc->hideColumn(0);
-
     ui->tvFuncGroups->setModel(funcGroupModel.get());
-    ui->tvFuncGroups->hideColumn(0);
 
     // Build connections of the new models.
     connect(
@@ -90,6 +94,13 @@ void QMFuncSettingsWidget::updateData()
         funcGroupModel.get(), &QAbstractItemModel::dataChanged, this,
         &QMSettingsWidget::settingsChanged
     );
+}
+
+void QMFuncSettingsWidget::updateTableView()
+{
+    funcFilterModel->setFilterKeyColumn(1);
+    ui->tvFunc->hideColumn(0);
+    ui->tvFuncGroups->hideColumn(0);
 }
 
 void QMFuncSettingsWidget::filterFunc()

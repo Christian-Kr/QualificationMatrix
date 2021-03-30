@@ -627,78 +627,78 @@ Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="130"/>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="147"/>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="163"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="135"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="152"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="168"/>
         <source>Mitarbeiterdetails</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="130"/>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="163"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="135"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="168"/>
         <source>Es muss genau ein Mitarbeiter in der Tabelle selektiert sein.
 
 Die Aktion wird abgebrochen!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="148"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="153"/>
         <source>Details sind für deaktivierte Mitarbeiter nicht erlaubt.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="181"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="186"/>
         <source>Mitarbeiter deaktivieren</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="182"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="187"/>
         <source>Ein deaktivierter Mitarbeiter kann nurnoch vom Administrator in der Datenbank aktiviert werden!
 
 Sind Sie sich sicher?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="201"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="206"/>
         <source>Mitarbeiter hinzufügen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="201"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="206"/>
         <source>Der Mitarbeiter konnt enciht hinzugefügt werden. Bitte informieren Sie den den Entwickler.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="213"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="218"/>
         <source>Name eingeben</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="227"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="232"/>
         <source>Gruppenname eingeben</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="243"/>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="269"/>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="281"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="248"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="274"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="286"/>
         <source>Mitarbeitergruppe löschen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="244"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="249"/>
         <source>Es wurde keine gültige Gruppe ausgewählt.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="270"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="275"/>
         <source>Es existieren Verweise auf die Gruppe in den Mitarbeiterdefinitionen. Bitte löschen Sie zuerst die entsprechenden Verweise oder ändern Sie deren Gruppenzugehörigkeit.
 
 Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="282"/>
+        <location filename="../src/settings/qmemployeesettingswidget.cpp" line="287"/>
         <source>Die Mitarbeitergruppe konnte aus einem unbekannten Grund nicht gelöscht werden. Bitte informieren Sie den Entwickler zur Fehlerbehebung.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -787,86 +787,86 @@ Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="106"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="117"/>
         <source>Funktion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="106"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="117"/>
         <source>Bevor eine Funktion hinzugefügt wird, muss eine Gruppe festgelegt werden.
 
 Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="127"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="138"/>
         <source>Funktionsname eingeben</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="143"/>
         <location filename="../src/settings/qmfuncsettingswidget.cpp" line="154"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="165"/>
         <source>Funktion löschen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="143"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="154"/>
         <source>Es wurde keine gültige Funktion ausgewählt.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="154"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="165"/>
         <source>Es existieren Verweise auf die Funktion in den anderen Tabellen. Bitte löschen Sie zuerst die entsprechenden Verweise oder ändern Sie deren Funktionszugehörigkeit.
 
 Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="167"/>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="247"/>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="272"/>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="284"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="178"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="258"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="283"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="295"/>
         <source>Funktionsgruppe löschen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="167"/>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="285"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="178"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="296"/>
         <source>Die Funktionsgruppe konnte aus einem unbekannten Grund nicht gelöscht werden. Bitte informieren Sie den Entwickler zur Fehlerbehebung.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="208"/>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="295"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="219"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="306"/>
         <source>Änderungen zurücksetzen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="209"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="220"/>
         <source>Alle temporären Änderungen an den Funktionen gehen verloren.
 
 Sind Sie sich sicher?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="231"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="242"/>
         <source>Gruppenname eingeben</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="247"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="258"/>
         <source>Es wurde keine gültige Gruppe ausgewählt.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="273"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="284"/>
         <source>Es existieren Verweise auf die Funktionsgruppe in den Funktiondefinitionen. Bitte löschen Sie zuerst die entsprechende Funktion oder ändern Sie deren Gruppenzugehörigkeit.
 
 Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="296"/>
+        <location filename="../src/settings/qmfuncsettingswidget.cpp" line="307"/>
         <source>Alle temporären Änderungen an den Funktiongruppen gehen verloren.
 
 Sind Sie sich sicher?</source>
@@ -2605,127 +2605,127 @@ Sind Sie sich sicher?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="129"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="137"/>
         <source>Schulung</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="129"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="137"/>
         <source>Bevor eine Schulung hinzugefügt wird, muss eine Gruppe festgelegt werden.
 
 Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="150"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="158"/>
         <source>Schulungsname eingeben</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="165"/>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="175"/>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="187"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="173"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="183"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="195"/>
         <source>Schulung löschen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="165"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="173"/>
         <source>Es wurde keine gültige Schulung ausgewählt.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="175"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="183"/>
         <source>Es existieren Verweise auf die Schulung in den anderen Tabellen. Bitte löschen Sie zuerst die entsprechenden Verweise oder ändern Sie deren Schulungszugehörigkeit.
 
 Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="187"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="195"/>
         <source>Die Schulung konnte aus einem unbekannten Grund nicht gelöscht werden. Bitte informieren Sie den Entwickler zur Fehlerbehebung.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="226"/>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="242"/>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="396"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="234"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="250"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="404"/>
         <source>Änderungen zurücksetzen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="226"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="234"/>
         <source>Alle temporären Änderungen an den Schulungen gehen verloren.
 
 Sind Sie sich sicher?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="242"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="250"/>
         <source>Alle temporären Änderungen an den Status gehen verloren.
 
 Sind Sie sich sicher?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="265"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="273"/>
         <source>Gruppenname eingeben</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="286"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="294"/>
         <source>Statusname eingeben</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="301"/>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="321"/>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="333"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="309"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="329"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="341"/>
         <source>Schulungsgruppe löschen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="301"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="309"/>
         <source>Es wurde keine gültige Gruppe ausgewählt.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="321"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="329"/>
         <source>Es existieren Verweise auf die Schulungsgruppe in den Schulungsdefinitionen. Bitte löschen Sie zuerst die entsprechende Schulung oder ändern Sie deren Gruppenzugehörigkeit.
 
 Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="333"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="341"/>
         <source>Die Schulungsgruppe konnte aus einem unbekannten Grund nicht gelöscht werden. Bitte informieren Sie den Entwickler zur Fehlerbehebung.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="349"/>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="372"/>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="384"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="357"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="380"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="392"/>
         <source>Schulungsstatus löschen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="350"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="358"/>
         <source>Es wurde kein gültiger Status ausgewählt.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="373"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="381"/>
         <source>Es existieren Verweise auf den Status in den Schulungsdaten. Bitte löschen Sie zuerst den entsprechende Schulungssatz oder ändern Sie deren Statuszugehörigkeit.
 
 Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="384"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="392"/>
         <source>Der Status konnte aus einem unbekannten Grund nicht gelöscht werden. Bitte informieren Sie den Entwickler zur Fehlerbehebung.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="396"/>
+        <location filename="../src/settings/qmtrainsettingswidget.cpp" line="404"/>
         <source>Alle temporären Änderungen an den Schulungsgruppen gehen verloren.
 
 Sind Sie sich sicher?</source>

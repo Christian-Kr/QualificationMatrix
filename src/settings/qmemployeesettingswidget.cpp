@@ -64,17 +64,13 @@ void QMEmployeeSettingsWidget::updateData()
     shiftModel = dm->getShiftModel();
 
     employeeActivatedFilterModel->setSourceModel(employeeModel.get());
-    employeeActivatedFilterModel->setFilterKeyColumn(3);
-
     employeeFilterModel->setSourceModel(employeeActivatedFilterModel);
-    employeeFilterModel->setFilterKeyColumn(1);
 
     // Update the views.
     ui->tvEmployee->setModel(employeeFilterModel);
-    ui->tvEmployee->hideColumn(0);
-
     ui->tvEmployeeGroups->setModel(shiftModel.get());
-    ui->tvEmployeeGroups->hideColumn(0);
+
+    updateTableView();
 
     // Build connections of the new models.
     connect(
@@ -82,6 +78,15 @@ void QMEmployeeSettingsWidget::updateData()
         &QMSettingsWidget::settingsChanged
     );
 }
+
+void QMEmployeeSettingsWidget::updateTableView()
+{
+    employeeActivatedFilterModel->setFilterKeyColumn(3);
+    employeeFilterModel->setFilterKeyColumn(1);
+    ui->tvEmployee->hideColumn(0);
+    ui->tvEmployeeGroups->hideColumn(0);
+}
+
 
 void QMEmployeeSettingsWidget::saveSettings()
 {

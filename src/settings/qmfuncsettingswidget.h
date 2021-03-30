@@ -20,6 +20,7 @@
 #include <QSortFilterProxyModel>
 
 // Forward declaration for faster compiling.
+class QMSqlRelationalTableModel;
 class QSqlRelationalTableModel;
 class QSqlTableModel;
 
@@ -60,6 +61,9 @@ public:
 
     /// Override from QMSettingsWidget.
     void loadSettings() override;
+
+    /// Update table view like setting hidden columns.
+    void updateTableView();
 
 public slots:
 
@@ -113,7 +117,7 @@ private:
 
     Ui::QMFuncSettingsWidget *ui;
 
-    std::shared_ptr<QSqlRelationalTableModel> funcModel;
+    std::shared_ptr<QMSqlRelationalTableModel> funcModel;
     std::shared_ptr<QSqlTableModel> funcGroupModel;
 
     QSortFilterProxyModel *funcFilterModel;

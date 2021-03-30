@@ -62,12 +62,16 @@ QMTrainSettingsWidget::~QMTrainSettingsWidget()
 void QMTrainSettingsWidget::saveSettings()
 {
     trainModel->submitAll();
-    trainGroupModel->submitAll();
     trainDataStateModel->submitAll();
 
-    // Other tables have to be updated.
-    QMDataManager::getInstance()->getQualiModel()->select();
-    QMDataManager::getInstance()->getTrainDataModel()->select();
+    if (trainGroupModel->isDirty())
+    {
+        trainGroupModel->submitAll();
+        trainModel->initModel();
+        trainModel->select();
+    }
+
+    updateTableView();
 }
 
 void QMTrainSettingsWidget::loadSettings()
@@ -94,18 +98,13 @@ void QMTrainSettingsWidget::updateData()
 
     // Set filter model.
     trainFilterModel->setSourceModel(trainModel.get());
-    trainFilterModel->setFilterKeyColumn(1);
 
     // Update the views.
     ui->tvTrain->setModel(trainFilterModel);
-    ui->tvTrain->hideColumn(0);
-    ui->tvTrain->setColumnWidth(5, 400);
-
     ui->tvTrainGroups->setModel(trainGroupModel.get());
-    ui->tvTrainGroups->hideColumn(0);
-
     ui->tvTrainState->setModel(trainDataStateModel.get());
-    ui->tvTrainState->hideColumn(0);
+
+    updateTableView();
 
     // Build connections of the new models.
     connect(trainModel.get(), &QAbstractItemModel::dataChanged, this,
@@ -114,6 +113,15 @@ void QMTrainSettingsWidget::updateData()
         &QMSettingsWidget::settingsChanged);
     connect(trainDataStateModel.get(), &QAbstractItemModel::dataChanged, this,
         &QMSettingsWidget::settingsChanged);
+}
+
+void QMTrainSettingsWidget::updateTableView()
+{
+    trainFilterModel->setFilterKeyColumn(1);
+    ui->tvTrain->setColumnWidth(5, 400);
+    ui->tvTrain->hideColumn(0);
+    ui->tvTrainGroups->hideColumn(0);
+    ui->tvTrainState->hideColumn(0);
 }
 
 void QMTrainSettingsWidget::filterTrain()

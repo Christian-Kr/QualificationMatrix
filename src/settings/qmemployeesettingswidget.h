@@ -55,6 +55,9 @@ public:
     /// Override from QMSettingsWidget.
     void loadSettings() override;
 
+    /// Update table view like setting hidden columns.
+    void updateTableView();
+
 public slots:
     /// Hide or show employees that are deactivated.
     /// \param state State of checkbox
