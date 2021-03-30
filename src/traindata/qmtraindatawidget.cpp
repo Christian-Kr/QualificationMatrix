@@ -43,8 +43,7 @@ QMTrainDataWidget::QMTrainDataWidget(QWidget *parent)
     ui->tvTrainData->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft);
 
     // Connect to data manager, to know when model reinitialization has been done.
-    connect(QMDataManager::getInstance(), &QMDataManager::modelsInitialized, this,
-        &QMTrainDataWidget::updateData);
+    connect(QMDataManager::getInstance(), &QMDataManager::modelsInitialized, this, &QMTrainDataWidget::updateData);
 
     // Default settings on start.
     ui->deDateFilterTo->setDate(QDate::currentDate());
@@ -93,29 +92,14 @@ void QMTrainDataWidget::updateData()
     trainDataCertModel = dm->getTrainDataCertificateModel();
     trainDataCertViewModel = dm->getTrainDataCertificateViewModel();
 
-    // Update the views.
+    // Set models to the corresponding view.
     ui->tvTrainData->setModel(trainDataModel.get());
-    ui->tvTrainData->hideColumn(0);
-    ui->tvTrainData->setItemDelegate(new QMProxySqlRelationalDelegate());
-    ui->tvTrainData->setItemDelegateForColumn(3, new DateDelegate());
-    ui->tvTrainData->selectionModel()->disconnect(this);
-    connect(ui->tvTrainData->selectionModel(), &QItemSelectionModel::selectionChanged, this,
-        &QMTrainDataWidget::trainDataSelectionChanged);
-
     ui->cbFilterEmployee->setModel(employeeModel.get());
-    ui->cbFilterEmployee->setModelColumn(1);
-
     ui->cbFilterTrain->setModel(trainModel.get());
-    ui->cbFilterTrain->setModelColumn(1);
-
     ui->cbFilterState->setModel(trainDataStateModel.get());
-    ui->cbFilterState->setModelColumn(1);
-
     ui->tvCertificates->setModel(trainDataCertViewModel.get());
-    ui->tvCertificates->hideColumn(0);
-    ui->tvCertificates->hideColumn(1);
-    ui->tvCertificates->hideColumn(2);
-    ui->tvCertificates->hideColumn(4);
+
+    updateTableView();
 
     // If have to many entries available, informa the user.
     trainDataModel->select();
@@ -125,6 +109,29 @@ void QMTrainDataWidget::updateData()
     }
 
     resetFilter();
+}
+
+void QMTrainDataWidget::updateTableView()
+{
+    ui->tvTrainData->hideColumn(0);
+    ui->tvTrainData->setItemDelegate(new QMProxySqlRelationalDelegate());
+    ui->tvTrainData->setItemDelegateForColumn(3, new DateDelegate());
+    ui->tvTrainData->selectionModel()->disconnect(this);
+
+    ui->tvTrainData->selectionModel()->disconnect(this);
+    connect(ui->tvTrainData->selectionModel(), &QItemSelectionModel::selectionChanged, this,
+        &QMTrainDataWidget::trainDataSelectionChanged);
+
+    ui->cbFilterEmployee->setModelColumn(1);
+
+    ui->cbFilterTrain->setModelColumn(1);
+
+    ui->cbFilterState->setModelColumn(1);
+
+    ui->tvCertificates->hideColumn(0);
+    ui->tvCertificates->hideColumn(1);
+    ui->tvCertificates->hideColumn(2);
+    ui->tvCertificates->hideColumn(4);
 }
 
 void QMTrainDataWidget::updateFilter()

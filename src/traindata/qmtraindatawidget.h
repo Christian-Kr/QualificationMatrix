@@ -43,6 +43,9 @@ public:
     /// Destructor
     ~QMTrainDataWidget() override;
 
+    /// Update the table view. Meaning to set hidden columns and delegators.
+    void updateTableView();
+
 public slots:
     /// Load settings.
     void loadSettings();

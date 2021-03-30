@@ -440,7 +440,7 @@ bool QMMainWindow::runAutoBackup()
     if (!pathInfo.isDir() || !pathInfo.exists() || !pathInfo.isWritable())
     {
         QMessageBox::critical(this, tr("Backup anlegen"),
-            tr("Der angegebene Ordner in den Einstellungen ist kein Verzeichnis,
+            tr("Der angegebene Ordner in den Einstellungen ist kein Verzeichnis,"
                " existiert nicht oder ist nicht beschreibbar."));
         return false;
     }
@@ -565,26 +565,29 @@ void QMMainWindow::showSettings()
         return;
     }
 
-    // Reset text in filter, cause when the models will be updated by changed settings, it will reset the filter
-    // entries to the first model values.
+    // There might the option, that several tables have been changed. This is mostly a problem for relation table,
+    // where some connected subtable has changed. They won't update due to how QSqlRelationalTableModel works. To
+    // update this subtables, every relational table has to be reinitialized.
 
-    // For the quali matrix, the whole matrix needs to be reseted.
-    qualiMatrixWidget->resetFilter();
-    qualiMatrixWidget->updateFilter();
+    // Reinitialize models, which related submodels might have changed.
+    auto dm = QMDataManager::getInstance();
+
+    dm->getQualiModel()->initModel();
+    dm->getQualiModel()->select();
+    dm->getQualiMatrixModel()->buildCache();
+
+    dm->getTrainDataModel()->initModel();
+    dm->getTrainDataModel()->select();
+
+    // Rebuild quali matrix widget.
     qualiMatrixWidget->updateHeaderCache();
     qualiMatrixWidget->updateColors();
+    qualiMatrixWidget->resetFilter();
 
-    // For the quali result, reseting is not a good option, cause this might take a while. Instead the result should
-    // be reseted.
+    trainDataWidget->updateTableView();
+    trainDataWidget->resetFilter();
+
     qualiResultWidget->resetFilter();
-    qualiResultWidget->resetModel();
-
-    // Update models, that might have been changed.
-    auto dm = QMDataManager::getInstance();
-    dm->getQualiModel()->initModel();
-    dm->getTrainDataModel()->initModel();
-    trainDataWidget->updateData();
-    trainDataWidget->update();
 }
 
 void QMMainWindow::manageCertificate()
