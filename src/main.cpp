@@ -93,8 +93,8 @@ void initApplicationStyle()
     QApplication::setStyle(style);
 }
 
-/// Install the translator into the qt application. If the loading or installing of the
-/// translation certificate fails, a warning message will be send for documentation.
+/// Install the translator into the qt application. If the loading or installing of the translation certificate fails,
+/// a warning message will be send for documentation.
 /// \param name The name of the translator certificate.
 /// \param path The path, where the tranaltor certificate could be found.
 void installTranslator(const QString &name, const QString &path)
