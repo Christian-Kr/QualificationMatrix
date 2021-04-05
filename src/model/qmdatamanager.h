@@ -122,7 +122,7 @@ public:
     sp_tableModel getTrainGroupModel() { return trainGroupModel; }
     sp_tableModel getTrainDataStateModel() { return trainDataStateModel; }
     sp_tableModel getFuncGroupModel() { return funcGroupModel; }
-    sp_relTableModel getEmployeeModel() { return employeeModel; }
+    sp_qmRelTableModel getEmployeeModel() { return employeeModel; }
     sp_relTableModel getEmployeeFuncModel() { return employeeFuncModel; }
     std::shared_ptr<QMQualiResultModel> getQualiResultModel() { return qualiResultModel; }
     std::shared_ptr<QMQualiMatrixModel> getQualiMatrixModel() { return qualiMatrixModel; }
@@ -157,7 +157,7 @@ private:
     sp_qmRelTableModel trainDataModel;
     sp_tableModel trainGroupModel;
     sp_tableModel funcGroupModel;
-    sp_relTableModel employeeModel;
+    sp_qmRelTableModel employeeModel;
     sp_relTableModel employeeFuncModel;
     sp_qmRelTableModel qualiModel;
     sp_relTableModel trainExceptionModel;

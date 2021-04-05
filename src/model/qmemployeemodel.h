@@ -14,11 +14,11 @@
 #ifndef QMEMPLOYEEMODEL_H
 #define QMEMPLOYEEMODEL_H
 
-#include <QSqlRelationalTableModel>
+#include "framework/qmsqlrelationaltablemodel.h"
 
 /// Employee table in sql.
 /// \author Christian Kr, Copyright 2020
-class QMEmployeeModel: public QSqlRelationalTableModel
+class QMEmployeeModel: public QMSqlRelationalTableModel
 {
 Q_OBJECT
 
@@ -38,6 +38,9 @@ public:
     /// \param index
     /// \return
     Qt::ItemFlags flags(const QModelIndex &index) const override;
+
+    /// Override from QMSqlRelationalTableModel.
+    void initModel() override;
 };
 
 #endif // QMEMPLOYEEMODEL_H

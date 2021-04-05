@@ -91,7 +91,13 @@ void QMEmployeeSettingsWidget::updateTableView()
 void QMEmployeeSettingsWidget::saveSettings()
 {
     employeeModel->submitAll();
-    shiftModel->submitAll();
+
+    if (shiftModel->isDirty())
+    {
+        shiftModel->submitAll();
+        employeeModel->initModel();
+        employeeModel->select();
+    }
 }
 
 void QMEmployeeSettingsWidget::loadSettings()
