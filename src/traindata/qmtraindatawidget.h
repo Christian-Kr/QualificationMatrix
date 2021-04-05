@@ -87,6 +87,17 @@ public slots:
     /// Show selected certificate.
     void showCert();
 
+    /// Set the training filter.
+    /// \param training
+    void setTrainFilter(QString training);
+
+    /// Set name filter.
+    /// \param name
+    void setNameFilter(QString name);
+
+    /// Clear filtering dates.
+    void clearDates();
+
 signals:
     /// There is a short message that should be displayed.
     /// \param msg

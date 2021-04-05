@@ -56,6 +56,9 @@ QMQualiResultWidget::QMQualiResultWidget(QWidget *parent)
     ui->tvQualiResult->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->cbTrainResultState->setCurrentText("");
 
+    // Connect to double click on table view.
+    connect(ui->tvQualiResult, &QTableView::doubleClicked, this, &QMQualiResultWidget::onDoubleClick);
+
     loadSettings();
 }
 
@@ -65,6 +68,14 @@ QMQualiResultWidget::~QMQualiResultWidget()
     saveSettings();
 
     delete ui;
+}
+
+void QMQualiResultWidget::onDoubleClick(const QModelIndex index)
+{
+    // Set focus to training data widget.
+    auto name = qualiResultModel->data(qualiResultModel->index(index.row(), 0), Qt::DisplayRole).toString();
+    auto training = qualiResultModel->data(qualiResultModel->index(index.row(), 2), Qt::DisplayRole).toString();
+    emit showTrainData(name, training);
 }
 
 void QMQualiResultWidget::saveSettings()
@@ -339,7 +350,7 @@ void QMQualiResultWidget::paintPdfRequest(QPrinter *printer)
                 format.setBackground(
                         QColor(settings.read("QualiResult/OkColor", "#ffffff").toString()));
             }
-            
+
             cell.setFormat(format);
 
             // First number column.

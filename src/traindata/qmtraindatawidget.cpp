@@ -162,6 +162,22 @@ void QMTrainDataWidget::resetFilter()
     ui->cbFilterState->setCurrentText("");
 }
 
+void QMTrainDataWidget::setTrainFilter(QString training)
+{
+    ui->cbFilterTrain->setCurrentText(training);
+}
+
+void QMTrainDataWidget::setNameFilter(QString name)
+{
+    ui->cbFilterEmployee->setCurrentText(name);
+}
+
+void QMTrainDataWidget::clearDates()
+{
+    ui->deDateFilterFrom->clear();
+    ui->deDateFilterTo->clear();
+}
+
 void QMTrainDataWidget::addSingleEntry()
 {
     if (trainModel->rowCount() < 1 || employeeModel->rowCount() < 1)

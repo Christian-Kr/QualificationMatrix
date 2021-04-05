@@ -107,6 +107,13 @@ public slots:
     /// Show extended filter dialog for train data state.
     void extSelTrainDataState();
 
+    /// Reaction when there is a double click on an element.
+    void onDoubleClick(const QModelIndex index);
+
+signals:
+    /// Emited when the corresponding train data entry should be shown.
+    void showTrainData(QString name, QString training);
+
 private:
     /// Create printer for pdf.
     /// \param printer The printer object to draw an.
