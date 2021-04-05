@@ -90,7 +90,13 @@ void QMEmployeeSettingsWidget::updateTableView()
 
 void QMEmployeeSettingsWidget::saveSettings()
 {
-    employeeModel->submitAll();
+    if (employeeModel->isDirty())
+    {
+        employeeModel->submitAll();
+
+        auto dm = QMDataManager::getInstance();
+        dm->getEmployeeViewModel()->select();
+    }
 
     if (shiftModel->isDirty())
     {
