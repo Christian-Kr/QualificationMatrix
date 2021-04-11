@@ -907,6 +907,11 @@ Sind Sie sich sicher?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../ui/qmgeneralsettingswidget.ui" line="34"/>
+        <source>Style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../ui/qmgeneralsettingswidget.ui" line="80"/>
         <source>Sprache:</source>
         <translation type="unfinished"></translation>
@@ -914,6 +919,11 @@ Sind Sie sich sicher?</source>
     <message>
         <location filename="../ui/qmgeneralsettingswidget.ui" line="112"/>
         <source>Letzte Datenbank automatisch laden</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmgeneralsettingswidget.ui" line="119"/>
+        <source>&amp;Zentralisierte Einstellung</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -925,21 +935,6 @@ Sind Sie sich sicher?</source>
         <location filename="../ui/qmgeneralsettingswidget.ui" line="158"/>
         <location filename="../ui/qmgeneralsettingswidget.ui" line="223"/>
         <source>Auswählen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/qmgeneralsettingswidget.ui" line="249"/>
-        <source>Anzahl Backups</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/qmgeneralsettingswidget.ui" line="34"/>
-        <source>Style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/qmgeneralsettingswidget.ui" line="119"/>
-        <source>&amp;Zentralisierte Einstellung</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -955,6 +950,11 @@ Sind Sie sich sicher?</source>
     <message>
         <location filename="../ui/qmgeneralsettingswidget.ui" line="213"/>
         <source>Verzeichnis:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmgeneralsettingswidget.ui" line="249"/>
+        <source>Anzahl Backups</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1515,6 +1515,11 @@ Version:	</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../ui/qmqualimatrixsettingswidget.ui" line="35"/>
+        <source>Höhe der horizontalen Leiste</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../ui/qmqualimatrixsettingswidget.ui" line="81"/>
         <source>Höhe der vertikalen Leiste</source>
         <translation type="unfinished"></translation>
@@ -1527,11 +1532,6 @@ Version:	</source>
     <message>
         <location filename="../ui/qmqualimatrixsettingswidget.ui" line="170"/>
         <source>Farbe der Selektion</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/qmqualimatrixsettingswidget.ui" line="35"/>
-        <source>Höhe der horizontalen Leiste</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1554,18 +1554,12 @@ Version:	</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="376"/>
-        <source>Funktion</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="369"/>
-        <source>Schulung</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="115"/>
-        <source>Funktionsgruppe</source>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="73"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="140"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="200"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="260"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="317"/>
+        <source>Zurücksetzen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1581,25 +1575,6 @@ Version:	</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="383"/>
-        <source>Schulungsgruppe</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="362"/>
-        <source>Rechtlich notwendige Einträge</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="73"/>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="140"/>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="200"/>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="260"/>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="317"/>
-        <source>Zurücksetzen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../ui/qmqualimatrixwidget.ui" line="93"/>
         <location filename="../ui/qmqualimatrixwidget.ui" line="160"/>
         <location filename="../ui/qmqualimatrixwidget.ui" line="220"/>
@@ -1608,8 +1583,33 @@ Version:	</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="115"/>
+        <source>Funktionsgruppe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../ui/qmqualimatrixwidget.ui" line="337"/>
         <source>Aktualisieren</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="362"/>
+        <source>Rechtlich notwendige Einträge</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="369"/>
+        <source>Schulung</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="376"/>
+        <source>Funktion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="383"/>
+        <source>Schulungsgruppe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1623,50 +1623,50 @@ Version:	</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="546"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="549"/>
         <source>Schulung - Details</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="564"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="567"/>
         <source>Name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="571"/>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="598"/>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="689"/>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="716"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="574"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="601"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="692"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="719"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="591"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="594"/>
         <source>Rechtlicht notwendig:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="615"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="618"/>
         <source>Inhalte:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="649"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="652"/>
         <source>Schließen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="652"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="655"/>
         <source>Ctrl+I</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="682"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="685"/>
         <source>Gruppe:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualimatrixwidget.ui" line="709"/>
+        <location filename="../ui/qmqualimatrixwidget.ui" line="712"/>
         <source>Intervall:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1747,8 +1747,23 @@ Version:	</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualiresultsettingswidget.ui" line="167"/>
-        <source>Farbe für Status &quot;Schlecht&quot;:</source>
+        <location filename="../ui/qmqualiresultsettingswidget.ui" line="20"/>
+        <source>Ignoriere &amp;Schulungsgruppen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmqualiresultsettingswidget.ui" line="39"/>
+        <source>Text:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmqualiresultsettingswidget.ui" line="49"/>
+        <source>Hinzufügen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmqualiresultsettingswidget.ui" line="56"/>
+        <source>Entfernen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1762,23 +1777,8 @@ Version:	</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualiresultsettingswidget.ui" line="39"/>
-        <source>Text:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/qmqualiresultsettingswidget.ui" line="20"/>
-        <source>Ignoriere &amp;Schulungsgruppen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/qmqualiresultsettingswidget.ui" line="49"/>
-        <source>Hinzufügen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/qmqualiresultsettingswidget.ui" line="56"/>
-        <source>Entfernen</source>
+        <location filename="../ui/qmqualiresultsettingswidget.ui" line="167"/>
+        <source>Farbe für Status &quot;Schlecht&quot;:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1821,8 +1821,24 @@ Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../ui/qmqualiresultwidget.ui" line="60"/>
+        <source>Fi&amp;lter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../ui/qmqualiresultwidget.ui" line="67"/>
         <source>Mitarbeiter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmqualiresultwidget.ui" line="92"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="159"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="226"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="273"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="338"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="405"/>
+        <location filename="../ui/qmqualiresultwidget.ui" line="478"/>
+        <source>Zurücksetzen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1840,21 +1856,6 @@ Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualiresultwidget.ui" line="248"/>
-        <source>Funktion</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/qmqualiresultwidget.ui" line="201"/>
-        <source>Schulung</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/qmqualiresultwidget.ui" line="134"/>
-        <source>Mitarbeitergruppe</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../ui/qmqualiresultwidget.ui" line="112"/>
         <location filename="../ui/qmqualiresultwidget.ui" line="179"/>
         <location filename="../ui/qmqualiresultwidget.ui" line="358"/>
@@ -1863,8 +1864,18 @@ Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualiresultwidget.ui" line="60"/>
-        <source>Fi&amp;lter</source>
+        <location filename="../ui/qmqualiresultwidget.ui" line="134"/>
+        <source>Mitarbeitergruppe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmqualiresultwidget.ui" line="201"/>
+        <source>Schulung</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmqualiresultwidget.ui" line="248"/>
+        <source>Funktion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1894,24 +1905,13 @@ Die Aktion wird abgebrochen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmqualiresultwidget.ui" line="92"/>
-        <location filename="../ui/qmqualiresultwidget.ui" line="159"/>
-        <location filename="../ui/qmqualiresultwidget.ui" line="226"/>
-        <location filename="../ui/qmqualiresultwidget.ui" line="273"/>
-        <location filename="../ui/qmqualiresultwidget.ui" line="338"/>
-        <location filename="../ui/qmqualiresultwidget.ui" line="405"/>
-        <location filename="../ui/qmqualiresultwidget.ui" line="478"/>
-        <source>Zurücksetzen</source>
+        <location filename="../ui/qmqualiresultwidget.ui" line="498"/>
+        <source>Aktualisieren</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/qmqualiresultwidget.ui" line="540"/>
         <source>Filtern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/qmqualiresultwidget.ui" line="498"/>
-        <source>Aktualisieren</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2141,14 +2141,6 @@ Sind Sie sich sicher?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/qmsigninglistdialog.ui" line="187"/>
-        <location filename="../ui/qmsigninglistdialog.ui" line="229"/>
-        <location filename="../ui/qmsigninglistdialog.ui" line="258"/>
-        <location filename="../ui/qmsigninglistdialog.ui" line="275"/>
-        <source>...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../ui/qmsigninglistdialog.ui" line="148"/>
         <source>Gruppe</source>
         <translation type="unfinished"></translation>
@@ -2156,6 +2148,14 @@ Sind Sie sich sicher?</source>
     <message>
         <location filename="../ui/qmsigninglistdialog.ui" line="180"/>
         <source>Einzel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/qmsigninglistdialog.ui" line="187"/>
+        <location filename="../ui/qmsigninglistdialog.ui" line="229"/>
+        <location filename="../ui/qmsigninglistdialog.ui" line="258"/>
+        <location filename="../ui/qmsigninglistdialog.ui" line="275"/>
+        <source>...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2243,11 +2243,6 @@ Sind Sie sich sicher?</source>
 <context>
     <name>QMSigningListDocument</name>
     <message>
-        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="68"/>
-        <source>Unterweisungsprotokoll</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="56"/>
         <source>Unterweisung am: %1</source>
         <translation type="unfinished"></translation>
@@ -2265,6 +2260,11 @@ Sind Sie sich sicher?</source>
     <message>
         <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="62"/>
         <source>Unterschrift:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/signinglist/qmsigninglistdocument.cpp" line="68"/>
+        <source>Unterweisungsprotokoll</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
