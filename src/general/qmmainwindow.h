@@ -119,6 +119,11 @@ public slots:
     /// Show dialog for certificate integrity check.
     void showCertificateIntegrityCheck();
 
+    /// Show the training data widget with the given filter name and training.
+    /// \param name
+    /// \param training
+    void showTrainingData(QString name, QString training);
+
 protected:
     /// Override from QMainWindow. This function will be called on closeing the widget.
     /// \param event The close event object that will be created.

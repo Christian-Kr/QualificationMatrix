@@ -397,6 +397,8 @@ void QMMainWindow::afterInitModels()
     connect(trainDataWidget.get(), &QMTrainDataWidget::warnMessageAvailable, ui->laInfo,
         &QMInfoLabel::showWarnMessage);
 
+    connect(qualiResultWidget.get(), &QMQualiResultWidget::showTrainData, this, &QMMainWindow::showTrainingData);
+
     // Set up the widgets.
     qualiResultWidget->updateData();
     ui->twQualiMatrix->addTab(qualiResultWidget.get(), tr("Qualifizierungsergebnis"));
@@ -588,6 +590,16 @@ void QMMainWindow::showSettings()
     trainDataWidget->resetFilter();
 
     qualiResultWidget->resetFilter();
+}
+
+void QMMainWindow::showTrainingData(QString name, QString training)
+{
+    ui->twQualiMatrix->setCurrentIndex(2);
+
+    trainDataWidget->resetFilter();
+    trainDataWidget->setNameFilter(name);
+    trainDataWidget->setTrainFilter(training);
+    trainDataWidget->updateFilter();
 }
 
 void QMMainWindow::manageCertificate()
