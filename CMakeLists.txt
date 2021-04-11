@@ -27,7 +27,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOUIC_SEARCH_PATHS ui)
 
-find_package(Qt5 COMPONENTS LinguistTools Widgets Sql PrintSupport REQUIRED)
+find_package(Qt5 5.15 COMPONENTS LinguistTools Widgets Sql PrintSupport REQUIRED)
 
 # Add application icon for windows.
 set(APP_ICON_RESOURCE_WINDOWS "qm_res.rc")

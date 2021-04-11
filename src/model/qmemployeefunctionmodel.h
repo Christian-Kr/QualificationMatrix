@@ -14,20 +14,22 @@
 #ifndef QMEMPLOYEEFUNCTIONMODEL_H
 #define QMEMPLOYEEFUNCTIONMODEL_H
 
-#include <QSqlRelationalTableModel>
+#include "framework/qmsqlrelationaltablemodel.h"
 
 /// Employee function relation table in sql.
 /// \author Christian Kr, Copyright 2020
-class QMEmployeeFunctionModel: public QSqlRelationalTableModel
+class QMEmployeeFunctionModel: public QMSqlRelationalTableModel
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /// Constructor - Override from QSqlRelationalTableModel.
     /// \param parent
     /// \param db
-    explicit QMEmployeeFunctionModel(
-        QObject *parent = nullptr, const QSqlDatabase &db = QSqlDatabase());
+    explicit QMEmployeeFunctionModel(QObject *parent = nullptr, const QSqlDatabase &db = QSqlDatabase());
+
+    /// Override from QMSqlRelationalTableModel.
+    void initModel() override;
 };
 
 #endif // QMEMPLOYEEFUNCTIONMODEL_H

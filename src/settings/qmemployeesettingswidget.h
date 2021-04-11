@@ -17,9 +17,10 @@
 #include "qmsettingswidget.h"
 
 #include <memory>
-#include <QSortFilterProxyModel>
+#include "framework/qmsqlrelationaltablemodel.h"
 
-// Forward declaration for faster compiling.
+class QMSqlRelationalTableModel;
+class QSortFilterProxyModel;
 class QSqlRelationalTableModel;
 class QSqlTableModel;
 
@@ -28,13 +29,11 @@ namespace Ui
 class QMEmployeeSettingsWidget;
 }
 
-/**
- * @brief Shows a configuration widget for employee data.
- * @author Christian Kr, Copyright 2020
- */
+/// Shows a configuration widget for employee data.
+/// \author Christian Kr, Copyright 2020
 class QMEmployeeSettingsWidget: public QMSettingsWidget
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /// Constructor
@@ -90,7 +89,7 @@ public slots:
 private:
     Ui::QMEmployeeSettingsWidget *ui;
 
-    std::shared_ptr<QSqlRelationalTableModel> employeeModel;
+    std::shared_ptr<QMSqlRelationalTableModel> employeeModel;
     std::shared_ptr<QSqlTableModel> shiftModel;
 
     QSortFilterProxyModel *employeeFilterModel;

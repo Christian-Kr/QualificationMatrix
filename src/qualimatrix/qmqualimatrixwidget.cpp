@@ -220,12 +220,11 @@ void QMQualiMatrixWidget::resetFilter()
 
 void QMQualiMatrixWidget::updateHeaderCache()
 {
-    auto verticalHeader = dynamic_cast<QMQualiMatrixHeaderView *>(
-        ui->tvQualiMatrix->verticalHeader());
+    auto verticalHeader = dynamic_cast<QMQualiMatrixHeaderView *>(ui->tvQualiMatrix->verticalHeader());
     verticalHeader->updateFunctionGroupColors();
     verticalHeader->updateTrainingGroupColors();
-    auto horizontalHeader = dynamic_cast<QMQualiMatrixHeaderView *>(
-        ui->tvQualiMatrix->horizontalHeader());
+
+    auto horizontalHeader = dynamic_cast<QMQualiMatrixHeaderView *>(ui->tvQualiMatrix->horizontalHeader());
     horizontalHeader->updateTrainingGroupColors();
     horizontalHeader->updateFunctionGroupColors();
     horizontalHeader->updateTrainLegallyNecessary();
