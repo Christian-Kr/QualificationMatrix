@@ -212,7 +212,7 @@ void QMMainWindow::initAfterDatabaseOpened()
 
     // If the version of the database doesn't fit the software version, show a message asking if the database should
     // be updated or not.
-    if (!dm->testVersion(db))
+    if (!QMDataManager::testVersion(db))
     {
         auto resMb = QMessageBox::question(this, tr("Datenbank laden"),
             tr("Die Version der Datenbank entspricht nicht der Vorgabe. Möchten Sie versuchen"

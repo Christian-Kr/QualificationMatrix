@@ -1,4 +1,4 @@
-// main.cpp is part of QualificationMatrix
+﻿// main.cpp is part of QualificationMatrix
 //
 // QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of the GNU General
 // Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
@@ -207,13 +207,13 @@ int main(int argc, char *argv[])
     }
 
     // Create application and main window object.
-    QApplication a(argc, argv);
+    QApplication app(argc, argv);
     qInstallMessageHandler(customMessageHandler);
     initApplicationTranslation();
     initApplicationStyle();
 
-    QMMainWindow w;
-    initShowMainWindow(w);
+    QMMainWindow win;
+    initShowMainWindow(win);
 
     return QApplication::exec();
 }
