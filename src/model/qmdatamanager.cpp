@@ -140,7 +140,6 @@ void QMDataManager::initializeModels(QSqlDatabase &db)
     emit updateInitModels(7);
 
     employeeFuncModel = std::make_shared<QMEmployeeFunctionModel>(nullptr, db);
-    employeeFuncModel->initModel();
     employeeFuncModel->select();
 
     emit updateInitModels(8);
