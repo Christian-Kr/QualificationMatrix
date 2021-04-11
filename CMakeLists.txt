@@ -35,8 +35,7 @@ set(APP_ICON_RESOURCE_WINDOWS "qm_res.rc")
 # ---------------------------------------------------------------------------------------------------------------------
 # Translation
 
-set(TS_FILES ${CMAKE_CURRENT_SOURCE_DIR}/translations/qm_de.ts ${CMAKE_CURRENT_SOURCE_DIR}/translations/qm_en.ts)
-
+set(TS_FILES ${CMAKE_CURRENT_SOURCE_DIR}/trans/qm_de.ts ${CMAKE_CURRENT_SOURCE_DIR}/trans/qm_en.ts)
 qt5_add_translation(QM_FILES ${TS_FILES})
 
 # ---------------------------------------------------------------------------------------------------------------------
