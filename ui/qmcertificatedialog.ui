@@ -22,7 +22,7 @@
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../icons.qrc">
+        <iconset resource="../rcs/icons.qrc">
          <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
        </property>
        <property name="iconSize">
@@ -56,7 +56,7 @@
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../icons.qrc">
+        <iconset resource="../rcs/icons.qrc">
          <normaloff>:/icons/icons/view-filter.svg</normaloff>:/icons/icons/view-filter.svg</iconset>
        </property>
        <property name="iconSize">
@@ -87,7 +87,7 @@
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../icons.qrc">
+        <iconset resource="../rcs/icons.qrc">
          <normaloff>:/icons/icons/list-add.svg</normaloff>:/icons/icons/list-add.svg</iconset>
        </property>
        <property name="iconSize">
@@ -104,7 +104,7 @@
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../icons.qrc">
+        <iconset resource="../rcs/icons.qrc">
          <normaloff>:/icons/icons/list-remove.svg</normaloff>:/icons/icons/list-remove.svg</iconset>
        </property>
        <property name="iconSize">
@@ -121,7 +121,7 @@
         <string>...</string>
        </property>
        <property name="icon">
-        <iconset resource="../icons.qrc">
+        <iconset resource="../rcs/icons.qrc">
          <normaloff>:/icons/icons/document-preview-archive.svg</normaloff>:/icons/icons/document-preview-archive.svg</iconset>
        </property>
        <property name="iconSize">
@@ -160,7 +160,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../icons.qrc"/>
+  <include location="../rcs/icons.qrc"/>
  </resources>
  <connections>
   <connection>

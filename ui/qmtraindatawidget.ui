@@ -53,7 +53,7 @@
           <string>Zurücksetzen</string>
          </property>
          <property name="icon">
-          <iconset resource="../icons.qrc">
+          <iconset resource="../rcs/icons.qrc">
            <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
          </property>
          <property name="iconSize">
@@ -152,7 +152,7 @@
           <string>Filtern</string>
          </property>
          <property name="icon">
-          <iconset resource="../icons.qrc">
+          <iconset resource="../rcs/icons.qrc">
            <normaloff>:/icons/icons/view-filter.svg</normaloff>:/icons/icons/view-filter.svg</iconset>
          </property>
          <property name="iconSize">
@@ -288,7 +288,7 @@
               <string>Eintrag hinzufügen</string>
              </property>
              <property name="icon">
-              <iconset resource="../icons.qrc">
+              <iconset resource="../rcs/icons.qrc">
                <normaloff>:/icons/icons/list-add.svg</normaloff>:/icons/icons/list-add.svg</iconset>
              </property>
              <property name="iconSize">
@@ -308,7 +308,7 @@
               <string>Ausgewählte löschen</string>
              </property>
              <property name="icon">
-              <iconset resource="../icons.qrc">
+              <iconset resource="../rcs/icons.qrc">
                <normaloff>:/icons/icons/list-remove.svg</normaloff>:/icons/icons/list-remove.svg</iconset>
              </property>
              <property name="iconSize">
@@ -325,7 +325,7 @@
               <string>...</string>
              </property>
              <property name="icon">
-              <iconset resource="../icons.qrc">
+              <iconset resource="../rcs/icons.qrc">
                <normaloff>:/icons/icons/view-list-details.svg</normaloff>:/icons/icons/view-list-details.svg</iconset>
              </property>
              <property name="iconSize">
@@ -345,7 +345,7 @@
               <string>CSV importieren</string>
              </property>
              <property name="icon">
-              <iconset resource="../icons.qrc">
+              <iconset resource="../rcs/icons.qrc">
                <normaloff>:/icons/icons/text-csv.svg</normaloff>:/icons/icons/text-csv.svg</iconset>
              </property>
              <property name="iconSize">
@@ -390,7 +390,7 @@
          <set>QDockWidget::DockWidgetClosable</set>
         </property>
         <property name="windowTitle">
-         <string>Schulungsnachweise</string>
+         <string>S&amp;chulungsnachweise</string>
         </property>
         <widget class="QWidget" name="dockWidgetContents">
          <layout class="QGridLayout" name="gridLayout_3">
@@ -444,7 +444,7 @@
                  <string>...</string>
                 </property>
                 <property name="icon">
-                 <iconset resource="../icons.qrc">
+                 <iconset resource="../rcs/icons.qrc">
                   <normaloff>:/icons/icons/list-add.svg</normaloff>:/icons/icons/list-add.svg</iconset>
                 </property>
                 <property name="iconSize">
@@ -461,7 +461,7 @@
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../icons.qrc">
+                 <iconset resource="../rcs/icons.qrc">
                   <normaloff>:/icons/icons/list-remove.svg</normaloff>:/icons/icons/list-remove.svg</iconset>
                 </property>
                 <property name="iconSize">
@@ -481,7 +481,7 @@
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../icons.qrc">
+                 <iconset resource="../rcs/icons.qrc">
                   <normaloff>:/icons/icons/document-preview-archive.svg</normaloff>:/icons/icons/document-preview-archive.svg</iconset>
                 </property>
                 <property name="iconSize">
@@ -532,7 +532,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../icons.qrc"/>
+  <include location="../rcs/icons.qrc"/>
  </resources>
  <connections>
   <connection>

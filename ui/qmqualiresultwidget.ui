@@ -37,7 +37,7 @@
       </property>
       <property name="minimumSize">
        <size>
-        <width>300</width>
+        <width>317</width>
         <height>572</height>
        </size>
       </property>
@@ -95,7 +95,7 @@
              <string>...</string>
             </property>
             <property name="icon">
-             <iconset resource="../icons.qrc">
+             <iconset resource="../rcs/icons.qrc">
               <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
             </property>
             <property name="iconSize">
@@ -115,7 +115,7 @@
              <string>...</string>
             </property>
             <property name="icon">
-             <iconset resource="../icons.qrc">
+             <iconset resource="../rcs/icons.qrc">
               <normaloff>:/icons/icons/view-list-details.svg</normaloff>:/icons/icons/view-list-details.svg</iconset>
             </property>
             <property name="iconSize">
@@ -162,7 +162,7 @@
              <string>...</string>
             </property>
             <property name="icon">
-             <iconset resource="../icons.qrc">
+             <iconset resource="../rcs/icons.qrc">
               <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
             </property>
             <property name="iconSize">
@@ -182,7 +182,7 @@
              <string>...</string>
             </property>
             <property name="icon">
-             <iconset resource="../icons.qrc">
+             <iconset resource="../rcs/icons.qrc">
               <normaloff>:/icons/icons/view-list-details.svg</normaloff>:/icons/icons/view-list-details.svg</iconset>
             </property>
             <property name="iconSize">
@@ -229,7 +229,7 @@
              <string>...</string>
             </property>
             <property name="icon">
-             <iconset resource="../icons.qrc">
+             <iconset resource="../rcs/icons.qrc">
               <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
             </property>
             <property name="iconSize">
@@ -276,7 +276,7 @@
              <string>...</string>
             </property>
             <property name="icon">
-             <iconset resource="../icons.qrc">
+             <iconset resource="../rcs/icons.qrc">
               <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
             </property>
             <property name="iconSize">
@@ -341,7 +341,7 @@
              <string>...</string>
             </property>
             <property name="icon">
-             <iconset resource="../icons.qrc">
+             <iconset resource="../rcs/icons.qrc">
               <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
             </property>
             <property name="iconSize">
@@ -361,7 +361,7 @@
              <string>...</string>
             </property>
             <property name="icon">
-             <iconset resource="../icons.qrc">
+             <iconset resource="../rcs/icons.qrc">
               <normaloff>:/icons/icons/view-list-details.svg</normaloff>:/icons/icons/view-list-details.svg</iconset>
             </property>
             <property name="iconSize">
@@ -408,7 +408,7 @@
              <string>...</string>
             </property>
             <property name="icon">
-             <iconset resource="../icons.qrc">
+             <iconset resource="../rcs/icons.qrc">
               <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
             </property>
             <property name="iconSize">
@@ -428,7 +428,7 @@
              <string>...</string>
             </property>
             <property name="icon">
-             <iconset resource="../icons.qrc">
+             <iconset resource="../rcs/icons.qrc">
               <normaloff>:/icons/icons/view-list-details.svg</normaloff>:/icons/icons/view-list-details.svg</iconset>
             </property>
             <property name="iconSize">
@@ -478,7 +478,7 @@
              <string>Zurücksetzen</string>
             </property>
             <property name="icon">
-             <iconset resource="../icons.qrc">
+             <iconset resource="../rcs/icons.qrc">
               <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
             </property>
             <property name="iconSize">
@@ -498,7 +498,7 @@
              <string>Aktualisieren</string>
             </property>
             <property name="icon">
-             <iconset resource="../icons.qrc">
+             <iconset resource="../rcs/icons.qrc">
               <normaloff>:/icons/icons/update-none.svg</normaloff>:/icons/icons/update-none.svg</iconset>
             </property>
             <property name="iconSize">
@@ -540,7 +540,7 @@
             <string>Filtern</string>
            </property>
            <property name="icon">
-            <iconset resource="../icons.qrc">
+            <iconset resource="../rcs/icons.qrc">
              <normaloff>:/icons/icons/view-filter.svg</normaloff>:/icons/icons/view-filter.svg</iconset>
            </property>
            <property name="iconSize">
@@ -573,7 +573,7 @@
             <string>CSV</string>
            </property>
            <property name="icon">
-            <iconset resource="../icons.qrc">
+            <iconset resource="../rcs/icons.qrc">
              <normaloff>:/icons/icons/text-csv.svg</normaloff>:/icons/icons/text-csv.svg</iconset>
            </property>
            <property name="iconSize">
@@ -593,7 +593,7 @@
             <string>PDF</string>
            </property>
            <property name="icon">
-            <iconset resource="../icons.qrc">
+            <iconset resource="../rcs/icons.qrc">
              <normaloff>:/icons/icons/application-pdf.svg</normaloff>:/icons/icons/application-pdf.svg</iconset>
            </property>
            <property name="iconSize">
@@ -639,7 +639,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../icons.qrc"/>
+  <include location="../rcs/icons.qrc"/>
  </resources>
  <connections>
   <connection>

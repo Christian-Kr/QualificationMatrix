@@ -76,7 +76,7 @@
             <string>Hinzufügen</string>
            </property>
            <property name="icon">
-            <iconset resource="../icons.qrc">
+            <iconset resource="../rcs/icons.qrc">
              <normaloff>:/icons/icons/list-add.svg</normaloff>:/icons/icons/list-add.svg</iconset>
            </property>
            <property name="iconSize">
@@ -102,7 +102,7 @@
             <string>Entfernen</string>
            </property>
            <property name="icon">
-            <iconset resource="../icons.qrc">
+            <iconset resource="../rcs/icons.qrc">
              <normaloff>:/icons/icons/list-remove.svg</normaloff>:/icons/icons/list-remove.svg</iconset>
            </property>
            <property name="iconSize">
@@ -266,7 +266,7 @@
             <string>Hinzufügen</string>
            </property>
            <property name="icon">
-            <iconset resource="../icons.qrc">
+            <iconset resource="../rcs/icons.qrc">
              <normaloff>:/icons/icons/list-add.svg</normaloff>:/icons/icons/list-add.svg</iconset>
            </property>
            <property name="iconSize">
@@ -298,7 +298,7 @@
             <string>Entfernen</string>
            </property>
            <property name="icon">
-            <iconset resource="../icons.qrc">
+            <iconset resource="../rcs/icons.qrc">
              <normaloff>:/icons/icons/list-remove.svg</normaloff>:/icons/icons/list-remove.svg</iconset>
            </property>
            <property name="iconSize">
@@ -345,7 +345,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../icons.qrc"/>
+  <include location="../rcs/icons.qrc"/>
  </resources>
  <connections>
   <connection>

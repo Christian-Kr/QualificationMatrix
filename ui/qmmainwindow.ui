@@ -20,7 +20,7 @@
    <string>QualificationMatrix</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../icons.qrc">
+   <iconset resource="../rcs/icons.qrc">
     <normaloff>:/icons/icons/qm.svg</normaloff>:/icons/icons/qm.svg</iconset>
   </property>
   <property name="documentMode">
@@ -83,7 +83,7 @@
      <x>0</x>
      <y>0</y>
      <width>874</width>
-     <height>30</height>
+     <height>34</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_Datei">
@@ -160,7 +160,7 @@
   </action>
   <action name="actManageDatabase">
    <property name="icon">
-    <iconset resource="../icons.qrc">
+    <iconset resource="../rcs/icons.qrc">
      <normaloff>:/icons/icons/opendatabase.svg</normaloff>:/icons/icons/opendatabase.svg</iconset>
    </property>
    <property name="text">
@@ -199,7 +199,7 @@
   </action>
   <action name="actSettings">
    <property name="icon">
-    <iconset resource="../icons.qrc">
+    <iconset resource="../rcs/icons.qrc">
      <normaloff>:/icons/icons/properties.svg</normaloff>:/icons/icons/properties.svg</iconset>
    </property>
    <property name="text">
@@ -240,7 +240,7 @@
   </action>
   <action name="actManageCertificate">
    <property name="icon">
-    <iconset resource="../icons.qrc">
+    <iconset resource="../rcs/icons.qrc">
      <normaloff>:/icons/icons/mail-attachment.svg</normaloff>:/icons/icons/mail-attachment.svg</iconset>
    </property>
    <property name="text">
@@ -257,7 +257,7 @@
   </action>
   <action name="actCreateSigningList">
    <property name="icon">
-    <iconset resource="../icons.qrc">
+    <iconset resource="../rcs/icons.qrc">
      <normaloff>:/icons/icons/traindata.svg</normaloff>:/icons/icons/traindata.svg</iconset>
    </property>
    <property name="text">
@@ -273,7 +273,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../icons.qrc"/>
+  <include location="../rcs/icons.qrc"/>
  </resources>
  <connections>
   <connection>

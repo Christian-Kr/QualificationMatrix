@@ -30,7 +30,7 @@ set(CMAKE_AUTOUIC_SEARCH_PATHS ui)
 find_package(Qt5 5.15 COMPONENTS LinguistTools Widgets Sql PrintSupport REQUIRED)
 
 # Add application icon for windows.
-set(APP_ICON_RESOURCE_WINDOWS "qm_res.rc")
+set(APP_ICON_RESOURCE_WINDOWS "rcs/qm_res.rc")
 
 # ---------------------------------------------------------------------------------------------------------------------
 # Translation
@@ -45,7 +45,7 @@ qt5_add_translation(QM_FILES ${TS_FILES})
 file(GLOB_RECURSE SRCS src/*.h src/*.cpp)
 file(GLOB_RECURSE UIS ui/*.ui)
 
-add_executable(QualificationMatrix WIN32 icons.qrc ${SRCS} ${UIS} ${APP_ICON_RESOURCE_WINDOWS})
+add_executable(QualificationMatrix WIN32 rcs/icons.qrc ${SRCS} ${UIS} ${APP_ICON_RESOURCE_WINDOWS})
 target_link_libraries(QualificationMatrix Qt5::Widgets Qt5::Sql Qt5::PrintSupport)
 
 # -------------------------------------------------------------------------------------------------
