@@ -38,25 +38,6 @@ set(APP_ICON_RESOURCE_WINDOWS "qm_res.rc")
 set(TS_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/translations/qm_de.ts
     ${CMAKE_CURRENT_SOURCE_DIR}/translations/qm_en.ts)
-file(GLOB_RECURSE TS_SOURCES "*.cpp" "*.h" "*.ui")
-
-# Add a custom translation target. ts files will only be updated if explicitly wanted.
-add_custom_target(translations)
-
-foreach (_ts_file ${TS_FILES})
-    get_filename_component(_ts_name ${_ts_file} NAME_WE)
-    add_custom_command(
-        OUTPUT "${_ts_file}"
-        DEPENDS ${TS_SOURCES}
-        COMMAND ${Qt5_LUPDATE_EXECUTABLE} -recursive
-        ${CMAKE_CURRENT_SOURCE_DIR} -ts ${_ts_file})
-
-    # create a target that depends on the generated files
-    add_custom_target(translate_${_ts_name} DEPENDS ${_ts_file})
-
-    # attach the custom target for this ts certificate to the parent target
-    add_dependencies(translations translate_${_ts_name})
-endforeach ()
 
 qt5_add_translation(QM_FILES ${TS_FILES})
 
