@@ -1,4 +1,4 @@
-// applicationcache.cpp is part of QualificationMatrix
+// appcache.cpp is part of QualificationMatrix
 //
 // QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of the GNU General
 // Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
@@ -11,19 +11,19 @@
 // You should have received a copy of the GNU General Public License along with QualificationMatrix.
 // If not, see <http://www.gnu.org/licenses/>.
 
-#include "applicationcache.h"
+#include "appcache.h"
 
 #include <QString>
 #include <QFileInfo>
 #include <QDir>
 
-ApplicationCache::ApplicationCache(QObject *parent)
+AppCache::AppCache(QObject *parent)
     : QObject(parent)
     , sourcePath(std::make_unique<QString>())
     , targetPath(std::make_unique<QString>())
 {}
 
-bool ApplicationCache::updateCache()
+bool AppCache::updateCache()
 {
     if (sourcePath == nullptr || targetPath == nullptr)
     {
@@ -38,6 +38,5 @@ bool ApplicationCache::updateCache()
         return false;
     }
 
-    // TODO: Complete update the cache. Therefore a file format needs to be created, which includes the files that need
-    // to be copied to the new place.
+    // TODO: Complete update the cache.
 }

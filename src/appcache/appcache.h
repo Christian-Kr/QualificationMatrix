@@ -1,4 +1,4 @@
-// applicationcache.h is part of QualificationMatrix
+// applcache.h is part of QualificationMatrix
 //
 // QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of the GNU General
 // Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
@@ -11,22 +11,22 @@
 // You should have received a copy of the GNU General Public License along with QualificationMatrix.
 // If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef QUALIFICATIONMATRIX_APPLICATIONCACHE_H
-#define QUALIFICATIONMATRIX_APPLICATIONCACHE_H
+#ifndef QUALIFICATIONMATRIX_APPCACHE_H
+#define QUALIFICATIONMATRIX_APPCACHE_H
 
 #include <QObject>
 #include <memory>
 
 /// Create a local cache of the application. This will increase performance of application usage.
 /// \author Christian Kr, Copyright 2021
-class ApplicationCache: public QObject
+class AppCache: public QObject
 {
     Q_OBJECT
 
 public:
     /// Constructor and destructor
     /// \param parent
-    explicit ApplicationCache(QObject *parent = nullptr);
+    explicit AppCache(QObject *parent = nullptr);
 
     /// Run an update of the application cache from the source to the target.
     /// \return True if update was successful, else false.
@@ -54,4 +54,4 @@ private:
 };
 
 
-#endif // QUALIFICATIONMATRIX_APPLICATIONCACHE_H
+#endif // QUALIFICATIONMATRIX_APPCACHE_H
