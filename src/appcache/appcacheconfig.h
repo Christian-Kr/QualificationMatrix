@@ -39,5 +39,4 @@ public:
     virtual QString version() = 0;
 };
 
-
 #endif //QUALIFICATIONMATRIX_APPCACHECONFIG_H

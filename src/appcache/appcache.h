@@ -53,5 +53,4 @@ private:
     std::unique_ptr<QString> targetPath;
 };
 
-
 #endif // QUALIFICATIONMATRIX_APPCACHE_H
