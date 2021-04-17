@@ -25,6 +25,10 @@ public:
     /// \param parent
     explicit AppCacheConfig(QObject *parent = nullptr);
 
+    /// Name of the derived object. The name should be clear to the file format.
+    /// \return Unique name to identifier which file format will be supported.
+    virtual QString getName() = 0;
+
     /// Parse file.
     /// \param fileName The file to open and parse.
     /// \return False if something went wrong, else true.

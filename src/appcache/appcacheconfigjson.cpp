@@ -16,3 +16,18 @@
 AppCacheConfigJSON::AppCacheConfigJSON(QObject *parent)
     : AppCacheConfig(parent)
 {}
+
+bool AppCacheConfigJSON::parse(QString fileName)
+{
+    // TODO: Parse json file.
+}
+
+QList<QString> AppCacheConfigJSON::getCacheFiles()
+{
+    // TODO: Get all files that should be cached.
+}
+
+QString AppCacheConfigJSON::version()
+{
+    // TODO: Get the version of the config, defining the version of the application that should be cached.
+}

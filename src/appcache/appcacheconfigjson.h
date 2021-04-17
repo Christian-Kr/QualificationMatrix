@@ -26,6 +26,23 @@ public:
     /// Constructor
     /// \param parent
     explicit AppCacheConfigJSON(QObject *parent = nullptr);
+
+    /// Overrides from AppCacheConfig.
+    /// \return
+    QString getName() override { return "JSON"; }
+
+    /// Overrides from AppCacheConfig.
+    /// \param fileName
+    /// \return
+    bool parse(QString fileName) override;
+
+    /// Overrides from AppCacheConfig.
+    /// \return
+    QList<QString> getCacheFiles() override;
+
+    /// Overrides from AppCacheConfig.
+    /// \return
+    QString version();
 };
 
 #endif //QUALIFICATIONMATRIX_APPCACHECONFIGJSON_H
