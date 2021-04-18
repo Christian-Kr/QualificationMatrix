@@ -42,7 +42,7 @@ public:
 
     /// Overrides from AppCacheConfig.
     /// \return
-    QString version();
+    QString version() override;
 };
 
 #endif //QUALIFICATIONMATRIX_APPCACHECONFIGJSON_H

@@ -13,13 +13,47 @@
 
 #include "appcacheconfigjson.h"
 
+#include <memory>
+#include <QJsonDocument>
+#include <QFileInfo>
+#include <QFile>
+#include <QJsonParseError>
+
 AppCacheConfigJSON::AppCacheConfigJSON(QObject *parent)
     : AppCacheConfig(parent)
 {}
 
 bool AppCacheConfigJSON::parse(QString fileName)
 {
-    // TODO: Parse json file.
+    if (!QFileInfo::exists(fileName))
+    {
+        // TODO: Error string handling.
+        return false;
+    }
+
+    QFile file;
+    file.setFileName(fileName);
+
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        // TODO: Error string handling.
+        return false;
+    }
+
+    auto content = file.readAll();
+    file.close();
+
+    std::unique_ptr<QJsonParseError> parseError = std::make_unique<QJsonParseError>();
+    QJsonDocument doc = QJsonDocument::fromJson(content, parseError.get());
+
+    if (parseError->error != QJsonParseError::NoError)
+    {
+        // TODO: Error string handling.
+        return false;
+    }
+
+    // At least, a document needs one array for the files and one object with the version number.
+
 }
 
 QList<QString> AppCacheConfigJSON::getCacheFiles()
