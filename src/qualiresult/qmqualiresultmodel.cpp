@@ -124,10 +124,7 @@ bool QMQualiResultModel::updateQualiInfo(const QString &filterName, const QStrin
     for (int i = 0; i < filterEmployeeModel.rowCount(); i++)
     {
         // Informate listener.
-        if (i % 20 == 0)
-        {
-            emit updateUpdateQualiInfo(i);
-        }
+        emit updateUpdateQualiInfo(i);
 
         // Build new data structure.
         QString name = filterEmployeeModel.data(filterEmployeeModel.index(i, 1)).toString();
@@ -307,13 +304,13 @@ bool QMQualiResultModel::updateQualiInfo(const QString &filterName, const QStrin
                     record->setTrainingState(tr("Gut"));
                 }
 
-                beginInsertRows(
-                    index(resultRecords->size(), 0), resultRecords->size(), resultRecords->size());
                 resultRecords->append(record);
-                endInsertRows();
             }
         }
     }
+
+    beginInsertRows(QModelIndex(), 0, resultRecords->size() - 1);
+    endInsertRows();
 
     employeeFuncModel->setFilter("");
     qualiModel->setFilter("");
