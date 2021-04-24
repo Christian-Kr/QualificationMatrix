@@ -334,16 +334,11 @@ void QMQualiResultWidget::paintPdfRequest(QPrinter *printer)
             }
 
             // For better readability fill the whole row with state color.
-            auto state = model->data(model->index(i, 7 - 1)).toString();
+            auto state = model->data(model->index(i, 8 - 1)).toString();
             if (state == "Schlecht")
             {
                 format.setBackground(
                         QColor(settings.read("QualiResult/BadColor", "#ffffff").toString()));
-            }
-            else if (state == "Ausreichend")
-            {
-                format.setBackground(
-                        QColor(settings.read("QualiResult/EnoughColor", "#ffffff").toString()));
             }
             else if (state == "Gut")
             {
