@@ -244,29 +244,43 @@ bool QMQualiResultModel::updateQualiInfo(
                     record->setNextDate(nextDate.toString(Qt::ISODate));
                 }
 
-                int intervall = getIntervallFromTrain(train);
-                record->setInterval(intervall);
+                int interval = getIntervallFromTrain(train);
+                record->setInterval(interval);
 
-                // Training state
-                if (qualiState != "Pflicht" || (lastDate.isValid() && intervall == 0))
+                // Training state: Can only be good or bad. There should nothing exist inbetween. If a qualiState is a
+                // must have following conditions make the training state bad:
+                // - Last date is not valid: There must be one training conducted.
+                // - There is one conducted training, but it is too many years ago.
+                if (qualiState == tr("Pflicht"))
                 {
-                    record->setTrainingState("Gut");
-                }
-                else
-                {
-                    int yearDiff = QDate::currentDate().year() - lastDate.addYears(intervall).year();
-                    if (yearDiff == 0)
+                    auto currDate = QDate::currentDate();
+
+                    if (lastDate.isValid())
                     {
-                        record->setTrainingState("Ausreichend");
-                    }
-                    else if (yearDiff > 0)
-                    {
-                        record->setTrainingState("Schlecht");
+                        if (interval == 0)
+                        {
+                            record->setTrainingState(tr("Gut"));
+                        }
+                        else
+                        {
+                            if (lastDate.addYears(interval) < currDate)
+                            {
+                                record->setTrainingState(tr("Schlecht"));
+                            }
+                            else
+                            {
+                                record->setTrainingState(tr("Gut"));
+                            }
+                        }
                     }
                     else
                     {
-                        record->setTrainingState("Gut");
+                        record->setTrainingState(tr("Schlecht"));
                     }
+                }
+                else
+                {
+                    record->setTrainingState(tr("Gut"));
                 }
 
                 beginInsertRows(
@@ -313,9 +327,9 @@ QVariant QMQualiResultModel::headerData(int section, Qt::Orientation orientation
             case 6:
                 return tr("Nächste Schulung");
             case 7:
-                return tr("Status");
-            case 8:
                 return tr("Schulungsstatus");
+            case 8:
+                return tr("Information");
         }
     }
     else
