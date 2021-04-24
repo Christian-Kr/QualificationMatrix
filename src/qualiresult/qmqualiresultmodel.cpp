@@ -244,18 +244,8 @@ bool QMQualiResultModel::updateQualiInfo(
                     record->setNextDate(nextDate.toString(Qt::ISODate));
                 }
 
-//                // Next date
                 int intervall = getIntervallFromTrain(train);
                 record->setInterval(intervall);
-//
-//                if (intervall == 0 && date.isValid())
-//                {
-//                    record->setNextDate("Keine Notwendigkeit!");
-//                }
-//                else
-//                {
-//                    record->setNextDate(date.addYears(intervall).toString(Qt::ISODate));
-//                }
 
                 // Training state
                 if (qualiState != "Pflicht" || (lastDate.isValid() && intervall == 0))
