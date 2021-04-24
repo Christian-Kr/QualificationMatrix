@@ -196,9 +196,11 @@ bool QMQualiResultModel::updateQualiInfo(
                 trainDataModel->setFilter("relTblAl_1.name='" + name + "'");
 
                 // Final date and state objects.
-                QDate date;
+                QDate lastDate;
+                QDate nextDate;
                 QString trainDataState;
 
+                // Search for a training data entry, that fits the searched train to get a record.
                 for (int l = 0; l < trainDataModel->rowCount(); l++)
                 {
                     QString trainDataEntry = trainDataModel->data(trainDataModel->index(l, 2)).toString();
@@ -210,52 +212,59 @@ bool QMQualiResultModel::updateQualiInfo(
                         // Get and set the date and train data state.
                         QString strDate = trainDataModel->data(trainDataModel->index(l, 3)).toString();
                         QDate tmpDate = QDate::fromString(strDate, Qt::ISODate);
+                        trainDataState = trainDataModel->data(trainDataModel->index(l, 4)).toString();
 
-                        if (date.isNull())
+                        // Logic: There two different states. The training could have been conducted or registered. For
+                        // both states, the newest date are the relevant ones.
+                        if (trainDataState == tr("Angemeldet"))
                         {
-                            date = tmpDate;
-                            trainDataState = trainDataModel->data(trainDataModel->index(l, 4)).toString();
-                        }
-                        else
-                        {
-                            if (tmpDate > date)
+                            if (nextDate.isNull() || tmpDate > nextDate)
                             {
-                                date = tmpDate;
-                                trainDataState = trainDataModel->data(trainDataModel->index(l, 4)).toString();
+                                nextDate = tmpDate;
+                            }
+                        }
+
+                        if (trainDataState == tr("Durchgeführt"))
+                        {
+                            if (lastDate.isNull() || tmpDate > lastDate)
+                            {
+                                lastDate = tmpDate;
                             }
                         }
                     }
                 }
 
-                if (date.isValid())
+                if (lastDate.isValid())
                 {
-                    record->setLastDate(date.toString(Qt::ISODate));
-                    record->setTrainingDataState(trainDataState);
-                }
-                else
-                {
-                    record->setLastDate("Nicht vorhanden!");
+                    record->setLastDate(lastDate.toString(Qt::ISODate));
                 }
 
-                // Next date
+                if (nextDate.isValid())
+                {
+                    record->setNextDate(nextDate.toString(Qt::ISODate));
+                }
+
+//                // Next date
                 int intervall = getIntervallFromTrain(train);
-                if (intervall == 0 && date.isValid())
-                {
-                    record->setNextDate("Keine Notwendigkeit!");
-                }
-                else
-                {
-                    record->setNextDate(date.addYears(intervall).toString(Qt::ISODate));
-                }
+                record->setInterval(intervall);
+//
+//                if (intervall == 0 && date.isValid())
+//                {
+//                    record->setNextDate("Keine Notwendigkeit!");
+//                }
+//                else
+//                {
+//                    record->setNextDate(date.addYears(intervall).toString(Qt::ISODate));
+//                }
 
                 // Training state
-                if (qualiState != "Pflicht" || (date.isValid() && intervall == 0))
+                if (qualiState != "Pflicht" || (lastDate.isValid() && intervall == 0))
                 {
                     record->setTrainingState("Gut");
                 }
                 else
                 {
-                    int yearDiff = QDate::currentDate().year() - date.addYears(intervall).year();
+                    int yearDiff = QDate::currentDate().year() - lastDate.addYears(intervall).year();
                     if (yearDiff == 0)
                     {
                         record->setTrainingState("Ausreichend");
@@ -306,14 +315,16 @@ QVariant QMQualiResultModel::headerData(int section, Qt::Orientation orientation
             case 2:
                 return tr("Schulung");
             case 3:
-                return tr("Notwendigkeit");
+                return tr("Intervall");
             case 4:
-                return tr("Letzte Schulung");
+                return tr("Notwendigkeit");
             case 5:
-                return tr("Nächste Schulung");
+                return tr("Letzte Schulung");
             case 6:
-                return tr("Status");
+                return tr("Nächste Schulung");
             case 7:
+                return tr("Status");
+            case 8:
                 return tr("Schulungsstatus");
         }
     }
@@ -344,7 +355,7 @@ int QMQualiResultModel::rowCount(const QModelIndex &) const
 
 int QMQualiResultModel::columnCount(const QModelIndex &) const
 {
-    return 8;
+    return 9;
 }
 
 QVariant QMQualiResultModel::data(const QModelIndex &index, int role) const
@@ -366,14 +377,23 @@ QVariant QMQualiResultModel::data(const QModelIndex &index, int role) const
             case 2:
                 return resultRecords->at(row)->getTraining();
             case 3:
-                return resultRecords->at(row)->getQualiState();
+                if (resultRecords->at(row)->getInterval() == 0)
+                {
+                    return tr("Einmalig");
+                }
+                else
+                {
+                    return tr("%1 Jahr(e)").arg(resultRecords->at(row)->getInterval());
+                }
             case 4:
-                return resultRecords->at(row)->getLastDate();
+                return resultRecords->at(row)->getQualiState();
             case 5:
-                return resultRecords->at(row)->getNextDate();
+                return resultRecords->at(row)->getLastDate();
             case 6:
-                return resultRecords->at(row)->getTrainingState();
+                return resultRecords->at(row)->getNextDate();
             case 7:
+                return resultRecords->at(row)->getTrainingState();
+            case 8:
                 return resultRecords->at(row)->getTrainingDataState();
         }
 
@@ -382,19 +402,19 @@ QVariant QMQualiResultModel::data(const QModelIndex &index, int role) const
 
     if (role == Qt::BackgroundRole)
     {
-        if (index.column() == 6 && index.data().toString() == "Schlecht")
+        if (index.column() == 7 && index.data().toString() == "Schlecht")
         {
             QMApplicationSettings &settings = QMApplicationSettings::getInstance();
             QString badColor = settings.read("QualiResult/BadColor", "#ffffff").toString();
             return QVariant(QColor(badColor));
         }
-        if (index.column() == 6 && index.data().toString() == "Gut")
+        if (index.column() == 7 && index.data().toString() == "Gut")
         {
             QMApplicationSettings &settings = QMApplicationSettings::getInstance();
             QString okColor = settings.read("QualiResult/OkColor", "#ffffff").toString();
             return QVariant(QColor(okColor));
         }
-        if (index.column() == 6 && index.data().toString() == "Ausreichend")
+        if (index.column() == 7 && index.data().toString() == "Ausreichend")
         {
             QMApplicationSettings &settings = QMApplicationSettings::getInstance();
             QString enoughColor = settings.read("QualiResult/EnoughColor", "#ffffff").toString();

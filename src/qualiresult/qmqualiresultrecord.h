@@ -60,6 +60,9 @@ public:
     void setTrainingState(const QString &tState) { trainState = tState; }
     QString getTrainingState() const { return trainState; }
 
+    void setInterval(const int interv) { this->interval = interv; }
+    int getInterval() const { return interval; }
+
 private:
     QString firstName;
     QString lastName;
@@ -70,6 +73,7 @@ private:
     QString lastDate;
     QString trainState;
     QString trainDataState;
+    int interval;
 
     bool vital;
 };
