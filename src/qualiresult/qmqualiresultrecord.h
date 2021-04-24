@@ -63,7 +63,11 @@ public:
     void setInterval(const int interv) { this->interval = interv; }
     int getInterval() const { return interval; }
 
+    void setInformation(const QString &info) { information = info; }
+    QString getInformation() { return information; }
+
 private:
+    QString information;
     QString firstName;
     QString lastName;
     QString func;

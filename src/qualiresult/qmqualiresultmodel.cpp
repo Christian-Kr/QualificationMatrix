@@ -143,6 +143,12 @@ bool QMQualiResultModel::updateQualiInfo(
                 QString train = qualiModel->data(qualiModel->index(k, 2)).toString();
                 QString qualiState = qualiModel->data(qualiModel->index(k, 3)).toString();
 
+                // Ignore, if there is no qualiState.
+                if (qualiState.isEmpty())
+                {
+                    continue;
+                }
+
                 // Ignore if filtered or global filtered in settings.
                 if ((!filterTrain.isEmpty() && !train.contains(filterTrain)) ||
                     (doIgnore && ignoreList.contains(train)))
@@ -266,6 +272,7 @@ bool QMQualiResultModel::updateQualiInfo(
                             if (lastDate.addYears(interval) < currDate)
                             {
                                 record->setTrainingState(tr("Schlecht"));
+                                record->setInformation(tr("Schulung planen!"));
                             }
                             else
                             {
@@ -276,6 +283,7 @@ bool QMQualiResultModel::updateQualiInfo(
                     else
                     {
                         record->setTrainingState(tr("Schlecht"));
+                        record->setInformation(tr("Schulung planen!"));
                     }
                 }
                 else
@@ -398,7 +406,7 @@ QVariant QMQualiResultModel::data(const QModelIndex &index, int role) const
             case 7:
                 return resultRecords->at(row)->getTrainingState();
             case 8:
-                return resultRecords->at(row)->getTrainingDataState();
+                return resultRecords->at(row)->getInformation();
         }
 
         return resultRecords->at(index.row())->getFirstName();
