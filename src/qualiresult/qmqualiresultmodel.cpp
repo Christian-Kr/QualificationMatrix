@@ -124,7 +124,10 @@ bool QMQualiResultModel::updateQualiInfo(const QString &filterName, const QStrin
     for (int i = 0; i < filterEmployeeModel.rowCount(); i++)
     {
         // Informate listener.
-        emit updateUpdateQualiInfo(i);
+        if (i % 20 == 0)
+        {
+            emit updateUpdateQualiInfo(i);
+        }
 
         // Build new data structure.
         QString name = filterEmployeeModel.data(filterEmployeeModel.index(i, 1)).toString();
