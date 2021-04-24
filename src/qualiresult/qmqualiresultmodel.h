@@ -129,6 +129,12 @@ private:
     /// \return Any number if row found, else < 0.
     int qualiStateRowFromFuncTrain(const int &funcRow, const int &trainRow) const;
 
+    /// Build an interval cache to speed up search.
+    void buildIntervalCache();
+
+    /// Build an train group cache to speed up search.
+    void buildTrainGroupCache();
+
     std::shared_ptr<QSqlRelationalTableModel> funcModel;
     std::shared_ptr<QSqlRelationalTableModel> trainModel;
     std::shared_ptr<QSqlRelationalTableModel> trainDataModel;
@@ -142,6 +148,8 @@ private:
     QString trainFilter;
 
     QList<QMQualiResultRecord *> *resultRecords;
+    QHash<QString, int> *intervalCache;
+    QHash<QString, QString> *trainGroupCache;
 };
 
 #endif // QMQUALIRESULTMODEL_H

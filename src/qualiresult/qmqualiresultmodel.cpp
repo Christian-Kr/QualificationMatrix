@@ -25,15 +25,23 @@
 #include <QDate>
 #include <QColor>
 #include <QSortFilterProxyModel>
+#include <QHash>
 
 #include <QDebug>
 
 QMQualiResultModel::QMQualiResultModel(QObject *parent)
-    : QAbstractTableModel(parent), funcModel(nullptr), trainModel(nullptr), trainDataModel(nullptr),
-    qualiModel(nullptr), employeeModel(nullptr), employeeFuncModel(nullptr),
-    trainExceptionModel(nullptr), resultRecords(new QList<QMQualiResultRecord *>())
-{
-}
+    : QAbstractTableModel(parent)
+    , funcModel(nullptr)
+    , trainModel(nullptr)
+    , trainDataModel(nullptr)
+    , qualiModel(nullptr)
+    , employeeModel(nullptr)
+    , employeeFuncModel(nullptr)
+    , trainExceptionModel(nullptr)
+    , resultRecords(new QList<QMQualiResultRecord *>())
+    , intervalCache(new QHash<QString, int>())
+    , trainGroupCache(new QHash<QString, QString>())
+{}
 
 void QMQualiResultModel::updateModels()
 {
@@ -46,9 +54,6 @@ void QMQualiResultModel::updateModels()
     employeeFuncModel = dm->getEmployeeFuncModel();
     trainDataModel = dm->getTrainDataModel();
     trainExceptionModel = dm->getTrainExceptionModel();
-
-    //    emit headerDataChanged(Qt::Orientation::Horizontal, 0, trainModel->rowCount() - 1);
-    //    emit headerDataChanged(Qt::Orientation::Vertical, 0, funcModel->rowCount() - 1);
 }
 
 void QMQualiResultModel::setEmployeeFilter(const QString &filter)
@@ -80,16 +85,15 @@ void QMQualiResultModel::resetModel()
     endRemoveRows();
 }
 
-bool QMQualiResultModel::updateQualiInfo(
-    const QString &filterName, const QString &filterFunc, const QString &filterTrain,
-    const QString &filterEmployeeGroup)
+bool QMQualiResultModel::updateQualiInfo(const QString &filterName, const QString &filterFunc,
+    const QString &filterTrain, const QString &filterEmployeeGroup)
 {
-    // This function will create its own model copies, for working with data. The data only need
-    // to be read, which reduces possible conflicts. All data gathered will be cached inside this
-    // model. That means, the model objects can be deleted after building the model here.
+    // This function will create its own model copies, for working with data. The data only need to be read, which
+    // reduces possible conflicts. All data gathered will be cached inside this model. That means, the model objects
+    // can be deleted after building the model here.
 
-    if (funcModel == nullptr || trainModel == nullptr || employeeModel == nullptr ||
-        employeeFuncModel == nullptr || qualiModel == nullptr || trainDataModel == nullptr)
+    if (funcModel == nullptr || trainModel == nullptr || employeeModel == nullptr || employeeFuncModel == nullptr ||
+        qualiModel == nullptr || trainDataModel == nullptr)
     {
         return false;
     }
@@ -104,9 +108,11 @@ bool QMQualiResultModel::updateQualiInfo(
     filterEmployeeModel.setFilterKeyColumn(1);
     filterEmployeeModel.setFilterRegExp(filterName);
 
-    qDebug() << filterEmployeeModel.rowCount();
-
     resetModel();
+
+    // Rebuild caches.
+    buildIntervalCache();
+    buildTrainGroupCache();
 
     // Informate listener.
     emit beforeUpdateQualiInfo(filterEmployeeModel.rowCount());
@@ -159,17 +165,14 @@ bool QMQualiResultModel::updateQualiInfo(
                 // General filter in settings für ignoring trainings and training groups.
                 if (doIgnore)
                 {
-                    QString trainGroup;
-                    for (int l = 0; l < trainModel->rowCount(); l++)
+                    if (trainGroupCache->contains(train))
                     {
-                        if (trainModel->data(trainModel->index(l, 1)).toString() == train)
+                        QString trainGroup = trainGroupCache->value(train);
+
+                        if (!trainGroup.isEmpty() && ignoreList.contains(trainGroup))
                         {
-                            trainGroup = trainModel->data(trainModel->index(l, 2)).toString();
+                            continue;
                         }
-                    }
-                    if (!trainGroup.isEmpty() && ignoreList.contains(trainGroup))
-                    {
-                        continue;
                     }
                 }
 
@@ -250,7 +253,17 @@ bool QMQualiResultModel::updateQualiInfo(
                     record->setNextDate(nextDate.toString(Qt::ISODate));
                 }
 
-                int interval = getIntervallFromTrain(train);
+                int interval = -1;
+                if (intervalCache->contains(train))
+                {
+                    interval = intervalCache->value(train);
+                }
+
+                if (interval < 0)
+                {
+                    qDebug() << "This should never happen. No training with this name found for interval";
+                }
+
                 record->setInterval(interval);
 
                 // Training state: Can only be good or bad. There should nothing exist inbetween. If a qualiState is a
@@ -454,6 +467,37 @@ int QMQualiResultModel::qualiStateRowFromFuncTrain(const int &funcRow, const int
     }
 
     return -1;
+}
+
+void QMQualiResultModel::buildIntervalCache()
+{
+    // Clear all data in cache.
+    intervalCache->clear();
+
+    for (int i = 0; i < trainModel->rowCount(); i++)
+    {
+        QString name = trainModel->data(trainModel->index(i, 1)).toString();
+        if (!intervalCache->contains(name))
+        {
+            intervalCache->insert(name, trainModel->data(trainModel->index(i, 3)).toInt());
+        }
+    }
+}
+
+void QMQualiResultModel::buildTrainGroupCache()
+{
+    // Clear all data in cache.
+    trainGroupCache->clear();
+
+    for (int i = 0; i < trainModel->rowCount(); i++)
+    {
+        QString name = trainModel->data(trainModel->index(i, 1)).toString();
+        QString group = trainModel->data(trainModel->index(i, 2)).toString();
+        if (!trainGroupCache->contains(name))
+        {
+            trainGroupCache->insert(name, group);
+        }
+    }
 }
 
 int QMQualiResultModel::getIntervallFromTrain(const QString &train)
