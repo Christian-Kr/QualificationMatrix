@@ -337,13 +337,11 @@ void QMQualiResultWidget::paintPdfRequest(QPrinter *printer)
             auto state = model->data(model->index(i, 8 - 1)).toString();
             if (state == "Schlecht")
             {
-                format.setBackground(
-                        QColor(settings.read("QualiResult/BadColor", "#ffffff").toString()));
+                format.setBackground( QColor(settings.read("QualiResult/BadColor", "#ffffff").toString()));
             }
             else if (state == "Gut")
             {
-                format.setBackground(
-                        QColor(settings.read("QualiResult/OkColor", "#ffffff").toString()));
+                format.setBackground(QColor(settings.read("QualiResult/OkColor", "#ffffff").toString()));
             }
 
             cell.setFormat(format);
