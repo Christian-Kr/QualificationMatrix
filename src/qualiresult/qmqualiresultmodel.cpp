@@ -192,41 +192,41 @@ bool QMQualiResultModel::updateQualiInfo(
                 record->setTraining(train);
                 record->setQualiState(qualiState);
 
-                // Find all trainings of this type for the employee and add them to calculate
-                // the latest last date
+                // Find all trainings of this type for the employee and add them to calculate the latest last date.
                 trainDataModel->setFilter("relTblAl_1.name='" + name + "'");
+
+                // Final date and state objects.
                 QDate date;
                 QString trainDataState;
+
                 for (int l = 0; l < trainDataModel->rowCount(); l++)
                 {
-                    QString trainDataEntry = trainDataModel->data(trainDataModel->index(l, 2))
-                        .toString();
+                    QString trainDataEntry = trainDataModel->data(trainDataModel->index(l, 2)).toString();
 
                     if (train == trainDataEntry)
                     {
                         // Found an entry that fits the train and employee in train data.
 
                         // Get and set the date and train data state.
-                        QString strDate = trainDataModel->data(trainDataModel->index(l, 3))
-                            .toString();
+                        QString strDate = trainDataModel->data(trainDataModel->index(l, 3)).toString();
                         QDate tmpDate = QDate::fromString(strDate, Qt::ISODate);
+
                         if (date.isNull())
                         {
                             date = tmpDate;
-                            trainDataState = trainDataModel->data(trainDataModel->index(l, 4))
-                                .toString();
+                            trainDataState = trainDataModel->data(trainDataModel->index(l, 4)).toString();
                         }
                         else
                         {
                             if (tmpDate > date)
                             {
                                 date = tmpDate;
-                                trainDataState = trainDataModel->data(trainDataModel->index(l, 4))
-                                    .toString();
+                                trainDataState = trainDataModel->data(trainDataModel->index(l, 4)).toString();
                             }
                         }
                     }
                 }
+
                 if (date.isValid())
                 {
                     record->setLastDate(date.toString(Qt::ISODate));
