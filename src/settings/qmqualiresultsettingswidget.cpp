@@ -45,6 +45,7 @@ void QMQualiResultSettingsWidget::saveSettings()
     settings.write("QualiResult/OkColor", ui->pbOkColor->text().remove("&"));
     settings.write("QualiResult/BadColor", ui->pbBadColor->text().remove("&"));
     settings.write("QualiResult/EnoughColor", ui->pbEnoughColor->text().remove("&"));
+    settings.write("QualiResult/MonthExpire", ui->sbMonthTrainExpire->value());
 }
 
 void QMQualiResultSettingsWidget::revertChanges()
@@ -70,6 +71,8 @@ void QMQualiResultSettingsWidget::loadSettings()
     auto enoughColor = settings.read("QualiResult/EnoughColor", "#ffffff").toString();
     ui->pbEnoughColor->setText(enoughColor);
     ui->pbEnoughColor->setStyleSheet("background-color: " + enoughColor + ";");
+
+    ui->sbMonthTrainExpire->setValue(settings.read("QualiResult/MonthExpire", 6).toInt());
 }
 
 void QMQualiResultSettingsWidget::changeOkColor()
@@ -84,8 +87,6 @@ void QMQualiResultSettingsWidget::changeOkColor()
 
     ui->pbOkColor->setText(color.name());
     ui->pbOkColor->setStyleSheet("background-color: " + color.name() + ";");
-
-    emitSettingsChanged();
 }
 
 void QMQualiResultSettingsWidget::changeBadColor()
@@ -100,8 +101,6 @@ void QMQualiResultSettingsWidget::changeBadColor()
 
     ui->pbBadColor->setText(color.name());
     ui->pbBadColor->setStyleSheet("background-color: " + color.name() + ";");
-
-    emitSettingsChanged();
 }
 
 void QMQualiResultSettingsWidget::changeEnoughColor()
@@ -116,8 +115,6 @@ void QMQualiResultSettingsWidget::changeEnoughColor()
 
     ui->pbEnoughColor->setText(color.name());
     ui->pbEnoughColor->setStyleSheet("background-color: " + color.name() + ";");
-
-    emitSettingsChanged();
 }
 
 void QMQualiResultSettingsWidget::addIgnore()

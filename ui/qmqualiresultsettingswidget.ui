@@ -197,6 +197,55 @@
     </layout>
    </item>
    <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_5">
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Information vor Ablauf</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="sbMonthTrainExpire">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="suffix">
+        <string> Monate</string>
+       </property>
+       <property name="prefix">
+        <string/>
+       </property>
+       <property name="maximum">
+        <number>12</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -334,6 +383,70 @@
     <hint type="sourcelabel">
      <x>294</x>
      <y>145</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>294</x>
+     <y>304</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sbMonthTrainExpire</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>QMQualiResultSettingsWidget</receiver>
+   <slot>emitSettingsChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>270</x>
+     <y>427</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>294</x>
+     <y>304</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbBadColor</sender>
+   <signal>clicked()</signal>
+   <receiver>QMQualiResultSettingsWidget</receiver>
+   <slot>emitSettingsChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>270</x>
+     <y>389</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>294</x>
+     <y>304</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbEnoughColor</sender>
+   <signal>clicked()</signal>
+   <receiver>QMQualiResultSettingsWidget</receiver>
+   <slot>emitSettingsChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>270</x>
+     <y>347</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>294</x>
+     <y>304</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbOkColor</sender>
+   <signal>clicked()</signal>
+   <receiver>QMQualiResultSettingsWidget</receiver>
+   <slot>emitSettingsChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>270</x>
+     <y>305</y>
     </hint>
     <hint type="destinationlabel">
      <x>294</x>
