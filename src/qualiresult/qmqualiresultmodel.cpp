@@ -267,10 +267,7 @@ bool QMQualiResultModel::updateQualiInfo(const QString &filterName, const QStrin
 
                 record->setInterval(interval);
 
-                // Training state: Can only be good or bad. There should nothing exist inbetween. If a qualiState is a
-                // must have following conditions make the training state bad:
-                // - Last date is not valid: There must be one training conducted.
-                // - There is one conducted training, but it is too many years ago.
+                // Training state: Can only be good or bad. There should nothing exist inbetween.
                 if (qualiState == tr("Pflicht"))
                 {
                     auto currDate = QDate::currentDate();
