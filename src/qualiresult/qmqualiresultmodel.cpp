@@ -120,6 +120,7 @@ bool QMQualiResultModel::updateQualiInfo(const QString &filterName, const QStrin
     auto &settings = QMApplicationSettings::getInstance();
     auto ignoreList = settings.read("QualiResult/IgnoreList", QStringList()).toStringList();
     auto doIgnore = settings.read("QualiResult/DoIgnore", true).toBool();
+    auto monthExpire = settings.read("QualiResult/MonthExpire", 6).toInt();
 
     for (int i = 0; i < filterEmployeeModel.rowCount(); i++)
     {
@@ -290,6 +291,12 @@ bool QMQualiResultModel::updateQualiInfo(const QString &filterName, const QStrin
                             else
                             {
                                 record->setTrainingState(tr("Gut"));
+
+                                if (lastDate.addYears(interval).addMonths(-1*monthExpire) < currDate &&
+                                    !nextDate.isValid())
+                                {
+                                    record->setInformation(tr("Schulung planen!"));
+                                }
                             }
                         }
                     }
