@@ -33,4 +33,6 @@ void QMTrainingModel::initModel()
     setHeaderData(3, Qt::Horizontal, tr("Intervall"));
     setHeaderData(4, Qt::Horizontal, tr("Rechtlich Notwendig"));
     setHeaderData(5, Qt::Horizontal, tr("Inhalte"));
+
+    sort(1, Qt::AscendingOrder);
 }

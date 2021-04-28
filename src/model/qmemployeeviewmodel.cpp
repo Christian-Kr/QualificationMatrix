@@ -27,4 +27,6 @@ QMEmployeeViewModel::QMEmployeeViewModel(QObject *parent, const QSqlDatabase &db
     QSqlRelationalTableModel::setHeaderData(1, Qt::Horizontal, tr("Name"));
     QSqlRelationalTableModel::setHeaderData(2, Qt::Horizontal, tr("Gruppe"));
     QSqlRelationalTableModel::setRelation(2, QSqlRelation("Shift", "id", "name"));
+
+    sort(1, Qt::AscendingOrder);
 }

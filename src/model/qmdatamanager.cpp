@@ -159,6 +159,7 @@ void QMDataManager::initializeModels(QSqlDatabase &db)
     shiftModel->setTable("Shift");
     shiftModel->setEditStrategy(QSqlTableModel::OnManualSubmit);
     shiftModel->setHeaderData(1, Qt::Horizontal, tr("Name"));
+    shiftModel->sort(1, Qt::AscendingOrder);
     shiftModel->select();
 
     emit updateInitModels(11);

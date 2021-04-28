@@ -32,4 +32,6 @@ void QMFunctionModel::initModel()
     setHeaderData(1, Qt::Horizontal, tr("Name"));
     setHeaderData(2, Qt::Horizontal, tr("Gruppe"));
     setRelation(2, QSqlRelation("FuncGroup", "id", "name"));
+
+    sort(1, Qt::AscendingOrder);
 }

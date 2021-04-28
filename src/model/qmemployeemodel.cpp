@@ -33,6 +33,8 @@ void QMEmployeeModel::initModel()
     setHeaderData(2, Qt::Horizontal, tr("Gruppe"));
     setRelation(2, QSqlRelation("Shift", "id", "name"));
     setHeaderData(3, Qt::Horizontal, tr("Aktiviert"));
+
+    sort(1, Qt::AscendingOrder);
 }
 
 QVariant QMEmployeeModel::data(const QModelIndex &index, int role) const

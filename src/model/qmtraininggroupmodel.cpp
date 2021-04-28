@@ -25,4 +25,6 @@ QMTrainingGroupModel::QMTrainingGroupModel(QObject *parent, QSqlDatabase db)
     // Specifiy header data of table.
     setHeaderData(1, Qt::Horizontal, tr("Name"));
     setHeaderData(2, Qt::Horizontal, tr("Farbe"));
+
+    sort(1, Qt::AscendingOrder);
 }
