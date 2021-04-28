@@ -263,6 +263,10 @@ void QMTrainDataWidget::addSingleEntry()
         {
             newRecord.setValue(4, trainDataStateModel->data(trainDataStateModel->index(indexes.first().row(), 0)));
         }
+        else
+        {
+            newRecord.setValue(4, trainDataStateModel->data(trainDataStateModel->index(0, 0)));
+        }
     }
 
     // Remove the record value id, cause this will be filled out by the database as primary key.
