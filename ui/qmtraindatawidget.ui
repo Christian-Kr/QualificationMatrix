@@ -44,35 +44,6 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="6">
-        <widget class="QToolButton" name="tbFilterReset">
-         <property name="minimumSize">
-          <size>
-           <width>100</width>
-           <height>35</height>
-          </size>
-         </property>
-         <property name="toolTip">
-          <string>Filter zurücksetzen</string>
-         </property>
-         <property name="text">
-          <string>Zurücksetzen</string>
-         </property>
-         <property name="icon">
-          <iconset resource="../rcs/icons.qrc">
-           <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>22</width>
-           <height>22</height>
-          </size>
-         </property>
-         <property name="toolButtonStyle">
-          <enum>Qt::ToolButtonTextBesideIcon</enum>
-         </property>
-        </widget>
-       </item>
        <item row="0" column="1">
         <widget class="QLabel" name="label_3">
          <property name="text">
@@ -143,35 +114,6 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="7">
-        <widget class="QToolButton" name="tbFilter">
-         <property name="minimumSize">
-          <size>
-           <width>100</width>
-           <height>35</height>
-          </size>
-         </property>
-         <property name="toolTip">
-          <string>Daten filtern</string>
-         </property>
-         <property name="text">
-          <string>Filtern</string>
-         </property>
-         <property name="icon">
-          <iconset resource="../rcs/icons.qrc">
-           <normaloff>:/icons/icons/view-filter.svg</normaloff>:/icons/icons/view-filter.svg</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>22</width>
-           <height>22</height>
-          </size>
-         </property>
-         <property name="toolButtonStyle">
-          <enum>Qt::ToolButtonTextBesideIcon</enum>
-         </property>
-        </widget>
-       </item>
        <item row="1" column="5">
         <spacer name="horizontalSpacer">
          <property name="orientation">
@@ -237,6 +179,58 @@
         <widget class="QLabel" name="label_2">
          <property name="text">
           <string>Mitarbeiter</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="7">
+        <widget class="QPushButton" name="tbFilter">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Daten filtern</string>
+         </property>
+         <property name="text">
+          <string>Filtern</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../rcs/icons.qrc">
+           <normaloff>:/icons/icons/view-filter.svg</normaloff>:/icons/icons/view-filter.svg</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>22</width>
+           <height>22</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="6">
+        <widget class="QPushButton" name="tbFilterReset">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Filter zurücksetzen</string>
+         </property>
+         <property name="text">
+          <string>Zurücksetzen</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../rcs/icons.qrc">
+           <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>22</width>
+           <height>22</height>
+          </size>
          </property>
         </widget>
        </item>
@@ -362,6 +356,9 @@
            </item>
            <item>
             <widget class="QToolButton" name="tbImportCsv">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="minimumSize">
               <size>
                <width>35</width>
@@ -584,38 +581,6 @@
  </resources>
  <connections>
   <connection>
-   <sender>tbFilterReset</sender>
-   <signal>clicked()</signal>
-   <receiver>QMTrainDataWidget</receiver>
-   <slot>resetFilter()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>799</x>
-     <y>34</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>449</x>
-     <y>333</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>tbFilter</sender>
-   <signal>clicked()</signal>
-   <receiver>QMTrainDataWidget</receiver>
-   <slot>updateFilter()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>837</x>
-     <y>34</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>449</x>
-     <y>333</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>tbAddSingle</sender>
    <signal>clicked()</signal>
    <receiver>QMTrainDataWidget</receiver>
@@ -704,6 +669,38 @@
     <hint type="sourcelabel">
      <x>880</x>
      <y>215</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>461</x>
+     <y>415</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tbFilterReset</sender>
+   <signal>clicked()</signal>
+   <receiver>QMTrainDataWidget</receiver>
+   <slot>resetFilter()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>741</x>
+     <y>48</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>461</x>
+     <y>415</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tbFilter</sender>
+   <signal>clicked()</signal>
+   <receiver>QMTrainDataWidget</receiver>
+   <slot>updateFilter()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>865</x>
+     <y>48</y>
     </hint>
     <hint type="destinationlabel">
      <x>461</x>

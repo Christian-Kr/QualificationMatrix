@@ -526,17 +526,17 @@
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>130</width>
+              <width>20</width>
               <height>20</height>
              </size>
             </property>
            </spacer>
           </item>
           <item>
-           <widget class="QToolButton" name="tbFilterReset">
+           <widget class="QPushButton" name="tbFilterReset">
             <property name="minimumSize">
              <size>
-              <width>0</width>
+              <width>100</width>
               <height>35</height>
              </size>
             </property>
@@ -553,16 +553,13 @@
               <height>22</height>
              </size>
             </property>
-            <property name="toolButtonStyle">
-             <enum>Qt::ToolButtonTextBesideIcon</enum>
-            </property>
            </widget>
           </item>
           <item>
-           <widget class="QToolButton" name="tbUpdate">
+           <widget class="QPushButton" name="tbUpdate">
             <property name="minimumSize">
              <size>
-              <width>0</width>
+              <width>100</width>
               <height>35</height>
              </size>
             </property>
@@ -578,9 +575,6 @@
               <width>22</width>
               <height>22</height>
              </size>
-            </property>
-            <property name="toolButtonStyle">
-             <enum>Qt::ToolButtonTextBesideIcon</enum>
             </property>
            </widget>
           </item>
@@ -607,7 +601,7 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
-          <widget class="QToolButton" name="tbFilterVisible">
+          <widget class="QPushButton" name="tbFilterVisible">
            <property name="minimumSize">
             <size>
              <width>100</width>
@@ -627,9 +621,6 @@
              <height>22</height>
             </size>
            </property>
-           <property name="toolButtonStyle">
-            <enum>Qt::ToolButtonTextBesideIcon</enum>
-           </property>
           </widget>
          </item>
          <item>
@@ -646,7 +637,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QToolButton" name="tbSaveToCsv">
+          <widget class="QPushButton" name="tbSaveToCsv">
            <property name="minimumSize">
             <size>
              <width>100</width>
@@ -666,13 +657,10 @@
              <height>22</height>
             </size>
            </property>
-           <property name="toolButtonStyle">
-            <enum>Qt::ToolButtonTextBesideIcon</enum>
-           </property>
           </widget>
          </item>
          <item>
-          <widget class="QToolButton" name="tbSaveToPDF">
+          <widget class="QPushButton" name="tbSaveToPDF">
            <property name="minimumSize">
             <size>
              <width>100</width>
@@ -691,9 +679,6 @@
              <width>22</width>
              <height>22</height>
             </size>
-           </property>
-           <property name="toolButtonStyle">
-            <enum>Qt::ToolButtonTextBesideIcon</enum>
            </property>
           </widget>
          </item>
@@ -732,86 +717,6 @@
   <include location="../rcs/icons.qrc"/>
  </resources>
  <connections>
-  <connection>
-   <sender>tbSaveToPDF</sender>
-   <signal>clicked()</signal>
-   <receiver>QMQualiResultWidget</receiver>
-   <slot>printToPDF()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>1021</x>
-     <y>33</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>535</x>
-     <y>416</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>tbSaveToCsv</sender>
-   <signal>clicked()</signal>
-   <receiver>QMQualiResultWidget</receiver>
-   <slot>saveToCsv()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>952</x>
-     <y>33</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>535</x>
-     <y>416</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>tbFilterVisible</sender>
-   <signal>clicked()</signal>
-   <receiver>QMQualiResultWidget</receiver>
-   <slot>switchFilterVisibility()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>317</x>
-     <y>30</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>535</x>
-     <y>416</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>tbFilterReset</sender>
-   <signal>clicked()</signal>
-   <receiver>QMQualiResultWidget</receiver>
-   <slot>resetFilter()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>100</x>
-     <y>788</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>535</x>
-     <y>416</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>tbUpdate</sender>
-   <signal>clicked()</signal>
-   <receiver>QMQualiResultWidget</receiver>
-   <slot>updateFilterAndCalculate()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>233</x>
-     <y>788</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>535</x>
-     <y>416</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>dwFilter</sender>
    <signal>visibilityChanged(bool)</signal>
@@ -981,6 +886,86 @@
     <hint type="sourcelabel">
      <x>591</x>
      <y>365</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>535</x>
+     <y>348</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tbSaveToCsv</sender>
+   <signal>clicked()</signal>
+   <receiver>QMQualiResultWidget</receiver>
+   <slot>saveToCsv()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>907</x>
+     <y>26</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>535</x>
+     <y>348</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tbSaveToPDF</sender>
+   <signal>clicked()</signal>
+   <receiver>QMQualiResultWidget</receiver>
+   <slot>printToPDF()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1013</x>
+     <y>26</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>535</x>
+     <y>348</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tbFilterReset</sender>
+   <signal>clicked()</signal>
+   <receiver>QMQualiResultWidget</receiver>
+   <slot>resetFilter()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>278</x>
+     <y>518</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>535</x>
+     <y>348</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tbFilterVisible</sender>
+   <signal>clicked()</signal>
+   <receiver>QMQualiResultWidget</receiver>
+   <slot>switchFilterVisibility()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>557</x>
+     <y>26</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>535</x>
+     <y>348</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tbUpdate</sender>
+   <signal>clicked()</signal>
+   <receiver>QMQualiResultWidget</receiver>
+   <slot>updateFilterAndCalculate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>419</x>
+     <y>518</y>
     </hint>
     <hint type="destinationlabel">
      <x>535</x>

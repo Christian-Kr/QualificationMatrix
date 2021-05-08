@@ -360,7 +360,7 @@
            </spacer>
           </item>
           <item>
-           <widget class="QToolButton" name="tbFilterReset">
+           <widget class="QPushButton" name="tbFilterReset">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -380,13 +380,10 @@
               <height>22</height>
              </size>
             </property>
-            <property name="toolButtonStyle">
-             <enum>Qt::ToolButtonTextBesideIcon</enum>
-            </property>
            </widget>
           </item>
           <item>
-           <widget class="QToolButton" name="tbFilterUpdate">
+           <widget class="QPushButton" name="tbFilterUpdate">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -405,9 +402,6 @@
               <width>22</width>
               <height>22</height>
              </size>
-            </property>
-            <property name="toolButtonStyle">
-             <enum>Qt::ToolButtonTextBesideIcon</enum>
             </property>
            </widget>
           </item>
@@ -481,7 +475,7 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
-          <widget class="QToolButton" name="tbFilterVisible">
+          <widget class="QPushButton" name="tbFilterVisible">
            <property name="minimumSize">
             <size>
              <width>100</width>
@@ -500,9 +494,6 @@
              <width>22</width>
              <height>22</height>
             </size>
-           </property>
-           <property name="toolButtonStyle">
-            <enum>Qt::ToolButtonTextBesideIcon</enum>
            </property>
           </widget>
          </item>
@@ -826,38 +817,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>tbFilterVisible</sender>
-   <signal>clicked()</signal>
-   <receiver>QMQualiMatrixWidget</receiver>
-   <slot>switchFilterVisibility()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>858</x>
-     <y>43</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>476</x>
-     <y>362</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>tbFilterReset</sender>
-   <signal>clicked()</signal>
-   <receiver>QMQualiMatrixWidget</receiver>
-   <slot>resetFilter()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>743</x>
-     <y>43</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>476</x>
-     <y>362</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>dwFilter</sender>
    <signal>visibilityChanged(bool)</signal>
    <receiver>QMQualiMatrixWidget</receiver>
@@ -866,22 +825,6 @@
     <hint type="sourcelabel">
      <x>184</x>
      <y>362</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>476</x>
-     <y>362</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>tbFilterUpdate</sender>
-   <signal>clicked()</signal>
-   <receiver>QMQualiMatrixWidget</receiver>
-   <slot>updateFilter()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>274</x>
-     <y>689</y>
     </hint>
     <hint type="destinationlabel">
      <x>476</x>
@@ -1026,6 +969,54 @@
     <hint type="sourcelabel">
      <x>452</x>
      <y>87</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>624</x>
+     <y>408</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tbFilterVisible</sender>
+   <signal>clicked()</signal>
+   <receiver>QMQualiMatrixWidget</receiver>
+   <slot>switchFilterVisibility()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>543</x>
+     <y>26</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>624</x>
+     <y>408</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tbFilterReset</sender>
+   <signal>clicked()</signal>
+   <receiver>QMQualiMatrixWidget</receiver>
+   <slot>resetFilter()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>264</x>
+     <y>415</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>624</x>
+     <y>408</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tbFilterUpdate</sender>
+   <signal>clicked()</signal>
+   <receiver>QMQualiMatrixWidget</receiver>
+   <slot>updateFilter()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>405</x>
+     <y>415</y>
     </hint>
     <hint type="destinationlabel">
      <x>624</x>
