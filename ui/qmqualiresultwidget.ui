@@ -474,6 +474,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbFilterReset">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
             <property name="text">
              <string>Zurücksetzen</string>
             </property>
@@ -494,6 +500,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbUpdate">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
             <property name="text">
              <string>Aktualisieren</string>
             </property>
@@ -536,6 +548,12 @@
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
           <widget class="QToolButton" name="tbFilterVisible">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>35</height>
+            </size>
+           </property>
            <property name="text">
             <string>Filtern</string>
            </property>
@@ -569,6 +587,12 @@
          </item>
          <item>
           <widget class="QToolButton" name="tbSaveToCsv">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>35</height>
+            </size>
+           </property>
            <property name="text">
             <string>CSV</string>
            </property>
@@ -589,6 +613,12 @@
          </item>
          <item>
           <widget class="QToolButton" name="tbSaveToPDF">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>35</height>
+            </size>
+           </property>
            <property name="text">
             <string>PDF</string>
            </property>

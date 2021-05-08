@@ -313,6 +313,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbFilterReset">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
             <property name="text">
              <string>Zurücksetzen</string>
             </property>
@@ -333,6 +339,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbFilterUpdate">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
             <property name="text">
              <string>Aktualisieren</string>
             </property>
@@ -425,7 +437,7 @@
            <property name="minimumSize">
             <size>
              <width>0</width>
-             <height>0</height>
+             <height>35</height>
             </size>
            </property>
            <property name="text">
@@ -461,6 +473,12 @@
          </item>
          <item>
           <widget class="QToolButton" name="tbLock">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>35</height>
+            </size>
+           </property>
            <property name="text">
             <string/>
            </property>
@@ -522,10 +540,10 @@
          <property name="cornerButtonEnabled">
           <bool>false</bool>
          </property>
-         <attribute name="horizontalHeaderDefaultSectionSize">
+         <attribute name="horizontalHeaderMinimumSectionSize">
           <number>30</number>
          </attribute>
-         <attribute name="horizontalHeaderMinimumSectionSize">
+         <attribute name="horizontalHeaderDefaultSectionSize">
           <number>30</number>
          </attribute>
         </widget>
@@ -645,6 +663,12 @@
           </item>
           <item>
            <widget class="QPushButton" name="pbClose">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
             <property name="text">
              <string>Schließen</string>
             </property>
