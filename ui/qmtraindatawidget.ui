@@ -48,7 +48,7 @@
         <widget class="QToolButton" name="tbFilterReset">
          <property name="minimumSize">
           <size>
-           <width>0</width>
+           <width>100</width>
            <height>35</height>
           </size>
          </property>
@@ -147,7 +147,7 @@
         <widget class="QToolButton" name="tbFilter">
          <property name="minimumSize">
           <size>
-           <width>0</width>
+           <width>100</width>
            <height>35</height>
           </size>
          </property>
@@ -420,7 +420,7 @@
          <set>QDockWidget::DockWidgetClosable</set>
         </property>
         <property name="windowTitle">
-         <string>S&amp;chulungsnachweise</string>
+         <string>Schulungsnachweise</string>
         </property>
         <widget class="QWidget" name="dockWidgetContents">
          <layout class="QGridLayout" name="gridLayout_3">

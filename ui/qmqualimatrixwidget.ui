@@ -45,7 +45,7 @@
        <set>QDockWidget::NoDockWidgetFeatures</set>
       </property>
       <property name="windowTitle">
-       <string>F&amp;ilter</string>
+       <string>Filter</string>
       </property>
       <widget class="QWidget" name="dockWidgetContents">
        <layout class="QGridLayout" name="gridLayout_2">
@@ -69,6 +69,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbResetFuncGroup">
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>35</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Zurücksetzen</string>
             </property>
@@ -89,6 +95,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbExtSelFuncGroup">
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>35</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Erweiterte Auswahl</string>
             </property>
@@ -136,6 +148,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbResetTrainGroup">
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>35</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Zurücksetzen</string>
             </property>
@@ -156,6 +174,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbExtSelTrainGroup">
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>35</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Erweiterte Auswahl</string>
             </property>
@@ -196,6 +220,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbResetTrain">
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>35</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Zurücksetzen</string>
             </property>
@@ -216,6 +246,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbExtSelTrain">
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>35</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Erweiterte Auswahl</string>
             </property>
@@ -256,6 +292,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbResetFunc">
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>35</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Zurücksetzen</string>
             </property>
@@ -276,6 +318,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbExtSelFunc">
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>35</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Erweiterte Auswahl</string>
             </property>
@@ -436,7 +484,7 @@
           <widget class="QToolButton" name="tbFilterVisible">
            <property name="minimumSize">
             <size>
-             <width>0</width>
+             <width>100</width>
              <height>35</height>
             </size>
            </property>
@@ -475,7 +523,7 @@
           <widget class="QToolButton" name="tbLock">
            <property name="minimumSize">
             <size>
-             <width>0</width>
+             <width>35</width>
              <height>35</height>
             </size>
            </property>

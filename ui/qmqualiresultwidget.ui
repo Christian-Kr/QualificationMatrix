@@ -57,7 +57,7 @@
        <set>Qt::AllDockWidgetAreas</set>
       </property>
       <property name="windowTitle">
-       <string>Fi&amp;lter</string>
+       <string>Filter</string>
       </property>
       <widget class="QWidget" name="dockWidgetContents">
        <layout class="QGridLayout" name="gridLayout_2">
@@ -88,6 +88,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbResetEmployee">
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>35</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Zurücksetzen</string>
             </property>
@@ -108,6 +114,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbExtSelEmployee">
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>35</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Erweiterte Auswahl</string>
             </property>
@@ -155,6 +167,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbResetEmployeeGroup">
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>35</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Zurücksetzen</string>
             </property>
@@ -175,6 +193,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbExtSelEmployeeGroup">
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>35</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Erweiterte Auswahl</string>
             </property>
@@ -222,6 +246,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbResetTrain">
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>35</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Zurücksetzen</string>
             </property>
@@ -269,6 +299,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbResetFunc">
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>35</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Zurücksetzen</string>
             </property>
@@ -334,6 +370,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbResetTrainResultState">
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>35</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Zurücksetzen</string>
             </property>
@@ -354,6 +396,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbExtSelTrainResultState">
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>35</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Erweiterte Auswahl</string>
             </property>
@@ -401,6 +449,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbResetTrainState">
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>35</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Zurücksetzen</string>
             </property>
@@ -421,6 +475,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbExtSelTrainDataState">
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>35</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Erweiterte Auswahl</string>
             </property>
@@ -550,7 +610,7 @@
           <widget class="QToolButton" name="tbFilterVisible">
            <property name="minimumSize">
             <size>
-             <width>0</width>
+             <width>100</width>
              <height>35</height>
             </size>
            </property>
@@ -589,7 +649,7 @@
           <widget class="QToolButton" name="tbSaveToCsv">
            <property name="minimumSize">
             <size>
-             <width>0</width>
+             <width>100</width>
              <height>35</height>
             </size>
            </property>
@@ -615,7 +675,7 @@
           <widget class="QToolButton" name="tbSaveToPDF">
            <property name="minimumSize">
             <size>
-             <width>0</width>
+             <width>100</width>
              <height>35</height>
             </size>
            </property>
