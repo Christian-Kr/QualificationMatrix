@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>372</width>
-    <height>369</height>
+    <height>401</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -335,6 +335,12 @@
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
       <widget class="QPushButton" name="pbSwitchConnected">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>35</height>
+        </size>
+       </property>
        <property name="text">
         <string>Verbinden</string>
        </property>
@@ -354,12 +360,15 @@
       </spacer>
      </item>
      <item>
-      <widget class="QDialogButtonBox" name="buttonBox">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+      <widget class="QPushButton" name="pbClose">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>35</height>
+        </size>
        </property>
-       <property name="standardButtons">
-        <set>QDialogButtonBox::Close</set>
+       <property name="text">
+        <string>Schließen</string>
        </property>
       </widget>
      </item>
@@ -382,38 +391,6 @@
  </widget>
  <resources/>
  <connections>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>QMDatabaseDialog</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>QMDatabaseDialog</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>cbType</sender>
    <signal>currentIndexChanged(int)</signal>
@@ -459,6 +436,22 @@
     <hint type="destinationlabel">
      <x>185</x>
      <y>174</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbClose</sender>
+   <signal>clicked()</signal>
+   <receiver>QMDatabaseDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>314</x>
+     <y>374</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>185</x>
+     <y>200</y>
     </hint>
    </hints>
   </connection>
