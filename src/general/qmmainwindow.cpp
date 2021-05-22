@@ -508,6 +508,9 @@ void QMMainWindow::saveSettings()
 
 void QMMainWindow::showSettings()
 {
+    // Close all modes.
+    closeCurrentWindowMode();
+
     // Create the settings dialog.
     QMSettingsDialog settingsDialog(this);
     settingsDialog.exec();
@@ -519,30 +522,6 @@ void QMMainWindow::showSettings()
     {
         return;
     }
-
-    // There might the option, that several tables have been changed. This is mostly a problem for relation table,
-    // where some connected subtable has changed. They won't update due to how QSqlRelationalTableModel works. To
-    // update this subtables, every relational table has to be reinitialized.
-
-    // Reinitialize models, which related submodels might have changed.
-    auto dm = QMDataManager::getInstance();
-
-    dm->getQualiModel()->initModel();
-    dm->getQualiModel()->select();
-    dm->getQualiMatrixModel()->buildCache();
-
-    dm->getTrainDataModel()->initModel();
-    dm->getTrainDataModel()->select();
-
-    // Rebuild quali matrix widget.
-    qualiMatrixWidget->updateHeaderCache();
-    qualiMatrixWidget->updateColors();
-    qualiMatrixWidget->resetFilter();
-
-    trainDataWidget->updateTableView();
-    trainDataWidget->resetFilter();
-
-    qualiResultWidget->resetFilter();
 }
 
 void QMMainWindow::showTrainingData(QString name, QString training)
@@ -654,6 +633,11 @@ bool QMMainWindow::closeCurrentWindowMode()
         widget->disconnect();
         delete widget;
         winMode = WIN_MODE::NONE;
+
+        // Check right buttons.
+        ui->actModeResult->setChecked(false);
+        ui->actModeQualiMatrix->setChecked(false);
+        ui->actModeTrainingData->setChecked(false);
 
         return true;
     }
