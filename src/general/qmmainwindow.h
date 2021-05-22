@@ -32,6 +32,15 @@ class QMTrainDataWidget;
 class QTranslator;
 class QSqlDatabase;
 
+// Enum: The WIN_MODE. Every time the mode will be switched and a new widget will be shown, the objects will be
+// deleted. This makes sure, nothing happens or blocks access in unused application parts.
+enum class WIN_MODE {
+    NONE,           // Show no widget. This normally happens, when no database has been loaded.
+    RESULT,         // Show the qualification result widget.
+    MATRIX,         // Show the qualification matrix widget.
+    TRAININGDATA    // Show the training data widget.
+};
+
 /// Main windows class for this application.
 /// \author Christian Kr, Copyright 2020
 class QMMainWindow: public QMainWindow
@@ -124,6 +133,23 @@ public slots:
     /// \param training
     void showTrainingData(QString name, QString training);
 
+    /// Enter the result window mode.
+    void enterResultMode();
+
+    /// Enter the quali matrix window mode.
+    void enterQualiMatrixMode();
+
+    /// Enter the training data window mode.
+    void enterTrainingDataMode();
+
+    /// Enter the given window mode.
+    /// \param mode The window mode to enter.
+    void enterWindowMode(WIN_MODE mode);
+
+    /// Closes the current window mode and deletes all objects.
+    /// \return True if success, else false. False could also be a user abort.
+    bool closeCurrentWindowMode();
+
 protected:
     /// Override from QMainWindow. This function will be called on closeing the widget.
     /// \param event The close event object that will be created.
@@ -154,6 +180,8 @@ private:
     std::unique_ptr<QMQualiResultWidget> qualiResultWidget;
     std::unique_ptr<QMQualiMatrixWidget> qualiMatrixWidget;
     std::unique_ptr<QMTrainDataWidget> trainDataWidget;
+
+    WIN_MODE winMode;
 };
 
 #endif // QMMAINWINDOW_H

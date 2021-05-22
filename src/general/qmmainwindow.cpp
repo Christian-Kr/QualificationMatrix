@@ -57,6 +57,7 @@
 
 QMMainWindow::QMMainWindow(QWidget *parent)
     : QMainWindow(parent)
+    , winMode(WIN_MODE::NONE)
 {
     ui = new Ui::QMMainWindow;
     ui->setupUi(this);
@@ -361,54 +362,6 @@ void QMMainWindow::afterInitModels()
 {
     closeProgress();
 
-    // All models are initialized now. The quali matrix models and the quali result models have action that might take
-    // a long time. Therefore each of them needs to be connected to functions showing progress dialogs.
-
-    // Create widgets.
-    qualiResultWidget = std::make_unique<QMQualiResultWidget>();
-    qualiMatrixWidget = std::make_unique<QMQualiMatrixWidget>();
-    trainDataWidget = std::make_unique<QMTrainDataWidget>();
-
-    // Build progress connections.
-    auto dm = QMDataManager::getInstance();
-
-    connect(dm->getQualiMatrixModel().get(), &QMQualiMatrixModel::beforeBuildCache, this,
-        &QMMainWindow::beforeQualiMatrixBuildCache);
-
-    connect(dm->getQualiMatrixModel().get(), &QMQualiMatrixModel::updateBuildCache, this,
-        &QMMainWindow::updateInitModels);
-
-    connect(dm->getQualiMatrixModel().get(), &QMQualiMatrixModel::afterBuildCache, this,
-        &QMMainWindow::closeProgress);
-
-    connect(dm->getQualiResultModel().get(), &QMQualiResultModel::beforeUpdateQualiInfo, this,
-        &QMMainWindow::beforeQualiResultCalculation);
-
-    connect(dm->getQualiResultModel().get(), &QMQualiResultModel::updateUpdateQualiInfo, this,
-        &QMMainWindow::updateInitModels);
-
-    connect(dm->getQualiResultModel().get(), &QMQualiResultModel::afterUpdateQualiInfo, this,
-        &QMMainWindow::closeProgress);
-
-    // Build message connections.
-    connect(trainDataWidget.get(), &QMTrainDataWidget::infoMessageAvailable, ui->laInfo,
-        &QMInfoLabel::showInfoMessage);
-
-    connect(trainDataWidget.get(), &QMTrainDataWidget::warnMessageAvailable, ui->laInfo,
-        &QMInfoLabel::showWarnMessage);
-
-    connect(qualiResultWidget.get(), &QMQualiResultWidget::showTrainData, this, &QMMainWindow::showTrainingData);
-
-    // Set up the widgets.
-    qualiResultWidget->updateData();
-    ui->twQualiMatrix->addTab(qualiResultWidget.get(), tr("Qualifizierungsergebnis"));
-
-    qualiMatrixWidget->updateData();
-    ui->twQualiMatrix->addTab(qualiMatrixWidget.get(), tr("Qualifizierungsmatrix"));
-
-    trainDataWidget->updateData();
-    ui->twQualiMatrix->addTab(trainDataWidget.get(), tr("Schulungsdaten"));
-
     // Unlock all ui elements.
     ui->actSettings->setEnabled(true);
     ui->actCloseDatabase->setEnabled(true);
@@ -526,7 +479,7 @@ bool QMMainWindow::closeDatabase()
     }
 
     // After database has been closed, everything needs to be deleted or locked.
-    ui->twQualiMatrix->clear();
+    closeCurrentWindowMode();
     ui->actSettings->setEnabled(false);
     ui->actCloseDatabase->setEnabled(false);
 
@@ -594,12 +547,13 @@ void QMMainWindow::showSettings()
 
 void QMMainWindow::showTrainingData(QString name, QString training)
 {
-    ui->twQualiMatrix->setCurrentIndex(2);
-
-    trainDataWidget->resetFilter();
-    trainDataWidget->setNameFilter(name);
-    trainDataWidget->setTrainFilter(training);
-    trainDataWidget->updateFilter();
+    // TODO: This is not possible anymore. Think about different ways.
+//    ui->twQualiMatrix->setCurrentIndex(2);
+//
+//    trainDataWidget->resetFilter();
+//    trainDataWidget->setNameFilter(name);
+//    trainDataWidget->setTrainFilter(training);
+//    trainDataWidget->updateFilter();
 }
 
 void QMMainWindow::manageCertificate()
@@ -646,4 +600,156 @@ void QMMainWindow::showCreateSigningList()
     signingListDialog.resize(width, height);
     signingListDialog.setModal(true);
     signingListDialog.exec();
+}
+
+void QMMainWindow::enterResultMode()
+{
+    enterWindowMode(WIN_MODE::RESULT);
+}
+
+void QMMainWindow::enterQualiMatrixMode()
+{
+    enterWindowMode(WIN_MODE::MATRIX);
+}
+
+void QMMainWindow::enterTrainingDataMode()
+{
+    enterWindowMode(WIN_MODE::TRAININGDATA);
+}
+
+bool QMMainWindow::closeCurrentWindowMode()
+{
+    if (winMode == WIN_MODE::NONE)
+    {
+        return true;
+    }
+
+    QWidget *widget = nullptr;
+
+    switch (winMode)
+    {
+        case WIN_MODE::TRAININGDATA:
+        {
+            widget = trainDataWidget.release();
+        }
+        break;
+        case WIN_MODE::MATRIX:
+        {
+            widget = qualiMatrixWidget.release();
+        }
+        break;
+        case WIN_MODE::RESULT:
+        {
+            widget = qualiResultWidget.release();
+        }
+        break;
+        default:
+            qWarning("Unknown window mode");
+            break;
+    }
+
+    if (widget != nullptr)
+    {
+        ui->centralwidget->layout()->removeWidget(widget);
+        widget->disconnect();
+        delete widget;
+        winMode = WIN_MODE::NONE;
+
+        return true;
+    }
+
+    return false;
+}
+
+void QMMainWindow::enterWindowMode(WIN_MODE mode)
+{
+    // Close the information label.
+    ui->laInfo->setVisible(false);
+
+    // Close the current window mode.
+    if (winMode != WIN_MODE::NONE)
+    {
+        closeCurrentWindowMode();
+    }
+
+    auto dm = QMDataManager::getInstance();
+
+    switch (mode)
+    {
+        case WIN_MODE::TRAININGDATA:
+        {
+            trainDataWidget = std::make_unique<QMTrainDataWidget>();
+            ui->centralwidget->layout()->addWidget(trainDataWidget.get());
+
+            connect(trainDataWidget.get(), &QMTrainDataWidget::infoMessageAvailable, ui->laInfo,
+                &QMInfoLabel::showInfoMessage);
+
+            connect(trainDataWidget.get(), &QMTrainDataWidget::warnMessageAvailable, ui->laInfo,
+                &QMInfoLabel::showWarnMessage);
+
+            trainDataWidget->updateData();
+
+            // Check right buttons.
+            ui->actModeResult->setChecked(false);
+            ui->actModeQualiMatrix->setChecked(false);
+            ui->actModeTrainingData->setChecked(true);
+
+            winMode = WIN_MODE::TRAININGDATA;
+        }
+        break;
+        case WIN_MODE::MATRIX:
+        {
+            qualiMatrixWidget = std::make_unique<QMQualiMatrixWidget>();
+            ui->centralwidget->layout()->addWidget(qualiMatrixWidget.get());
+
+            connect(dm->getQualiMatrixModel().get(), &QMQualiMatrixModel::beforeBuildCache, this,
+                &QMMainWindow::beforeQualiMatrixBuildCache);
+
+            connect(dm->getQualiMatrixModel().get(), &QMQualiMatrixModel::updateBuildCache, this,
+                &QMMainWindow::updateInitModels);
+
+            connect(dm->getQualiMatrixModel().get(), &QMQualiMatrixModel::afterBuildCache, this,
+                &QMMainWindow::closeProgress);
+
+            qualiMatrixWidget->updateData();
+
+            // Check right buttons.
+            ui->actModeResult->setChecked(false);
+            ui->actModeQualiMatrix->setChecked(true);
+            ui->actModeTrainingData->setChecked(false);
+
+            winMode = WIN_MODE::MATRIX;
+        }
+        break;
+        case WIN_MODE::RESULT:
+        {
+            qualiResultWidget = std::make_unique<QMQualiResultWidget>();
+            ui->centralwidget->layout()->addWidget(qualiResultWidget.get());
+
+            connect(dm->getQualiResultModel().get(), &QMQualiResultModel::beforeUpdateQualiInfo, this,
+                &QMMainWindow::beforeQualiResultCalculation);
+
+            connect(dm->getQualiResultModel().get(), &QMQualiResultModel::updateUpdateQualiInfo, this,
+                &QMMainWindow::updateInitModels);
+
+            connect(dm->getQualiResultModel().get(), &QMQualiResultModel::afterUpdateQualiInfo, this,
+                &QMMainWindow::closeProgress);
+
+            connect(qualiResultWidget.get(), &QMQualiResultWidget::showTrainData, this,
+                &QMMainWindow::showTrainingData);
+
+            qualiResultWidget->updateData();
+
+            // Check right buttons.
+            ui->actModeResult->setChecked(true);
+            ui->actModeQualiMatrix->setChecked(false);
+            ui->actModeTrainingData->setChecked(false);
+
+            winMode = WIN_MODE::RESULT;
+        }
+        break;
+        default:
+            qWarning("Unknown window mode");
+            break;
+    }
 }
