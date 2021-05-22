@@ -134,7 +134,7 @@
     <string>toolBar</string>
    </property>
    <property name="toolButtonStyle">
-    <enum>Qt::ToolButtonTextBesideIcon</enum>
+    <enum>Qt::ToolButtonIconOnly</enum>
    </property>
    <property name="floatable">
     <bool>true</bool>
@@ -146,9 +146,14 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actManageDatabase"/>
-   <addaction name="actSettings"/>
    <addaction name="actManageCertificate"/>
    <addaction name="actCreateSigningList"/>
+   <addaction name="separator"/>
+   <addaction name="actModeResult"/>
+   <addaction name="actModeQualiMatrix"/>
+   <addaction name="actModeTrainingData"/>
+   <addaction name="separator"/>
+   <addaction name="actSettings"/>
   </widget>
   <action name="actExit">
    <property name="text">
@@ -262,6 +267,39 @@
    </property>
    <property name="text">
     <string>&amp;Unterschriftenliste erstellen</string>
+   </property>
+  </action>
+  <action name="actModeResult">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Qualifizierungsergebnis</string>
+   </property>
+   <property name="toolTip">
+    <string>Starte Modus Qualifizierungsergebnis</string>
+   </property>
+  </action>
+  <action name="actModeQualiMatrix">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Qualifzierungsmatrix</string>
+   </property>
+   <property name="toolTip">
+    <string>Starte Modus Qualifizierungsmatrix</string>
+   </property>
+  </action>
+  <action name="actModeTrainingData">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Schulungsdaten</string>
+   </property>
+   <property name="toolTip">
+    <string>Starte Modus Schulungsdaten</string>
    </property>
   </action>
  </widget>
@@ -436,6 +474,54 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actModeQualiMatrix</sender>
+   <signal>triggered()</signal>
+   <receiver>QMMainWindow</receiver>
+   <slot>enterQualiMatrixMode()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>436</x>
+     <y>319</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actModeResult</sender>
+   <signal>triggered()</signal>
+   <receiver>QMMainWindow</receiver>
+   <slot>enterResultMode()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>436</x>
+     <y>319</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actModeTrainingData</sender>
+   <signal>triggered()</signal>
+   <receiver>QMMainWindow</receiver>
+   <slot>enterTrainingDataMode()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>436</x>
+     <y>319</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>showAbout()</slot>
@@ -451,5 +537,8 @@
   <slot>manageCertificate()</slot>
   <slot>showCertificateIntegrityCheck()</slot>
   <slot>showCreateSigningList()</slot>
+  <slot>enterResultMode()</slot>
+  <slot>enterQualiMatrixMode()</slot>
+  <slot>enterTrainingDataMode()</slot>
  </slots>
 </ui>
