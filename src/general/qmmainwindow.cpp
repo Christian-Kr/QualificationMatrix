@@ -508,6 +508,8 @@ void QMMainWindow::saveSettings()
 
 void QMMainWindow::showSettings()
 {
+    WIN_MODE tmpMode = winMode;
+
     // Close all modes.
     closeCurrentWindowMode();
 
@@ -522,6 +524,9 @@ void QMMainWindow::showSettings()
     {
         return;
     }
+
+    // Reset the win mode.
+    enterWindowMode(tmpMode);
 }
 
 void QMMainWindow::showTrainingData(QString name, QString training)
@@ -654,6 +659,19 @@ void QMMainWindow::enterWindowMode(WIN_MODE mode)
     if (winMode != WIN_MODE::NONE)
     {
         closeCurrentWindowMode();
+    }
+
+    // If no database is connected, don't switch to mode.
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        QMessageBox::information(this, tr("Achtung"), tr("Datenbank is nicht geöffnet. Aktion wird abgebrochen."));
+
+        // Check right buttons.
+        ui->actModeResult->setChecked(false);
+        ui->actModeQualiMatrix->setChecked(false);
+        ui->actModeTrainingData->setChecked(false);
+
+        return;
     }
 
     auto dm = QMDataManager::getInstance();
