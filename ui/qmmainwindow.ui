@@ -43,14 +43,7 @@
     <property name="bottomMargin">
      <number>0</number>
     </property>
-    <item row="2" column="0">
-     <widget class="QMInfoLabel" name="laInfo">
-      <property name="text">
-       <string>TextLabel</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
+    <item row="0" column="0">
      <widget class="QTabWidget" name="twQualiMatrix">
       <property name="enabled">
        <bool>true</bool>
@@ -72,6 +65,13 @@
       </property>
       <property name="movable">
        <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QMInfoLabel" name="laInfo">
+      <property name="text">
+       <string>TextLabel</string>
       </property>
      </widget>
     </item>
@@ -134,7 +134,7 @@
     <string>toolBar</string>
    </property>
    <property name="toolButtonStyle">
-    <enum>Qt::ToolButtonIconOnly</enum>
+    <enum>Qt::ToolButtonTextBesideIcon</enum>
    </property>
    <property name="floatable">
     <bool>true</bool>
@@ -146,15 +146,9 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actManageDatabase"/>
-   <addaction name="separator"/>
+   <addaction name="actSettings"/>
    <addaction name="actManageCertificate"/>
    <addaction name="actCreateSigningList"/>
-   <addaction name="separator"/>
-   <addaction name="actModeResult"/>
-   <addaction name="actModeMatrix"/>
-   <addaction name="actModeTrainingData"/>
-   <addaction name="separator"/>
-   <addaction name="actSettings"/>
   </widget>
   <action name="actExit">
    <property name="text">
@@ -167,7 +161,7 @@
   <action name="actManageDatabase">
    <property name="icon">
     <iconset resource="../rcs/icons.qrc">
-     <normaloff>:/icons/icons/network-server-symbolic.symbolic.png</normaloff>:/icons/icons/network-server-symbolic.symbolic.png</iconset>
+     <normaloff>:/icons/icons/opendatabase.svg</normaloff>:/icons/icons/opendatabase.svg</iconset>
    </property>
    <property name="text">
     <string>&amp;Datenbank verwalten</string>
@@ -206,7 +200,7 @@
   <action name="actSettings">
    <property name="icon">
     <iconset resource="../rcs/icons.qrc">
-     <normaloff>:/icons/icons/preferences-system-symbolic.symbolic.png</normaloff>:/icons/icons/preferences-system-symbolic.symbolic.png</iconset>
+     <normaloff>:/icons/icons/properties.svg</normaloff>:/icons/icons/properties.svg</iconset>
    </property>
    <property name="text">
     <string>&amp;Einstellungen</string>
@@ -247,7 +241,7 @@
   <action name="actManageCertificate">
    <property name="icon">
     <iconset resource="../rcs/icons.qrc">
-     <normaloff>:/icons/icons/document-send-symbolic.symbolic.png</normaloff>:/icons/icons/document-send-symbolic.symbolic.png</iconset>
+     <normaloff>:/icons/icons/mail-attachment.svg</normaloff>:/icons/icons/mail-attachment.svg</iconset>
    </property>
    <property name="text">
     <string>&amp;Nachweise verwalten</string>
@@ -264,55 +258,10 @@
   <action name="actCreateSigningList">
    <property name="icon">
     <iconset resource="../rcs/icons.qrc">
-     <normaloff>:/icons/icons/text-editor-symbolic.symbolic.png</normaloff>:/icons/icons/text-editor-symbolic.symbolic.png</iconset>
+     <normaloff>:/icons/icons/traindata.svg</normaloff>:/icons/icons/traindata.svg</iconset>
    </property>
    <property name="text">
     <string>&amp;Unterschriftenliste erstellen</string>
-   </property>
-  </action>
-  <action name="actModeResult">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="icon">
-    <iconset resource="../rcs/icons.qrc">
-     <normaloff>:/icons/icons/view-reveal-symbolic.symbolic.png</normaloff>:/icons/icons/view-reveal-symbolic.symbolic.png</iconset>
-   </property>
-   <property name="text">
-    <string>Qualifizierungsergebnis</string>
-   </property>
-   <property name="toolTip">
-    <string>Starten des Modus Qualifizierungsergebnis</string>
-   </property>
-  </action>
-  <action name="actModeMatrix">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="icon">
-    <iconset resource="../rcs/icons.qrc">
-     <normaloff>:/icons/icons/view-app-grid-symbolic.symbolic.png</normaloff>:/icons/icons/view-app-grid-symbolic.symbolic.png</iconset>
-   </property>
-   <property name="text">
-    <string>Qualifizierungsmatrix</string>
-   </property>
-   <property name="toolTip">
-    <string>Qualifizierungsmatrix anzeigen/bearbeiten</string>
-   </property>
-  </action>
-  <action name="actModeTrainingData">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="icon">
-    <iconset resource="../rcs/icons.qrc">
-     <normaloff>:/icons/icons/view-list-bullet-symbolic.symbolic.png</normaloff>:/icons/icons/view-list-bullet-symbolic.symbolic.png</iconset>
-   </property>
-   <property name="text">
-    <string>Schulungsdaten</string>
-   </property>
-   <property name="toolTip">
-    <string>Schulungsdaten anzeigen/bearbeiten</string>
    </property>
   </action>
  </widget>

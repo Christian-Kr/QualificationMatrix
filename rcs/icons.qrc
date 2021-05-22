@@ -1,14 +1,6 @@
 <RCC>
   <qresource prefix="/icons">
-    <file>icons/document-send-symbolic.symbolic.png</file>
-    <file>icons/text-editor-symbolic.symbolic.png</file>
-    <file>icons/view-app-grid-symbolic.symbolic.png</file>
-    <file>icons/view-list-bullet-symbolic.symbolic.png</file>
-    <file>icons/network-server-symbolic.symbolic.png</file>
-    <file>icons/preferences-system-symbolic.symbolic.png</file>
-    <file>icons/system-run-symbolic.symbolic.png</file>
     <file>icons/document-preview-archive.svg</file>
-    <file>icons/view-reveal-symbolic.symbolic.png</file>
     <file>icons/mail-attachment.svg</file>
     <file>icons/document-preview-archive.svg</file>
     <file>icons/view-list-details.svg</file>
