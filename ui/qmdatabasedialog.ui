@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>372</width>
-    <height>401</height>
+    <width>389</width>
+    <height>430</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -114,14 +114,7 @@
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QComboBox" name="cbDriverLocal">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-        </widget>
+        <widget class="QComboBox" name="cbDriverLocal"/>
        </item>
        <item row="1" column="0">
         <widget class="QLabel" name="label_2">
@@ -152,6 +145,12 @@
          </item>
          <item>
           <widget class="QPushButton" name="pbChooseLocal">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="text">
             <string>Auswählen</string>
            </property>
@@ -338,7 +337,7 @@
        <property name="minimumSize">
         <size>
          <width>100</width>
-         <height>35</height>
+         <height>0</height>
         </size>
        </property>
        <property name="text">
@@ -364,7 +363,7 @@
        <property name="minimumSize">
         <size>
          <width>100</width>
-         <height>35</height>
+         <height>0</height>
         </size>
        </property>
        <property name="text">

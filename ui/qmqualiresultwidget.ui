@@ -88,12 +88,6 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbResetEmployee">
-            <property name="minimumSize">
-             <size>
-              <width>35</width>
-              <height>35</height>
-             </size>
-            </property>
             <property name="toolTip">
              <string>Zurücksetzen</string>
             </property>
@@ -114,12 +108,6 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbExtSelEmployee">
-            <property name="minimumSize">
-             <size>
-              <width>35</width>
-              <height>35</height>
-             </size>
-            </property>
             <property name="toolTip">
              <string>Erweiterte Auswahl</string>
             </property>
@@ -167,12 +155,6 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbResetEmployeeGroup">
-            <property name="minimumSize">
-             <size>
-              <width>35</width>
-              <height>35</height>
-             </size>
-            </property>
             <property name="toolTip">
              <string>Zurücksetzen</string>
             </property>
@@ -193,12 +175,6 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbExtSelEmployeeGroup">
-            <property name="minimumSize">
-             <size>
-              <width>35</width>
-              <height>35</height>
-             </size>
-            </property>
             <property name="toolTip">
              <string>Erweiterte Auswahl</string>
             </property>
@@ -246,12 +222,6 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbResetTrain">
-            <property name="minimumSize">
-             <size>
-              <width>35</width>
-              <height>35</height>
-             </size>
-            </property>
             <property name="toolTip">
              <string>Zurücksetzen</string>
             </property>
@@ -299,12 +269,6 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbResetFunc">
-            <property name="minimumSize">
-             <size>
-              <width>35</width>
-              <height>35</height>
-             </size>
-            </property>
             <property name="toolTip">
              <string>Zurücksetzen</string>
             </property>
@@ -370,12 +334,6 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbResetTrainResultState">
-            <property name="minimumSize">
-             <size>
-              <width>35</width>
-              <height>35</height>
-             </size>
-            </property>
             <property name="toolTip">
              <string>Zurücksetzen</string>
             </property>
@@ -396,12 +354,6 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbExtSelTrainResultState">
-            <property name="minimumSize">
-             <size>
-              <width>35</width>
-              <height>35</height>
-             </size>
-            </property>
             <property name="toolTip">
              <string>Erweiterte Auswahl</string>
             </property>
@@ -449,12 +401,6 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbResetTrainState">
-            <property name="minimumSize">
-             <size>
-              <width>35</width>
-              <height>35</height>
-             </size>
-            </property>
             <property name="toolTip">
              <string>Zurücksetzen</string>
             </property>
@@ -475,12 +421,6 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbExtSelTrainDataState">
-            <property name="minimumSize">
-             <size>
-              <width>35</width>
-              <height>35</height>
-             </size>
-            </property>
             <property name="toolTip">
              <string>Erweiterte Auswahl</string>
             </property>
@@ -537,7 +477,7 @@
             <property name="minimumSize">
              <size>
               <width>100</width>
-              <height>35</height>
+              <height>0</height>
              </size>
             </property>
             <property name="text">
@@ -560,7 +500,7 @@
             <property name="minimumSize">
              <size>
               <width>100</width>
-              <height>35</height>
+              <height>0</height>
              </size>
             </property>
             <property name="text">
@@ -605,7 +545,7 @@
            <property name="minimumSize">
             <size>
              <width>100</width>
-             <height>35</height>
+             <height>0</height>
             </size>
            </property>
            <property name="text">
@@ -641,7 +581,7 @@
            <property name="minimumSize">
             <size>
              <width>100</width>
-             <height>35</height>
+             <height>0</height>
             </size>
            </property>
            <property name="text">
@@ -664,7 +604,7 @@
            <property name="minimumSize">
             <size>
              <width>100</width>
-             <height>35</height>
+             <height>0</height>
             </size>
            </property>
            <property name="text">

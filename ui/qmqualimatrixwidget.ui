@@ -31,7 +31,7 @@
      <widget class="QDockWidget" name="dwFilter">
       <property name="minimumSize">
        <size>
-        <width>317</width>
+        <width>332</width>
         <height>494</height>
        </size>
       </property>
@@ -69,12 +69,6 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbResetFuncGroup">
-            <property name="minimumSize">
-             <size>
-              <width>35</width>
-              <height>35</height>
-             </size>
-            </property>
             <property name="toolTip">
              <string>Zurücksetzen</string>
             </property>
@@ -95,12 +89,6 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbExtSelFuncGroup">
-            <property name="minimumSize">
-             <size>
-              <width>35</width>
-              <height>35</height>
-             </size>
-            </property>
             <property name="toolTip">
              <string>Erweiterte Auswahl</string>
             </property>
@@ -148,12 +136,6 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbResetTrainGroup">
-            <property name="minimumSize">
-             <size>
-              <width>35</width>
-              <height>35</height>
-             </size>
-            </property>
             <property name="toolTip">
              <string>Zurücksetzen</string>
             </property>
@@ -174,12 +156,6 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbExtSelTrainGroup">
-            <property name="minimumSize">
-             <size>
-              <width>35</width>
-              <height>35</height>
-             </size>
-            </property>
             <property name="toolTip">
              <string>Erweiterte Auswahl</string>
             </property>
@@ -220,12 +196,6 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbResetTrain">
-            <property name="minimumSize">
-             <size>
-              <width>35</width>
-              <height>35</height>
-             </size>
-            </property>
             <property name="toolTip">
              <string>Zurücksetzen</string>
             </property>
@@ -246,12 +216,6 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbExtSelTrain">
-            <property name="minimumSize">
-             <size>
-              <width>35</width>
-              <height>35</height>
-             </size>
-            </property>
             <property name="toolTip">
              <string>Erweiterte Auswahl</string>
             </property>
@@ -292,12 +256,6 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbResetFunc">
-            <property name="minimumSize">
-             <size>
-              <width>35</width>
-              <height>35</height>
-             </size>
-            </property>
             <property name="toolTip">
              <string>Zurücksetzen</string>
             </property>
@@ -318,12 +276,6 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbExtSelFunc">
-            <property name="minimumSize">
-             <size>
-              <width>35</width>
-              <height>35</height>
-             </size>
-            </property>
             <property name="toolTip">
              <string>Erweiterte Auswahl</string>
             </property>
@@ -361,12 +313,6 @@
           </item>
           <item>
            <widget class="QPushButton" name="tbFilterReset">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>35</height>
-             </size>
-            </property>
             <property name="text">
              <string>Zurücksetzen</string>
             </property>
@@ -384,12 +330,6 @@
           </item>
           <item>
            <widget class="QPushButton" name="tbFilterUpdate">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>35</height>
-             </size>
-            </property>
             <property name="text">
              <string>Aktualisieren</string>
             </property>
@@ -479,7 +419,7 @@
            <property name="minimumSize">
             <size>
              <width>100</width>
-             <height>35</height>
+             <height>0</height>
             </size>
            </property>
            <property name="text">
@@ -512,12 +452,6 @@
          </item>
          <item>
           <widget class="QToolButton" name="tbLock">
-           <property name="minimumSize">
-            <size>
-             <width>35</width>
-             <height>35</height>
-            </size>
-           </property>
            <property name="text">
             <string/>
            </property>
@@ -600,7 +534,7 @@
        <set>QDockWidget::NoDockWidgetFeatures</set>
       </property>
       <property name="windowTitle">
-       <string>S&amp;chulung - Details</string>
+       <string>Schulung - Details</string>
       </property>
       <widget class="QWidget" name="dockWidgetContents_2">
        <layout class="QGridLayout" name="gridLayout_3">
@@ -704,8 +638,8 @@
            <widget class="QPushButton" name="pbClose">
             <property name="minimumSize">
              <size>
-              <width>0</width>
-              <height>35</height>
+              <width>100</width>
+              <height>0</height>
              </size>
             </property>
             <property name="text">
