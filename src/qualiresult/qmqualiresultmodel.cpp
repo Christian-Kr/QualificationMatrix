@@ -115,7 +115,7 @@ bool QMQualiResultModel::updateQualiInfo(const QString &filterName, const QStrin
     buildTrainGroupCache();
 
     // Informate listener.
-    emit beforeUpdateQualiInfo(filterEmployeeModel.rowCount());
+    emit beforeUpdateQualiInfo(tr("Berechne Qualifizierungsresultat"), filterEmployeeModel.rowCount());
 
     auto &settings = QMApplicationSettings::getInstance();
     auto ignoreList = settings.read("QualiResult/IgnoreList", QStringList()).toStringList();

@@ -92,7 +92,8 @@ public slots:
 
     /// Informate before qualiresult calculation will be done (time expensive).
     /// \param maxSteps Maximum number of steps in progress.
-    void beforeQualiResultCalculation(int maxSteps);
+    /// \param info Information about what happens.
+    void beforeQualiResultCalculation(QString info, int maxSteps);
 
     /// Only call when progressdialog object has been created and dialog is visible.
     /// \param currentStep Needs be lower than maximum step.

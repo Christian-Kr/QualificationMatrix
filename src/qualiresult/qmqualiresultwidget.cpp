@@ -104,6 +104,10 @@ void QMQualiResultWidget::updateData()
 
     // Create the model objects.
     qualiResultModel = std::make_unique<QMQualiResultModel>();
+    connect(qualiResultModel.get(), &QMQualiResultModel::beforeUpdateQualiInfo, this, &QMWinModeWidget::startWorkload);
+    connect(qualiResultModel.get(), &QMQualiResultModel::updateUpdateQualiInfo, this, &QMWinModeWidget::updateWorkload);
+    connect(qualiResultModel.get(), &QMQualiResultModel::afterUpdateQualiInfo, this, &QMWinModeWidget::endWorkload);
+
     funcViewModel = std::make_unique<QMFunctionViewModel>(this, db);
     trainViewModel = std::make_unique<QMTrainingViewModel>(this, db);
     trainDataStateViewModel = std::make_unique<QMTrainingDataStateViewModel>(this, db);

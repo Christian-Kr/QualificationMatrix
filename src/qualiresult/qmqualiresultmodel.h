@@ -112,7 +112,8 @@ public:
 signals:
     /// Emited before the quali info will be updated.
     /// \param maxSteps The maximum number of steps for the progress.
-    void beforeUpdateQualiInfo(int maxSteps);
+    /// \param info Info message about upcoming process.
+    void beforeUpdateQualiInfo(QString info, int maxSteps);
 
     /// Emited after the quali info will be updated.
     void afterUpdateQualiInfo();

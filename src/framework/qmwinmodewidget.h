@@ -27,6 +27,20 @@ public:
     /// Constructor
     /// \param parent
     explicit QMWinModeWidget(QWidget *parent = nullptr);
+
+signals:
+    /// Informate about starting work load.
+    /// \param info Message to display.
+    /// \param max Maximum process value.
+    void startWorkload(QString info, int max);
+
+    /// Informate about work load update.
+    /// \param info Message to display.
+    /// \param curr The current value.
+    void updateWorkload(int curr);
+
+    /// Informate about ending work load.
+    void endWorkload();
 };
 
 #endif // QMWINMODEWIDGET_H
