@@ -28,8 +28,8 @@ public:
     /// \param db The database to work with.
     explicit QMFunctionViewModel(QObject *parent = nullptr, const QSqlDatabase &db = QSqlDatabase());
 
-    /// Override from QMSqlRelationalTableModel.
-    void initModel() override;
+    /// Initialize the model with its settings.
+    void initModel();
 };
 
 #endif // QMFUNCTIONVIEWMODEL_H
