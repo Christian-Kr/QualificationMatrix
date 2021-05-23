@@ -1,4 +1,4 @@
-// qmtraindatacertificateviewmodel.h is part of QualificationMatrix
+// qmtrainingdataviewmodel.h is part of QualificationMatrix
 //
 // QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of the GNU General
 // Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
@@ -11,24 +11,25 @@
 // You should have received a copy of the GNU General Public License along with QualificationMatrix.
 // If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef QMTRAINDATACERTIFICATEVIEWMODEL_H
-#define QMTRAINDATACERTIFICATEVIEWMODEL_H
+#ifndef QMTRAININGDATAVIEWMODEL_H
+#define QMTRAININGDATAVIEWMODEL_H
 
 #include <QSqlTableModel>
 
-/// Table for correlation of train data and certificates. This allow flexible handle of the nubmer
-/// of certificates for every train data entry.
+/// Employee training data view table in sql.
 /// \author Christian Kr, Copyright 2021
-class QMTrainDataCertificateViewModel: public QSqlTableModel
+class QMTrainingDataViewModel: public QSqlTableModel
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
-    /// Constructor - Override from QSqlTableModel.
+    /// Constructor - Override from QSqlRelationalTableModel.
     /// \param parent
     /// \param db
-    explicit QMTrainDataCertificateViewModel(
-        QObject *parent = nullptr, QSqlDatabase db = QSqlDatabase());
+    explicit QMTrainingDataViewModel(QObject *parent = nullptr, const QSqlDatabase &db = QSqlDatabase());
+
+    /// Override from QMSqlRelationalTableModel.
+    void initModel();
 };
 
-#endif // QMTRAINDATACERTIFICATEVIEWMODEL_H
+#endif // QMTRAININGDATAVIEWMODEL_H

@@ -141,9 +141,6 @@ void QMQualiResultWidget::updateData()
     ui->cbTrainStateFilter->setModelColumn(1);
 
     resetFilter();
-
-    // Update quali result model data.
-    qualiResultModel->updateModels();
 }
 
 void QMQualiResultWidget::resetFilter()

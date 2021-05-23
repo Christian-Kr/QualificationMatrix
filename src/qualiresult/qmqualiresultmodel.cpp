@@ -13,11 +13,14 @@
 
 #include "qmqualiresultmodel.h"
 #include "qmqualiresultrecord.h"
-#include "model/qmdatamanager.h"
 #include "settings/qmapplicationsettings.h"
-#include "framework/qmsqlrelationaltablemodel.h"
+#include "model/qmfunctionviewmodel.h"
+#include "model/qmtrainingviewmodel.h"
+#include "model/qmemployeeviewmodel.h"
+#include "model/qmqualificationmatrixviewmodel.h"
+#include "model/qmtrainingdataviewmodel.h"
+#include "model/qmemployeefunctionviewmodel.h"
 
-#include <QSqlRelationalTableModel>
 #include <QSqlQuery>
 #include <QSqlRecord>
 #include <QSqlError>
@@ -31,45 +34,10 @@
 
 QMQualiResultModel::QMQualiResultModel(QObject *parent)
     : QAbstractTableModel(parent)
-    , funcModel(nullptr)
-    , trainModel(nullptr)
-    , trainDataModel(nullptr)
-    , qualiModel(nullptr)
-    , employeeModel(nullptr)
-    , employeeFuncModel(nullptr)
-    , trainExceptionModel(nullptr)
     , resultRecords(new QList<QMQualiResultRecord *>())
     , intervalCache(new QHash<QString, int>())
     , trainGroupCache(new QHash<QString, QString>())
 {}
-
-void QMQualiResultModel::updateModels()
-{
-    auto dm = QMDataManager::getInstance();
-
-    funcModel = dm->getFuncModel();
-    trainModel = dm->getTrainModel();
-    qualiModel = dm->getQualiModel();
-    employeeModel = dm->getEmployeeViewModel();
-    employeeFuncModel = dm->getEmployeeFuncModel();
-    trainDataModel = dm->getTrainDataModel();
-    trainExceptionModel = dm->getTrainExceptionModel();
-}
-
-void QMQualiResultModel::setEmployeeFilter(const QString &filter)
-{
-    employeeFilter = filter;
-}
-
-void QMQualiResultModel::setTrainFilter(const QString &filter)
-{
-    trainFilter = filter;
-}
-
-void QMQualiResultModel::setFuncFilter(const QString &filter)
-{
-    funcFilter = filter;
-}
 
 void QMQualiResultModel::resetModel()
 {
@@ -88,18 +56,37 @@ void QMQualiResultModel::resetModel()
 bool QMQualiResultModel::updateQualiInfo(const QString &filterName, const QString &filterFunc,
     const QString &filterTrain, const QString &filterEmployeeGroup)
 {
-    // This function will create its own model copies, for working with data. The data only need to be read, which
-    // reduces possible conflicts. All data gathered will be cached inside this model. That means, the model objects
-    // can be deleted after building the model here.
-
-    if (funcModel == nullptr || trainModel == nullptr || employeeModel == nullptr || employeeFuncModel == nullptr ||
-        qualiModel == nullptr || trainDataModel == nullptr)
+    // Get the current database and update data only when it is connected.
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
     {
         return false;
     }
 
+    auto db = QSqlDatabase::database("default");
+
+    QMFunctionViewModel funcViewModel(this, db);
+    funcViewModel.select();
+
+    QMTrainingViewModel trainViewModel(this, db);
+    trainViewModel.select();
+
+    QMTrainingDataViewModel trainDataViewModel(this, db);
+    trainDataViewModel.select();
+
+    QMQualificationMatrixViewModel qualiViewModel(this, db);
+    qualiViewModel.select();
+
+    QMEmployeeViewModel employeeViewModel(this, db);
+    employeeViewModel.select();
+
+    QMEmployeeFunctionViewModel employeeFuncViewModel(this, db);
+    employeeFuncViewModel.select();
+
+    QMTrainingDataViewModel trainExceptionViewModel(this, db);
+    trainExceptionViewModel.select();
+
     QSortFilterProxyModel filterEmployeeGroupModel(this);
-    filterEmployeeGroupModel.setSourceModel(employeeModel.get());
+    filterEmployeeGroupModel.setSourceModel(&employeeViewModel);
     filterEmployeeGroupModel.setFilterKeyColumn(2);
     filterEmployeeGroupModel.setFilterRegExp(filterEmployeeGroup);
 
@@ -111,8 +98,8 @@ bool QMQualiResultModel::updateQualiInfo(const QString &filterName, const QStrin
     resetModel();
 
     // Rebuild caches.
-    buildIntervalCache();
-    buildTrainGroupCache();
+    buildIntervalCache(trainViewModel);
+    buildTrainGroupCache(trainViewModel);
 
     // Informate listener.
     emit beforeUpdateQualiInfo(tr("Berechne Qualifizierungsresultat"), filterEmployeeModel.rowCount());
@@ -129,13 +116,12 @@ bool QMQualiResultModel::updateQualiInfo(const QString &filterName, const QStrin
 
         // Build new data structure.
         QString name = filterEmployeeModel.data(filterEmployeeModel.index(i, 1)).toString();
-        QString id = filterEmployeeModel.data(filterEmployeeModel.index(i, 0)).toString();
 
         // get all functions as a list from an employee
-        employeeFuncModel->setFilter("employee='" + id + "'");
-        for (int j = 0; j < employeeFuncModel->rowCount(); j++)
+        employeeFuncViewModel.setFilter("name='" + name + "'");
+        for (int j = 0; j < employeeFuncViewModel.rowCount(); j++)
         {
-            QString func = employeeFuncModel->data(employeeFuncModel->index(j, 2)).toString();
+            QString func = employeeFuncViewModel.data(employeeFuncViewModel.index(j, 2)).toString();
 
             // Ignore if filtered or global filtered in settings.
             if (!filterFunc.isEmpty() && !func.contains(filterFunc))
@@ -143,12 +129,12 @@ bool QMQualiResultModel::updateQualiInfo(const QString &filterName, const QStrin
                 continue;
             }
 
-            // go through all trainings of a function
-            qualiModel->setFilter("relTblAl_1.name='" + func + "'");
-            for (int k = 0; k < qualiModel->rowCount(); k++)
+            // Go through all trainings of a function.
+            qualiViewModel.setFilter("name='" + func + "'");
+            for (int k = 0; k < qualiViewModel.rowCount(); k++)
             {
-                QString train = qualiModel->data(qualiModel->index(k, 2)).toString();
-                QString qualiState = qualiModel->data(qualiModel->index(k, 3)).toString();
+                QString train = qualiViewModel.data(qualiViewModel.index(k, 2)).toString();
+                QString qualiState = qualiViewModel.data(qualiViewModel.index(k, 3)).toString();
 
                 // Ignore, if there is no qualiState.
                 if (qualiState.isEmpty())
@@ -179,12 +165,10 @@ bool QMQualiResultModel::updateQualiInfo(const QString &filterName, const QStrin
 
                 // Search for train exception and filter train.
                 bool filterException = false;
-                for (int l = 0; l < trainExceptionModel->rowCount(); l++)
+                for (int l = 0; l < trainExceptionViewModel.rowCount(); l++)
                 {
-                    QString temEmployee = trainExceptionModel
-                        ->data(trainExceptionModel->index(l, 1)).toString();
-                    QString temTrain = trainExceptionModel->data(trainExceptionModel->index(l, 2))
-                        .toString();
+                    QString temEmployee = trainExceptionViewModel.data(trainExceptionViewModel.index(l, 1)).toString();
+                    QString temTrain = trainExceptionViewModel.data(trainExceptionViewModel.index(l, 2)).toString();
                     if (temEmployee == name && temTrain == train)
                     {
                         filterException = true;
@@ -203,7 +187,7 @@ bool QMQualiResultModel::updateQualiInfo(const QString &filterName, const QStrin
                 record->setQualiState(qualiState);
 
                 // Find all trainings of this type for the employee and add them to calculate the latest last date.
-                trainDataModel->setFilter("relTblAl_1.name='" + name + "'");
+                trainDataViewModel.setFilter("name='" + name + "'");
 
                 // Final date and state objects.
                 QDate lastDate;
@@ -211,18 +195,18 @@ bool QMQualiResultModel::updateQualiInfo(const QString &filterName, const QStrin
                 QString trainDataState;
 
                 // Search for a training data entry, that fits the searched train to get a record.
-                for (int l = 0; l < trainDataModel->rowCount(); l++)
+                for (int l = 0; l < trainDataViewModel.rowCount(); l++)
                 {
-                    QString trainDataEntry = trainDataModel->data(trainDataModel->index(l, 2)).toString();
+                    QString trainDataEntry = trainDataViewModel.data(trainDataViewModel.index(l, 2)).toString();
 
                     if (train == trainDataEntry)
                     {
                         // Found an entry that fits the train and employee in train data.
 
                         // Get and set the date and train data state.
-                        QString strDate = trainDataModel->data(trainDataModel->index(l, 3)).toString();
+                        QString strDate = trainDataViewModel.data(trainDataViewModel.index(l, 3)).toString();
                         QDate tmpDate = QDate::fromString(strDate, Qt::ISODate);
-                        trainDataState = trainDataModel->data(trainDataModel->index(l, 4)).toString();
+                        trainDataState = trainDataViewModel.data(trainDataViewModel.index(l, 4)).toString();
 
                         // Logic: There two different states. The training could have been conducted or registered. For
                         // both states, the newest date are the relevant ones.
@@ -316,9 +300,9 @@ bool QMQualiResultModel::updateQualiInfo(const QString &filterName, const QStrin
     beginInsertRows(QModelIndex(), 0, resultRecords->size() - 1);
     endInsertRows();
 
-    employeeFuncModel->setFilter("");
-    qualiModel->setFilter("");
-    trainDataModel->setFilter("");
+    employeeFuncViewModel.setFilter("");
+    qualiViewModel.setFilter("");
+    trainDataViewModel.setFilter("");
 
     // Informate listener.
     emit afterUpdateQualiInfo();
@@ -454,67 +438,35 @@ QVariant QMQualiResultModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-int QMQualiResultModel::qualiStateRowFromFuncTrain(const int &funcRow, const int &trainRow) const
-{
-    QString funcName = funcModel->data(funcModel->index(funcRow, 1)).toString();
-    QString trainName = trainModel->data(trainModel->index(trainRow, 1)).toString();
-
-    for (int i = 0; i < qualiModel->rowCount(); i++)
-    {
-        QString qualiDataFunc = qualiModel->data(qualiModel->index(i, 1)).toString();
-        QString qualiDataTrain = qualiModel->data(qualiModel->index(i, 2)).toString();
-
-        if (funcName == qualiDataFunc && trainName == qualiDataTrain)
-        {
-            return i;
-        }
-    }
-
-    return -1;
-}
-
-void QMQualiResultModel::buildIntervalCache()
+void QMQualiResultModel::buildIntervalCache(QMTrainingViewModel &trainViewModel)
 {
     // Clear all data in cache.
     intervalCache->clear();
 
-    for (int i = 0; i < trainModel->rowCount(); i++)
+    for (int i = 0; i < trainViewModel.rowCount(); i++)
     {
-        QString name = trainModel->data(trainModel->index(i, 1)).toString();
+        QString name = trainViewModel.data(trainViewModel.index(i, 1)).toString();
         if (!intervalCache->contains(name))
         {
-            intervalCache->insert(name, trainModel->data(trainModel->index(i, 3)).toInt());
+            intervalCache->insert(name, trainViewModel.data(trainViewModel.index(i, 3)).toInt());
         }
     }
 }
 
-void QMQualiResultModel::buildTrainGroupCache()
+void QMQualiResultModel::buildTrainGroupCache(QMTrainingViewModel &trainViewModel)
 {
     // Clear all data in cache.
     trainGroupCache->clear();
 
-    for (int i = 0; i < trainModel->rowCount(); i++)
+    for (int i = 0; i < trainViewModel.rowCount(); i++)
     {
-        QString name = trainModel->data(trainModel->index(i, 1)).toString();
-        QString group = trainModel->data(trainModel->index(i, 2)).toString();
+        QString name = trainViewModel.data(trainViewModel.index(i, 1)).toString();
+        QString group = trainViewModel.data(trainViewModel.index(i, 2)).toString();
         if (!trainGroupCache->contains(name))
         {
             trainGroupCache->insert(name, group);
         }
     }
-}
-
-int QMQualiResultModel::getIntervallFromTrain(const QString &train)
-{
-    for (int i = 0; i < trainModel->rowCount(); i++)
-    {
-        QString name = trainModel->data(trainModel->index(i, 1)).toString();
-        if (name == train)
-        {
-            return trainModel->data(trainModel->index(i, 3)).toInt();
-        }
-    }
-    return -1;
 }
 
 bool QMQualiResultModel::setData(const QModelIndex &index, const QVariant &value, int role)

@@ -18,10 +18,9 @@
 
 #include <memory>
 
-// Forward declarations
-class QMSqlRelationalTableModel;
-class QSqlRelationalTableModel;
 class QMQualiResultRecord;
+class QMTrainingViewModel;
+class QSqlTableModel;
 
 /// A model for holding the table view data representation.
 /// \author Christian Kr, Copyright 2020
@@ -42,8 +41,7 @@ public:
     /// \param role
     /// \param section
     /// \return
-    QVariant headerData(
-        int section, Qt::Orientation orientation, int role) const override;
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
 
     /// Override from QAbstractTableModel.
     /// \param section
@@ -51,8 +49,7 @@ public:
     /// \param role
     /// \param value
     /// \return
-    bool setHeaderData(
-        int section, Qt::Orientation orientation, const QVariant &value, int role) override;
+    bool setHeaderData(int section, Qt::Orientation orientation, const QVariant &value, int role) override;
 
     /// Override from QAbstractTableModel.
     /// \param parent
@@ -82,29 +79,14 @@ public:
     /// \return
     Qt::ItemFlags flags(const QModelIndex &index) const override;
 
-    /// Load/reload the models from database object.
-    void updateModels();
-
-    /// Set different filter for the database.
-    /// \param filter
-    void setEmployeeFilter(const QString &filter);
-    void setFuncFilter(const QString &filter);
-    void setTrainFilter(const QString &fitler);
-
     /// Update the quali information with filter for all data.
     /// \param filterEmployeeGroup
     /// \param filterFunc
     /// \param filterName
     /// \param filterTrain
     /// \return true if succes, else false.
-    bool updateQualiInfo(
-        const QString &filterName, const QString &filterFunc, const QString &filterTrain,
+    bool updateQualiInfo(const QString &filterName, const QString &filterFunc, const QString &filterTrain,
         const QString &filterEmployeeGroup);
-
-    /// Search in train model for name and return the intervall.
-    /// \param train The train name to search for.
-    /// \return -1 if train not found.
-    int getIntervallFromTrain(const QString &train);
 
     /// Resets the model to be empty.
     void resetModel();
@@ -124,29 +106,13 @@ signals:
     void updateUpdateQualiInfo(int currentStep);
 
 private:
-    /// Get the state row in the qualiModel from func and train index.
-    /// \param funcRow The function index.
-    /// \param trainRow The training index.
-    /// \return Any number if row found, else < 0.
-    int qualiStateRowFromFuncTrain(const int &funcRow, const int &trainRow) const;
-
     /// Build an interval cache to speed up search.
-    void buildIntervalCache();
+    /// \param trainViewModel The training view model.
+    void buildIntervalCache(QMTrainingViewModel &trainViewModel);
 
-    /// Build an train group cache to speed up search.
-    void buildTrainGroupCache();
-
-    std::shared_ptr<QSqlRelationalTableModel> funcModel;
-    std::shared_ptr<QSqlRelationalTableModel> trainModel;
-    std::shared_ptr<QSqlRelationalTableModel> trainDataModel;
-    std::shared_ptr<QMSqlRelationalTableModel> qualiModel;
-    std::shared_ptr<QSqlRelationalTableModel> employeeModel;
-    std::shared_ptr<QSqlRelationalTableModel> employeeFuncModel;
-    std::shared_ptr<QSqlRelationalTableModel> trainExceptionModel;
-
-    QString employeeFilter;
-    QString funcFilter;
-    QString trainFilter;
+    /// Build an train group cache to speed up search. This correlates the training name to a group.
+    /// \param trainViewModel The training group view model.
+    void buildTrainGroupCache(QMTrainingViewModel &trainViewModel);
 
     QList<QMQualiResultRecord *> *resultRecords;
     QHash<QString, int> *intervalCache;
