@@ -26,9 +26,7 @@ public:
     /// Constructor
     /// \param parent Parent object for qt system.
     /// \param db The database object to work with.
-    explicit QMEmployeeViewModel(QObject *parent = nullptr,
-        const QSqlDatabase &db = QSqlDatabase());
-
+    explicit QMEmployeeViewModel(QObject *parent = nullptr, const QSqlDatabase &db = QSqlDatabase());
 };
 
 #endif // QMEMPLOYEEVIEWMODEL_H
