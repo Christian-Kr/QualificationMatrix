@@ -54,6 +54,15 @@ SELECT
 FROM
     TrainDataState;
 
+-- Create train data state view
+
+CREATE VIEW IF NOT EXISTS ShiftView AS
+SELECT
+    Shift.id,
+    Shift.name
+FROM
+    Shift;
+
 -- Update version of database
 
 UPDATE "Info" SET "value" = "1" WHERE "name" = "MAJOR";

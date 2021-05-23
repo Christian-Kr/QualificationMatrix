@@ -124,8 +124,8 @@ private:
     std::unique_ptr<QSqlTableModel> funcViewModel;
     std::unique_ptr<QSqlTableModel> trainViewModel;
     std::unique_ptr<QSqlRelationalTableModel> employeeViewModel;
-    std::shared_ptr<QSqlTableModel> employeeGroupModel;
-    std::shared_ptr<QSqlTableModel> trainDataStateModel;
+    std::unique_ptr<QSqlTableModel> employeeGroupViewModel;
+    std::unique_ptr<QSqlTableModel> trainDataStateViewModel;
 
     QSortFilterProxyModel *qualiResultFilterTRState;
     QSortFilterProxyModel *qualiResultFilterTState;
