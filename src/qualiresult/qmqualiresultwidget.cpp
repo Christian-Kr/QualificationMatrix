@@ -102,9 +102,7 @@ void QMQualiResultWidget::updateData()
 
     auto db = QSqlDatabase::database("default");
 
-    // Get the model data.
-    auto dm = QMDataManager::getInstance();
-
+    // Create the model objects.
     qualiResultModel = std::make_unique<QMQualiResultModel>();
     funcViewModel = std::make_unique<QMFunctionViewModel>(this, db);
     trainViewModel = std::make_unique<QMTrainingViewModel>(this, db);
@@ -112,6 +110,7 @@ void QMQualiResultWidget::updateData()
     employeeViewModel = std::make_unique<QMEmployeeViewModel>(this, db);
     employeeGroupViewModel = std::make_unique<QMShiftViewModel>(this, db);
 
+    // Set models to different ui controls.
     qualiResultFilterTRState->setSourceModel(qualiResultModel.get());
     qualiResultFilterTRState->setFilterKeyColumn(6);
 
