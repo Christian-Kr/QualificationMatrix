@@ -24,18 +24,14 @@
 #include <QDebug>
 
 QMQualiMatrixModel::QMQualiMatrixModel(QObject *parent)
-    : QAbstractTableModel(parent),
-    funcModel(nullptr),
-    trainModel(nullptr),
-    qualiModel(nullptr),
-    funcFilterModel(new QSortFilterProxyModel(this)),
-    trainFilterModel(new QSortFilterProxyModel(this)),
-    funcFilterGroupModel(new QSortFilterProxyModel(this)),
-    trainFilterGroupModel(new QSortFilterProxyModel(this)),
-    cache(new QHash<QString, QString>()),
-    trainFilterLegalModel(new QSortFilterProxyModel(this))
-{
-}
+    : QAbstractTableModel(parent)
+    , funcFilterModel(new QSortFilterProxyModel(this))
+    , trainFilterModel(new QSortFilterProxyModel(this))
+    , funcFilterGroupModel(new QSortFilterProxyModel(this))
+    , trainFilterGroupModel(new QSortFilterProxyModel(this))
+    , cache(new QHash<QString, QString>())
+    , trainFilterLegalModel(new QSortFilterProxyModel(this))
+{}
 
 QMQualiMatrixModel::~QMQualiMatrixModel()
 {
@@ -72,7 +68,7 @@ void QMQualiMatrixModel::updateModels()
 
 void QMQualiMatrixModel::buildCache()
 {
-    emit beforeBuildCache(funcFilterModel->rowCount() * trainFilterModel->rowCount());
+    emit beforeBuildCache(tr("Erstelle cache"), funcFilterModel->rowCount() * trainFilterModel->rowCount());
 
     // Clear all data in cache.
     cache->clear();

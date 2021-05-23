@@ -118,30 +118,23 @@ public:
 
 signals:
 
-    /**
-     * @brief Emit before the cache will be build.
-     * @param maxSteps The maximum number of steps.
-     */
-    void beforeBuildCache(int maxSteps);
+    /// Emit before the cache will be build.
+    /// \param maxSteps The maximum number of steps.
+    /// \param info Information message about what will happen.
+    void beforeBuildCache(QString info, int maxSteps);
 
-    /**
-     * @brief Emited on every loop of cache build.
-     * @param currentStep The current number of steps.
-     */
+    /// Emited on every loop of cache build.
+    /// \param currentStep The current number of steps.
     void updateBuildCache(int currentStep);
 
-    /**
-     * @brief Emit when the build cache has been finished.
-     */
+    /// Emit when the build cache has been finished.
     void afterBuildCache();
 
 private:
-    /**
-     * @brief get the state row in the qualiModel from func and train index
-     * @param funcRow the function index
-     * @param trainRow the training index
-     * @return any number if row found, else < 0
-     */
+    /// Get the state row in the qualiModel from func and train index.
+    /// \param funcRow the function index
+    /// \param trainRow the training index
+    /// \return any number if row found, else < 0.
     int qualiStateRowFromFuncTrain(const int &funcRow, const int &trainRow) const;
 
     std::shared_ptr<QSqlRelationalTableModel> funcModel;

@@ -699,9 +699,8 @@ void QMMainWindow::enterWindowMode(WIN_MODE mode)
             qualiMatrixWidget = std::make_unique<QMQualiMatrixWidget>();
             ui->centralwidget->layout()->addWidget(qualiMatrixWidget.get());
 
-//            connect(dm->getQualiMatrixModel().get(), &QMQualiMatrixModel::beforeBuildCache, this,
-//                &QMMainWindow::beforeQualiMatrixBuildCache);
-
+            connect(dm->getQualiMatrixModel().get(), &QMQualiMatrixModel::beforeBuildCache, this,
+                &QMMainWindow::workloadStarts);
             connect(dm->getQualiMatrixModel().get(), &QMQualiMatrixModel::updateBuildCache, this,
                 &QMMainWindow::workloadUpdates);
             connect(dm->getQualiMatrixModel().get(), &QMQualiMatrixModel::afterBuildCache, this,
