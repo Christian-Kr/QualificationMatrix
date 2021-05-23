@@ -14,7 +14,8 @@
 #ifndef QMTRAINDATAWIDGET_H
 #define QMTRAINDATAWIDGET_H
 
-#include <QWidget>
+#include "framework/qmwinmodewidget.h"
+
 #include <memory>
 
 // Forward declarations for faster compiling.
@@ -31,9 +32,9 @@ class QMTrainDataWidget;
 
 /// Widget for training data to manipulate.
 /// \author Christian Kr, Copyright 2020
-class QMTrainDataWidget: public QWidget
+class QMTrainDataWidget: public QMWinModeWidget
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /// Constructor

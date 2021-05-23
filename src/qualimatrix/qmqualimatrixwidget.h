@@ -14,7 +14,8 @@
 #ifndef QMQUALIMATRIXWIDGET_H
 #define QMQUALIMATRIXWIDGET_H
 
-#include <QWidget>
+#include "framework/qmwinmodewidget.h"
+
 #include <memory>
 
 // Forward declaration
@@ -31,9 +32,9 @@ class QMQualiMatrixWidget;
 
 /// The view of the quali matrix.
 /// \author Christian Kr, Copyright 2020
-class QMQualiMatrixWidget: public QWidget
+class QMQualiMatrixWidget: public QMWinModeWidget
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /// Constructor

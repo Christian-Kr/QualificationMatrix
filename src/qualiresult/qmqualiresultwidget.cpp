@@ -37,7 +37,7 @@
 #include <QTextStream>
 
 QMQualiResultWidget::QMQualiResultWidget(QWidget *parent)
-    : QWidget(parent)
+    : QMWinModeWidget(parent)
     , ui(new Ui::QMQualiResultWidget)
     , qualiResultFilterTRState(new QSortFilterProxyModel(this))
     , qualiResultFilterTState(new QSortFilterProxyModel(this))

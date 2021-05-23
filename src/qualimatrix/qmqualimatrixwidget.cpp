@@ -31,11 +31,15 @@
 #include <QTimer>
 
 QMQualiMatrixWidget::QMQualiMatrixWidget(QWidget *parent)
-    : QWidget(parent), ui(new Ui::QMQualiMatrixWidget), qualiMatrixModel(nullptr), funcModel
-    (nullptr),
-    trainModel(nullptr), funcGroupModel(nullptr), trainGroupModel(nullptr),
-    qualiMatrixFuncFilterModel(new QSortFilterProxyModel(this)),
-    lockModeTimer(new QTimer(this))
+    : QMWinModeWidget(parent)
+    , ui(new Ui::QMQualiMatrixWidget)
+    , qualiMatrixModel(nullptr)
+    , funcModel(nullptr)
+    , trainModel(nullptr)
+    , funcGroupModel(nullptr)
+    , trainGroupModel(nullptr)
+    , qualiMatrixFuncFilterModel(new QSortFilterProxyModel(this))
+    , lockModeTimer(new QTimer(this))
 {
     ui->setupUi(this);
 

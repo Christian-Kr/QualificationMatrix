@@ -14,7 +14,7 @@
 #ifndef QMQUALIRESULTWIDGET_H
 #define QMQUALIRESULTWIDGET_H
 
-#include <QWidget>
+#include "framework/qmwinmodewidget.h"
 
 #include <memory>
 
@@ -33,7 +33,7 @@ class QMQualiResultWidget;
 
 /// Display the results of qualification.
 /// \author Christian Kr, Copyright 2020
-class QMQualiResultWidget: public QWidget
+class QMQualiResultWidget: public QMWinModeWidget
 {
     Q_OBJECT
 

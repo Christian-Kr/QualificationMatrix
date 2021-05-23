@@ -32,8 +32,8 @@
 #include <QDebug>
 
 QMTrainDataWidget::QMTrainDataWidget(QWidget *parent)
-    : QWidget(parent),
-    ui(new Ui::QMTrainDataWidget)
+    : QMWinModeWidget(parent)
+    , ui(new Ui::QMTrainDataWidget)
 {
     ui->setupUi(this);
 
