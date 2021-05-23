@@ -20,6 +20,10 @@
 #include "settings/qmapplicationsettings.h"
 #include "framework/qmextendedselectiondialog.h"
 #include "framework/qmsqlrelationaltablemodel.h"
+#include "model/qmfunctionviewmodel.h"
+#include "model/qmfunctiongroupviewmodel.h"
+#include "model/qmtrainingviewmodel.h"
+#include "model/qmtraininggroupviewmodel.h"
 
 #include <QSortFilterProxyModel>
 #include <QSqlTableModel>
@@ -33,11 +37,6 @@
 QMQualiMatrixWidget::QMQualiMatrixWidget(QWidget *parent)
     : QMWinModeWidget(parent)
     , ui(new Ui::QMQualiMatrixWidget)
-    , qualiMatrixModel(nullptr)
-    , funcModel(nullptr)
-    , trainModel(nullptr)
-    , funcGroupModel(nullptr)
-    , trainGroupModel(nullptr)
     , qualiMatrixFuncFilterModel(new QSortFilterProxyModel(this))
     , lockModeTimer(new QTimer(this))
 {
@@ -84,18 +83,18 @@ void QMQualiMatrixWidget::showTrainSectionHeaderInfo(int logicalIndex)
     ui->dwTrainDetails->setVisible(true);
     auto trainName = qualiMatrixModel->headerData(logicalIndex, Qt::Horizontal).toString();
 
-    for(int i = 0; i < trainModel->rowCount(); i++)
+    for(int i = 0; i < trainViewModel->rowCount(); i++)
     {
-        auto tmpValue = trainModel->data(trainModel->index(i, 1)).toString();
+        auto tmpValue = trainViewModel->data(trainViewModel->index(i, 1)).toString();
         if (tmpValue == trainName)
         {
             ui->laName->setText(tmpValue);
-            ui->laGroup->setText(trainModel->data(trainModel->index(i, 2)).toString());
+            ui->laGroup->setText(trainViewModel->data(trainViewModel->index(i, 2)).toString());
 
-            ui->laInterval->setText(trainModel->data(
-                trainModel->index(i, 3)).toString() + tr(" Jahr(e)"));
+            ui->laInterval->setText(trainViewModel->data(
+                trainViewModel->index(i, 3)).toString() + tr(" Jahr(e)"));
 
-            if (trainModel->data(trainModel->index(i, 4)).toInt() == 1)
+            if (trainViewModel->data(trainViewModel->index(i, 4)).toInt() == 1)
             {
                 ui->laLegallyNecessary->setText(tr("Ja"));
             }
@@ -104,7 +103,7 @@ void QMQualiMatrixWidget::showTrainSectionHeaderInfo(int logicalIndex)
                 ui->laLegallyNecessary->setText(tr("Nein"));
             }
 
-            ui->pteContent->setPlainText(trainModel->data(trainModel->index(i, 5)).toString());
+            ui->pteContent->setPlainText(trainViewModel->data(trainViewModel->index(i, 5)).toString());
 
             break;
         }
@@ -170,42 +169,45 @@ void QMQualiMatrixWidget::switchFilterVisibility()
 
 void QMQualiMatrixWidget::updateData()
 {
-    // Get the model data.
-    auto dm = QMDataManager::getInstance();
+    // Get the current database and update data only when it is connected.
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        return;
+    }
 
-    funcModel = dm->getFuncModel();
-    trainModel = dm->getTrainModel();
-    funcGroupModel = dm->getFuncGroupModel();
-    trainGroupModel = dm->getTrainGroupModel();
-    qualiMatrixModel = dm->getQualiMatrixModel();
+    auto db = QSqlDatabase::database("default");
+
+    qualiMatrixModel = std::make_unique<QMQualiMatrixModel>();
+
+    connect(qualiMatrixModel.get(), &QMQualiMatrixModel::beforeBuildCache, this, &QMWinModeWidget::startWorkload);
+    connect(qualiMatrixModel.get(), &QMQualiMatrixModel::updateBuildCache, this, &QMWinModeWidget::updateWorkload);
+    connect(qualiMatrixModel.get(), &QMQualiMatrixModel::afterBuildCache, this, &QMWinModeWidget::endWorkload);
+
     qualiMatrixModel->updateModels();
 
-    // Delete all connections.
-    ui->cbFuncFilter->disconnect(this, SLOT(updateFilter()));
-    ui->cbFuncGroupFilter->disconnect(this, SLOT(updateFilter()));
-    ui->cbTrainFilter->disconnect(this, SLOT(updateFilter()));
-    ui->cbTrainGroupFilter->disconnect(this, SLOT(updateFilter()));
+    funcViewModel = std::make_unique<QMFunctionViewModel>(this, db);
+    trainViewModel = std::make_unique<QMTrainingViewModel>(this, db);
+    trainGroupViewModel = std::make_unique<QMTrainingGroupViewModel>(this, db);
+    funcGroupViewModel = std::make_unique<QMFunctionGroupViewModel>(this, db);
 
     // Update the views.
     ui->tvQualiMatrix->setModel(qualiMatrixModel.get());
 
     // After setting the new model, the connection fo the selection model has to be reset.
-    ui->tvQualiMatrix->selectionModel()->disconnect(this,
-        SLOT(QMQualiMatrixWidget::selectionChanged()));
-    connect(
-        ui->tvQualiMatrix->selectionModel(), &QItemSelectionModel::currentChanged,
+    ui->tvQualiMatrix->selectionModel()->disconnect(this, SLOT(QMQualiMatrixWidget::selectionChanged()));
+    connect(ui->tvQualiMatrix->selectionModel(), &QItemSelectionModel::currentChanged,
         this, &QMQualiMatrixWidget::selectionChanged);
 
-    ui->cbFuncGroupFilter->setModel(funcGroupModel.get());
+    ui->cbFuncGroupFilter->setModel(funcGroupViewModel.get());
     ui->cbFuncGroupFilter->setModelColumn(1);
 
-    ui->cbTrainGroupFilter->setModel(trainGroupModel.get());
+    ui->cbTrainGroupFilter->setModel(trainGroupViewModel.get());
     ui->cbTrainGroupFilter->setModelColumn(1);
 
-    ui->cbTrainFilter->setModel(trainModel.get());
+    ui->cbTrainFilter->setModel(trainViewModel.get());
     ui->cbTrainFilter->setModelColumn(1);
 
-    ui->cbFuncFilter->setModel(funcModel.get());
+    ui->cbFuncFilter->setModel(funcViewModel.get());
     ui->cbFuncFilter->setModelColumn(1);
 
     resetFilter();
@@ -224,12 +226,11 @@ void QMQualiMatrixWidget::resetFilter()
 
 void QMQualiMatrixWidget::updateHeaderCache()
 {
-    auto verticalHeader = dynamic_cast<QMQualiMatrixHeaderView *>(
-        ui->tvQualiMatrix->verticalHeader());
+    auto verticalHeader = dynamic_cast<QMQualiMatrixHeaderView *>(ui->tvQualiMatrix->verticalHeader());
     verticalHeader->updateFunctionGroupColors();
     verticalHeader->updateTrainingGroupColors();
-    auto horizontalHeader = dynamic_cast<QMQualiMatrixHeaderView *>(
-        ui->tvQualiMatrix->horizontalHeader());
+
+    auto horizontalHeader = dynamic_cast<QMQualiMatrixHeaderView *>(ui->tvQualiMatrix->horizontalHeader());
     horizontalHeader->updateTrainingGroupColors();
     horizontalHeader->updateFunctionGroupColors();
     horizontalHeader->updateTrainLegallyNecessary();
@@ -237,8 +238,8 @@ void QMQualiMatrixWidget::updateHeaderCache()
 
 void QMQualiMatrixWidget::updateColors()
 {
-    auto matrixDelegate = dynamic_cast<QMQualiMatrixDelegate *>(
-        ui->tvQualiMatrix->itemDelegate());
+    auto matrixDelegate = dynamic_cast<QMQualiMatrixDelegate *>(ui->tvQualiMatrix->itemDelegate());
+
     if (matrixDelegate != nullptr)
     {
         matrixDelegate->updateColors();
@@ -255,8 +256,7 @@ void QMQualiMatrixWidget::switchLockMode()
     }
     else
     {
-        ui->tvQualiMatrix->setEditTriggers(
-            QAbstractItemView::DoubleClicked | QAbstractItemView::EditKeyPressed);
+        ui->tvQualiMatrix->setEditTriggers(QAbstractItemView::DoubleClicked | QAbstractItemView::EditKeyPressed);
 
         // After lock mode has been opened, start a timer to trigger the end of editing at a
         // specific time.
@@ -271,8 +271,7 @@ void QMQualiMatrixWidget::enableLocked()
     ui->tvQualiMatrix->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
 
-void QMQualiMatrixWidget::selectionChanged(
-    const QModelIndex & current, const QModelIndex & previous)
+void QMQualiMatrixWidget::selectionChanged(const QModelIndex & current, const QModelIndex & previous)
 {
     extendDisableLocked();
 }
@@ -288,7 +287,7 @@ void QMQualiMatrixWidget::extendDisableLocked()
 
 void QMQualiMatrixWidget::extSelTrainGroup()
 {
-    QMExtendedSelectionDialog extSelDialog(this, trainGroupModel.get(), 1);
+    QMExtendedSelectionDialog extSelDialog(this, trainGroupViewModel.get(), 1);
     auto res = extSelDialog.exec();
     auto modelIndexList = extSelDialog.getFilterSelected();
 
@@ -303,7 +302,7 @@ void QMQualiMatrixWidget::extSelTrainGroup()
 
 void QMQualiMatrixWidget::extSelFuncGroup()
 {
-    QMExtendedSelectionDialog extSelDialog(this, funcGroupModel.get(), 1);
+    QMExtendedSelectionDialog extSelDialog(this, funcGroupViewModel.get(), 1);
     auto res = extSelDialog.exec();
     auto modelIndexList = extSelDialog.getFilterSelected();
 
@@ -318,7 +317,7 @@ void QMQualiMatrixWidget::extSelFuncGroup()
 
 void QMQualiMatrixWidget::extSelFunc()
 {
-    QMExtendedSelectionDialog extSelDialog(this, funcModel.get(), 1);
+    QMExtendedSelectionDialog extSelDialog(this, funcViewModel.get(), 1);
     auto res = extSelDialog.exec();
     auto modelIndexList = extSelDialog.getFilterSelected();
 
@@ -333,7 +332,7 @@ void QMQualiMatrixWidget::extSelFunc()
 
 void QMQualiMatrixWidget::extSelTrain()
 {
-    QMExtendedSelectionDialog extSelDialog(this, trainModel.get(), 1);
+    QMExtendedSelectionDialog extSelDialog(this, trainViewModel.get(), 1);
     auto res = extSelDialog.exec();
     auto modelIndexList = extSelDialog.getFilterSelected();
 

@@ -22,7 +22,6 @@
 class QMQualiMatrixModel;
 class QSortFilterProxyModel;
 class QSqlTableModel;
-class QMSqlRelationalTableModel;
 class QSqlRelationalTableModel;
 
 namespace Ui
@@ -118,11 +117,11 @@ public slots:
 private:
     Ui::QMQualiMatrixWidget *ui;
 
-    std::shared_ptr<QMQualiMatrixModel> qualiMatrixModel;
-    std::shared_ptr<QMSqlRelationalTableModel> funcModel;
-    std::shared_ptr<QMSqlRelationalTableModel> trainModel;
-    std::shared_ptr<QSqlTableModel> funcGroupModel;
-    std::shared_ptr<QSqlTableModel> trainGroupModel;
+    std::unique_ptr<QMQualiMatrixModel> qualiMatrixModel;
+    std::unique_ptr<QSqlTableModel> funcViewModel;
+    std::unique_ptr<QSqlTableModel> trainViewModel;
+    std::unique_ptr<QSqlTableModel> funcGroupViewModel;
+    std::unique_ptr<QSqlTableModel> trainGroupViewModel;
 
     QSortFilterProxyModel *qualiMatrixFuncFilterModel;
 
