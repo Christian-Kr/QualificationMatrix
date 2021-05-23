@@ -80,7 +80,7 @@ void QMMainWindow::initDataManager() const
     auto dm = QMDataManager::getInstance();
 
     connect(dm, &QMDataManager::beforeInitModels, this, &QMMainWindow::beforeInitModels);
-    connect(dm, &QMDataManager::updateInitModels, this, &QMMainWindow::updateInitModels);
+    connect(dm, &QMDataManager::updateInitModels, this, &QMMainWindow::workloadUpdates);
     connect(dm, &QMDataManager::afterInitModels, this, &QMMainWindow::afterInitModels);
 }
 
@@ -310,14 +310,9 @@ void QMMainWindow::beforeInitModels(int maxSteps)
     showProgress(tr("Datenbank"), tr("Daten abrufen..."), 0, maxSteps);
 }
 
-void QMMainWindow::beforeQualiResultCalculation(QString info, int maxSteps)
+void QMMainWindow::workloadStarts(QString info, int maxSteps)
 {
-    showProgress(tr("Schulungsresultat"), info, 0, maxSteps);
-}
-
-void QMMainWindow::beforeQualiMatrixBuildCache(int maxSteps)
-{
-    showProgress(tr("Qualifikationsmatrix"), tr("Cache aufbauen..."), 0, maxSteps);
+    showProgress(tr("Berechnung"), info, 0, maxSteps);
 }
 
 void QMMainWindow::showProgress(const QString &title, const QString &text, const int &minSteps, const int &maxSteps)
@@ -339,7 +334,7 @@ void QMMainWindow::showProgress(const QString &title, const QString &text, const
     progressDialog->setVisible(true);
 }
 
-void QMMainWindow::updateInitModels(int currentStep)
+void QMMainWindow::workloadUpdates(int currentStep)
 {
     progressDialog->setValue(currentStep);
 
@@ -704,12 +699,11 @@ void QMMainWindow::enterWindowMode(WIN_MODE mode)
             qualiMatrixWidget = std::make_unique<QMQualiMatrixWidget>();
             ui->centralwidget->layout()->addWidget(qualiMatrixWidget.get());
 
-            connect(dm->getQualiMatrixModel().get(), &QMQualiMatrixModel::beforeBuildCache, this,
-                &QMMainWindow::beforeQualiMatrixBuildCache);
+//            connect(dm->getQualiMatrixModel().get(), &QMQualiMatrixModel::beforeBuildCache, this,
+//                &QMMainWindow::beforeQualiMatrixBuildCache);
 
             connect(dm->getQualiMatrixModel().get(), &QMQualiMatrixModel::updateBuildCache, this,
-                &QMMainWindow::updateInitModels);
-
+                &QMMainWindow::workloadUpdates);
             connect(dm->getQualiMatrixModel().get(), &QMQualiMatrixModel::afterBuildCache, this,
                 &QMMainWindow::closeProgress);
 
@@ -728,15 +722,9 @@ void QMMainWindow::enterWindowMode(WIN_MODE mode)
             qualiResultWidget = std::make_unique<QMQualiResultWidget>();
             ui->centralwidget->layout()->addWidget(qualiResultWidget.get());
 
-            connect(qualiResultWidget.get(), &QMWinModeWidget::startWorkload, this,
-                &QMMainWindow::beforeQualiResultCalculation);
-
-            connect(qualiResultWidget.get(), &QMWinModeWidget::updateWorkload, this,
-                &QMMainWindow::updateInitModels);
-
-            connect(qualiResultWidget.get(), &QMWinModeWidget::endWorkload, this,
-                &QMMainWindow::closeProgress);
-
+            connect(qualiResultWidget.get(), &QMWinModeWidget::startWorkload, this, &QMMainWindow::workloadStarts);
+            connect(qualiResultWidget.get(), &QMWinModeWidget::updateWorkload, this, &QMMainWindow::workloadUpdates);
+            connect(qualiResultWidget.get(), &QMWinModeWidget::endWorkload, this, &QMMainWindow::closeProgress);
             connect(qualiResultWidget.get(), &QMQualiResultWidget::showTrainData, this,
                 &QMMainWindow::showTrainingData);
 

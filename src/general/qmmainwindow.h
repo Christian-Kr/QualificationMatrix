@@ -86,18 +86,14 @@ public slots:
     /// Informate that all models have been initialized in data manager.
     void afterInitModels();
 
-    /// Informate before the qualimatrix cache will be build (time expensive).
-    /// \param maxSteps Maximum number of steps in progress.
-    void beforeQualiMatrixBuildCache(int maxSteps);
-
-    /// Informate before qualiresult calculation will be done (time expensive).
+    /// Informate before a workload starts. This will show a progress dialog with progress information.
     /// \param maxSteps Maximum number of steps in progress.
     /// \param info Information about what happens.
-    void beforeQualiResultCalculation(QString info, int maxSteps);
+    void workloadStarts(QString info, int maxSteps);
 
     /// Only call when progressdialog object has been created and dialog is visible.
     /// \param currentStep Needs be lower than maximum step.
-    void updateInitModels(int currentStep);
+    void workloadUpdates(int currentStep);
 
     /// Should only be called after progressdialog has been shown.
     void closeProgress();
