@@ -17,7 +17,9 @@
 
 QMFunctionViewModel::QMFunctionViewModel(QObject *parent, const QSqlDatabase &db)
     : QSqlTableModel(parent, db)
-{}
+{
+    initModel();
+}
 
 void QMFunctionViewModel::initModel()
 {

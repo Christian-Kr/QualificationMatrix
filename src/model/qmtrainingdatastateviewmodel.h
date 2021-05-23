@@ -1,4 +1,4 @@
-// qmtraininggroupviewmodel.cpp is part of QualificationMatrix
+// qmtrainingdatastateviewmodel.h is part of QualificationMatrix
 //
 // QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of the GNU General
 // Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
@@ -11,25 +11,25 @@
 // You should have received a copy of the GNU General Public License along with QualificationMatrix.
 // If not, see <http://www.gnu.org/licenses/>.
 
-#include "qmtraininggroupviewmodel.h"
+#ifndef QMTRAININGDATASTATEVIEWMODEL_H
+#define QMTRAININGDATASTATEVIEWMODEL_H
 
-QMTrainingGroupViewModel::QMTrainingGroupViewModel(QObject *parent, QSqlDatabase db)
-    : QSqlTableModel(parent, db)
+#include <QSqlTableModel>
+
+/// Employee training data state view table in sql.
+/// \author Christian Kr, Copyright 2021
+class QMTrainingDataStateViewModel: public QSqlTableModel
 {
-    initModel();
-}
+    Q_OBJECT
 
-void QMTrainingGroupViewModel::initModel()
-{
-    // The name of the Table.
-    setTable("TrainGroupView");
+public:
+    /// Constructor - Override from QSqlRelationalTableModel.
+    /// \param parent
+    /// \param db
+    explicit QMTrainingDataStateViewModel(QObject *parent = nullptr, const QSqlDatabase &db = QSqlDatabase());
 
-    // The edit strategy.
-    setEditStrategy(QSqlTableModel::OnManualSubmit);
+    /// Initialize the model with settings.
+    void initModel();
+};
 
-    // Specifiy header data of table.
-    setHeaderData(1, Qt::Horizontal, tr("Name"));
-    setHeaderData(2, Qt::Horizontal, tr("Farbe"));
-
-    sort(1, Qt::AscendingOrder);
-}
+#endif // QMTRAININGDATASTATEVIEWMODEL_H

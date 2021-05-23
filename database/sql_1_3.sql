@@ -45,6 +45,15 @@ SELECT
 FROM
     TrainGroup;
 
+-- Create train data state view
+
+CREATE VIEW IF NOT EXISTS TrainDataStateView AS
+SELECT
+    TrainDataState.id,
+    TrainDataState.name
+FROM
+    TrainDataState;
+
 -- Update version of database
 
 UPDATE "Info" SET "value" = "1" WHERE "name" = "MAJOR";

@@ -15,7 +15,9 @@
 
 QMTrainingViewModel::QMTrainingViewModel(QObject *parent, QSqlDatabase db)
     : QSqlTableModel(parent, db)
-{}
+{
+    initModel();
+}
 
 void QMTrainingViewModel::initModel()
 {

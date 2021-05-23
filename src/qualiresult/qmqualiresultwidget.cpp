@@ -18,6 +18,9 @@
 #include "framework/qmextendedselectiondialog.h"
 #include "settings/qmapplicationsettings.h"
 #include "framework/qmsqlrelationaltablemodel.h"
+#include "model/qmfunctionviewmodel.h"
+#include "model/qmtrainingviewmodel.h"
+#include "model/qmemployeeviewmodel.h"
 
 #include <QSortFilterProxyModel>
 #include <QSqlRelationalTableModel>
@@ -34,16 +37,16 @@
 #include <QTextStream>
 
 QMQualiResultWidget::QMQualiResultWidget(QWidget *parent)
-    : QWidget(parent),
-    ui(new Ui::QMQualiResultWidget),
-    qualiResultModel(nullptr),
-    funcModel(nullptr),
-    trainModel(nullptr),
-    employeeModel(nullptr),
-    employeeGroupModel(nullptr),
-    trainDataStateModel(nullptr),
-    qualiResultFilterTRState(new QSortFilterProxyModel(this)),
-    qualiResultFilterTState(new QSortFilterProxyModel(this))
+    : QWidget(parent)
+    , ui(new Ui::QMQualiResultWidget)
+    , qualiResultModel(nullptr)
+    , funcViewModel(nullptr)
+    , trainViewModel(nullptr)
+    , employeeViewModel(nullptr)
+    , employeeGroupModel(nullptr)
+    , trainDataStateModel(nullptr)
+    , qualiResultFilterTRState(new QSortFilterProxyModel(this))
+    , qualiResultFilterTState(new QSortFilterProxyModel(this))
 {
     ui->setupUi(this);
 
@@ -97,13 +100,28 @@ void QMQualiResultWidget::loadSettings()
 
 void QMQualiResultWidget::updateData()
 {
+    // Get the current database and update data only when it is connected.
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        return;
+    }
+
+    auto db = QSqlDatabase::database("default");
+
     // Get the model data.
     auto dm = QMDataManager::getInstance();
-    qualiResultModel = dm->getQualiResultModel();
-    funcModel = dm->getFuncModel();
-    trainModel = dm->getTrainModel();
+
+    qualiResultModel = std::make_unique<QMQualiResultModel>();
+
+    funcViewModel = std::make_unique<QMFunctionViewModel>(this, db);
+    funcViewModel->select();
+
+    trainViewModel = std::make_unique<QMTrainingViewModel>(this, db);
+    trainViewModel->select();
+
     trainDataStateModel = dm->getTrainDataStateModel();
-    employeeModel = dm->getEmployeeViewModel();
+
+    employeeViewModel = std::make_unique<QMEmployeeViewModel>(this, db);
     employeeGroupModel = dm->getShiftModel();
 
     qualiResultFilterTRState->setSourceModel(qualiResultModel.get());
@@ -116,16 +134,16 @@ void QMQualiResultWidget::updateData()
     ui->tvQualiResult->setModel(qualiResultFilterTState);
 
     // Update all table views with the new models.
-    ui->cbFilterFunc->setModel(funcModel.get());
+    ui->cbFilterFunc->setModel(funcViewModel.get());
     ui->cbFilterFunc->setModelColumn(1);
 
-    ui->cbFilterTrain->setModel(trainModel.get());
+    ui->cbFilterTrain->setModel(trainViewModel.get());
     ui->cbFilterTrain->setModelColumn(1);
 
     ui->cbFilterEmployeeGroup->setModel(employeeGroupModel.get());
     ui->cbFilterEmployeeGroup->setModelColumn(1);
 
-    ui->cbFilterEmployee->setModel(employeeModel.get());
+    ui->cbFilterEmployee->setModel(employeeViewModel.get());
     ui->cbFilterEmployee->setModelColumn(1);
 
     ui->cbTrainStateFilter->setModel(trainDataStateModel.get());
@@ -395,7 +413,7 @@ void QMQualiResultWidget::resetEmployeeGroup()
 
 void QMQualiResultWidget::extSelEmployee()
 {
-    QMExtendedSelectionDialog extSelDialog(this, employeeModel.get(), 1);
+    QMExtendedSelectionDialog extSelDialog(this, employeeViewModel.get(), 1);
     auto res = extSelDialog.exec();
     auto modelIndexList = extSelDialog.getFilterSelected();
 

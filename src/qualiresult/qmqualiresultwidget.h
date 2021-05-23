@@ -121,9 +121,9 @@ private:
     Ui::QMQualiResultWidget *ui;
 
     std::shared_ptr<QMQualiResultModel> qualiResultModel;
-    std::shared_ptr<QMSqlRelationalTableModel> funcModel;
-    std::shared_ptr<QMSqlRelationalTableModel> trainModel;
-    std::shared_ptr<QSqlRelationalTableModel> employeeModel;
+    std::unique_ptr<QSqlTableModel> funcViewModel;
+    std::unique_ptr<QSqlTableModel> trainViewModel;
+    std::unique_ptr<QSqlRelationalTableModel> employeeViewModel;
     std::shared_ptr<QSqlTableModel> employeeGroupModel;
     std::shared_ptr<QSqlTableModel> trainDataStateModel;
 
