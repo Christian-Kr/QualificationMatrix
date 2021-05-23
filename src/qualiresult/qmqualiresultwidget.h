@@ -18,7 +18,6 @@
 
 #include <memory>
 
-// Forward declaration for faster compiling.
 class QMQualiResultModel;
 class QMSqlRelationalTableModel;
 class QSqlRelationalTableModel;
@@ -36,7 +35,7 @@ class QMQualiResultWidget;
 /// \author Christian Kr, Copyright 2020
 class QMQualiResultWidget: public QWidget
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /// Constructor
