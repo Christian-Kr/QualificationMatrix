@@ -39,12 +39,6 @@
 QMQualiResultWidget::QMQualiResultWidget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::QMQualiResultWidget)
-    , qualiResultModel(nullptr)
-    , funcViewModel(nullptr)
-    , trainViewModel(nullptr)
-    , employeeViewModel(nullptr)
-    , employeeGroupModel(nullptr)
-    , trainDataStateViewModel(nullptr)
     , qualiResultFilterTRState(new QSortFilterProxyModel(this))
     , qualiResultFilterTState(new QSortFilterProxyModel(this))
 {
@@ -421,7 +415,7 @@ void QMQualiResultWidget::extSelEmployee()
 
 void QMQualiResultWidget::extSelEmployeeGroup()
 {
-    QMExtendedSelectionDialog extSelDialog(this, employeeGroupModel.get(), 1);
+    QMExtendedSelectionDialog extSelDialog(this, employeeGroupViewModel.get(), 1);
     auto res = extSelDialog.exec();
     auto modelIndexList = extSelDialog.getFilterSelected();
 
