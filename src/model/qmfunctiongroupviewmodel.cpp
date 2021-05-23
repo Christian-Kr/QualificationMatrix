@@ -1,4 +1,4 @@
-// qmfunctionviewmodel.h is part of QualificationMatrix
+// qmfunctiongroupviewmodel.cpp is part of QualificationMatrix
 //
 // QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of the GNU General
 // Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
@@ -11,25 +11,23 @@
 // You should have received a copy of the GNU General Public License along with QualificationMatrix.
 // If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef QMFUNCTIONVIEWMODEL_H
-#define QMFUNCTIONVIEWMODEL_H
+#include "qmfunctiongroupviewmodel.h"
 
-#include <QSqlTableModel>
+QMFunctionGroupViewModel::QMFunctionGroupViewModel(QObject *parent, const QSqlDatabase &db)
+    : QSqlTableModel(parent, db)
+{}
 
-/// Sql model for the function view table.
-/// \author Christian Kr, Copyright 2021
-class QMFunctionViewModel: public QSqlTableModel
+void QMFunctionGroupViewModel::initModel()
 {
-    Q_OBJECT
+    // The name of the Table.
+    setTable("FuncGroupView");
 
-public:
-    /// Constructor
-    /// \param parent Parent object for the qt system.
-    /// \param db The database to work with.
-    explicit QMFunctionViewModel(QObject *parent = nullptr, const QSqlDatabase &db = QSqlDatabase());
+    // The edit strategy.
+    setEditStrategy(QSqlTableModel::OnManualSubmit);
 
-    /// Initialize the model with its settings.
-    void initModel();
-};
+    // Specifiy header data of table.
+    setHeaderData(1, Qt::Horizontal, tr("Name"));
+    setHeaderData(2, Qt::Horizontal, tr("Farbe"));
 
-#endif // QMFUNCTIONVIEWMODEL_H
+    sort(1, Qt::AscendingOrder);
+}

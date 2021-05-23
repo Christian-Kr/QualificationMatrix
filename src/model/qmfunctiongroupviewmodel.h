@@ -1,4 +1,4 @@
-// qmfunctionviewmodel.h is part of QualificationMatrix
+// qmfunctiongroupviewmodel.h is part of QualificationMatrix
 //
 // QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of the GNU General
 // Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
@@ -11,25 +11,25 @@
 // You should have received a copy of the GNU General Public License along with QualificationMatrix.
 // If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef QMFUNCTIONVIEWMODEL_H
-#define QMFUNCTIONVIEWMODEL_H
+#ifndef QMFUNCTIONGROUPVIEWMODEL_H
+#define QMFUNCTIONGROUPVIEWMODEL_H
 
 #include <QSqlTableModel>
 
-/// Sql model for the function view table.
+/// Employee function group view table in sql.
 /// \author Christian Kr, Copyright 2021
-class QMFunctionViewModel: public QSqlTableModel
+class QMFunctionGroupViewModel: public QSqlTableModel
 {
     Q_OBJECT
 
 public:
-    /// Constructor
-    /// \param parent Parent object for the qt system.
-    /// \param db The database to work with.
-    explicit QMFunctionViewModel(QObject *parent = nullptr, const QSqlDatabase &db = QSqlDatabase());
+    /// Constructor - Override from QSqlTableModel.
+    /// \param parent
+    /// \param db
+    explicit QMFunctionGroupViewModel(QObject *parent = nullptr, const QSqlDatabase &db = QSqlDatabase());
 
     /// Initialize the model with its settings.
     void initModel();
 };
 
-#endif // QMFUNCTIONVIEWMODEL_H
+#endif // QMFUNCTIONGROUPVIEWMODEL_H
