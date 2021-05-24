@@ -46,7 +46,7 @@ enum class CertLoc
 /// \author Christian Kr, Copyright 2020
 class QMDataManager: public QObject
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /// Get a singleton instance of the data manager.
@@ -97,13 +97,6 @@ public:
     QMDataManager(QMDataManager const &) = delete;
     void operator=(QMDataManager const &) = delete;
 
-    /// Initialize all models with the given database object. The initializing process might
-    /// include the loss of all model pointer references. Cause of using smart pointers, this
-    /// won't be a problem in the sense of a memory leak. But objects that use the model pointers
-    /// have to get the new pointers. The custom quali* models are NOT PART OF OBJECT CREATION
-    /// UPDATE.
-    void initializeModels(QSqlDatabase &db);
-
     /// Test for the database version. This is only a test of an entry with the right version
     /// number. It does not include any test of available tables and/or columns.
     /// \param db The database to test.
@@ -116,28 +109,6 @@ public:
     /// \return True if structure is ok, else false.
     static bool testTableStructure(QSqlDatabase &db);
 
-    sp_qmRelTableModel getFuncModel() { return funcModel; }
-    sp_qmRelTableModel getTrainModel() { return trainModel; }
-    sp_qmRelTableModel getTrainDataModel() { return trainDataModel; }
-    sp_tableModel getTrainGroupModel() { return trainGroupModel; }
-    sp_tableModel getTrainDataStateModel() { return trainDataStateModel; }
-    sp_tableModel getFuncGroupModel() { return funcGroupModel; }
-    sp_qmRelTableModel getEmployeeModel() { return employeeModel; }
-    sp_relTableModel getEmployeeFuncModel() { return employeeFuncModel; }
-    std::shared_ptr<QMQualiResultModel> getQualiResultModel() { return qualiResultModel; }
-    std::shared_ptr<QMQualiMatrixModel> getQualiMatrixModel() { return qualiMatrixModel; }
-    sp_qmRelTableModel getQualiModel() { return qualiModel; }
-    sp_relTableModel getTrainExceptionModel() { return trainExceptionModel; }
-    sp_tableModel getShiftModel() { return shiftModel; }
-    sp_tableModel getInfoModel() { return infoModel; }
-    sp_tableModel getCertificateModel() { return certificateModel; }
-    sp_tableModel getTrainDataCertificateModel() { return trainDataCertificateModel; }
-    sp_tableModel getTrainDataCertificateViewModel() { return trainDataCertificateViewModel; }
-    sp_relTableModel getEmployeeViewModel() { return employeeViewModel; }
-
-    /// QSqlTableModel dirty test
-    bool isAnyDirty() const;
-
     /// Send a signal to all connected models.
     /// \param sender The sender of the information (mostly object calling this function).
     void sendModelChangedInformation(QObject *sender);
@@ -149,51 +120,7 @@ private:
     /// Destructor
     ~QMDataManager() override = default;
 
-    // Models as smart pointer (shared). They are needed all over the application. And they all use
-    // this single model. The objects might change on database change. The customer has to take
-    // about that. (Get up to date objects.)
-    sp_qmRelTableModel funcModel;
-    sp_qmRelTableModel trainModel;
-    sp_qmRelTableModel trainDataModel;
-    sp_tableModel trainGroupModel;
-    sp_tableModel funcGroupModel;
-    sp_qmRelTableModel employeeModel;
-    sp_relTableModel employeeFuncModel;
-    sp_qmRelTableModel qualiModel;
-    sp_relTableModel trainExceptionModel;
-    sp_tableModel shiftModel;
-    sp_tableModel trainDataStateModel;
-    sp_tableModel infoModel;
-    sp_tableModel trainDataCertificateModel;
-    sp_tableModel trainDataCertificateViewModel;
-    sp_tableModel certificateModel;
-    sp_relTableModel employeeViewModel;
-
-    // These models are custom ones. They won't get updated as an object itself, but they are based
-    // on the basic models above. So the basic models have to be updated inside the quali models.
-    std::shared_ptr<QMQualiResultModel> qualiResultModel;
-    std::shared_ptr<QMQualiMatrixModel> qualiMatrixModel;
-
 signals:
-    /// Whent he models will be initialized, this signal gets emited. This is useful to inform
-    /// every customer of the shared pointer models, that they might have been changed. So the
-    /// customer has to update the reference pointer.
-    void modelsInitialized();
-
-    /// Emited before models will be initialized.
-    /// \param maxSteps Maximum number of initializing models.
-    void beforeInitModels(int maxSteps);
-
-    /// Emited after models have been initialized and everyone has been iformed about it.
-    void afterInitModels();
-
-    /// Emited while models will be initialized.
-    /// \param currentStep Current number of initializing model.
-    void updateInitModels(int currentSteps);
-
-    /// Informate all registered models, that an table has been changed.
-    /// \param sender The object sending the signal.
-    void modelChanged(QObject *sender);
 
 private:
     static QMDataManager *instance;

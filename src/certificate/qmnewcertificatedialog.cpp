@@ -13,11 +13,11 @@
 
 #include "qmnewcertificatedialog.h"
 #include "ui_qmnewcertificatedialog.h"
-#include "model/qmdatamanager.h"
+#include "model/qmtrainingviewmodel.h"
+#include "model/qmemployeeviewmodel.h"
+#include "model/qmshiftviewmodel.h"
 #include "settings/qmapplicationsettings.h"
-#include "framework/qmsqlrelationaltablemodel.h"
 
-#include <QSqlRelationalTableModel>
 #include <QSortFilterProxyModel>
 #include <QFileDialog>
 #include <QCryptographicHash>
@@ -122,20 +122,31 @@ void QMNewCertificateDialog::saveSettings()
 
 void QMNewCertificateDialog::updateData()
 {
-    // Get the model data.
-    auto dm = QMDataManager::getInstance();
-    trainModel = dm->getTrainModel();
-    employeeModel = dm->getEmployeeViewModel();
-    employeeGroupModel = dm->getShiftModel();
+    // Get the current database and update data only when it is connected.
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        return;
+    }
+
+    auto db = QSqlDatabase::database("default");
+
+    trainViewModel = std::make_unique<QMTrainingViewModel>(this, db);
+    trainViewModel->select();
+
+    employeeViewModel = std::make_unique<QMEmployeeViewModel>(this, db);
+    employeeViewModel->select();
+
+    employeeGroupViewModel = std::make_unique<QMShiftViewModel>(this, db);
+    employeeGroupViewModel->select();
 
     // Set model to ui elements.
-    ui->cbTrain->setModel(trainModel.get());
+    ui->cbTrain->setModel(trainViewModel.get());
     ui->cbTrain->setModelColumn(1);
 
-    ui->cbEmployee->setModel(employeeModel.get());
+    ui->cbEmployee->setModel(employeeViewModel.get());
     ui->cbEmployee->setModelColumn(1);
 
-    ui->cbEmployeeGroup->setModel(employeeGroupModel.get());
+    ui->cbEmployeeGroup->setModel(employeeGroupViewModel.get());
     ui->cbEmployeeGroup->setModelColumn(1);
 }
 

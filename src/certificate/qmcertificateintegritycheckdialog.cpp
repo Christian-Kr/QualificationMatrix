@@ -13,7 +13,7 @@
 
 #include "qmcertificateintegritycheckdialog.h"
 #include "ui_qmcertificateintegritycheckdialog.h"
-#include "model/qmdatamanager.h"
+#include "model/qmcertificatemodel.h"
 #include "settings/qmapplicationsettings.h"
 
 #include <QSqlTableModel>
@@ -193,9 +193,16 @@ void QMCertificateIntegrityCheckDialog::saveSettings()
 
 void QMCertificateIntegrityCheckDialog::updateData()
 {
-    // Get the model data.
-    auto dm = QMDataManager::getInstance();
-    certificateModel = dm->getCertificateModel();
+    // Get the current database and update data only when it is connected.
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        return;
+    }
+
+    auto db = QSqlDatabase::database("default");
+
+    certificateModel = std::make_unique<QMCertificateModel>(this, db);
+    certificateModel->select();
 
     // Set ui.
     ui->cbCertificateMode->clear();

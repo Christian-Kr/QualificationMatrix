@@ -14,6 +14,8 @@
 #include "qmcertificatedialog.h"
 #include "ui_qmcertificatedialog.h"
 #include "model/qmdatamanager.h"
+#include "model/qmcertificatemodel.h"
+#include "model/qmtraindatacertificatemodel.h"
 #include "settings/qmapplicationsettings.h"
 #include "qmnewcertificatedialog.h"
 
@@ -85,10 +87,19 @@ void QMCertificateDialog::saveSettings()
 
 void QMCertificateDialog::updateData()
 {
-    // Get the model data.
-    auto dm = QMDataManager::getInstance();
-    certificateModel = dm->getCertificateModel();
-    trainDataCertificateModel = dm->getTrainDataCertificateModel();
+    // Get the current database and update data only when it is connected.
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        return;
+    }
+
+    auto db = QSqlDatabase::database("default");
+
+    certificateModel = std::make_unique<QMCertificateModel>(this, db);
+    certificateModel->select();
+
+    trainDataCertificateModel = std::make_unique<QMTrainDataCertificateModel>(this, db);
+    trainDataCertificateModel->select();
 
     nameFilterModel->setSourceModel(certificateModel.get());
     nameFilterModel->setFilterKeyColumn(1);

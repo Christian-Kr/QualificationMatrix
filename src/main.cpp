@@ -60,7 +60,11 @@ void initShowMainWindow(QMainWindow &mainWin)
         }
 
         screen = QGuiApplication::screens().at(activeScreenNumber);
-        mainWin.windowHandle()->setScreen(screen);
+
+        if (mainWin.windowHandle() != nullptr)
+        {
+            mainWin.windowHandle()->setScreen(screen);
+        }
 
         // Calling only setScreen won't put the window onto the right screen.
         mainWin.setGeometry(screen->geometry());

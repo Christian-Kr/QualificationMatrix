@@ -13,7 +13,12 @@
 
 #include "qmimportcsvdialog.h"
 #include "ui_qmimportcsvdialog.h"
-#include "model/qmdatamanager.h"
+#include "model/qmtrainingviewmodel.h"
+#include "model/qmemployeeviewmodel.h"
+#include "model/qmshiftviewmodel.h"
+#include "model/qmtrainingdatastateviewmodel.h"
+#include "model/qmtrainingdatamodel.h"
+#include "model/qmtraininggroupviewmodel.h"
 #include "framework/qmsqlrelationaltablemodel.h"
 
 #include <QFileDialog>
@@ -29,13 +34,7 @@
 
 QMImportCsvDialog::QMImportCsvDialog(QWidget *parent)
     : QMDialog(parent),
-    ui(new Ui::QMImportCsvDialog),
-    trainModel(nullptr),
-    employeeModel(nullptr),
-    shiftModel(nullptr),
-    trainGroupModel(nullptr),
-    trainDataStateModel(nullptr),
-    trainDataModel(nullptr)
+    ui(new Ui::QMImportCsvDialog)
 {
     ui->setupUi(this);
 
@@ -51,19 +50,25 @@ QMImportCsvDialog::~QMImportCsvDialog()
 
 void QMImportCsvDialog::updateData()
 {
-    auto dm = QMDataManager::getInstance();
-    trainModel = dm->getTrainModel();
-    employeeModel = dm->getEmployeeModel();
-    shiftModel = dm->getShiftModel();
-    trainGroupModel = dm->getTrainGroupModel();
-    trainDataStateModel = dm->getTrainDataStateModel();
-    trainDataModel = dm->getTrainDataModel();
+    // Get the current database and update data only when it is connected.
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        return;
+    }
 
-    // Set view
-    ui->cbDefaultTrainGroup->setModel(trainGroupModel.get());
+    auto db = QSqlDatabase::database("default");
+
+    trainViewModel = std::make_unique<QMTrainingViewModel>(this, db);
+    employeeViewModel = std::make_unique<QMEmployeeViewModel>(this, db);
+    shiftViewModel = std::make_unique<QMShiftViewModel>(this, db);
+    trainGroupViewModel = std::make_unique<QMTrainingGroupViewModel>(this, db);
+    trainDataStateViewModel = std::make_unique<QMTrainingDataStateViewModel>(this, db);
+    trainDataModel = std::make_unique<QMTrainingDataModel>(this, db);
+
+    ui->cbDefaultTrainGroup->setModel(trainGroupViewModel.get());
     ui->cbDefaultTrainGroup->setModelColumn(1);
 
-    ui->cbDefaultEmployeeGroup->setModel(shiftModel.get());
+    ui->cbDefaultEmployeeGroup->setModel(shiftViewModel.get());
     ui->cbDefaultEmployeeGroup->setModelColumn(1);
 }
 
@@ -220,19 +225,19 @@ void QMImportCsvDialog::parseCsv(QFile &importFile)
 
         // Get the first column (or first and second) for name and search for right name. At the
         // end, the first (or first and second) will be removed.
-        int colEmployeeName = employeeModel->fieldIndex("name");
-        int colEmployeeId = employeeModel->fieldIndex("id");
+        int colEmployeeName = employeeViewModel->fieldIndex("name");
+        int colEmployeeId = employeeViewModel->fieldIndex("id");
         int primaryKeyEmployeeName = -1;
-        for (int i = 0; i < employeeModel->rowCount(); i++)
+        for (int i = 0; i < employeeViewModel->rowCount(); i++)
         {
-            QString name = employeeModel->data(employeeModel->index(i, colEmployeeName)).toString();
+            QString name = employeeViewModel->data(employeeViewModel->index(i, colEmployeeName)).toString();
             if (ui->cbTwoNameColumns->isChecked())
             {
                 // First and last name are separated.
                 if (name.contains(columns.at(0)) && name.contains(columns.at(1)))
                 {
-                    primaryKeyEmployeeName = employeeModel
-                        ->data(employeeModel->index(i, colEmployeeId)).toInt();
+                    primaryKeyEmployeeName = employeeViewModel->data(
+                            employeeViewModel->index(i, colEmployeeId)).toInt();
                     columns.removeFirst();
                     columns.removeFirst();
                     break;
@@ -246,8 +251,8 @@ void QMImportCsvDialog::parseCsv(QFile &importFile)
                     lastName = lastName.replace("ae", "ä").replace("ue", "ü").replace("oe", "ö");
                     if (name.contains(firstName) && name.contains(lastName))
                     {
-                        primaryKeyEmployeeName = employeeModel
-                            ->data(employeeModel->index(i, colEmployeeId)).toInt();
+                        primaryKeyEmployeeName = employeeViewModel->data(
+                                employeeViewModel->index(i, colEmployeeId)).toInt();
                         columns.removeFirst();
                         columns.removeFirst();
                         break;
@@ -259,8 +264,8 @@ void QMImportCsvDialog::parseCsv(QFile &importFile)
                 // One Field for first and last name.
                 if (name == columns.at(0))
                 {
-                    primaryKeyEmployeeName = employeeModel
-                        ->data(employeeModel->index(i, colEmployeeId)).toInt();
+                    primaryKeyEmployeeName = employeeViewModel
+                        ->data(employeeViewModel->index(i, colEmployeeId)).toInt();
                     columns.removeFirst();
                     break;
                 }
@@ -270,8 +275,8 @@ void QMImportCsvDialog::parseCsv(QFile &importFile)
                     fullName = fullName.replace("ae", "ä").replace("ue", "ü").replace("oe", "ö");
                     if (name == fullName)
                     {
-                        primaryKeyEmployeeName = employeeModel
-                            ->data(employeeModel->index(i, colEmployeeId)).toInt();
+                        primaryKeyEmployeeName = employeeViewModel
+                            ->data(employeeViewModel->index(i, colEmployeeId)).toInt();
                         columns.removeFirst();
                         break;
                     }
@@ -290,15 +295,15 @@ void QMImportCsvDialog::parseCsv(QFile &importFile)
 
         // Get the first column for training name and search for existing. At the end, remove the
         // the column from the list.
-        int colTrainName = trainModel->fieldIndex("name");
-        int colTrainId = trainModel->fieldIndex("id");
+        int colTrainName = trainViewModel->fieldIndex("name");
+        int colTrainId = trainViewModel->fieldIndex("id");
         int primaryKeyTrainName = -1;
-        for (int i = 0; i < trainModel->rowCount(); i++)
+        for (int i = 0; i < trainViewModel->rowCount(); i++)
         {
-            QString name = trainModel->data(trainModel->index(i, colTrainName)).toString();
+            QString name = trainViewModel->data(trainViewModel->index(i, colTrainName)).toString();
             if (name == columns.at(0))
             {
-                primaryKeyTrainName = trainModel->data(trainModel->index(i, colTrainId)).toInt();
+                primaryKeyTrainName = trainViewModel->data(trainViewModel->index(i, colTrainId)).toInt();
                 columns.removeFirst();
                 break;
             }
@@ -327,17 +332,17 @@ void QMImportCsvDialog::parseCsv(QFile &importFile)
 
         // Get the first column for training name and search for existing. At the end, remove the
         // the column from the list.
-        auto colTrainStateName = trainDataStateModel->fieldIndex("name");
-        auto colTrainStateId = trainDataStateModel->fieldIndex("id");
+        auto colTrainStateName = trainDataStateViewModel->fieldIndex("name");
+        auto colTrainStateId = trainDataStateViewModel->fieldIndex("id");
         auto primaryKeyTrainStateName = -1;
-        for (int i = 0; i < trainDataStateModel->rowCount(); i++)
+        for (int i = 0; i < trainDataStateViewModel->rowCount(); i++)
         {
-            QString name = trainDataStateModel
-                ->data(trainDataStateModel->index(i, colTrainStateName)).toString();
+            QString name = trainDataStateViewModel->data(
+                    trainDataStateViewModel->index(i, colTrainStateName)).toString();
             if (name == columns.at(0))
             {
-                primaryKeyTrainStateName = trainDataStateModel
-                    ->data(trainDataStateModel->index(i, colTrainStateId)).toInt();
+                primaryKeyTrainStateName = trainDataStateViewModel
+                    ->data(trainDataStateViewModel->index(i, colTrainStateId)).toInt();
                 columns.removeFirst();
                 break;
             }

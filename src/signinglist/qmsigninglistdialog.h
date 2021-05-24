@@ -15,9 +15,9 @@
 #define QMSIGNINGLISTDIALOG_H
 
 #include "framework/qmdialog.h"
+
 #include <memory>
 
-// Forward declaration.
 class QSqlTableModel;
 class QMSqlRelationalTableModel;
 class QSqlRelationalTableModel;
@@ -34,7 +34,7 @@ QT_END_NAMESPACE
 /// \author Christian Kr, Copyright 2020
 class QMSigningListDialog: public QMDialog
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /// Constructor
@@ -86,10 +86,9 @@ private:
 
     Ui::QMSigningListDialog *ui;
 
-    std::shared_ptr<QSqlRelationalTableModel> employeeModel;
-    std::shared_ptr<QSqlTableModel> shiftModel;
-    std::shared_ptr<QMSqlRelationalTableModel> trainModel;
-    std::shared_ptr<QMSqlRelationalTableModel> trainDataModel;
+    std::unique_ptr<QSqlTableModel> employeeViewModel;
+    std::unique_ptr<QSqlTableModel> shiftViewModel;
+    std::unique_ptr<QSqlTableModel> trainViewModel;
 };
 
 #endif // QMSIGNINGLISTDIALOG_H

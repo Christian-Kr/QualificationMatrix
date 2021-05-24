@@ -17,7 +17,6 @@
 #include "framework/qmdialog.h"
 #include <memory>
 
-// Forward declaration.
 class QSqlTableModel;
 
 QT_BEGIN_NAMESPACE
@@ -31,7 +30,7 @@ QT_END_NAMESPACE
 /// \author Christian Kr, Copyright 2020
 class QMCertificateIntegrityCheckDialog: public QMDialog
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /// Constructor
@@ -60,7 +59,7 @@ public slots:
 private:
     Ui::QMCertificateIntegrityCheckDialog *ui;
 
-    std::shared_ptr<QSqlTableModel> certificateModel;
+    std::unique_ptr<QSqlTableModel> certificateModel;
 };
 
 #endif // QMCERTIFICATEINTEGRITYCHECKDIALOG_H

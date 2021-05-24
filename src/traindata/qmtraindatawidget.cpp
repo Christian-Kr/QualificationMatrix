@@ -47,9 +47,6 @@ QMTrainDataWidget::QMTrainDataWidget(QWidget *parent)
     ui->tvTrainData->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     ui->tvTrainData->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft);
 
-    // Connect to data manager, to know when model reinitialization has been done.
-    connect(QMDataManager::getInstance(), &QMDataManager::modelsInitialized, this, &QMTrainDataWidget::updateData);
-
     // Default settings on start.
     ui->deDateFilterTo->setDate(QDate::currentDate());
     ui->dwTrainDataCertificates->setVisible(false);

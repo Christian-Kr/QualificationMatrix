@@ -15,6 +15,7 @@
 #define QMIMPORTCSVDIALOG_H
 
 #include "framework/qmdialog.h"
+
 #include <memory>
 
 QT_BEGIN_NAMESPACE
@@ -72,12 +73,12 @@ private:
 
     Ui::QMImportCsvDialog *ui;
 
-    std::shared_ptr<QSqlRelationalTableModel> trainModel;
-    std::shared_ptr<QSqlRelationalTableModel> employeeModel;
-    std::shared_ptr<QSqlTableModel> shiftModel;
-    std::shared_ptr<QSqlTableModel> trainGroupModel;
-    std::shared_ptr<QSqlTableModel> trainDataStateModel;
-    std::shared_ptr<QMSqlRelationalTableModel> trainDataModel;
+    std::unique_ptr<QSqlTableModel> trainViewModel;
+    std::unique_ptr<QSqlTableModel> employeeViewModel;
+    std::unique_ptr<QSqlTableModel> shiftViewModel;
+    std::unique_ptr<QSqlTableModel> trainGroupViewModel;
+    std::unique_ptr<QSqlTableModel> trainDataStateViewModel;
+    std::unique_ptr<QMSqlRelationalTableModel> trainDataModel;
 };
 
 #endif // QMIMPORTCSVDIALOG_H

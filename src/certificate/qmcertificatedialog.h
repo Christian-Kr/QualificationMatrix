@@ -17,7 +17,6 @@
 #include "framework/qmdialog.h"
 #include <memory>
 
-// Forward declaration.
 class QSqlTableModel;
 class QSortFilterProxyModel;
 class QFile;
@@ -44,7 +43,7 @@ enum class Mode
 /// \author Christian Kr, Copyright 2020
 class QMCertificateDialog: public QMDialog
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /// Constructor
@@ -101,8 +100,8 @@ private:
 
     QSortFilterProxyModel *nameFilterModel;
 
-    std::shared_ptr<QSqlTableModel> certificateModel;
-    std::shared_ptr<QSqlTableModel> trainDataCertificateModel;
+    std::unique_ptr<QSqlTableModel> certificateModel;
+    std::unique_ptr<QSqlTableModel> trainDataCertificateModel;
 };
 
 #endif // QMCERTIFICATEDIALOG_H

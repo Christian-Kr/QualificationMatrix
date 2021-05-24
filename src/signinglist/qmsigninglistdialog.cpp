@@ -13,7 +13,9 @@
 
 #include "qmsigninglistdialog.h"
 #include "ui_qmsigninglistdialog.h"
-#include "model/qmdatamanager.h"
+#include "model/qmemployeeviewmodel.h"
+#include "model/qmshiftviewmodel.h"
+#include "model/qmtrainingviewmodel.h"
 #include "settings/qmapplicationsettings.h"
 #include "signinglist/qmsigninglistdocument.h"
 #include "framework/qmsqlrelationaltablemodel.h"
@@ -81,21 +83,30 @@ void QMSigningListDialog::saveSettings()
 
 void QMSigningListDialog::updateData()
 {
-    // Get the model data.
-    auto dm = QMDataManager::getInstance();
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        return;
+    }
 
-    employeeModel = dm->getEmployeeViewModel();
-    shiftModel = dm->getShiftModel();
-    trainModel = dm->getTrainModel();
+    auto db = QSqlDatabase::database("default");
+
+    employeeViewModel = std::make_unique<QMEmployeeViewModel>(this, db);
+    employeeViewModel->select();
+
+    shiftViewModel = std::make_unique<QMShiftViewModel>(this, db);
+    shiftViewModel->select();
+
+    trainViewModel = std::make_unique<QMTrainingViewModel>(this, db);
+    trainViewModel->select();
 
     // Set ui elements.
-    ui->cbTraining->setModel(trainModel.get());
+    ui->cbTraining->setModel(trainViewModel.get());
     ui->cbTraining->setModelColumn(1);
 
-    ui->cbEmployeeGroup->setModel(shiftModel.get());
+    ui->cbEmployeeGroup->setModel(shiftViewModel.get());
     ui->cbEmployeeGroup->setModelColumn(1);
 
-    ui->cbSingleEmployee->setModel(employeeModel.get());
+    ui->cbSingleEmployee->setModel(employeeViewModel.get());
     ui->cbSingleEmployee->setModelColumn(1);
 }
 
@@ -127,10 +138,10 @@ void QMSigningListDialog::addEmployee()
 
 void QMSigningListDialog::addEmployeeFromGroup()
 {
-    for (int i = 0; i < employeeModel->rowCount(); i++)
+    for (int i = 0; i < employeeViewModel->rowCount(); i++)
     {
-        QString employeeName = employeeModel->data(employeeModel->index(i, 1)).toString();
-        QString groupName = employeeModel->data(employeeModel->index(i, 2)).toString();
+        QString employeeName = employeeViewModel->data(employeeViewModel->index(i, 1)).toString();
+        QString groupName = employeeViewModel->data(employeeViewModel->index(i, 2)).toString();
 
         if (groupName == ui->cbEmployeeGroup->currentText())
         {
@@ -236,8 +247,7 @@ void QMSigningListDialog::paintPdfRequest(QPrinter *printer)
 
 void QMSigningListDialog::trainingChanged()
 {
-    auto contentDesc = trainModel->data(
-        trainModel->index(ui->cbTraining->currentIndex(), 5)).toString();
+    auto contentDesc = trainViewModel->data(trainViewModel->index(ui->cbTraining->currentIndex(), 5)).toString();
 
     if (contentDesc.isEmpty())
     {

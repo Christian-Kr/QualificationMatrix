@@ -62,9 +62,6 @@ QMMainWindow::QMMainWindow(QWidget *parent)
     ui = new Ui::QMMainWindow;
     ui->setupUi(this);
 
-    // Initialize the data manager, which is responsible for the models.
-    initDataManager();
-
     // Load database on startup. If there are some settings for automatic loading of database on startup, follow them.
     // Otherwise show the manage database dialog, cause the application is not useful if there is no database loaded.
     initDatabaseSettings();
@@ -73,15 +70,6 @@ QMMainWindow::QMMainWindow(QWidget *parent)
 QMMainWindow::~QMMainWindow()
 {
     delete ui;
-}
-
-void QMMainWindow::initDataManager() const
-{
-    auto dm = QMDataManager::getInstance();
-
-    connect(dm, &QMDataManager::beforeInitModels, this, &QMMainWindow::beforeInitModels);
-    connect(dm, &QMDataManager::updateInitModels, this, &QMMainWindow::workloadUpdates);
-    connect(dm, &QMDataManager::afterInitModels, this, &QMMainWindow::afterInitModels);
 }
 
 void QMMainWindow::initDatabaseSettings()
@@ -209,7 +197,6 @@ void QMMainWindow::saveDatabaseSettings()
 void QMMainWindow::initAfterDatabaseOpened()
 {
     auto db = QSqlDatabase::database("default", false);
-    auto dm = QMDataManager::getInstance();
 
     // If the version of the database doesn't fit the software version, show a message asking if the database should
     // be updated or not.
@@ -267,7 +254,6 @@ void QMMainWindow::initAfterDatabaseOpened()
     }
 
     // After database has been loaded and version is ok, load the database models and informate the user about it.
-    dm->initializeModels(db);
     ui->statusbar->showMessage(tr("Datenbank verbunden"));
     setWindowTitle("QualificationMatrix - " + db.databaseName());
 
@@ -284,6 +270,10 @@ void QMMainWindow::initAfterDatabaseOpened()
             return;
         }
     }
+
+    // Unlock all ui elements.
+    ui->actSettings->setEnabled(true);
+    ui->actCloseDatabase->setEnabled(true);
 }
 
 bool QMMainWindow::saveSingleDatabaseBackup(const QSqlDatabase &db)
@@ -303,11 +293,6 @@ bool QMMainWindow::saveSingleDatabaseBackup(const QSqlDatabase &db)
     }
 
     return true;
-}
-
-void QMMainWindow::beforeInitModels(int maxSteps)
-{
-    showProgress(tr("Datenbank"), tr("Daten abrufen..."), 0, maxSteps);
 }
 
 void QMMainWindow::workloadStarts(QString info, int maxSteps)
@@ -351,15 +336,6 @@ void QMMainWindow::closeProgress()
         // Kills the object (although method name doesn't suggest).
         progressDialog.reset();
     }
-}
-
-void QMMainWindow::afterInitModels()
-{
-    closeProgress();
-
-    // Unlock all ui elements.
-    ui->actSettings->setEnabled(true);
-    ui->actCloseDatabase->setEnabled(true);
 }
 
 void QMMainWindow::showAboutQt()

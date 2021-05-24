@@ -13,24 +13,25 @@
 
 #include "qmqualimatrixheaderview.h"
 #include "settings/qmapplicationsettings.h"
-#include "model/qmdatamanager.h"
-#include "framework/qmsqlrelationaltablemodel.h"
+#include "model/qmtrainingviewmodel.h"
+#include "model/qmtraininggroupviewmodel.h"
+#include "model/qmfunctionviewmodel.h"
+#include "model/qmfunctiongroupviewmodel.h"
 
 #include <QPainter>
 #include <QHash>
-#include <QSqlRelationalTableModel>
 #include <memory>
 #include <QDebug>
 
 QMQualiMatrixHeaderView::QMQualiMatrixHeaderView(Qt::Orientation orientation, QWidget *parent)
-    : QHeaderView(orientation, parent),
-    horSectionHeight(0),
-    vertSectionWidth(0),
-    funcGroupColorCache(new QHash<QString, QString>()),
-    trainGroupColorCache(new QHash<QString, QString>()),
-    trainLegallyNecessaryCache(new QHash<QString, bool>()),
-    gridColor(QColor("#ffffff")),
-    selectionColor(QColor("#ffffff"))
+    : QHeaderView(orientation, parent)
+    , horSectionHeight(0)
+    , vertSectionWidth(0)
+    , funcGroupColorCache(new QHash<QString, QString>())
+    , trainGroupColorCache(new QHash<QString, QString>())
+    , trainLegallyNecessaryCache(new QHash<QString, bool>())
+    , gridColor(QColor("#ffffff"))
+    , selectionColor(QColor("#ffffff"))
 {
     setSectionResizeMode(QHeaderView::Fixed);
     setDefaultSectionSize(30);
@@ -56,31 +57,39 @@ QMQualiMatrixHeaderView::~QMQualiMatrixHeaderView()
 
 void QMQualiMatrixHeaderView::updateTrainingGroupColors()
 {
-    // Get color from models.
-    auto dm = QMDataManager::getInstance();
+    // Get the current database and update data only when it is connected.
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        return;
+    }
+
+    auto db = QSqlDatabase::database("default");
+
+    std::unique_ptr<QSqlTableModel> trainViewModel = std::make_unique<QMTrainingViewModel>(this, db);
+    trainViewModel->select();
+
+    std::unique_ptr<QSqlTableModel> trainGroupViewModel = std::make_unique<QMTrainingGroupViewModel>(this, db);
+    trainGroupViewModel->select();
 
     trainGroupColorCache->clear();
 
-    // Build cache.
-    for (int i = 0; i < dm->getTrainModel()->rowCount(); i++)
+    for (int i = 0; i < trainViewModel->rowCount(); i++)
     {
         // Get the function name.
-        auto train = dm->getTrainModel()->data(dm->getTrainModel()->index(i, 1)).toString();
+        auto train = trainViewModel->data(trainViewModel->index(i, 1)).toString();
 
         // Get the group name and search for its color.
-        auto group = dm->getTrainModel()->data(dm->getTrainModel()->index(i, 2)).toString();
+        auto group = trainViewModel->data(trainViewModel->index(i, 2)).toString();
 
         // Find color of group.
         QString color = "#ffffff";
-        for (int j = 0; j < dm->getTrainGroupModel()->rowCount(); j++)
+        for (int j = 0; j < trainGroupViewModel->rowCount(); j++)
         {
-            auto tmpGroup = dm->getTrainGroupModel()->data(
-                dm->getTrainGroupModel()->index(j, 1)).toString();
+            auto tmpGroup = trainGroupViewModel->data(trainGroupViewModel->index(j, 1)).toString();
 
             if (group == tmpGroup)
             {
-                color = dm->getTrainGroupModel()->data(
-                    dm->getTrainGroupModel()->index(j, 2)).toString();
+                color = trainGroupViewModel->data(trainGroupViewModel->index(j, 2)).toString();
                 break;
             }
         }
@@ -92,14 +101,23 @@ void QMQualiMatrixHeaderView::updateTrainingGroupColors()
 
 void QMQualiMatrixHeaderView::updateTrainLegallyNecessary()
 {
-    auto dm = QMDataManager::getInstance();
+    // Get the current database and update data only when it is connected.
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        return;
+    }
+
+    auto db = QSqlDatabase::database("default");
+
+    std::unique_ptr<QSqlTableModel> trainViewModel = std::make_unique<QMTrainingViewModel>(this, db);
+    trainViewModel->select();
 
     trainLegallyNecessaryCache->clear();
-    for (int i = 0; i < dm->getTrainModel()->rowCount(); i++)
+
+    for (int i = 0; i < trainViewModel->rowCount(); i++)
     {
-        auto train = dm->getTrainModel()->data(dm->getTrainModel()->index(i, 1)).toString();
-        auto legallyNecessary = dm->getTrainModel()->data(dm->getTrainModel()->index(i, 4))
-            .toBool();
+        auto train = trainViewModel->data(trainViewModel->index(i, 1)).toString();
+        auto legallyNecessary = trainViewModel->data(trainViewModel->index(i, 4)).toBool();
 
         trainLegallyNecessaryCache->insert(train, legallyNecessary);
     }
@@ -107,30 +125,39 @@ void QMQualiMatrixHeaderView::updateTrainLegallyNecessary()
 
 void QMQualiMatrixHeaderView::updateFunctionGroupColors()
 {
-    // Get color from models.
-    auto dm = QMDataManager::getInstance();
+    // Get the current database and update data only when it is connected.
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        return;
+    }
+
+    auto db = QSqlDatabase::database("default");
+
+    std::unique_ptr<QSqlTableModel> funcViewModel = std::make_unique<QMFunctionViewModel>(this, db);
+    funcViewModel->select();
+
+    std::unique_ptr<QSqlTableModel> funcGroupViewModel = std::make_unique<QMFunctionGroupViewModel>(this, db);
+    funcGroupViewModel->select();
 
     funcGroupColorCache->clear();
 
     // Build cache.
-    for (int i = 0; i < dm->getFuncModel()->rowCount(); i++)
+    for (int i = 0; i < funcViewModel->rowCount(); i++)
     {
         // Get the function name.
-        QString func = dm->getFuncModel()->data(dm->getFuncModel()->index(i, 1)).toString();
+        QString func = funcViewModel->data(funcViewModel->index(i, 1)).toString();
 
         // Get the group name and search for its color.
-        QString group = dm->getFuncModel()->data(dm->getFuncModel()->index(i, 2)).toString();
+        QString group = funcViewModel->data(funcViewModel->index(i, 2)).toString();
 
         // Find color of group.
         QString color = "#ffffff";
-        for (int j = 0; j < dm->getFuncGroupModel()->rowCount(); j++)
+        for (int j = 0; j < funcGroupViewModel->rowCount(); j++)
         {
-            QString tmpGroup = dm->getFuncGroupModel()->data(dm->getFuncGroupModel()->index(j, 1))
-                .toString();
+            QString tmpGroup = funcGroupViewModel->data(funcGroupViewModel->index(j, 1)).toString();
             if (group == tmpGroup)
             {
-                color = dm->getFuncGroupModel()->data(dm->getFuncGroupModel()->index(j, 2))
-                    .toString();
+                color = funcGroupViewModel->data(funcGroupViewModel->index(j, 2)).toString();
                 break;
             }
         }

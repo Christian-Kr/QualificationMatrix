@@ -82,12 +82,5 @@ bool QMSqlRelationalTableModel::setData(
     // Set data of the entry.
     bool res = QSqlRelationalTableModel::setData(index, value, role);
 
-    // If change has been done, informate other models about the change.
-    if (res)
-    {
-        auto dm = QMDataManager::getInstance();
-        dm->sendModelChangedInformation(this);
-    }
-
     return res;
 }

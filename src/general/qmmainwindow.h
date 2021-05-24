@@ -45,7 +45,7 @@ enum class WIN_MODE {
 /// \author Christian Kr, Copyright 2020
 class QMMainWindow: public QMainWindow
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /// Constructor
@@ -78,13 +78,6 @@ public slots:
 
     /// Save all readed settings centralized on one place.
     void saveSettings();
-
-    /// Informate before models will be initialized in datamanager (time expensive).
-    /// \param maxSteps Number of models that will be initialized.
-    void beforeInitModels(int maxSteps);
-
-    /// Informate that all models have been initialized in data manager.
-    void afterInitModels();
 
     /// Informate before a workload starts. This will show a progress dialog with progress information.
     /// \param maxSteps Maximum number of steps in progress.
@@ -153,10 +146,6 @@ protected:
     void closeEvent(QCloseEvent *event) override;
 
 private:
-    /// Initialize the data manager which handles the models. This includes building the
-    /// connections to react on signals.
-    void initDataManager() const;
-
     /// Initialize database information.
     void initDatabaseSettings();
 
