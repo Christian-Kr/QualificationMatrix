@@ -23,6 +23,9 @@ class QSqlTableModel;
 class QSqlRelationalTableModel;
 class QSortFilterProxyModel;
 
+enum class FUNCTION_SORT { PRIMARY_KEY, NAME, GROUP };
+enum class TRAINING_SORT { PRIMARY_KEY, NAME, GROUP };
+
 /// A model for holding the table view data representation
 /// \author Christian Kr, Copyright (c) 2020
 class QMQualiMatrixModel: public QAbstractTableModel
@@ -106,6 +109,28 @@ public:
     /// Due to performance reasons, use caching of model data.
     void buildCache();
 
+    /// Set function sort to given system.
+    /// \param sortColumnValue The sort column.
+    void setFunctionSortColumn(FUNCTION_SORT sortColumnValue);
+
+    /// Set the sort order of the function.
+    /// \param sortOrderValue Set the sort order.
+    void setFunctionSortOrder(Qt::SortOrder sortOrderValue);
+
+    /// Update the sorting parameter to the model.
+    void updateFunctionSort();
+
+    /// Set training sort to given system.
+    /// \param sortColumnValue The sort column.
+    void setTrainingSortColumn(TRAINING_SORT sortColumnValue);
+
+    /// Set the sort order of the training.
+    /// \param sortOrderValue Set the sort order.
+    void setTrainingSortOrder(Qt::SortOrder sortOrderValue);
+
+    /// Update the sorting parameter to the model.
+    void updateTrainingSort();
+
 signals:
     /// Emit before the cache will be build.
     /// \param maxSteps The maximum number of steps.
@@ -137,6 +162,12 @@ private:
     QSortFilterProxyModel *trainFilterLegalModel;
 
     QHash<QString, QString> *cache;
+
+    Qt::SortOrder funcSortOrder;
+    FUNCTION_SORT funcSortColumn;
+
+    Qt::SortOrder trainSortOrder;
+    TRAINING_SORT trainSortColumn;
 };
 
 #endif // QMQUALIMATRIXMODEL_H

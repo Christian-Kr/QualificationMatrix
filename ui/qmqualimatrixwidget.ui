@@ -722,6 +722,86 @@
     </widget>
    </item>
   </layout>
+  <action name="actFuncSortPrimaryKey">
+   <property name="text">
+    <string>Primärschlüssel</string>
+   </property>
+   <property name="toolTip">
+    <string>Nach Primärschlüssel sortieren</string>
+   </property>
+  </action>
+  <action name="actFuncSortName">
+   <property name="text">
+    <string>Name</string>
+   </property>
+   <property name="toolTip">
+    <string>Nach Name sortieren</string>
+   </property>
+  </action>
+  <action name="actFuncSortGroup">
+   <property name="text">
+    <string>Gruppe</string>
+   </property>
+   <property name="toolTip">
+    <string>Nach Gruppe sortieren</string>
+   </property>
+  </action>
+  <action name="actFuncSortDescending">
+   <property name="text">
+    <string>Absteigend</string>
+   </property>
+   <property name="toolTip">
+    <string>Absteigend sortieren</string>
+   </property>
+  </action>
+  <action name="actFuncSortAscending">
+   <property name="text">
+    <string>Aufsteigend</string>
+   </property>
+   <property name="toolTip">
+    <string>Aufsteigend sortieren</string>
+   </property>
+  </action>
+  <action name="actTrainSortPrimaryKey">
+   <property name="text">
+    <string>Primärschlüssel</string>
+   </property>
+   <property name="toolTip">
+    <string>Nach Primärschlüssel sortieren</string>
+   </property>
+  </action>
+  <action name="actTrainSortName">
+   <property name="text">
+    <string>Name</string>
+   </property>
+   <property name="toolTip">
+    <string>Nach Name sortieren</string>
+   </property>
+  </action>
+  <action name="actTrainSortGroup">
+   <property name="text">
+    <string>Gruppe</string>
+   </property>
+   <property name="toolTip">
+    <string>Nach Gruppe sortieren</string>
+   </property>
+  </action>
+  <action name="actTrainSortDescending">
+   <property name="text">
+    <string>Absteigend</string>
+   </property>
+   <property name="toolTip">
+    <string>Absteigend sortieren</string>
+   </property>
+  </action>
+  <action name="actTrainSortAscending">
+   <property name="text">
+    <string>Aufsteigend</string>
+   </property>
+   <property name="toolTip">
+    <string>Aufsteigend sortieren</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -958,6 +1038,166 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actFuncSortPrimaryKey</sender>
+   <signal>triggered()</signal>
+   <receiver>QMQualiMatrixWidget</receiver>
+   <slot>funcSortPrimaryKey()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>624</x>
+     <y>408</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actFuncSortName</sender>
+   <signal>triggered()</signal>
+   <receiver>QMQualiMatrixWidget</receiver>
+   <slot>funcSortName()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>624</x>
+     <y>408</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actFuncSortGroup</sender>
+   <signal>triggered()</signal>
+   <receiver>QMQualiMatrixWidget</receiver>
+   <slot>funcSortGroup()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>624</x>
+     <y>408</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actFuncSortAscending</sender>
+   <signal>triggered()</signal>
+   <receiver>QMQualiMatrixWidget</receiver>
+   <slot>funcSortAscending()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>624</x>
+     <y>408</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actFuncSortDescending</sender>
+   <signal>triggered()</signal>
+   <receiver>QMQualiMatrixWidget</receiver>
+   <slot>funcSortDescending()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>624</x>
+     <y>408</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actTrainSortAscending</sender>
+   <signal>triggered()</signal>
+   <receiver>QMQualiMatrixWidget</receiver>
+   <slot>trainSortAscending()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>624</x>
+     <y>408</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actTrainSortDescending</sender>
+   <signal>triggered()</signal>
+   <receiver>QMQualiMatrixWidget</receiver>
+   <slot>trainSortDescending()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>624</x>
+     <y>408</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actTrainSortGroup</sender>
+   <signal>triggered()</signal>
+   <receiver>QMQualiMatrixWidget</receiver>
+   <slot>trainSortGroup()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>624</x>
+     <y>408</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actTrainSortName</sender>
+   <signal>triggered()</signal>
+   <receiver>QMQualiMatrixWidget</receiver>
+   <slot>trainSortName()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>624</x>
+     <y>408</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actTrainSortPrimaryKey</sender>
+   <signal>triggered()</signal>
+   <receiver>QMQualiMatrixWidget</receiver>
+   <slot>trainSortPrimaryKey()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>624</x>
+     <y>408</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>updateFilter()</slot>
@@ -975,5 +1215,15 @@
   <slot>resetTrainGroup()</slot>
   <slot>extSelTrain()</slot>
   <slot>extSelFunc()</slot>
+  <slot>funcSortPrimaryKey()</slot>
+  <slot>funcSortName()</slot>
+  <slot>funcSortGroup()</slot>
+  <slot>funcSortDescending()</slot>
+  <slot>funcSortAscending()</slot>
+  <slot>trainSortName()</slot>
+  <slot>trainSortGroup()</slot>
+  <slot>trainSortPrimaryKey()</slot>
+  <slot>trainSortDescending()</slot>
+  <slot>trainSortAscending()</slot>
  </slots>
 </ui>

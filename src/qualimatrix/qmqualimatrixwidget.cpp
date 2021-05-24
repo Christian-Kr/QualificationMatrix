@@ -33,6 +33,7 @@
 #include <QHeaderView>
 #include <QWidget>
 #include <QTimer>
+#include <QMenu>
 
 QMQualiMatrixWidget::QMQualiMatrixWidget(QWidget *parent)
     : QMWinModeWidget(parent)
@@ -48,16 +49,22 @@ QMQualiMatrixWidget::QMQualiMatrixWidget(QWidget *parent)
 
     // initial settings for table view
     ui->tvQualiMatrix->setItemDelegate(new QMQualiMatrixDelegate());
-    ui->tvQualiMatrix->setHorizontalHeader(
-        new QMQualiMatrixHeaderView(Qt::Orientation::Horizontal, this));
-    ui->tvQualiMatrix->setVerticalHeader(
-        new QMQualiMatrixHeaderView(Qt::Orientation::Vertical, this));
+    ui->tvQualiMatrix->setHorizontalHeader(new QMQualiMatrixHeaderView(Qt::Orientation::Horizontal, this));
+    ui->tvQualiMatrix->setVerticalHeader(new QMQualiMatrixHeaderView(Qt::Orientation::Vertical, this));
 
     // Connect horizontal header.
     connect(ui->tvQualiMatrix->horizontalHeader(), &QHeaderView::sectionClicked, this,
-        &QMQualiMatrixWidget::showTrainSectionHeaderInfo);
+            &QMQualiMatrixWidget::showTrainSectionHeaderInfo);
 
-    // default edit mode - not editable
+    ui->tvQualiMatrix->horizontalHeader()->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(ui->tvQualiMatrix->horizontalHeader(), &QHeaderView::customContextMenuRequested, this,
+            &QMQualiMatrixWidget::customHorizontalContextMenuRequest);
+
+    ui->tvQualiMatrix->verticalHeader()->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(ui->tvQualiMatrix->verticalHeader(), &QHeaderView::customContextMenuRequested, this,
+            &QMQualiMatrixWidget::customVerticalContextMenuRequest);
+
+            // default edit mode - not editable
     ui->tbLock->setChecked(false);
     ui->tvQualiMatrix->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
@@ -66,6 +73,8 @@ QMQualiMatrixWidget::QMQualiMatrixWidget(QWidget *parent)
     ui->splitter->setCollapsible(0, false);
     ui->splitter->setCollapsible(1, false);
     ui->splitter->setCollapsible(2, false);
+
+    buildContextMenus();
 
     loadSettings();
 }
@@ -76,6 +85,93 @@ QMQualiMatrixWidget::~QMQualiMatrixWidget()
     saveSettings();
 
     delete ui;
+}
+
+void QMQualiMatrixWidget::buildContextMenus()
+{
+    contextVerticalHeader = new QMenu(this);
+
+    contextVerticalHeader->addSection(tr("Sortierungsspalte"));
+
+    contextVerticalHeader->addAction(ui->actFuncSortPrimaryKey);
+    contextVerticalHeader->addAction(ui->actFuncSortName);
+    contextVerticalHeader->addAction(ui->actFuncSortGroup);
+
+    contextVerticalHeader->addSection(tr("Reihenfolge"));
+    contextVerticalHeader->addAction(ui->actFuncSortAscending);
+    contextVerticalHeader->addAction(ui->actFuncSortDescending);
+
+    contextHorizontalHeader = new QMenu(this);
+
+    contextHorizontalHeader->addSection(tr("Sortierungsspalte"));
+
+    contextHorizontalHeader->addAction(ui->actTrainSortPrimaryKey);
+    contextHorizontalHeader->addAction(ui->actTrainSortName);
+    contextHorizontalHeader->addAction(ui->actTrainSortGroup);
+
+    contextHorizontalHeader->addSection(tr("Reihenfolge"));
+    contextHorizontalHeader->addAction(ui->actTrainSortAscending);
+    contextHorizontalHeader->addAction(ui->actTrainSortDescending);
+}
+
+void QMQualiMatrixWidget::customVerticalContextMenuRequest(QPoint pos)
+{
+    contextVerticalHeader->popup(ui->tvQualiMatrix->verticalHeader()->mapToGlobal(pos));
+}
+
+void QMQualiMatrixWidget::customHorizontalContextMenuRequest(QPoint pos)
+{
+    contextHorizontalHeader->popup(ui->tvQualiMatrix->horizontalHeader()->mapToGlobal(pos));
+}
+
+void QMQualiMatrixWidget::trainSortName()
+{
+    qualiMatrixModel->setTrainingSortColumn(TRAINING_SORT::NAME);
+}
+
+void QMQualiMatrixWidget::trainSortGroup()
+{
+    qualiMatrixModel->setTrainingSortColumn(TRAINING_SORT::GROUP);
+}
+
+void QMQualiMatrixWidget::trainSortPrimaryKey()
+{
+    qualiMatrixModel->setTrainingSortColumn(TRAINING_SORT::PRIMARY_KEY);
+}
+
+void QMQualiMatrixWidget::trainSortAscending()
+{
+    qualiMatrixModel->setTrainingSortOrder(Qt::AscendingOrder);
+}
+
+void QMQualiMatrixWidget::trainSortDescending()
+{
+    qualiMatrixModel->setTrainingSortOrder(Qt::DescendingOrder);
+}
+
+void QMQualiMatrixWidget::funcSortName()
+{
+    qualiMatrixModel->setFunctionSortColumn(FUNCTION_SORT::NAME);
+}
+
+void QMQualiMatrixWidget::funcSortGroup()
+{
+    qualiMatrixModel->setFunctionSortColumn(FUNCTION_SORT::GROUP);
+}
+
+void QMQualiMatrixWidget::funcSortPrimaryKey()
+{
+    qualiMatrixModel->setFunctionSortColumn(FUNCTION_SORT::PRIMARY_KEY);
+}
+
+void QMQualiMatrixWidget::funcSortAscending()
+{
+    qualiMatrixModel->setFunctionSortOrder(Qt::AscendingOrder);
+}
+
+void QMQualiMatrixWidget::funcSortDescending()
+{
+    qualiMatrixModel->setFunctionSortOrder(Qt::DescendingOrder);
 }
 
 void QMQualiMatrixWidget::showTrainSectionHeaderInfo(int logicalIndex)
@@ -167,6 +263,12 @@ void QMQualiMatrixWidget::switchFilterVisibility()
     settings.write("QualiMatrix/ShowFilter", ui->dwFilter->isVisible());
 }
 
+void QMQualiMatrixWidget::afterBuildCacheModel()
+{
+    ui->tvQualiMatrix->repaint();
+    ui->tvQualiMatrix->viewport()->repaint();
+}
+
 void QMQualiMatrixWidget::updateData()
 {
     // Get the current database and update data only when it is connected.
@@ -182,6 +284,8 @@ void QMQualiMatrixWidget::updateData()
     connect(qualiMatrixModel.get(), &QMQualiMatrixModel::beforeBuildCache, this, &QMWinModeWidget::startWorkload);
     connect(qualiMatrixModel.get(), &QMQualiMatrixModel::updateBuildCache, this, &QMWinModeWidget::updateWorkload);
     connect(qualiMatrixModel.get(), &QMQualiMatrixModel::afterBuildCache, this, &QMWinModeWidget::endWorkload);
+    connect(qualiMatrixModel.get(), &QMQualiMatrixModel::afterBuildCache, this,
+            &QMQualiMatrixWidget::afterBuildCacheModel);
 
     qualiMatrixModel->updateModels();
 
@@ -347,12 +451,11 @@ void QMQualiMatrixWidget::extSelTrain()
 
 void QMQualiMatrixWidget::updateModel()
 {
-    // Rebuild cache of model.
-    qualiMatrixModel->buildCache();
     ui->tvQualiMatrix->clearSelection();
     ui->tvQualiMatrix->selectionModel()->clearCurrentIndex();
-    ui->tvQualiMatrix->update();
-    ui->tvQualiMatrix->viewport()->repaint();
+
+    // Rebuild cache of model.
+    qualiMatrixModel->buildCache();
 }
 
 void QMQualiMatrixWidget::resetTrain()

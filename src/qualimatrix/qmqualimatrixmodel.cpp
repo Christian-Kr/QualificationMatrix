@@ -32,6 +32,10 @@ QMQualiMatrixModel::QMQualiMatrixModel(QObject *parent)
     , trainFilterGroupModel(new QSortFilterProxyModel(this))
     , cache(new QHash<QString, QString>())
     , trainFilterLegalModel(new QSortFilterProxyModel(this))
+    , funcSortOrder(Qt::AscendingOrder)
+    , funcSortColumn(FUNCTION_SORT::PRIMARY_KEY)
+    , trainSortOrder(Qt::AscendingOrder)
+    , trainSortColumn(TRAINING_SORT::NAME)
 {}
 
 QMQualiMatrixModel::~QMQualiMatrixModel()
@@ -63,6 +67,7 @@ void QMQualiMatrixModel::updateModels()
     funcFilterGroupModel->setFilterKeyColumn(2);
     funcFilterModel->setSourceModel(funcFilterGroupModel);
     funcFilterModel->setFilterKeyColumn(1);
+    funcFilterModel->sort(0, funcSortOrder);
 
     trainFilterGroupModel->setSourceModel(trainViewModel.get());
     trainFilterGroupModel->setFilterKeyColumn(2);
@@ -115,6 +120,7 @@ void QMQualiMatrixModel::buildCache()
             }
         }
     }
+
 
     emit afterBuildCache();
 }
@@ -351,4 +357,82 @@ void QMQualiMatrixModel::setTrainLegalFilter(bool filter)
     {
         trainFilterLegalModel->setFilterFixedString("");
     }
+}
+
+void QMQualiMatrixModel::setFunctionSortOrder(Qt::SortOrder sortOrderValue)
+{
+    funcSortOrder = sortOrderValue;
+    updateFunctionSort();
+}
+
+void QMQualiMatrixModel::setFunctionSortColumn(FUNCTION_SORT sortColumnValue)
+{
+    funcSortColumn = sortColumnValue;
+    updateFunctionSort();
+}
+
+void QMQualiMatrixModel::updateFunctionSort()
+{
+    switch (funcSortColumn)
+    {
+        case FUNCTION_SORT::PRIMARY_KEY:
+        {
+            funcFilterModel->sort(0, funcSortOrder);
+        }
+        break;
+        case FUNCTION_SORT::GROUP:
+        {
+            funcFilterModel->sort(2, funcSortOrder);
+        }
+        break;
+        case FUNCTION_SORT::NAME:
+        {
+            funcFilterModel->sort(1, funcSortOrder);
+        }
+        break;
+        default:
+            qWarning() << "Unknown funcSortColumn";
+            return;
+    }
+
+    buildCache();
+}
+
+void QMQualiMatrixModel::setTrainingSortOrder(Qt::SortOrder sortOrderValue)
+{
+    trainSortOrder = sortOrderValue;
+    updateTrainingSort();
+}
+
+void QMQualiMatrixModel::setTrainingSortColumn(TRAINING_SORT sortColumnValue)
+{
+    trainSortColumn = sortColumnValue;
+    updateTrainingSort();
+}
+
+void QMQualiMatrixModel::updateTrainingSort()
+{
+    switch (trainSortColumn)
+    {
+        case TRAINING_SORT::PRIMARY_KEY:
+        {
+            trainFilterModel->sort(0, trainSortOrder);
+        }
+            break;
+        case TRAINING_SORT::GROUP:
+        {
+            trainFilterModel->sort(2, trainSortOrder);
+        }
+            break;
+        case TRAINING_SORT::NAME:
+        {
+            trainFilterModel->sort(1, trainSortOrder);
+        }
+            break;
+        default:
+            qWarning() << "Unknown trainSortColumn";
+            return;
+    }
+
+    buildCache();
 }

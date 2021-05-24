@@ -23,6 +23,7 @@ class QMQualiMatrixModel;
 class QSortFilterProxyModel;
 class QSqlTableModel;
 class QSqlRelationalTableModel;
+class QMenu;
 
 namespace Ui
 {
@@ -50,6 +51,44 @@ public:
     void saveSettings();
 
 public slots:
+    // Actions after the model cache has been build.
+    void afterBuildCacheModel();
+
+    /// Sort the quali matrix by primary key.
+    void trainSortPrimaryKey();
+
+    /// Sort the quali matrix by name.
+    void trainSortName();
+
+    /// Sort the quali matrix by group.
+    void trainSortGroup();
+
+    /// Sort order ascending.
+    void trainSortAscending();
+
+    /// Sort order descending();
+    void trainSortDescending();
+
+    /// Show a context menu for horizontal header.
+    void customHorizontalContextMenuRequest(QPoint pos);
+
+    /// Sort the quali matrix by primary key.
+    void funcSortPrimaryKey();
+
+    /// Sort the quali matrix by name.
+    void funcSortName();
+
+    /// Sort the quali matrix by group.
+    void funcSortGroup();
+
+    /// Sort order ascending.
+    void funcSortAscending();
+
+    /// Sort order descending();
+    void funcSortDescending();
+
+    /// Show a context menu for horizontal header.
+    void customVerticalContextMenuRequest(QPoint pos);
 
     /// The visibility state of the filter widget has changed.
     void filterVisibilityChanged();
@@ -115,6 +154,9 @@ public slots:
     void updateModel();
 
 private:
+    /// Build context menus.
+    void buildContextMenus();
+
     Ui::QMQualiMatrixWidget *ui;
 
     std::unique_ptr<QMQualiMatrixModel> qualiMatrixModel;
@@ -126,6 +168,9 @@ private:
     QSortFilterProxyModel *qualiMatrixFuncFilterModel;
 
     QTimer *lockModeTimer;
+
+    QMenu *contextHorizontalHeader;
+    QMenu *contextVerticalHeader;
 };
 
 #endif // QMQUALIMATRIXWIDGET_H
