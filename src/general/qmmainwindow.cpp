@@ -629,6 +629,7 @@ bool QMMainWindow::closeCurrentWindowMode()
 
     if (widget != nullptr)
     {
+        ui->laInfo->setVisible(false);
         ui->centralwidget->layout()->removeWidget(widget);
         widget->disconnect();
         delete widget;
