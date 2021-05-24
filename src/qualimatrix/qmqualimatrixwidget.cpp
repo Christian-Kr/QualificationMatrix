@@ -352,6 +352,7 @@ void QMQualiMatrixWidget::updateModel()
     ui->tvQualiMatrix->clearSelection();
     ui->tvQualiMatrix->selectionModel()->clearCurrentIndex();
     ui->tvQualiMatrix->update();
+    ui->tvQualiMatrix->viewport()->repaint();
 }
 
 void QMQualiMatrixWidget::resetTrain()
