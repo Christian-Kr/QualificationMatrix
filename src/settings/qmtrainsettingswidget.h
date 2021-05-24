@@ -126,10 +126,10 @@ private:
 
     Ui::QMTrainSettingsWidget *ui;
 
-    std::shared_ptr<QMSqlRelationalTableModel> trainModel;
-    std::shared_ptr<QSqlTableModel> trainGroupModel;
-    std::shared_ptr<QSqlTableModel> trainDataStateModel;
-    std::shared_ptr<QSqlRelationalTableModel> trainDataModel;
+    std::unique_ptr<QMSqlRelationalTableModel> trainModel;
+    std::unique_ptr<QSqlTableModel> trainGroupModel;
+    std::unique_ptr<QSqlTableModel> trainDataStateModel;
+    std::unique_ptr<QSqlTableModel> trainDataViewModel;
 
     QSortFilterProxyModel *trainFilterModel;
 };

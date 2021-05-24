@@ -13,24 +13,24 @@
 
 #include "qmtrainsettingswidget.h"
 #include "ui_qmtrainsettingswidget.h"
-#include "model/qmdatamanager.h"
+#include "model/qmtrainingdataviewmodel.h"
+#include "model/qmtrainingmodel.h"
+#include "model/qmtraininggroupmodel.h"
+#include "model/qmtrainingdatastatemodel.h"
+#include "model/qmqualificationmatrixviewmodel.h"
+#include "model/qmtrainingexceptionviewmodel.h"
 #include "framework/qmproxysqlrelationaldelegate.h"
 #include "framework/qmcolorchooserdelegate.h"
 #include "framework/qmbooleandelegate.h"
 #include "framework/qmplaintexteditdelegate.h"
-#include "framework/qmsqlrelationaltablemodel.h"
 
 #include <QSqlTableModel>
 #include <QMessageBox>
 
 QMTrainSettingsWidget::QMTrainSettingsWidget(QWidget *parent)
-    : QMSettingsWidget(parent),
-    ui(new Ui::QMTrainSettingsWidget),
-    trainModel(nullptr),
-    trainGroupModel(nullptr),
-    trainDataStateModel(nullptr),
-    trainDataModel(nullptr),
-    trainFilterModel(new QSortFilterProxyModel(this))
+    : QMSettingsWidget(parent)
+    , ui(new Ui::QMTrainSettingsWidget)
+    , trainFilterModel(new QSortFilterProxyModel(this))
 {
     ui->setupUi(this);
 
@@ -88,13 +88,25 @@ void QMTrainSettingsWidget::revertChanges()
 
 void QMTrainSettingsWidget::updateData()
 {
-    // Get the model data.
-    auto dm = QMDataManager::getInstance();
+    // Get the current database and update data only when it is connected.
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        return;
+    }
 
-    trainModel = dm->getTrainModel();
-    trainGroupModel = dm->getTrainGroupModel();
-    trainDataStateModel = dm->getTrainDataStateModel();
-    trainDataModel = dm->getTrainDataModel();
+    auto db = QSqlDatabase::database("default");
+
+    trainModel = std::make_unique<QMTrainingModel>(this, db);
+    trainModel->select();
+
+    trainGroupModel = std::make_unique<QMTrainingGroupModel>(this, db);
+    trainGroupModel->select();
+
+    trainDataStateModel = std::make_unique<QMTrainingDataStateModel>(this, db);
+    trainDataStateModel->select();
+
+    trainDataViewModel = std::make_unique<QMTrainingDataViewModel>(this, db);
+    trainDataViewModel->select();
 
     // Set filter model.
     trainFilterModel->setSourceModel(trainModel.get());
@@ -107,12 +119,9 @@ void QMTrainSettingsWidget::updateData()
     updateTableView();
 
     // Build connections of the new models.
-    connect(trainModel.get(), &QAbstractItemModel::dataChanged, this,
-        &QMSettingsWidget::settingsChanged);
-    connect(trainGroupModel.get(), &QAbstractItemModel::dataChanged, this,
-        &QMSettingsWidget::settingsChanged);
-    connect(trainDataStateModel.get(), &QAbstractItemModel::dataChanged, this,
-        &QMSettingsWidget::settingsChanged);
+    connect(trainModel.get(), &QAbstractItemModel::dataChanged, this, &QMSettingsWidget::settingsChanged);
+    connect(trainGroupModel.get(), &QAbstractItemModel::dataChanged, this, &QMSettingsWidget::settingsChanged);
+    connect(trainDataStateModel.get(), &QAbstractItemModel::dataChanged, this, &QMSettingsWidget::settingsChanged);
 }
 
 void QMTrainSettingsWidget::updateTableView()
@@ -206,20 +215,33 @@ bool QMTrainSettingsWidget::trainReference(const QString &train)
     // The training can exist in several tables. Every table has to be searched for a relation.
     // This process might take a while, especially for the training data table, which might have
     // thousands of entries.
-    auto dm = QMDataManager::getInstance();
+
+    // Get the current database and update data only when it is connected.
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        return false;
+    }
+
+    auto db = QSqlDatabase::database("default");
+
+    std::unique_ptr<QSqlTableModel> qualiViewModel = std::make_unique<QMQualificationMatrixViewModel>(this, db);
+    qualiViewModel->select();
+
+    std::unique_ptr<QSqlTableModel> trainExcpViewModel = std::make_unique<QMTrainingExceptionViewModel>(this, db);
+    trainExcpViewModel->select();
 
     // Search inside quali model.
-    for (int i = 0; i < dm->getQualiModel()->rowCount(); i++) {
-        QString trainName = dm->getQualiModel()->data(dm->getQualiModel()->index(i, 2)).toString();
+    for (int i = 0; i < qualiViewModel->rowCount(); i++) {
+        QString trainName = qualiViewModel->data(qualiViewModel->index(i, 2)).toString();
         if (train == trainName) {
             return true;
         }
     }
 
     // Search inside exception model.
-    for (int i = 0; i < dm->getTrainExceptionModel()->rowCount(); i++) {
-        QString trainName = dm->getTrainExceptionModel()
-            ->data(dm->getTrainExceptionModel()->index(i, 2)).toString();
+    for (int i = 0; i < trainExcpViewModel->rowCount(); i++) {
+        QString trainName = trainExcpViewModel
+            ->data(trainExcpViewModel->index(i, 2)).toString();
         if (train == trainName) {
             return true;
         }
@@ -365,9 +387,9 @@ void QMTrainSettingsWidget::removeTrainState()
 
     // Do not delete when entries in train data model have a reference to the state.
     bool found = false;
-    for (int i = 0; i < trainDataModel->rowCount(); i++)
+    for (int i = 0; i < trainDataViewModel->rowCount(); i++)
     {
-        QString trainStateName = trainDataModel->data(trainDataModel->index(i, 4)).toString();
+        QString trainStateName = trainDataViewModel->data(trainDataViewModel->index(i, 4)).toString();
         if (selectedStateName == trainStateName) {
             found = true;
             break;
