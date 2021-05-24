@@ -669,8 +669,6 @@ void QMMainWindow::enterWindowMode(WIN_MODE mode)
         return;
     }
 
-    auto dm = QMDataManager::getInstance();
-
     switch (mode)
     {
         case WIN_MODE::TRAININGDATA:
