@@ -669,7 +669,7 @@ void QMMainWindow::enterWindowMode(WIN_MODE mode)
         return;
     }
 
-    QVBoxLayout *layout = dynamic_cast<QVBoxLayout *>(ui->centralwidget->layout());
+    auto *layout = dynamic_cast<QVBoxLayout *>(ui->centralwidget->layout());
     if (layout == nullptr)
     {
         qWarning("Could not cast layout to QVBoxLayout");
