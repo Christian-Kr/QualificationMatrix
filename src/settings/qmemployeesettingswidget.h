@@ -89,8 +89,8 @@ public slots:
 private:
     Ui::QMEmployeeSettingsWidget *ui;
 
-    std::shared_ptr<QMSqlRelationalTableModel> employeeModel;
-    std::shared_ptr<QSqlTableModel> shiftModel;
+    std::unique_ptr<QMSqlRelationalTableModel> employeeModel;
+    std::unique_ptr<QSqlTableModel> shiftModel;
 
     QSortFilterProxyModel *employeeFilterModel;
     QSortFilterProxyModel *employeeActivatedFilterModel;

@@ -13,7 +13,7 @@
 
 #include "qmemployeesettingswidget.h"
 #include "ui_qmemployeesettingswidget.h"
-#include "model/qmdatamanager.h"
+#include "model/qmemployeemodel.h"
 #include "framework/qmproxysqlrelationaldelegate.h"
 #include "framework/qmbooleandelegate.h"
 #include "qmemployeedetailsdialog.h"
@@ -27,18 +27,14 @@
 QMEmployeeSettingsWidget::QMEmployeeSettingsWidget(QWidget *parent)
     : QMSettingsWidget(parent),
     ui(new Ui::QMEmployeeSettingsWidget),
-    employeeModel(nullptr),
-    shiftModel(nullptr),
     employeeFilterModel(new QSortFilterProxyModel(this)),
     employeeActivatedFilterModel(new QSortFilterProxyModel(this))
 {
     ui->setupUi(this);
 
     // Set initial settings for ui elements.
-    ui->tvEmployee->horizontalHeader()->setSectionResizeMode(
-            QHeaderView::ResizeMode::ResizeToContents);
-    ui->tvEmployee->verticalHeader()->setSectionResizeMode(
-            QHeaderView::ResizeMode::ResizeToContents);
+    ui->tvEmployee->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeMode::ResizeToContents);
+    ui->tvEmployee->verticalHeader()->setSectionResizeMode(QHeaderView::ResizeMode::ResizeToContents);
     ui->tvEmployee->verticalHeader()->setVisible(true);
     ui->tvEmployee->setItemDelegateForColumn(2, new QMProxySqlRelationalDelegate());
 
@@ -46,8 +42,8 @@ QMEmployeeSettingsWidget::QMEmployeeSettingsWidget(QWidget *parent)
     booleanDelegate->setEditable(false);
     ui->tvEmployee->setItemDelegateForColumn(3, booleanDelegate);
 
-    ui->tvEmployeeGroups->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tvEmployeeGroups->verticalHeader()->setVisible(true);
+    ui->tvEmployeeGroups->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeMode::ResizeToContents);
 }
 
 QMEmployeeSettingsWidget::~QMEmployeeSettingsWidget()
@@ -57,11 +53,23 @@ QMEmployeeSettingsWidget::~QMEmployeeSettingsWidget()
 
 void QMEmployeeSettingsWidget::updateData()
 {
-    // Get the model data.
-    auto dm = QMDataManager::getInstance();
+    // Get the current database and update data only when it is connected.
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        return;
+    }
 
-    employeeModel = dm->getEmployeeModel();
-    shiftModel = dm->getShiftModel();
+    auto db = QSqlDatabase::database("default");
+
+    employeeModel = std::make_unique<QMEmployeeModel>(this, db);
+    employeeModel->select();
+
+    shiftModel = std::make_unique<QSqlTableModel>(this, db);
+    shiftModel->setTable("Shift");
+    shiftModel->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    shiftModel->setHeaderData(1, Qt::Horizontal, tr("Name"));
+    shiftModel->sort(1, Qt::AscendingOrder);
+    shiftModel->select();
 
     employeeActivatedFilterModel->setSourceModel(employeeModel.get());
     employeeFilterModel->setSourceModel(employeeActivatedFilterModel);
@@ -73,10 +81,7 @@ void QMEmployeeSettingsWidget::updateData()
     updateTableView();
 
     // Build connections of the new models.
-    connect(
-        employeeModel.get(), &QAbstractItemModel::dataChanged, this,
-        &QMSettingsWidget::settingsChanged
-    );
+    connect(employeeModel.get(), &QAbstractItemModel::dataChanged, this, &QMSettingsWidget::settingsChanged);
 }
 
 void QMEmployeeSettingsWidget::updateTableView()
@@ -93,9 +98,6 @@ void QMEmployeeSettingsWidget::saveSettings()
     if (employeeModel->isDirty())
     {
         employeeModel->submitAll();
-
-        auto dm = QMDataManager::getInstance();
-        dm->getEmployeeViewModel()->select();
     }
 
     if (shiftModel->isDirty())

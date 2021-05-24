@@ -17,7 +17,9 @@
 
 QMEmployeeModel::QMEmployeeModel(QObject *parent, const QSqlDatabase &db)
     : QMSqlRelationalTableModel(parent, db)
-{}
+{
+    initModel();
+}
 
 void QMEmployeeModel::initModel()
 {
