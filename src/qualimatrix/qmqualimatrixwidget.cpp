@@ -240,6 +240,9 @@ void QMQualiMatrixWidget::updateFilter()
     qualiMatrixModel->setTrainLegalFilter(ui->cbLegal->isChecked());
 
     updateModel();
+
+    // Close filter dock widget.
+    ui->dwFilter->setVisible(false);
 }
 
 void QMQualiMatrixWidget::filterVisibilityChanged()
@@ -401,7 +404,6 @@ void QMQualiMatrixWidget::extSelTrainGroup()
     }
 
     ui->cbTrainGroupFilter->setCurrentText(extSelDialog.getRegExpText());
-    updateFilter();
 }
 
 void QMQualiMatrixWidget::extSelFuncGroup()
@@ -416,7 +418,6 @@ void QMQualiMatrixWidget::extSelFuncGroup()
     }
 
     ui->cbFuncGroupFilter->setCurrentText(extSelDialog.getRegExpText());
-    updateFilter();
 }
 
 void QMQualiMatrixWidget::extSelFunc()
@@ -431,7 +432,6 @@ void QMQualiMatrixWidget::extSelFunc()
     }
 
     ui->cbFuncFilter->setCurrentText(extSelDialog.getRegExpText());
-    updateFilter();
 }
 
 void QMQualiMatrixWidget::extSelTrain()
@@ -446,7 +446,6 @@ void QMQualiMatrixWidget::extSelTrain()
     }
 
     ui->cbTrainFilter->setCurrentText(extSelDialog.getRegExpText());
-    updateFilter();
 }
 
 void QMQualiMatrixWidget::updateModel()
@@ -466,7 +465,6 @@ void QMQualiMatrixWidget::resetTrain()
     }
 
     ui->cbTrainFilter->clearEditText();
-    updateFilter();
 }
 
 void QMQualiMatrixWidget::resetTrainGroup()
@@ -477,7 +475,6 @@ void QMQualiMatrixWidget::resetTrainGroup()
     }
 
     ui->cbTrainGroupFilter->clearEditText();
-    updateFilter();
 }
 
 void QMQualiMatrixWidget::resetFunc()
@@ -488,7 +485,6 @@ void QMQualiMatrixWidget::resetFunc()
     }
 
     ui->cbFuncFilter->clearEditText();
-    updateFilter();
 }
 
 void QMQualiMatrixWidget::resetFuncGroup()
@@ -499,5 +495,4 @@ void QMQualiMatrixWidget::resetFuncGroup()
     }
 
     ui->cbFuncGroupFilter->clearEditText();
-    updateFilter();
 }
