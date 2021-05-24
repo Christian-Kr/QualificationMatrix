@@ -41,8 +41,6 @@ QMQualiResultModel::QMQualiResultModel(QObject *parent)
 
 void QMQualiResultModel::resetModel()
 {
-    // Removes all data in the model. Listener should be informed about changes in row number.
-
     beginRemoveRows(QModelIndex(), 0, resultRecords->size() - 1);
 
     while (!resultRecords->isEmpty())
