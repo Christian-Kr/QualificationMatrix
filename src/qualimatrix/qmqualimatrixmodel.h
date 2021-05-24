@@ -19,6 +19,7 @@
 #include <memory>
 
 class QMSqlRelationalTableModel;
+class QSqlTableModel;
 class QSqlRelationalTableModel;
 class QSortFilterProxyModel;
 
@@ -125,9 +126,9 @@ private:
     /// \return any number if row found, else < 0.
     int qualiStateRowFromFuncTrain(const int &funcRow, const int &trainRow) const;
 
-    std::shared_ptr<QSqlRelationalTableModel> funcModel;
-    std::shared_ptr<QSqlRelationalTableModel> trainModel;
-    std::shared_ptr<QMSqlRelationalTableModel> qualiModel;
+    std::unique_ptr<QSqlTableModel> funcViewModel;
+    std::unique_ptr<QSqlTableModel> trainViewModel;
+    std::unique_ptr<QMSqlRelationalTableModel> qualiModel;
 
     QSortFilterProxyModel *funcFilterModel;
     QSortFilterProxyModel *trainFilterModel;

@@ -13,9 +13,10 @@
 
 #include "qmqualimatrixmodel.h"
 #include "model/qmdatamanager.h"
-#include "framework/qmsqlrelationaltablemodel.h"
+#include "model/qmfunctionviewmodel.h"
+#include "model/qmtrainingviewmodel.h"
+#include "model/qmqualificationmatrixmodel.h"
 
-#include <QSqlRelationalTableModel>
 #include <QSqlRecord>
 #include <QSqlError>
 #include <QSortFilterProxyModel>
@@ -40,18 +41,30 @@ QMQualiMatrixModel::~QMQualiMatrixModel()
 
 void QMQualiMatrixModel::updateModels()
 {
-    auto dm = QMDataManager::getInstance();
-    funcModel = dm->getFuncModel();
-    trainModel = dm->getTrainModel();
-    qualiModel = dm->getQualiModel();
+    // Get the current database and update data only when it is connected.
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        return;
+    }
+
+    auto db = QSqlDatabase::database("default");
+
+    funcViewModel = std::make_unique<QMFunctionViewModel>(this, db);
+    funcViewModel->select();
+
+    trainViewModel = std::make_unique<QMTrainingViewModel>(this, db);
+    trainViewModel->select();
+
+    qualiModel = std::make_unique<QMQualificationMatrixModel>(this, db);
+    qualiModel->select();
 
     // Update the filter models.
-    funcFilterGroupModel->setSourceModel(funcModel.get());
+    funcFilterGroupModel->setSourceModel(funcViewModel.get());
     funcFilterGroupModel->setFilterKeyColumn(2);
     funcFilterModel->setSourceModel(funcFilterGroupModel);
     funcFilterModel->setFilterKeyColumn(1);
 
-    trainFilterGroupModel->setSourceModel(trainModel.get());
+    trainFilterGroupModel->setSourceModel(trainViewModel.get());
     trainFilterGroupModel->setFilterKeyColumn(2);
     trainFilterGroupModel->sort(2);
     trainFilterLegalModel->setSourceModel(trainFilterGroupModel);
@@ -81,7 +94,7 @@ void QMQualiMatrixModel::buildCache()
         auto qualiDataTrain = qualiModel->data(qualiModel->index(i, 2)).toString();
         auto qualiStateRow = qualiModel->data(qualiModel->index(i, 3)).toString();
 
-        tmpCache.insert(QString("%1_%2").arg(qualiDataFunc).arg(qualiDataTrain), qualiStateRow);
+        tmpCache.insert(QString("%1_%2").arg(qualiDataFunc, qualiDataTrain), qualiStateRow);
     }
 
     // Now create main cache.
@@ -94,7 +107,7 @@ void QMQualiMatrixModel::buildCache()
             QString qualiDataFunc = funcFilterModel->data(funcFilterModel->index(i, 1)).toString();
             QString qualiDataTrain = trainFilterModel->data(trainFilterModel->index(j, 1))
                 .toString();
-            QString key = QString("%1_%2").arg(qualiDataFunc).arg(qualiDataTrain);
+            QString key = QString("%1_%2").arg(qualiDataFunc, qualiDataTrain);
 
             if (tmpCache.contains(key))
             {
@@ -124,7 +137,6 @@ bool QMQualiMatrixModel::setHeaderData(int section, Qt::Orientation orientation,
 {
     if (value != headerData(section, orientation, role))
     {
-        // FIXME: Implement me!
         emit headerDataChanged(orientation, section, section);
         return true;
     }
@@ -196,7 +208,7 @@ int QMQualiMatrixModel::qualiStateRowFromFuncTrain(const int &funcRow, const int
 
 bool QMQualiMatrixModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
-    if (qualiModel == nullptr || funcModel == nullptr || trainModel == nullptr)
+    if (qualiModel == nullptr || funcViewModel == nullptr || trainViewModel == nullptr)
     {
         return false;
     }
