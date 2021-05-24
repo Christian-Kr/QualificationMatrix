@@ -669,12 +669,19 @@ void QMMainWindow::enterWindowMode(WIN_MODE mode)
         return;
     }
 
+    QVBoxLayout *layout = dynamic_cast<QVBoxLayout *>(ui->centralwidget->layout());
+    if (layout == nullptr)
+    {
+        qWarning("Could not cast layout to QVBoxLayout");
+        return;
+    }
+
     switch (mode)
     {
         case WIN_MODE::TRAININGDATA:
         {
             trainDataWidget = std::make_unique<QMTrainDataWidget>();
-            ui->centralwidget->layout()->addWidget(trainDataWidget.get());
+            layout->insertWidget(0, trainDataWidget.get());
 
             connect(trainDataWidget.get(), &QMTrainDataWidget::infoMessageAvailable, ui->laInfo,
                 &QMInfoLabel::showInfoMessage);
@@ -695,7 +702,7 @@ void QMMainWindow::enterWindowMode(WIN_MODE mode)
         case WIN_MODE::MATRIX:
         {
             qualiMatrixWidget = std::make_unique<QMQualiMatrixWidget>();
-            ui->centralwidget->layout()->addWidget(qualiMatrixWidget.get());
+            layout->insertWidget(0, qualiMatrixWidget.get());
 
             connect(qualiMatrixWidget.get(), &QMWinModeWidget::startWorkload, this, &QMMainWindow::workloadStarts);
             connect(qualiMatrixWidget.get(), &QMWinModeWidget::updateWorkload, this, &QMMainWindow::workloadUpdates);
@@ -714,7 +721,7 @@ void QMMainWindow::enterWindowMode(WIN_MODE mode)
         case WIN_MODE::RESULT:
         {
             qualiResultWidget = std::make_unique<QMQualiResultWidget>();
-            ui->centralwidget->layout()->addWidget(qualiResultWidget.get());
+            layout->insertWidget(0, qualiResultWidget.get());
 
             connect(qualiResultWidget.get(), &QMWinModeWidget::startWorkload, this, &QMMainWindow::workloadStarts);
             connect(qualiResultWidget.get(), &QMWinModeWidget::updateWorkload, this, &QMMainWindow::workloadUpdates);
