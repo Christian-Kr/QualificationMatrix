@@ -19,6 +19,7 @@
 #include "model/qmemployeeviewmodel.h"
 #include "model/qmqualificationmatrixviewmodel.h"
 #include "model/qmtrainingdataviewmodel.h"
+#include "model/qmtrainingexceptionviewmodel.h"
 #include "model/qmemployeefunctionviewmodel.h"
 
 #include <QSqlQuery>
@@ -80,7 +81,7 @@ bool QMQualiResultModel::updateQualiInfo(const QString &filterName, const QStrin
     QMEmployeeFunctionViewModel employeeFuncViewModel(this, db);
     employeeFuncViewModel.select();
 
-    QMTrainingDataViewModel trainExceptionViewModel(this, db);
+    QMTrainingExceptionViewModel trainExceptionViewModel(this, db);
     trainExceptionViewModel.select();
 
     QSortFilterProxyModel filterEmployeeGroupModel(this);
