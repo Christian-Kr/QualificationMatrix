@@ -81,7 +81,7 @@ QMQualiMatrixWidget::~QMQualiMatrixWidget()
 void QMQualiMatrixWidget::showTrainSectionHeaderInfo(int logicalIndex)
 {
     ui->dwTrainDetails->setVisible(true);
-    auto trainName = qualiMatrixModel->headerData(logicalIndex, Qt::Horizontal).toString();
+    auto trainName = qualiMatrixModel->headerData(logicalIndex, Qt::Horizontal, Qt::DisplayRole).toString();
 
     for(int i = 0; i < trainViewModel->rowCount(); i++)
     {
