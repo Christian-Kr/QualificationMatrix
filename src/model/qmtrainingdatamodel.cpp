@@ -15,7 +15,9 @@
 
 QMTrainingDataModel::QMTrainingDataModel(QObject *parent, const QSqlDatabase &db)
     : QMSqlRelationalTableModel(parent, db, false, true)
-{}
+{
+    initModel();
+}
 
 void QMTrainingDataModel::initModel()
 {

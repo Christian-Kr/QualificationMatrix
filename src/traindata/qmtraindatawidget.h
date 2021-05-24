@@ -18,7 +18,6 @@
 
 #include <memory>
 
-// Forward declarations for faster compiling.
 class QMSqlRelationalTableModel;
 class QSqlRelationalTableModel;
 class QSqlTableModel;
@@ -76,8 +75,9 @@ public slots:
     void showTrainDataCertificates();
 
     /// Selection of trainDataTable changed.
-    void trainDataSelectionChanged(const QItemSelection &selected,
-        const QItemSelection &deselected);
+    /// \param deselected
+    /// \param selected
+    void trainDataSelectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
 
     /// Add a certificate to a train data entry.
     void addCertificate();
@@ -111,12 +111,12 @@ signals:
 private:
     Ui::QMTrainDataWidget *ui;
 
-    std::shared_ptr<QSqlRelationalTableModel> employeeModel;
-    std::shared_ptr<QSqlRelationalTableModel> trainModel;
-    std::shared_ptr<QMSqlRelationalTableModel> trainDataModel;
-    std::shared_ptr<QSqlTableModel> trainDataStateModel;
-    std::shared_ptr<QSqlTableModel> trainDataCertModel;
-    std::shared_ptr<QSqlTableModel> trainDataCertViewModel;
+    std::unique_ptr<QSqlTableModel> employeeViewModel;
+    std::unique_ptr<QSqlTableModel> trainViewModel;
+    std::unique_ptr<QMSqlRelationalTableModel> trainDataModel;
+    std::unique_ptr<QSqlTableModel> trainDataStateViewModel;
+    std::unique_ptr<QSqlTableModel> trainDataCertModel;
+    std::unique_ptr<QSqlTableModel> trainDataCertViewModel;
 };
 
 #endif // QMTRAINDATAWIDGET_H

@@ -14,6 +14,12 @@
 #include "qmtraindatawidget.h"
 #include "ui_qmtraindatawidget.h"
 #include "model/qmdatamanager.h"
+#include "model/qmemployeeviewmodel.h"
+#include "model/qmtrainingviewmodel.h"
+#include "model/qmtrainingdatamodel.h"
+#include "model/qmtrainingdatastateviewmodel.h"
+#include "model/qmtraindatacertificatemodel.h"
+#include "model/qmtraindatacertificateviewmodel.h"
 #include "framework/qmproxysqlrelationaldelegate.h"
 #include "framework/qmdatedelegate.h"
 #include "certificate/qmcertificatedialog.h"
@@ -83,20 +89,37 @@ void QMTrainDataWidget::importCsv()
 
 void QMTrainDataWidget::updateData()
 {
-    // Get the model data.
-    auto dm = QMDataManager::getInstance();
-    employeeModel = dm->getEmployeeViewModel();
-    trainModel = dm->getTrainModel();
-    trainDataModel = dm->getTrainDataModel();
-    trainDataStateModel = dm->getTrainDataStateModel();
-    trainDataCertModel = dm->getTrainDataCertificateModel();
-    trainDataCertViewModel = dm->getTrainDataCertificateViewModel();
+    // Get the current database and update data only when it is connected.
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        return;
+    }
+
+    auto db = QSqlDatabase::database("default");
+
+    employeeViewModel = std::make_unique<QMEmployeeViewModel>(this, db);
+    employeeViewModel->select();
+
+    trainViewModel = std::make_unique<QMTrainingViewModel>(this, db);
+    trainViewModel->select();
+
+    trainDataModel = std::make_unique<QMTrainingDataModel>(this, db);
+    trainDataModel->select();
+
+    trainDataStateViewModel = std::make_unique<QMTrainingDataStateViewModel>(this, db);
+    trainDataStateViewModel->select();
+
+    trainDataCertModel = std::make_unique<QMTrainDataCertificateModel>(this, db);
+    trainDataCertModel->select();
+
+    trainDataCertViewModel = std::make_unique<QMTrainDataCertificateViewModel>(this, db);
+    trainDataCertViewModel->select();
 
     // Set models to the corresponding view.
     ui->tvTrainData->setModel(trainDataModel.get());
-    ui->cbFilterEmployee->setModel(employeeModel.get());
-    ui->cbFilterTrain->setModel(trainModel.get());
-    ui->cbFilterState->setModel(trainDataStateModel.get());
+    ui->cbFilterEmployee->setModel(employeeViewModel.get());
+    ui->cbFilterTrain->setModel(trainViewModel.get());
+    ui->cbFilterState->setModel(trainDataStateViewModel.get());
     ui->tvCertificates->setModel(trainDataCertViewModel.get());
 
     updateTableView();
@@ -138,11 +161,8 @@ void QMTrainDataWidget::updateFilter()
 {
     auto filter = QString("relTblAl_1.name LIKE '%%1%' AND relTblAl_2.name LIKE '%%2%' "
         "AND date > '%3' AND date < '%4' AND relTblAl_4.name LIKE '%%5%'")
-        .arg(ui->cbFilterEmployee->currentText())
-        .arg(ui->cbFilterTrain->currentText())
-        .arg(ui->deDateFilterFrom->text())
-        .arg(ui->deDateFilterTo->text())
-        .arg(ui->cbFilterState->currentText());
+        .arg(ui->cbFilterEmployee->currentText(), ui->cbFilterTrain->currentText(), ui->deDateFilterFrom->text(),
+            ui->deDateFilterTo->text(), ui->cbFilterState->currentText());
     trainDataModel->setFilter(filter);
 
     // If have to many entries available, informa the user.
@@ -180,13 +200,20 @@ void QMTrainDataWidget::clearDates()
 
 void QMTrainDataWidget::addSingleEntry()
 {
-    if (trainModel->rowCount() < 1 || employeeModel->rowCount() < 1)
+    if (trainViewModel == nullptr || employeeViewModel == nullptr || trainDataStateViewModel == nullptr ||
+        trainDataModel == nullptr)
+    {
+        qWarning() << "Models have nullptr";
+        return;
+    }
+
+    if (trainViewModel->rowCount() < 1 || employeeViewModel->rowCount() < 1)
     {
         emit warnMessageAvailable(tr("Keine Schulung verfügbar"));
         return;
     }
 
-    if (trainDataStateModel->rowCount() < 1)
+    if (trainDataStateViewModel->rowCount() < 1)
     {
         emit warnMessageAvailable(tr("Kein Schulungsstatus verfügbar"));
         return;
@@ -210,62 +237,63 @@ void QMTrainDataWidget::addSingleEntry()
     // available, use the values of the last entry as default.
     if (trainDataModel->rowCount() == 1 || selRow == 0)
     {
-        newRecord.setValue(1, employeeModel->data(employeeModel->index(0, 0)));
-        newRecord.setValue(2, trainModel->data(trainModel->index(0, 0)));
+        newRecord.setValue(1, employeeViewModel->data(employeeViewModel->index(0, 0)));
+        newRecord.setValue(2, trainViewModel->data(trainViewModel->index(0, 0)));
         newRecord.setValue(3, "2020-01-01");
-        newRecord.setValue(4, trainDataStateModel->data(trainDataStateModel->index(0, 0)));
+        newRecord.setValue(4, trainDataStateViewModel->data(trainDataStateViewModel->index(0, 0)));
     }
     else
     {
         newRecord = trainDataModel->record(selRow);
 
-        QModelIndexList indexes = employeeModel->match(
-            employeeModel->index(0, employeeModel->fieldIndex("name")), Qt::DisplayRole,
+        QModelIndexList indexes = employeeViewModel->match(
+            employeeViewModel->index(0, employeeViewModel->fieldIndex("name")), Qt::DisplayRole,
             trainDataModel->data(trainDataModel->index(selRow, 1)), 1, Qt::MatchFixedString);
 
         if (indexes.size() == 1)
         {
-            newRecord.setValue(1, employeeModel->data(employeeModel->index(indexes.first().row(), 0)));
+            newRecord.setValue(1, employeeViewModel->data(employeeViewModel->index(indexes.first().row(), 0)));
         }
         else
         {
             // If no employee has been found, the last entry might be a deactivated employee. Just
             // give an information to the user about it.
             emit infoMessageAvailable(tr("Der Mitarbeiter existiert nicht oder ist deaktiviert"));
-            newRecord.setValue(1, employeeModel->data(employeeModel->index(0, 0)));
+            newRecord.setValue(1, employeeViewModel->data(employeeViewModel->index(0, 0)));
         }
 
-        indexes = trainModel->match(
-                trainModel->index(0, trainModel->fieldIndex("name")), Qt::DisplayRole,
+        indexes = trainViewModel->match(
+                trainViewModel->index(0, trainViewModel->fieldIndex("name")), Qt::DisplayRole,
                 trainDataModel->data(trainDataModel->index(selRow, 2)), 1,
                 Qt::MatchFixedString);
 
         if (indexes.size() == 1)
         {
-            newRecord.setValue(2, trainModel->data(trainModel->index(indexes.first().row(), 0)));
+            newRecord.setValue(2, trainViewModel->data(trainViewModel->index(indexes.first().row(), 0)));
         }
         else
         {
             // If no training has been found, the last entry might be a deactivated training. Just
             // give an information to the user about it.
             emit infoMessageAvailable(tr("Die Schulung existiert nicht oder ist deaktiviert"));
-            newRecord.setValue(2, trainModel->data(trainModel->index(0, 0)));
+            newRecord.setValue(2, trainViewModel->data(trainViewModel->index(0, 0)));
         }
 
         newRecord.setValue(3, trainDataModel->data(trainDataModel->index(selRow, 3)));
 
-        indexes = trainDataStateModel->match(
-                trainDataStateModel->index(0, trainModel->fieldIndex("name")), Qt::DisplayRole,
+        indexes = trainDataStateViewModel->match(
+                trainDataStateViewModel->index(0, trainViewModel->fieldIndex("name")), Qt::DisplayRole,
                 trainDataModel->data(trainDataModel->index(selRow, 4)), 1,
                 Qt::MatchFixedString);
 
         if (indexes.size() == 1)
         {
-            newRecord.setValue(4, trainDataStateModel->data(trainDataStateModel->index(indexes.first().row(), 0)));
+            newRecord.setValue(4, trainDataStateViewModel->data(
+                trainDataStateViewModel->index(indexes.first().row(), 0)));
         }
         else
         {
-            newRecord.setValue(4, trainDataStateModel->data(trainDataStateModel->index(0, 0)));
+            newRecord.setValue(4, trainDataStateViewModel->data(trainDataStateViewModel->index(0, 0)));
         }
     }
 
