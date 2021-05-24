@@ -19,7 +19,6 @@
 #include <memory>
 #include <QSortFilterProxyModel>
 
-// Forward declaration for faster compiling.
 class QMSqlRelationalTableModel;
 class QSqlRelationalTableModel;
 class QSqlTableModel;
@@ -29,73 +28,50 @@ namespace Ui
 class QMEmployeeDetailsDialog;
 }
 
-/**
- * @brief Show details about an employee and lets change some settings.
- * @author Christian Kr, Copyright (c) 2020
- */
+/// Show details about an employee and lets change some settings.
+/// \author Christian Kr, Copyright (c) 2020
 class QMEmployeeDetailsDialog: public QMDialog
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
-    /**
-     * @brief Constructor
-     * @param parent
-     * @param employeeId Unique id in table. This is the primary key.
-     * @param emnployeeName The name of the employee.
-     * @param employeeGroup The employees' group.
-     */
-    explicit QMEmployeeDetailsDialog(
-        QString employeeId, QString employeeName, QString employeeGroup, bool activated,
-        QWidget *parent = nullptr);
+    /// Constructor
+    /// \param parent
+    /// \param employeeId Unique id in table. This is the primary key.
+    /// \param emnployeeName The name of the employee.
+    /// \param employeeGroup The employees' group.
+    explicit QMEmployeeDetailsDialog(QString employeeId, QString employeeName, QString employeeGroup, bool activated,
+            QWidget *parent = nullptr);
 
+    // Constructor
     ~QMEmployeeDetailsDialog() override;
 
-    /**
-     * @brief Override from QDialog.
-     */
+    /// Override from QDialog.
     void accept() override;
 
-    /**
-     * @brief Override from QDialog.
-     */
+    /// Override from QDialog.
     void reject() override;
 
-    /**
-     * @brief Apply all changes..
-     */
+    /// Apply all changes..
     void applyChanges();
 
-    /**
-     * @brief Revert all changes.
-     */
+    /// Revert all changes.
     void revertChanges();
 
 public slots:
-
-    /**
-     * @brief Add a new func.
-     */
+    /// Add a new func.
     void addFunc();
 
-    /**
-     * @brief Add a new train exception.
-     */
+    /// Add a new train exception.
     void addTrainException();
 
-    /**
-     * @brief Remove a selected function.
-     */
+    /// Remove a selected function.
     void removeFunc();
 
-    /**
-     * @brief Remove a selected train exception.
-     */
+    /// Remove a selected train exception.
     void removeTrainException();
 
-    /**
-     * @brief Updates all data that exist are needed.
-     */
+    /// Updates all data that exist are needed.
     void updateData();
 
 private:
@@ -106,13 +82,11 @@ private:
     QString group;
     bool active;
 
-    std::shared_ptr<QMSqlRelationalTableModel> funcModel;
-    std::shared_ptr<QSqlRelationalTableModel> employeeFuncModel;
-    std::shared_ptr<QMSqlRelationalTableModel> trainModel;
-    std::shared_ptr<QSqlRelationalTableModel> trainExceptionModel;
-    std::shared_ptr<QSqlTableModel> shiftModel;
+    std::unique_ptr<QSqlTableModel> funcViewModel;
+    std::unique_ptr<QSqlRelationalTableModel> employeeFuncModel;
+    std::unique_ptr<QSqlTableModel> trainViewModel;
+    std::unique_ptr<QSqlRelationalTableModel> trainExceptionModel;
 
-    QSortFilterProxyModel *employeeFilterModel;
     QSortFilterProxyModel *employeeFuncFilterModel;
     QSortFilterProxyModel *trainExceptionFilterModel;
 };

@@ -13,9 +13,11 @@
 
 #include "qmemployeedetailsdialog.h"
 #include "ui_qmemployeedetailsdialog.h"
-#include "model/qmdatamanager.h"
+#include "model/qmfunctionviewmodel.h"
+#include "model/qmtrainingviewmodel.h"
+#include "model/qmemployeefunctionmodel.h"
+#include "model/qmtrainingexceptionmodel.h"
 #include "framework/qmproxysqlrelationaldelegate.h"
-#include "framework/qmsqlrelationaltablemodel.h"
 
 #include <QDebug>
 #include <QInputDialog>
@@ -23,23 +25,16 @@
 #include <QSqlQuery>
 #include <QMessageBox>
 
-QMEmployeeDetailsDialog::QMEmployeeDetailsDialog(
-        QString employeeId, QString employeeName, QString employeeGroup, bool activated,
-        QWidget *parent)
-    : QMDialog(parent),
-    ui(new Ui::QMEmployeeDetailsDialog),
-    id(employeeId),
-    name(employeeName),
-    group(employeeGroup),
-    active(activated),
-    funcModel(nullptr),
-    employeeFuncModel(nullptr),
-    trainModel(nullptr),
-    trainExceptionModel(nullptr),
-    shiftModel(nullptr),
-    employeeFilterModel(new QSortFilterProxyModel()),
-    employeeFuncFilterModel(new QSortFilterProxyModel()),
-    trainExceptionFilterModel(new QSortFilterProxyModel())
+QMEmployeeDetailsDialog::QMEmployeeDetailsDialog(QString employeeId, QString employeeName, QString employeeGroup,
+        bool activated, QWidget *parent)
+    : QMDialog(parent)
+    , ui(new Ui::QMEmployeeDetailsDialog)
+    , id(employeeId)
+    , name(employeeName)
+    , group(employeeGroup)
+    , active(activated)
+    , employeeFuncFilterModel(new QSortFilterProxyModel())
+    , trainExceptionFilterModel(new QSortFilterProxyModel())
 {
     ui->setupUi(this);
 
@@ -49,18 +44,14 @@ QMEmployeeDetailsDialog::QMEmployeeDetailsDialog(
     ui->laActivated->setText((active) ? tr("Aktiv") : tr("Inaktiv"));
 
     ui->tvEmployeeFunc->horizontalHeader()->setStretchLastSection(true);
-    ui->tvEmployeeFunc->horizontalHeader()->setSectionResizeMode(
-            QHeaderView::ResizeToContents);
+    ui->tvEmployeeFunc->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     ui->tvEmployeeFunc->horizontalHeader()->setVisible(false);
-    ui->tvEmployeeFunc->setItemDelegateForColumn(
-            2, new QMProxySqlRelationalDelegate());
+    ui->tvEmployeeFunc->setItemDelegateForColumn(2, new QMProxySqlRelationalDelegate());
 
     ui->tvTrainException->horizontalHeader()->setStretchLastSection(false);
-    ui->tvTrainException->horizontalHeader()->setSectionResizeMode(
-            QHeaderView::ResizeToContents);
+    ui->tvTrainException->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     ui->tvTrainException->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft);
-    ui->tvTrainException->setItemDelegateForColumn(
-            2, new QMProxySqlRelationalDelegate());
+    ui->tvTrainException->setItemDelegateForColumn(2, new QMProxySqlRelationalDelegate());
 }
 
 QMEmployeeDetailsDialog::~QMEmployeeDetailsDialog()
@@ -70,24 +61,33 @@ QMEmployeeDetailsDialog::~QMEmployeeDetailsDialog()
 
 void QMEmployeeDetailsDialog::updateData()
 {
-    // Get the model data.
-    auto dm = QMDataManager::getInstance();
+    // Get the current database and update data only when it is connected.
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        return;
+    }
 
-    employeeFuncModel = dm->getEmployeeFuncModel();
-    trainModel = dm->getTrainModel();
-    funcModel = dm->getFuncModel();
-    trainExceptionModel = dm->getTrainExceptionModel();
-    shiftModel = dm->getShiftModel();
+    auto db = QSqlDatabase::database("default");
+
+    employeeFuncModel = std::make_unique<QMEmployeeFunctionModel>(this, db);
+    employeeFuncModel->select();
+
+    trainViewModel = std::make_unique<QMTrainingViewModel>(this, db);
+    trainViewModel->select();
+
+    funcViewModel = std::make_unique<QMFunctionViewModel>(this, db);
+    funcViewModel->select();
+
+    trainExceptionModel = std::make_unique<QMTrainingExceptionModel>(this, db);
+    trainExceptionModel->select();
 
     employeeFuncFilterModel->setSourceModel(employeeFuncModel.get());
     employeeFuncFilterModel->setFilterKeyColumn(1);
-    employeeFuncFilterModel->setFilterRegExp(
-        QRegExp("^" + name + "$", Qt::CaseInsensitive, QRegExp::RegExp));
+    employeeFuncFilterModel->setFilterRegExp(QRegExp("^" + name + "$", Qt::CaseInsensitive, QRegExp::RegExp));
 
     trainExceptionFilterModel->setSourceModel(trainExceptionModel.get());
     trainExceptionFilterModel->setFilterKeyColumn(1);
-    trainExceptionFilterModel->setFilterRegExp(
-        QRegExp("^" + name + "$", Qt::CaseInsensitive, QRegExp::RegExp));
+    trainExceptionFilterModel->setFilterRegExp(QRegExp("^" + name + "$", Qt::CaseInsensitive, QRegExp::RegExp));
 
     // Update the views.
     ui->tvEmployeeFunc->setModel(employeeFuncFilterModel);
@@ -152,7 +152,7 @@ void QMEmployeeDetailsDialog::reject()
 void QMEmployeeDetailsDialog::addFunc()
 {
     // There is no need to insert an entry, if there is no func.
-    if (funcModel->rowCount() < 1)
+    if (funcViewModel->rowCount() < 1)
     {
         QMessageBox::information(
             this, tr("Funktion"),
@@ -168,15 +168,14 @@ void QMEmployeeDetailsDialog::addFunc()
     employeeFuncModel->setData(employeeFuncModel->index(employeeFuncModel->rowCount() - 1, 1), id);
 
     // Default employee function.
-    employeeFuncModel->setData(
-        employeeFuncModel->index(employeeFuncModel->rowCount() - 1, 2),
-        funcModel->data(funcModel->index(0, 0)));
+    employeeFuncModel->setData(employeeFuncModel->index(employeeFuncModel->rowCount() - 1, 2),
+        funcViewModel->data(funcViewModel->index(0, 0)));
 }
 
 void QMEmployeeDetailsDialog::addTrainException()
 {
     // There is no need to insert an entry, if there is no train.
-    if (trainModel->rowCount() < 1)
+    if (trainViewModel->rowCount() < 1)
     {
         QMessageBox::information(
             this, tr("Schulungsausnahme"), tr(
@@ -194,9 +193,8 @@ void QMEmployeeDetailsDialog::addTrainException()
     );
 
     // Add default train id.
-    trainExceptionModel->setData(
-        trainExceptionModel->index(trainExceptionModel->rowCount() - 1, 2),
-        trainModel->data(trainModel->index(0, 0)));
+    trainExceptionModel->setData(trainExceptionModel->index(trainExceptionModel->rowCount() - 1, 2),
+        trainViewModel->data(trainViewModel->index(0, 0)));
 
     // Add default text.
     trainExceptionModel->setData(
