@@ -17,7 +17,9 @@
 
 QMFunctionModel::QMFunctionModel(QObject *parent, const QSqlDatabase &db)
     : QMSqlRelationalTableModel(parent, db)
-{}
+{
+    initModel();
+}
 
 void QMFunctionModel::initModel()
 {

@@ -19,7 +19,6 @@
 #include <memory>
 #include <QSortFilterProxyModel>
 
-// Forward declaration for faster compiling.
 class QMSqlRelationalTableModel;
 class QSqlRelationalTableModel;
 class QSqlTableModel;
@@ -29,34 +28,25 @@ namespace Ui
 class QMFuncSettingsWidget;
 }
 
-/**
- * @brief Shows a settings widget for function data.
- * @author Christian Kr, Copyright (c) 2020
- */
+/// Shows a settings widget for function data.
+/// \author Christian Kr, Copyright (c) 2020
 class QMFuncSettingsWidget: public QMSettingsWidget
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
-    /**
-     * @brief Constructor
-     * @param parent
-     */
+    /// Constructor
+    /// \param parent
     explicit QMFuncSettingsWidget(QWidget *parent = nullptr);
 
+    /// Destructor
     ~QMFuncSettingsWidget() override;
 
-    /**
-     * @brief This slot has to be implemented by parent class.
-     *
-     * When calling this function, it should take a QSettings object or data Model
-     * (bspw. SqlModel) to save every changes to a certificate based system.
-     */
+    /// This slot has to be implemented by parent class. When calling this function, it should take a QSettings object
+    /// or data Model (bspw. SqlModel) to save every changes to a certificate based system.
     void saveSettings() override;
 
-    /**
-     * @brief Override from QMSettingsWidget
-     */
+    /// Override from QMSettingsWidget
     void revertChanges() override;
 
     /// Override from QMSettingsWidget.
@@ -66,59 +56,40 @@ public:
     void updateTableView();
 
 public slots:
-
-    /**
-     * @brief Updates all data that exist are needed.
-     */
+    /// Updates all data that exist are needed.
     void updateData();
 
-    /**
-     * @brief Add a new function.
-     */
+    /// Add a new function.
     void addFunc();
 
-    /**
-     * @brief Remove a selected function.
-     */
+    /// Remove a selected function.
     void removeFunc();
 
-    /**
-     * @brief Revert changes in function data model.
-     */
+    /// Revert changes in function data model.
     void revertFunc();
 
-    /**
-     * @brief Add a new function group.
-     */
+    /// Add a new function group.
     void addFuncGroups();
 
-    /**
-     * @brief Remove a selected function group.
-     */
+    /// Remove a selected function group.
     void removeFuncGroups();
 
-    /**
-     * @brief Revert changes in function group data model.
-     */
+    /// Revert changes in function group data model.
     void revertFuncGroups();
 
-    /**
-     * @brief Filter the function table.
-     */
+    /// Filter the function table.
     void filterFunc();
 
 private:
-    /**
-     * @brief Search for references in models to the given function.
-     * @param func Name of the function to search for references.
-     * @return True if reference found, else false.
-     */
+    /// Search for references in models to the given function.
+    /// \param func Name of the function to search for references.
+    /// \return True if reference found, else false.
     bool funcReference(const QString &func);
 
     Ui::QMFuncSettingsWidget *ui;
 
-    std::shared_ptr<QMSqlRelationalTableModel> funcModel;
-    std::shared_ptr<QSqlTableModel> funcGroupModel;
+    std::unique_ptr<QMSqlRelationalTableModel> funcModel;
+    std::unique_ptr<QSqlTableModel> funcGroupModel;
 
     QSortFilterProxyModel *funcFilterModel;
 };

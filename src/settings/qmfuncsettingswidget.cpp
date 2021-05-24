@@ -13,17 +13,20 @@
 
 #include "qmfuncsettingswidget.h"
 #include "ui_qmfuncsettingswidget.h"
-#include "model/qmdatamanager.h"
+#include "model/qmfunctionmodel.h"
+#include "model/qmfunctiongroupmodel.h"
+#include "model/qmqualificationmatrixviewmodel.h"
+#include "model/qmemployeefunctionviewmodel.h"
 #include "framework/qmproxysqlrelationaldelegate.h"
 #include "framework/qmcolorchooserdelegate.h"
-#include "framework/qmsqlrelationaltablemodel.h"
 
 #include <QSqlTableModel>
 #include <QMessageBox>
 
 QMFuncSettingsWidget::QMFuncSettingsWidget(QWidget *parent)
-    : QMSettingsWidget(parent), ui(new Ui::QMFuncSettingsWidget), funcModel(nullptr),
-    funcGroupModel(nullptr), funcFilterModel(new QSortFilterProxyModel(this))
+    : QMSettingsWidget(parent)
+    , ui(new Ui::QMFuncSettingsWidget)
+    , funcFilterModel(new QSortFilterProxyModel(this))
 {
     ui->setupUi(this);
 
@@ -73,27 +76,33 @@ void QMFuncSettingsWidget::revertChanges()
 
 void QMFuncSettingsWidget::updateData()
 {
-    // Get the model data.
-    auto dm = QMDataManager::getInstance();
+    // Get the current database and update data only when it is connected.
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        return;
+    }
 
-    funcModel = dm->getFuncModel();
-    funcGroupModel = dm->getFuncGroupModel();
+    auto db = QSqlDatabase::database("default");
+
+    funcModel = std::make_unique<QMFunctionModel>(this, db);
+    funcModel->select();
+
+    funcGroupModel = std::make_unique<QMFunctionGroupModel>(this, db);
+    funcGroupModel->select();
 
     // Set filter model.
     funcFilterModel->setSourceModel(funcModel.get());
 
     // Update the views.
     ui->tvFunc->setModel(funcFilterModel);
+    ui->tvFunc->hideColumn(0);
+
     ui->tvFuncGroups->setModel(funcGroupModel.get());
+    ui->tvFuncGroups->hideColumn(0);
 
     // Build connections of the new models.
-    connect(
-        funcModel.get(), &QAbstractItemModel::dataChanged, this, &QMSettingsWidget::settingsChanged
-    );
-    connect(
-        funcGroupModel.get(), &QAbstractItemModel::dataChanged, this,
-        &QMSettingsWidget::settingsChanged
-    );
+    connect(funcModel.get(), &QAbstractItemModel::dataChanged, this, &QMSettingsWidget::settingsChanged);
+    connect(funcGroupModel.get(), &QAbstractItemModel::dataChanged, this, &QMSettingsWidget::settingsChanged);
 }
 
 void QMFuncSettingsWidget::updateTableView()
@@ -189,21 +198,33 @@ bool QMFuncSettingsWidget::funcReference(const QString &func)
     // The function can exist in several tables. Every table has to be searched for a relation.
     // This process might take a while, especially for the training data table, which might have
     // thousands of entries.
-    auto dm = QMDataManager::getInstance();
 
-    for (int i = 0; i < dm->getQualiModel()->rowCount(); i++)
+    // Get the current database and update data only when it is connected.
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
     {
-        QString funcName = dm->getQualiModel()->data(dm->getQualiModel()->index(i, 1)).toString();
+        return false;
+    }
+
+    auto db = QSqlDatabase::database("default");
+
+    std::unique_ptr<QSqlTableModel> qualiViewModel = std::make_unique<QMQualificationMatrixViewModel>(this, db);
+    qualiViewModel->select();
+
+    std::unique_ptr<QSqlTableModel> employeeFuncViewModel = std::make_unique<QMEmployeeFunctionViewModel>(this, db);
+    employeeFuncViewModel->select();
+
+    for (int i = 0; i < qualiViewModel->rowCount(); i++)
+    {
+        QString funcName = qualiViewModel->data(qualiViewModel->index(i, 1)).toString();
         if (func == funcName)
         {
             return true;
         }
     }
 
-    for (int i = 0; i < dm->getEmployeeFuncModel()->rowCount(); i++)
+    for (int i = 0; i < employeeFuncViewModel->rowCount(); i++)
     {
-        QString funcName = dm->getEmployeeFuncModel()->data(dm->getEmployeeFuncModel()->index(i, 2))
-            .toString();
+        QString funcName = employeeFuncViewModel->data(employeeFuncViewModel->index(i, 2)).toString();
         if (func == funcName)
         {
             return true;
