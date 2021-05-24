@@ -19,7 +19,6 @@
 #include <memory>
 #include <QSortFilterProxyModel>
 
-// Forward declaration for faster compiling.
 class QMSqlRelationalTableModel;
 class QSqlRelationalTableModel;
 class QSqlTableModel;
@@ -29,34 +28,25 @@ namespace Ui
 class QMTrainSettingsWidget;
 }
 
-/**
- * @brief Shows a settings widget for training data.
- * @author Christian Kr, Copyright (c) 2020
- */
+/// Shows a settings widget for training data.
+/// \author Christian Kr, Copyright (c) 2020
 class QMTrainSettingsWidget: public QMSettingsWidget
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
-    /**
-     * @brief Constructor
-     * @param parent
-     */
+    /// Constructor
+    /// \param parent
     explicit QMTrainSettingsWidget(QWidget *parent = nullptr);
 
+    /// Destructor
     ~QMTrainSettingsWidget() override;
 
-    /**
-     * @brief This slot has to be implemented by parent class.
-     *
-     * When calling this function, it should take a QSettings object or data Model
-     * (bspw. SqlModel) to save every changes to a certificate based system.
-     */
+    /// This slot has to be implemented by parent class. When calling this function, it should take a QSettings object
+    /// or data Model (bspw. SqlModel) to save every changes to a certificate based system.
     void saveSettings() override;
 
-    /**
-     * @brief Override from QMSettingsWidget
-     */
+    ///  Override from QMSettingsWidget
     void revertChanges() override;
 
     /// Override from QMSettingsWidget.
@@ -66,45 +56,28 @@ public:
     void updateTableView();
 
 public slots:
-
-    /**
-     * @brief Updates all data that exist are needed.
-     */
+    /// Updates all data that exist are needed.
     void updateData();
 
-    /**
-     * @brief Add a new training.
-     */
+    /// Add a new training.
     void addTrain();
 
-    /**
-     * @brief Remove a selected training.
-     */
+    /// Remove a selected training.
     void removeTrain();
 
-    /**
-     * @brief Revert changes in training data model.
-     */
+    /// Revert changes in training data model.
     void revertTrain();
 
-    /**
-     * @brief Add a new training group.
-     */
+    /// Add a new training group.
     void addTrainGroups();
 
-    /**
-     * @brief Remove a selected training group.
-     */
+    /// Remove a selected training group.
     void removeTrainGroups();
 
-    /**
-     * @brief Revert changes in training group data model.
-     */
+    /// Revert changes in training group data model.
     void revertTrainGroups();
 
-    /**
-     * @brief Filter the training table.
-     */
+    /// Filter the training table.
     void filterTrain();
 
     /// Remove a training date state.
@@ -117,11 +90,9 @@ public slots:
     void revertTrainStates();
 
 private:
-    /**
-     * @brief Search for references in models to the given training.
-     * @param func Name of the training to search for references.
-     * @return True if reference found, else false.
-     */
+    /// Search for references in models to the given training.
+    /// \param func Name of the training to search for references.
+    /// \return True if reference found, else false.
     bool trainReference(const QString &train);
 
     Ui::QMTrainSettingsWidget *ui;
