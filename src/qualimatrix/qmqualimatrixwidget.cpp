@@ -44,7 +44,6 @@ QMQualiMatrixWidget::QMQualiMatrixWidget(QWidget *parent)
     ui->setupUi(this);
 
     lockModeTimer->setSingleShot(true);
-    lockModeTimer->setInterval(10000);
     connect(lockModeTimer, &QTimer::timeout, this, &QMQualiMatrixWidget::enableLocked);
 
     // initial settings for table view
@@ -219,6 +218,9 @@ void QMQualiMatrixWidget::loadSettings()
     filterVisibilityChanged();
 
     ui->splitter->restoreState(settings.read("QualiMatrix/FilterSplitter").toByteArray());
+
+    auto lockTime = settings.read("QualiMatrix/LockTime", 30).toInt();
+    lockModeTimer->setInterval(lockTime*1000);
 }
 
 void QMQualiMatrixWidget::saveSettings()
