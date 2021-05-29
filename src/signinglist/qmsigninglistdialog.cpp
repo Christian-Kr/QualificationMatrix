@@ -18,12 +18,9 @@
 #include "model/qmtrainingviewmodel.h"
 #include "settings/qmapplicationsettings.h"
 #include "signinglist/qmsigninglistdocument.h"
-#include "framework/qmsqlrelationaltablemodel.h"
 
 #include <QDate>
 #include <QMessageBox>
-#include <QKeyEvent>
-#include <QSqlRelationalTableModel>
 #include <QSqlTableModel>
 #include <QPrinter>
 #include <QPrintPreviewDialog>
