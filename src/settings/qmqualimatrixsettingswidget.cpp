@@ -38,6 +38,7 @@ void QMQualiMatrixSettingsWidget::saveSettings()
     settings.write("QualiMatrix/TrainBottomTop", ui->cbWriteTrainBottomToTop->isChecked());
     settings.write("QualiMatrix/VertHeaderWidth", ui->sbQMVertWidth->value());
     settings.write("QualiMatrix/HorHeaderHeight", ui->sbQMHorHeight->value());
+    settings.write("QualiMatrix/LockTime", ui->sbLockTime->value());
 }
 
 void QMQualiMatrixSettingsWidget::revertChanges()
@@ -65,6 +66,9 @@ void QMQualiMatrixSettingsWidget::loadSettings()
 
     auto qmHorHeight = settings.read("QualiMatrix/HorHeaderHeight", 200).toInt();
     ui->sbQMHorHeight->setValue(qmHorHeight);
+
+    auto lockTime = settings.read("QualiMatrix/LockTime", 30).toInt();
+    ui->sbLockTime->setValue(lockTime);
 }
 
 void QMQualiMatrixSettingsWidget::changeGridColor()
