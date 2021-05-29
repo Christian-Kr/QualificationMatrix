@@ -40,6 +40,8 @@ QMQualiMatrixWidget::QMQualiMatrixWidget(QWidget *parent)
     , ui(new Ui::QMQualiMatrixWidget)
     , qualiMatrixFuncFilterModel(new QSortFilterProxyModel(this))
     , lockModeTimer(new QTimer(this))
+    , contextHorizontalHeader(nullptr)
+    , contextVerticalHeader(nullptr)
 {
     ui->setupUi(this);
 
