@@ -100,7 +100,7 @@ void QMTrainDataWidget::updateData()
     trainViewModel->select();
 
     trainDataModel = std::make_unique<QMTrainingDataModel>(this, db);
-    trainDataModel->select();
+    trainDataModel->setLimit(100);
 
     trainDataStateViewModel = std::make_unique<QMTrainingDataStateViewModel>(this, db);
     trainDataStateViewModel->select();
@@ -122,9 +122,9 @@ void QMTrainDataWidget::updateData()
 
     // If have to many entries available, informa the user.
     trainDataModel->select();
-    if (trainDataModel->canFetchMore())
+    if (trainDataModel->rowCount() >= trainDataModel->getLimit())
     {
-        emit warnMessageAvailable(tr("Mehr als 255 Ergebnisse an Schulungsdaten verfügbar"));
+        emit warnMessageAvailable(tr("Mehr als %1 Einträge").arg(trainDataModel->getLimit()));
     }
 
     resetFilter();
@@ -160,11 +160,9 @@ void QMTrainDataWidget::updateFilter()
         .arg(ui->cbFilterEmployee->currentText(), ui->cbFilterTrain->currentText(), ui->deDateFilterFrom->text(),
             ui->deDateFilterTo->text(), ui->cbFilterState->currentText());
     trainDataModel->setFilter(filter);
-
-    // If have to many entries available, informa the user.
-    if (trainDataModel->canFetchMore())
+    if (trainDataModel->rowCount() >= trainDataModel->getLimit())
     {
-        emit warnMessageAvailable(tr("Mehr als 255 Ergebnisse an Schulungsdaten verfügbar"));
+        emit warnMessageAvailable(tr("Mehr als %1 Einträge").arg(trainDataModel->getLimit()));
     }
 
     // Close an open certificate widget.
@@ -298,6 +296,7 @@ void QMTrainDataWidget::addSingleEntry()
 
     if (!trainDataModel->insertRecord(0, newRecord))
     {
+        qDebug() << trainDataModel->database().lastError().driverText();
         emit warnMessageAvailable(tr("Der Eintrag konnte nicht erstellt werden."));
         return;
     }

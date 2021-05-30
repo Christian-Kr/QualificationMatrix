@@ -26,8 +26,8 @@ public:
     /// Constructor
     /// \param parent The parent object for the qt system.
     /// \param db The database to work with.
-    explicit QMSqlRelationalTableModel(QObject *parent = nullptr,
-        QSqlDatabase db = QSqlDatabase(), bool doFetchAll = true, bool doFetchAllSub = true);
+    explicit QMSqlRelationalTableModel(QObject *parent = nullptr, QSqlDatabase db = QSqlDatabase(),
+       bool doFetchAll = true, bool doFetchAllSub = true);
 
     /// Override from QSqlRelationalTableModel.
     /// \return True is selection was successful, else false.
@@ -52,6 +52,14 @@ public:
     /// This function musst be implemented for the model to be recreated after clear.
     virtual void initModel() {};
 
+    /// Set the limit of the select rows.
+    /// \param value The limit number.
+    void setLimit(int value) { limit = value; }
+
+    /// Get the selection limit row number.
+    /// \return The limit value.
+    int getLimit() const { return limit; }
+
 public slots:
     /// Test for need of new select. Based on the models changed in application.
     /// \param sender The sending model object indicating whether the reciever needs to be updated.
@@ -68,6 +76,10 @@ signals:
     /// \param currentStep Current number of fetch running.
     void nextSelect(int currentStep);
 
+protected:
+    /// Override from QSqlRelationalTableModel.
+    QString selectStatement() const override;
+
 private:
     /// If true, fetch all data exceeding the 255 limit of the tables.
     bool doFetchAll;
@@ -76,6 +88,9 @@ private:
     /// for all relational table models only. The tables of relations will be created with
     /// QTable, which also has the limit of 255.
     bool doFetchAllSub;
+
+    // Limit the number of rows per select statement.
+    int limit;
 };
 
 #endif // QMSQLRELATIONALTABLEMODEL_H

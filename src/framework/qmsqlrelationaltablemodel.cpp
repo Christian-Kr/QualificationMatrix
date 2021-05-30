@@ -17,9 +17,10 @@
 #include <QDebug>
 #include <QSqlRelationalTableModel>
 
-QMSqlRelationalTableModel::QMSqlRelationalTableModel(QObject *parent, QSqlDatabase db, bool doFetchAll, bool
-    doFetchAllSub)
+QMSqlRelationalTableModel::QMSqlRelationalTableModel(QObject *parent, QSqlDatabase db, bool doFetchAll,
+     bool doFetchAllSub)
     : QSqlRelationalTableModel(parent, db)
+    , limit(0)
 {
     // Fetching all sub data exceeding 255 should be true by default. This makes sure, that
     // relations work with big data sets.
@@ -65,8 +66,7 @@ QVariant QMSqlRelationalTableModel::data(const QModelIndex &index, int role) con
     return QSqlRelationalTableModel::data(index, role);
 }
 
-bool QMSqlRelationalTableModel::setData(
-        const QModelIndex &index, const QVariant &value, int role)
+bool QMSqlRelationalTableModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     // Before setting a value, look if it is a relational model. If so: Update all related table models.
     QSqlTableModel *tableModel = relationModel(index.column());
@@ -84,3 +84,16 @@ bool QMSqlRelationalTableModel::setData(
 
     return res;
 }
+
+QString QMSqlRelationalTableModel::selectStatement() const
+{
+    QString query = QSqlRelationalTableModel::selectStatement();
+
+    if (limit > 0)
+    {
+        query += QString(" LIMIT %1").arg(limit);
+    }
+
+    return query;
+}
+
