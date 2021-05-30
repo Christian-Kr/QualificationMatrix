@@ -14,11 +14,11 @@
 #ifndef QMTRAININGVIEWMODEL_H
 #define QMTRAININGVIEWMODEL_H
 
-#include <QSqlTableModel>
+#include "framework/qmsqltablemodel.h"
 
 /// Employee training view table in sql.
 /// \author Christian Kr, Copyright 2021
-class QMTrainingViewModel: public QSqlTableModel
+class QMTrainingViewModel: public QMSqlTableModel
 {
     Q_OBJECT
 

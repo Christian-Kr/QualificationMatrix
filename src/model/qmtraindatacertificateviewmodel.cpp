@@ -14,7 +14,7 @@
 #include "qmtraindatacertificateviewmodel.h"
 
 QMTrainDataCertificateViewModel::QMTrainDataCertificateViewModel(QObject *parent, QSqlDatabase db)
-    : QSqlTableModel(parent, db)
+    : QMSqlTableModel(parent, db)
 {
     // The name of the Table.
     setTable("TrainDataCertificateView");

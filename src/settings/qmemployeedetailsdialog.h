@@ -19,7 +19,7 @@
 #include <memory>
 #include <QSortFilterProxyModel>
 
-class QMSqlRelationalTableModel;
+class QMSqlTableModel;
 class QSqlRelationalTableModel;
 class QSqlTableModel;
 

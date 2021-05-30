@@ -18,7 +18,7 @@
 
 #include <memory>
 
-class QMSqlRelationalTableModel;
+class QMSqlTableModel;
 class QSqlRelationalTableModel;
 class QSqlTableModel;
 class QProgressDialog;
@@ -113,7 +113,7 @@ private:
 
     std::unique_ptr<QSqlTableModel> employeeViewModel;
     std::unique_ptr<QSqlTableModel> trainViewModel;
-    std::unique_ptr<QMSqlRelationalTableModel> trainDataModel;
+    std::unique_ptr<QMSqlTableModel> trainDataModel;
     std::unique_ptr<QSqlTableModel> trainDataStateViewModel;
     std::unique_ptr<QSqlTableModel> trainDataCertModel;
     std::unique_ptr<QSqlTableModel> trainDataCertViewModel;

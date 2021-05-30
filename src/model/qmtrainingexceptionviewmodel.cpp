@@ -14,7 +14,7 @@
 #include "qmtrainingexceptionviewmodel.h"
 
 QMTrainingExceptionViewModel::QMTrainingExceptionViewModel(QObject *parent, const QSqlDatabase &db)
-    : QSqlTableModel(parent, db)
+    : QMSqlTableModel(parent, db)
 {
     initModel();
 }

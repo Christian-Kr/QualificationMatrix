@@ -14,13 +14,13 @@
 #ifndef QMINFOMODEL_H
 #define QMINFOMODEL_H
 
-#include "framework/qmsqlrelationaltablemodel.h"
+#include "framework/qmsqltablemodel.h"
 
 /// Model for database information.
 /// \author Christian Kr, Copyright 2020
-class QMInfoModel: public QMSqlRelationalTableModel
+class QMInfoModel: public QMSqlTableModel
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /// Constructor

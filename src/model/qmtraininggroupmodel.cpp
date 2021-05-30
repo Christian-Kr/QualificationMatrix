@@ -14,7 +14,7 @@
 #include "qmtraininggroupmodel.h"
 
 QMTrainingGroupModel::QMTrainingGroupModel(QObject *parent, QSqlDatabase db)
-    : QSqlTableModel(parent, db)
+    : QMSqlTableModel(parent, db)
 {
     // The name of the Table.
     setTable("TrainGroup");

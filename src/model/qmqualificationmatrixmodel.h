@@ -14,15 +14,13 @@
 #ifndef QMQUALIFICATIONMATRIXMODEL_H
 #define QMQUALIFICATIONMATRIXMODEL_H
 
-#include "framework/qmsqlrelationaltablemodel.h"
+#include "framework/qmsqltablemodel.h"
 
-/**
- * @brief Qaulification matrix data table in sql.
- * @author Christian Kr, Copyright (c) 2020
- */
-class QMQualificationMatrixModel: public QMSqlRelationalTableModel
+/// Qaulification matrix data table in sql.
+/// \author Christian Kr, Copyright (c) 2020
+class QMQualificationMatrixModel: public QMSqlTableModel
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /// Constructor - Override from QSqlRelationalTableModel.
@@ -30,7 +28,7 @@ public:
     /// \param db
     explicit QMQualificationMatrixModel(QObject *parent = nullptr, const QSqlDatabase &db = QSqlDatabase());
 
-    /// Override from QMSqlRelationalTableModel.
+    /// Override from QMSqlTableModel.
     void initModel() override;
 };
 

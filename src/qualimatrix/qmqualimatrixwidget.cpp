@@ -19,7 +19,7 @@
 #include "qmqualimatrixheaderview.h"
 #include "settings/qmapplicationsettings.h"
 #include "framework/qmextendedselectiondialog.h"
-#include "framework/qmsqlrelationaltablemodel.h"
+#include "framework/qmsqltablemodel.h"
 #include "model/qmfunctionviewmodel.h"
 #include "model/qmfunctiongroupviewmodel.h"
 #include "model/qmtrainingviewmodel.h"

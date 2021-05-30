@@ -14,7 +14,7 @@
 #include "qmemployeeviewmodel.h"
 
 QMEmployeeViewModel::QMEmployeeViewModel(QObject *parent, const QSqlDatabase &db)
-    : QMSqlRelationalTableModel(parent, db)
+    : QMSqlTableModel(parent, db)
 {
     // The name of the Table.
     QSqlRelationalTableModel::setTable("EmployeeView");

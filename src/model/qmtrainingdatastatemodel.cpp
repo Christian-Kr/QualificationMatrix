@@ -14,7 +14,7 @@
 #include "qmtrainingdatastatemodel.h"
 
 QMTrainingDataStateModel::QMTrainingDataStateModel(QObject *parent, const QSqlDatabase &db)
-    : QSqlTableModel(parent, db)
+    : QMSqlTableModel(parent, db)
 {
     // The name of the Table.
     setTable("TrainDataState");

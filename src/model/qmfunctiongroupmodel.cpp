@@ -14,7 +14,7 @@
 #include "qmfunctiongroupmodel.h"
 
 QMFunctionGroupModel::QMFunctionGroupModel(QObject *parent, const QSqlDatabase &db)
-    : QSqlTableModel(parent, db)
+    : QMSqlTableModel(parent, db)
 {
     // The name of the Table.
     setTable("FuncGroup");

@@ -19,7 +19,7 @@
 #include <memory>
 
 class QSqlTableModel;
-class QMSqlRelationalTableModel;
+class QMSqlTableModel;
 class QSqlRelationalTableModel;
 class QPrinter;
 

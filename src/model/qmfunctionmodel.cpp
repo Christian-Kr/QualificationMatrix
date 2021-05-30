@@ -16,7 +16,7 @@
 #include <QDebug>
 
 QMFunctionModel::QMFunctionModel(QObject *parent, const QSqlDatabase &db)
-    : QMSqlRelationalTableModel(parent, db)
+    : QMSqlTableModel(parent, db)
 {
     initModel();
 }

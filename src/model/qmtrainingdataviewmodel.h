@@ -14,11 +14,11 @@
 #ifndef QMTRAININGDATAVIEWMODEL_H
 #define QMTRAININGDATAVIEWMODEL_H
 
-#include <QSqlTableModel>
+#include "framework/qmsqltablemodel.h"
 
 /// Employee training data view table in sql.
 /// \author Christian Kr, Copyright 2021
-class QMTrainingDataViewModel: public QSqlTableModel
+class QMTrainingDataViewModel: public QMSqlTableModel
 {
     Q_OBJECT
 
@@ -28,7 +28,7 @@ public:
     /// \param db
     explicit QMTrainingDataViewModel(QObject *parent = nullptr, const QSqlDatabase &db = QSqlDatabase());
 
-    /// Override from QMSqlRelationalTableModel.
+    /// Override from QMSqlTableModel.
     void initModel();
 };
 

@@ -14,11 +14,11 @@
 #ifndef QMTRAININGDATASTATEVIEWMODEL_H
 #define QMTRAININGDATASTATEVIEWMODEL_H
 
-#include <QSqlTableModel>
+#include "framework/qmsqltablemodel.h"
 
 /// Employee training data state view table in sql.
 /// \author Christian Kr, Copyright 2021
-class QMTrainingDataStateViewModel: public QSqlTableModel
+class QMTrainingDataStateViewModel: public QMSqlTableModel
 {
     Q_OBJECT
 

@@ -14,13 +14,13 @@
 #ifndef QMFUNCTIONGROUPMODEL_H
 #define QMFUNCTIONGROUPMODEL_H
 
-#include <QSqlTableModel>
+#include "framework/qmsqltablemodel.h"
 
 /// Employee function group table in sql.
 /// \author Christian Kr, Copyright 2020
-class QMFunctionGroupModel: public QSqlTableModel
+class QMFunctionGroupModel: public QMSqlTableModel
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /// Constructor - Override from QSqlTableModel.

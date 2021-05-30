@@ -18,7 +18,7 @@
 
 #include <memory>
 
-class QMSqlRelationalTableModel;
+class QMSqlTableModel;
 class QSqlTableModel;
 class QSqlRelationalTableModel;
 class QSortFilterProxyModel;
@@ -153,7 +153,7 @@ private:
 
     std::unique_ptr<QSqlTableModel> funcViewModel;
     std::unique_ptr<QSqlTableModel> trainViewModel;
-    std::unique_ptr<QMSqlRelationalTableModel> qualiModel;
+    std::unique_ptr<QMSqlTableModel> qualiModel;
 
     QSortFilterProxyModel *funcFilterModel;
     QSortFilterProxyModel *trainFilterModel;

@@ -14,13 +14,13 @@
 #ifndef QMCERTIFICATEMODEL_H
 #define QMCERTIFICATEMODEL_H
 
-#include <QSqlTableModel>
+#include "framework/qmsqltablemodel.h"
 
 /// Model with for an sql table with all certificates.
 /// \author Christian Kr, Copyright 2020
-class QMCertificateModel: public QSqlTableModel
+class QMCertificateModel: public QMSqlTableModel
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /// Constructor - Override from QSqlTableModel.

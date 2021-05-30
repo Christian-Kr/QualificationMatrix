@@ -14,7 +14,7 @@
 #include "qmfunctiongroupviewmodel.h"
 
 QMFunctionGroupViewModel::QMFunctionGroupViewModel(QObject *parent, const QSqlDatabase &db)
-    : QSqlTableModel(parent, db)
+    : QMSqlTableModel(parent, db)
 {
     initModel();
 }

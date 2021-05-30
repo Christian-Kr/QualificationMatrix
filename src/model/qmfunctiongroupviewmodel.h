@@ -14,11 +14,11 @@
 #ifndef QMFUNCTIONGROUPVIEWMODEL_H
 #define QMFUNCTIONGROUPVIEWMODEL_H
 
-#include <QSqlTableModel>
+#include "framework/qmsqltablemodel.h"
 
 /// Employee function group view table in sql.
 /// \author Christian Kr, Copyright 2021
-class QMFunctionGroupViewModel: public QSqlTableModel
+class QMFunctionGroupViewModel: public QMSqlTableModel
 {
     Q_OBJECT
 

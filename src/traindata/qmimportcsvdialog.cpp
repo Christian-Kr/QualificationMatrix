@@ -19,7 +19,7 @@
 #include "model/qmtrainingdatastateviewmodel.h"
 #include "model/qmtrainingdatamodel.h"
 #include "model/qmtraininggroupviewmodel.h"
-#include "framework/qmsqlrelationaltablemodel.h"
+#include "framework/qmsqltablemodel.h"
 
 #include <QFileDialog>
 #include <QFile>

@@ -14,20 +14,19 @@
 #ifndef QMTRAININGEXCEPTIONMODEL_H
 #define QMTRAININGEXCEPTIONMODEL_H
 
-#include <QSqlRelationalTableModel>
+#include "framework/qmsqltablemodel.h"
 
 /// Training exception data table in sql.
 /// \author Christian Kr, Copyright 2020
-class QMTrainingExceptionModel: public QSqlRelationalTableModel
+class QMTrainingExceptionModel: public QMSqlTableModel
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /// Constructor - Override from QSqlRelationalTableModel.
     /// \param parent
     /// \param db
-    explicit QMTrainingExceptionModel(
-        QObject *parent = nullptr, const QSqlDatabase &db = QSqlDatabase());
+    explicit QMTrainingExceptionModel(QObject *parent = nullptr, const QSqlDatabase &db = QSqlDatabase());
 };
 
 #endif // QMTRAININGEXCEPTIONMODEL_H

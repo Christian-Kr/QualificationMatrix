@@ -14,7 +14,7 @@
 #include "qminfomodel.h"
 
 QMInfoModel::QMInfoModel(QObject *parent, QSqlDatabase db)
-    : QMSqlRelationalTableModel(parent, db)
+    : QMSqlTableModel(parent, db)
 {
     setTable("Info");
 

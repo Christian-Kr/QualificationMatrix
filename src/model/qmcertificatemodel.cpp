@@ -14,7 +14,7 @@
 #include "qmcertificatemodel.h"
 
 QMCertificateModel::QMCertificateModel(QObject *parent, QSqlDatabase db)
-    : QSqlTableModel(parent, db)
+    : QMSqlTableModel(parent, db)
 {
     // The name of the Table.
     setTable("Certificate");

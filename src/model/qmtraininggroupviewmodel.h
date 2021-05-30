@@ -14,11 +14,11 @@
 #ifndef QMTRAININGGROUPVIEWMODEL_H
 #define QMTRAININGGROUPVIEWMODEL_H
 
-#include <QSqlTableModel>
+#include "framework/qmsqltablemodel.h"
 
 /// Employee training group view table in sql.
 /// \author Christian Kr, Copyright 2021
-class QMTrainingGroupViewModel: public QSqlTableModel
+class QMTrainingGroupViewModel: public QMSqlTableModel
 {
     Q_OBJECT
 

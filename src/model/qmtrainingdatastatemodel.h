@@ -14,13 +14,13 @@
 #ifndef QMTRAININGSTATEDATAMODEL_H
 #define QMTRAININGSTATEDATAMODEL_H
 
-#include <QSqlTableModel>
+#include "framework/qmsqltablemodel.h"
 
 /// Employee training data state table in sql.
 /// \author Christian Kr, Copyright 2020
-class QMTrainingDataStateModel: public QSqlTableModel
+class QMTrainingDataStateModel: public QMSqlTableModel
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /// Constructor - Override from QSqlRelationalTableModel.

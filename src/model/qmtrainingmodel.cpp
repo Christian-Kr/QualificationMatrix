@@ -14,7 +14,7 @@
 #include "qmtrainingmodel.h"
 
 QMTrainingModel::QMTrainingModel(QObject *parent, QSqlDatabase db)
-    : QMSqlRelationalTableModel(parent, db)
+    : QMSqlTableModel(parent, db)
 {
     initModel();
 }

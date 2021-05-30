@@ -19,7 +19,7 @@
 #include <memory>
 #include <QSortFilterProxyModel>
 
-class QMSqlRelationalTableModel;
+class QMSqlTableModel;
 class QSqlRelationalTableModel;
 class QSqlTableModel;
 
@@ -88,7 +88,7 @@ private:
 
     Ui::QMFuncSettingsWidget *ui;
 
-    std::unique_ptr<QMSqlRelationalTableModel> funcModel;
+    std::unique_ptr<QMSqlTableModel> funcModel;
     std::unique_ptr<QSqlTableModel> funcGroupModel;
 
     QSortFilterProxyModel *funcFilterModel;

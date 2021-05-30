@@ -16,7 +16,7 @@
 #include <QColor>
 
 QMEmployeeModel::QMEmployeeModel(QObject *parent, const QSqlDatabase &db)
-    : QMSqlRelationalTableModel(parent, db)
+    : QMSqlTableModel(parent, db)
 {
     initModel();
 }
@@ -41,7 +41,7 @@ void QMEmployeeModel::initModel()
 
 QVariant QMEmployeeModel::data(const QModelIndex &index, int role) const
 {
-    bool activated = QMSqlRelationalTableModel::data(
+    bool activated = QMSqlTableModel::data(
             this->index(index.row(), 3), Qt::DisplayRole).toBool();
     if (!activated)
     {
@@ -51,12 +51,12 @@ QVariant QMEmployeeModel::data(const QModelIndex &index, int role) const
         }
     }
 
-    return QMSqlRelationalTableModel::data(index, role);
+    return QMSqlTableModel::data(index, role);
 }
 
 Qt::ItemFlags QMEmployeeModel::flags(const QModelIndex &index) const
 {
-    bool activated = QMSqlRelationalTableModel::data(
+    bool activated = QMSqlTableModel::data(
             this->index(index.row(), 3), Qt::DisplayRole).toBool();
     if (!activated)
     {

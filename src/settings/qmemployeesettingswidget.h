@@ -17,9 +17,9 @@
 #include "qmsettingswidget.h"
 
 #include <memory>
-#include "framework/qmsqlrelationaltablemodel.h"
+#include "framework/qmsqltablemodel.h"
 
-class QMSqlRelationalTableModel;
+class QMSqlTableModel;
 class QSortFilterProxyModel;
 class QSqlRelationalTableModel;
 class QSqlTableModel;
@@ -89,7 +89,7 @@ public slots:
 private:
     Ui::QMEmployeeSettingsWidget *ui;
 
-    std::unique_ptr<QMSqlRelationalTableModel> employeeModel;
+    std::unique_ptr<QMSqlTableModel> employeeModel;
     std::unique_ptr<QSqlTableModel> shiftModel;
 
     QSortFilterProxyModel *employeeFilterModel;

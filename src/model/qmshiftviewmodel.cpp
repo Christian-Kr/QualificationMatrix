@@ -14,7 +14,7 @@
 #include "qmshiftviewmodel.h"
 
 QMShiftViewModel::QMShiftViewModel(QObject *parent, QSqlDatabase db)
-    : QSqlTableModel(parent, db)
+    : QMSqlTableModel(parent, db)
 {
     initModel();
 }

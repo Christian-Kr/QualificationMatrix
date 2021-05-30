@@ -31,7 +31,7 @@
 #include "certificate/qmcertificatedialog.h"
 #include "certificate/qmcertificateintegritycheckdialog.h"
 #include "signinglist/qmsigninglistdialog.h"
-#include "framework/qmsqlrelationaltablemodel.h"
+#include "framework/qmsqltablemodel.h"
 
 #include <QProgressDialog>
 #include <QDesktopWidget>

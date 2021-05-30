@@ -14,13 +14,13 @@
 #ifndef QMTRAININGMODEL_H
 #define QMTRAININGMODEL_H
 
-#include "framework/qmsqlrelationaltablemodel.h"
+#include "framework/qmsqltablemodel.h"
 
 /// Employee training table in sql.
 /// \author Christian Kr, Copyright 2020
-class QMTrainingModel: public QMSqlRelationalTableModel
+class QMTrainingModel: public QMSqlTableModel
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /// Constructor - Override from QSqlRelationalTableModel.
@@ -28,7 +28,7 @@ public:
     /// \param db
     explicit QMTrainingModel(QObject *parent = nullptr, QSqlDatabase db = QSqlDatabase());
 
-    /// Override from QMSqlRelationalTableModel.
+    /// Override from QMSqlTableModel.
     void initModel() override;
 };
 

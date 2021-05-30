@@ -14,11 +14,11 @@
 #ifndef QMFUNCTIONVIEWMODEL_H
 #define QMFUNCTIONVIEWMODEL_H
 
-#include <QSqlTableModel>
+#include "framework/qmsqltablemodel.h"
 
 /// Sql model for the function view table.
 /// \author Christian Kr, Copyright 2021
-class QMFunctionViewModel: public QSqlTableModel
+class QMFunctionViewModel: public QMSqlTableModel
 {
     Q_OBJECT
 

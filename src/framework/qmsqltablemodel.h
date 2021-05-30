@@ -18,7 +18,7 @@
 
 /// Own model class for making it more customize.
 /// \author Christian Kr, Copyright 2020
-class QMSqlRelationalTableModel: public QSqlRelationalTableModel
+class QMSqlTableModel: public QSqlRelationalTableModel
 {
 Q_OBJECT
 
@@ -26,8 +26,8 @@ public:
     /// Constructor
     /// \param parent The parent object for the qt system.
     /// \param db The database to work with.
-    explicit QMSqlRelationalTableModel(QObject *parent = nullptr, QSqlDatabase db = QSqlDatabase(),
-       bool doFetchAll = true, bool doFetchAllSub = true);
+    explicit QMSqlTableModel(QObject *parent = nullptr, QSqlDatabase db = QSqlDatabase(),
+                             bool doFetchAll = true, bool doFetchAllSub = true);
 
     /// Override from QSqlRelationalTableModel.
     /// \return True is selection was successful, else false.
@@ -64,17 +64,6 @@ public slots:
     /// Test for need of new select. Based on the models changed in application.
     /// \param sender The sending model object indicating whether the reciever needs to be updated.
     virtual void otherModelChanged(QObject *sender) {};
-
-signals:
-    /// Emited before select.
-    void beforeSelect();
-
-    /// Emited after all select statements have run.
-    void afterSelect();
-
-    /// Emited when fetch will be run.
-    /// \param currentStep Current number of fetch running.
-    void nextSelect(int currentStep);
 
 protected:
     /// Override from QSqlRelationalTableModel.

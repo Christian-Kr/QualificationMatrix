@@ -19,7 +19,7 @@
 #include <memory>
 
 class QMQualiResultModel;
-class QMSqlRelationalTableModel;
+class QMSqlTableModel;
 class QSqlRelationalTableModel;
 class QSortFilterProxyModel;
 class QProgressDialog;

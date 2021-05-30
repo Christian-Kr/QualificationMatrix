@@ -14,7 +14,7 @@
 #include "qmtrainingdatastateviewmodel.h"
 
 QMTrainingDataStateViewModel::QMTrainingDataStateViewModel(QObject *parent, const QSqlDatabase &db)
-    : QSqlTableModel(parent, db)
+    : QMSqlTableModel(parent, db)
 {
     initModel();
 }

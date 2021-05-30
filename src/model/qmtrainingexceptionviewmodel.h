@@ -14,11 +14,11 @@
 #ifndef QMTRAININGEXCEPTIONVIEWMODEL_H
 #define QMTRAININGEXCEPTIONVIEWMODEL_H
 
-#include <QSqlTableModel>
+#include "framework/qmsqltablemodel.h"
 
 /// Training exception data view table in sql.
 /// \author Christian Kr, Copyright 2021
-class QMTrainingExceptionViewModel: public QSqlTableModel
+class QMTrainingExceptionViewModel: public QMSqlTableModel
 {
     Q_OBJECT
 

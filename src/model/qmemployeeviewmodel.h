@@ -14,13 +14,13 @@
 #ifndef QMEMPLOYEEVIEWMODEL_H
 #define QMEMPLOYEEVIEWMODEL_H
 
-#include "framework/qmsqlrelationaltablemodel.h"
+#include "framework/qmsqltablemodel.h"
 
 /// Employee view table in sql.
 /// \author Christian Kr, Copyright 2021
-class QMEmployeeViewModel: public QMSqlRelationalTableModel
+class QMEmployeeViewModel: public QMSqlTableModel
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /// Constructor

@@ -17,7 +17,7 @@
 #include "framework/qmdialog.h"
 #include <memory>
 
-class QMSqlRelationalTableModel;
+class QMSqlTableModel;
 class QSqlRelationalTableModel;
 class QSqlTableModel;
 

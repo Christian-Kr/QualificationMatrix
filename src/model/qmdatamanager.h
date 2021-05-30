@@ -23,7 +23,7 @@
 #define DB_MIN_MINOR 3
 
 // Forward declaration
-class QMSqlRelationalTableModel;
+class QMSqlTableModel;
 class QSqlRelationalTableModel;
 class QSqlDatabase;
 class QSqlTableModel;
@@ -31,7 +31,7 @@ class QMQualiResultModel;
 class QMQualiMatrixModel;
 
 // Typedefs
-typedef std::shared_ptr<QMSqlRelationalTableModel> sp_qmRelTableModel;
+typedef std::shared_ptr<QMSqlTableModel> sp_qmRelTableModel;
 typedef std::shared_ptr<QSqlRelationalTableModel> sp_relTableModel;
 typedef std::shared_ptr<QSqlTableModel> sp_tableModel;
 

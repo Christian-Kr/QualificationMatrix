@@ -14,7 +14,7 @@
 #include "qmemployeefunctionmodel.h"
 
 QMEmployeeFunctionModel::QMEmployeeFunctionModel(QObject *parent, const QSqlDatabase &db)
-    : QSqlRelationalTableModel(parent, db)
+    : QMSqlTableModel(parent, db)
 {
     // The name of the Table.
     setTable("EmployeeFunc");

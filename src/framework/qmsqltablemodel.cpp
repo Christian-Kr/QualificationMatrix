@@ -11,14 +11,15 @@
 // You should have received a copy of the GNU General Public License along with QualificationMatrix.
 // If not, see <http://www.gnu.org/licenses/>.
 
-#include "framework/qmsqlrelationaltablemodel.h"
+#include "framework/qmsqltablemodel.h"
 #include "model/qmdatamanager.h"
 
 #include <QDebug>
 #include <QSqlRelationalTableModel>
+#include <QSqlQuery>
 
-QMSqlRelationalTableModel::QMSqlRelationalTableModel(QObject *parent, QSqlDatabase db, bool doFetchAll,
-     bool doFetchAllSub)
+QMSqlTableModel::QMSqlTableModel(QObject *parent, QSqlDatabase db, bool doFetchAll,
+                                 bool doFetchAllSub)
     : QSqlRelationalTableModel(parent, db)
     , limit(0)
 {
@@ -30,27 +31,19 @@ QMSqlRelationalTableModel::QMSqlRelationalTableModel(QObject *parent, QSqlDataba
     this->doFetchAll = doFetchAll;
 }
 
-bool QMSqlRelationalTableModel::select()
+bool QMSqlTableModel::select()
 {
-    emit beforeSelect();
-
-    auto i = 0;
     auto res = QSqlRelationalTableModel::select();
 
     while (doFetchAll && canFetchMore())
     {
-        i++;
         fetchMore();
-
-        // Informate listener.
-        emit nextSelect(i);
     }
 
-    emit afterSelect();
     return res;
 }
 
-QVariant QMSqlRelationalTableModel::data(const QModelIndex &index, int role) const
+QVariant QMSqlTableModel::data(const QModelIndex &index, int role) const
 {
     // Before getting a value, look if it is a relational model. If so: Update all related table models.
     QSqlTableModel *tableModel = relationModel(index.column());
@@ -66,7 +59,7 @@ QVariant QMSqlRelationalTableModel::data(const QModelIndex &index, int role) con
     return QSqlRelationalTableModel::data(index, role);
 }
 
-bool QMSqlRelationalTableModel::setData(const QModelIndex &index, const QVariant &value, int role)
+bool QMSqlTableModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     // Before setting a value, look if it is a relational model. If so: Update all related table models.
     QSqlTableModel *tableModel = relationModel(index.column());
@@ -85,7 +78,7 @@ bool QMSqlRelationalTableModel::setData(const QModelIndex &index, const QVariant
     return res;
 }
 
-QString QMSqlRelationalTableModel::selectStatement() const
+QString QMSqlTableModel::selectStatement() const
 {
     QString query = QSqlRelationalTableModel::selectStatement();
 

@@ -14,7 +14,7 @@
 #include "qmqualificationmatrixviewmodel.h"
 
 QMQualificationMatrixViewModel::QMQualificationMatrixViewModel(QObject *parent, const QSqlDatabase &db)
-    : QSqlTableModel(parent, db)
+    : QMSqlTableModel(parent, db)
 {
     initModel();
 }

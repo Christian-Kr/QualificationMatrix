@@ -385,27 +385,27 @@ void QMTrainSettingsWidget::removeTrainState()
     QString selectedStateName = trainDataStateModel->data(
             trainDataStateModel->index(selectedIndex.row(), 1)).toString();
 
-    // Do not delete when entries in train data model have a reference to the state.
-    bool found = false;
-    for (int i = 0; i < trainDataViewModel->rowCount(); i++)
-    {
-        QString trainStateName = trainDataViewModel->data(trainDataViewModel->index(i, 4)).toString();
-        if (selectedStateName == trainStateName) {
-            found = true;
-            break;
-        }
-    }
-
-    if (found)
-    {
-        QMessageBox::critical(
-                this, tr("Schulungsstatus löschen"),
-                tr("Es existieren Verweise auf den Status in den"
-                    " Schulungsdaten. Bitte löschen Sie zuerst den entsprechende Schulungssatz"
-                    " oder ändern Sie deren Statuszugehörigkeit."
-                    "\n\nDie Aktion wird abgebrochen."));
-        return;
-    }
+//    // Do not delete when entries in train data model have a reference to the state.
+//    bool found = false;
+//    for (int i = 0; i < trainDataViewModel->rowCount(); i++)
+//    {
+//        QString trainStateName = trainDataViewModel->data(trainDataViewModel->index(i, 4)).toString();
+//        if (selectedStateName == trainStateName) {
+//            found = true;
+//            break;
+//        }
+//    }
+//
+//    if (found)
+//    {
+//        QMessageBox::critical(
+//                this, tr("Schulungsstatus löschen"),
+//                tr("Es existieren Verweise auf den Status in den"
+//                    " Schulungsdaten. Bitte löschen Sie zuerst den entsprechende Schulungssatz"
+//                    " oder ändern Sie deren Statuszugehörigkeit."
+//                    "\n\nDie Aktion wird abgebrochen."));
+//        return;
+//    }
 
     // Delete the entry.
     if (!trainDataStateModel->removeRow(selectedIndex.row()))

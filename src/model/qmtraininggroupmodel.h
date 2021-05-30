@@ -14,13 +14,13 @@
 #ifndef QMTRAININGGROUPMODEL_H
 #define QMTRAININGGROUPMODEL_H
 
-#include <QSqlTableModel>
+#include "framework/qmsqltablemodel.h"
 
 /// Employee training group table in sql.
 /// \author Christian Kr, Copyright 2020
-class QMTrainingGroupModel: public QSqlTableModel
+class QMTrainingGroupModel: public QMSqlTableModel
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /// Constructor - Override from QSqlTableModel.

@@ -19,7 +19,7 @@
 #include <memory>
 #include <QSortFilterProxyModel>
 
-class QMSqlRelationalTableModel;
+class QMSqlTableModel;
 class QSqlRelationalTableModel;
 class QSqlTableModel;
 
@@ -97,7 +97,7 @@ private:
 
     Ui::QMTrainSettingsWidget *ui;
 
-    std::unique_ptr<QMSqlRelationalTableModel> trainModel;
+    std::unique_ptr<QMSqlTableModel> trainModel;
     std::unique_ptr<QSqlTableModel> trainGroupModel;
     std::unique_ptr<QSqlTableModel> trainDataStateModel;
     std::unique_ptr<QSqlTableModel> trainDataViewModel;

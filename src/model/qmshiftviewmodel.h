@@ -14,11 +14,11 @@
 #ifndef QMSHIFTVIEWMODEL_H
 #define QMSHIFTVIEWMODEL_H
 
-#include <QSqlTableModel>
+#include "framework/qmsqltablemodel.h"
 
 /// Employee group table in sql.
 /// \author Christian Kr, Copyright 2021
-class QMShiftViewModel: public QSqlTableModel
+class QMShiftViewModel: public QMSqlTableModel
 {
     Q_OBJECT
 

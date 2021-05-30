@@ -14,13 +14,13 @@
 #ifndef QMEMPLOYEEFUNCTIONMODEL_H
 #define QMEMPLOYEEFUNCTIONMODEL_H
 
-#include <QSqlRelationalTableModel>
+#include "framework/qmsqltablemodel.h"
 
 /// Employee function relation table in sql.
 /// \author Christian Kr, Copyright 2020
-class QMEmployeeFunctionModel: public QSqlRelationalTableModel
+class QMEmployeeFunctionModel: public QMSqlTableModel
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /// Constructor - Override from QSqlRelationalTableModel.

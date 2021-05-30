@@ -14,11 +14,11 @@
 #ifndef QMQUALIFICATIONMATRIXVIEWMODEL_H
 #define QMQUALIFICATIONMATRIXVIEWMODEL_H
 
-#include <QSqlTableModel>
+#include "framework/qmsqltablemodel.h"
 
 /// Qualification matrix data view table in sql.
 /// \author Christian Kr, Copyright (c) 2021
-class QMQualificationMatrixViewModel: public QSqlTableModel
+class QMQualificationMatrixViewModel: public QMSqlTableModel
 {
     Q_OBJECT
 
@@ -28,7 +28,7 @@ public:
     /// \param db
     explicit QMQualificationMatrixViewModel(QObject *parent = nullptr, const QSqlDatabase &db = QSqlDatabase());
 
-    /// Override from QMSqlRelationalTableModel.
+    /// Override from QMSqlTableModel.
     void initModel();
 };
 

@@ -14,21 +14,20 @@
 #ifndef QMTRAINDATACERTIFICATEVIEWMODEL_H
 #define QMTRAINDATACERTIFICATEVIEWMODEL_H
 
-#include <QSqlTableModel>
+#include "framework/qmsqltablemodel.h"
 
 /// Table for correlation of train data and certificates. This allow flexible handle of the nubmer
 /// of certificates for every train data entry.
 /// \author Christian Kr, Copyright 2021
-class QMTrainDataCertificateViewModel: public QSqlTableModel
+class QMTrainDataCertificateViewModel: public QMSqlTableModel
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /// Constructor - Override from QSqlTableModel.
     /// \param parent
     /// \param db
-    explicit QMTrainDataCertificateViewModel(
-        QObject *parent = nullptr, QSqlDatabase db = QSqlDatabase());
+    explicit QMTrainDataCertificateViewModel(QObject *parent = nullptr, QSqlDatabase db = QSqlDatabase());
 };
 
 #endif // QMTRAINDATACERTIFICATEVIEWMODEL_H

@@ -14,7 +14,7 @@
 #include "qmtrainingexceptionmodel.h"
 
 QMTrainingExceptionModel::QMTrainingExceptionModel(QObject *parent, const QSqlDatabase &db)
-    : QSqlRelationalTableModel(parent, db)
+    : QMSqlTableModel(parent, db)
 {
     // The name of the Table.
     setTable("TrainException");
