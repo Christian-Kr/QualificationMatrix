@@ -12,25 +12,8 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 #include "qmdatamanager.h"
-#include "qualimatrix/qmqualimatrixmodel.h"
-#include "qualiresult/qmqualiresultmodel.h"
-#include "qmfunctionmodel.h"
-#include "qmtrainingmodel.h"
-#include "qmtrainingdatamodel.h"
-#include "qmfunctiongroupmodel.h"
-#include "qmtraininggroupmodel.h"
-#include "qmtrainingdatastatemodel.h"
-#include "qmemployeemodel.h"
-#include "qmemployeeviewmodel.h"
-#include "qmemployeefunctionmodel.h"
-#include "qmqualificationmatrixmodel.h"
-#include "qmtrainingexceptionmodel.h"
-#include "qminfomodel.h"
-#include "qmcertificatemodel.h"
-#include "qmtraindatacertificatemodel.h"
 #include "qmtraindatacertificateviewmodel.h"
 
-#include <QSqlRelationalTableModel>
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QDebug>
