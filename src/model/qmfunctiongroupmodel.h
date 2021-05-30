@@ -26,8 +26,7 @@ public:
     /// Constructor - Override from QSqlTableModel.
     /// \param parent
     /// \param db
-    explicit QMFunctionGroupModel(
-        QObject *parent = nullptr, const QSqlDatabase &db = QSqlDatabase());
+    explicit QMFunctionGroupModel(QObject *parent = nullptr, const QSqlDatabase &db = QSqlDatabase());
 };
 
 #endif // QMFUNCTIONGROUPMODEL_H

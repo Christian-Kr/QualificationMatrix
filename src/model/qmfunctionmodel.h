@@ -20,7 +20,7 @@
 /// \author Christian Kr, Copyright 2020
 class QMFunctionModel: public QMSqlTableModel
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /// Constructor

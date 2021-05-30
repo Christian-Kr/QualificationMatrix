@@ -26,8 +26,7 @@ public:
     /// Constructor - Override from QSqlRelationalTableModel.
     /// \param parent
     /// \param db
-    explicit QMEmployeeFunctionModel(
-        QObject *parent = nullptr, const QSqlDatabase &db = QSqlDatabase());
+    explicit QMEmployeeFunctionModel(QObject *parent = nullptr, const QSqlDatabase &db = QSqlDatabase());
 };
 
 #endif // QMEMPLOYEEFUNCTIONMODEL_H

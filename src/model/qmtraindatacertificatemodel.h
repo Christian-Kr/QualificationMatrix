@@ -27,8 +27,7 @@ public:
     /// Constructor - Override from QSqlTableModel.
     /// \param parent
     /// \param db
-    explicit QMTrainDataCertificateModel(
-        QObject *parent = nullptr, QSqlDatabase db = QSqlDatabase());
+    explicit QMTrainDataCertificateModel(QObject *parent = nullptr, QSqlDatabase db = QSqlDatabase());
 };
 
 #endif // QMTRAINDATACERTIFICATEMODEL_H
