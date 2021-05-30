@@ -21,6 +21,10 @@
 #include <QPainter>
 #include <QHash>
 #include <memory>
+#include <QMouseEvent>
+#include <QLabel>
+#include <QGuiApplication>
+
 #include <QDebug>
 
 QMQualiMatrixHeaderView::QMQualiMatrixHeaderView(Qt::Orientation orientation, QWidget *parent)
@@ -32,6 +36,7 @@ QMQualiMatrixHeaderView::QMQualiMatrixHeaderView(Qt::Orientation orientation, QW
     , trainLegallyNecessaryCache(new QHash<QString, bool>())
     , gridColor(QColor("#ffffff"))
     , selectionColor(QColor("#ffffff"))
+    , laInfo(new QLabel(parent))
 {
     setSectionResizeMode(QHeaderView::Fixed);
     setDefaultSectionSize(30);
@@ -46,6 +51,17 @@ QMQualiMatrixHeaderView::QMQualiMatrixHeaderView(Qt::Orientation orientation, QW
     connect(&settings, SIGNAL(settingsChanged()), this, SLOT(updateSizeSettings()));
 
     updateColors();
+
+    laInfo->setAttribute(Qt::WA_TransparentForMouseEvents);
+    laInfo->setText(tr("HallO"));
+
+    if (orientation == Qt::Horizontal)
+    {
+        laInfo->setGeometry(0, 0, 200, sizeHint().width());
+    }
+
+    laInfo->setStyleSheet("background-color: #FFFFFF; border: 1px solid #000000;");
+    laInfo->setVisible(false);
 }
 
 QMQualiMatrixHeaderView::~QMQualiMatrixHeaderView()
@@ -53,6 +69,7 @@ QMQualiMatrixHeaderView::~QMQualiMatrixHeaderView()
     delete funcGroupColorCache;
     delete trainGroupColorCache;
     delete trainLegallyNecessaryCache;
+    delete laInfo;
 }
 
 void QMQualiMatrixHeaderView::updateTrainingGroupColors()
@@ -97,6 +114,25 @@ void QMQualiMatrixHeaderView::updateTrainingGroupColors()
         // Add to cache.
         trainGroupColorCache->insert(train, color);
     }
+}
+
+void QMQualiMatrixHeaderView::showHeaderLabel(int section, QString text)
+{
+    laInfo->setVisible(true);
+    laInfo->setText(text);
+
+    QFontMetricsF metrics(laInfo->font());
+    double width = metrics.boundingRect(metrics.boundingRect(text), 0, text).width() + 10;
+
+    laInfo->setFixedWidth(width);
+
+    QPoint point = mapToParent(QPoint(section * sizeHint().width(), sizeHint().height() - laInfo->height()));
+    laInfo->move(point.x(), point.y());
+}
+
+void QMQualiMatrixHeaderView::hideHeaderLabel()
+{
+    laInfo->setVisible(false);
 }
 
 void QMQualiMatrixHeaderView::updateTrainLegallyNecessary()

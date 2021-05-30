@@ -16,11 +16,13 @@
 
 #include <QHeaderView>
 
+class QLabel;
+
 /// Derives the header to allow custom design of column header.
 /// \author Christian Kr, Copyright (c) 2020
 class QMQualiMatrixHeaderView: public QHeaderView
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /// Constructor
@@ -53,6 +55,13 @@ public slots:
     /// Update the colors from config.
     void updateColors();
 
+    /// Show the header label.
+    /// \param section The section to show the label from.
+    void showHeaderLabel(int section, QString text);
+
+    /// Hide header label.
+    void hideHeaderLabel();
+
 private:
     int horSectionHeight;
     int vertSectionWidth;
@@ -63,6 +72,8 @@ private:
 
     QColor gridColor;
     QColor selectionColor;
+
+    QLabel *laInfo;
 };
 
 #endif // QMQUALIMATRIXHEADERVIEW_H

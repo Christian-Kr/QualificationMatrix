@@ -51,7 +51,10 @@ public:
     void saveSettings();
 
 public slots:
-    // Actions after the model cache has been build.
+    /// Scroll bars changed, so do some updating.
+    void updateHeaderLabel();
+
+    /// Actions after the model cache has been build.
     void afterBuildCacheModel();
 
     /// Sort the quali matrix by primary key.

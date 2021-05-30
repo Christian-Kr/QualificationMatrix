@@ -34,6 +34,7 @@
 #include <QWidget>
 #include <QTimer>
 #include <QMenu>
+#include <QScrollBar>
 
 QMQualiMatrixWidget::QMQualiMatrixWidget(QWidget *parent)
     : QMWinModeWidget(parent)
@@ -50,8 +51,8 @@ QMQualiMatrixWidget::QMQualiMatrixWidget(QWidget *parent)
 
     // initial settings for table view
     ui->tvQualiMatrix->setItemDelegate(new QMQualiMatrixDelegate());
-    ui->tvQualiMatrix->setHorizontalHeader(new QMQualiMatrixHeaderView(Qt::Orientation::Horizontal, this));
-    ui->tvQualiMatrix->setVerticalHeader(new QMQualiMatrixHeaderView(Qt::Orientation::Vertical, this));
+    ui->tvQualiMatrix->setHorizontalHeader(new QMQualiMatrixHeaderView(Qt::Orientation::Horizontal, ui->tvQualiMatrix));
+    ui->tvQualiMatrix->setVerticalHeader(new QMQualiMatrixHeaderView(Qt::Orientation::Vertical, ui->tvQualiMatrix));
 
     // Connect horizontal header.
     connect(ui->tvQualiMatrix->horizontalHeader(), &QHeaderView::sectionClicked, this,
@@ -65,7 +66,10 @@ QMQualiMatrixWidget::QMQualiMatrixWidget(QWidget *parent)
     connect(ui->tvQualiMatrix->verticalHeader(), &QHeaderView::customContextMenuRequested, this,
             &QMQualiMatrixWidget::customVerticalContextMenuRequest);
 
-            // default edit mode - not editable
+    connect(ui->tvQualiMatrix->horizontalScrollBar(), &QScrollBar::valueChanged, this,
+            &QMQualiMatrixWidget::updateHeaderLabel);
+
+    // default edit mode - not editable
     ui->tbLock->setChecked(false);
     ui->tvQualiMatrix->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
@@ -86,6 +90,34 @@ QMQualiMatrixWidget::~QMQualiMatrixWidget()
     saveSettings();
 
     delete ui;
+}
+
+void QMQualiMatrixWidget::updateHeaderLabel()
+{
+    auto headerView = dynamic_cast<QMQualiMatrixHeaderView *>(ui->tvQualiMatrix->horizontalHeader());
+    if (headerView == nullptr)
+    {
+        return;
+    }
+
+    if (!ui->tvQualiMatrix->selectionModel()->hasSelection())
+    {
+        headerView->hideHeaderLabel();
+        return;
+    }
+    else
+    {
+        if (ui->tvQualiMatrix->selectionModel()->currentIndex().column() < ui->tvQualiMatrix->columnAt(0))
+        {
+            headerView->hideHeaderLabel();
+            return;
+        }
+
+        headerView->showHeaderLabel(ui->tvQualiMatrix->selectionModel()->currentIndex().column() -
+                ui->tvQualiMatrix->columnAt(0),
+                qualiMatrixModel->headerData(ui->tvQualiMatrix->selectionModel()->currentIndex().column(),
+                 Qt::Horizontal, Qt::DisplayRole).toString());
+    }
 }
 
 void QMQualiMatrixWidget::buildContextMenus()
@@ -128,26 +160,31 @@ void QMQualiMatrixWidget::customHorizontalContextMenuRequest(QPoint pos)
 void QMQualiMatrixWidget::trainSortName()
 {
     qualiMatrixModel->setTrainingSortColumn(TRAINING_SORT::NAME);
+    updateHeaderLabel();
 }
 
 void QMQualiMatrixWidget::trainSortGroup()
 {
     qualiMatrixModel->setTrainingSortColumn(TRAINING_SORT::GROUP);
+    updateHeaderLabel();
 }
 
 void QMQualiMatrixWidget::trainSortPrimaryKey()
 {
     qualiMatrixModel->setTrainingSortColumn(TRAINING_SORT::PRIMARY_KEY);
+    updateHeaderLabel();
 }
 
 void QMQualiMatrixWidget::trainSortAscending()
 {
     qualiMatrixModel->setTrainingSortOrder(Qt::AscendingOrder);
+    updateHeaderLabel();
 }
 
 void QMQualiMatrixWidget::trainSortDescending()
 {
     qualiMatrixModel->setTrainingSortOrder(Qt::DescendingOrder);
+    updateHeaderLabel();
 }
 
 void QMQualiMatrixWidget::funcSortName()
@@ -382,9 +419,16 @@ void QMQualiMatrixWidget::enableLocked()
     ui->tvQualiMatrix->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
 
-void QMQualiMatrixWidget::selectionChanged(const QModelIndex & current, const QModelIndex & previous)
+void QMQualiMatrixWidget::selectionChanged(const QModelIndex &current, const QModelIndex &previous)
 {
     extendDisableLocked();
+
+    auto headerView = dynamic_cast<QMQualiMatrixHeaderView *>(ui->tvQualiMatrix->horizontalHeader());
+    if (headerView != nullptr)
+    {
+        headerView->showHeaderLabel(current.column() - ui->tvQualiMatrix->columnAt(0),
+                qualiMatrixModel->headerData(current.column(), Qt::Horizontal, Qt::DisplayRole).toString());
+    }
 }
 
 void QMQualiMatrixWidget::extendDisableLocked()
