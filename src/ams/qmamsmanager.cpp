@@ -13,10 +13,58 @@
 
 #include "qmamsmanager.h"
 
+#include <QSqlDatabase>
 #include <QDebug>
 
 QMAMSManager *QMAMSManager::instance = nullptr;
 
 QMAMSManager::QMAMSManager()
     : QObject()
+    , username(std::make_unique<QString>())
+    , fullname(std::make_unique<QString>())
+    , loginState(LoginState::NOT_LOGGED_IN)
+    , lastError(std::make_unique<QString>())
 {}
+
+bool QMAMSManager::logoutUser()
+{
+    if (loginState == LoginState::NOT_LOGGED_IN)
+    {
+        return true;
+    }
+
+    username->clear();
+    fullname->clear();
+
+    loginState = LoginState::NOT_LOGGED_IN;
+
+    return true;
+}
+
+bool QMAMSManager::loginUser(const QString &name, const QString &password)
+{
+    if (!logoutUser())
+    {
+        return false;
+    }
+
+    QMAMSUserInformation userInfo = getUserFromDatabase(name);
+}
+
+QMAMSUserInformation QMAMSManager::getUserFromDatabase(const QString &username)
+{
+    QMAMSUserInformation userInfo;
+
+    // Get the database connection.
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        qWarning("Database is not connected");
+        return userInfo;
+    }
+
+    auto db = QSqlDatabase::database("default");
+
+    // TODO: Create database model and search for user.
+
+    return userInfo;
+}

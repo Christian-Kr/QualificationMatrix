@@ -43,7 +43,23 @@ enum class AccessMode
     PER_DATA_WRITE
 };
 
-/// Thi class is the manager for the acces management system. Here you get all access to functionalities that
+/// Give the state if any user is logged in or not.
+enum class LoginState
+{
+    LOGGED_IN,
+    NOT_LOGGED_IN
+};
+
+/// The struct is an information holder for user data.
+struct QMAMSUserInformation
+{
+    bool found = false;
+    QString username;
+    QString fullname;
+    QString password;
+};
+
+/// The class is the manager for the acces management system. Here you get all access to functionalities that
 /// controls the access to the database content.
 ///
 /// TODO: It might be a good practice to modify the general database table.
@@ -76,6 +92,23 @@ public:
         }
     }
 
+    /// Get full name of the currently logged in user.
+    /// \return The full name of the current login user, else empty.
+    QString * getLoginFullName() const { return fullname.get(); }
+
+    /// Get user name of the current login user.
+    /// \return The login name of the current login user, else empty.
+    QString * getLoginUserName() const { return username.get(); }
+
+    /// Login with the given credentials. Any logged in user will automatically be logged out.
+    /// \param password The password for login.
+    /// \param username The username for login.
+    bool loginUser(const QString &username, const QString &password);
+
+    /// Logout the current user.
+    /// \return True on success, else false. When no user is logged in, method will always return true.
+    bool logoutUser();
+
 private:
     /// Constructor
     QMAMSManager();
@@ -83,10 +116,21 @@ private:
     /// Destructor
     ~QMAMSManager() override = default;
 
-signals:
+    /// Get the password from a user. This function will take the information from the database directly.
+    /// \param username The username to get information from.
+    /// \return User information as a struct.
+    QMAMSUserInformation getUserFromDatabase(const QString &username);
 
-private:
+    // Variables
+
     static QMAMSManager *instance;
+
+    std::unique_ptr<QString> username;
+    std::unique_ptr<QString> fullname;
+
+    LoginState loginState;
+
+    std::unique_ptr<QString> lastError;
 };
 
 #endif // QMAMSMANAGER_H
