@@ -126,7 +126,7 @@ void QMQualiMatrixHeaderView::showHeaderLabel(int section, QString text)
 
     laInfo->setFixedWidth(width);
 
-    QPoint point = mapToParent(QPoint(section * sizeHint().width(), sizeHint().height() - laInfo->height()));
+    QPoint point = mapToParent(QPoint(section * sectionSize(section), sizeHint().height() - laInfo->height()));
     laInfo->move(point.x(), point.y());
 }
 
