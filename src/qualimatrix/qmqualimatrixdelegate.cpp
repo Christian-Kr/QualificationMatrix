@@ -19,6 +19,8 @@
 #include <QPen>
 #include <QComboBox>
 
+#include <QDebug>
+
 QMQualiMatrixDelegate::QMQualiMatrixDelegate(QWidget *parent)
     : QStyledItemDelegate(parent),
     gridColor(QColor("#ffffff")),
