@@ -226,8 +226,7 @@ void QMQualiMatrixHeaderView::updateColors()
     gridColor = QColor(settings.read("QualiMatrix/GridColor", "#ffffff").toString());
 }
 
-void QMQualiMatrixHeaderView::paintSection(
-    QPainter *painter, const QRect &rect, int logicalIndex) const
+void QMQualiMatrixHeaderView::paintSection(QPainter *painter, const QRect &rect, int logicalIndex) const
 {
     auto &settings = QMApplicationSettings::getInstance();
 
@@ -279,7 +278,7 @@ void QMQualiMatrixHeaderView::paintSection(
         {
             painter->rotate(-90);
             painter->drawText(
-                -1 * sizeHint().height() + 10, 0, sizeHint().height() - 50, sizeHint().width(),
+                -1 * rect.height() + 10, 0, rect.height() - 50, rect.width(),
                 Qt::AlignVCenter,
                 model()->headerData(logicalIndex, Qt::Orientation::Horizontal).toString());
         }
@@ -287,7 +286,7 @@ void QMQualiMatrixHeaderView::paintSection(
         {
             painter->rotate(90);
             painter->drawText(
-                40, -sizeHint().width(), sizeHint().height() - 20, sizeHint().width(),
+                40, -rect.width(), rect.height() - 20, rect.width(),
                 Qt::AlignVCenter,
                 model()->headerData(logicalIndex, Qt::Orientation::Horizontal).toString());
         }
@@ -321,7 +320,7 @@ void QMQualiMatrixHeaderView::paintSection(
         painter->translate(rect.x(), rect.y());
         painter->setFont(font);
         painter->drawText(
-            10, 0, sizeHint().width() - 1, sizeHint().height(), Qt::AlignVCenter,
+            10, 0, rect.width() - 1, rect.height(), Qt::AlignVCenter,
             model()->headerData(logicalIndex, Qt::Orientation::Vertical).toString());
     }
 }
