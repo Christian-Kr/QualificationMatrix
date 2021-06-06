@@ -28,17 +28,6 @@ public:
     /// \param db The database object to work with.
     explicit QMAMSUserModel(QObject *parent = nullptr, const QSqlDatabase &db = QSqlDatabase());
 
-    /// Override from QSqlRelationTableModel
-    /// \param index
-    /// \param role
-    /// \return
-    QVariant data(const QModelIndex &index, int role) const override;
-
-    /// Override from QSqlRelationalTableModel
-    /// \param index
-    /// \return
-    Qt::ItemFlags flags(const QModelIndex &index) const override;
-
     /// Override from QMSqlTableModel.
     void initModel() override;
 };
