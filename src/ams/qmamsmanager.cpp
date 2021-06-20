@@ -12,6 +12,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 #include "qmamsmanager.h"
+#include "ams/model/qmamsusermodel.h"
 
 #include <QSqlDatabase>
 #include <QDebug>
@@ -48,7 +49,21 @@ bool QMAMSManager::loginUser(const QString &name, const QString &password)
         return false;
     }
 
-    QMAMSUserInformation userInfo = getUserFromDatabase(name);
+    auto userInfo = getUserFromDatabase(name);
+    if (!userInfo.found)
+    {
+        return false;
+    }
+
+    if (password == userInfo.password)
+    {
+        *username = userInfo.username;
+        *fullname = userInfo.fullname;
+
+        return true;
+    }
+
+    return false;
 }
 
 QMAMSUserInformation QMAMSManager::getUserFromDatabase(const QString &username)
@@ -65,6 +80,27 @@ QMAMSUserInformation QMAMSManager::getUserFromDatabase(const QString &username)
     auto db = QSqlDatabase::database("default");
 
     // TODO: Create database model and search for user.
+    QMAMSUserModel amsUserModel(this, db);
+    amsUserModel.select();
+
+    for (int i = 0; i < amsUserModel.rowCount(); i++)
+    {
+        auto dbUsername = amsUserModel.data(amsUserModel.index(i, amsUserModel.fieldIndex("username"))).toString();
+        if (dbUsername == username)
+        {
+            userInfo.username = dbUsername;
+
+            auto dbFullname = amsUserModel.data(amsUserModel.index(i, amsUserModel.fieldIndex("name"))).toString();
+            userInfo.fullname = dbFullname;
+
+            auto dbPassword = amsUserModel.data(amsUserModel.index(i, amsUserModel.fieldIndex("password"))).toString();
+            userInfo.password = dbPassword;
+
+            userInfo.found = true;
+
+            return userInfo;
+        }
+    }
 
     return userInfo;
 }

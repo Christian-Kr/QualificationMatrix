@@ -29,10 +29,10 @@ void QMAMSUserModel::initModel()
     setEditStrategy(QSqlTableModel::OnManualSubmit);
 
     // Specifiy header data of table.
-//    setHeaderData(1, Qt::Horizontal, tr("Name"));
-//    setHeaderData(2, Qt::Horizontal, tr("Gruppe"));
-//    setRelation(2, QSqlRelation("Shift", "id", "name"));
-//    setHeaderData(3, Qt::Horizontal, tr("Aktiviert"));
-
-    sort(1, Qt::AscendingOrder);
+    setHeaderData(1, Qt::Horizontal, tr("Name"));
+    setHeaderData(2, Qt::Horizontal, tr("Benutzername"));
+    setHeaderData(3, Qt::Horizontal, tr("Passwort"));
+    setHeaderData(4, Qt::Horizontal, tr("Letzter Login"));
+    setHeaderData(5, Qt::Horizontal, tr("Gescheiterte Loginversuche"));
+    setHeaderData(6, Qt::Horizontal, tr("Aktiv"));
 }
