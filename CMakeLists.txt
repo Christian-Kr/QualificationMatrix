@@ -30,7 +30,7 @@ set(CMAKE_AUTOUIC_SEARCH_PATHS ui)
 find_package(Qt5 5.15 COMPONENTS LinguistTools Widgets Sql PrintSupport REQUIRED)
 
 # Add application icon for windows.
-set(APP_ICON_RESOURCE_WINDOWS "rcs/qm_res.rc")
+set(APP_ICON_RESOURCE_WINDOWS "rcs/qm_res.rc" src/ams/settings/qmamssettingswidget.h src/ams/settings/qmamssettingswidget.cpp)
 
 # ---------------------------------------------------------------------------------------------------------------------
 # Translation

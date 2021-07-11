@@ -109,6 +109,10 @@ public:
     /// \return True on success, else false. When no user is logged in, method will always return true.
     bool logoutUser();
 
+    /// Call if you want to know whether a user is logged in or not.
+    /// \return
+    LoginState getLoginState() { return loginState; }
+
 private:
     /// Constructor
     QMAMSManager();
