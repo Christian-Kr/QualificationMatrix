@@ -15,6 +15,9 @@
 #include "ams/model/qmamsusermodel.h"
 
 #include <QSqlDatabase>
+#include <QSqlRecord>
+#include <QSqlField>
+#include <QDateTime>
 #include <QDebug>
 
 QMAMSManager *QMAMSManager::instance = nullptr;
@@ -42,6 +45,84 @@ bool QMAMSManager::logoutUser()
     return true;
 }
 
+bool QMAMSManager::setUserLastLoginDateInDatabase()
+{
+    // Get the database connection.
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        qWarning("Database is not connected");
+        return false;
+    }
+
+    auto db = QSqlDatabase::database("default");
+
+    QMAMSUserModel amsUserModel(this, db);
+    amsUserModel.select();
+
+    for (int i = 0; i < amsUserModel.rowCount(); i++)
+    {
+        auto dbUsername = amsUserModel.data(amsUserModel.index(i, amsUserModel.fieldIndex("username"))).toString();
+        if (dbUsername == *username)
+        {
+            QString strDateTime = (QDateTime::currentDateTime()).toString(Qt::ISODate);
+
+            if (!amsUserModel.setData(amsUserModel.index(i, amsUserModel.fieldIndex("last_login")), strDateTime))
+            {
+                return false;
+            }
+
+            if (!amsUserModel.submitAll())
+            {
+                return false;
+            }
+
+            return true;
+        }
+    }
+
+    return false;
+}
+
+bool QMAMSManager::loginAdmin(const QString &password)
+{
+    if (!logoutUser())
+    {
+        return false;
+    }
+
+    auto userInfo = getUserFromDatabase("administrator");
+    if (!userInfo.found)
+    {
+        // The administrator user could not be found. Create the administrator user with an empty password.
+        if (!createAdminInDatabase())
+        {
+            return false;
+        }
+
+        userInfo = getUserFromDatabase("administrator");
+        if (!userInfo.found)
+        {
+            return false;
+        }
+    }
+
+    // If we are here, there is a user with the name "administrator". Go on with login.
+    if (password == userInfo.password)
+    {
+        *username = userInfo.username;
+        *fullname = userInfo.fullname;
+
+        if (!setUserLastLoginDateInDatabase())
+        {
+            qCritical() << "Cannot set last login date for admin user";
+        }
+
+        return true;
+    }
+
+    return false;
+}
+
 bool QMAMSManager::loginUser(const QString &name, const QString &password)
 {
     if (!logoutUser())
@@ -66,6 +147,53 @@ bool QMAMSManager::loginUser(const QString &name, const QString &password)
     return false;
 }
 
+bool QMAMSManager::createAdminInDatabase()
+{
+    // Get the database connection.
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        qWarning("Database is not connected");
+        return false;
+    }
+
+    auto db = QSqlDatabase::database("default");
+
+    QMAMSUserModel amsUserModel(this, db);
+    amsUserModel.select();
+
+    for (int i = 0; i < amsUserModel.rowCount(); i++)
+    {
+        auto dbUsername = amsUserModel.data(amsUserModel.index(i, amsUserModel.fieldIndex("username"))).toString();
+        if (dbUsername == "administrator")
+        {
+            return false;
+        }
+    }
+
+    QSqlRecord record;
+
+    record.append(QSqlField("name"));
+    record.append(QSqlField("username"));
+    record.append(QSqlField("password"));
+    record.append(QSqlField("last_login"));
+    record.append(QSqlField("unsuccess_login_num"));
+    record.append(QSqlField("active"));
+
+    record.setValue("name", "administrator");
+    record.setValue("username", "administrator");
+    record.setValue("password", "");
+    record.setValue("last_login", "");
+    record.setValue("unsuccess_login_num", 0);
+    record.setValue("active", 1);
+
+    if (!amsUserModel.insertRecord(-1, record))
+    {
+        return false;
+    }
+
+    return true;
+}
+
 QMAMSUserInformation QMAMSManager::getUserFromDatabase(const QString &username)
 {
     QMAMSUserInformation userInfo;
@@ -79,7 +207,6 @@ QMAMSUserInformation QMAMSManager::getUserFromDatabase(const QString &username)
 
     auto db = QSqlDatabase::database("default");
 
-    // TODO: Create database model and search for user.
     QMAMSUserModel amsUserModel(this, db);
     amsUserModel.select();
 
