@@ -20,7 +20,7 @@
 #include <QFileDialog>
 
 QMGeneralSettingsWidget::QMGeneralSettingsWidget(QWidget *parent)
-    : QMSettingsWidget(parent),
+    : QMSettingsWidget(parent, false),
     ui(new Ui::QMGeneralSettingsWidget)
 {
     ui->setupUi(this);

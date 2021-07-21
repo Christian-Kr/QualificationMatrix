@@ -25,7 +25,7 @@
 #include <QModelIndexList>
 
 QMEmployeeSettingsWidget::QMEmployeeSettingsWidget(QWidget *parent)
-    : QMSettingsWidget(parent),
+    : QMSettingsWidget(parent, false),
     ui(new Ui::QMEmployeeSettingsWidget),
     employeeFilterModel(new QSortFilterProxyModel(this)),
     employeeActivatedFilterModel(new QSortFilterProxyModel(this))

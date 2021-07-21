@@ -23,7 +23,8 @@ Q_OBJECT
 public:
     /// Constructor
     /// \param parent The parent object for the qt system.
-    explicit QMSettingsWidget(QWidget *parent = nullptr);
+    /// \param adminAcces True if administrator should be logged in to access this dialog, else false.
+    explicit QMSettingsWidget(QWidget *parent = nullptr, bool adminAccess = true);
 
 signals:
     /// A setting in the dialog changed (not in QMApplicationSettings).
@@ -42,6 +43,9 @@ public slots:
 
     /// Load settings from appropriate source. (Might be a database or qsettings.)
     virtual void loadSettings() = 0;
+
+private:
+    bool needAdminAccess;
 };
 
 #endif // QMSETTINGSWIDGET_H

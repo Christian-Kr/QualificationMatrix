@@ -19,7 +19,7 @@
 #include <QColorDialog>
 
 QMQualiResultSettingsWidget::QMQualiResultSettingsWidget(QWidget *parent)
-    : QMSettingsWidget(parent),
+    : QMSettingsWidget(parent, false),
     ui(new Ui::QMQualiResultSettingsWidget)
 {
     ui->setupUi(this);

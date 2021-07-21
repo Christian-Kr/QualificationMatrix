@@ -28,7 +28,7 @@
 #include <QMessageBox>
 
 QMTrainSettingsWidget::QMTrainSettingsWidget(QWidget *parent)
-    : QMSettingsWidget(parent)
+    : QMSettingsWidget(parent, false)
     , ui(new Ui::QMTrainSettingsWidget)
     , trainFilterModel(new QSortFilterProxyModel(this))
 {

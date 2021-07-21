@@ -24,7 +24,7 @@
 #include <QMessageBox>
 
 QMFuncSettingsWidget::QMFuncSettingsWidget(QWidget *parent)
-    : QMSettingsWidget(parent)
+    : QMSettingsWidget(parent, false)
     , ui(new Ui::QMFuncSettingsWidget)
     , funcFilterModel(new QSortFilterProxyModel(this))
 {

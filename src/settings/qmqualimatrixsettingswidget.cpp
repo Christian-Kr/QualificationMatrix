@@ -18,7 +18,7 @@
 #include <QColorDialog>
 
 QMQualiMatrixSettingsWidget::QMQualiMatrixSettingsWidget(QWidget *parent)
-    : QMSettingsWidget(parent),
+    : QMSettingsWidget(parent, false),
     ui(new Ui::QMQualiMatrixSettingsWidget)
 {
     ui->setupUi(this);

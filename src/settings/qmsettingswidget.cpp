@@ -15,8 +15,9 @@
 
 #include <QMessageBox>
 
-QMSettingsWidget::QMSettingsWidget(QWidget *parent)
+QMSettingsWidget::QMSettingsWidget(QWidget *parent, bool adminAccess)
     : QWidget(parent)
+    , needAdminAccess(adminAccess)
 {}
 
 void QMSettingsWidget::emitSettingsChanged()

@@ -20,6 +20,7 @@
 #include "qmgeneralsettingswidget.h"
 #include "qmqualimatrixsettingswidget.h"
 #include "qmqualiresultsettingswidget.h"
+#include "ams/qmamssettingswidget.h"
 #include "framework/qmtreesettingsdelegate.h"
 
 #include <QWidget>
@@ -79,6 +80,7 @@ void QMSettingsDialog::initStackWidgets()
     appendConnectSettingsWidget(new QMTrainSettingsWidget(this));
     appendConnectSettingsWidget(new QMFuncSettingsWidget(this));
     appendConnectSettingsWidget(new QMEmployeeSettingsWidget(this));
+    appendConnectSettingsWidget(new QMAMSSettingsWidget(this));
 }
 
 void QMSettingsDialog::appendConnectSettingsWidget(QMSettingsWidget *settingsWidget)
@@ -126,6 +128,10 @@ void QMSettingsDialog::initTreeWidgets()
     auto twiEmployee = new QTreeWidgetItem(twiDatasets);
     twiEmployee->setText(0, tr("Mitarbeiter"));
     twiEmployee->setData(0, Qt::UserRole, 5);
+
+    auto twiAMS = new QTreeWidgetItem(ui->twSettingGroups);
+    twiAMS->setText(0, tr("Rechtverwaltung"));
+    twiAMS->setData(0, Qt::UserRole, 6);
 
     ui->twSettingGroups->expandAll();
 }
