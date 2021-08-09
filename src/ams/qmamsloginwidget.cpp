@@ -13,6 +13,10 @@
 
 #include "qmamsloginwidget.h"
 #include "ui_qmamsloginwidget.h"
+#include "ams/qmamsmanager.h"
+
+#include <QMessageBox>
+#include <QDebug>
 
 QMAMSLoginWidget::QMAMSLoginWidget(QWidget *parent)
     : QMSettingsWidget(parent)
@@ -26,12 +30,47 @@ QMAMSLoginWidget::~QMAMSLoginWidget()
     delete ui;
 }
 
+void QMAMSLoginWidget::setUsername(QString name)
+{
+    ui->leUsername->setText(name);
+    ui->leUsername->setReadOnly(true);
+}
+
 void QMAMSLoginWidget::login()
 {
-    // TODO: Login
+    QString username = ui->leUsername->text();
+    QString password = ui->lePassword->text();
+
+    auto am = QMAMSManager::getInstance();
+
+    if (am->getLoginUserName()->compare(username) == 0)
+    {
+        QMessageBox::information(this, tr("Anmelden"), tr("Benutzer ist bereits angemeldet."));
+        return;
+    }
+
+    if (am->getLoginState() == LoginState::LOGGED_IN)
+    {
+        auto res = QMessageBox::information(this, tr("Anmelden"), tr("Ein Benutzer ist bereits angemeldet und wird "
+                "mit dem login abgemeldet. Fortfahren?"), QMessageBox::Yes | QMessageBox::No);
+
+        if (res == QMessageBox::No)
+        {
+            return;
+        }
+    }
+
+    am->loginUser(username, password);
+
+    // Test afterwarts, whether everything goes right.
+    if (am->getLoginUserName()->compare(username) != 0)
+    {
+        QMessageBox::information(this, tr("Anmelden"), tr("Bei der Anmeldung is etwas schief gelaufen."));
+        return;
+    }
 }
 
 void QMAMSLoginWidget::cancel()
 {
-    // TODO: Cancel login
+    close();
 }

@@ -35,6 +35,10 @@ public:
     /// Destructor
     ~QMAMSLoginWidget() override;
 
+    /// Set the user name to log in. If user is set, it is not changeable by user. To reset, recreate the widget.
+    /// \param username The username to log in
+    void setUsername(QString name);
+
 public slots:
     /// Login width credentials clicked.
     void login();
