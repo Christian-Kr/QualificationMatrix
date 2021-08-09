@@ -26,6 +26,9 @@ public:
     /// \param adminAcces True if administrator should be logged in to access this dialog, else false.
     explicit QMSettingsWidget(QWidget *parent = nullptr, bool adminAccess = false);
 
+    // Getter for admin rights.
+    bool adminAccessNeeded() const { return admin; }
+
 signals:
     /// A setting in the dialog changed (not in QMApplicationSettings).
     void settingsChanged();

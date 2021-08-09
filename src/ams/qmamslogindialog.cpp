@@ -1,4 +1,4 @@
-// qmamssettingswidget.cpp is part of QualificationMatrix
+// qmamssettingsdialog.cpp is part of QualificationMatrix
 //
 // QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of the GNU General
 // Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
@@ -11,32 +11,32 @@
 // You should have received a copy of the GNU General Public License along with QualificationMatrix.
 // If not, see <http://www.gnu.org/licenses/>.
 
-#include "qmamsloginwidget.h"
-#include "ui_qmamsloginwidget.h"
+#include "qmamslogindialog.h"
+#include "ui_qmamslogindialog.h"
 #include "ams/qmamsmanager.h"
 
 #include <QMessageBox>
 #include <QDebug>
 
-QMAMSLoginWidget::QMAMSLoginWidget(QWidget *parent)
-    : QMSettingsWidget(parent)
-    , ui(new Ui::QMAMSLoginWidget)
+QMAMSLoginDialog::QMAMSLoginDialog(QWidget *parent)
+    : QDialog(parent)
+    , ui(new Ui::QMAMSLoginDialog)
 {
     ui->setupUi(this);
 }
 
-QMAMSLoginWidget::~QMAMSLoginWidget()
+QMAMSLoginDialog::~QMAMSLoginDialog()
 {
     delete ui;
 }
 
-void QMAMSLoginWidget::setUsername(QString name)
+void QMAMSLoginDialog::setUsername(QString name)
 {
     ui->leUsername->setText(name);
     ui->leUsername->setReadOnly(true);
 }
 
-void QMAMSLoginWidget::login()
+void QMAMSLoginDialog::login()
 {
     QString username = ui->leUsername->text();
     QString password = ui->lePassword->text();
@@ -70,7 +70,7 @@ void QMAMSLoginWidget::login()
     }
 }
 
-void QMAMSLoginWidget::cancel()
+void QMAMSLoginDialog::cancel()
 {
     close();
 }

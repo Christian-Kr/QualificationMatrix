@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>QMAMSLoginWidget</class>
- <widget class="QWidget" name="QMAMSLoginWidget">
+ <class>QMAMSLoginDialog</class>
+ <widget class="QDialog" name="QMAMSLoginDialog">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +14,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Benutzer anmelden</string>
+   <string>Anmelden</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <item>
@@ -107,7 +110,7 @@
      <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
-       <height>40</height>
+       <height>0</height>
       </size>
      </property>
     </spacer>
@@ -117,13 +120,13 @@
  <resources/>
  <connections>
   <connection>
-   <sender>pbLogin</sender>
+   <sender>pbCancel</sender>
    <signal>clicked()</signal>
-   <receiver>QMAMSLoginWidget</receiver>
-   <slot>login()</slot>
+   <receiver>QMAMSLoginDialog</receiver>
+   <slot>cancel()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>339</x>
+     <x>233</x>
      <y>143</y>
     </hint>
     <hint type="destinationlabel">
@@ -133,13 +136,13 @@
    </hints>
   </connection>
   <connection>
-   <sender>pbCancel</sender>
+   <sender>pbLogin</sender>
    <signal>clicked()</signal>
-   <receiver>QMAMSLoginWidget</receiver>
-   <slot>cancel()</slot>
+   <receiver>QMAMSLoginDialog</receiver>
+   <slot>login()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>233</x>
+     <x>339</x>
      <y>143</y>
     </hint>
     <hint type="destinationlabel">

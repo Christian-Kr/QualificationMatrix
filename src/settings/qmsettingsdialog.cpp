@@ -22,6 +22,8 @@
 #include "qmqualiresultsettingswidget.h"
 #include "ams/qmamssettingswidget.h"
 #include "framework/qmtreesettingsdelegate.h"
+#include "ams/qmamslogindialog.h"
+#include "ams/qmamsmanager.h"
 
 #include <QWidget>
 #include <QSqlRelationalDelegate>
@@ -316,7 +318,7 @@ void QMSettingsDialog::changeSettingsGroup(QTreeWidgetItem *item, const int)
         auto scrollArea = dynamic_cast<QScrollArea *>(widget);
         if (scrollArea == nullptr)
         {
-            qWarning() << "loadSettings: dynamic_cast failed to QScrollArea";
+            qWarning() << "changeSettingsGroup: dynamic_cast failed to QScrollArea";
             return;
         }
 
@@ -350,6 +352,34 @@ void QMSettingsDialog::changeSettingsGroup(QTreeWidgetItem *item, const int)
         lastGroup = ui->swSettingGroups->currentIndex();
         ui->swSettingGroups->setCurrentIndex(item->data(0, Qt::UserRole).toInt());
         currentGroup = ui->swSettingGroups->currentIndex();
+
+        auto widget = ui->swSettingGroups->currentWidget();
+        if (widget == nullptr)
+        {
+            qWarning() << "changeSettingsGroup: widget does not exist";
+            return;
+        }
+
+        auto scrollArea = dynamic_cast<QScrollArea *>(widget);
+        if (scrollArea == nullptr)
+        {
+            qWarning() << "changeSettingsGroup: dynamic_cast failed to QScrollArea";
+            return;
+        }
+
+        auto settingsWidget = dynamic_cast<QMSettingsWidget *>(scrollArea->widget());
+        if (settingsWidget == nullptr)
+        {
+            qWarning() << "changeSettingsGroup: dynamic_cast failed to QMSettingsWidget";
+            return;
+        }
+
+        if (settingsWidget->adminAccessNeeded())
+        {
+            QMAMSLoginDialog loginDialog(this);
+            loginDialog.setUsername("administrator");
+            loginDialog.exec();
+        }
     }
 }
 
