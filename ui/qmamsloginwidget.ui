@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Login to database</string>
+   <string>Benutzer anmelden</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <item>
@@ -72,6 +72,19 @@
       </spacer>
      </item>
      <item>
+      <widget class="QPushButton" name="pbCancel">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Abbrechen</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="pbLogin">
        <property name="minimumSize">
         <size>
@@ -119,8 +132,25 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pbCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>QMAMSLoginWidget</receiver>
+   <slot>cancel()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>233</x>
+     <y>143</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>86</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>login()</slot>
+  <slot>cancel()</slot>
  </slots>
 </ui>

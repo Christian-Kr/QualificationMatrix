@@ -25,3 +25,13 @@ QMAMSLoginWidget::~QMAMSLoginWidget()
 {
     delete ui;
 }
+
+void QMAMSLoginWidget::login()
+{
+    // TODO: Login
+}
+
+void QMAMSLoginWidget::cancel()
+{
+    // TODO: Cancel login
+}

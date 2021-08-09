@@ -36,6 +36,11 @@ public:
     ~QMAMSLoginWidget() override;
 
 public slots:
+    /// Login width credentials clicked.
+    void login();
+
+    /// Cancel login process.
+    void cancel();
 
 private:
     Ui::QMAMSLoginWidget *ui;

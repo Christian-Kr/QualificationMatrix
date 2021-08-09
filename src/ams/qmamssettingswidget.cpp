@@ -15,7 +15,7 @@
 #include "ui_qmamssettingswidget.h"
 
 QMAMSSettingsWidget::QMAMSSettingsWidget(QWidget *parent)
-    : QMSettingsWidget(parent)
+    : QMSettingsWidget(parent, true)
     , ui(new Ui::QMAMSSettingsWidget)
 {
     ui->setupUi(this);

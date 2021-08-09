@@ -12,15 +12,36 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 #include "qmsettingswidget.h"
+#include "ams/qmamsmanager.h"
 
-#include <QMessageBox>
+#include <QShowEvent>
+#include <QDebug>
 
 QMSettingsWidget::QMSettingsWidget(QWidget *parent, bool adminAccess)
     : QWidget(parent)
-    , needAdminAccess(adminAccess)
+    , admin(adminAccess)
 {}
 
 void QMSettingsWidget::emitSettingsChanged()
 {
     emit settingsChanged();
+}
+
+void QMSettingsWidget::showEvent(QShowEvent *event)
+{
+    if (admin)
+    {
+        // If the administrator account is needed to get access to the widget: Test if the administrator is logged in,
+        // else set the widget to invisible.
+
+        auto am = QMAMSManager::getInstance();
+        if (am->getLoginUserName()->compare("administrator") != 0)
+        {
+            qDebug() << "Try to open admin widget without being logged in";
+            setVisible(false);
+            return;
+        }
+    }
+
+    QWidget::showEvent(event);
 }
