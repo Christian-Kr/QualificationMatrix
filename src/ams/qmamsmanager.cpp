@@ -32,6 +32,61 @@ QMAMSManager::QMAMSManager()
     , lastError(std::make_unique<QString>())
 {}
 
+bool QMAMSManager::checkDatabase()
+{
+    // INFO: For now, this function won't check the whole structure and all of
+    // its tables. This might already be implemented by version check. The only
+    // check that needs to be done is: Exist an "administrator" user or not. If
+    // the user does not exist, the method will try to create it with an empty
+    // password. If creating the administrator user is successful the function
+    // might return true, cause the check is ok again.
+
+    // Get the database connection.
+    if (!QSqlDatabase::contains("default") ||
+    !QSqlDatabase::database("default", false).isOpen())
+    {
+        qWarning("Database is not connected");
+        return false;
+    }
+
+    auto db = QSqlDatabase::database("default");
+
+    if (checkForAdministrator(db))
+    {
+        return true;
+    }
+    else
+    {
+        if (createAdminInDatabase())
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+bool QMAMSManager::checkForAdministrator(QSqlDatabase &database)
+{
+    QMAMSUserModel amsUserModel(this, database);
+    amsUserModel.select();
+
+    auto usernameFieldIndex = amsUserModel.fieldIndex("username");
+
+    for (int i = 0; i < amsUserModel.rowCount(); i++)
+    {
+        auto usernameModelIndex = amsUserModel.index(i, usernameFieldIndex);
+        auto dbUsername = amsUserModel.data(usernameModelIndex).toString();
+
+        if (dbUsername == "administrator")
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 bool QMAMSManager::logoutUser()
 {
     if (loginState == LoginState::NOT_LOGGED_IN)

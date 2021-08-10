@@ -19,6 +19,8 @@
 #include <QObject>
 #include <memory>
 
+class QSqlDatabase;
+
 // Enumerations for access modes. Every WRITE access includes automatic READ
 // access.
 // QM = QualificationMatrix
@@ -99,6 +101,13 @@ public:
         }
     }
 
+    /// Check database for right structure and content to be sure that
+    /// everything works right.
+    /// \return True if everything is ok, else false. False will also be
+    ///     returned, when there is no database connected, or it can't be
+    ///     opened.
+    bool checkDatabase();
+
     /// Create an administrator username.
     /// \return True if creation was successful, else false.
     bool createAdminInDatabase();
@@ -142,6 +151,10 @@ private:
 
     /// Destructor
     ~QMAMSManager() override = default;
+
+    /// Search for administrator user.
+    /// \return True if exist, else false.
+    bool checkForAdministrator(QSqlDatabase &database);
 
     /// Get the password from a user. This function will take the information
     /// from the database directly.
