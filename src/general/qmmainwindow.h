@@ -34,6 +34,8 @@ class QMTrainDataWidget;
 class QTranslator;
 class QSqlDatabase;
 
+enum class LoginState;
+
 // Enum: The WIN_MODE. Every time the mode will be switched and a new widget
 // will be shown, the objects will be deleted. This makes sure, nothing
 // happens or blocks access in unused application parts.
@@ -146,6 +148,11 @@ public slots:
     /// Closes the current window mode and deletes all objects.
     /// \return True if success, else false. False could also be a user abort.
     bool closeCurrentWindowMode();
+
+    /// Handle the login change signal.
+    /// \param before Login state before the change.
+    /// \param current Current login state after change.
+    void handleLoginChange(LoginState before, LoginState current);
 
 protected:
     /// Override from QMainWindow. This function will be called on closeing

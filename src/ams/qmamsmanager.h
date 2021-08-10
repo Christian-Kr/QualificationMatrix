@@ -145,6 +145,12 @@ public:
     /// \return
     LoginState getLoginState() { return loginState; }
 
+signals:
+    /// Emited when the login state changed.
+    /// \param before Login state before the change.
+    /// \param current Current login state after change.
+    void loginStateChanged(LoginState before, LoginState current);
+
 private:
     /// Constructor
     QMAMSManager();

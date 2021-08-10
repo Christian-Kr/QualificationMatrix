@@ -65,6 +65,11 @@ QMMainWindow::QMMainWindow(QWidget *parent)
     ui = new Ui::QMMainWindow;
     ui->setupUi(this);
 
+    // Initialize connections to AMS.
+    auto am = QMAMSManager::getInstance();
+    connect(am, &QMAMSManager::loginStateChanged, this,
+        &QMMainWindow::handleLoginChange);
+
     // Load database on startup. If there are some settings for automatic
     // loading of database on startup, follow them. Otherwise show the manage
     // database dialog, cause the application is not useful if there is no
@@ -773,5 +778,18 @@ void QMMainWindow::enterWindowMode(WIN_MODE mode)
         default:
             qWarning("Unknown window mode");
             break;
+    }
+}
+
+void QMMainWindow::handleLoginChange(LoginState before, LoginState current)
+{
+    // TODO: Handle more on state change. For now, just change icon.
+    if (current == LoginState::LOGGED_IN)
+    {
+        ui->actAMS->setIcon(QIcon(":/icons/icons/im-user-online.svg"));
+    }
+    else
+    {
+        ui->actAMS->setIcon(QIcon(":/icons/icons/im-user-offline.svg"));
     }
 }
