@@ -1,15 +1,17 @@
 // qmamsmanager.cpp is part of QualificationMatrix
 //
-// QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of the GNU General
-// Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
-// any later version.
+// QualificationMatrix is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by the
+// Free Software Foundation, either version 3 of the License, or (at your
+// option) any later version.
 //
-// QualificationMatrix is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
-// implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
-// details.
+// QualificationMatrix is distributed in the hope that it will be useful, but
+// WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+// or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+// more details.
 //
-// You should have received a copy of the GNU General Public License along with QualificationMatrix.
-// If not, see <http://www.gnu.org/licenses/>.
+// You should have received a copy of the GNU General Public License along
+// with QualificationMatrix. If not, see <http://www.gnu.org/licenses/>.
 
 #include "qmamsmanager.h"
 #include "ams/model/qmamsusermodel.h"
@@ -48,7 +50,8 @@ bool QMAMSManager::logoutUser()
 bool QMAMSManager::setUserLastLoginDateInDatabase()
 {
     // Get the database connection.
-    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    if (!QSqlDatabase::contains("default") ||
+        !QSqlDatabase::database("default", false).isOpen())
     {
         qWarning("Database is not connected");
         return false;
@@ -59,14 +62,21 @@ bool QMAMSManager::setUserLastLoginDateInDatabase()
     QMAMSUserModel amsUserModel(this, db);
     amsUserModel.select();
 
+    auto usernameFieldIndex = amsUserModel.fieldIndex("username");
+    auto lastLoginIndex = amsUserModel.fieldIndex("last_login");
+
     for (int i = 0; i < amsUserModel.rowCount(); i++)
     {
-        auto dbUsername = amsUserModel.data(amsUserModel.index(i, amsUserModel.fieldIndex("username"))).toString();
+        auto usernameModelIndex = amsUserModel.index(i, usernameFieldIndex);
+        auto dbUsername = amsUserModel.data(usernameModelIndex).toString();
+
         if (dbUsername == *username)
         {
-            QString strDateTime = (QDateTime::currentDateTime()).toString(Qt::ISODate);
+            auto currDateTime = QDateTime::currentDateTime();
+            auto strCurrDateTime = currDateTime.toString(Qt::ISODate);
+            auto lastLoginModelIndex = amsUserModel.index(i, lastLoginIndex);
 
-            if (!amsUserModel.setData(amsUserModel.index(i, amsUserModel.fieldIndex("last_login")), strDateTime))
+            if (!amsUserModel.setData(lastLoginModelIndex, strCurrDateTime))
             {
                 return false;
             }
@@ -93,7 +103,8 @@ bool QMAMSManager::loginAdmin(const QString &password)
     auto userInfo = getUserFromDatabase("administrator");
     if (!userInfo.found)
     {
-        // The administrator user could not be found. Create the administrator user with an empty password.
+        // The administrator user could not be found. Create the administrator
+        // user with an empty password.
         if (!createAdminInDatabase())
         {
             return false;
@@ -106,7 +117,8 @@ bool QMAMSManager::loginAdmin(const QString &password)
         }
     }
 
-    // If we are here, there is a user with the name "administrator". Go on with login.
+    // If we are here, there is a user with the name "administrator". Go on
+    // with login.
     if (password == userInfo.password)
     {
         *username = userInfo.username;
@@ -150,7 +162,8 @@ bool QMAMSManager::loginUser(const QString &name, const QString &password)
 bool QMAMSManager::createAdminInDatabase()
 {
     // Get the database connection.
-    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    if (!QSqlDatabase::contains("default") ||
+        !QSqlDatabase::database("default", false).isOpen())
     {
         qWarning("Database is not connected");
         return false;
@@ -161,9 +174,13 @@ bool QMAMSManager::createAdminInDatabase()
     QMAMSUserModel amsUserModel(this, db);
     amsUserModel.select();
 
+    auto usernameFieldIndex = amsUserModel.fieldIndex("username");
+
     for (int i = 0; i < amsUserModel.rowCount(); i++)
     {
-        auto dbUsername = amsUserModel.data(amsUserModel.index(i, amsUserModel.fieldIndex("username"))).toString();
+        auto usernameModelIndex = amsUserModel.index(i, usernameFieldIndex);
+        auto dbUsername = amsUserModel.data(usernameModelIndex).toString();
+
         if (dbUsername == "administrator")
         {
             return false;
@@ -199,7 +216,8 @@ QMAMSUserInformation QMAMSManager::getUserFromDatabase(const QString &username)
     QMAMSUserInformation userInfo;
 
     // Get the database connection.
-    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    if (!QSqlDatabase::contains("default") ||
+        !QSqlDatabase::database("default", false).isOpen())
     {
         qWarning("Database is not connected");
         return userInfo;
@@ -210,19 +228,26 @@ QMAMSUserInformation QMAMSManager::getUserFromDatabase(const QString &username)
     QMAMSUserModel amsUserModel(this, db);
     amsUserModel.select();
 
+    auto usernameFieldIndex = amsUserModel.fieldIndex("username");
+
     for (int i = 0; i < amsUserModel.rowCount(); i++)
     {
-        auto dbUsername = amsUserModel.data(amsUserModel.index(i, amsUserModel.fieldIndex("username"))).toString();
+        auto usernameModelIndex = amsUserModel.index(i, usernameFieldIndex);
+        auto dbUsername = amsUserModel.data(usernameModelIndex).toString();
+
         if (dbUsername == username)
         {
+            auto nameFieldIndex = amsUserModel.fieldIndex("user");
+            auto nameModelIndex = amsUserModel.index(i, nameFieldIndex);
+            auto dbFullname = amsUserModel.data(nameModelIndex).toString();
+
+            auto pwFieldIndex = amsUserModel.fieldIndex("password");
+            auto pwModelIndex = amsUserModel.index(i, pwFieldIndex);
+            auto dbPassword = amsUserModel.data(pwModelIndex).toString();
+
             userInfo.username = dbUsername;
-
-            auto dbFullname = amsUserModel.data(amsUserModel.index(i, amsUserModel.fieldIndex("name"))).toString();
-            userInfo.fullname = dbFullname;
-
-            auto dbPassword = amsUserModel.data(amsUserModel.index(i, amsUserModel.fieldIndex("password"))).toString();
             userInfo.password = dbPassword;
-
+            userInfo.fullname = dbFullname;
             userInfo.found = true;
 
             return userInfo;
