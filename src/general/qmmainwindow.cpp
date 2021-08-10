@@ -209,8 +209,8 @@ void QMMainWindow::initAfterDatabaseOpened()
 {
     auto db = QSqlDatabase::database("default", false);
 
-    // If the version of the database doesn't fit the software version, show a message asking if the database should
-    // be updated or not.
+    // If the version of the database doesn't fit the software version,
+    // show a message asking if the database should be updated or not.
     if (!QMDataManager::testVersion(db))
     {
         auto resMb = QMessageBox::question(this, tr("Datenbank laden"),
