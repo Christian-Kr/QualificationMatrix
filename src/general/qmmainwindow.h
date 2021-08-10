@@ -1,15 +1,17 @@
 // qmmainwindow.h is part of QualificationMatrix
 //
-// QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of the GNU General
-// Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
-// any later version.
+// QualificationMatrix is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by the
+// Free Software Foundation, either version 3 of the License, or (at your
+// option) any later version.
 //
-// QualificationMatrix is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
-// implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
-// details.
+// QualificationMatrix is distributed in the hope that it will be useful, but
+// WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+// or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+// more details.
 //
-// You should have received a copy of the GNU General Public License along with QualificationMatrix.
-// If not, see <http://www.gnu.org/licenses/>.
+// You should have received a copy of the GNU General Public License along
+// with QualificationMatrix. If not, see <http://www.gnu.org/licenses/>.
 
 #ifndef QMMAINWINDOW_H
 #define QMMAINWINDOW_H
@@ -32,10 +34,12 @@ class QMTrainDataWidget;
 class QTranslator;
 class QSqlDatabase;
 
-// Enum: The WIN_MODE. Every time the mode will be switched and a new widget will be shown, the objects will be
-// deleted. This makes sure, nothing happens or blocks access in unused application parts.
+// Enum: The WIN_MODE. Every time the mode will be switched and a new widget
+// will be shown, the objects will be deleted. This makes sure, nothing
+// happens or blocks access in unused application parts.
 enum class WIN_MODE {
-    NONE,           // Show no widget. This normally happens, when no database has been loaded.
+    NONE,           // Show no widget. This normally happens, when no database
+                    // has been loaded.
     RESULT,         // Show the qualification result widget.
     MATRIX,         // Show the qualification matrix widget.
     TRAININGDATA    // Show the training data widget.
@@ -70,21 +74,24 @@ public slots:
 
     /// Show a progress dialog to informate about a working progress.
     /// \param title The title of the progress dialog.
-    /// \param text The text to give the user an information about the work that will be done.
+    /// \param text The text to give the user an information about the work
+    ///     that will be done.
     /// \param minSteps The minimum steps of updates for the progress widget.
     /// \param maxSteps The maximum steps of updates for the progress widget.
-    void showProgress(
-        const QString &title, const QString &text, const int &minSteps, const int &maxSteps);
+    void showProgress(const QString &title, const QString &text,
+        const int &minSteps, const int &maxSteps);
 
     /// Save all readed settings centralized on one place.
     void saveSettings();
 
-    /// Informate before a workload starts. This will show a progress dialog with progress information.
+    /// Informate before a workload starts. This will show a progress dialog
+    /// with progress information.
     /// \param maxSteps Maximum number of steps in progress.
     /// \param info Information about what happens.
     void workloadStarts(QString info, int maxSteps);
 
-    /// Only call when progressdialog object has been created and dialog is visible.
+    /// Only call when progressdialog object has been created and dialog is
+    /// visible.
     /// \param currentStep Needs be lower than maximum step.
     void workloadUpdates(int currentStep);
 
@@ -141,7 +148,8 @@ public slots:
     bool closeCurrentWindowMode();
 
 protected:
-    /// Override from QMainWindow. This function will be called on closeing the widget.
+    /// Override from QMainWindow. This function will be called on closeing
+    /// the widget.
     /// \param event The close event object that will be created.
     void closeEvent(QCloseEvent *event) override;
 
@@ -152,8 +160,9 @@ private:
     /// Save QSqlDatabase information to QMApplicationSettings.
     static void saveDatabaseSettings();
 
-    /// Load QSqlDatabase information from QMApplicationSettings. A new database object will be
-    /// created. If one exist with the name, the database will be closed and the object removed.
+    /// Load QSqlDatabase information from QMApplicationSettings. A new
+    /// database object will be created. If one exist with the name, the
+    /// database will be closed and the object removed.
     /// \param dbName The name of the db that should be created from settings.
     void loadDatabaseFromSettings(const QString &dbName = "default");
 
