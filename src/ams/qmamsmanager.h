@@ -1,15 +1,17 @@
 // qmamsmanager.h is part of QualificationMatrix
 //
-// QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of the GNU General
-// Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
-// any later version.
+// QualificationMatrix is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by the
+// Free Software Foundation, either version 3 of the License, or (at your
+// option) any later version.
 //
-// QualificationMatrix is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
-// implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
-// details.
+// QualificationMatrix is distributed in the hope that it will be useful, but
+// WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+// or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+// more details.
 //
-// You should have received a copy of the GNU General Public License along with QualificationMatrix.
-// If not, see <http://www.gnu.org/licenses/>.
+// You should have received a copy of the GNU General Public License along
+// with QualificationMatrix. If not, see <http://www.gnu.org/licenses/>.
 
 #ifndef QMAMSMANAGER_H
 #define QMAMSMANAGER_H
@@ -17,28 +19,33 @@
 #include <QObject>
 #include <memory>
 
-// Enumerations for access modes. Every WRITE access includes automatic READ access.
+// Enumerations for access modes. Every WRITE access includes automatic READ
+// access.
 // QM = QualificationMatrix
 // QR = QualificationResult
 // TD = TrainingData
-// Having no enum flag at all means no access. This philosophie is known as whitelist. Meaning everything is forbidden
-// except the application explicitly says that access is granted. If access to some features is given, they might
+// Having no enum flag at all means no access. This philosophie is known as
+// whitelist. Meaning everything is forbidden except the application explicitly
+// says that access is granted. If access to some features is given, they might
 // additionally be restricted to specific user.
 enum class AccessMode
 {
-    // Allows to enter the qualification matrix mode and view all contents. Write acces gives additional possibility to
+    // Allows to enter the qualification matrix mode and view all contents.
+    // Write acces gives additional possibility to
     // edit the qualification matrix.
     QM_MODE_READ,
     QM_MODE_WRITE,
 
-    // Allows to view results. There is no need to give write access, cause there is nothing to edit.
+    // Allows to view results. There is no need to give write access, cause
+    // there is nothing to edit.
     QR_MODE_READ,
 
     // Allows to view and/or edit training data.
     TD_MODE_READ,
     TD_MODE_WRITE,
 
-    // Allow to view and/or edit persistent data in tables like functions, trainings and or employees etc.
+    // Allow to view and/or edit persistent data in tables like functions,
+    // trainings and or employees etc.
     PER_DATA_READ,
     PER_DATA_WRITE
 };
@@ -59,8 +66,8 @@ struct QMAMSUserInformation
     QString password;
 };
 
-/// The class is the manager for the acces management system. Here you get all access to functionalities that
-/// controls the access to the database content.
+/// The class is the manager for the acces management system. Here you get all
+/// access to functionalities that controls the access to the database content.
 ///
 /// TODO: It might be a good practice to modify the general database table.
 ///
@@ -96,7 +103,8 @@ public:
     /// \return True if creation was successful, else false.
     bool createAdminInDatabase();
 
-    /// Sets the last login date in the database for the current logged in user. If the database does not contain the
+    /// Sets the last login date in the database for the current logged in
+    /// user. If the database does not contain the
     /// user, nothing will be done.
     /// \return True if success, else false.
     bool setUserLastLoginDateInDatabase();
@@ -113,13 +121,15 @@ public:
     /// \param password The password for user 'administrator'.
     bool loginAdmin(const QString &password);
 
-    /// Login with the given credentials. Any logged in user will automatically be logged out.
+    /// Login with the given credentials. Any logged in user will
+    /// automatically be logged out.
     /// \param password The password for login.
     /// \param username The username for login.
     bool loginUser(const QString &username, const QString &password);
 
     /// Logout the current user.
-    /// \return True on success, else false. When no user is logged in, method will always return true.
+    /// \return True on success, else false. When no user is logged in,
+    ///     method will always return true.
     bool logoutUser();
 
     /// Call if you want to know whether a user is logged in or not.
@@ -133,7 +143,8 @@ private:
     /// Destructor
     ~QMAMSManager() override = default;
 
-    /// Get the password from a user. This function will take the information from the database directly.
+    /// Get the password from a user. This function will take the information
+    /// from the database directly.
     /// \param username The username to get information from.
     /// \return User information as a struct.
     QMAMSUserInformation getUserFromDatabase(const QString &username);
