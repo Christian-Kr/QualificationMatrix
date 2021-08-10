@@ -106,7 +106,7 @@
     </size>
    </property>
    <property name="windowTitle">
-    <string>toolBar</string>
+    <string>Hauptwerkzeugleiste</string>
    </property>
    <property name="iconSize">
     <size>
@@ -135,6 +135,8 @@
    <addaction name="actModeTrainingData"/>
    <addaction name="separator"/>
    <addaction name="actSettings"/>
+   <addaction name="separator"/>
+   <addaction name="actAMS"/>
   </widget>
   <action name="actExit">
    <property name="text">
@@ -293,6 +295,31 @@
    </property>
    <property name="toolTip">
     <string>Starte Modus Schulungsdaten</string>
+   </property>
+  </action>
+  <action name="actLogin">
+   <property name="text">
+    <string>Login</string>
+   </property>
+   <property name="toolTip">
+    <string>Benutzer anmelden</string>
+   </property>
+  </action>
+  <action name="actLogout">
+   <property name="text">
+    <string>Logout</string>
+   </property>
+   <property name="toolTip">
+    <string>Aktuellen Benutzer abmelden</string>
+   </property>
+  </action>
+  <action name="actAMS">
+   <property name="icon">
+    <iconset resource="../rcs/icons.qrc">
+     <normaloff>:/icons/icons/im-user-offline.svg</normaloff>:/icons/icons/im-user-offline.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Benutzerverwaltung</string>
    </property>
   </action>
  </widget>

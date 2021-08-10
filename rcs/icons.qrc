@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="/icons">
+    <file>icons/im-user-offline.svg</file>
+    <file>icons/im-user-online.svg</file>
     <file>icons/item.svg</file>
     <file>icons/mail-mark-task.svg</file>
     <file>icons/map-flat.svg</file>
