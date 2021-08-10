@@ -34,6 +34,7 @@
 #include "certificate/qmcertificateintegritycheckdialog.h"
 #include "signinglist/qmsigninglistdialog.h"
 #include "framework/qmsqltablemodel.h"
+#include "ams/qmamsmanager.h"
 
 #include <QProgressDialog>
 #include <QDesktopWidget>
@@ -290,6 +291,16 @@ void QMMainWindow::initAfterDatabaseOpened()
         }
     }
 
+    // Initialize the AMS system.
+    auto am = QMAMSManager::getInstance();
+    if (!am->checkDatabase())
+    {
+        QMessageBox::warning(this, tr("Rechtemanagement"),
+            tr("Die Prüfung der Datenbank für das Rechtemanagement ist "
+                "fehlgeschlagen."));
+        return;
+    }
+
     // Unlock all ui elements.
     ui->actSettings->setEnabled(true);
     ui->actCloseDatabase->setEnabled(true);
@@ -505,7 +516,7 @@ void QMMainWindow::saveSettings()
     settings.write("MainWin/Width", width());
     settings.write("MainWin/Height", height());
 
-    auto testFlag = windowState().testFlag(Qt::WindowMaximized):
+    auto testFlag = windowState().testFlag(Qt::WindowMaximized);
     settings.write("MainWin/Maximized", testFlag);
 }
 

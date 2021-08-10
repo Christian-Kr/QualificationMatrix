@@ -258,7 +258,8 @@ bool QMAMSManager::createAdminInDatabase()
     record.setValue("unsuccess_login_num", 0);
     record.setValue("active", 1);
 
-    if (!amsUserModel.insertRecord(-1, record))
+    if (!amsUserModel.insertRecord(-1, record) ||
+        !amsUserModel.submitAll())
     {
         return false;
     }
