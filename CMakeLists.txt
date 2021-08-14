@@ -27,16 +27,23 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOUIC_SEARCH_PATHS ui)
 
-find_package(Qt5 5.15 COMPONENTS LinguistTools Widgets Sql PrintSupport REQUIRED)
+find_package(Qt5 5.15
+        COMPONENTS LinguistTools Widgets Sql PrintSupport
+        REQUIRED)
 
 # Add application icon for windows.
-set(APP_ICON_RESOURCE_WINDOWS "rcs/qm_res.rc" src/ams/qmamssettingswidget.h src/ams/qmamssettingswidget.cpp)
+set(APP_ICON_RESOURCE_WINDOWS "rcs/qm_res.rc"
+        src/ams/qmamssettingswidget.h
+        src/ams/qmamssettingswidget.cpp)
 
 # ---------------------------------------------------------------------------------------------------------------------
 # Translation
 
-set(TS_FILES ${CMAKE_CURRENT_SOURCE_DIR}/trans/qm_de.ts ${CMAKE_CURRENT_SOURCE_DIR}/trans/qm_en.ts)
-qt5_add_translation(QM_FILES ${TS_FILES})
+set(TS_FILES
+        ${CMAKE_CURRENT_SOURCE_DIR}/trans/qm_de.ts
+        ${CMAKE_CURRENT_SOURCE_DIR}/trans/qm_en.ts)
+qt5_add_translation(QM_FILES
+        ${TS_FILES})
 
 # ---------------------------------------------------------------------------------------------------------------------
 # Create executable and link libraries
@@ -45,15 +52,20 @@ qt5_add_translation(QM_FILES ${TS_FILES})
 file(GLOB_RECURSE SRCS src/*.h src/*.cpp)
 file(GLOB_RECURSE UIS ui/*.ui)
 
-add_executable(QualificationMatrix WIN32 rcs/icons.qrc ${SRCS} ${UIS} ${APP_ICON_RESOURCE_WINDOWS})
-target_link_libraries(QualificationMatrix Qt5::Widgets Qt5::Sql Qt5::PrintSupport)
+add_executable(QualificationMatrix
+        WIN32 rcs/icons.qrc ${SRCS} ${UIS} ${APP_ICON_RESOURCE_WINDOWS})
+target_link_libraries(QualificationMatrix
+        Qt5::Widgets Qt5::Sql Qt5::PrintSupport)
 
 # -------------------------------------------------------------------------------------------------
 # Deploy
 
 # Copy the database directory.
-add_custom_command(TARGET QualificationMatrix PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory
-    ${CMAKE_SOURCE_DIR}/database $<TARGET_FILE_DIR:QualificationMatrix>/database)
+add_custom_command(TARGET QualificationMatrix
+        PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/database
+        $<TARGET_FILE_DIR:QualificationMatrix>/database)
 
 # Copy translation files.
-target_sources(QualificationMatrix PRIVATE ${QM_FILES})
+target_sources(QualificationMatrix
+        PRIVATE ${QM_FILES})
