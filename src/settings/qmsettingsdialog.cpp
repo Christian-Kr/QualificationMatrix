@@ -374,7 +374,9 @@ void QMSettingsDialog::changeSettingsGroup(QTreeWidgetItem *item, const int)
             return;
         }
 
-        if (settingsWidget->adminAccessNeeded())
+        auto am = QMAMSManager::getInstance();
+        if (settingsWidget->adminAccessNeeded() &&
+            am->getLoginUserName()->compare("administrator") != 0)
         {
             QMAMSLoginDialog loginDialog(this);
             loginDialog.setUsername("administrator");

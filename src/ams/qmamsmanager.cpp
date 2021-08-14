@@ -202,7 +202,7 @@ bool QMAMSManager::loginUser(const QString &name, const QString &password)
     // Create a hashed value from password for comparision.
     QString pwHashed = QCryptographicHash::hash(password.toUtf8(),
             QCryptographicHash::Algorithm::Sha3_512).toHex();
-    qDebug() << pwHashed;
+
     auto userInfo = getUserFromDatabase(name);
     if (!userInfo.found)
     {
