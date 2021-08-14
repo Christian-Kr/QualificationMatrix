@@ -48,8 +48,6 @@ QMQualiMatrixHeaderView::QMQualiMatrixHeaderView(Qt::Orientation orientation, QW
     vertSectionWidth = settings.read("QualiMatrix/VertHeaderWidth", 200).toInt();
     horSectionHeight = settings.read("QualiMatrix/HorHeaderHeight", 200).toInt();
 
-    connect(&settings, SIGNAL(settingsChanged()), this, SLOT(updateSizeSettings()));
-
     updateColors();
 
     laInfo->setAttribute(Qt::WA_TransparentForMouseEvents);
