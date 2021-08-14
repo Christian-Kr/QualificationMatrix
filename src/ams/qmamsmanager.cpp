@@ -202,7 +202,7 @@ bool QMAMSManager::loginUser(const QString &name, const QString &password)
     // Create a hashed value from password for comparision.
     QString pwHashed = QCryptographicHash::hash(password.toUtf8(),
             QCryptographicHash::Algorithm::Sha3_512).toHex();
-
+    qDebug() << pwHashed;
     auto userInfo = getUserFromDatabase(name);
     if (!userInfo.found)
     {
@@ -211,7 +211,7 @@ bool QMAMSManager::loginUser(const QString &name, const QString &password)
 
     // IMPORTANT: For security reasons, an empty password is never allowed.
 
-    if (!userInfo.password.isEmpty() && password == userInfo.password)
+    if (!userInfo.password.isEmpty() && pwHashed == userInfo.password)
     {
         *username = userInfo.username;
         *fullname = userInfo.fullname;

@@ -837,8 +837,7 @@ void QMMainWindow::amsLogin()
                 ui->toolBar->widgetForAction(ui->actAMS));
         QString username = *am->getLoginUserName();
         tbAMS->setText(username);
-
-        // TODO: Change icon.
+        tbAMS->setIcon(QIcon(":/icons/icons/im-user-online.svg"));
     }
 }
 
@@ -857,6 +856,5 @@ void QMMainWindow::amsLogout()
     auto *tbAMS = dynamic_cast<QToolButton *>(
             ui->toolBar->widgetForAction(ui->actAMS));
     tbAMS->setText("");
-
-    // TODO: Change icon.
+    tbAMS->setIcon(QIcon(":/icons/icons/im-user-offline.svg"));
 }
