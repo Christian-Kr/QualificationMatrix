@@ -13,100 +13,19 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_3">
+  <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_5">
        <item>
-        <widget class="QGroupBox" name="groupBox">
-         <property name="maximumSize">
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="minimumSize">
           <size>
-           <width>600</width>
-           <height>16777215</height>
+           <width>500</width>
+           <height>0</height>
           </size>
          </property>
-         <property name="title">
-          <string>Administrator</string>
-         </property>
-         <layout class="QGridLayout" name="gridLayout">
-          <item row="1" column="0" colspan="2">
-           <layout class="QHBoxLayout" name="horizontalLayout">
-            <item>
-             <widget class="QPushButton" name="pbSaveNewPassword">
-              <property name="minimumSize">
-               <size>
-                <width>100</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>Speichern</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>478</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
-          </item>
-          <item row="0" column="0">
-           <layout class="QVBoxLayout" name="verticalLayout">
-            <item>
-             <widget class="QLabel" name="label_2">
-              <property name="text">
-               <string>Neues Passwort</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="lineEdit">
-              <property name="echoMode">
-               <enum>QLineEdit::Password</enum>
-              </property>
-              <property name="clearButtonEnabled">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="0" column="1">
-           <layout class="QVBoxLayout" name="verticalLayout_2">
-            <item>
-             <widget class="QLabel" name="label_3">
-              <property name="text">
-               <string>Wiederholen</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="lineEdit_2">
-              <property name="echoMode">
-               <enum>QLineEdit::Password</enum>
-              </property>
-              <property name="clearButtonEnabled">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="groupBox_2">
          <property name="maximumSize">
           <size>
            <width>600</width>
@@ -122,7 +41,7 @@
             <item>
              <layout class="QVBoxLayout" name="verticalLayout_3">
               <item>
-               <widget class="QListView" name="listView"/>
+               <widget class="QListView" name="lvUser"/>
               </item>
              </layout>
             </item>
@@ -187,6 +106,94 @@
          </layout>
         </widget>
        </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_3">
+         <property name="minimumSize">
+          <size>
+           <width>500</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>600</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="title">
+          <string>Gruppen</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_3">
+          <item row="0" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_6">
+              <item>
+               <widget class="QListView" name="lvGroup"/>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_7">
+              <item>
+               <widget class="QPushButton" name="pbAddGroup">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Hinzufügen</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pbRemoveGroup">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Löschen</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pbConfigGroup">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Konfigurieren</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="verticalSpacer_2">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
       </layout>
      </item>
      <item>
@@ -207,5 +214,110 @@
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pbAddGroup</sender>
+   <signal>clicked()</signal>
+   <receiver>QMAMSSettingsWidget</receiver>
+   <slot>addGroup()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>446</x>
+     <y>343</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>393</x>
+     <y>290</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbAddUser</sender>
+   <signal>clicked()</signal>
+   <receiver>QMAMSSettingsWidget</receiver>
+   <slot>addUser()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>446</x>
+     <y>60</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>393</x>
+     <y>290</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbConfigGroup</sender>
+   <signal>clicked()</signal>
+   <receiver>QMAMSSettingsWidget</receiver>
+   <slot>configGroup()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>446</x>
+     <y>409</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>393</x>
+     <y>290</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbConfigUser</sender>
+   <signal>clicked()</signal>
+   <receiver>QMAMSSettingsWidget</receiver>
+   <slot>configUser()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>446</x>
+     <y>126</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>393</x>
+     <y>290</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbRemoveGroup</sender>
+   <signal>clicked()</signal>
+   <receiver>QMAMSSettingsWidget</receiver>
+   <slot>removeGroup()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>446</x>
+     <y>376</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>393</x>
+     <y>290</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbRemoveUser</sender>
+   <signal>clicked()</signal>
+   <receiver>QMAMSSettingsWidget</receiver>
+   <slot>removeUser()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>446</x>
+     <y>93</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>393</x>
+     <y>290</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>addUser()</slot>
+  <slot>removeUser()</slot>
+  <slot>configUser()</slot>
+  <slot>addGroup()</slot>
+  <slot>removeGroup()</slot>
+  <slot>configGroup()</slot>
+ </slots>
 </ui>
