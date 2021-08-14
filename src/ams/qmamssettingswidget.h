@@ -16,6 +16,9 @@
 
 #include "settings/qmsettingswidget.h"
 
+class QMAMSGroupModel;
+class QMAMSUserModel;
+
 namespace Ui
 {
     class QMAMSSettingsWidget;
@@ -49,7 +52,13 @@ public:
 public slots:
 
 private:
+    /// Update model data.
+    void updateData();
+
     Ui::QMAMSSettingsWidget *ui;
+
+    std::unique_ptr<QMAMSUserModel> amsUserModel;
+    std::unique_ptr<QMAMSGroupModel> amsGroupModel;
 };
 
 #endif // QMAMSSETTINGSWIDGET_H

@@ -13,6 +13,10 @@
 
 #include "qmamssettingswidget.h"
 #include "ui_qmamssettingswidget.h"
+#include "ams/model/qmamsusermodel.h"
+#include "ams/model/qmamsgroupmodel.h"
+
+#include <QSqlDatabase>
 
 QMAMSSettingsWidget::QMAMSSettingsWidget(QWidget *parent)
     : QMSettingsWidget(parent, true)
@@ -38,5 +42,27 @@ void QMAMSSettingsWidget::revertChanges()
 
 void QMAMSSettingsWidget::loadSettings()
 {
-    // TODO: Load settings.
+    updateData();
+}
+
+void QMAMSSettingsWidget::updateData()
+{
+    // Get the current database and update data only when it is connected.
+    if (!QSqlDatabase::contains("default") ||
+        !QSqlDatabase::database("default", false).isOpen())
+    {
+        return;
+    }
+
+    auto db = QSqlDatabase::database("default");
+
+    amsUserModel = std::make_unique<QMAMSUserModel>(this, db);
+    amsUserModel->select();
+
+    amsGroupModel = std::make_unique<QMAMSGroupModel>(this, db);
+    amsGroupModel->select();
+
+    ui->lvUser->setModel(amsUserModel.get());
+    ui->lvUser->setModelColumn(1);
+    ui->lvGroup->setModel(amsGroupModel.get());
 }
