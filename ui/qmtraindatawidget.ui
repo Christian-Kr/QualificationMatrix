@@ -571,22 +571,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>tbTrainDataDetails</sender>
-   <signal>clicked()</signal>
-   <receiver>QMTrainDataWidget</receiver>
-   <slot>showTrainDataDetails()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>881</x>
-     <y>161</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>449</x>
-     <y>333</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>tbAddCertificate</sender>
    <signal>clicked()</signal>
    <receiver>QMTrainDataWidget</receiver>

@@ -341,10 +341,12 @@ void QMQualiMatrixWidget::updateData()
     // Update the views.
     ui->tvQualiMatrix->setModel(qualiMatrixModel.get());
 
-    // After setting the new model, the connection fo the selection model has to be reset.
-    ui->tvQualiMatrix->selectionModel()->disconnect(this, SLOT(QMQualiMatrixWidget::selectionChanged()));
-    connect(ui->tvQualiMatrix->selectionModel(), &QItemSelectionModel::currentChanged,
-        this, &QMQualiMatrixWidget::selectionChanged);
+    // After setting the new model, the connection fo the selection model
+    // has to be reset.
+    ui->tvQualiMatrix->selectionModel()->disconnect(this);
+    connect(ui->tvQualiMatrix->selectionModel(),
+        &QItemSelectionModel::currentChanged, this,
+        &QMQualiMatrixWidget::selectionChanged);
 
     ui->cbFuncGroupFilter->setModel(funcGroupViewModel.get());
     ui->cbFuncGroupFilter->setModelColumn(1);
