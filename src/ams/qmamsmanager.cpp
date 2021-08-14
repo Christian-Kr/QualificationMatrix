@@ -20,6 +20,8 @@
 #include <QSqlRecord>
 #include <QSqlField>
 #include <QDateTime>
+#include <QCryptographicHash>
+
 #include <QDebug>
 
 QMAMSManager *QMAMSManager::instance = nullptr;
@@ -197,13 +199,19 @@ bool QMAMSManager::loginUser(const QString &name, const QString &password)
         return false;
     }
 
+    // Create a hashed value from password for comparision.
+    QString pwHashed = QCryptographicHash::hash(password.toUtf8(),
+            QCryptographicHash::Algorithm::Sha3_512).toHex();
+
     auto userInfo = getUserFromDatabase(name);
     if (!userInfo.found)
     {
         return false;
     }
 
-    if (password == userInfo.password)
+    // IMPORTANT: For security reasons, an empty password is never allowed.
+
+    if (!userInfo.password.isEmpty() && password == userInfo.password)
     {
         *username = userInfo.username;
         *fullname = userInfo.fullname;
