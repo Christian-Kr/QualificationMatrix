@@ -133,14 +133,14 @@
              <attribute name="verticalHeaderVisible">
               <bool>false</bool>
              </attribute>
+             <attribute name="verticalHeaderMinimumSectionSize">
+              <number>30</number>
+             </attribute>
              <attribute name="verticalHeaderDefaultSectionSize">
               <number>30</number>
              </attribute>
              <attribute name="verticalHeaderHighlightSections">
               <bool>false</bool>
-             </attribute>
-             <attribute name="verticalHeaderMinimumSectionSize">
-              <number>30</number>
              </attribute>
              <attribute name="verticalHeaderShowSortIndicator" stdset="0">
               <bool>false</bool>
@@ -308,14 +308,14 @@
            <attribute name="verticalHeaderVisible">
             <bool>false</bool>
            </attribute>
+           <attribute name="verticalHeaderMinimumSectionSize">
+            <number>30</number>
+           </attribute>
            <attribute name="verticalHeaderDefaultSectionSize">
             <number>30</number>
            </attribute>
            <attribute name="verticalHeaderHighlightSections">
             <bool>false</bool>
-           </attribute>
-           <attribute name="verticalHeaderMinimumSectionSize">
-            <number>30</number>
            </attribute>
            <attribute name="verticalHeaderShowSortIndicator" stdset="0">
             <bool>false</bool>
@@ -481,14 +481,14 @@
            <attribute name="verticalHeaderVisible">
             <bool>false</bool>
            </attribute>
+           <attribute name="verticalHeaderMinimumSectionSize">
+            <number>30</number>
+           </attribute>
            <attribute name="verticalHeaderDefaultSectionSize">
             <number>30</number>
            </attribute>
            <attribute name="verticalHeaderHighlightSections">
             <bool>false</bool>
-           </attribute>
-           <attribute name="verticalHeaderMinimumSectionSize">
-            <number>30</number>
            </attribute>
            <attribute name="verticalHeaderShowSortIndicator" stdset="0">
             <bool>false</bool>
