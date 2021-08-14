@@ -325,11 +325,14 @@ void QMQualiMatrixWidget::updateData()
 
     qualiMatrixModel = std::make_unique<QMQualiMatrixModel>();
 
-    connect(qualiMatrixModel.get(), &QMQualiMatrixModel::beforeBuildCache, this, &QMWinModeWidget::startWorkload);
-    connect(qualiMatrixModel.get(), &QMQualiMatrixModel::updateBuildCache, this, &QMWinModeWidget::updateWorkload);
-    connect(qualiMatrixModel.get(), &QMQualiMatrixModel::afterBuildCache, this, &QMWinModeWidget::endWorkload);
-    connect(qualiMatrixModel.get(), &QMQualiMatrixModel::afterBuildCache, this,
-            &QMQualiMatrixWidget::afterBuildCacheModel);
+    connect(qualiMatrixModel.get(), &QMQualiMatrixModel::beforeBuildCache,
+            this, &QMWinModeWidget::startWorkload);
+    connect(qualiMatrixModel.get(), &QMQualiMatrixModel::updateBuildCache,
+            this, &QMWinModeWidget::updateWorkload);
+    connect(qualiMatrixModel.get(), &QMQualiMatrixModel::afterBuildCache,
+            this, &QMWinModeWidget::endWorkload);
+    connect(qualiMatrixModel.get(), &QMQualiMatrixModel::afterBuildCache,
+            this, &QMQualiMatrixWidget::afterBuildCacheModel);
 
     qualiMatrixModel->updateModels();
 

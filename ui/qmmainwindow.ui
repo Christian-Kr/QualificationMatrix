@@ -536,5 +536,6 @@
   <slot>enterResultMode()</slot>
   <slot>enterQualiMatrixMode()</slot>
   <slot>enterTrainingDataMode()</slot>
+  <slot>showAMSMenu()</slot>
  </slots>
 </ui>

@@ -57,6 +57,7 @@
 #include <QTranslator>
 #include <QWindow>
 #include <QStatusBar>
+#include <QToolButton>
 
 QMMainWindow::QMMainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -69,6 +70,14 @@ QMMainWindow::QMMainWindow(QWidget *parent)
     auto am = QMAMSManager::getInstance();
     connect(am, &QMAMSManager::loginStateChanged, this,
         &QMMainWindow::handleLoginChange);
+
+    // Initialize some ui elements.
+    auto *tbAMS = dynamic_cast<QToolButton *>(
+            ui->toolBar->widgetForAction(ui->actAMS));
+    tbAMS->setPopupMode(QToolButton::InstantPopup);
+    tbAMS->removeAction(ui->actAMS);
+    tbAMS->addAction(ui->actLogin);
+    tbAMS->addAction(ui->actLogout);
 
     // Load database on startup. If there are some settings for automatic
     // loading of database on startup, follow them. Otherwise show the manage
@@ -792,4 +801,9 @@ void QMMainWindow::handleLoginChange(LoginState before, LoginState current)
     {
         ui->actAMS->setIcon(QIcon(":/icons/icons/im-user-offline.svg"));
     }
+}
+
+void QMMainWindow::showAMSMenu()
+{
+
 }
