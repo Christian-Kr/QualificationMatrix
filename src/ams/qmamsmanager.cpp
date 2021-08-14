@@ -207,6 +207,7 @@ bool QMAMSManager::loginUser(const QString &name, const QString &password)
     {
         *username = userInfo.username;
         *fullname = userInfo.fullname;
+        loginState = LoginState::LOGGED_IN;
 
         return true;
     }

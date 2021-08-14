@@ -74,6 +74,8 @@ void QMAMSLoginDialog::login()
                 tr("Bei der Anmeldung is etwas schief gelaufen."));
         return;
     }
+
+    close();
 }
 
 void QMAMSLoginDialog::cancel()

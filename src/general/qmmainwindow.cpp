@@ -75,6 +75,8 @@ QMMainWindow::QMMainWindow(QWidget *parent)
     // Initialize some ui elements.
     auto *tbAMS = dynamic_cast<QToolButton *>(
             ui->toolBar->widgetForAction(ui->actAMS));
+    tbAMS->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+    tbAMS->setText("");
     tbAMS->setPopupMode(QToolButton::InstantPopup);
     tbAMS->removeAction(ui->actAMS);
     tbAMS->addAction(ui->actLogin);
