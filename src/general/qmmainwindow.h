@@ -62,8 +62,11 @@ public:
     ~QMMainWindow() override;
 
 public slots:
-    /// Display menu with some ams actions in a context menu.
-    void showAMSMenu();
+    /// AMS login user.
+    void amsLogin();
+
+    /// AMS logout user.
+    void amsLogout();
 
     /// Show the dialog to create a signing list.
     void showCreateSigningList();

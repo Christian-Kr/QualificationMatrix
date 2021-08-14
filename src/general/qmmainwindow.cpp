@@ -35,6 +35,7 @@
 #include "signinglist/qmsigninglistdialog.h"
 #include "framework/qmsqltablemodel.h"
 #include "ams/qmamsmanager.h"
+#include "ams/qmamslogindialog.h"
 
 #include <QProgressDialog>
 #include <QDesktopWidget>
@@ -803,7 +804,57 @@ void QMMainWindow::handleLoginChange(LoginState before, LoginState current)
     }
 }
 
-void QMMainWindow::showAMSMenu()
+void QMMainWindow::amsLogin()
 {
+    auto am = QMAMSManager::getInstance();
 
+    if (am->getLoginState() == LoginState::LOGGED_IN)
+    {
+        QMessageBox::StandardButton res = QMessageBox::question(this,
+            tr("Anmelden"), tr("Ein Nutzer ist bereits angemeldet. Möchten "
+            "Sie den Nutzer abmelden?"), QMessageBox::Yes | QMessageBox::No);
+
+        if (res != QMessageBox::Yes)
+        {
+            return;
+        }
+
+        amsLogout();
+        if (am->getLoginState() == LoginState::LOGGED_IN)
+        {
+            return;
+        }
+    }
+
+    QMAMSLoginDialog loginDialog(this);
+    loginDialog.exec();
+
+    if (am->getLoginState() == LoginState::LOGGED_IN)
+    {
+        auto *tbAMS = dynamic_cast<QToolButton *>(
+                ui->toolBar->widgetForAction(ui->actAMS));
+        QString username = *am->getLoginUserName();
+        tbAMS->setText(username);
+
+        // TODO: Change icon.
+    }
+}
+
+void QMMainWindow::amsLogout()
+{
+    auto am = QMAMSManager::getInstance();
+
+    if (!am->logoutUser())
+    {
+        QMessageBox::critical(this, tr("Abmelden"), tr("Der Nutzer konnte "
+            "nicht abgemeldet werden."));
+        qWarning() << "user could not be logged out";
+        return;
+    }
+
+    auto *tbAMS = dynamic_cast<QToolButton *>(
+            ui->toolBar->widgetForAction(ui->actAMS));
+    tbAMS->setText("");
+
+    // TODO: Change icon.
 }
