@@ -118,14 +118,14 @@ void installTranslator(const QString &name, const QString &path)
 
         if (!installed)
         {
-            qWarning() << "cannot install language certificate" << name
-                << "in" << path;
+            qWarning() << "cannot install language certificate" <<
+                translator->filePath();
         }
     }
     else
     {
-        qWarning() << "cannot load custom language certificate" << name
-            << "in" << path;
+        qWarning() << "cannot load custom language certificate" <<
+            translator->filePath();
     }
 }
 
