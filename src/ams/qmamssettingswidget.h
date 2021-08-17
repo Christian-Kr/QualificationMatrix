@@ -50,6 +50,23 @@ public:
     void loadSettings() override;
 
 public slots:
+    /// Add a new user.
+    void addUser();
+
+    /// Add a new group.
+    void addGroup();
+
+    /// Remove a user.
+    void removeUser();
+
+    /// Remove a group.
+    void removeGroup();
+
+    /// Config the user.
+    void configUser();
+
+    /// Config the group.
+    void configGroup();
 
 private:
     /// Update model data.

@@ -17,6 +17,8 @@
 #include "ams/model/qmamsgroupmodel.h"
 
 #include <QSqlDatabase>
+#include <QSqlRecord>
+#include <QDebug>
 
 QMAMSSettingsWidget::QMAMSSettingsWidget(QWidget *parent)
     : QMSettingsWidget(parent, true)
@@ -62,7 +64,51 @@ void QMAMSSettingsWidget::updateData()
     amsGroupModel = std::make_unique<QMAMSGroupModel>(this, db);
     amsGroupModel->select();
 
-    ui->lvUser->setModel(amsUserModel.get());
-    ui->lvUser->setModelColumn(1);
+    ui->tvUser->setModel(amsUserModel.get());
+    ui->tvUser->hideColumn(0);
+    ui->tvUser->hideColumn(3);
+    ui->tvUser->resizeColumnsToContents();
+
     ui->lvGroup->setModel(amsGroupModel.get());
+}
+
+void QMAMSSettingsWidget::addUser()
+{
+    // TODO: Implement
+
+    auto record = amsUserModel->record();
+    record.setValue("name", "Vollständiger Name");
+    record.setValue("username", "Nutzername");
+
+    // TODO: Get password and add it.
+
+    if (!amsUserModel->insertRecord(-1, record) | !amsUserModel->submitAll())
+    {
+        qWarning() << "could not save a new record";
+    }
+}
+
+void QMAMSSettingsWidget::addGroup()
+{
+    // TODO: Implement
+}
+
+void QMAMSSettingsWidget::removeUser()
+{
+    // TODO: Implement
+}
+
+void QMAMSSettingsWidget::removeGroup()
+{
+    // TODO: Implement
+}
+
+void QMAMSSettingsWidget::configUser()
+{
+    // TODO: Implement
+}
+
+void QMAMSSettingsWidget::configGroup()
+{
+    // TODO: Implement
 }
