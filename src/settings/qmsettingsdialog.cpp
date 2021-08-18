@@ -72,8 +72,7 @@ QMSettingsDialog::~QMSettingsDialog()
 
 void QMSettingsDialog::restartNeededInformation()
 {
-    QMessageBox::information(
-        this, tr("Einstellung geändert"),
+    QMessageBox::information(this, tr("Einstellung geändert"),
         tr("Die neue Einstellung erfordert einen Neustart der Anwendung."));
 }
 
@@ -137,7 +136,10 @@ void QMSettingsDialog::initTreeWidgets()
 
     auto twiAMS = new QTreeWidgetItem(ui->twSettingGroups);
     twiAMS->setText(0, tr("Rechtverwaltung"));
-    twiAMS->setData(0, Qt::UserRole, 6);
+
+    auto twiAMSUser = new QTreeWidgetItem(twiAMS);
+    twiAMSUser->setText(0, tr("Benutzer"));
+    twiAMSUser->setData(0, Qt::UserRole, 6);
 
     ui->twSettingGroups->expandAll();
 }
