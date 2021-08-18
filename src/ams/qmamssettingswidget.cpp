@@ -77,8 +77,8 @@ void QMAMSSettingsWidget::addUser()
     // TODO: Implement
 
     auto record = amsUserModel->record();
-    record.setValue("name", "Vollständiger Name");
-    record.setValue("username", "Nutzername");
+    record.setValue("name", tr("Vollständiger Name"));
+    record.setValue("username", tr("Benutzername"));
 
     // TODO: Get password and add it.
 
