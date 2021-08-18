@@ -22,7 +22,7 @@
 #include "qmgeneralsettingswidget.h"
 #include "qmqualimatrixsettingswidget.h"
 #include "qmqualiresultsettingswidget.h"
-#include "ams/qmamssettingswidget.h"
+#include "ams/qmamsusersettingswidget.h"
 #include "framework/qmtreesettingsdelegate.h"
 #include "ams/qmamslogindialog.h"
 #include "ams/qmamsmanager.h"
@@ -84,7 +84,7 @@ void QMSettingsDialog::initStackWidgets()
     appendConnectSettingsWidget(new QMTrainSettingsWidget(this));
     appendConnectSettingsWidget(new QMFuncSettingsWidget(this));
     appendConnectSettingsWidget(new QMEmployeeSettingsWidget(this));
-    appendConnectSettingsWidget(new QMAMSSettingsWidget(this));
+    appendConnectSettingsWidget(new QMAMSUserSettingsWidget(this));
 }
 
 void QMSettingsDialog::appendConnectSettingsWidget(

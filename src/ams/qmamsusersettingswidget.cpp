@@ -13,8 +13,8 @@
 // You should have received a copy of the GNU General Public License along
 // with QualificationMatrix. If not, see <http://www.gnu.org/licenses/>.
 
-#include "qmamssettingswidget.h"
-#include "ui_qmamssettingswidget.h"
+#include "qmamsusersettingswidget.h"
+#include "ui_qmamsusersettingswidget.h"
 #include "ams/model/qmamsusermodel.h"
 #include "ams/model/qmamsgroupmodel.h"
 
@@ -22,34 +22,34 @@
 #include <QSqlRecord>
 #include <QDebug>
 
-QMAMSSettingsWidget::QMAMSSettingsWidget(QWidget *parent)
+QMAMSUserSettingsWidget::QMAMSUserSettingsWidget(QWidget *parent)
     : QMSettingsWidget(parent, true)
-    , ui(new Ui::QMAMSSettingsWidget)
+    , ui(new Ui::QMAMSUserSettingsWidget)
 {
     ui->setupUi(this);
 }
 
-QMAMSSettingsWidget::~QMAMSSettingsWidget()
+QMAMSUserSettingsWidget::~QMAMSUserSettingsWidget()
 {
     delete ui;
 }
 
-void QMAMSSettingsWidget::saveSettings()
+void QMAMSUserSettingsWidget::saveSettings()
 {
     // TODO: Save settings.
 }
 
-void QMAMSSettingsWidget::revertChanges()
+void QMAMSUserSettingsWidget::revertChanges()
 {
     // TODO: Revert all changes and load last state.
 }
 
-void QMAMSSettingsWidget::loadSettings()
+void QMAMSUserSettingsWidget::loadSettings()
 {
     updateData();
 }
 
-void QMAMSSettingsWidget::updateData()
+void QMAMSUserSettingsWidget::updateData()
 {
     // Get the current database and update data only when it is connected.
     if (!QSqlDatabase::contains("default") ||
@@ -74,7 +74,7 @@ void QMAMSSettingsWidget::updateData()
     ui->lvGroup->setModel(amsGroupModel.get());
 }
 
-void QMAMSSettingsWidget::addUser()
+void QMAMSUserSettingsWidget::addUser()
 {
     // TODO: Implement
 
@@ -90,27 +90,27 @@ void QMAMSSettingsWidget::addUser()
     }
 }
 
-void QMAMSSettingsWidget::addGroup()
+void QMAMSUserSettingsWidget::addGroup()
 {
     // TODO: Implement
 }
 
-void QMAMSSettingsWidget::removeUser()
+void QMAMSUserSettingsWidget::removeUser()
 {
     // TODO: Implement
 }
 
-void QMAMSSettingsWidget::removeGroup()
+void QMAMSUserSettingsWidget::removeGroup()
 {
     // TODO: Implement
 }
 
-void QMAMSSettingsWidget::configUser()
+void QMAMSUserSettingsWidget::configUser()
 {
     // TODO: Implement
 }
 
-void QMAMSSettingsWidget::configGroup()
+void QMAMSUserSettingsWidget::configGroup()
 {
     // TODO: Implement
 }

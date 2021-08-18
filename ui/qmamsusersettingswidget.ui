@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>QMAMSSettingsWidget</class>
- <widget class="QWidget" name="QMAMSSettingsWidget">
+ <class>QMAMSUserSettingsWidget</class>
+ <widget class="QWidget" name="QMAMSUserSettingsWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -177,7 +177,7 @@
   <connection>
    <sender>pbAddGroup</sender>
    <signal>clicked()</signal>
-   <receiver>QMAMSSettingsWidget</receiver>
+   <receiver>QMAMSUserSettingsWidget</receiver>
    <slot>addGroup()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -193,7 +193,7 @@
   <connection>
    <sender>pbAddUser</sender>
    <signal>clicked()</signal>
-   <receiver>QMAMSSettingsWidget</receiver>
+   <receiver>QMAMSUserSettingsWidget</receiver>
    <slot>addUser()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -209,7 +209,7 @@
   <connection>
    <sender>pbConfigGroup</sender>
    <signal>clicked()</signal>
-   <receiver>QMAMSSettingsWidget</receiver>
+   <receiver>QMAMSUserSettingsWidget</receiver>
    <slot>configGroup()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -225,7 +225,7 @@
   <connection>
    <sender>pbConfigUser</sender>
    <signal>clicked()</signal>
-   <receiver>QMAMSSettingsWidget</receiver>
+   <receiver>QMAMSUserSettingsWidget</receiver>
    <slot>configUser()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -241,7 +241,7 @@
   <connection>
    <sender>pbRemoveGroup</sender>
    <signal>clicked()</signal>
-   <receiver>QMAMSSettingsWidget</receiver>
+   <receiver>QMAMSUserSettingsWidget</receiver>
    <slot>removeGroup()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -257,7 +257,7 @@
   <connection>
    <sender>pbRemoveUser</sender>
    <signal>clicked()</signal>
-   <receiver>QMAMSSettingsWidget</receiver>
+   <receiver>QMAMSUserSettingsWidget</receiver>
    <slot>removeUser()</slot>
    <hints>
     <hint type="sourcelabel">

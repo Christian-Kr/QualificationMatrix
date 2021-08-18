@@ -13,8 +13,8 @@
 // You should have received a copy of the GNU General Public License along
 // with QualificationMatrix. If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef QMAMSSETTINGSWIDGET_H
-#define QMAMSSETTINGSWIDGET_H
+#ifndef QMAMSUSERSETTINGSWIDGET_H
+#define QMAMSUSERSETTINGSWIDGET_H
 
 #include "settings/qmsettingswidget.h"
 
@@ -23,22 +23,22 @@ class QMAMSUserModel;
 
 namespace Ui
 {
-    class QMAMSSettingsWidget;
+    class QMAMSUserSettingsWidget;
 }
 
 /// Settings widget for account management system.
 /// \author Christian Kr, Copyright 2020
-class QMAMSSettingsWidget: public QMSettingsWidget
+class QMAMSUserSettingsWidget: public QMSettingsWidget
 {
     Q_OBJECT
 
 public:
     /// Constructor
     /// \param parent The parent object for the qt system.
-    explicit QMAMSSettingsWidget(QWidget *parent = nullptr);
+    explicit QMAMSUserSettingsWidget(QWidget *parent = nullptr);
 
     /// Destructor
-    ~QMAMSSettingsWidget() override;
+    ~QMAMSUserSettingsWidget() override;
 
     /// This slot has to be implemented by parent class. When calling this
     /// function, it should take a QSettings object or data Model
@@ -74,10 +74,10 @@ private:
     /// Update model data.
     void updateData();
 
-    Ui::QMAMSSettingsWidget *ui;
+    Ui::QMAMSUserSettingsWidget *ui;
 
     std::unique_ptr<QMAMSUserModel> amsUserModel;
     std::unique_ptr<QMAMSGroupModel> amsGroupModel;
 };
 
-#endif // QMAMSSETTINGSWIDGET_H
+#endif // QMAMSUSERSETTINGSWIDGET_H

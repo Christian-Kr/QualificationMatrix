@@ -33,8 +33,8 @@ find_package(Qt5 5.15
 
 # Add application icon for windows.
 set(APP_ICON_RESOURCE_WINDOWS "rcs/qm_res.rc"
-        src/ams/qmamssettingswidget.h
-        src/ams/qmamssettingswidget.cpp)
+        src/ams/qmamsusersettingswidget.h
+        src/ams/qmamsusersettingswidget.cpp)
 
 # ------------------------------------------------------------------------------
 # Translation
