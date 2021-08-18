@@ -27,7 +27,17 @@
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_3">
             <item>
-             <widget class="QTableView" name="tvUser"/>
+             <widget class="QTableView" name="tvUser">
+              <property name="selectionMode">
+               <enum>QAbstractItemView::SingleSelection</enum>
+              </property>
+              <property name="selectionBehavior">
+               <enum>QAbstractItemView::SelectRows</enum>
+              </property>
+              <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+               <bool>true</bool>
+              </attribute>
+             </widget>
             </item>
            </layout>
           </item>
@@ -94,8 +104,14 @@
      </item>
      <item>
       <widget class="QGroupBox" name="groupBox_3">
+       <property name="maximumSize">
+        <size>
+         <width>400</width>
+         <height>16777215</height>
+        </size>
+       </property>
        <property name="title">
-        <string>Gruppen</string>
+        <string>Gruppenzugehörigkeit des selektierten Benutzers</string>
        </property>
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="0" column="0">
@@ -132,19 +148,6 @@
               </property>
               <property name="text">
                <string>Löschen</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="pbConfigGroup">
-              <property name="minimumSize">
-               <size>
-                <width>100</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>Konfigurieren</string>
               </property>
              </widget>
             </item>
@@ -199,22 +202,6 @@
     <hint type="sourcelabel">
      <x>446</x>
      <y>60</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>393</x>
-     <y>290</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pbConfigGroup</sender>
-   <signal>clicked()</signal>
-   <receiver>QMAMSUserSettingsWidget</receiver>
-   <slot>configGroup()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>446</x>
-     <y>409</y>
     </hint>
     <hint type="destinationlabel">
      <x>393</x>
