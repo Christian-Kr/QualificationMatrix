@@ -1,15 +1,17 @@
 // qmsettings.cpp is part of QualificationMatrix
 //
-// QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of the GNU General
-// Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
-// any later version.
+// QualificationMatrix is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by the
+// Free Software Foundation, either version 3 of the License, or (at your
+// option) any later version.
 //
-// QualificationMatrix is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
-// implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
-// details.
+// QualificationMatrix is distributed in the hope that it will be useful, but
+// WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+// or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+// more details.
 //
-// You should have received a copy of the GNU General Public License along with QualificationMatrix.
-// If not, see <http://www.gnu.org/licenses/>.
+// You should have received a copy of the GNU General Public License along
+// with QualificationMatrix. If not, see <http://www.gnu.org/licenses/>.
 
 #include "qmsettingsdialog.h"
 #include "ui_qmsettingsdialog.h"
@@ -47,15 +49,16 @@ QMSettingsDialog::QMSettingsDialog(QWidget *parent)
     currentGroup = 0;
     lastGroup = 0;
 
-    // Stack widget and tree are connected in functionality. So create both before.
+    // Stack widget and tree are connected in functionality. So create both
+    // before.
     initStackWidgets();
     initTreeWidgets();
 
     // Load general settings from settings certificate.
     loadSettings();
 
-    // After loading all settings, signal has been called, that changed the settingsChanged state
-    // so it has to be returned.
+    // After loading all settings, signal has been called, that changed the
+    // settingsChanged state so it has to be returned.
     changed = false;
     ui->pbApply->setEnabled(false);
     ui->swSettingGroups->setCurrentIndex(0);
@@ -85,7 +88,8 @@ void QMSettingsDialog::initStackWidgets()
     appendConnectSettingsWidget(new QMAMSSettingsWidget(this));
 }
 
-void QMSettingsDialog::appendConnectSettingsWidget(QMSettingsWidget *settingsWidget)
+void QMSettingsDialog::appendConnectSettingsWidget(
+        QMSettingsWidget *settingsWidget)
 {
     auto *scrollArea = new QScrollArea();
     scrollArea->setWidget(settingsWidget);
@@ -151,7 +155,8 @@ void QMSettingsDialog::accept()
     {
         auto res = QMessageBox::question(
             this, tr("Einstellungen geändert"),
-            tr("Die Einstellungen wurden geändert, sollen sie gespeichert werden?"),
+            tr("Die Einstellungen wurden geändert, sollen sie gespeichert "
+                "werden?"),
             QMessageBox::Yes | QMessageBox::No);
 
         if (res == QMessageBox::Yes)
@@ -160,15 +165,17 @@ void QMSettingsDialog::accept()
         }
         else
         {
-            // The settings of the current dialog have to be reset, if they are a database value,
-            // cause changes to database are manually temporary. Other setting widgets not writing
-            // to the database are not that important, cause they will be reloaded when the dialog
-            // gets recreated.
+            // The settings of the current dialog have to be reset, if they are
+            // a database value, cause changes to database are manually
+            // temporary. Other setting widgets not writing to the database
+            // are not that important, cause they will be reloaded when the
+            // dialog gets recreated.
             if (!resetSettingsGroup(ui->swSettingGroups->currentIndex()))
             {
                 QMessageBox::critical(
                     this, tr("Einstellungen zurücksetzen"),
-                    tr("Die Einstellungen konnten nicht zurückgesetzt werden!"));
+                    tr("Die Einstellungen konnten nicht zurückgesetzt "
+                        "werden!"));
                 return;
             }
         }
@@ -198,7 +205,8 @@ void QMSettingsDialog::apply()
         return;
     }
 
-    auto settingsWidget = dynamic_cast<QMSettingsWidget *>(scrollArea->widget());
+    auto settingsWidget = dynamic_cast<QMSettingsWidget *>(
+            scrollArea->widget());
     if (settingsWidget == nullptr)
     {
         qWarning() << "loadSettings: dynamic_cast failed to QMSettingsWidget";
@@ -212,9 +220,10 @@ void QMSettingsDialog::apply()
 
 void QMSettingsDialog::loadSettings()
 {
-    // Load all settings from every widget. The widgets in stacked widget should all be derived
-    // from QMSettingsWidget. Therefore every object as a widget from stacked widget should be
-    // able to cast into QMSettingsWidget.
+    // Load all settings from every widget. The widgets in stacked widget
+    // should all be derived from QMSettingsWidget. Therefore every object as
+    // a widget from stacked widget should be able to cast into
+    // QMSettingsWidget.
 
     auto widgetsCount = ui->swSettingGroups->count();
 
@@ -234,10 +243,12 @@ void QMSettingsDialog::loadSettings()
             return;
         }
 
-        auto settingsWidget = dynamic_cast<QMSettingsWidget *>(scrollArea->widget());
+        auto settingsWidget = dynamic_cast<QMSettingsWidget *>(
+                scrollArea->widget());
         if (settingsWidget == nullptr)
         {
-            qWarning() << "loadSettings: dynamic_cast failed to QMSettingsWidget";
+            qWarning() << "loadSettings: dynamic_cast failed to "
+                "QMSettingsWidget";
             continue;
         }
 
@@ -283,10 +294,12 @@ void QMSettingsDialog::saveSettings()
             return;
         }
 
-        auto settingsWidget = dynamic_cast<QMSettingsWidget *>(scrollArea->widget());
+        auto settingsWidget = dynamic_cast<QMSettingsWidget *>(
+                scrollArea->widget());
         if (settingsWidget == nullptr)
         {
-            qWarning() << "loadSettings: dynamic_cast failed to QMSettingsWidget";
+            qWarning() << "loadSettings: dynamic_cast failed to "
+                "QMSettingsWidget";
             continue;
         }
 
@@ -305,7 +318,8 @@ void QMSettingsDialog::changeSettingsGroup(QTreeWidgetItem *item, const int)
     {
         QMessageBox::StandardButton res = QMessageBox::question(
             this, tr("Einstellungen geändert"),
-            tr("Die Einstellungen wurden geändert, sollen sie gespeichert werden?"),
+            tr("Die Einstellungen wurden geändert, sollen sie gespeichert "
+                "werden?"),
             QMessageBox::Yes | QMessageBox::No);
 
         auto widget = ui->swSettingGroups->currentWidget();
@@ -318,14 +332,17 @@ void QMSettingsDialog::changeSettingsGroup(QTreeWidgetItem *item, const int)
         auto scrollArea = dynamic_cast<QScrollArea *>(widget);
         if (scrollArea == nullptr)
         {
-            qWarning() << "changeSettingsGroup: dynamic_cast failed to QScrollArea";
+            qWarning() << "changeSettingsGroup: dynamic_cast failed to "
+                "QScrollArea";
             return;
         }
 
-        auto settingsWidget = dynamic_cast<QMSettingsWidget *>(scrollArea->widget());
+        auto settingsWidget = dynamic_cast<QMSettingsWidget *>(
+                scrollArea->widget());
         if (settingsWidget == nullptr)
         {
-            qWarning() << "changeSettingsGroup: dynamic_cast failed to QMSettingsWidget";
+            qWarning() << "changeSettingsGroup: dynamic_cast failed to "
+                "QMSettingsWidget";
             return;
         }
 
@@ -338,7 +355,8 @@ void QMSettingsDialog::changeSettingsGroup(QTreeWidgetItem *item, const int)
                 settingsWidget->revertChanges();
                 break;
             default:
-                qWarning() << "changeSettingsGroup: unknown dialog button pressed";
+                qWarning() << "changeSettingsGroup: unknown dialog button "
+                    "pressed";
                 break;
         }
 
@@ -350,7 +368,8 @@ void QMSettingsDialog::changeSettingsGroup(QTreeWidgetItem *item, const int)
     if (item->data(0, Qt::UserRole).isValid())
     {
         lastGroup = ui->swSettingGroups->currentIndex();
-        ui->swSettingGroups->setCurrentIndex(item->data(0, Qt::UserRole).toInt());
+        ui->swSettingGroups->setCurrentIndex(
+                item->data(0, Qt::UserRole).toInt());
         currentGroup = ui->swSettingGroups->currentIndex();
 
         auto widget = ui->swSettingGroups->currentWidget();
@@ -363,14 +382,17 @@ void QMSettingsDialog::changeSettingsGroup(QTreeWidgetItem *item, const int)
         auto scrollArea = dynamic_cast<QScrollArea *>(widget);
         if (scrollArea == nullptr)
         {
-            qWarning() << "changeSettingsGroup: dynamic_cast failed to QScrollArea";
+            qWarning() << "changeSettingsGroup: dynamic_cast failed to "
+                "QScrollArea";
             return;
         }
 
-        auto settingsWidget = dynamic_cast<QMSettingsWidget *>(scrollArea->widget());
+        auto settingsWidget = dynamic_cast<QMSettingsWidget *>(
+                scrollArea->widget());
         if (settingsWidget == nullptr)
         {
-            qWarning() << "changeSettingsGroup: dynamic_cast failed to QMSettingsWidget";
+            qWarning() << "changeSettingsGroup: dynamic_cast failed to "
+                "QMSettingsWidget";
             return;
         }
 
@@ -418,10 +440,12 @@ bool QMSettingsDialog::resetSettingsGroup(const int group)
         return false;
     }
 
-    auto settingsWidget = dynamic_cast<QMSettingsWidget *>(scrollArea->widget());
+    auto settingsWidget = dynamic_cast<QMSettingsWidget *>(
+            scrollArea->widget());
     if (settingsWidget == nullptr)
     {
-        qWarning() << "changeSettingsGroup: dynamic_cast failed to QMSettingsWidget";
+        qWarning() << "changeSettingsGroup: dynamic_cast failed to "
+            "QMSettingsWidget";
         return false;
     }
 
