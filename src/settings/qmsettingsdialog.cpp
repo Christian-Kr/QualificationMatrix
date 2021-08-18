@@ -405,6 +405,8 @@ void QMSettingsDialog::changeSettingsGroup(QTreeWidgetItem *item, const int)
             QMAMSLoginDialog loginDialog(this);
             loginDialog.setUsername("administrator");
             loginDialog.exec();
+
+            settingsWidget->show();
         }
     }
 }
