@@ -73,7 +73,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="pbAccept">
+        <widget class="QPushButton" name="pbReject">
          <property name="minimumSize">
           <size>
            <width>100</width>
@@ -81,7 +81,13 @@
           </size>
          </property>
          <property name="text">
-          <string>OK</string>
+          <string>Abbrechen</string>
+         </property>
+         <property name="default">
+          <bool>false</bool>
+         </property>
+         <property name="flat">
+          <bool>false</bool>
          </property>
         </widget>
        </item>
@@ -102,7 +108,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pbReject">
+        <widget class="QPushButton" name="pbAccept">
          <property name="minimumSize">
           <size>
            <width>100</width>
@@ -110,13 +116,7 @@
           </size>
          </property>
          <property name="text">
-          <string>Abbrechen</string>
-         </property>
-         <property name="default">
-          <bool>false</bool>
-         </property>
-         <property name="flat">
-          <bool>false</bool>
+          <string>OK</string>
          </property>
         </widget>
        </item>
