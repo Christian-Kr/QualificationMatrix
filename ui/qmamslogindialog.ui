@@ -101,6 +101,9 @@
        <property name="text">
         <string>Abbrechen</string>
        </property>
+       <property name="default">
+        <bool>false</bool>
+       </property>
       </widget>
      </item>
      <item>
@@ -113,6 +116,9 @@
        </property>
        <property name="text">
         <string>Anmelden</string>
+       </property>
+       <property name="default">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
