@@ -104,7 +104,7 @@ bool QMAMSManager::logoutUser()
     return true;
 }
 
-bool QMAMSManager::setUserLastLoginDateInDatabase()
+bool QMAMSManager::setLastLoginDateTime(QString name)
 {
     // Get the database connection.
     if (!QSqlDatabase::contains("default") ||
@@ -116,7 +116,7 @@ bool QMAMSManager::setUserLastLoginDateInDatabase()
 
     auto db = QSqlDatabase::database("default");
 
-    QMAMSUserModel amsUserModel(this, db);
+    QMAMSUserModel amsUserModel(nullptr, db);
     amsUserModel.select();
 
     auto usernameFieldIndex = amsUserModel.fieldIndex("username");
@@ -127,7 +127,7 @@ bool QMAMSManager::setUserLastLoginDateInDatabase()
         auto usernameModelIndex = amsUserModel.index(i, usernameFieldIndex);
         auto dbUsername = amsUserModel.data(usernameModelIndex).toString();
 
-        if (dbUsername == *username)
+        if (dbUsername == name)
         {
             auto currDateTime = QDateTime::currentDateTime();
             auto strCurrDateTime = currDateTime.toString(Qt::ISODate);
@@ -181,10 +181,12 @@ bool QMAMSManager::loginAdmin(const QString &password)
         *username = userInfo.username;
         *fullname = userInfo.fullname;
 
-        if (!setUserLastLoginDateInDatabase())
+        if (!setLastLoginDateTime(*username))
         {
-            qCritical() << "Cannot set last login date for admin user";
+            qCritical() << "cannot set last login date for admin user";
         }
+
+        setLoginState(LoginState::LOGGED_IN);
 
         return true;
     }
@@ -215,6 +217,12 @@ bool QMAMSManager::loginUser(const QString &name, const QString &password)
     {
         *username = userInfo.username;
         *fullname = userInfo.fullname;
+
+        if (!setLastLoginDateTime(*username))
+        {
+            qCritical() << "cannot set last login date for admin user";
+        }
+
         setLoginState(LoginState::LOGGED_IN);
 
         return true;

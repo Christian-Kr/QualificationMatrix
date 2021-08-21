@@ -112,12 +112,6 @@ public:
     /// \return True if creation was successful, else false.
     bool createAdminInDatabase();
 
-    /// Sets the last login date in the database for the current logged in
-    /// user. If the database does not contain the
-    /// user, nothing will be done.
-    /// \return True if success, else false.
-    bool setUserLastLoginDateInDatabase();
-
     /// Get full name of the currently logged in user.
     /// \return The full name of the current login user, else empty.
     QString * getLoginFullName() const { return fullname.get(); }
@@ -171,6 +165,11 @@ private:
     /// \param username The username to get information from.
     /// \return User information as a struct.
     QMAMSUserInformation getUserFromDatabase(const QString &username);
+
+    /// Set the timestamp to the last login user.
+    /// \param user The user to set the last login timestamp
+    /// \return True is success, else false
+    static bool setLastLoginDateTime(QString user);
 
     // Variables
 
