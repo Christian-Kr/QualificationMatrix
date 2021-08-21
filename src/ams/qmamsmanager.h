@@ -158,6 +158,10 @@ private:
     /// Destructor
     ~QMAMSManager() override = default;
 
+    /// Set the login state and send a signal for changing state.
+    /// \param state The login state.
+    void setLoginState(LoginState state);
+
     /// Search for administrator user.
     /// \return True if exist, else false.
     bool checkForAdministrator(QSqlDatabase &database);

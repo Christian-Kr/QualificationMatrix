@@ -91,7 +91,7 @@ bool QMAMSManager::checkForAdministrator(QSqlDatabase &database)
 
 bool QMAMSManager::logoutUser()
 {
-    if (loginState == LoginState::NOT_LOGGED_IN)
+    if (getLoginState() == LoginState::NOT_LOGGED_IN)
     {
         return true;
     }
@@ -99,7 +99,7 @@ bool QMAMSManager::logoutUser()
     username->clear();
     fullname->clear();
 
-    loginState = LoginState::NOT_LOGGED_IN;
+    setLoginState(LoginState::NOT_LOGGED_IN);
 
     return true;
 }
@@ -215,7 +215,7 @@ bool QMAMSManager::loginUser(const QString &name, const QString &password)
     {
         *username = userInfo.username;
         *fullname = userInfo.fullname;
-        loginState = LoginState::LOGGED_IN;
+        setLoginState(LoginState::LOGGED_IN);
 
         return true;
     }
@@ -320,4 +320,17 @@ QMAMSUserInformation QMAMSManager::getUserFromDatabase(const QString &username)
     }
 
     return userInfo;
+}
+
+void QMAMSManager::setLoginState(LoginState state)
+{
+    auto lastState = getLoginState();
+    loginState = state;
+
+    if (lastState == getLoginState())
+    {
+        return;
+    }
+
+    emit loginStateChanged(lastState, getLoginState());
 }
