@@ -150,50 +150,6 @@ bool QMAMSManager::setLastLoginDateTime(QString name)
     return false;
 }
 
-bool QMAMSManager::loginAdmin(const QString &password)
-{
-    if (!logoutUser())
-    {
-        return false;
-    }
-
-    auto userInfo = getUserFromDatabase("administrator");
-    if (!userInfo.found)
-    {
-        // The administrator user could not be found. Create the administrator
-        // user with an empty password.
-        if (!createAdminInDatabase())
-        {
-            return false;
-        }
-
-        userInfo = getUserFromDatabase("administrator");
-        if (!userInfo.found)
-        {
-            return false;
-        }
-    }
-
-    // If we are here, there is a user with the name "administrator". Go on
-    // with login.
-    if (password == userInfo.password)
-    {
-        *username = userInfo.username;
-        *fullname = userInfo.fullname;
-
-        if (!setLastLoginDateTime(*username))
-        {
-            qCritical() << "cannot set last login date for admin user";
-        }
-
-        setLoginState(LoginState::LOGGED_IN);
-
-        return true;
-    }
-
-    return false;
-}
-
 bool QMAMSManager::loginUser(const QString &name, const QString &password)
 {
     if (!logoutUser())

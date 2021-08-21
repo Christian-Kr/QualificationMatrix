@@ -63,6 +63,7 @@ enum class LoginState
 struct QMAMSUserInformation
 {
     bool found = false;
+    int failedLoginCount = 0;
     QString username;
     QString fullname;
     QString password;
@@ -119,10 +120,6 @@ public:
     /// Get user name of the current login user.
     /// \return The login name of the current login user, else empty.
     QString * getLoginUserName() const { return username.get(); }
-
-    /// Login in as admin. If there is no user admin user, it should be added.
-    /// \param password The password for user 'administrator'.
-    bool loginAdmin(const QString &password);
 
     /// Login with the given credentials. Any logged in user will
     /// automatically be logged out.
