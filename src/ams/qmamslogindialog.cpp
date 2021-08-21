@@ -65,17 +65,40 @@ void QMAMSLoginDialog::login()
         }
     }
 
-    am->loginUser(username, password);
+    QString result = "";
+    auto res = am->loginUser(username, password);
 
-    // Test afterwarts, whether everything goes right.
-    if (am->getLoginUserName()->compare(username) != 0)
+    if (res == LoginResult::SUCCESSFUL)
     {
-        QMessageBox::information(this, tr("Anmelden"),
-                tr("Bei der Anmeldung is etwas schief gelaufen."));
+        close();
         return;
     }
 
-    close();
+    switch (res)
+    {
+        case LoginResult::EMPTY_PASSWORD:
+            result = tr("Ein leeres Passwort in der Datenbank ist nicht "
+                    "erlaubt.");
+            break;
+        case LoginResult::WRONG_PASSWORD:
+            result = tr("Falsches Passwort.");
+            break;
+        case LoginResult::FAILED_LOGIN_COUNT:
+            result = tr("Zu viele Fehlversuche für den Nutzer.");
+            break;
+        case LoginResult::USER_NOT_EXIST:
+            result = tr("Der Nutzer existiert nicht.");
+            break;
+        case LoginResult::USER_NOT_ACTIVE:
+            result = tr("Nutzer ist deaktiviert.");
+            break;
+        case LoginResult::FAILED_UNKNOWN:
+            result = tr("Unbekannter Fehler.");
+            break;
+    }
+
+    QMessageBox::information(this, tr("Anmelden"),
+            tr("Die Anmeldung ist fehlgeschlagen. ") + result);
 }
 
 void QMAMSLoginDialog::cancel()

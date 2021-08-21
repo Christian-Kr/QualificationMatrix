@@ -19,7 +19,7 @@
 #include <QObject>
 #include <memory>
 
-#define MAX_LOGIN_COUNT = 3;
+#define MAX_LOGIN_COUNT 3
 
 class QSqlDatabase;
 
@@ -54,6 +54,18 @@ enum class AccessMode
     PER_DATA_WRITE
 };
 
+/// For the login function, return a code what happens.
+enum class LoginResult
+{
+    SUCCESSFUL,
+    USER_NOT_ACTIVE,
+    FAILED_LOGIN_COUNT,
+    WRONG_PASSWORD,
+    USER_NOT_EXIST,
+    FAILED_UNKNOWN,
+    EMPTY_PASSWORD
+};
+
 /// Give the state if any user is logged in or not.
 enum class LoginState
 {
@@ -65,6 +77,7 @@ enum class LoginState
 struct QMAMSUserInformation
 {
     bool found = false;
+    bool active = false;
     int failedLoginCount = 0;
     QString username;
     QString fullname;
@@ -127,7 +140,8 @@ public:
     /// automatically be logged out.
     /// \param password The password for login.
     /// \param username The username for login.
-    bool loginUser(const QString &username, const QString &password);
+    /// \return Return code of login result.
+    LoginResult loginUser(const QString &username, const QString &password);
 
     /// Logout the current user.
     /// \return True on success, else false. When no user is logged in,

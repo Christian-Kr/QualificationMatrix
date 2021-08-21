@@ -195,11 +195,12 @@ bool QMAMSManager::setLastLoginDateTime(QString name)
     return false;
 }
 
-bool QMAMSManager::loginUser(const QString &name, const QString &password)
+LoginResult QMAMSManager::loginUser(const QString &name,
+        const QString &password)
 {
     if (!logoutUser())
     {
-        return false;
+        return LoginResult::FAILED_UNKNOWN;
     }
 
     // Create a hashed value from password for comparision.
@@ -209,15 +210,19 @@ bool QMAMSManager::loginUser(const QString &name, const QString &password)
     auto userInfo = getUserFromDatabase(name);
     if (!userInfo.found)
     {
-        return false;
+        return LoginResult::USER_NOT_EXIST;
     }
 
-    if (userInfo.failedLoginCount > 3 || userInfo.failedLoginCount < 0)
+    if (!userInfo.active)
     {
-        return false;
+        return LoginResult::USER_NOT_ACTIVE;
     }
 
-    // IMPORTANT: For security reasons, an empty password is never allowed.
+    if (userInfo.failedLoginCount > MAX_LOGIN_COUNT ||
+        userInfo.failedLoginCount < 0)
+    {
+        return LoginResult::FAILED_LOGIN_COUNT;
+    }
 
     if (!userInfo.password.isEmpty())
     {
@@ -239,7 +244,7 @@ bool QMAMSManager::loginUser(const QString &name, const QString &password)
 
             setLoginState(LoginState::LOGGED_IN);
 
-            return true;
+            return LoginResult::SUCCESSFUL;
         }
         else
         {
@@ -249,10 +254,12 @@ bool QMAMSManager::loginUser(const QString &name, const QString &password)
             {
                 qCritical() << "cannot set failed login count";
             }
+
+            return LoginResult::WRONG_PASSWORD;
         }
     }
 
-    return false;
+    return LoginResult::EMPTY_PASSWORD;
 }
 
 bool QMAMSManager::createAdminInDatabase()
@@ -349,11 +356,16 @@ QMAMSUserInformation QMAMSManager::getUserFromDatabase(const QString &username)
             auto dbFailedLoginCount = amsUserModel.data(failedLoginModelIndex)
                     .toInt();
 
+            auto activeFieldIndex = amsUserModel.fieldIndex("active");
+            auto activeModelIndex = amsUserModel.index(i, activeFieldIndex);
+            auto active = amsUserModel.data(activeModelIndex).toBool();
+
             userInfo.username = dbUsername;
             userInfo.password = dbPassword;
             userInfo.fullname = dbFullname;
             userInfo.found = true;
             userInfo.failedLoginCount = dbFailedLoginCount;
+            userInfo.active = active;
 
             return userInfo;
         }
