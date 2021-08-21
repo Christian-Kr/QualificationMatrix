@@ -231,6 +231,12 @@ bool QMAMSManager::loginUser(const QString &name, const QString &password)
                 qCritical() << "cannot set last login date";
             }
 
+            auto res = setFailedLoginCount(userInfo.username, 0);
+            if (!res)
+            {
+                qCritical() << "cannot set failed login count";
+            }
+
             setLoginState(LoginState::LOGGED_IN);
 
             return true;
