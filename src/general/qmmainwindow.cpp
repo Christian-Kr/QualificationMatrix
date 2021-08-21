@@ -795,14 +795,20 @@ void QMMainWindow::enterWindowMode(WIN_MODE mode)
 
 void QMMainWindow::handleLoginChange(LoginState before, LoginState current)
 {
-    // TODO: Handle more on state change. For now, just change icon.
+    auto *tbAMS = dynamic_cast<QToolButton *>(
+            ui->toolBar->widgetForAction(ui->actAMS));
+
     if (current == LoginState::LOGGED_IN)
     {
-        ui->actAMS->setIcon(QIcon(":/icons/icons/im-user-online.svg"));
+        auto am = QMAMSManager::getInstance();
+
+        tbAMS->setText(*am->getLoginUserName());
+        tbAMS->setIcon(QIcon(":/icons/icons/im-user-online.svg"));
     }
     else
     {
-        ui->actAMS->setIcon(QIcon(":/icons/icons/im-user-offline.svg"));
+        tbAMS->setIcon(QIcon(":/icons/icons/im-user-offline.svg"));
+        tbAMS->setText("");
     }
 }
 
@@ -830,15 +836,6 @@ void QMMainWindow::amsLogin()
 
     QMAMSLoginDialog loginDialog(this);
     loginDialog.exec();
-
-    if (am->getLoginState() == LoginState::LOGGED_IN)
-    {
-        auto *tbAMS = dynamic_cast<QToolButton *>(
-                ui->toolBar->widgetForAction(ui->actAMS));
-        QString username = *am->getLoginUserName();
-        tbAMS->setText(username);
-        tbAMS->setIcon(QIcon(":/icons/icons/im-user-online.svg"));
-    }
 }
 
 void QMMainWindow::amsLogout()
@@ -852,9 +849,4 @@ void QMMainWindow::amsLogout()
         qWarning() << "user could not be logged out";
         return;
     }
-
-    auto *tbAMS = dynamic_cast<QToolButton *>(
-            ui->toolBar->widgetForAction(ui->actAMS));
-    tbAMS->setText("");
-    tbAMS->setIcon(QIcon(":/icons/icons/im-user-offline.svg"));
 }
