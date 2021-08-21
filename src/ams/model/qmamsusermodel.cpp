@@ -33,6 +33,6 @@ void QMAMSUserModel::initModel()
     setHeaderData(2, Qt::Horizontal, tr("Benutzername"));
     setHeaderData(3, Qt::Horizontal, tr("Passwort"));
     setHeaderData(4, Qt::Horizontal, tr("Letzter Login"));
-    setHeaderData(5, Qt::Horizontal, tr("Gescheiterte Loginversuche"));
+    setHeaderData(5, Qt::Horizontal, tr("Loginversuche"));
     setHeaderData(6, Qt::Horizontal, tr("Aktiv"));
 }
