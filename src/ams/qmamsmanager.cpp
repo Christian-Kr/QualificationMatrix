@@ -104,6 +104,51 @@ bool QMAMSManager::logoutUser()
     return true;
 }
 
+bool QMAMSManager::setFailedLoginCount(QString name, int count)
+{
+    // Get the database connection.
+    if (!QSqlDatabase::contains("default") ||
+    !QSqlDatabase::database("default", false).isOpen())
+    {
+        qWarning("Database is not connected");
+        return false;
+    }
+
+    auto db = QSqlDatabase::database("default");
+
+    QMAMSUserModel amsUserModel(nullptr, db);
+    amsUserModel.select();
+
+    auto usernameFieldIndex = amsUserModel.fieldIndex("username");
+    auto failedLoginIndex = amsUserModel.fieldIndex("unsuccess_login_num");
+
+    for (int i = 0; i < amsUserModel.rowCount(); i++)
+    {
+        auto usernameModelIndex = amsUserModel.index(i, usernameFieldIndex);
+        auto dbUsername = amsUserModel.data(usernameModelIndex).toString();
+
+        if (dbUsername == name)
+        {
+            auto failedLoginModelIndex = amsUserModel.index(i,
+                    failedLoginIndex);
+
+            if (!amsUserModel.setData(failedLoginModelIndex, count))
+            {
+                return false;
+            }
+
+            if (!amsUserModel.submitAll())
+            {
+                return false;
+            }
+
+            return true;
+        }
+    }
+
+    return false;
+}
+
 bool QMAMSManager::setLastLoginDateTime(QString name)
 {
     // Get the database connection.
@@ -167,21 +212,38 @@ bool QMAMSManager::loginUser(const QString &name, const QString &password)
         return false;
     }
 
+    if (userInfo.failedLoginCount > 3 || userInfo.failedLoginCount < 0)
+    {
+        return false;
+    }
+
     // IMPORTANT: For security reasons, an empty password is never allowed.
 
-    if (!userInfo.password.isEmpty() && pwHashed == userInfo.password)
+    if (!userInfo.password.isEmpty())
     {
-        *username = userInfo.username;
-        *fullname = userInfo.fullname;
-
-        if (!setLastLoginDateTime(*username))
+        if(pwHashed == userInfo.password)
         {
-            qCritical() << "cannot set last login date for admin user";
+            *username = userInfo.username;
+            *fullname = userInfo.fullname;
+
+            if (!setLastLoginDateTime(userInfo.username))
+            {
+                qCritical() << "cannot set last login date";
+            }
+
+            setLoginState(LoginState::LOGGED_IN);
+
+            return true;
         }
-
-        setLoginState(LoginState::LOGGED_IN);
-
-        return true;
+        else
+        {
+            auto res = setFailedLoginCount(userInfo.username,
+                    ++userInfo.failedLoginCount);
+            if (!res)
+            {
+                qCritical() << "cannot set failed login count";
+            }
+        }
     }
 
     return false;
@@ -274,10 +336,18 @@ QMAMSUserInformation QMAMSManager::getUserFromDatabase(const QString &username)
             auto pwModelIndex = amsUserModel.index(i, pwFieldIndex);
             auto dbPassword = amsUserModel.data(pwModelIndex).toString();
 
+            auto failedLoginFieldIndex = amsUserModel.fieldIndex(
+                    "unsuccess_login_num");
+            auto failedLoginModelIndex = amsUserModel.index(i,
+                    failedLoginFieldIndex);
+            auto dbFailedLoginCount = amsUserModel.data(failedLoginModelIndex)
+                    .toInt();
+
             userInfo.username = dbUsername;
             userInfo.password = dbPassword;
             userInfo.fullname = dbFullname;
             userInfo.found = true;
+            userInfo.failedLoginCount = dbFailedLoginCount;
 
             return userInfo;
         }

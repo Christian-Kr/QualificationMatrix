@@ -19,6 +19,8 @@
 #include <QObject>
 #include <memory>
 
+#define MAX_LOGIN_COUNT = 3;
+
 class QSqlDatabase;
 
 // Enumerations for access modes. Every WRITE access includes automatic READ
@@ -164,9 +166,14 @@ private:
     QMAMSUserInformation getUserFromDatabase(const QString &username);
 
     /// Set the timestamp to the last login user.
-    /// \param user The user to set the last login timestamp
-    /// \return True is success, else false
+    /// \param user The user to set the last login timestamp.
+    /// \return True is success, else false.
     static bool setLastLoginDateTime(QString user);
+
+    /// Set the failed login count to a specific number.
+    /// \param name The username to set the count for.
+    /// \param count The count to set.
+    static bool setFailedLoginCount(QString name, int count);
 
     // Variables
 
