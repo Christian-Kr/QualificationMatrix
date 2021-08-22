@@ -43,6 +43,7 @@ set(APP_ICON_RESOURCE_WINDOWS "rcs/qm_res.rc"
 # Botan
 
 find_package(Botan REQUIRED)
+include_directories(${BOTAN_INCLUDE_DIRS})
 
 # ------------------------------------------------------------------------------
 # Translation

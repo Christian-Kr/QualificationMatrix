@@ -22,6 +22,9 @@
 #include <QDateTime>
 #include <QCryptographicHash>
 
+#include <botan/argon2.h>
+#include <botan/system_rng.h>
+
 #include <QDebug>
 
 QMAMSManager *QMAMSManager::instance = nullptr;
@@ -385,4 +388,20 @@ void QMAMSManager::setLoginState(LoginState state)
     }
 
     emit loginStateChanged(lastState, getLoginState());
+}
+
+QString QMAMSManager::createPasswordHash(const QString &pw)
+{
+    auto tmpStdHash = Botan::argon2_generate_pwhash(pw.toStdString().c_str(),
+            pw.length(), Botan::system_rng(), 1, 8192, 100);
+
+    return QString::fromStdString(tmpStdHash);
+}
+
+bool QMAMSManager::checkPasswordHash(const QString &pw, const QString &hash)
+{
+    auto tmpStdHash = hash.toStdString();
+
+    return Botan::argon2_check_pwhash(pw.toStdString().c_str(), pw.length(),
+            tmpStdHash);
 }

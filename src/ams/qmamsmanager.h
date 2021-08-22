@@ -152,6 +152,17 @@ public:
     /// \return
     LoginState getLoginState() { return loginState; }
 
+    /// Create a hash value for the given password.
+    /// \param pw The clear password to hash.
+    /// \return The total hash string which might be additionally encoded.
+    static QString createPasswordHash(const QString &pw);
+
+    /// Check the given hash against the given password.
+    /// \param pw The clear password to check against.
+    /// \param hash The total hash string including all aditional information.
+    /// \return True if equal, else false.
+    static bool checkPasswordHash(const QString &pw, const QString &hash);
+
 signals:
     /// Emited when the login state changed.
     /// \param before Login state before the change.
