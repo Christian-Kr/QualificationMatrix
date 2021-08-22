@@ -17,9 +17,12 @@
 #include "ui_qmamsusersettingswidget.h"
 #include "ams/model/qmamsusermodel.h"
 #include "ams/model/qmamsgroupmodel.h"
+#include "ams/qmamspassworddialog.h"
+#include "ams/qmamsmanager.h"
 
 #include <QSqlDatabase>
 #include <QSqlRecord>
+
 #include <QDebug>
 
 QMAMSUserSettingsWidget::QMAMSUserSettingsWidget(QWidget *parent)
@@ -83,6 +86,17 @@ void QMAMSUserSettingsWidget::addUser()
     record.setValue("username", tr("Benutzername"));
 
     // TODO: Get password and add it.
+    QMAMSPasswordDialog passwordDialog(this);
+    passwordDialog.exec();
+
+    auto password = passwordDialog.getPasswort();
+    if (password.isEmpty())
+    {
+        return;
+    }
+
+    auto hash = QMAMSManager::createPasswordHash(password);
+    record.setValue("password", hash);
 
     if (!amsUserModel->insertRecord(-1, record) | !amsUserModel->submitAll())
     {
