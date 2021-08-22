@@ -7,6 +7,9 @@ cmake_minimum_required(VERSION 3.13.0)
 # Name of the project
 project(QualificationMatrix)
 
+# Add module path
+list(INSERT CMAKE_MODULE_PATH 0 ${CMAKE_CURRENT_SOURCE_DIR}/cmake_modules)
+
 # Include the subdirectory
 include_directories(${QualificationMatrix_SOURCE_DIR}/src)
 
@@ -37,6 +40,11 @@ set(APP_ICON_RESOURCE_WINDOWS "rcs/qm_res.rc"
         src/ams/qmamsusersettingswidget.cpp)
 
 # ------------------------------------------------------------------------------
+# Botan
+
+find_package(Botan REQUIRED)
+
+# ------------------------------------------------------------------------------
 # Translation
 
 set(TS_FILES
@@ -55,7 +63,8 @@ file(GLOB_RECURSE UIS ui/*.ui)
 add_executable(QualificationMatrix
         WIN32 rcs/icons.qrc ${SRCS} ${UIS} ${APP_ICON_RESOURCE_WINDOWS})
 target_link_libraries(QualificationMatrix
-        Qt5::Widgets Qt5::Sql Qt5::PrintSupport)
+        Qt5::Widgets Qt5::Sql Qt5::PrintSupport
+        botan-2)
 
 # ------------------------------------------------------------------------------
 # Deploy
