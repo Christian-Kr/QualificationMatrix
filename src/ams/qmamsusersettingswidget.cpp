@@ -22,6 +22,7 @@
 
 #include <QSqlDatabase>
 #include <QSqlRecord>
+#include <QMessageBox>
 
 #include <QDebug>
 
@@ -39,7 +40,15 @@ QMAMSUserSettingsWidget::~QMAMSUserSettingsWidget()
 
 void QMAMSUserSettingsWidget::saveSettings()
 {
-    // TODO: Save settings.
+    if (amsUserModel->isDirty())
+    {
+        if (!amsUserModel->submitAll())
+        {
+            QMessageBox::critical(this, tr("Speichern"),
+                    tr("Die Änderungen konnten nicht in die Datenbank "
+                    "geschrieben werden."));
+        }
+    }
 }
 
 void QMAMSUserSettingsWidget::revertChanges()
@@ -75,6 +84,10 @@ void QMAMSUserSettingsWidget::updateData()
     ui->tvUser->resizeColumnsToContents();
 
     ui->lvGroup->setModel(amsGroupModel.get());
+
+    // Build some connections.
+    connect(amsUserModel.get(), &QMAMSUserModel::dataChanged, this,
+            &QMAMSUserSettingsWidget::settingsChanged);
 }
 
 void QMAMSUserSettingsWidget::addUser()
