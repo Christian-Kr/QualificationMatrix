@@ -152,7 +152,7 @@ void QMAMSUserSettingsWidget::configGroup()
 void QMAMSUserSettingsWidget::userSelectionChanged(
         const QItemSelection &selected, const QItemSelection &deselected)
 {
-    if (selected.size() <= 0)
+    if (selected.empty())
     {
         ui->gbGroups->setEnabled(false);
     }
