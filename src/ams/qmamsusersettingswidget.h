@@ -20,6 +20,8 @@
 
 class QMAMSGroupModel;
 class QMAMSUserModel;
+class QMAMSUserGroupModel;
+class QItemSelection;
 
 namespace Ui
 {
@@ -70,6 +72,12 @@ public slots:
     /// Config the group.
     void configGroup();
 
+    /// User selection changed.
+    /// \param deselected Item that has been deselected.
+    /// \param selected Item that has been selected.
+    void userSelectionChanged(const QItemSelection &selected,
+            const QItemSelection &deselected);
+
 private:
     /// Update model data.
     void updateData();
@@ -78,6 +86,7 @@ private:
 
     std::unique_ptr<QMAMSUserModel> amsUserModel;
     std::unique_ptr<QMAMSGroupModel> amsGroupModel;
+    std::unique_ptr<QMAMSUserGroupModel> amsUserGroupModel;
 };
 
 #endif // QMAMSUSERSETTINGSWIDGET_H

@@ -17,6 +17,7 @@
 #include "ui_qmamsusersettingswidget.h"
 #include "ams/model/qmamsusermodel.h"
 #include "ams/model/qmamsgroupmodel.h"
+#include "ams/model/qmamsusergroupmodel.h"
 #include "ams/qmamspassworddialog.h"
 #include "ams/qmamsmanager.h"
 
@@ -78,6 +79,9 @@ void QMAMSUserSettingsWidget::updateData()
     amsGroupModel = std::make_unique<QMAMSGroupModel>(this, db);
     amsGroupModel->select();
 
+    amsUserGroupModel = std::make_unique<QMAMSUserGroupModel>(this, db);
+    amsUserGroupModel->select();
+
     ui->tvUser->setModel(amsUserModel.get());
     ui->tvUser->hideColumn(0);
     ui->tvUser->hideColumn(3);
@@ -88,6 +92,9 @@ void QMAMSUserSettingsWidget::updateData()
     // Build some connections.
     connect(amsUserModel.get(), &QMAMSUserModel::dataChanged, this,
             &QMAMSUserSettingsWidget::settingsChanged);
+    connect(ui->tvUser->selectionModel(),
+            &QItemSelectionModel::selectionChanged, this,
+            &QMAMSUserSettingsWidget::userSelectionChanged);
 }
 
 void QMAMSUserSettingsWidget::addUser()
@@ -140,4 +147,17 @@ void QMAMSUserSettingsWidget::configUser()
 void QMAMSUserSettingsWidget::configGroup()
 {
     // TODO: Implement
+}
+
+void QMAMSUserSettingsWidget::userSelectionChanged(
+        const QItemSelection &selected, const QItemSelection &deselected)
+{
+    if (selected.size() <= 0)
+    {
+        ui->gbGroups->setEnabled(false);
+    }
+    else
+    {
+        ui->gbGroups->setEnabled(true);
+    }
 }
