@@ -161,3 +161,8 @@ void QMAMSUserSettingsWidget::userSelectionChanged(
         ui->gbGroups->setEnabled(true);
     }
 }
+
+void QMAMSUserSettingsWidget::changePassword()
+{
+    // TODO: Implement
+}

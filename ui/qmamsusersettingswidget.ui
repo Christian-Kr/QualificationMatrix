@@ -81,6 +81,13 @@
            </widget>
           </item>
           <item>
+           <widget class="QPushButton" name="pbChangePassword">
+            <property name="text">
+             <string>Passwort ändern</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <spacer name="verticalSpacer">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
@@ -286,6 +293,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pbChangePassword</sender>
+   <signal>clicked()</signal>
+   <receiver>QMAMSUserSettingsWidget</receiver>
+   <slot>changePassword()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1084</x>
+     <y>157</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>583</x>
+     <y>380</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>addUser()</slot>
@@ -294,5 +317,6 @@
   <slot>addGroup()</slot>
   <slot>removeGroup()</slot>
   <slot>configGroup()</slot>
+  <slot>changePassword()</slot>
  </slots>
 </ui>

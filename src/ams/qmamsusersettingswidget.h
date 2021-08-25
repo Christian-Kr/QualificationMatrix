@@ -78,6 +78,9 @@ public slots:
     void userSelectionChanged(const QItemSelection &selected,
             const QItemSelection &deselected);
 
+    /// Change the password of the selected user.
+    void changePassword();
+
 private:
     /// Update model data.
     void updateData();
