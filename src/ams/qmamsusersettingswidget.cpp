@@ -88,6 +88,10 @@ void QMAMSUserSettingsWidget::updateData()
     ui->tvUser->resizeColumnsToContents();
 
     ui->lvGroup->setModel(amsGroupModel.get());
+    ui->lvGroup->setModelColumn(1);
+
+    ui->lvUserGroup->setModel(amsUserGroupModel.get());
+    ui->lvUserGroup->setModelColumn(2);
 
     // Build some connections.
     connect(amsUserModel.get(), &QMAMSUserModel::dataChanged, this,
