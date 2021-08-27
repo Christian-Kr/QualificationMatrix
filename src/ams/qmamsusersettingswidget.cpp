@@ -97,7 +97,7 @@ void QMAMSUserSettingsWidget::updateData()
     connect(amsUserModel.get(), &QMAMSUserModel::dataChanged, this,
             &QMAMSUserSettingsWidget::settingsChanged);
     connect(ui->tvUser->selectionModel(),
-            &QItemSelectionModel::selectionChanged, this,
+            &QItemSelectionModel::currentRowChanged, this,
             &QMAMSUserSettingsWidget::userSelectionChanged);
 }
 
@@ -154,16 +154,32 @@ void QMAMSUserSettingsWidget::configGroup()
 }
 
 void QMAMSUserSettingsWidget::userSelectionChanged(
-        const QItemSelection &selected, const QItemSelection &deselected)
+        const QModelIndex &selected, const QModelIndex &deselected)
 {
-    if (selected.empty())
+    if (!selected.isValid())
     {
         ui->gbGroups->setEnabled(false);
+        ui->pbConfigUser->setEnabled(false);
+        ui->pbRemoveUser->setEnabled(false);
+
+        return;
     }
-    else
+
+    auto selModelIndex = amsUserModel->index(selected.row(), 2);
+    auto selData = amsUserModel->data(selModelIndex).toString();
+
+    if (selData.compare("administrator") == 0)
     {
-        ui->gbGroups->setEnabled(true);
+        ui->gbGroups->setEnabled(false);
+        ui->pbConfigUser->setEnabled(false);
+        ui->pbRemoveUser->setEnabled(false);
+
+        return;
     }
+
+    ui->gbGroups->setEnabled(true);
+    ui->pbConfigUser->setEnabled(true);
+    ui->pbRemoveUser->setEnabled(true);
 }
 
 void QMAMSUserSettingsWidget::changePassword()

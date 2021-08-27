@@ -21,7 +21,6 @@
 class QMAMSGroupModel;
 class QMAMSUserModel;
 class QMAMSUserGroupModel;
-class QItemSelection;
 
 namespace Ui
 {
@@ -75,8 +74,8 @@ public slots:
     /// User selection changed.
     /// \param deselected Item that has been deselected.
     /// \param selected Item that has been selected.
-    void userSelectionChanged(const QItemSelection &selected,
-            const QItemSelection &deselected);
+    void userSelectionChanged(const QModelIndex &selected,
+            const QModelIndex &deselected);
 
     /// Change the password of the selected user.
     void changePassword();
