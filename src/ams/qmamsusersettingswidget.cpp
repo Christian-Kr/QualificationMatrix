@@ -20,6 +20,7 @@
 #include "ams/model/qmamsusergroupmodel.h"
 #include "ams/qmamspassworddialog.h"
 #include "ams/qmamsmanager.h"
+#include "ams/qmamspassworddialog.h"
 
 #include <QSqlDatabase>
 #include <QSqlRecord>
@@ -184,5 +185,12 @@ void QMAMSUserSettingsWidget::userSelectionChanged(
 
 void QMAMSUserSettingsWidget::changePassword()
 {
-    // TODO: Implement
+    QMAMSPasswordDialog passwordDialog(this);
+    passwordDialog.exec();
+
+    auto password = passwordDialog.getPasswort();
+    if (password.isEmpty())
+    {
+        return;
+    }
 }
