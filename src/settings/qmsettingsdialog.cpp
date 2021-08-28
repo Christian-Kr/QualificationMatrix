@@ -23,6 +23,7 @@
 #include "qmqualimatrixsettingswidget.h"
 #include "qmqualiresultsettingswidget.h"
 #include "ams/qmamsusersettingswidget.h"
+#include "ams/qmamsgroupsettingswidget.h"
 #include "framework/qmtreesettingsdelegate.h"
 #include "ams/qmamslogindialog.h"
 #include "ams/qmamsmanager.h"
@@ -85,6 +86,7 @@ void QMSettingsDialog::initStackWidgets()
     appendConnectSettingsWidget(new QMFuncSettingsWidget(this));
     appendConnectSettingsWidget(new QMEmployeeSettingsWidget(this));
     appendConnectSettingsWidget(new QMAMSUserSettingsWidget(this));
+    appendConnectSettingsWidget(new QMAMSGroupSettingsWidget(this));
 }
 
 void QMSettingsDialog::appendConnectSettingsWidget(
@@ -140,6 +142,10 @@ void QMSettingsDialog::initTreeWidgets()
     auto twiAMSUser = new QTreeWidgetItem(twiAMS);
     twiAMSUser->setText(0, tr("Benutzer"));
     twiAMSUser->setData(0, Qt::UserRole, 6);
+
+    auto twiAMSGroup = new QTreeWidgetItem(twiAMS);
+    twiAMSGroup->setText(0, tr("Gruppen"));
+    twiAMSGroup->setData(0, Qt::UserRole, 7);
 
     ui->twSettingGroups->expandAll();
 }

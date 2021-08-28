@@ -37,21 +37,21 @@ enum class AccessMode
     // Allows to enter the qualification matrix mode and view all contents.
     // Write acces gives additional possibility to
     // edit the qualification matrix.
-    QM_MODE_READ,
-    QM_MODE_WRITE,
+    QM_MODE_READ = 0,
+    QM_MODE_WRITE = 1,
 
     // Allows to view results. There is no need to give write access, cause
     // there is nothing to edit.
-    QR_MODE_READ,
+    QR_MODE_READ = 2,
 
     // Allows to view and/or edit training data.
-    TD_MODE_READ,
-    TD_MODE_WRITE,
+    TD_MODE_READ = 3,
+    TD_MODE_WRITE = 4,
 
     // Allow to view and/or edit persistent data in tables like functions,
     // trainings and or employees etc.
-    PER_DATA_READ,
-    PER_DATA_WRITE
+    PER_DATA_READ = 5,
+    PER_DATA_WRITE = 6
 };
 
 /// For the login function, return a code what happens.
