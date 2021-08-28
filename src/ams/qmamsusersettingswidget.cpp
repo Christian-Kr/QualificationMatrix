@@ -21,18 +21,26 @@
 #include "ams/qmamspassworddialog.h"
 #include "ams/qmamsmanager.h"
 #include "ams/qmamspassworddialog.h"
+#include "framework/qmbooleandelegate.h"
 
 #include <QSqlDatabase>
 #include <QSqlRecord>
 #include <QMessageBox>
+#include <QSortFilterProxyModel>
 
 #include <QDebug>
 
 QMAMSUserSettingsWidget::QMAMSUserSettingsWidget(QWidget *parent)
     : QMSettingsWidget(parent, true)
     , ui(new Ui::QMAMSUserSettingsWidget)
+    , amsUserGroupProxyModel(std::make_unique<QSortFilterProxyModel>(this))
 {
     ui->setupUi(this);
+
+    // Ui
+    auto booleanDelegate = new QMBooleanDelegate(this);
+    booleanDelegate->setEditable(true);
+    ui->tvUser->setItemDelegateForColumn(6, booleanDelegate);
 }
 
 QMAMSUserSettingsWidget::~QMAMSUserSettingsWidget()
@@ -91,15 +99,15 @@ void QMAMSUserSettingsWidget::updateData()
     ui->lvGroup->setModel(amsGroupModel.get());
     ui->lvGroup->setModelColumn(1);
 
-    ui->lvUserGroup->setModel(amsUserGroupModel.get());
-    ui->lvUserGroup->setModelColumn(2);
-
     // Build some connections.
     connect(amsUserModel.get(), &QMAMSUserModel::dataChanged, this,
             &QMAMSUserSettingsWidget::settingsChanged);
     connect(ui->tvUser->selectionModel(),
             &QItemSelectionModel::currentRowChanged, this,
             &QMAMSUserSettingsWidget::userSelectionChanged);
+    connect(ui->lvGroup->selectionModel(),
+            &QItemSelectionModel::currentRowChanged, this,
+            &QMAMSUserSettingsWidget::groupSelectionChanged);
 }
 
 void QMAMSUserSettingsWidget::addUser()
@@ -154,15 +162,67 @@ void QMAMSUserSettingsWidget::configGroup()
     // TODO: Implement
 }
 
+void QMAMSUserSettingsWidget::userGroupSelectionChanged(
+        const QModelIndex &selected, const QModelIndex &deselected)
+{
+    ui->lvGroup->reset();
+    if (selected.isValid())
+    {
+        ui->pbRemoveGroup->setEnabled(true);
+    }
+}
+
+void QMAMSUserSettingsWidget::groupSelectionChanged(
+        const QModelIndex &selected, const QModelIndex &deselected)
+{
+    ui->lvUserGroup->reset();
+    ui->pbRemoveGroup->setEnabled(false);
+
+    if (!selected.isValid())
+    {
+        ui->pbAddGroup->setEnabled(false);
+        return;
+    }
+
+    auto group = selected.data().toString();
+
+    if (userGroupProxyContainsGroup(group))
+    {
+        ui->pbAddGroup->setEnabled(false);
+    }
+    else
+    {
+        ui->pbAddGroup->setEnabled(true);
+    }
+}
+
+bool QMAMSUserSettingsWidget::userGroupProxyContainsGroup(const QString &group)
+{
+    for (int i = 0; i < amsUserGroupProxyModel->rowCount(); i++)
+    {
+        auto groupModelIndex = amsUserGroupProxyModel->index(i, 2);
+        auto groupName = amsUserGroupProxyModel->data(groupModelIndex)
+                .toString();
+
+        if (groupName.compare(group) == 0)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 void QMAMSUserSettingsWidget::userSelectionChanged(
         const QModelIndex &selected, const QModelIndex &deselected)
 {
+    ui->lvGroup->reset();
+    ui->pbAddGroup->setEnabled(false);
+    ui->pbRemoveGroup->setEnabled(false);
+
     if (!selected.isValid())
     {
-        ui->gbGroups->setEnabled(false);
-        ui->pbConfigUser->setEnabled(false);
-        ui->pbRemoveUser->setEnabled(false);
-
+        deactivateUserGroupList();
         return;
     }
 
@@ -171,16 +231,41 @@ void QMAMSUserSettingsWidget::userSelectionChanged(
 
     if (selData.compare("administrator") == 0)
     {
-        ui->gbGroups->setEnabled(false);
-        ui->pbConfigUser->setEnabled(false);
-        ui->pbRemoveUser->setEnabled(false);
-
+        deactivateUserGroupList();
         return;
     }
 
+    activateUserGroupList(selected.row());
+}
+
+void QMAMSUserSettingsWidget::deactivateUserGroupList()
+{
+    ui->gbGroups->setEnabled(false);
+    ui->pbConfigUser->setEnabled(false);
+    ui->pbRemoveUser->setEnabled(false);
+
+    ui->lvUserGroup->setModel(nullptr);
+}
+
+void QMAMSUserSettingsWidget::activateUserGroupList(int selRow)
+{
     ui->gbGroups->setEnabled(true);
     ui->pbConfigUser->setEnabled(true);
     ui->pbRemoveUser->setEnabled(true);
+
+    auto selModelIndex = amsUserModel->index(selRow, 2);
+    auto selData = amsUserModel->data(selModelIndex).toString();
+
+    amsUserGroupProxyModel->setSourceModel(amsUserGroupModel.get());
+    amsUserGroupProxyModel->setFilterKeyColumn(1);
+    amsUserGroupProxyModel->setFilterFixedString(selData);
+    ui->lvUserGroup->setModel(amsUserGroupProxyModel.get());
+    ui->lvUserGroup->setModelColumn(2);
+
+    ui->lvUserGroup->selectionModel()->disconnect(this);
+    connect(ui->lvUserGroup->selectionModel(),
+            &QItemSelectionModel::currentRowChanged, this,
+            &QMAMSUserSettingsWidget::userGroupSelectionChanged);
 }
 
 void QMAMSUserSettingsWidget::changePassword()

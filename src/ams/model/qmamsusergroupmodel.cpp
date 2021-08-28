@@ -33,5 +33,7 @@ void QMAMSUserGroupModel::initModel()
 
     // Specifiy header data of table.
     setHeaderData(1, Qt::Horizontal, tr("Benutzer"));
+    setRelation(1, QSqlRelation("AMSUser", "id", "username"));
     setHeaderData(2, Qt::Horizontal, tr("Gruppe"));
+    setRelation(2, QSqlRelation("AMSGroup", "id", "name"));
 }

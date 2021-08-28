@@ -21,6 +21,7 @@
 class QMAMSGroupModel;
 class QMAMSUserModel;
 class QMAMSUserGroupModel;
+class QSortFilterProxyModel;
 
 namespace Ui
 {
@@ -77,6 +78,18 @@ public slots:
     void userSelectionChanged(const QModelIndex &selected,
             const QModelIndex &deselected);
 
+    /// Group selection changed.
+    /// \param deselected Item that has been deselected.
+    /// \param selected Item that has been selected.
+    void groupSelectionChanged(const QModelIndex &selected,
+            const QModelIndex &deselected);
+
+    /// User group correlation table selection changed.
+    /// \param deselected Item that has been deselected.
+    /// \param selected Item that has been selected.
+    void userGroupSelectionChanged(const QModelIndex &selected,
+            const QModelIndex &deselected);
+
     /// Change the password of the selected user.
     void changePassword();
 
@@ -84,11 +97,25 @@ private:
     /// Update model data.
     void updateData();
 
+    /// Run action for enabling the usergroup list.
+    /// \param selRow Selected row.
+    void activateUserGroupList(int selRow);
+
+    /// Run action for disabling the usergroup list.
+    void deactivateUserGroupList();
+
+    /// Search for a user in user group proxy model.
+    /// \param name The name of the group to search for.
+    /// \return True if minimum one exist, else false.
+    bool userGroupProxyContainsGroup(const QString &group);
+
     Ui::QMAMSUserSettingsWidget *ui;
 
     std::unique_ptr<QMAMSUserModel> amsUserModel;
     std::unique_ptr<QMAMSGroupModel> amsGroupModel;
     std::unique_ptr<QMAMSUserGroupModel> amsUserGroupModel;
+
+    std::unique_ptr<QSortFilterProxyModel> amsUserGroupProxyModel;
 };
 
 #endif // QMAMSUSERSETTINGSWIDGET_H

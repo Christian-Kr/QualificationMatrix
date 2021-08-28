@@ -138,7 +138,11 @@
          </widget>
         </item>
         <item>
-         <widget class="QListView" name="lvUserGroup"/>
+         <widget class="QListView" name="lvUserGroup">
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -208,7 +212,11 @@
          </widget>
         </item>
         <item>
-         <widget class="QListView" name="lvGroup"/>
+         <widget class="QListView" name="lvGroup">
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
