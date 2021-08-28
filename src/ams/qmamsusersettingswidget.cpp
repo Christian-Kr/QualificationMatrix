@@ -50,14 +50,23 @@ QMAMSUserSettingsWidget::~QMAMSUserSettingsWidget()
 
 void QMAMSUserSettingsWidget::saveSettings()
 {
+    bool error = false;
+
     if (amsUserModel->isDirty())
     {
-        if (!amsUserModel->submitAll())
-        {
-            QMessageBox::critical(this, tr("Speichern"),
-                    tr("Die Änderungen konnten nicht in die Datenbank "
-                    "geschrieben werden."));
-        }
+        error = error | !amsUserModel->submitAll();
+    }
+
+    if (amsUserGroupModel->isDirty())
+    {
+        error = error | !amsUserGroupModel->submitAll();
+    }
+
+    if (error)
+    {
+        QMessageBox::critical(this, tr("Speichern"),
+                tr("Die Änderungen konnten nicht in die Datenbank "
+                   "geschrieben werden."));
     }
 }
 
@@ -149,7 +158,18 @@ void QMAMSUserSettingsWidget::removeUser()
 
 void QMAMSUserSettingsWidget::removeGroup()
 {
-    // TODO: Implement
+    auto userGroupIndex = ui->lvUserGroup->currentIndex();
+
+    if (!userGroupIndex.isValid())
+    {
+        QMessageBox::information(this, tr("Gruppe entfernen"),
+                tr("Keine Gruppe ausgewählt."));
+        return;
+    }
+
+    amsUserGroupProxyModel->removeRow(userGroupIndex.row());
+
+    emitSettingsChanged();
 }
 
 void QMAMSUserSettingsWidget::configUser()
