@@ -451,6 +451,23 @@
           </spacer>
          </item>
          <item>
+          <widget class="QPushButton" name="pbExportCSV">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>CSV</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../rcs/icons.qrc">
+             <normaloff>:/icons/icons/text-csv.svg</normaloff>:/icons/icons/text-csv.svg</iconset>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QToolButton" name="tbLock">
            <property name="text">
             <string/>
@@ -1198,6 +1215,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pbExportCSV</sender>
+   <signal>clicked()</signal>
+   <receiver>QMQualiMatrixWidget</receiver>
+   <slot>exportCSV()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>697</x>
+     <y>25</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>624</x>
+     <y>408</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>updateFilter()</slot>
@@ -1225,5 +1258,6 @@
   <slot>trainSortPrimaryKey()</slot>
   <slot>trainSortDescending()</slot>
   <slot>trainSortAscending()</slot>
+  <slot>exportCSV()</slot>
  </slots>
 </ui>

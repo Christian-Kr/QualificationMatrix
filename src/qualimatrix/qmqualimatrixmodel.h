@@ -58,12 +58,12 @@ public:
     /// Override from QAbstractTableModel
     /// \param parent
     /// \return
-    int rowCount(const QModelIndex &parent) const override;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 
     /// Override from QAbstractTableModel
     /// \param parent
     /// \return
-    int columnCount(const QModelIndex &parent) const override;
+    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
 
     /// Override from QAbstractTableModel
     /// \param index

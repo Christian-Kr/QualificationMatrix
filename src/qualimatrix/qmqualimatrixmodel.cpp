@@ -152,20 +152,11 @@ bool QMQualiMatrixModel::setHeaderData(int section, Qt::Orientation orientation,
 
 int QMQualiMatrixModel::rowCount(const QModelIndex &parent) const
 {
-    if (parent.isValid())
-    {
-        return 0;
-    }
-
     return funcFilterModel->rowCount();
 }
 
 int QMQualiMatrixModel::columnCount(const QModelIndex &parent) const
 {
-    if (parent.isValid()) {
-        return 0;
-    }
-
     return trainFilterModel->rowCount();
 }
 

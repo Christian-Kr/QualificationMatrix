@@ -156,6 +156,9 @@ public slots:
     /// Update the model and view.
     void updateModel();
 
+    /// Export the current quali matrix as csv file.
+    void exportCSV();
+
 private:
     /// Build context menus.
     void buildContextMenus();
