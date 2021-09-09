@@ -35,6 +35,11 @@
 #include <QTimer>
 #include <QMenu>
 #include <QScrollBar>
+#include <QFileDialog>
+#include <QDir>
+#include <QMessageBox>
+
+#include <QDebug>
 
 QMQualiMatrixWidget::QMQualiMatrixWidget(QWidget *parent)
     : QMWinModeWidget(parent)
@@ -543,4 +548,83 @@ void QMQualiMatrixWidget::resetFuncGroup()
     }
 
     ui->cbFuncGroupFilter->clearEditText();
+}
+
+void QMQualiMatrixWidget::exportCSV()
+{
+    if (qualiMatrixModel == nullptr)
+    {
+        qCritical() << "qualiMatrixModel is nullptr";
+        return;
+    }
+
+    // Ask where to save the csv file.
+    auto fileName = QFileDialog::getSaveFileName(
+            this, tr("Qualifizierungsmatrix speichern"), QDir::homePath(),
+            tr("Comma-separated values (*.csv)"));
+    if (fileName.isEmpty())
+    {
+        return;
+    }
+
+    QFile csvFile(fileName);
+
+    if (!csvFile.open(QFile::ReadWrite))
+    {
+        QMessageBox::critical(
+                this, tr("Qualifizierungsresultat speichern"), tr(
+                        "Datei konnte nicht zum Schreiben geöffnet werden. Bitte prüfen Sie die"
+                        " Berechtigungen."
+                        "\n\nAktion wird abgebrochen."
+                ));
+        return;
+    }
+
+    QTextStream csvStream(&csvFile);
+
+    auto colCount = qualiMatrixModel->columnCount();
+    auto rowCount = qualiMatrixModel->rowCount();
+
+
+    // Write header.
+    csvStream << ";";
+    for (int i = 0; i < colCount; i++)
+    {
+        csvStream << qualiMatrixModel->headerData(
+                i, Qt::Horizontal, Qt::DisplayRole).toString();
+        if (i < colCount - 1)
+        {
+            csvStream << ";";
+        }
+        else
+        {
+            csvStream << "\n";
+        }
+    }
+
+    // Write data.
+    for (int i = 0; i < rowCount; i++)
+    {
+        csvStream << qualiMatrixModel->headerData(
+                i, Qt::Vertical, Qt::DisplayRole).toString() << ";";
+        for (int j = 0; j < colCount; j++)
+        {
+            csvStream << qualiMatrixModel->data(
+                    qualiMatrixModel->index(i, j), Qt::DisplayRole).toString();
+            if (j < colCount - 1)
+            {
+                csvStream << ";";
+            }
+            else
+            {
+                csvStream << "\n";
+            }
+        }
+    }
+
+    csvFile.close();
+//
+//    QMessageBox::information(
+//            this, tr("Qualifizierungsresultat speichern"),
+//            tr("Die Daten wurden erfolgreich gespeichert."));
 }
