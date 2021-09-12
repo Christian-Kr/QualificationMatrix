@@ -20,7 +20,6 @@
 #include "ams/model/qmamsusergroupmodel.h"
 #include "ams/qmamspassworddialog.h"
 #include "ams/qmamsmanager.h"
-#include "ams/qmamspassworddialog.h"
 #include "framework/qmbooleandelegate.h"
 
 #include <QSqlDatabase>
