@@ -121,8 +121,6 @@ void QMAMSUserSettingsWidget::updateData()
 
 void QMAMSUserSettingsWidget::addUser()
 {
-    // TODO: Implement
-
     auto record = amsUserModel->record();
     record.setValue("name", tr("Vollständiger Name"));
     record.setValue("username", tr("Benutzername"));
@@ -142,13 +140,123 @@ void QMAMSUserSettingsWidget::addUser()
 
     if (!amsUserModel->insertRecord(-1, record) | !amsUserModel->submitAll())
     {
-        qWarning() << "could not save a new record";
+        qCritical() << "Could not save a new record";
     }
 }
 
 void QMAMSUserSettingsWidget::addGroup()
 {
-    // TODO: Implement
+    // Get the primary key id of selected element.
+    auto groupIndex = ui->lvGroup->currentIndex();
+    if(!groupIndex.isValid())
+    {
+        QMessageBox::information(this, tr("Gruppe hinzufügen"),
+                tr("Keine Gruppe ausgewählt"));
+        return;
+    }
+
+    auto groupModelPrimaryIdField = amsGroupModel->fieldIndex("id");
+    if (groupModelPrimaryIdField < 0)
+    {
+        qCritical() << "Cannot find field index of id in AMSGroup";
+        return;
+    }
+
+    auto groupModelIndex = amsGroupModel->index(groupIndex.row(),
+            groupModelPrimaryIdField);
+    auto groupPrimaryId = amsGroupModel->data(groupModelIndex).toInt();
+
+    // Get primary key id of selected user.
+    auto userIndex = ui->tvUser->currentIndex();
+    if(!userIndex.isValid())
+    {
+        QMessageBox::information(this, tr("Gruppe hinzufügen"),
+                tr("Kein Benutzer ausgewählt"));
+        return;
+    }
+
+    auto userModelPrimaryIdField = amsUserModel->fieldIndex("id");
+    if (userModelPrimaryIdField < 0)
+    {
+        qCritical() << "Cannot find field index of id in AMSUser";
+        return;
+    }
+
+    auto userModelIndex = amsGroupModel->index(userIndex.row(),
+            userModelPrimaryIdField);
+    auto userPrimaryId = amsUserModel->data(userModelIndex).toInt();
+
+    // Search for duplicates.
+    if (userGroupProxyContainsGroup(groupIndex.data().toString()))
+    {
+        QMessageBox::information(this, tr("Gruppe hinzufügen"),
+                tr("Die Gruppe wurde bereits hinzugefügt."));
+        return;
+    }
+
+    // Create record and add.
+    auto record = amsUserGroupModel->record();
+
+    record.setValue("username", userPrimaryId);
+    record.setValue("name", groupPrimaryId);
+
+    if (!amsUserGroupModel->insertRecord(-1, record) |
+        !amsUserGroupModel->submitAll())
+    {
+        QMessageBox::warning(this, tr("Gruppe hinzufügen"),
+                tr("Konnte die Änderung nicht in die Datenbank schreiben."));
+        return;
+    }
+}
+
+QString QMAMSUserSettingsWidget::getUsernameFromPrimaryId(int primaryId)
+{
+    auto usernameFieldIndex = amsUserModel->fieldIndex("username");
+    auto idFieldIndex = amsUserModel->fieldIndex("id");
+    if (usernameFieldIndex < 0 || idFieldIndex < 0)
+    {
+        return {};
+    }
+
+    for (int i = 0; i < amsUserModel->rowCount(); i++)
+    {
+        auto id = amsUserModel->data(amsUserModel->index(i, idFieldIndex))
+                .toInt();
+        auto username = amsUserModel->data(amsUserModel->index(
+                i, usernameFieldIndex)).toString();
+
+        if (id == primaryId)
+        {
+            return username;
+        }
+    }
+
+    return {};
+}
+
+QString QMAMSUserSettingsWidget::getGroupFromPrimaryId(int primaryId)
+{
+    auto groupFieldIndex = amsGroupModel->fieldIndex("name");
+    auto idFieldIndex = amsGroupModel->fieldIndex("id");
+    if (groupFieldIndex < 0 || idFieldIndex < 0)
+    {
+        return {};
+    }
+
+    for (int i = 0; i < amsGroupModel->rowCount(); i++)
+    {
+        auto id = amsGroupModel->data(amsGroupModel->index(i, idFieldIndex))
+                .toInt();
+        auto group = amsGroupModel->data(amsGroupModel->index(
+                i, groupFieldIndex)).toString();
+
+        if (id == primaryId)
+        {
+            return group;
+        }
+    }
+
+    return {};
 }
 
 void QMAMSUserSettingsWidget::removeUser()

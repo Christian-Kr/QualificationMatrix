@@ -94,6 +94,16 @@ public slots:
     void changePassword();
 
 private:
+    /// Get the username from the given primary id.
+    /// \param primaryId The primary key id in the table AMSUser.
+    /// \return The username or empty string if nothing found.
+    QString getUsernameFromPrimaryId(int primaryId);
+
+    /// Get the group from the given primary id.
+    /// \param primaryId The primary key id in the table AMSGroup.
+    /// \return The group or empty string if nothing found.
+    QString getGroupFromPrimaryId(int primaryId);
+
     /// Update model data.
     void updateData();
 
