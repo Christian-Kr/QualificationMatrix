@@ -33,7 +33,8 @@ void QMAMSGroupAccessModeModel::initModel()
 
     // Specifiy header data of table.
     setHeaderData(1, Qt::Horizontal, tr("Gruppe"));
-    setRelation(1, QSqlRelation("AMSGroup", "id", "name"));
+    setRelation(1, QSqlRelation("AMSGroup", "amsgroup_id", "amsgroup_name"));
     setHeaderData(2, Qt::Horizontal, tr("Zugriffsmodus"));
-    setRelation(2, QSqlRelation("AMSGroupAccessMode", "id", "name"));
+    setRelation(2, QSqlRelation("AMSAccessMode", "amsaccessmode_id",
+            "amsaccessmode_name"));
 }

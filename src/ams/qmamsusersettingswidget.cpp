@@ -65,7 +65,7 @@ void QMAMSUserSettingsWidget::saveSettings()
     {
         QMessageBox::critical(this, tr("Speichern"),
                 tr("Die Änderungen konnten nicht in die Datenbank "
-                   "geschrieben werden."));
+                "geschrieben werden."));
     }
 }
 
@@ -122,6 +122,8 @@ void QMAMSUserSettingsWidget::updateData()
 
 void QMAMSUserSettingsWidget::addUser()
 {
+    // TODO: No user with same username.
+
     auto record = amsUserModel->record();
     record.setValue("name", tr("Vollständiger Name"));
     record.setValue("username", tr("Benutzername"));
@@ -149,7 +151,7 @@ void QMAMSUserSettingsWidget::addGroup()
 {
     // Get the primary key id of selected element.
     auto groupIndex = ui->lvGroup->currentIndex();
-    if(!groupIndex.isValid())
+    if (!groupIndex.isValid())
     {
         QMessageBox::information(this, tr("Gruppe hinzufügen"),
                 tr("Keine Gruppe ausgewählt"));
@@ -212,7 +214,7 @@ void QMAMSUserSettingsWidget::addGroup()
 
 QString QMAMSUserSettingsWidget::getUsernameFromPrimaryId(int primaryId)
 {
-    auto usernameFieldIndex = amsUserModel->fieldIndex("username");
+    auto usernameFieldIndex = amsUserModel->fieldIndex("amsuser_username");
     auto idFieldIndex = amsUserModel->fieldIndex("id");
     if (usernameFieldIndex < 0 || idFieldIndex < 0)
     {
@@ -237,8 +239,8 @@ QString QMAMSUserSettingsWidget::getUsernameFromPrimaryId(int primaryId)
 
 QString QMAMSUserSettingsWidget::getGroupFromPrimaryId(int primaryId)
 {
-    auto groupFieldIndex = amsGroupModel->fieldIndex("name");
-    auto idFieldIndex = amsGroupModel->fieldIndex("id");
+    auto groupFieldIndex = amsGroupModel->fieldIndex("amsgroup_name");
+    auto idFieldIndex = amsGroupModel->fieldIndex("amsgroup_id");
     if (groupFieldIndex < 0 || idFieldIndex < 0)
     {
         return {};

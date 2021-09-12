@@ -18,13 +18,12 @@
 #include "ams/model/qmamsgroupmodel.h"
 #include "ams/model/qmamsgroupaccessmodemodel.h"
 #include "ams/model/qmamsaccessmodemodel.h"
-#include "ams/qmamspassworddialog.h"
 #include "ams/qmamsmanager.h"
-#include "ams/qmamspassworddialog.h"
 #include "framework/qmbooleandelegate.h"
 
 #include <QSqlDatabase>
 #include <QSqlRecord>
+#include <QSqlError>
 #include <QMessageBox>
 #include <QSortFilterProxyModel>
 
@@ -72,7 +71,9 @@ void QMAMSGroupSettingsWidget::saveSettings()
 
 void QMAMSGroupSettingsWidget::revertChanges()
 {
-    // TODO: Revert all changes and load last state.
+    amsGroupModel->revertAll();
+    amsGroupAccessModeModel->revertAll();
+    amsAccessModeModel->revertAll();
 }
 
 void QMAMSGroupSettingsWidget::loadSettings()
@@ -120,34 +121,101 @@ void QMAMSGroupSettingsWidget::updateData()
 
 void QMAMSGroupSettingsWidget::addGroup()
 {
-    // TODO: Implement
+    // TODO: No groups with same name.
 
-//    auto record = amsGroupModel->record();
-//    record.setValue("name", tr("Vollständiger Name"));
-//    record.setValue("username", tr("Benutzername"));
-//
-//    // TODO: Get password and add it.
-//    QMAMSPasswordDialog passwordDialog(this);
-//    passwordDialog.exec();
-//
-//    auto password = passwordDialog.getPasswort();
-//    if (password.isEmpty())
-//    {
-//        return;
-//    }
-//
-//    auto hash = QMAMSManager::createPasswordHash(password);
-//    record.setValue("password", hash);
-//
-//    if (!amsUserModel->insertRecord(-1, record) | !amsUserModel->submitAll())
-//    {
-//        qWarning() << "could not save a new record";
-//    }
+    auto record = amsGroupModel->record();
+    record.setValue("name", tr("Gruppe"));
+
+    if (!amsGroupModel->insertRecord(-1, record) | !amsGroupModel->submitAll())
+    {
+        qWarning() << "could not save a new record";
+    }
 }
 
 void QMAMSGroupSettingsWidget::addAccessMode()
 {
-    // TODO: Implement
+    // Get primary key id of selected element.
+    auto accessModeIndex = ui->lvAccessMode->currentIndex();
+    if (!accessModeIndex.isValid())
+    {
+        QMessageBox::information(this, tr("Zugriffsmodus hinzufügen"),
+                tr("Kein Zugriffsmodus ausgewählt."));
+        return;
+    }
+
+    auto accessModePrimaryIdField = amsAccessModeModel->fieldIndex(
+            "amsaccessmode_id");
+    if (accessModePrimaryIdField < 0)
+    {
+        qCritical() << "Cannto find field index of id in AMSAccessMode";
+        return;
+    }
+
+    auto accessModeModelIndex = amsAccessModeModel->index(
+            accessModeIndex.row(), accessModePrimaryIdField);
+    auto accessModePrimaryId = amsAccessModeModel->data(
+            accessModeModelIndex).toInt();
+
+    // Get primary key of selected group.
+    auto groupIndex = ui->tvGroup->currentIndex();
+    if (!groupIndex.isValid())
+    {
+        QMessageBox::information(this, tr("Zugriffsmodus hinzufügen"),
+                tr("Keine Gruppe ausgewählt"));
+        return;
+    }
+
+    auto groupModelPrimaryIdField = amsGroupModel->fieldIndex(
+            "amsgroup_id");
+    if (groupModelPrimaryIdField < 0)
+    {
+        qCritical() << "Cannot find field index of id in AMSGroup";
+        return;
+    }
+
+    auto groupModelIndex = amsGroupModel->index(groupIndex.row(),
+            groupModelPrimaryIdField);
+    auto groupPrimaryId = amsGroupModel->data(groupModelIndex).toInt();
+
+    // Search for duplicates.
+    if (groupAccessModeProxyContainsAccessMode(
+            accessModeIndex.data().toString()))
+    {
+        QMessageBox::information(this, tr("Zugriffsmodus hinzufügen"),
+                tr("Der Zugriffsmodus wurde bereits hinzugefügt."));
+        return;
+    }
+
+    // Create record and add.
+    auto record = amsGroupAccessModeModel->record();
+
+    record.setValue("amsgroup_name", groupPrimaryId);
+    record.setValue("amsaccessmode_name", accessModePrimaryId);
+
+    if (!amsGroupAccessModeModel->insertRecord(-1, record) |
+        !amsGroupAccessModeModel->submitAll())
+    {
+        QMessageBox::warning(this, tr("Zugriffsmodus hinzufügen"),
+                tr("Konnte die Änderung nicht in die Datenbank schreiben."));
+        return;
+    }
+}
+
+bool QMAMSGroupSettingsWidget::groupAccessModeProxyContainsAccessMode(
+        const QString &accessMode)
+{
+    for (int i = 0; i < amsGroupAccessModeProxyModel->rowCount(); i++)
+    {
+        auto accessModeModelIndex = amsGroupAccessModeProxyModel->index(i, 2);
+        auto accessModeName = amsGroupAccessModeProxyModel->data(
+                accessModeModelIndex).toString();
+        if (accessModeName.compare(accessMode) == 0)
+        {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 void QMAMSGroupSettingsWidget::removeGroup()
@@ -193,9 +261,9 @@ void QMAMSGroupSettingsWidget::accessModeSelectionChanged(
         return;
     }
 
-    auto group = selected.data().toString();
+    auto accessMode = selected.data().toString();
 
-    if (groupAccessModeProxyContainsGroup(group))
+    if (groupAccessModeProxyContainsAccessMode(accessMode))
     {
         ui->pbAddAccessMode->setEnabled(false);
     }
@@ -203,24 +271,6 @@ void QMAMSGroupSettingsWidget::accessModeSelectionChanged(
     {
         ui->pbAddAccessMode->setEnabled(true);
     }
-}
-
-bool QMAMSGroupSettingsWidget::groupAccessModeProxyContainsGroup(
-        const QString &accessMode)
-{
-    for (int i = 0; i < amsGroupAccessModeProxyModel->rowCount(); i++)
-    {
-        auto groupModelIndex = amsGroupAccessModeProxyModel->index(i, 2);
-        auto groupName = amsGroupAccessModeProxyModel->data(groupModelIndex)
-                .toString();
-
-        if (groupName.compare(accessMode) == 0)
-        {
-            return true;
-        }
-    }
-
-    return false;
 }
 
 void QMAMSGroupSettingsWidget::groupSelectionChanged(
@@ -255,7 +305,7 @@ void QMAMSGroupSettingsWidget::activateGroupAccessModeList(int selRow)
     ui->gbAccessMode->setEnabled(true);
     ui->pbRemoveGroup->setEnabled(true);
 
-    auto selModelIndex = amsGroupModel->index(selRow, 2);
+    auto selModelIndex = amsGroupModel->index(selRow, 1);
     auto selData = amsGroupModel->data(selModelIndex).toString();
 
     amsGroupAccessModeProxyModel->setSourceModel(amsGroupAccessModeModel.get());

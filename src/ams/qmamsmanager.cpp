@@ -76,7 +76,7 @@ bool QMAMSManager::checkForAdministrator(QSqlDatabase &database)
     QMAMSUserModel amsUserModel(this, database);
     amsUserModel.select();
 
-    auto usernameFieldIndex = amsUserModel.fieldIndex("username");
+    auto usernameFieldIndex = amsUserModel.fieldIndex("amsuser_username");
 
     for (int i = 0; i < amsUserModel.rowCount(); i++)
     {
@@ -122,8 +122,9 @@ bool QMAMSManager::setFailedLoginCount(QString name, int count)
     QMAMSUserModel amsUserModel(nullptr, db);
     amsUserModel.select();
 
-    auto usernameFieldIndex = amsUserModel.fieldIndex("username");
-    auto failedLoginIndex = amsUserModel.fieldIndex("unsuccess_login_num");
+    auto usernameFieldIndex = amsUserModel.fieldIndex("amsuser_username");
+    auto failedLoginIndex = amsUserModel.fieldIndex(
+            "amsuser_unsuccess_login_num");
 
     for (int i = 0; i < amsUserModel.rowCount(); i++)
     {
@@ -167,8 +168,8 @@ bool QMAMSManager::setLastLoginDateTime(QString name)
     QMAMSUserModel amsUserModel(nullptr, db);
     amsUserModel.select();
 
-    auto usernameFieldIndex = amsUserModel.fieldIndex("username");
-    auto lastLoginIndex = amsUserModel.fieldIndex("last_login");
+    auto usernameFieldIndex = amsUserModel.fieldIndex("amsuser_username");
+    auto lastLoginIndex = amsUserModel.fieldIndex("amsuser_last_login");
 
     for (int i = 0; i < amsUserModel.rowCount(); i++)
     {
@@ -276,7 +277,7 @@ bool QMAMSManager::createAdminInDatabase()
     QMAMSUserModel amsUserModel(this, db);
     amsUserModel.select();
 
-    auto usernameFieldIndex = amsUserModel.fieldIndex("username");
+    auto usernameFieldIndex = amsUserModel.fieldIndex("amsuser_username");
 
     for (int i = 0; i < amsUserModel.rowCount(); i++)
     {
@@ -291,19 +292,19 @@ bool QMAMSManager::createAdminInDatabase()
 
     QSqlRecord record;
 
-    record.append(QSqlField("name"));
-    record.append(QSqlField("username"));
-    record.append(QSqlField("password"));
-    record.append(QSqlField("last_login"));
-    record.append(QSqlField("unsuccess_login_num"));
-    record.append(QSqlField("active"));
+    record.append(QSqlField("amsuser_name"));
+    record.append(QSqlField("amsuser_username"));
+    record.append(QSqlField("amsuser_password"));
+    record.append(QSqlField("amsuser_last_login"));
+    record.append(QSqlField("amsuser_unsuccess_login_num"));
+    record.append(QSqlField("amsuser_active"));
 
-    record.setValue("name", "administrator");
-    record.setValue("username", "administrator");
-    record.setValue("password", "");
-    record.setValue("last_login", "");
-    record.setValue("unsuccess_login_num", 0);
-    record.setValue("active", 1);
+    record.setValue("amsuser_name", "administrator");
+    record.setValue("amsuser_username", "administrator");
+    record.setValue("amsuser_password", "");
+    record.setValue("amsuser_last_login", "");
+    record.setValue("amsuser_unsuccess_login_num", 0);
+    record.setValue("amsuser_active", 1);
 
     if (!amsUserModel.insertRecord(-1, record) ||
         !amsUserModel.submitAll())
@@ -331,7 +332,7 @@ QMAMSUserInformation QMAMSManager::getUserFromDatabase(const QString &username)
     QMAMSUserModel amsUserModel(this, db);
     amsUserModel.select();
 
-    auto usernameFieldIndex = amsUserModel.fieldIndex("username");
+    auto usernameFieldIndex = amsUserModel.fieldIndex("amsuser_username");
 
     for (int i = 0; i < amsUserModel.rowCount(); i++)
     {
@@ -340,22 +341,22 @@ QMAMSUserInformation QMAMSManager::getUserFromDatabase(const QString &username)
 
         if (dbUsername == username)
         {
-            auto nameFieldIndex = amsUserModel.fieldIndex("user");
+            auto nameFieldIndex = amsUserModel.fieldIndex("amsuser_user");
             auto nameModelIndex = amsUserModel.index(i, nameFieldIndex);
             auto dbFullname = amsUserModel.data(nameModelIndex).toString();
 
-            auto pwFieldIndex = amsUserModel.fieldIndex("password");
+            auto pwFieldIndex = amsUserModel.fieldIndex("amsuser_password");
             auto pwModelIndex = amsUserModel.index(i, pwFieldIndex);
             auto dbPassword = amsUserModel.data(pwModelIndex).toString();
 
             auto failedLoginFieldIndex = amsUserModel.fieldIndex(
-                    "unsuccess_login_num");
+                    "amsuser_unsuccess_login_num");
             auto failedLoginModelIndex = amsUserModel.index(i,
                     failedLoginFieldIndex);
             auto dbFailedLoginCount = amsUserModel.data(failedLoginModelIndex)
                     .toInt();
 
-            auto activeFieldIndex = amsUserModel.fieldIndex("active");
+            auto activeFieldIndex = amsUserModel.fieldIndex("amsuser_active");
             auto activeModelIndex = amsUserModel.index(i, activeFieldIndex);
             auto active = amsUserModel.data(activeModelIndex).toBool();
 

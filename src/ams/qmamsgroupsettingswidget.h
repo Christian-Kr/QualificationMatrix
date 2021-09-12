@@ -98,7 +98,7 @@ private:
     /// Search for an access mode in user group proxy model.
     /// \param name The name of the group to search for.
     /// \return True if minimum one exist, else false.
-    bool groupAccessModeProxyContainsGroup(const QString &accessMode);
+    bool groupAccessModeProxyContainsAccessMode(const QString &accessMode);
 
     Ui::QMAMSGroupSettingsWidget *ui;
 
