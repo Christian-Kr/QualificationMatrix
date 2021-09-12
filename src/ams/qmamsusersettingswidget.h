@@ -66,12 +66,6 @@ public slots:
     /// Remove a group.
     void removeGroup();
 
-    /// Config the user.
-    void configUser();
-
-    /// Config the group.
-    void configGroup();
-
     /// User selection changed.
     /// \param deselected Item that has been deselected.
     /// \param selected Item that has been selected.

@@ -72,7 +72,9 @@ void QMAMSUserSettingsWidget::saveSettings()
 
 void QMAMSUserSettingsWidget::revertChanges()
 {
-    // TODO: Revert all changes and load last state.
+    amsUserModel->revertAll();
+    amsGroupModel->revertAll();
+    amsUserGroupModel->revertAll();
 }
 
 void QMAMSUserSettingsWidget::loadSettings()
@@ -262,6 +264,8 @@ QString QMAMSUserSettingsWidget::getGroupFromPrimaryId(int primaryId)
 void QMAMSUserSettingsWidget::removeUser()
 {
     // TODO: Implement
+    QMessageBox::information(this, tr("Nutzer entfernen"),
+            tr("Nicht implementiert."));
 }
 
 void QMAMSUserSettingsWidget::removeGroup()
@@ -278,16 +282,6 @@ void QMAMSUserSettingsWidget::removeGroup()
     amsUserGroupProxyModel->removeRow(userGroupIndex.row());
 
     emitSettingsChanged();
-}
-
-void QMAMSUserSettingsWidget::configUser()
-{
-    // TODO: Implement
-}
-
-void QMAMSUserSettingsWidget::configGroup()
-{
-    // TODO: Implement
 }
 
 void QMAMSUserSettingsWidget::userGroupSelectionChanged(
