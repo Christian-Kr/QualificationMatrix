@@ -200,8 +200,8 @@ void QMAMSUserSettingsWidget::addGroup()
     // Create record and add.
     auto record = amsUserGroupModel->record();
 
-    record.setValue("username", userPrimaryId);
-    record.setValue("name", groupPrimaryId);
+    record.setValue("amsuser_username", userPrimaryId);
+    record.setValue("amsgroup_name", groupPrimaryId);
 
     if (!amsUserGroupModel->insertRecord(-1, record) |
         !amsUserGroupModel->submitAll())
@@ -215,7 +215,7 @@ void QMAMSUserSettingsWidget::addGroup()
 QString QMAMSUserSettingsWidget::getUsernameFromPrimaryId(int primaryId)
 {
     auto usernameFieldIndex = amsUserModel->fieldIndex("amsuser_username");
-    auto idFieldIndex = amsUserModel->fieldIndex("id");
+    auto idFieldIndex = amsUserModel->fieldIndex("amsuser_id");
     if (usernameFieldIndex < 0 || idFieldIndex < 0)
     {
         return {};
