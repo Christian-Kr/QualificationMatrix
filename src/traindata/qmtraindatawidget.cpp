@@ -96,11 +96,11 @@ void QMTrainDataWidget::executeMultiEdit()
     }
 
     // Ask to be sure.
-    auto ok = QMessageBox::question(this, tr("Mehrfachänderung"),
+    auto res = QMessageBox::question(this, tr("Mehrfachänderung"),
             tr("Bist du dir sicher, dass du die Änderungen in die Datenbank schreiben möchtest? Die Rückstellung bei "
                "fehlerhaften Eintragen ist aufwendig und muss manuell durchgeführt werden."),
             QMessageBox::Yes | QMessageBox::No);
-    if (ok != QMessageBox::Yes)
+    if (res != QMessageBox::Yes)
     {
         return;
     }
