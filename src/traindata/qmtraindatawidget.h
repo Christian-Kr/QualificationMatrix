@@ -23,6 +23,7 @@ class QSqlRelationalTableModel;
 class QSqlTableModel;
 class QProgressDialog;
 class QItemSelection;
+class QMTrainingDataModel;
 
 namespace Ui
 {
@@ -108,6 +109,9 @@ public slots:
     /// Execute the multi edit process.
     void executeMultiEdit();
 
+    /// Add multiple entries.
+    void addMultipleEntries();
+
 signals:
     /// There is a short message that should be displayed.
     /// \param msg
@@ -122,7 +126,7 @@ private:
 
     std::unique_ptr<QSqlTableModel> employeeViewModel;
     std::unique_ptr<QSqlTableModel> trainViewModel;
-    std::unique_ptr<QMSqlTableModel> trainDataModel;
+    std::unique_ptr<QMTrainingDataModel> trainDataModel;
     std::unique_ptr<QSqlTableModel> trainDataStateViewModel;
     std::unique_ptr<QSqlTableModel> trainDataCertModel;
     std::unique_ptr<QSqlTableModel> trainDataCertViewModel;

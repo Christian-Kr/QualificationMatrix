@@ -25,6 +25,8 @@
 #include "certificate/qmcertificatedialog.h"
 #include "qmimportcsvdialog.h"
 #include "settings/qmapplicationsettings.h"
+#include "qmaddmultipletraindatadialog.h"
+#include "model/qmtrainingdatamodel.h"
 
 #include <QMessageBox>
 #include <QSqlRecord>
@@ -482,8 +484,16 @@ void QMTrainDataWidget::showMultiEdit()
     ui->laSelCount->setText(QString::number(modelIndexList.size()));
 
     // Show the details docked widget (might be invisible).
-    ui->dwMultiEdit->setVisible(true);
     ui->dwTrainDataCertificates->setVisible(false);
+    ui->dwMultiEdit->setVisible(true);
+}
+
+void QMTrainDataWidget::addMultipleEntries()
+{
+    QMAddMultipleTrainDataDialog addMultipleDialog(trainDataModel.get(), this);
+    addMultipleDialog.exec();
+
+    trainDataModel->select();
 }
 
 void QMTrainDataWidget::showTrainDataCertificates()
