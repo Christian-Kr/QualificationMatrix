@@ -74,6 +74,9 @@ public slots:
     /// Show certificates in train data docked widget.
     void showTrainDataCertificates();
 
+    /// Show a widget for multi editing entries.
+    void showMultiEdit();
+
     /// Selection of trainDataTable changed.
     /// \param deselected
     /// \param selected
@@ -98,6 +101,12 @@ public slots:
 
     /// Clear filtering dates.
     void clearDates();
+
+    /// Update which item is enabled and which not on dock widget for multi edit.
+    void updateMultiEditEnabledState();
+
+    /// Execute the multi edit process.
+    void executeMultiEdit();
 
 signals:
     /// There is a short message that should be displayed.

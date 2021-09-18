@@ -26,6 +26,7 @@
 #include "qmimportcsvdialog.h"
 #include "settings/qmapplicationsettings.h"
 
+#include <QMessageBox>
 #include <QSqlRecord>
 #include <QSqlField>
 #include <QModelIndexList>
@@ -50,6 +51,8 @@ QMTrainDataWidget::QMTrainDataWidget(QWidget *parent)
     // Default settings on start.
     ui->deDateFilterTo->setDate(QDate::currentDate());
     ui->dwTrainDataCertificates->setVisible(false);
+    ui->dwMultiEdit->setVisible(false);
+    updateMultiEditEnabledState();
 
     // Load settings on start.
     loadSettings();
@@ -67,20 +70,108 @@ void QMTrainDataWidget::loadSettings()
 {
     auto &settings = QMApplicationSettings::getInstance();
 
-    ui->splitter->restoreState(settings.read("TrainData/CertificatesSplitter").toByteArray());
+    // ui->splitter->restoreState(settings.read("TrainData/CertificatesSplitter").toByteArray());
 }
 
 void QMTrainDataWidget::saveSettings()
 {
     auto &settings = QMApplicationSettings::getInstance();
 
-    settings.write("TrainData/CertificatesSplitter", ui->splitter->saveState());
+    // settings.write("TrainData/CertificatesSplitter", ui->splitter->saveState());
 }
 
 void QMTrainDataWidget::importCsv()
 {
     QMImportCsvDialog importDialog(this);
     importDialog.exec();
+}
+
+
+void QMTrainDataWidget::executeMultiEdit()
+{
+    auto modelIndexList = ui->tvTrainData->selectionModel()->selectedRows();
+    if (modelIndexList.size() <= 1)
+    {
+        return;
+    }
+
+    // Ask to be sure.
+    auto ok = QMessageBox::question(this, tr("Mehrfachänderung"),
+            tr("Bist du dir sicher, dass du die Änderungen in die Datenbank schreiben möchtest? Die Rückstellung bei "
+               "fehlerhaften Eintragen ist aufwendig und muss manuell durchgeführt werden."),
+            QMessageBox::Yes | QMessageBox::No);
+    if (ok != QMessageBox::Yes)
+    {
+        return;
+    }
+
+    for (int i = 0; i < modelIndexList.size(); i++)
+    {
+        auto modelIndex = modelIndexList.at(i);
+        auto modelIndexTrainFieldIndex = trainDataModel->fieldIndex("Train_name_2");
+        auto modelIndexEmployeeFieldIndex = trainDataModel->fieldIndex("Employee_name_3");
+        auto modelIndexStateFieldIndex = trainDataModel->fieldIndex("name");
+        auto dateFieldIndex = trainDataModel->fieldIndex("date");
+
+        // Set properties...
+        if (ui->cbSetTrain->isChecked())
+        {
+            auto selTrainRow = ui->cbTrain->currentIndex();
+            auto selTrainIdFieldIndex = trainViewModel->fieldIndex("id");
+            auto selTrainIdModelIndex = trainViewModel->index(selTrainRow, selTrainIdFieldIndex);
+            auto selTrainId = trainViewModel->data(selTrainIdModelIndex).toInt();
+
+            auto trainDataTrainModelIndex = trainDataModel->index(modelIndex.row(), modelIndexTrainFieldIndex);
+            auto ok = trainDataModel->setData(trainDataTrainModelIndex, selTrainId);
+
+            if (!ok)
+            {
+                emit warnMessageAvailable(tr("Cannot den Eintrag Nr. %1 nicht ändern.").arg(modelIndex.row()));
+            }
+        }
+        if (ui->cbSetName->isChecked())
+        {
+            auto selNameRow = ui->cbName->currentIndex();
+            auto selNameIdFieldIndex = employeeViewModel->fieldIndex("id");
+            auto selNameIdModelIndex = employeeViewModel->index(selNameRow, selNameIdFieldIndex);
+            auto selNameId = employeeViewModel->data(selNameIdModelIndex).toInt();
+
+            auto trainDataNameModelIndex = trainDataModel->index(modelIndex.row(), modelIndexEmployeeFieldIndex);
+            auto ok = trainDataModel->setData(trainDataNameModelIndex, selNameId);
+
+            if (!ok)
+            {
+                emit warnMessageAvailable(tr("Cannot den Eintrag Nr. %1 nicht ändern.").arg(modelIndex.row()));
+            }
+        }
+        if (ui->cbSetState->isChecked())
+        {
+            auto selStateRow = ui->cbTrainState->currentIndex();
+            auto selStateIdFieldIndex = trainDataStateViewModel->fieldIndex("id");
+            auto selStateIdModelIndex = trainDataStateViewModel->index(selStateRow, selStateIdFieldIndex);
+            auto selStateId = trainDataStateViewModel->data(selStateIdModelIndex).toInt();
+
+            auto trainDataStateModelIndex = trainDataModel->index(modelIndex.row(), modelIndexStateFieldIndex);
+            auto ok = trainDataModel->setData(trainDataStateModelIndex, selStateId);
+
+            if (!ok)
+            {
+                emit warnMessageAvailable(tr("Cannot den Eintrag Nr. %1 nicht ändern.").arg(modelIndex.row()));
+            }
+        }
+        if (ui->cbSetDate->isChecked())
+        {
+            auto dateISO = ui->cwTrainDate->selectedDate().toString("yyyy-MM-dd");
+
+            auto trainDataDateModelIndex = trainDataModel->index(modelIndex.row(), dateFieldIndex);
+            auto ok = trainDataModel->setData(trainDataDateModelIndex, dateISO);
+
+            if (!ok)
+            {
+                emit warnMessageAvailable(tr("Cannot den Eintrag Nr. %1 nicht ändern.").arg(modelIndex.row()));
+            }
+        }
+    }
 }
 
 void QMTrainDataWidget::updateData()
@@ -117,6 +208,14 @@ void QMTrainDataWidget::updateData()
     ui->cbFilterTrain->setModel(trainViewModel.get());
     ui->cbFilterState->setModel(trainDataStateViewModel.get());
     ui->tvCertificates->setModel(trainDataCertViewModel.get());
+
+    ui->cbName->setModel(employeeViewModel.get());
+    ui->cbTrainState->setModel(trainDataStateViewModel.get());
+    ui->cbTrain->setModel(trainViewModel.get());
+
+    ui->cbName->setModelColumn(1);
+    ui->cbTrainState->setModelColumn(1);
+    ui->cbTrain->setModelColumn(1);
 
     updateTableView();
 
@@ -165,8 +264,9 @@ void QMTrainDataWidget::updateFilter()
         emit warnMessageAvailable(tr("Mehr als %1 Einträge").arg(trainDataModel->getLimit()));
     }
 
-    // Close an open certificate widget.
+    // Close an open dock widget.
     ui->dwTrainDataCertificates->setVisible(false);
+    ui->dwMultiEdit->setVisible(false);
 }
 
 void QMTrainDataWidget::resetFilter()
@@ -371,14 +471,26 @@ void QMTrainDataWidget::deleteSelected()
     trainDataModel->select();
 }
 
+void QMTrainDataWidget::showMultiEdit()
+{
+    auto modelIndexList = ui->tvTrainData->selectionModel()->selectedRows();
+    if (modelIndexList.size() <= 1)
+    {
+        return;
+    }
+
+    ui->laSelCount->setText(QString::number(modelIndexList.size()));
+
+    // Show the details docked widget (might be invisible).
+    ui->dwMultiEdit->setVisible(true);
+    ui->dwTrainDataCertificates->setVisible(false);
+}
+
 void QMTrainDataWidget::showTrainDataCertificates()
 {
     auto modelIndexList = ui->tvTrainData->selectionModel()->selectedRows();
-
     if (modelIndexList.size() != 1)
     {
-        emit infoMessageAvailable(tr("Details werden nur bei genau einer Selektion angezeigt"));
-        ui->dwTrainDataCertificates->setVisible(false);
         return;
     }
 
@@ -403,16 +515,36 @@ void QMTrainDataWidget::showTrainDataCertificates()
     trainDataCertViewModel->setFilter(QString("train_data=%1").arg(trainDataId));
 
     // Show the details docked widget (might be invisible).
+    ui->dwMultiEdit->setVisible(false);
     ui->dwTrainDataCertificates->setVisible(true);
 }
 
 void QMTrainDataWidget::trainDataSelectionChanged(const QItemSelection &selected,
     const QItemSelection &deselected)
 {
-    if (selected.indexes().size() > 0)
+    auto modelIndexList = ui->tvTrainData->selectionModel()->selectedRows();
+    if (modelIndexList.size() == 1)
     {
         showTrainDataCertificates();
+        return;
     }
+
+    if (modelIndexList.size() > 1)
+    {
+        showMultiEdit();
+        return;
+    }
+
+    ui->dwMultiEdit->setVisible(false);
+    ui->dwTrainDataCertificates->setVisible(false);
+}
+
+void QMTrainDataWidget::updateMultiEditEnabledState()
+{
+    ui->cbTrainState->setEnabled(ui->cbSetState->isChecked());
+    ui->cbName->setEnabled(ui->cbSetName->isChecked());
+    ui->cwTrainDate->setEnabled(ui->cbSetDate->isChecked());
+    ui->cbTrain->setEnabled(ui->cbSetTrain->isChecked());
 }
 
 void QMTrainDataWidget::addCertificate()
