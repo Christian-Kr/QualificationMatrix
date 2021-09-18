@@ -384,8 +384,22 @@ void QMTrainDataWidget::showTrainDataCertificates()
 
     auto modelIndex = modelIndexList.at(0);
 
+    // Show information of selected entry.
+    auto selRow = modelIndex.row();
+
+    auto idFieldIndex = trainDataModel->fieldIndex("id");
+    auto employeeFieldIndex = trainDataModel->fieldIndex("Employee_name_3");
+    auto trainFieldIndex = trainDataModel->fieldIndex("Train_name_2");
+    auto dateFieldIndex = trainDataModel->fieldIndex("date");
+    auto stateFieldIndex = trainDataModel->fieldIndex("name");
+
+    ui->laEmployeeName->setText(trainDataModel->data(trainDataModel->index(selRow, employeeFieldIndex)).toString());
+    ui->laTraining->setText(trainDataModel->data(trainDataModel->index(selRow, trainFieldIndex)).toString());
+    ui->laDate->setText(trainDataModel->data(trainDataModel->index(selRow, dateFieldIndex)).toString());
+    ui->laState->setText(trainDataModel->data(trainDataModel->index(selRow, stateFieldIndex)).toString());
+
     // Get the train data id (primary key) and use it to filter the certificate table.
-    auto trainDataId = trainDataModel->data(trainDataModel->index(modelIndex.row(), 0)).toInt();
+    auto trainDataId = trainDataModel->data(trainDataModel->index(selRow, idFieldIndex)).toInt();
     trainDataCertViewModel->setFilter(QString("train_data=%1").arg(trainDataId));
 
     // Show the details docked widget (might be invisible).
