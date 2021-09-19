@@ -187,6 +187,53 @@ bool QMAMSManager::setLastLoginDateTime(QString &name)
     return false;
 }
 
+bool QMAMSManager::setPassword(int userId, const QString &password)
+{
+    // This function can - for now - only be used, when you are logged in as administrator user.
+    if (loginState == LoginState::NOT_LOGGED_IN || loggedinUser->username.compare("administrator") != 0)
+    {
+        return false;
+    }
+
+    // Get the database connection.
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        qWarning("Database is not connected");
+        return false;
+    }
+
+    auto db = QSqlDatabase::database("default");
+
+    QMAMSUserModel amsUserModel(this, db);
+    amsUserModel.select();
+
+    auto userIdFieldIndex = amsUserModel.fieldIndex("amsuser_id");
+    auto passwordFieldIndex = amsUserModel.fieldIndex("amsuser_password");
+
+    for (int i = 0; i < amsUserModel.rowCount(); i++)
+    {
+        auto userIdModelIndex = amsUserModel.index(i, userIdFieldIndex);
+        auto dbUserId = amsUserModel.data(userIdModelIndex).toInt();
+
+        if (dbUserId == userId)
+        {
+            auto passwordModelIndex = amsUserModel.index(i, passwordFieldIndex);
+            auto newPassword = createPasswordHash(password);
+
+            if (amsUserModel.setData(passwordModelIndex, newPassword) || amsUserModel.submitAll())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+
+    return false;
+}
+
 LoginResult QMAMSManager::loginUser(const QString &name, const QString &password)
 {
     logoutUser();

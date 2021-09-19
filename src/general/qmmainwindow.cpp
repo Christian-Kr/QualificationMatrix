@@ -719,6 +719,17 @@ void QMMainWindow::enterWindowMode(WIN_MODE mode)
     {
         case WIN_MODE::TRAININGDATA:
         {
+            // Permission check.
+            auto amsManager = QMAMSManager::getInstance();
+            if (!amsManager->checkPermission(AccessMode::TD_MODE_READ) &&
+                !amsManager->checkPermission(AccessMode::TD_MODE_WRITE))
+            {
+                QMessageBox::warning(this, tr("Schulungsdaten"),
+                        tr("Sie haben nicht die notwendigen Berechtigungen."));
+                ui->actModeTrainingData->setChecked(false);
+                return;
+            }
+
             trainDataWidget = std::make_unique<QMTrainDataWidget>();
             layout->insertWidget(0, trainDataWidget.get());
 

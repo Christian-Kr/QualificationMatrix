@@ -180,6 +180,12 @@ public:
     /// \return True if equal, else false.
     static bool checkPasswordHash(const QString &pw, const QString &hash);
 
+    /// Set the password for the given user.
+    /// \param password The new clear text password.
+    /// \param userId The user id which is the primary key of the user in the AMSUser table.
+    /// \return True if successfull, else false.
+    bool setPassword(int userId, const QString &password);
+
 signals:
     /// Emited when the login state changed.
     /// \param before Login state before the change.
