@@ -71,15 +71,31 @@ enum class LoginState
     NOT_LOGGED_IN
 };
 
+
+/// The struct holds information about general access permissions for a user.
+struct QMAMSUserGeneralAccessPermissions
+{
+    // A list with access modes from the database. The codes must be available as an enum from AccessMode.
+    QList<int> accessModes;
+};
+
 /// The struct is an information holder for user data.
 struct QMAMSUserInformation
 {
     bool found = false;
     bool active = false;
     int failedLoginCount = 0;
+
+    // The database id representing the primary key.
+    int id;
+
+    // The name that will be used for login.
     QString username;
+
     QString fullname;
     QString password;
+
+    QMAMSUserGeneralAccessPermissions generalPermissions;
 };
 
 /// The class is the manager for the acces management system. Here you get all
@@ -128,11 +144,11 @@ public:
 
     /// Get full name of the currently logged in user.
     /// \return The full name of the current login user, else empty.
-    QString * getLoginFullName() const { return fullname.get(); }
+    QString getLoginFullName() const { return loggedinUser->fullname; }
 
     /// Get user name of the current login user.
     /// \return The login name of the current login user, else empty.
-    QString * getLoginUserName() const { return username.get(); }
+    QString getLoginUserName() const { return loggedinUser->username; }
 
     /// Login with the given credentials. Any logged in user will
     /// automatically be logged out.
@@ -142,9 +158,7 @@ public:
     LoginResult loginUser(const QString &username, const QString &password);
 
     /// Logout the current user.
-    /// \return True on success, else false. When no user is logged in,
-    ///     method will always return true.
-    bool logoutUser();
+    void logoutUser();
 
     /// Call if you want to know whether a user is logged in or not.
     /// \return
@@ -182,31 +196,48 @@ private:
     /// \return True if exist, else false.
     bool checkForAdministrator(QSqlDatabase &database);
 
-    /// Get the password from a user. This function will take the information
+    /// Get information from a user. This function will take the information
     /// from the database directly.
     /// \param username The username to get information from.
     /// \return User information as a struct.
     QMAMSUserInformation getUserFromDatabase(const QString &username);
 
+    /// Get the general permission information from a user.
+    /// \param userInfo The user information struct to find the user.
+    /// \return General user permission struct.
+    QMAMSUserGeneralAccessPermissions getUserGeneralAccessPermissionsFromDatabase(QMAMSUserInformation &userInfo);
+
+    /// Get a list of all group names, that correlate to the given username.
+    /// \param username The name of the user to get the information for.
+    /// \return A list of group names, the user ist part of.
+    QList<QString> getUserGroupsFromDatabase(const QString &username);
+
+    /// Get a list of all access modes for the list of group names.
+    /// \param groupNames The list of group names to get the access modes for.
+    /// \return A list of all access modes for the given list of group names.
+    QList<QString> getGroupAccessModesFromDatabase(const QList<QString> &groupNames);
+
+    /// Get a list of values from a list access mode names.
+    /// \param accessModeNames The acces mode names to translate.
+    /// \return A list with all values for access mode names.
+    QList<int> getAccessModeValuesFromDatabase(const QList<QString> &accessModeNames);
+
     /// Set the timestamp to the last login user.
     /// \param user The user to set the last login timestamp.
     /// \return True is success, else false.
-    static bool setLastLoginDateTime(QString user);
+    static bool setLastLoginDateTime(QString &user);
 
     /// Set the failed login count to a specific number.
     /// \param name The username to set the count for.
     /// \param count The count to set.
-    static bool setFailedLoginCount(QString name, int count);
+    static bool setFailedLoginCount(QString &name, int count);
 
     // Variables
 
     static QMAMSManager *instance;
 
-    std::unique_ptr<QString> username;
-    std::unique_ptr<QString> fullname;
-
+    std::unique_ptr<QMAMSUserInformation> loggedinUser;
     LoginState loginState;
-
     std::unique_ptr<QString> lastError;
 };
 

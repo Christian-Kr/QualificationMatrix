@@ -406,7 +406,7 @@ void QMSettingsDialog::changeSettingsGroup(QTreeWidgetItem *item, const int)
 
         auto am = QMAMSManager::getInstance();
         if (settingsWidget->adminAccessNeeded() &&
-            am->getLoginUserName()->compare("administrator") != 0)
+            am->getLoginUserName().compare("administrator") != 0)
         {
             QMAMSLoginDialog loginDialog(this);
             loginDialog.setUsername("administrator");

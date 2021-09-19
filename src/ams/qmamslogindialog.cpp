@@ -45,7 +45,7 @@ void QMAMSLoginDialog::login()
 
     auto am = QMAMSManager::getInstance();
 
-    if (am->getLoginUserName()->compare(username) == 0)
+    if (am->getLoginUserName().compare(username) == 0)
     {
         QMessageBox::information(this, tr("Anmelden"),
                 tr("Benutzer ist bereits angemeldet."));

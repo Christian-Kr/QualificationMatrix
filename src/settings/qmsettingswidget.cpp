@@ -35,7 +35,7 @@ void QMSettingsWidget::showEvent(QShowEvent *event)
         // else set the widget to invisible.
 
         auto am = QMAMSManager::getInstance();
-        if (am->getLoginUserName()->compare("administrator") != 0)
+        if (am->getLoginUserName().compare("administrator") != 0)
         {
             qDebug() << "Try to open admin widget without being logged in";
             setVisible(false);

@@ -13,6 +13,9 @@
 
 #include "qmamsmanager.h"
 #include "ams/model/qmamsusermodel.h"
+#include "ams/model/qmamsgroupaccessmodemodel.h"
+#include "ams/model/qmamsusergroupmodel.h"
+#include "ams/model/qmamsaccessmodemodel.h"
 
 #include <QSqlDatabase>
 #include <QSqlRecord>
@@ -29,24 +32,20 @@ QMAMSManager *QMAMSManager::instance = nullptr;
 
 QMAMSManager::QMAMSManager()
     : QObject()
-    , username(std::make_unique<QString>())
-    , fullname(std::make_unique<QString>())
     , loginState(LoginState::NOT_LOGGED_IN)
     , lastError(std::make_unique<QString>())
+    , loggedinUser(std::make_unique<QMAMSUserInformation>())
 {}
 
 bool QMAMSManager::checkDatabase()
 {
-    // INFO: For now, this function won't check the whole structure and all of
-    // its tables. This might already be implemented by version check. The only
-    // check that needs to be done is: Exist an "administrator" user or not. If
-    // the user does not exist, the method will try to create it with an empty
-    // password. If creating the administrator user is successful the function
-    // might return true, cause the check is ok again.
+    // INFO: For now, this function won't check the whole structure and all of its tables. This might already be
+    // implemented by version check. The only check that needs to be done is: Exist an "administrator" user or not. If
+    // the user does not exist, the method will try to create it with an empty password. If creating the
+    // administrator user is successful the function might return true, cause the check is ok again.
 
     // Get the database connection.
-    if (!QSqlDatabase::contains("default") ||
-    !QSqlDatabase::database("default", false).isOpen())
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
     {
         qWarning("Database is not connected");
         return false;
@@ -90,22 +89,13 @@ bool QMAMSManager::checkForAdministrator(QSqlDatabase &database)
     return false;
 }
 
-bool QMAMSManager::logoutUser()
+void QMAMSManager::logoutUser()
 {
-    if (getLoginState() == LoginState::NOT_LOGGED_IN)
-    {
-        return true;
-    }
-
-    username->clear();
-    fullname->clear();
-
+    loggedinUser = std::make_unique<QMAMSUserInformation>();
     setLoginState(LoginState::NOT_LOGGED_IN);
-
-    return true;
 }
 
-bool QMAMSManager::setFailedLoginCount(QString name, int count)
+bool QMAMSManager::setFailedLoginCount(QString &name, int count)
 {
     // Get the database connection.
     if (!QSqlDatabase::contains("default") ||
@@ -151,7 +141,7 @@ bool QMAMSManager::setFailedLoginCount(QString name, int count)
     return false;
 }
 
-bool QMAMSManager::setLastLoginDateTime(QString name)
+bool QMAMSManager::setLastLoginDateTime(QString &name)
 {
     // Get the database connection.
     if (!QSqlDatabase::contains("default") ||
@@ -197,15 +187,14 @@ bool QMAMSManager::setLastLoginDateTime(QString name)
     return false;
 }
 
-LoginResult QMAMSManager::loginUser(const QString &name,
-        const QString &password)
+LoginResult QMAMSManager::loginUser(const QString &name, const QString &password)
 {
-    if (!logoutUser())
-    {
-        return LoginResult::FAILED_UNKNOWN;
-    }
+    logoutUser();
 
+    // Get the user data from the database.
     auto userInfo = getUserFromDatabase(name);
+
+    // Do several tests, whether login should fail or not.
     if (!userInfo.found)
     {
         return LoginResult::USER_NOT_EXIST;
@@ -216,8 +205,7 @@ LoginResult QMAMSManager::loginUser(const QString &name,
         return LoginResult::USER_NOT_ACTIVE;
     }
 
-    if (userInfo.failedLoginCount > MAX_LOGIN_COUNT ||
-        userInfo.failedLoginCount < 0)
+    if (userInfo.failedLoginCount > MAX_LOGIN_COUNT || userInfo.failedLoginCount < 0)
     {
         return LoginResult::FAILED_LOGIN_COUNT;
     }
@@ -226,19 +214,21 @@ LoginResult QMAMSManager::loginUser(const QString &name,
     {
         if(checkPasswordHash(password, userInfo.password))
         {
-            *username = userInfo.username;
-            *fullname = userInfo.fullname;
-
             if (!setLastLoginDateTime(userInfo.username))
             {
                 qCritical() << "cannot set last login date";
             }
 
-            auto res = setFailedLoginCount(userInfo.username, 0);
-            if (!res)
+            if (!setFailedLoginCount(userInfo.username, 0))
             {
                 qCritical() << "cannot set failed login count";
             }
+
+            loggedinUser->username = userInfo.username;
+            loggedinUser->fullname = userInfo.fullname;
+
+            auto generalPermissions = getUserGeneralAccessPermissionsFromDatabase(*loggedinUser);
+            loggedinUser->generalPermissions = generalPermissions;
 
             setLoginState(LoginState::LOGGED_IN);
 
@@ -246,9 +236,7 @@ LoginResult QMAMSManager::loginUser(const QString &name,
         }
         else
         {
-            auto res = setFailedLoginCount(userInfo.username,
-                    ++userInfo.failedLoginCount);
-            if (!res)
+            if (!setFailedLoginCount(userInfo.username, ++userInfo.failedLoginCount))
             {
                 qCritical() << "cannot set failed login count";
             }
@@ -263,8 +251,7 @@ LoginResult QMAMSManager::loginUser(const QString &name,
 bool QMAMSManager::createAdminInDatabase()
 {
     // Get the database connection.
-    if (!QSqlDatabase::contains("default") ||
-        !QSqlDatabase::database("default", false).isOpen())
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
     {
         qWarning("Database is not connected");
         return false;
@@ -304,8 +291,7 @@ bool QMAMSManager::createAdminInDatabase()
     record.setValue("amsuser_unsuccess_login_num", 0);
     record.setValue("amsuser_active", 1);
 
-    if (!amsUserModel.insertRecord(-1, record) ||
-        !amsUserModel.submitAll())
+    if (!amsUserModel.insertRecord(-1, record) || !amsUserModel.submitAll())
     {
         return false;
     }
@@ -313,13 +299,182 @@ bool QMAMSManager::createAdminInDatabase()
     return true;
 }
 
+QMAMSUserGeneralAccessPermissions QMAMSManager::getUserGeneralAccessPermissionsFromDatabase(
+        QMAMSUserInformation &userInfo)
+{
+    // Get the database connection.
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        qWarning("Database is not connected");
+        return {};
+    }
+
+    auto db = QSqlDatabase::database("default");
+
+    // To ge the necessary information, get the user id, get the connected groups to the user id and at last, get the
+    // permissions that are correlated with the groups.
+
+    QList<QString> groupNames = getUserGroupsFromDatabase(userInfo.username);
+    if (groupNames.isEmpty())
+    {
+        return {};
+    }
+
+    QList<QString> accessModeNames = getGroupAccessModesFromDatabase(groupNames);
+    if (accessModeNames.isEmpty())
+    {
+        return {};
+    }
+
+    QList<int> accessModeValues = getAccessModeValuesFromDatabase(accessModeNames);
+    if (accessModeValues.isEmpty())
+    {
+        return {};
+    }
+
+    QMAMSUserGeneralAccessPermissions generalPermissions;
+    generalPermissions.accessModes = accessModeValues;
+
+    return generalPermissions;
+}
+
+QList<int> QMAMSManager::getAccessModeValuesFromDatabase(const QList<QString> &accessModeNames)
+{
+    // Get the database connection.
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        qWarning("Database is not connected");
+        return {};
+    }
+
+    auto db = QSqlDatabase::database("default");
+
+    QMAMSAccessModeModel amsAccessModeModel(this, db);
+    amsAccessModeModel.select();
+
+    QList<int> accessModeValues;
+
+    auto nameFieldIndex = amsAccessModeModel.fieldIndex("amsaccessmode_name");
+    auto valueFieldIndex = amsAccessModeModel.fieldIndex("amsaccessmode_value");
+
+    for (int i = 0; i < accessModeNames.count(); i++)
+    {
+        auto &accessModeName = accessModeNames.at(i);
+        for (int j = 0; j < amsAccessModeModel.rowCount(); j++)
+        {
+            auto nameModelIndex = amsAccessModeModel.index(j, nameFieldIndex);
+            auto dbName = amsAccessModeModel.data(nameModelIndex).toString();
+
+            if (dbName.compare(accessModeName) == 0)
+            {
+                auto valueModelIndex = amsAccessModeModel.index(j, valueFieldIndex);
+                auto dbValue = amsAccessModeModel.data(valueModelIndex).toInt();
+
+                if (!accessModeValues.contains(dbValue))
+                {
+                    accessModeValues.append(i);
+                }
+
+                // If we found the right entry, go on with the names list.
+                break;
+            }
+        }
+    }
+
+    return accessModeValues;
+}
+
+QList<QString> QMAMSManager::getGroupAccessModesFromDatabase(const QList<QString> &groupNames)
+{
+    // Get the database connection.
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        qWarning("Database is not connected");
+        return {};
+    }
+
+    auto db = QSqlDatabase::database("default");
+
+    QMAMSGroupAccessModeModel amsGroupAccessModeModel(this, db);
+    amsGroupAccessModeModel.select();
+
+    QList<QString> accessModeNames;
+
+    auto accessmodeFieldIndex = amsGroupAccessModeModel.fieldIndex("amsgroupaccessmode_access_mode");
+    auto groupnameFieldIndex = amsGroupAccessModeModel.fieldIndex("amsgroupaccessmode_group");
+    for (int i = 0; i < amsGroupAccessModeModel.rowCount(); i++)
+    {
+        auto groupnameModelIndex = amsGroupAccessModeModel.index(i, groupnameFieldIndex);
+        auto dbGroupname = amsGroupAccessModeModel.data(groupnameModelIndex).toString();
+
+        for (int j = 0; j < groupNames.count(); j++)
+        {
+            auto &groupname = groupNames.at(j);
+
+            if (dbGroupname.compare(groupname) == 0) {
+                // Get the access mode.
+                auto accessmodeModelIndex = amsGroupAccessModeModel.index(i, accessmodeFieldIndex);
+                auto dbAccessmode = amsGroupAccessModeModel.data(accessmodeModelIndex).toString();
+
+                if (!accessModeNames.contains(dbAccessmode)) {
+                    accessModeNames.append(dbAccessmode);
+                }
+
+                // If one of the groups fit, we don't have to search for further, cause the access mode has already
+                // been added.
+                break;
+            }
+        }
+    }
+
+    return accessModeNames;
+}
+
+QList<QString> QMAMSManager::getUserGroupsFromDatabase(const QString &username)
+{
+    // Get the database connection.
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        qWarning("Database is not connected");
+        return {};
+    }
+
+    auto db = QSqlDatabase::database("default");
+
+    QMAMSUserGroupModel amsUserGroupModel(this, db);
+    amsUserGroupModel.select();
+
+    QList<QString> groupNames;
+
+    auto usernameFieldIndex = amsUserGroupModel.fieldIndex("amsusergroup_user");
+    auto groupnameFieldIndex = amsUserGroupModel.fieldIndex("amsusergroup_group");
+    for (int i = 0; i < amsUserGroupModel.rowCount(); i++)
+    {
+        auto usernameModelIndex = amsUserGroupModel.index(i, usernameFieldIndex);
+        auto dbUsername = amsUserGroupModel.data(usernameModelIndex).toString();
+
+        if (dbUsername.compare(username) == 0)
+        {
+            // Get the group name.
+            auto groupnameModelIndex = amsUserGroupModel.index(i, groupnameFieldIndex);
+            auto dbGroupname = amsUserGroupModel.data(groupnameModelIndex).toString();
+
+            if (!groupNames.contains(dbGroupname))
+            {
+                groupNames.append(dbGroupname);
+            }
+        }
+    }
+
+    return groupNames;
+}
+
 QMAMSUserInformation QMAMSManager::getUserFromDatabase(const QString &username)
 {
     QMAMSUserInformation userInfo;
 
     // Get the database connection.
-    if (!QSqlDatabase::contains("default") ||
-        !QSqlDatabase::database("default", false).isOpen())
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
     {
         qWarning("Database is not connected");
         return userInfo;
@@ -339,6 +494,10 @@ QMAMSUserInformation QMAMSManager::getUserFromDatabase(const QString &username)
 
         if (dbUsername == username)
         {
+            auto idFieldIndex = amsUserModel.fieldIndex("amsuser_id");
+            auto idModelIndex = amsUserModel.index(i, idFieldIndex);
+            auto dbId = amsUserModel.data(idModelIndex).toInt();
+
             auto nameFieldIndex = amsUserModel.fieldIndex("amsuser_user");
             auto nameModelIndex = amsUserModel.index(i, nameFieldIndex);
             auto dbFullname = amsUserModel.data(nameModelIndex).toString();
@@ -347,12 +506,9 @@ QMAMSUserInformation QMAMSManager::getUserFromDatabase(const QString &username)
             auto pwModelIndex = amsUserModel.index(i, pwFieldIndex);
             auto dbPassword = amsUserModel.data(pwModelIndex).toString();
 
-            auto failedLoginFieldIndex = amsUserModel.fieldIndex(
-                    "amsuser_unsuccess_login_num");
-            auto failedLoginModelIndex = amsUserModel.index(i,
-                    failedLoginFieldIndex);
-            auto dbFailedLoginCount = amsUserModel.data(failedLoginModelIndex)
-                    .toInt();
+            auto failedLoginFieldIndex = amsUserModel.fieldIndex("amsuser_unsuccess_login_num");
+            auto failedLoginModelIndex = amsUserModel.index(i, failedLoginFieldIndex);
+            auto dbFailedLoginCount = amsUserModel.data(failedLoginModelIndex).toInt();
 
             auto activeFieldIndex = amsUserModel.fieldIndex("amsuser_active");
             auto activeModelIndex = amsUserModel.index(i, activeFieldIndex);
@@ -361,6 +517,7 @@ QMAMSUserInformation QMAMSManager::getUserFromDatabase(const QString &username)
             userInfo.username = dbUsername;
             userInfo.password = dbPassword;
             userInfo.fullname = dbFullname;
+            userInfo.id = dbId;
             userInfo.found = true;
             userInfo.failedLoginCount = dbFailedLoginCount;
             userInfo.active = active;
@@ -387,16 +544,13 @@ void QMAMSManager::setLoginState(LoginState state)
 
 QString QMAMSManager::createPasswordHash(const QString &pw)
 {
-    auto tmpStdHash = Botan::argon2_generate_pwhash(pw.toStdString().c_str(),
-            pw.length(), Botan::system_rng(), 1, 8192, 100);
-
+    auto tmpStdHash = Botan::argon2_generate_pwhash(pw.toStdString().c_str(), pw.length(), Botan::system_rng(), 1,
+            8192, 100);
     return QString::fromStdString(tmpStdHash);
 }
 
 bool QMAMSManager::checkPasswordHash(const QString &pw, const QString &hash)
 {
     auto tmpStdHash = hash.toStdString();
-
-    return Botan::argon2_check_pwhash(pw.toStdString().c_str(), pw.length(),
-            tmpStdHash);
+    return Botan::argon2_check_pwhash(pw.toStdString().c_str(), pw.length(), tmpStdHash);
 }

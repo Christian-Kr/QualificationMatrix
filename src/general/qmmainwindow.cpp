@@ -802,7 +802,7 @@ void QMMainWindow::handleLoginChange(LoginState before, LoginState current)
     {
         auto am = QMAMSManager::getInstance();
 
-        tbAMS->setText(*am->getLoginUserName());
+        tbAMS->setText(am->getLoginUserName());
         tbAMS->setIcon(QIcon(":/icons/icons/im-user-online.svg"));
     }
     else
@@ -841,12 +841,5 @@ void QMMainWindow::amsLogin()
 void QMMainWindow::amsLogout()
 {
     auto am = QMAMSManager::getInstance();
-
-    if (!am->logoutUser())
-    {
-        QMessageBox::critical(this, tr("Abmelden"), tr("Der Nutzer konnte "
-            "nicht abgemeldet werden."));
-        qWarning() << "user could not be logged out";
-        return;
-    }
+    am->logoutUser();
 }
