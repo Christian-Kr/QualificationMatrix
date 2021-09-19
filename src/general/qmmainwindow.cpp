@@ -753,6 +753,17 @@ void QMMainWindow::enterWindowMode(WIN_MODE mode)
         break;
         case WIN_MODE::MATRIX:
         {
+            // Permission check.
+            auto amsManager = QMAMSManager::getInstance();
+            if (!amsManager->checkPermission(AccessMode::QM_MODE_READ) &&
+                !amsManager->checkPermission(AccessMode::QM_MODE_WRITE))
+            {
+                QMessageBox::warning(this, tr("Qualifizierungsmatrix"),
+                        tr("Sie haben nicht die notwendigen Berechtigungen."));
+                ui->actModeQualiMatrix->setChecked(false);
+                return;
+            }
+
             qualiMatrixWidget = std::make_unique<QMQualiMatrixWidget>();
             layout->insertWidget(0, qualiMatrixWidget.get());
 
@@ -775,6 +786,16 @@ void QMMainWindow::enterWindowMode(WIN_MODE mode)
         break;
         case WIN_MODE::RESULT:
         {
+            // Permission check.
+            auto amsManager = QMAMSManager::getInstance();
+            if (!amsManager->checkPermission(AccessMode::QR_MODE_READ))
+            {
+                QMessageBox::warning(this, tr("Qualifizierungsresultat"),
+                        tr("Sie haben nicht die notwendigen Berechtigungen."));
+                ui->actModeResult->setChecked(false);
+                return;
+            }
+
             qualiResultWidget = std::make_unique<QMQualiResultWidget>();
             layout->insertWidget(0, qualiResultWidget.get());
 
