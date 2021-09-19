@@ -419,7 +419,7 @@ QList<int> QMAMSManager::getAccessModeValuesFromDatabase(const QList<QString> &a
 
                 if (!accessModeValues.contains(dbValue))
                 {
-                    accessModeValues.append(i);
+                    accessModeValues.append(dbValue);
                 }
 
                 // If we found the right entry, go on with the names list.
@@ -447,8 +447,8 @@ QList<QString> QMAMSManager::getGroupAccessModesFromDatabase(const QList<QString
 
     QList<QString> accessModeNames;
 
-    auto accessmodeFieldIndex = amsGroupAccessModeModel.fieldIndex("amsgroupaccessmode_access_mode");
-    auto groupnameFieldIndex = amsGroupAccessModeModel.fieldIndex("amsgroupaccessmode_group");
+    auto accessmodeFieldIndex = amsGroupAccessModeModel.fieldIndex("amsaccessmode_name");
+    auto groupnameFieldIndex = amsGroupAccessModeModel.fieldIndex("amsgroup_name");
     for (int i = 0; i < amsGroupAccessModeModel.rowCount(); i++)
     {
         auto groupnameModelIndex = amsGroupAccessModeModel.index(i, groupnameFieldIndex);
@@ -493,13 +493,13 @@ QList<QString> QMAMSManager::getUserGroupsFromDatabase(const QString &username)
 
     QList<QString> groupNames;
 
-    auto usernameFieldIndex = amsUserGroupModel.fieldIndex("amsusergroup_user");
-    auto groupnameFieldIndex = amsUserGroupModel.fieldIndex("amsusergroup_group");
+    auto usernameFieldIndex = amsUserGroupModel.fieldIndex("amsuser_username");
+    auto groupnameFieldIndex = amsUserGroupModel.fieldIndex("amsgroup_name");
     for (int i = 0; i < amsUserGroupModel.rowCount(); i++)
     {
         auto usernameModelIndex = amsUserGroupModel.index(i, usernameFieldIndex);
         auto dbUsername = amsUserGroupModel.data(usernameModelIndex).toString();
-
+        qDebug() << dbUsername << username;
         if (dbUsername.compare(username) == 0)
         {
             // Get the group name.
