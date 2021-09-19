@@ -23,6 +23,7 @@ class QSqlRelationalTableModel;
 class QSqlTableModel;
 class QProgressDialog;
 class QItemSelection;
+class QMTrainingDataModel;
 
 namespace Ui
 {
@@ -74,6 +75,9 @@ public slots:
     /// Show certificates in train data docked widget.
     void showTrainDataCertificates();
 
+    /// Show a widget for multi editing entries.
+    void showMultiEdit();
+
     /// Selection of trainDataTable changed.
     /// \param deselected
     /// \param selected
@@ -99,6 +103,15 @@ public slots:
     /// Clear filtering dates.
     void clearDates();
 
+    /// Update which item is enabled and which not on dock widget for multi edit.
+    void updateMultiEditEnabledState();
+
+    /// Execute the multi edit process.
+    void executeMultiEdit();
+
+    /// Add multiple entries.
+    void addMultipleEntries();
+
 signals:
     /// There is a short message that should be displayed.
     /// \param msg
@@ -113,7 +126,7 @@ private:
 
     std::unique_ptr<QSqlTableModel> employeeViewModel;
     std::unique_ptr<QSqlTableModel> trainViewModel;
-    std::unique_ptr<QMSqlTableModel> trainDataModel;
+    std::unique_ptr<QMTrainingDataModel> trainDataModel;
     std::unique_ptr<QSqlTableModel> trainDataStateViewModel;
     std::unique_ptr<QSqlTableModel> trainDataCertModel;
     std::unique_ptr<QSqlTableModel> trainDataCertViewModel;
