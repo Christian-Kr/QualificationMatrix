@@ -142,6 +142,11 @@ public:
     /// \return True if creation was successful, else false.
     bool createAdminInDatabase();
 
+    /// Check for permission.
+    /// \param mode The access mode to test for.
+    /// \return False if logged in user does not have the permission, else false.
+    bool checkPermission(AccessMode mode);
+
     /// Get full name of the currently logged in user.
     /// \return The full name of the current login user, else empty.
     QString getLoginFullName() const { return loggedinUser->fullname; }

@@ -554,3 +554,18 @@ bool QMAMSManager::checkPasswordHash(const QString &pw, const QString &hash)
     auto tmpStdHash = hash.toStdString();
     return Botan::argon2_check_pwhash(pw.toStdString().c_str(), pw.length(), tmpStdHash);
 }
+
+bool QMAMSManager::checkPermission(AccessMode mode)
+{
+    if (loginState == LoginState::NOT_LOGGED_IN)
+    {
+        return false;
+    }
+
+    if (loggedinUser->generalPermissions.accessModes.isEmpty())
+    {
+        return false;
+    }
+
+    return loggedinUser->generalPermissions.accessModes.contains(static_cast<int>(mode));
+}
