@@ -402,5 +402,24 @@ void QMAMSUserSettingsWidget::changePassword()
         return;
     }
 
-    // TODO: Set password
+    auto selRows = ui->tvUser->selectionModel()->selectedRows();
+    if (selRows.count() != 1)
+    {
+        qWarning() << "wrong number of selected rows";
+    }
+
+    auto userIdFieldIndex = amsUserModel->fieldIndex("amsuser_id");
+    auto userId = amsUserModel->data(amsUserModel->index(selRows.first().row(), userIdFieldIndex)).toInt();
+
+    auto amsManager = QMAMSManager::getInstance();
+    if (!amsManager->setPassword(userId, password))
+    {
+        QMessageBox::warning(this, tr("Passwort ändern"), tr("Das Passwort konnte nicht festgelegt werden."));
+        return;
+    }
+    else
+    {
+        QMessageBox::information(this, tr("Passwort ändern"), tr("Das Passwort wurde geändert."));
+        return;
+    }
 }

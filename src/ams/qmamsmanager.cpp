@@ -219,8 +219,9 @@ bool QMAMSManager::setPassword(int userId, const QString &password)
         {
             auto passwordModelIndex = amsUserModel.index(i, passwordFieldIndex);
             auto newPassword = createPasswordHash(password);
+            qDebug() << newPassword;
 
-            if (amsUserModel.setData(passwordModelIndex, newPassword) || amsUserModel.submitAll())
+            if (amsUserModel.setData(passwordModelIndex, newPassword) && amsUserModel.submitAll())
             {
                 return true;
             }
@@ -545,7 +546,7 @@ QMAMSUserInformation QMAMSManager::getUserFromDatabase(const QString &username)
             auto idModelIndex = amsUserModel.index(i, idFieldIndex);
             auto dbId = amsUserModel.data(idModelIndex).toInt();
 
-            auto nameFieldIndex = amsUserModel.fieldIndex("amsuser_user");
+            auto nameFieldIndex = amsUserModel.fieldIndex("amsuser_name");
             auto nameModelIndex = amsUserModel.index(i, nameFieldIndex);
             auto dbFullname = amsUserModel.data(nameModelIndex).toString();
 
