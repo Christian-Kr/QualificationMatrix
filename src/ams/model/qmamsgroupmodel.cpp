@@ -15,6 +15,8 @@
 
 #include "qmamsgroupmodel.h"
 
+#include <QColor>
+
 QMAMSGroupModel::QMAMSGroupModel(QObject *parent, const QSqlDatabase &db)
     : QMSqlTableModel(parent, db)
 {
@@ -33,4 +35,18 @@ void QMAMSGroupModel::initModel()
     // Specifiy header data of table.
     setHeaderData(1, Qt::Horizontal, tr("Name"));
     setHeaderData(2, Qt::Horizontal, tr("Aktiviert"));
+}
+
+QVariant QMAMSGroupModel::data(const QModelIndex &index, int role) const
+{
+    bool activated = QMSqlTableModel::data(this->index(index.row(), 2), Qt::DisplayRole).toBool();
+    if (!activated)
+    {
+        if (role == Qt::BackgroundRole)
+        {
+            return QVariant(QColor("#F8E6E0"));
+        }
+    }
+
+    return QMSqlTableModel::data(index, role);
 }

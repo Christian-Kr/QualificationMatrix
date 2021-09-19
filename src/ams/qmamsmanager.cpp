@@ -16,6 +16,7 @@
 #include "ams/model/qmamsgroupaccessmodemodel.h"
 #include "ams/model/qmamsusergroupmodel.h"
 #include "ams/model/qmamsaccessmodemodel.h"
+#include "ams/model/qmamsgroupmodel.h"
 
 #include <QSqlDatabase>
 #include <QSqlRecord>
@@ -362,7 +363,8 @@ QMAMSUserGeneralAccessPermissions QMAMSManager::getUserGeneralAccessPermissionsF
     // permissions that are correlated with the groups.
 
     QList<QString> groupNames = getUserGroupsFromDatabase(userInfo.username);
-    if (groupNames.isEmpty())
+    QList<QString> activeGroupNames = getActiveGroups(groupNames);
+    if (activeGroupNames.isEmpty())
     {
         return {};
     }
@@ -383,6 +385,48 @@ QMAMSUserGeneralAccessPermissions QMAMSManager::getUserGeneralAccessPermissionsF
     generalPermissions.accessModes = accessModeValues;
 
     return generalPermissions;
+}
+
+QList<QString> QMAMSManager::getActiveGroups(const QList<QString> &groupNames)
+{
+    // Get the database connection.
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        qWarning("Database is not connected");
+        return {};
+    }
+
+    auto db = QSqlDatabase::database("default");
+
+    QList<QString> activeGroupNames;
+
+    QMAMSGroupModel amsGroupModel(this, db);
+    amsGroupModel.select();
+
+    auto groupNameFieldIndex = amsGroupModel.fieldIndex("amsgroup_name");
+    auto activeFieldIndex = amsGroupModel.fieldIndex("amsgroup_active");
+
+    for (int i = 0; i < groupNames.count(); i ++)
+    {
+        auto groupName = groupNames.at(i);
+
+        for (int j = 0; j < amsGroupModel.rowCount(); j++)
+        {
+            auto groupNameModelIndex = amsGroupModel.index(j, groupNameFieldIndex);
+            auto activeModelIndex = amsGroupModel.index(j, activeFieldIndex);
+
+            auto dbGroupName = amsGroupModel.data(groupNameModelIndex).toString();
+            auto dbGroupActive = amsGroupModel.data(activeModelIndex).toBool();
+
+            if (dbGroupName.compare(groupName) == 0 && dbGroupActive)
+            {
+                activeGroupNames.append(groupName);
+                break;
+            }
+        }
+    }
+
+    return activeGroupNames;
 }
 
 QList<int> QMAMSManager::getAccessModeValuesFromDatabase(const QList<QString> &accessModeNames)

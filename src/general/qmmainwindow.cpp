@@ -846,6 +846,11 @@ void QMMainWindow::handleLoginChange(LoginState before, LoginState current)
 
 void QMMainWindow::amsLogin()
 {
+    WIN_MODE tmpMode = winMode;
+
+    // Close all modes.
+    closeCurrentWindowMode();
+
     auto am = QMAMSManager::getInstance();
 
     if (am->getLoginState() == LoginState::LOGGED_IN)
@@ -868,10 +873,21 @@ void QMMainWindow::amsLogin()
 
     QMAMSLoginDialog loginDialog(this);
     loginDialog.exec();
+
+    // Reset the win mode.
+    enterWindowMode(tmpMode);
 }
 
 void QMMainWindow::amsLogout()
 {
+    WIN_MODE tmpMode = winMode;
+
+    // Close all modes.
+    closeCurrentWindowMode();
+
     auto am = QMAMSManager::getInstance();
     am->logoutUser();
+
+    // Reset the win mode.
+    enterWindowMode(tmpMode);
 }

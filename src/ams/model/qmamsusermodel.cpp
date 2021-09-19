@@ -43,8 +43,7 @@ void QMAMSUserModel::initModel()
 
 QVariant QMAMSUserModel::data(const QModelIndex &index, int role) const
 {
-    bool activated = QMSqlTableModel::data(
-            this->index(index.row(), 6), Qt::DisplayRole).toBool();
+    bool activated = QMSqlTableModel::data(this->index(index.row(), 6), Qt::DisplayRole).toBool();
     if (!activated)
     {
         if (role == Qt::BackgroundRole)

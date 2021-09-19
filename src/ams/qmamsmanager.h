@@ -207,6 +207,11 @@ private:
     /// \return True if exist, else false.
     bool checkForAdministrator(QSqlDatabase &database);
 
+    /// Filter the list with group names of active name.
+    /// \param groupNames The group names to filter.
+    /// \return A list with groups, that are all active.
+    QList<QString> getActiveGroups(const QList<QString> &groupNames);
+
     /// Get information from a user. This function will take the information
     /// from the database directly.
     /// \param username The username to get information from.

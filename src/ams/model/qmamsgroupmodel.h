@@ -28,8 +28,13 @@ public:
     /// Constructor
     /// \param parent Parent object for qt system.
     /// \param db The database object to work with.
-    explicit QMAMSGroupModel(QObject *parent = nullptr,
-            const QSqlDatabase &db = QSqlDatabase());
+    explicit QMAMSGroupModel(QObject *parent = nullptr, const QSqlDatabase &db = QSqlDatabase());
+
+    /// Override from QSqlRelationTableModel
+    /// \param index
+    /// \param role
+    /// \return
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
     /// Override from QMSqlTableModel.
     void initModel() override;
