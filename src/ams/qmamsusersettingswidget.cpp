@@ -364,7 +364,6 @@ void QMAMSUserSettingsWidget::userSelectionChanged(
 void QMAMSUserSettingsWidget::deactivateUserGroupList()
 {
     ui->gbGroups->setEnabled(false);
-    ui->pbConfigUser->setEnabled(false);
     ui->pbRemoveUser->setEnabled(false);
 
     ui->lvUserGroup->setModel(nullptr);
@@ -373,7 +372,6 @@ void QMAMSUserSettingsWidget::deactivateUserGroupList()
 void QMAMSUserSettingsWidget::activateUserGroupList(int selRow)
 {
     ui->gbGroups->setEnabled(true);
-    ui->pbConfigUser->setEnabled(true);
     ui->pbRemoveUser->setEnabled(true);
 
     auto selModelIndex = amsUserModel->index(selRow, 2);
