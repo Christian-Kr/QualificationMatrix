@@ -164,7 +164,7 @@ bool QMAMSManager::setLastLoginDateTime(QString &name)
         auto usernameModelIndex = amsUserModel.index(i, usernameFieldIndex);
         auto dbUsername = amsUserModel.data(usernameModelIndex).toString();
 
-        if (dbUsername == name)
+        if (dbUsername.compare(name) == 0)
         {
             auto currDateTime = QDateTime::currentDateTime();
             auto strCurrDateTime = currDateTime.toString(Qt::ISODate);
@@ -219,7 +219,6 @@ bool QMAMSManager::setPassword(int userId, const QString &password)
         {
             auto passwordModelIndex = amsUserModel.index(i, passwordFieldIndex);
             auto newPassword = createPasswordHash(password);
-            qDebug() << newPassword;
 
             if (amsUserModel.setData(passwordModelIndex, newPassword) && amsUserModel.submitAll())
             {
