@@ -19,15 +19,14 @@
 #include "qmqualimatrixheaderview.h"
 #include "settings/qmapplicationsettings.h"
 #include "framework/qmextendedselectiondialog.h"
-#include "framework/qmsqltablemodel.h"
 #include "model/qmfunctionviewmodel.h"
 #include "model/qmfunctiongroupviewmodel.h"
 #include "model/qmtrainingviewmodel.h"
 #include "model/qmtraininggroupviewmodel.h"
+#include "ams/qmamsmanager.h"
 
 #include <QSortFilterProxyModel>
 #include <QSqlTableModel>
-#include <QSqlRelationalTableModel>
 #include <QColor>
 #include <QDebug>
 #include <QHeaderView>
@@ -73,6 +72,13 @@ QMQualiMatrixWidget::QMQualiMatrixWidget(QWidget *parent)
 
     connect(ui->tvQualiMatrix->horizontalScrollBar(), &QScrollBar::valueChanged, this,
             &QMQualiMatrixWidget::updateHeaderLabel);
+
+    // Default permission look.
+    auto amsManager = QMAMSManager::getInstance();
+    if (!amsManager->checkPermission(AccessMode::QM_MODE_WRITE))
+    {
+        ui->tbLock->setEnabled(false);
+    }
 
     // default edit mode - not editable
     ui->tbLock->setChecked(false);
