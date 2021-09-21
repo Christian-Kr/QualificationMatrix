@@ -26,7 +26,7 @@
 #include "qmimportcsvdialog.h"
 #include "settings/qmapplicationsettings.h"
 #include "qmaddmultipletraindatadialog.h"
-#include "model/qmtrainingdatamodel.h"
+#include "ams/qmamsmanager.h"
 
 #include <QMessageBox>
 #include <QSqlRecord>
@@ -55,6 +55,19 @@ QMTrainDataWidget::QMTrainDataWidget(QWidget *parent)
     ui->dwTrainDataCertificates->setVisible(false);
     ui->dwMultiEdit->setVisible(false);
     updateMultiEditEnabledState();
+
+    // If do not have the permission, make a lot of stuff disable.
+    // Permission check.
+    auto amsManager = QMAMSManager::getInstance();
+    if (!amsManager->checkPermission(AccessMode::TD_MODE_WRITE))
+    {
+        ui->tvTrainData->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        ui->dwMultiEdit->setEnabled(false);
+        ui->pbAddMultiple->setEnabled(false);
+        ui->pbAddSingle->setEnabled(false);
+        ui->pbExecMultiEdit->setEnabled(false);
+        ui->pbDeleteSelected->setEnabled(false);
+    }
 
     // Load settings on start.
     loadSettings();

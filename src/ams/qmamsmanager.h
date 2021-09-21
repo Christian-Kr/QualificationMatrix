@@ -46,10 +46,9 @@ enum class AccessMode
     TD_MODE_READ = 3,
     TD_MODE_WRITE = 4,
 
-    // Allow to view and/or edit persistent data in tables like functions,
+    // Allow to view and edit persistent data in tables like functions,
     // trainings and or employees etc.
-    PER_DATA_READ = 5,
-    PER_DATA_WRITE = 6
+    PER_DATA_CONFIG = 5
 };
 
 /// For the login function, return a code what happens.

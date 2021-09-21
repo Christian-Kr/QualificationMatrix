@@ -11,6 +11,11 @@ CREATE TABLE IF NOT EXISTS "AMSUser" (
     PRIMARY KEY("amsuser_id")
 );
 
+INSERT INTO "AMSUser" ("amsuser_name", "amsuser_username", "amsuser_password", "amsuser_active")
+VALUES
+    ("administrator", "administrator",
+     "$argon2id$v=19$m=8192,t=100,p=1$w93g/9FGO2nAajwoi02FHw$tHjzDkGoscBHLJOGJoqh699KXvWf+JqmARrR2L4yzxk", 1);
+
 -- Group for Access Management System
 
 CREATE TABLE IF NOT EXISTS "AMSGroup" (
@@ -41,6 +46,16 @@ CREATE TABLE IF NOT EXISTS "AMSAccessMode" (
     PRIMARY KEY("amsaccessmode_id")
 );
 
+-- Add default values for access mode
+INSERT INTO "AMSAccessMode" ("amsaccessmode_name", "amsaccessmode_value", "amsaccessmode_description")
+VALUES
+       ("QM_MODE_READ", 0, "Read access to qualification matrix"),
+       ("QM_MODE_WRITE", 1, "Write and read access to qualification matrix"),
+       ("QR_MODE_READ", 2, "Read access to qualification result"),
+       ("TD_MODE_READ", 3, "Read access to training data including certification management"),
+       ("TD_MODE_WRITE", 4, "Write and read access to training data including certification management"),
+       ("PER_DATA_CONFIG", 5, "Read and write access to the persistent tables in config");
+
 -- Connects the acces modes with the groups
 
 CREATE TABLE IF NOT EXISTS "AMSGroupAccessMode" (
@@ -60,7 +75,7 @@ CREATE TABLE IF NOT EXISTS "AMSGeneral" (
     "amsgeneral_name"          TEXT,
     "amsgeneral_value"         TEXT,
     "amsgeneral_description"   TEXT,
-    PRIMARY KEY("id")
+    PRIMARY KEY("amsgeneral_id")
 );
 
 -- Update version of database

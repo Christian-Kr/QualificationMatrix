@@ -82,9 +82,17 @@ void QMSettingsDialog::initStackWidgets()
     appendConnectSettingsWidget(new QMGeneralSettingsWidget(this));
     appendConnectSettingsWidget(new QMQualiMatrixSettingsWidget(this));
     appendConnectSettingsWidget(new QMQualiResultSettingsWidget(this));
-    appendConnectSettingsWidget(new QMTrainSettingsWidget(this));
-    appendConnectSettingsWidget(new QMFuncSettingsWidget(this));
-    appendConnectSettingsWidget(new QMEmployeeSettingsWidget(this));
+
+    // If do not have the permission, make a lot of stuff disable.
+    // Permission check.
+    auto amsManager = QMAMSManager::getInstance();
+    if (amsManager->checkPermission(AccessMode::PER_DATA_CONFIG))
+    {
+        appendConnectSettingsWidget(new QMTrainSettingsWidget(this));
+        appendConnectSettingsWidget(new QMFuncSettingsWidget(this));
+        appendConnectSettingsWidget(new QMEmployeeSettingsWidget(this));
+    }
+
     appendConnectSettingsWidget(new QMAMSUserSettingsWidget(this));
     appendConnectSettingsWidget(new QMAMSGroupSettingsWidget(this));
 }
@@ -109,43 +117,51 @@ void QMSettingsDialog::settingsChanged()
 
 void QMSettingsDialog::initTreeWidgets()
 {
+    int i = 0;
+
     auto twiGeneral = new QTreeWidgetItem(ui->twSettingGroups);
     twiGeneral->setText(0, tr("Allgemein"));
-    twiGeneral->setData(0, Qt::UserRole, 0);
+    twiGeneral->setData(0, Qt::UserRole, i++);
 
     auto twiQualiMatrix = new QTreeWidgetItem(ui->twSettingGroups);
     twiQualiMatrix->setText(0, tr("Qualikationsmatrix"));
-    twiQualiMatrix->setData(0, Qt::UserRole, 1);
+    twiQualiMatrix->setData(0, Qt::UserRole, i++);
 
     auto twiQualiResult = new QTreeWidgetItem(ui->twSettingGroups);
     twiQualiResult->setText(0, tr("Qualifizierungsergebnis"));
-    twiQualiResult->setData(0, Qt::UserRole, 2);
+    twiQualiResult->setData(0, Qt::UserRole, i++);
 
-    auto twiDatasets = new QTreeWidgetItem(ui->twSettingGroups);
-    twiDatasets->setText(0, tr("Datensätze"));
+    // If do not have the permission, make a lot of stuff disable.
+    // Permission check.
+    auto amsManager = QMAMSManager::getInstance();
+    if (amsManager->checkPermission(AccessMode::PER_DATA_CONFIG))
+    {
+        auto twiDatasets = new QTreeWidgetItem(ui->twSettingGroups);
+        twiDatasets->setText(0, tr("Datensätze"));
 
-    auto twiTrainings = new QTreeWidgetItem(twiDatasets);
-    twiTrainings->setText(0, tr("Schulungen"));
-    twiTrainings->setData(0, Qt::UserRole, 3);
+        auto twiTrainings = new QTreeWidgetItem(twiDatasets);
+        twiTrainings->setText(0, tr("Schulungen"));
+        twiTrainings->setData(0, Qt::UserRole, i++);
 
-    auto twiFunctions = new QTreeWidgetItem(twiDatasets);
-    twiFunctions->setText(0, tr("Funktionen"));
-    twiFunctions->setData(0, Qt::UserRole, 4);
+        auto twiFunctions = new QTreeWidgetItem(twiDatasets);
+        twiFunctions->setText(0, tr("Funktionen"));
+        twiFunctions->setData(0, Qt::UserRole, i++);
 
-    auto twiEmployee = new QTreeWidgetItem(twiDatasets);
-    twiEmployee->setText(0, tr("Mitarbeiter"));
-    twiEmployee->setData(0, Qt::UserRole, 5);
+        auto twiEmployee = new QTreeWidgetItem(twiDatasets);
+        twiEmployee->setText(0, tr("Mitarbeiter"));
+        twiEmployee->setData(0, Qt::UserRole, i++);
+    }
 
     auto twiAMS = new QTreeWidgetItem(ui->twSettingGroups);
     twiAMS->setText(0, tr("Rechtverwaltung"));
 
     auto twiAMSUser = new QTreeWidgetItem(twiAMS);
     twiAMSUser->setText(0, tr("Benutzer"));
-    twiAMSUser->setData(0, Qt::UserRole, 6);
+    twiAMSUser->setData(0, Qt::UserRole, i++);
 
     auto twiAMSGroup = new QTreeWidgetItem(twiAMS);
     twiAMSGroup->setText(0, tr("Gruppen"));
-    twiAMSGroup->setData(0, Qt::UserRole, 7);
+    twiAMSGroup->setData(0, Qt::UserRole, i++);
 
     ui->twSettingGroups->expandAll();
 }

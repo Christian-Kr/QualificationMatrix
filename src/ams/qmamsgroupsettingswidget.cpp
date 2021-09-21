@@ -19,6 +19,7 @@
 #include "ams/model/qmamsgroupaccessmodemodel.h"
 #include "ams/model/qmamsaccessmodemodel.h"
 #include "ams/qmamsmanager.h"
+#include "ams/model/qmamsusergroupmodel.h"
 #include "framework/qmbooleandelegate.h"
 
 #include <QSqlDatabase>
@@ -121,10 +122,8 @@ void QMAMSGroupSettingsWidget::updateData()
 
 void QMAMSGroupSettingsWidget::addGroup()
 {
-    // TODO: No groups with same name.
-
     auto record = amsGroupModel->record();
-    record.setValue("name", tr("Gruppe"));
+    record.setValue("amsgroup_name", tr("Gruppe"));
 
     if (!amsGroupModel->insertRecord(-1, record) | !amsGroupModel->submitAll())
     {
@@ -220,7 +219,55 @@ bool QMAMSGroupSettingsWidget::groupAccessModeProxyContainsAccessMode(
 
 void QMAMSGroupSettingsWidget::removeGroup()
 {
-    // TODO: Implement
+    // Get the current database and update data only when it is connected.
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        qCritical() << "Cannot connect to db.";
+        return;
+    }
+
+    auto db = QSqlDatabase::database("default");
+
+    // Get the selected group.
+    auto selRows = ui->tvGroup->selectionModel()->selectedRows();
+    if (selRows.count() != 1)
+    {
+        qCritical() << "Wrong number of selected rows";
+        return;
+    }
+    auto selRow = selRows.first().row();
+
+    auto groupNameFieldIndex = amsGroupModel->fieldIndex("amsgroup_name");
+    auto groupNameModelIndex = amsGroupModel->index(selRow, groupNameFieldIndex);
+    auto groupName = amsGroupModel->data(groupNameModelIndex).toString();
+
+    QMAMSUserGroupModel amsUserGroupModel(this, db);
+    amsUserGroupModel.select();
+
+    auto groupFieldIndex = amsUserGroupModel.fieldIndex("amsgroup_name");
+
+    for (int i = 0; i < amsUserGroupModel.rowCount(); i++)
+    {
+        auto groupModelIndex = amsUserGroupModel.index(i, groupFieldIndex);
+        auto dbGroup = amsUserGroupModel.data(groupModelIndex).toString();
+
+        if(groupName.compare(dbGroup) == 0)
+        {
+            QMessageBox::information(this, tr("Gruppe löschen"),
+                    tr("Ein Benutzer ist mit der Gruppe verbunden. Bitte löschen Sie zuerst die Verknüpfung."));
+            return;
+        }
+    }
+
+    // Delete group.
+    if (!amsGroupAccessModeProxyModel->removeRows(0, amsGroupAccessModeProxyModel->rowCount()) ||
+        !amsGroupModel->removeRow(selRow))
+    {
+        QMessageBox::information(this, tr("Gruppe löschen"), tr("Die Gruppe konnte nicht gelöscht werden."));
+        return;
+    }
+
+    emitSettingsChanged();
 }
 
 void QMAMSGroupSettingsWidget::removeAccessMode()

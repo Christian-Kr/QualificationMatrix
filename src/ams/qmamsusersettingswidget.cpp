@@ -125,8 +125,9 @@ void QMAMSUserSettingsWidget::addUser()
     // TODO: No user with same username.
 
     auto record = amsUserModel->record();
-    record.setValue("name", tr("Vollständiger Name"));
-    record.setValue("username", tr("Benutzername"));
+    record.setValue("amsuser_name", tr("Vollständiger Name"));
+    record.setValue("amsuser_username", tr("Benutzername"));
+    record.setValue("amsuser_unsuccess_login_num", 0);
 
     // TODO: Get password and add it.
     QMAMSPasswordDialog passwordDialog(this);
@@ -139,11 +140,11 @@ void QMAMSUserSettingsWidget::addUser()
     }
 
     auto hash = QMAMSManager::createPasswordHash(password);
-    record.setValue("password", hash);
+    record.setValue("amsuser_password", hash);
 
     if (!amsUserModel->insertRecord(-1, record) | !amsUserModel->submitAll())
     {
-        qCritical() << "Could not save a new record";
+        qCritical() << "could not save a new record";
     }
 }
 
@@ -158,7 +159,7 @@ void QMAMSUserSettingsWidget::addGroup()
         return;
     }
 
-    auto groupModelPrimaryIdField = amsGroupModel->fieldIndex("id");
+    auto groupModelPrimaryIdField = amsGroupModel->fieldIndex("amsgroup_id");
     if (groupModelPrimaryIdField < 0)
     {
         qCritical() << "Cannot find field index of id in AMSGroup";
@@ -178,7 +179,7 @@ void QMAMSUserSettingsWidget::addGroup()
         return;
     }
 
-    auto userModelPrimaryIdField = amsUserModel->fieldIndex("id");
+    auto userModelPrimaryIdField = amsUserModel->fieldIndex("amsuser_id");
     if (userModelPrimaryIdField < 0)
     {
         qCritical() << "Cannot find field index of id in AMSUser";
@@ -264,9 +265,25 @@ QString QMAMSUserSettingsWidget::getGroupFromPrimaryId(int primaryId)
 
 void QMAMSUserSettingsWidget::removeUser()
 {
-    // TODO: Implement
-    QMessageBox::information(this, tr("Nutzer entfernen"),
-            tr("Nicht implementiert."));
+    auto selRows = ui->tvUser->selectionModel()->selectedRows();
+    if (selRows.count() < 1)
+    {
+        QMessageBox::information(this, tr("Nutzer löschen"), tr("Es wurde kein Nutzer ausgewählt."));
+        return;
+    }
+
+    if (selRows.count() > 1)
+    {
+        QMessageBox::information(this, tr("Nutzer löschen"), tr("Es darf nur ein Nutzer ausgewählt werden."));
+        return;
+    }
+
+    amsUserModel->removeRow(selRows.first().row());
+
+    // All connection between the user and the group have to be deleted.
+    amsUserGroupProxyModel->removeRows(0, amsUserGroupProxyModel->rowCount());
+
+    emitSettingsChanged();
 }
 
 void QMAMSUserSettingsWidget::removeGroup()
@@ -281,7 +298,6 @@ void QMAMSUserSettingsWidget::removeGroup()
     }
 
     amsUserGroupProxyModel->removeRow(userGroupIndex.row());
-
     emitSettingsChanged();
 }
 

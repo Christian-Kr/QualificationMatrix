@@ -18,6 +18,7 @@
 #include "model/qmtraindatacertificatemodel.h"
 #include "settings/qmapplicationsettings.h"
 #include "qmnewcertificatedialog.h"
+#include "ams/qmamsmanager.h"
 
 #include <QSqlTableModel>
 #include <QSortFilterProxyModel>
@@ -55,6 +56,16 @@ QMCertificateDialog::QMCertificateDialog(Mode mode, QWidget *parent)
     {
         ui->buttonBox->setStandardButtons(QDialogButtonBox::Ok);
         setWindowTitle(tr("Nachweis auswählen"));
+    }
+
+    // If do not have the permission, make a lot of stuff disable.
+    // Permission check.
+    auto amsManager = QMAMSManager::getInstance();
+    if (!amsManager->checkPermission(AccessMode::TD_MODE_WRITE))
+    {
+        ui->tvFiles->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        ui->tbAdd->setEnabled(false);
+        ui->tbRemove->setEnabled(false);
     }
 }
 

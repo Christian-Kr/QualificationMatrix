@@ -573,6 +573,17 @@ void QMMainWindow::showTrainingData(QString name, QString training)
 
 void QMMainWindow::manageCertificate()
 {
+    // If do not have the permission, make a lot of stuff disable.
+    // Permission check.
+    auto amsManager = QMAMSManager::getInstance();
+    if (!amsManager->checkPermission(AccessMode::TD_MODE_WRITE) &&
+        !amsManager->checkPermission(AccessMode::TD_MODE_READ))
+    {
+        QMessageBox::warning(this, tr("Nachweise verwalten"),
+                tr("Sie haben nicht die notwendigen Berechtigungen."));
+        return;
+    }
+
     auto &settings = QMApplicationSettings::getInstance();
 
     auto varWidth = settings.read("CertificateDialog/Width");
