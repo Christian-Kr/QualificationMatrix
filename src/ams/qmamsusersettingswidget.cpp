@@ -179,7 +179,7 @@ void QMAMSUserSettingsWidget::addGroup()
         return;
     }
 
-    auto userModelIndex = amsGroupModel->index(userIndex.row(), userModelPrimaryIdField);
+    auto userModelIndex = amsUserModel->index(userIndex.row(), userModelPrimaryIdField);
     auto userPrimaryId = amsUserModel->data(userModelIndex).toInt();
 
     // Search for duplicates.
