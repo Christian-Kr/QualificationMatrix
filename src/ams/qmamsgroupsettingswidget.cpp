@@ -137,48 +137,40 @@ void QMAMSGroupSettingsWidget::addAccessMode()
     auto accessModeIndex = ui->lvAccessMode->currentIndex();
     if (!accessModeIndex.isValid())
     {
-        QMessageBox::information(this, tr("Zugriffsmodus hinzufügen"),
-                tr("Kein Zugriffsmodus ausgewählt."));
+        QMessageBox::information(this, tr("Zugriffsmodus hinzufügen"), tr("Kein Zugriffsmodus ausgewählt."));
         return;
     }
 
-    auto accessModePrimaryIdField = amsAccessModeModel->fieldIndex(
-            "amsaccessmode_id");
+    auto accessModePrimaryIdField = amsAccessModeModel->fieldIndex("amsaccessmode_id");
     if (accessModePrimaryIdField < 0)
     {
         qCritical() << "Cannto find field index of id in AMSAccessMode";
         return;
     }
 
-    auto accessModeModelIndex = amsAccessModeModel->index(
-            accessModeIndex.row(), accessModePrimaryIdField);
-    auto accessModePrimaryId = amsAccessModeModel->data(
-            accessModeModelIndex).toInt();
+    auto accessModeModelIndex = amsAccessModeModel->index(accessModeIndex.row(), accessModePrimaryIdField);
+    auto accessModePrimaryId = amsAccessModeModel->data(accessModeModelIndex).toInt();
 
     // Get primary key of selected group.
     auto groupIndex = ui->tvGroup->currentIndex();
     if (!groupIndex.isValid())
     {
-        QMessageBox::information(this, tr("Zugriffsmodus hinzufügen"),
-                tr("Keine Gruppe ausgewählt"));
+        QMessageBox::information(this, tr("Zugriffsmodus hinzufügen"), tr("Keine Gruppe ausgewählt"));
         return;
     }
 
-    auto groupModelPrimaryIdField = amsGroupModel->fieldIndex(
-            "amsgroup_id");
+    auto groupModelPrimaryIdField = amsGroupModel->fieldIndex("amsgroup_id");
     if (groupModelPrimaryIdField < 0)
     {
         qCritical() << "Cannot find field index of id in AMSGroup";
         return;
     }
 
-    auto groupModelIndex = amsGroupModel->index(groupIndex.row(),
-            groupModelPrimaryIdField);
+    auto groupModelIndex = amsGroupModel->index(groupIndex.row(), groupModelPrimaryIdField);
     auto groupPrimaryId = amsGroupModel->data(groupModelIndex).toInt();
 
     // Search for duplicates.
-    if (groupAccessModeProxyContainsAccessMode(
-            accessModeIndex.data().toString()))
+    if (groupAccessModeProxyContainsAccessMode(accessModeIndex.data().toString()))
     {
         QMessageBox::information(this, tr("Zugriffsmodus hinzufügen"),
                 tr("Der Zugriffsmodus wurde bereits hinzugefügt."));
