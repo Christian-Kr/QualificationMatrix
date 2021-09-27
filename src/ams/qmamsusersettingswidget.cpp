@@ -64,8 +64,7 @@ void QMAMSUserSettingsWidget::saveSettings()
     if (error)
     {
         QMessageBox::critical(this, tr("Speichern"),
-                tr("Die Änderungen konnten nicht in die Datenbank "
-                "geschrieben werden."));
+                tr("Die Änderungen konnten nicht in die Datenbank geschrieben werden."));
     }
 }
 
@@ -84,8 +83,7 @@ void QMAMSUserSettingsWidget::loadSettings()
 void QMAMSUserSettingsWidget::updateData()
 {
     // Get the current database and update data only when it is connected.
-    if (!QSqlDatabase::contains("default") ||
-        !QSqlDatabase::database("default", false).isOpen())
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
     {
         return;
     }
@@ -112,11 +110,9 @@ void QMAMSUserSettingsWidget::updateData()
     // Build some connections.
     connect(amsUserModel.get(), &QMAMSUserModel::dataChanged, this,
             &QMAMSUserSettingsWidget::settingsChanged);
-    connect(ui->tvUser->selectionModel(),
-            &QItemSelectionModel::currentRowChanged, this,
+    connect(ui->tvUser->selectionModel(), &QItemSelectionModel::currentRowChanged, this,
             &QMAMSUserSettingsWidget::userSelectionChanged);
-    connect(ui->lvGroup->selectionModel(),
-            &QItemSelectionModel::currentRowChanged, this,
+    connect(ui->lvGroup->selectionModel(), &QItemSelectionModel::currentRowChanged, this,
             &QMAMSUserSettingsWidget::groupSelectionChanged);
 }
 
@@ -154,8 +150,7 @@ void QMAMSUserSettingsWidget::addGroup()
     auto groupIndex = ui->lvGroup->currentIndex();
     if (!groupIndex.isValid())
     {
-        QMessageBox::information(this, tr("Gruppe hinzufügen"),
-                tr("Keine Gruppe ausgewählt"));
+        QMessageBox::information(this, tr("Gruppe hinzufügen"), tr("Keine Gruppe ausgewählt"));
         return;
     }
 
@@ -166,16 +161,14 @@ void QMAMSUserSettingsWidget::addGroup()
         return;
     }
 
-    auto groupModelIndex = amsGroupModel->index(groupIndex.row(),
-            groupModelPrimaryIdField);
+    auto groupModelIndex = amsGroupModel->index(groupIndex.row(), groupModelPrimaryIdField);
     auto groupPrimaryId = amsGroupModel->data(groupModelIndex).toInt();
 
     // Get primary key id of selected user.
     auto userIndex = ui->tvUser->currentIndex();
     if(!userIndex.isValid())
     {
-        QMessageBox::information(this, tr("Gruppe hinzufügen"),
-                tr("Kein Benutzer ausgewählt"));
+        QMessageBox::information(this, tr("Gruppe hinzufügen"), tr("Kein Benutzer ausgewählt"));
         return;
     }
 
@@ -186,15 +179,13 @@ void QMAMSUserSettingsWidget::addGroup()
         return;
     }
 
-    auto userModelIndex = amsGroupModel->index(userIndex.row(),
-            userModelPrimaryIdField);
+    auto userModelIndex = amsGroupModel->index(userIndex.row(), userModelPrimaryIdField);
     auto userPrimaryId = amsUserModel->data(userModelIndex).toInt();
 
     // Search for duplicates.
     if (userGroupProxyContainsGroup(groupIndex.data().toString()))
     {
-        QMessageBox::information(this, tr("Gruppe hinzufügen"),
-                tr("Die Gruppe wurde bereits hinzugefügt."));
+        QMessageBox::information(this, tr("Gruppe hinzufügen"), tr("Die Gruppe wurde bereits hinzugefügt."));
         return;
     }
 
@@ -204,8 +195,7 @@ void QMAMSUserSettingsWidget::addGroup()
     record.setValue("amsuser_username", userPrimaryId);
     record.setValue("amsgroup_name", groupPrimaryId);
 
-    if (!amsUserGroupModel->insertRecord(-1, record) |
-        !amsUserGroupModel->submitAll())
+    if (!amsUserGroupModel->insertRecord(-1, record) | !amsUserGroupModel->submitAll())
     {
         QMessageBox::warning(this, tr("Gruppe hinzufügen"),
                 tr("Konnte die Änderung nicht in die Datenbank schreiben."));
@@ -224,10 +214,8 @@ QString QMAMSUserSettingsWidget::getUsernameFromPrimaryId(int primaryId)
 
     for (int i = 0; i < amsUserModel->rowCount(); i++)
     {
-        auto id = amsUserModel->data(amsUserModel->index(i, idFieldIndex))
-                .toInt();
-        auto username = amsUserModel->data(amsUserModel->index(
-                i, usernameFieldIndex)).toString();
+        auto id = amsUserModel->data(amsUserModel->index(i, idFieldIndex)).toInt();
+        auto username = amsUserModel->data(amsUserModel->index(i, usernameFieldIndex)).toString();
 
         if (id == primaryId)
         {
@@ -249,10 +237,8 @@ QString QMAMSUserSettingsWidget::getGroupFromPrimaryId(int primaryId)
 
     for (int i = 0; i < amsGroupModel->rowCount(); i++)
     {
-        auto id = amsGroupModel->data(amsGroupModel->index(i, idFieldIndex))
-                .toInt();
-        auto group = amsGroupModel->data(amsGroupModel->index(
-                i, groupFieldIndex)).toString();
+        auto id = amsGroupModel->data(amsGroupModel->index(i, idFieldIndex)).toInt();
+        auto group = amsGroupModel->data(amsGroupModel->index(i, groupFieldIndex)).toString();
 
         if (id == primaryId)
         {
@@ -292,8 +278,7 @@ void QMAMSUserSettingsWidget::removeGroup()
 
     if (!userGroupIndex.isValid())
     {
-        QMessageBox::information(this, tr("Gruppe entfernen"),
-                tr("Keine Gruppe ausgewählt."));
+        QMessageBox::information(this, tr("Gruppe entfernen"), tr("Keine Gruppe ausgewählt."));
         return;
     }
 
@@ -301,8 +286,7 @@ void QMAMSUserSettingsWidget::removeGroup()
     emitSettingsChanged();
 }
 
-void QMAMSUserSettingsWidget::userGroupSelectionChanged(
-        const QModelIndex &selected, const QModelIndex &deselected)
+void QMAMSUserSettingsWidget::userGroupSelectionChanged(const QModelIndex &selected, const QModelIndex &deselected)
 {
     ui->lvGroup->reset();
     if (selected.isValid())
@@ -311,8 +295,7 @@ void QMAMSUserSettingsWidget::userGroupSelectionChanged(
     }
 }
 
-void QMAMSUserSettingsWidget::groupSelectionChanged(
-        const QModelIndex &selected, const QModelIndex &deselected)
+void QMAMSUserSettingsWidget::groupSelectionChanged(const QModelIndex &selected, const QModelIndex &deselected)
 {
     ui->lvUserGroup->reset();
     ui->pbRemoveGroup->setEnabled(false);
@@ -340,8 +323,7 @@ bool QMAMSUserSettingsWidget::userGroupProxyContainsGroup(const QString &group)
     for (int i = 0; i < amsUserGroupProxyModel->rowCount(); i++)
     {
         auto groupModelIndex = amsUserGroupProxyModel->index(i, 2);
-        auto groupName = amsUserGroupProxyModel->data(groupModelIndex)
-                .toString();
+        auto groupName = amsUserGroupProxyModel->data(groupModelIndex).toString();
 
         if (groupName.compare(group) == 0)
         {
@@ -352,8 +334,7 @@ bool QMAMSUserSettingsWidget::userGroupProxyContainsGroup(const QString &group)
     return false;
 }
 
-void QMAMSUserSettingsWidget::userSelectionChanged(
-        const QModelIndex &selected, const QModelIndex &deselected)
+void QMAMSUserSettingsWidget::userSelectionChanged(const QModelIndex &selected, const QModelIndex &deselected)
 {
     ui->lvGroup->reset();
     ui->pbAddGroup->setEnabled(false);
@@ -400,8 +381,7 @@ void QMAMSUserSettingsWidget::activateUserGroupList(int selRow)
     ui->lvUserGroup->setModelColumn(2);
 
     ui->lvUserGroup->selectionModel()->disconnect(this);
-    connect(ui->lvUserGroup->selectionModel(),
-            &QItemSelectionModel::currentRowChanged, this,
+    connect(ui->lvUserGroup->selectionModel(), &QItemSelectionModel::currentRowChanged, this,
             &QMAMSUserSettingsWidget::userGroupSelectionChanged);
 }
 
