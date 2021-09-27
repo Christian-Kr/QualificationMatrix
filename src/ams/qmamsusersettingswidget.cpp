@@ -376,7 +376,7 @@ void QMAMSUserSettingsWidget::activateUserGroupList(int selRow)
 
     amsUserGroupProxyModel->setSourceModel(amsUserGroupModel.get());
     amsUserGroupProxyModel->setFilterKeyColumn(1);
-    amsUserGroupProxyModel->setFilterFixedString(selData);
+    amsUserGroupProxyModel->setFilterRegExp(QString("^%1$").arg(selData));
     ui->lvUserGroup->setModel(amsUserGroupProxyModel.get());
     ui->lvUserGroup->setModelColumn(2);
 

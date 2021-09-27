@@ -312,8 +312,7 @@ void QMAMSGroupSettingsWidget::accessModeSelectionChanged(
     }
 }
 
-void QMAMSGroupSettingsWidget::groupSelectionChanged(
-        const QModelIndex &selected, const QModelIndex &deselected)
+void QMAMSGroupSettingsWidget::groupSelectionChanged(const QModelIndex &selected, const QModelIndex &deselected)
 {
     ui->lvAccessMode->reset();
     ui->pbAddAccessMode->setEnabled(false);
@@ -349,12 +348,11 @@ void QMAMSGroupSettingsWidget::activateGroupAccessModeList(int selRow)
 
     amsGroupAccessModeProxyModel->setSourceModel(amsGroupAccessModeModel.get());
     amsGroupAccessModeProxyModel->setFilterKeyColumn(1);
-    amsGroupAccessModeProxyModel->setFilterFixedString(selData);
+    amsGroupAccessModeProxyModel->setFilterRegExp(QString("^%1$").arg(selData));
     ui->lvGroupAccessMode->setModel(amsGroupAccessModeProxyModel.get());
     ui->lvGroupAccessMode->setModelColumn(2);
 
     ui->lvGroupAccessMode->selectionModel()->disconnect(this);
-    connect(ui->lvGroupAccessMode->selectionModel(),
-            &QItemSelectionModel::currentRowChanged, this,
+    connect(ui->lvGroupAccessMode->selectionModel(), &QItemSelectionModel::currentRowChanged, this,
             &QMAMSGroupSettingsWidget::groupAccessModeSelectionChanged);
 }
