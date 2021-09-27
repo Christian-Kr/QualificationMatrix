@@ -67,6 +67,8 @@ QMTrainDataWidget::QMTrainDataWidget(QWidget *parent)
         ui->pbAddSingle->setEnabled(false);
         ui->pbExecMultiEdit->setEnabled(false);
         ui->pbDeleteSelected->setEnabled(false);
+        ui->tbAddCertificate->setEnabled(false);
+        ui->tbRemoveCertificate->setEnabled(false);
     }
 
     // Load settings on start.
