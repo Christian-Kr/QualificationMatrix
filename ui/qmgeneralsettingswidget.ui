@@ -77,7 +77,7 @@
         </size>
        </property>
        <property name="text">
-        <string>Sprache:</string>
+        <string>Sprache</string>
        </property>
       </widget>
      </item>
@@ -114,6 +114,20 @@
     </widget>
    </item>
    <item>
+    <widget class="QCheckBox" name="cbAutoLogin">
+     <property name="text">
+      <string>Automatisch anmelden nach dem Öffnen der Datenbank</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="cbSaveLastLoginName">
+     <property name="text">
+      <string>Letzten Benutzernamen speichern (außer Administrator-Anmeldungen)</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QGroupBox" name="gbCentralizedSettings">
      <property name="title">
       <string>&amp;Zentralisierte Einstellung</string>
@@ -145,7 +159,7 @@
            </size>
           </property>
           <property name="text">
-           <string>Datei:</string>
+           <string>Datei</string>
           </property>
          </widget>
         </item>
@@ -210,7 +224,7 @@
            </size>
           </property>
           <property name="text">
-           <string>Verzeichnis:</string>
+           <string>Verzeichnis</string>
           </property>
          </widget>
         </item>
@@ -436,6 +450,38 @@
     <hint type="destinationlabel">
      <x>380</x>
      <y>243</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cbAutoLogin</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>QMGeneralSettingsWidget</receiver>
+   <slot>emitSettingsChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>294</x>
+     <y>124</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>294</x>
+     <y>271</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cbSaveLastLoginName</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>QMGeneralSettingsWidget</receiver>
+   <slot>emitSettingsChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>294</x>
+     <y>152</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>294</x>
+     <y>271</y>
     </hint>
    </hints>
   </connection>

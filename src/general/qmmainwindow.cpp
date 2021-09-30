@@ -227,13 +227,12 @@ void QMMainWindow::initAfterDatabaseOpened()
 {
     auto db = QSqlDatabase::database("default", false);
 
-    // If the version of the database doesn't fit the software version,
-    // show a message asking if the database should be updated or not.
+    // If the version of the database doesn't fit the software version, show a message asking if the database should
+    // be updated or not.
     if (!QMDataManager::testVersion(db))
     {
-        auto resMb = QMessageBox::question(this, tr("Datenbank laden"),
-            tr("Die Version der Datenbank entspricht nicht der Vorgabe. "
-                "Möchten Sie versuchen die Datenbank zu aktualisieren?"),
+        auto resMb = QMessageBox::question(this, tr("Datenbank laden"), tr("Die Version der Datenbank entspricht "
+            "nicht der Vorgabe. Möchten Sie versuchen die Datenbank zu aktualisieren?"),
             QMessageBox::Yes | QMessageBox::No);
 
         if (resMb != QMessageBox::Yes)
@@ -250,18 +249,16 @@ void QMMainWindow::initAfterDatabaseOpened()
             return;
         }
 
-        // A database backup should only be run, when the database is a local
-        // one. On a remote database the administrator of the database system
-        // has to take care of backups. For now, only a database with the
+        // A database backup should only be run, when the database is a local one. On a remote database the
+        // administrator of the database system has to take care of backups. For now, only a database with the
         // QSQLITE driver is a local one.
         if (db.driverName() == "QSQLITE")
         {
             if (!saveSingleDatabaseBackup(db))
             {
-                QMessageBox::critical(this, tr("Datenbank-Backup"),
-                    tr("Es konnte kein Backup erstellt werden. Da für eine "
-                        "Aktualisierung ein Backup notwendig ist, wird die "
-                        "Aktion abgebrochen und die Datenbank geschlossen."));
+                QMessageBox::critical(this, tr("Datenbank-Backup"), tr("Es konnte kein Backup erstellt werden. Da für"
+                        " eine Aktualisierung ein Backup notwendig ist, wird die Aktion abgebrochen und die Datenbank"
+                        " geschlossen."));
                 closeDatabase();
                 return;
             }
@@ -270,30 +267,25 @@ void QMMainWindow::initAfterDatabaseOpened()
         QMDatabaseUpdater databaseUpdater;
         if (!databaseUpdater.updateDatabase(db))
         {
-            QMessageBox::critical(this, tr("Datenbank aktualisieren"),
-                tr("Die Datenbank konnte nicht vollständig aktualisiert "
-                    "werden. Der Fehler ist kritisch. Bitte spielen Sie das "
-                    "vorher angelegte Backup ein. Die Datenbank "
-                    "wird geschlossen und nicht weiter verarbeitet."));
+            QMessageBox::critical(this, tr("Datenbank aktualisieren"), tr("Die Datenbank konnte nicht vollständig "
+                    "aktualisiert werden. Der Fehler ist kritisch. Bitte spielen Sie das vorher angelegte Backup ein."
+                    " Die Datenbank wird geschlossen und nicht weiter verarbeitet."));
             closeDatabase();
             return;
         }
         else
         {
-            QMessageBox::information(this, tr("Datenbank aktualisieren"),
-                tr("Die Aktualisierung der Datenbank war erfolgreich. Bitte "
-                    "heben Sie das erstellte Backup für einen späteren Fall "
-                    "auf."));
+            QMessageBox::information(this, tr("Datenbank aktualisieren"), tr("Die Aktualisierung der Datenbank war "
+                    "erfolgreich. Bitte heben Sie das erstellte Backup für einen späteren Fall auf."));
         }
     }
 
-    // After database has been loaded and version is ok, load the database
-    // models and informate the user about it.
+    // After database has been loaded and version is ok, load the database models and informate the user about it.
     ui->statusbar->showMessage(tr("Datenbank verbunden"));
     setWindowTitle("QualificationMatrix - " + db.databaseName());
 
-    // Make an database backup from the auto system if wanted. Backup should
-    // only be run if the driver is QSQLITE, cause this one is file based.
+    // Make an database backup from the auto system if wanted. Backup should only be run if the driver is QSQLITE,
+    // cause this one is file based.
     auto &settings = QMApplicationSettings::getInstance();
     auto autoBackup = settings.read("Database/LocalAutoBackup", false).toBool();
 
@@ -301,9 +293,7 @@ void QMMainWindow::initAfterDatabaseOpened()
     {
         if (!runAutoBackup())
         {
-            QMessageBox::warning(this, tr("Backup"),
-                tr("Das Backup konnte nicht erfolgreich durchgeführt "
-                    "werden."));
+            QMessageBox::warning(this, tr("Backup"), tr("Das Backup konnte nicht erfolgreich durchgeführt werden."));
             return;
         }
     }
@@ -313,14 +303,19 @@ void QMMainWindow::initAfterDatabaseOpened()
     if (!am->checkDatabase())
     {
         QMessageBox::warning(this, tr("Rechtemanagement"),
-            tr("Die Prüfung der Datenbank für das Rechtemanagement ist "
-                "fehlgeschlagen."));
+                tr("Die Prüfung der Datenbank für das Rechtemanagement ist fehlgeschlagen."));
         return;
     }
 
     // Unlock all ui elements.
     ui->actSettings->setEnabled(true);
     ui->actCloseDatabase->setEnabled(true);
+
+    // Do automatic login if wanted.
+    if (settings.read("AMS/AutoLogin", false).toBool())
+    {
+        amsLogin();
+    }
 }
 
 bool QMMainWindow::saveSingleDatabaseBackup(const QSqlDatabase &db)
@@ -511,6 +506,9 @@ bool QMMainWindow::closeDatabase()
     closeCurrentWindowMode();
     ui->actSettings->setEnabled(false);
     ui->actCloseDatabase->setEnabled(false);
+
+    // Logout from database.
+    amsLogout();
 
     // Set ui elements.
     setWindowTitle(tr("QualificationMatrix"));
@@ -705,11 +703,9 @@ void QMMainWindow::enterWindowMode(WIN_MODE mode)
     }
 
     // If no database is connected, don't switch to mode.
-    if (!QSqlDatabase::contains("default") ||
-        !QSqlDatabase::database("default", false).isOpen())
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
     {
-        QMessageBox::information(this, tr("Achtung"),
-            tr("Datenbank is nicht geöffnet. Aktion wird abgebrochen."));
+        QMessageBox::information(this, tr("Achtung"), tr("Datenbank is nicht geöffnet. Aktion wird abgebrochen."));
 
         // Check right buttons.
         ui->actModeResult->setChecked(false);
@@ -882,11 +878,29 @@ void QMMainWindow::amsLogin()
         }
     }
 
+    auto &settings = QMApplicationSettings::getInstance();
+    auto saveLastLogin = settings.read("AMS/SaveLastLogin", false).toBool();
+    QString lastLoginName = "";
+
+    if (saveLastLogin)
+    {
+        lastLoginName = settings.read("AMS/LastLoginName", "").toString();
+    }
+
     QMAMSLoginDialog loginDialog(this);
+
+    if (!lastLoginName.isEmpty())
+    {
+        loginDialog.setUsername(lastLoginName);
+    }
+
     loginDialog.exec();
 
-    // Reset the win mode.
-    enterWindowMode(tmpMode);
+    // Reset the win mode only when not NONE (cause it already is NONE).
+    if (tmpMode != WIN_MODE::NONE)
+    {
+        enterWindowMode(tmpMode);
+    }
 }
 
 void QMMainWindow::amsLogout()
@@ -899,6 +913,9 @@ void QMMainWindow::amsLogout()
     auto am = QMAMSManager::getInstance();
     am->logoutUser();
 
-    // Reset the win mode.
-    enterWindowMode(tmpMode);
+    // Reset the win mode only when not NONE (cause it already is NONE).
+    if (tmpMode != WIN_MODE::NONE)
+    {
+        enterWindowMode(tmpMode);
+    }
 }

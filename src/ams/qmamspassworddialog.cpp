@@ -38,15 +38,13 @@ void QMAMSPasswordDialog::acceptPassword()
 
     if (ui->lePassword->text().length() < 8)
     {
-        QMessageBox::information(this, tr("Passwort"),
-                tr("Das Passwort muss mindestens 8 Zeichen haben."));
+        QMessageBox::information(this, tr("Passwort"), tr("Das Passwort muss mindestens 8 Zeichen haben."));
         return;
     }
 
     if (ui->lePassword->text() != ui->lePasswordRepeat->text())
     {
-        QMessageBox::information(this, tr("Passwort"),
-                tr("Die Passwörter stimmen nicht übereine."));
+        QMessageBox::information(this, tr("Passwort"), tr("Die Passwörter stimmen nicht überein."));
         return;
     }
 

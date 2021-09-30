@@ -16,6 +16,7 @@
 #include "qmamslogindialog.h"
 #include "ui_qmamslogindialog.h"
 #include "ams/qmamsmanager.h"
+#include "settings/qmapplicationsettings.h"
 
 #include <QMessageBox>
 #include <QDebug>
@@ -35,7 +36,6 @@ QMAMSLoginDialog::~QMAMSLoginDialog()
 void QMAMSLoginDialog::setUsername(QString name)
 {
     ui->leUsername->setText(name);
-    ui->leUsername->setReadOnly(true);
 }
 
 void QMAMSLoginDialog::login()
@@ -47,16 +47,14 @@ void QMAMSLoginDialog::login()
 
     if (am->getLoginUserName().compare(username) == 0)
     {
-        QMessageBox::information(this, tr("Anmelden"),
-                tr("Benutzer ist bereits angemeldet."));
+        QMessageBox::information(this, tr("Anmelden"), tr("Benutzer ist bereits angemeldet."));
         return;
     }
 
     if (am->getLoginState() == LoginState::LOGGED_IN)
     {
         auto res = QMessageBox::information(this, tr("Anmelden"),
-                tr("Ein Benutzer ist bereits angemeldet und wird "
-                "mit dem login abgemeldet. Fortfahren?"),
+                tr("Ein Benutzer ist bereits angemeldet und wird mit dem login abgemeldet. Fortfahren?"),
                 QMessageBox::Yes | QMessageBox::No);
 
         if (res == QMessageBox::No)
@@ -70,6 +68,17 @@ void QMAMSLoginDialog::login()
 
     if (res == LoginResult::SUCCESSFUL)
     {
+        if (username.compare("administrator") != 0)
+        {
+            // Save the login if wanted.
+            auto &settings = QMApplicationSettings::getInstance();
+            auto saveLastLogin = settings.read("AMS/SaveLastLogin", false).toBool();
+
+            if (saveLastLogin) {
+                settings.write("AMS/LastLoginName", username);
+            }
+        }
+
         close();
         return;
     }

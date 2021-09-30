@@ -69,6 +69,9 @@ void QMGeneralSettingsWidget::loadSettings()
         settings.read("Database/LocalAutoBackupDelete", false).toBool());
     ui->leBackupPath->setText(settings.read("Database/LocalBackupPath", "").toString());
     ui->spBackupCount->setValue(settings.read("Database/LocalBackupCount", 10).toInt());
+
+    ui->cbAutoLogin->setChecked(settings.read("AMS/AutoLogin", false).toBool());
+    ui->cbSaveLastLoginName->setChecked(settings.read("AMS/SaveLastLogin", false).toBool());
 }
 
 void QMGeneralSettingsWidget::initLanguageFiles()
@@ -138,6 +141,9 @@ void QMGeneralSettingsWidget::saveSettings()
 
     settings.write("General/Lang", ui->cbLanguage->currentText());
     settings.write("General/Style", ui->cbStyle->currentText());
+
+    settings.write("AMS/AutoLogin", ui->cbAutoLogin->isChecked());
+    settings.write("AMS/SaveLastLogin", ui->cbSaveLastLoginName->isChecked());
 }
 
 void QMGeneralSettingsWidget::revertChanges()
