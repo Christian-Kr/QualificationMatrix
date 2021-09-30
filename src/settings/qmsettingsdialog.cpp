@@ -93,8 +93,12 @@ void QMSettingsDialog::initStackWidgets()
         appendConnectSettingsWidget(new QMEmployeeSettingsWidget(this));
     }
 
-    appendConnectSettingsWidget(new QMAMSUserSettingsWidget(this));
-    appendConnectSettingsWidget(new QMAMSGroupSettingsWidget(this));
+    // Don't show permission configuration if administrator ist not logged in.
+    if (amsManager->getLoginUserName().compare("administrator") == 0)
+    {
+        appendConnectSettingsWidget(new QMAMSUserSettingsWidget(this));
+        appendConnectSettingsWidget(new QMAMSGroupSettingsWidget(this));
+    }
 }
 
 void QMSettingsDialog::appendConnectSettingsWidget(
@@ -152,16 +156,21 @@ void QMSettingsDialog::initTreeWidgets()
         twiEmployee->setData(0, Qt::UserRole, i++);
     }
 
-    auto twiAMS = new QTreeWidgetItem(ui->twSettingGroups);
-    twiAMS->setText(0, tr("Rechtverwaltung"));
 
-    auto twiAMSUser = new QTreeWidgetItem(twiAMS);
-    twiAMSUser->setText(0, tr("Benutzer"));
-    twiAMSUser->setData(0, Qt::UserRole, i++);
+    // Don't show permission configuration if administrator ist not logged in.
+    if (amsManager->getLoginUserName().compare("administrator") == 0)
+    {
+        auto twiAMS = new QTreeWidgetItem(ui->twSettingGroups);
+        twiAMS->setText(0, tr("Rechtverwaltung"));
 
-    auto twiAMSGroup = new QTreeWidgetItem(twiAMS);
-    twiAMSGroup->setText(0, tr("Gruppen"));
-    twiAMSGroup->setData(0, Qt::UserRole, i++);
+        auto twiAMSUser = new QTreeWidgetItem(twiAMS);
+        twiAMSUser->setText(0, tr("Benutzer"));
+        twiAMSUser->setData(0, Qt::UserRole, i++);
+
+        auto twiAMSGroup = new QTreeWidgetItem(twiAMS);
+        twiAMSGroup->setText(0, tr("Gruppen"));
+        twiAMSGroup->setData(0, Qt::UserRole, i++);
+    }
 
     ui->twSettingGroups->expandAll();
 }
