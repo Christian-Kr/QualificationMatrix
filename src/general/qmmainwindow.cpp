@@ -1,17 +1,15 @@
 // qmmainwindow.cpp is part of QualificationMatrix
 //
-// QualificationMatrix is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by the
-// Free Software Foundation, either version 3 of the License, or (at your
-// option) any later version.
+// QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of the GNU General
+// Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
+// any later version.
 //
-// QualificationMatrix is distributed in the hope that it will be useful, but
-// WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
-// or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+// QualificationMatrix is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+// implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 // more details.
 //
-// You should have received a copy of the GNU General Public License along
-// with QualificationMatrix. If not, see <http://www.gnu.org/licenses/>.
+// You should have received a copy of the GNU General Public License along with QualificationMatrix. If not, see
+// <http://www.gnu.org/licenses/>.
 
 #include "qmmainwindow.h"
 #include "ui_qmmainwindow.h"
@@ -69,12 +67,10 @@ QMMainWindow::QMMainWindow(QWidget *parent)
 
     // Initialize connections to AMS.
     auto am = QMAMSManager::getInstance();
-    connect(am, &QMAMSManager::loginStateChanged, this,
-        &QMMainWindow::handleLoginChange);
+    connect(am, &QMAMSManager::loginStateChanged, this, &QMMainWindow::handleLoginChange);
 
     // Initialize some ui elements.
-    auto *tbAMS = dynamic_cast<QToolButton *>(
-            ui->toolBar->widgetForAction(ui->actAMS));
+    auto *tbAMS = dynamic_cast<QToolButton *>(ui->toolBar->widgetForAction(ui->actAMS));
     tbAMS->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
     tbAMS->setText("");
     tbAMS->setPopupMode(QToolButton::InstantPopup);
@@ -92,10 +88,9 @@ void QMMainWindow::showEvent(QShowEvent *event)
 {
     QMainWindow::showEvent(event);
 
-    // Load database on startup. If there are some settings for automatic
-    // loading of database on startup, follow them. Otherwise show the manage
-    // database dialog, cause the application is not useful if there is no
-    // database loaded.
+    // Load database on startup. If there are some settings for automatic loading of database on startup, follow
+    // them. Otherwise show the manage database dialog, cause the application is not useful if there is no database
+    // loaded.
     initDatabaseSettings();
 
     // Try to bring window to top.
@@ -132,8 +127,7 @@ bool QMMainWindow::manageDatabaseFromSettings()
     if (!db.open())
     {
         QMessageBox::critical(this, tr("Datenbankverbindung"),
-            tr("Die Datenbank konnte nicht geöffnet werden, überprüfen Sie "
-                "ihre Einstellungen."));
+            tr("Die Datenbank konnte nicht geöffnet werden, überprüfen Sie ihre Einstellungen."));
         return false;
     }
 
@@ -146,12 +140,10 @@ void QMMainWindow::manageDatabase()
 {
     // Before the dialog for managing a database will be shown, close a
     // currently loaded one.
-    if (QSqlDatabase::contains("default") &&
-        QSqlDatabase::database("default", false).isOpen())
+    if (QSqlDatabase::contains("default") && QSqlDatabase::database("default", false).isOpen())
     {
         auto res = QMessageBox::question(this, tr("Datenbank verwalten"),
-            tr("Es besteht bereits eine Verbindung zu einer Datenbank. "
-                "Jetzt trennen?"),
+            tr("Es besteht bereits eine Verbindung zu einer Datenbank. Jetzt trennen?"),
             QMessageBox::Yes | QMessageBox::No);
 
         if (res == QMessageBox::No)
@@ -169,8 +161,7 @@ void QMMainWindow::manageDatabase()
     databaseDialog.exec();
 
     // If there is no default database or it is not open, something went wrong.
-    if (QSqlDatabase::contains("default") &&
-        QSqlDatabase::database("default", false).isOpen())
+    if (QSqlDatabase::contains("default") && QSqlDatabase::database("default", false).isOpen())
     {
         saveDatabaseSettings();
         initAfterDatabaseOpened();
