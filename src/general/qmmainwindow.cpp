@@ -81,17 +81,26 @@ QMMainWindow::QMMainWindow(QWidget *parent)
     tbAMS->removeAction(ui->actAMS);
     tbAMS->addAction(ui->actLogin);
     tbAMS->addAction(ui->actLogout);
+}
+
+QMMainWindow::~QMMainWindow()
+{
+    delete ui;
+}
+
+void QMMainWindow::showEvent(QShowEvent *event)
+{
+    QMainWindow::showEvent(event);
 
     // Load database on startup. If there are some settings for automatic
     // loading of database on startup, follow them. Otherwise show the manage
     // database dialog, cause the application is not useful if there is no
     // database loaded.
     initDatabaseSettings();
-}
 
-QMMainWindow::~QMMainWindow()
-{
-    delete ui;
+    // Try to bring window to top.
+    activateWindow();
+    raise();
 }
 
 void QMMainWindow::initDatabaseSettings()
@@ -862,9 +871,9 @@ void QMMainWindow::amsLogin()
 
     if (am->getLoginState() == LoginState::LOGGED_IN)
     {
-        QMessageBox::StandardButton res = QMessageBox::question(this,
-            tr("Anmelden"), tr("Ein Nutzer ist bereits angemeldet. Möchten "
-            "Sie den Nutzer abmelden?"), QMessageBox::Yes | QMessageBox::No);
+        QMessageBox::StandardButton res = QMessageBox::question(this, tr("Anmelden"),
+                tr("Ein Nutzer ist bereits angemeldet. Möchten Sie den Nutzer abmelden?"),
+                QMessageBox::Yes | QMessageBox::No);
 
         if (res != QMessageBox::Yes)
         {

@@ -86,8 +86,7 @@ public slots:
     ///     that will be done.
     /// \param minSteps The minimum steps of updates for the progress widget.
     /// \param maxSteps The maximum steps of updates for the progress widget.
-    void showProgress(const QString &title, const QString &text,
-        const int &minSteps, const int &maxSteps);
+    void showProgress(const QString &title, const QString &text, const int &minSteps, const int &maxSteps);
 
     /// Save all readed settings centralized on one place.
     void saveSettings();
@@ -165,6 +164,10 @@ protected:
     /// the widget.
     /// \param event The close event object that will be created.
     void closeEvent(QCloseEvent *event) override;
+
+    /// Override from QMainWindow.
+    /// \param event
+    void showEvent(QShowEvent *event) override;
 
 private:
     /// Initialize database information.
