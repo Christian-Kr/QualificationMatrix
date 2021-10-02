@@ -21,7 +21,10 @@
 class QMAMSGroupModel;
 class QMAMSAccessModeModel;
 class QMAMSGroupAccessModeModel;
+class QMEmployeeViewModel;
 class QSortFilterProxyModel;
+class QItemSelection;
+class QMAMSGroupEmployeeModel;
 
 namespace Ui
 {
@@ -69,20 +72,51 @@ public slots:
     /// Group selection changed.
     /// \param deselected Item that has been deselected.
     /// \param selected Item that has been selected.
-    void groupSelectionChanged(const QModelIndex &selected,
-            const QModelIndex &deselected);
+    void groupSelectionChanged(const QModelIndex &selected, const QModelIndex &deselected);
 
     /// Access mode selection changed.
     /// \param deselected Item that has been deselected.
     /// \param selected Item that has been selected.
-    void accessModeSelectionChanged(const QModelIndex &selected,
-            const QModelIndex &deselected);
+    void accessModeSelectionChanged(const QModelIndex &selected, const QModelIndex &deselected);
 
     /// Group access mode correlation table selection changed.
     /// \param deselected Item that has been deselected.
     /// \param selected Item that has been selected.
-    void groupAccessModeSelectionChanged(const QModelIndex &selected,
-            const QModelIndex &deselected);
+    void groupAccessModeSelectionChanged(const QModelIndex &selected, const QModelIndex &deselected);
+
+    /// Employee selection changed.
+    /// \param deselected Item that has been deselected.
+    /// \param selected Item that has been selected.
+    void employeeSelectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
+
+    /// Employee correlation table selection changed.
+    /// \param deselected Item that has been deselected.
+    /// \param selected Item that has been selected.
+    void groupEmployeeSelectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
+
+    /// Change the name of the group.
+    void changeName();
+
+    /// Change the activated state of the group.
+    void changeActiveState();
+
+    /// Select all employee.
+    void selectAllEmployee();
+
+    /// Deselect all employee.
+    void deselectAllEmployee();
+
+    /// Select all group employee.
+    void selectAllGroupEmployee();
+
+    /// Deselect all group employee.
+    void deselectAllGroupEmployee();
+
+    /// Add an employee.
+    void addEmployee();
+
+    /// Remove the selected employees.
+    void removeEmployee();
 
 private:
     /// Update model data.
@@ -90,23 +124,36 @@ private:
 
     /// Run action for enabling the usergroup list.
     /// \param selRow Selected row.
-    void activateGroupAccessModeList(int selRow);
+    void activateGroup(int selRow);
 
     /// Run action for disabling the usergroup list.
-    void deactivateGroupAccessModeList();
+    void deactivateGroup();
 
-    /// Search for an access mode in user group proxy model.
+    /// Search for an access mode in group proxy model.
     /// \param name The name of the group to search for.
     /// \return True if minimum one exist, else false.
     bool groupAccessModeProxyContainsAccessMode(const QString &accessMode);
+
+    /// Search for an employee name in the group employee proxy model.
+    /// \param name The name of the employee to search for.
+    /// \return True if found, else false.
+    bool groupEmployeeProxyContainsEmployee(const QString &name);
+
+    /// Search for group name in group model.
+    /// \param The group name to search for.
+    /// \return True if found, else false.
+    bool groupContainsGroupname(const QString &groupname);
 
     Ui::QMAMSGroupSettingsWidget *ui;
 
     std::unique_ptr<QMAMSAccessModeModel> amsAccessModeModel;
     std::unique_ptr<QMAMSGroupModel> amsGroupModel;
+    std::unique_ptr<QMAMSGroupEmployeeModel> amsGroupEmployeeModel;
+    std::unique_ptr<QMEmployeeViewModel> employeeViewModel;
     std::unique_ptr<QMAMSGroupAccessModeModel> amsGroupAccessModeModel;
 
     std::unique_ptr<QSortFilterProxyModel> amsGroupAccessModeProxyModel;
+    std::unique_ptr<QSortFilterProxyModel> amsGroupEmployeeProxyModel;
 };
 
 #endif // QMAMSGROUPSETTINGSWIDGET_H

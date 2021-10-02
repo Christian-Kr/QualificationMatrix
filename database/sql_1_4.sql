@@ -69,6 +69,19 @@ CREATE TABLE IF NOT EXISTS "AMSGroupAccessMode" (
         "AMSAccessMode"("amsaccessmode_id")
 );
 
+-- Connects employees with the groups
+
+CREATE TABLE IF NOT EXISTS "AMSGroupEmployee" (
+    "amsgroupemployee_id"                           INTEGER,
+    "amsgroupemployee_group"                        INTEGER,
+    "amsgroupemployee_employee"                     INTEGER,
+    PRIMARY KEY("amsgroupemployee_id"),
+    FOREIGN KEY("amsgroupemployee_group")           REFERENCES
+        "AMSGroup" ("amsgroup_id"),
+    FOREIGN KEY("amsgroupemployee_employee")        REFERENCES
+        "Employee" ("id")
+);
+
 -- General information for access management system
 CREATE TABLE IF NOT EXISTS "AMSGeneral" (
     "amsgeneral_id"            INTEGER,

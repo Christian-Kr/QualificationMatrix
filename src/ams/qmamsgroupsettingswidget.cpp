@@ -21,7 +21,10 @@
 #include "ams/qmamsmanager.h"
 #include "ams/model/qmamsusergroupmodel.h"
 #include "framework/qmbooleandelegate.h"
+#include "model/qmemployeeviewmodel.h"
+#include "ams/model/qmamsgroupemployeemodel.h"
 
+#include <QInputDialog>
 #include <QSqlDatabase>
 #include <QSqlRecord>
 #include <QSqlError>
@@ -34,6 +37,7 @@ QMAMSGroupSettingsWidget::QMAMSGroupSettingsWidget(QWidget *parent)
     : QMSettingsWidget(parent, true)
     , ui(new Ui::QMAMSGroupSettingsWidget)
     , amsGroupAccessModeProxyModel(std::make_unique<QSortFilterProxyModel>(this))
+    , amsGroupEmployeeProxyModel(std::make_unique<QSortFilterProxyModel>(this))
 {
     ui->setupUi(this);
 
@@ -41,6 +45,7 @@ QMAMSGroupSettingsWidget::QMAMSGroupSettingsWidget(QWidget *parent)
     auto booleanDelegate = new QMBooleanDelegate(this);
     booleanDelegate->setEditable(true);
     ui->tvGroup->setItemDelegateForColumn(2, booleanDelegate);
+    ui->tvGroup->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
 
 QMAMSGroupSettingsWidget::~QMAMSGroupSettingsWidget()
@@ -57,6 +62,11 @@ void QMAMSGroupSettingsWidget::saveSettings()
         error = error | !amsGroupModel->submitAll();
     }
 
+    if (amsGroupEmployeeModel->isDirty())
+    {
+        error = error | !amsGroupEmployeeModel->submitAll();
+    }
+
     if (amsGroupAccessModeModel->isDirty())
     {
         error = error | !amsGroupAccessModeModel->submitAll();
@@ -65,8 +75,7 @@ void QMAMSGroupSettingsWidget::saveSettings()
     if (error)
     {
         QMessageBox::critical(this, tr("Speichern"),
-                tr("Die Änderungen konnten nicht in die Datenbank "
-                "geschrieben werden."));
+                tr("Die Änderungen konnten nicht in die Datenbank geschrieben werden."));
     }
 }
 
@@ -102,12 +111,21 @@ void QMAMSGroupSettingsWidget::updateData()
     amsGroupAccessModeModel = std::make_unique<QMAMSGroupAccessModeModel>(this, db);
     amsGroupAccessModeModel->select();
 
+    amsGroupEmployeeModel = std::make_unique<QMAMSGroupEmployeeModel>(this, db);
+    amsGroupEmployeeModel->select();
+
+    employeeViewModel = std::make_unique<QMEmployeeViewModel>(this, db);
+    employeeViewModel->select();
+
     ui->tvGroup->setModel(amsGroupModel.get());
     ui->tvGroup->hideColumn(0);
     ui->tvGroup->resizeColumnsToContents();
 
     ui->lvAccessMode->setModel(amsAccessModeModel.get());
     ui->lvAccessMode->setModelColumn(1);
+
+    ui->lvEmployee->setModel(employeeViewModel.get());
+    ui->lvEmployee->setModelColumn(1);
 
     // Build some connections.
     connect(amsGroupModel.get(), &QMAMSGroupModel::dataChanged, this,
@@ -118,6 +136,9 @@ void QMAMSGroupSettingsWidget::updateData()
     connect(ui->lvAccessMode->selectionModel(),
             &QItemSelectionModel::currentRowChanged, this,
             &QMAMSGroupSettingsWidget::accessModeSelectionChanged);
+    connect(ui->lvEmployee->selectionModel(),
+            &QItemSelectionModel::selectionChanged, this,
+            &QMAMSGroupSettingsWidget::employeeSelectionChanged);
 }
 
 void QMAMSGroupSettingsWidget::addGroup()
@@ -144,7 +165,7 @@ void QMAMSGroupSettingsWidget::addAccessMode()
     auto accessModePrimaryIdField = amsAccessModeModel->fieldIndex("amsaccessmode_id");
     if (accessModePrimaryIdField < 0)
     {
-        qCritical() << "Cannto find field index of id in AMSAccessMode";
+        qCritical() << "Cannot find field index of id in AMSAccessMode";
         return;
     }
 
@@ -190,6 +211,99 @@ void QMAMSGroupSettingsWidget::addAccessMode()
                 tr("Konnte die Änderung nicht in die Datenbank schreiben."));
         return;
     }
+}
+
+void QMAMSGroupSettingsWidget::addEmployee()
+{
+    // If no employee is selected inform.
+    auto selModelIndexes = ui->lvEmployee->selectionModel()->selectedRows(1);
+    auto selCount = selModelIndexes.count();
+
+    if (selCount < 1)
+    {
+        QMessageBox::information(this, tr("Mitarbeiter hinzufügen"), tr("Kein Mitarbeiter ausgewählt."));
+        return;
+    }
+
+    auto employeePrimaryIdField = employeeViewModel->fieldIndex("id");
+    auto employeeNameFieldIndex = employeeViewModel->fieldIndex("name");
+    if (employeePrimaryIdField < 0 || employeeNameFieldIndex < 0)
+    {
+        qCritical() << "Cannot find field index of id and/or name in Employee";
+        return;
+    }
+
+    // Exit if no group has been selected.
+    auto groupIndex = ui->tvGroup->currentIndex();
+    if (!groupIndex.isValid())
+    {
+        QMessageBox::information(this, tr("Mitarbeiter hinzufügen"), tr("Keine Gruppe ausgewählt"));
+        return;
+    }
+
+    auto groupModelPrimaryIdField = amsGroupModel->fieldIndex("amsgroup_id");
+    if (groupModelPrimaryIdField < 0)
+    {
+        qCritical() << "Cannot find field index of id in AMSGroup";
+        return;
+    }
+
+    auto groupModelIndex = amsGroupModel->index(groupIndex.row(), groupModelPrimaryIdField);
+    auto groupPrimaryId = amsGroupModel->data(groupModelIndex).toInt();
+
+    for (int i = 0; i < selModelIndexes.count(); i++)
+    {
+        auto selModelIndex = selModelIndexes.at(i);
+
+        if (!selModelIndex.isValid())
+        {
+            qCritical() << "ModelIndex of selected employee not valid";
+            continue;
+        }
+
+        // Get the primary key and name of the employee.
+        auto selRow = selModelIndex.row();
+
+        auto employeeIdModelIndex = employeeViewModel->index(selRow, employeePrimaryIdField);
+        auto employeeId = employeeViewModel->data(employeeIdModelIndex).toInt();
+
+        auto employeeNameModelIndex = employeeViewModel->index(selRow, employeeNameFieldIndex);
+        auto employeeName = employeeViewModel->data(employeeNameModelIndex).toString();
+
+        // Search for duplicates.
+        if (groupEmployeeProxyContainsEmployee(employeeName))
+        {
+            // Here we give no message, cause there might be mutiple employees already existing.
+            continue;
+        }
+
+        // Create record and add.
+        auto record = amsGroupEmployeeModel->record();
+
+        record.setValue("amsgroup_name", groupPrimaryId);
+        record.setValue("name", employeeId);
+
+        if (!amsGroupEmployeeModel->insertRecord(-1, record) | !amsGroupEmployeeModel->submitAll())
+        {
+            QMessageBox::warning(this, tr("Mitarbeiter hinzufügen"), tr("Konnte den Mitarbeiter nicht hinzufügen"));
+            return;
+        }
+    }
+}
+
+bool QMAMSGroupSettingsWidget::groupEmployeeProxyContainsEmployee(const QString &name)
+{
+    for (int i = 0; i < amsGroupEmployeeProxyModel->rowCount(); i++)
+    {
+        auto emplyoeeNameModelIndex = amsGroupEmployeeProxyModel->index(i, 2);
+        auto employeeName = amsGroupEmployeeProxyModel->data(emplyoeeNameModelIndex).toString();
+        if (employeeName.compare(name) == 0)
+        {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 bool QMAMSGroupSettingsWidget::groupAccessModeProxyContainsAccessMode(
@@ -262,14 +376,29 @@ void QMAMSGroupSettingsWidget::removeGroup()
     emitSettingsChanged();
 }
 
+void QMAMSGroupSettingsWidget::removeEmployee()
+{
+    auto employeeModelIndexes = ui->lvGroupEmployee->selectionModel()->selectedRows();
+
+    for (int i = 0; i < employeeModelIndexes.count(); i++)
+    {
+        auto row = employeeModelIndexes.at(i).row();
+        if (!amsGroupEmployeeProxyModel->removeRow(row))
+        {
+            qCritical() << "Cannot remove employee from group emploee model";
+        }
+    }
+
+    emitSettingsChanged();
+}
+
 void QMAMSGroupSettingsWidget::removeAccessMode()
 {
     auto groupAccessModeIndex = ui->lvGroupAccessMode->currentIndex();
 
     if (!groupAccessModeIndex.isValid())
     {
-        QMessageBox::information(this, tr("Gruppe entfernen"),
-                tr("Keine Gruppe ausgewählt."));
+        QMessageBox::information(this, tr("Gruppe entfernen"), tr("Keine Gruppe ausgewählt."));
         return;
     }
 
@@ -278,8 +407,8 @@ void QMAMSGroupSettingsWidget::removeAccessMode()
     emitSettingsChanged();
 }
 
-void QMAMSGroupSettingsWidget::groupAccessModeSelectionChanged(
-        const QModelIndex &selected, const QModelIndex &deselected)
+void QMAMSGroupSettingsWidget::groupAccessModeSelectionChanged(const QModelIndex &selected,
+        const QModelIndex &deselected)
 {
     ui->lvAccessMode->reset();
     if (selected.isValid())
@@ -288,8 +417,81 @@ void QMAMSGroupSettingsWidget::groupAccessModeSelectionChanged(
     }
 }
 
-void QMAMSGroupSettingsWidget::accessModeSelectionChanged(
-        const QModelIndex &selected, const QModelIndex &deselected)
+void QMAMSGroupSettingsWidget::groupEmployeeSelectionChanged(const QItemSelection &selected,
+        const QItemSelection &deselected)
+{
+    ui->lvEmployee->reset();
+    ui->pbAddEmployee->setEnabled(false);
+
+    // Set the number of selected elements.
+    auto selCount = ui->lvGroupEmployee->selectionModel()->selectedRows(1).count();
+    ui->laSelGroupEmployee->setText(QString("%1").arg(selCount));
+
+    if (selCount < 1)
+    {
+        ui->pbRemoveEmployee->setEnabled(false);
+        return;
+    }
+    else
+    {
+        ui->pbRemoveEmployee->setEnabled(true);
+    }
+}
+
+void QMAMSGroupSettingsWidget::employeeSelectionChanged(const QItemSelection &selected,
+        const QItemSelection &deselected)
+{
+    ui->lvGroupEmployee->reset();
+    ui->pbRemoveEmployee->setEnabled(false);
+
+    // Set the number of selected elements.
+    auto selCount = ui->lvEmployee->selectionModel()->selectedRows(1).count();
+    ui->laSelEmployee->setText(QString("%1").arg(selCount));
+
+    if (selCount < 1)
+    {
+        ui->pbAddEmployee->setEnabled(false);
+        return;
+    }
+    else
+    {
+        ui->pbAddEmployee->setEnabled(true);
+    }
+}
+
+void QMAMSGroupSettingsWidget::selectAllEmployee()
+{
+    ui->lvGroupEmployee->clearSelection();
+    ui->lvEmployee->selectAll();
+    ui->pbAddEmployee->setEnabled(true);
+    ui->pbRemoveEmployee->setEnabled(false);
+}
+
+void QMAMSGroupSettingsWidget::deselectAllEmployee()
+{
+    ui->lvGroupEmployee->clearSelection();
+    ui->lvEmployee->clearSelection();
+    ui->pbAddEmployee->setEnabled(false);
+    ui->pbRemoveEmployee->setEnabled(false);
+}
+
+void QMAMSGroupSettingsWidget::selectAllGroupEmployee()
+{
+    ui->lvEmployee->clearSelection();
+    ui->lvGroupEmployee->selectAll();
+    ui->pbAddEmployee->setEnabled(false);
+    ui->pbRemoveEmployee->setEnabled(true);
+}
+
+void QMAMSGroupSettingsWidget::deselectAllGroupEmployee()
+{
+    ui->lvGroupEmployee->clearSelection();
+    ui->lvEmployee->clearSelection();
+    ui->pbAddEmployee->setEnabled(false);
+    ui->pbRemoveEmployee->setEnabled(false);
+}
+
+void QMAMSGroupSettingsWidget::accessModeSelectionChanged(const QModelIndex &selected, const QModelIndex &deselected)
 {
     ui->lvGroupAccessMode->reset();
     ui->pbRemoveAccessMode->setEnabled(false);
@@ -312,6 +514,115 @@ void QMAMSGroupSettingsWidget::accessModeSelectionChanged(
     }
 }
 
+void QMAMSGroupSettingsWidget::changeName()
+{
+    auto selRows = ui->tvGroup->selectionModel()->selectedRows();
+    if (selRows.count() != 1)
+    {
+        qWarning() << "Wrong number of selected rows";
+    }
+
+    auto selRow = selRows.first().row();
+
+    auto nameFieldIndex = amsGroupModel->fieldIndex("amsgroup_name");
+    auto nameModelIndex = amsGroupModel->index(selRow, nameFieldIndex);
+    auto selName = amsGroupModel->data(nameModelIndex).toString();
+
+    // Get the new group name.
+    bool ok = false;
+    bool first = true;
+    QString newName = selName;
+    while (ok || first)
+    {
+        first = false;
+        newName = QInputDialog::getText(this, tr("Name von %1 ändern").arg(selName), tr("Name"), QLineEdit::Normal,
+                newName, &ok);
+
+        if (!ok) {
+            return;
+        }
+
+        // The name should only consist of letters and spaces.
+        if (!newName.contains(QRegExp("^[a-zA-Z ]+$")) || newName.length() < 6)
+        {
+            QMessageBox::information(this, tr("Name ändern"),
+                    tr("Der Name darf nur Buchstaben und Leerzeichen enthalten und muss mindestens 6 Zeichen "
+                       "lang sein."));
+            continue;
+        }
+
+        // The username should not already exist.
+        if (groupContainsGroupname(newName) && selName.compare(newName) != 0)
+        {
+            QMessageBox::information(this, tr("Name ändern"), tr("Der Name existiert bereits."));
+            continue;
+        }
+
+        break;
+    }
+
+    // Change the name.
+    if (!amsGroupModel->setData(nameModelIndex, newName))
+    {
+        QMessageBox::information(this, tr("Name ändern"), tr("Der Name konnte nicht geändert werden."));
+        return;
+    }
+
+    emitSettingsChanged();
+}
+
+bool QMAMSGroupSettingsWidget::groupContainsGroupname(const QString &groupname)
+{
+    auto groupnameFieldIndex = amsGroupModel->fieldIndex("amsgroup_name");
+
+    for (int i = 0; i < amsGroupModel->rowCount(); i++)
+    {
+        auto groupnameModelIndex = amsGroupModel->index(i, groupnameFieldIndex);
+        auto tmpGroupname = amsGroupModel->data(groupnameModelIndex).toString();
+
+        if (tmpGroupname.compare(groupname) == 0)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+void QMAMSGroupSettingsWidget::changeActiveState()
+{
+    auto selRows = ui->tvGroup->selectionModel()->selectedRows();
+    if (selRows.count() != 1)
+    {
+        qWarning() << "Wrong number of selected rows";
+    }
+
+    auto selRow = selRows.first().row();
+
+    auto activeFieldIndex = amsGroupModel->fieldIndex("amsgroup_active");
+    auto activeModelIndex = amsGroupModel->index(selRow, activeFieldIndex);
+    auto selActive = amsGroupModel->data(activeModelIndex).toBool();
+
+    // Change the activated state.
+    if (!amsGroupModel->setData(activeModelIndex, !selActive))
+    {
+        QMessageBox::information(this, tr("Aktiviert-Status ändern"),
+                tr("Der Aktiviert-Status konnte nicht geändert werden."));
+        return;
+    }
+
+    if (!selActive)
+    {
+        ui->pbChangeActiveState->setText(tr("Deaktivieren"));
+    }
+    else
+    {
+        ui->pbChangeActiveState->setText(tr("Aktivieren"));
+    }
+
+    emitSettingsChanged();
+}
+
 void QMAMSGroupSettingsWidget::groupSelectionChanged(const QModelIndex &selected, const QModelIndex &deselected)
 {
     ui->lvAccessMode->reset();
@@ -320,32 +631,53 @@ void QMAMSGroupSettingsWidget::groupSelectionChanged(const QModelIndex &selected
 
     if (!selected.isValid())
     {
-        deactivateGroupAccessModeList();
+        deactivateGroup();
         return;
     }
 
     auto selModelIndex = amsGroupModel->index(selected.row(), 2);
     auto selData = amsGroupModel->data(selModelIndex).toString();
 
-    activateGroupAccessModeList(selected.row());
+    activateGroup(selected.row());
 }
 
-void QMAMSGroupSettingsWidget::deactivateGroupAccessModeList()
+void QMAMSGroupSettingsWidget::deactivateGroup()
 {
     ui->gbAccessMode->setEnabled(false);
+    ui->gbEmployeeAccess->setEnabled(false);
     ui->pbRemoveGroup->setEnabled(false);
+    ui->pbChangeActiveState->setEnabled(false);
+    ui->pbChangeActiveState->setEnabled(false);
+    ui->pbChangeName->setEnabled(false);
 
     ui->lvGroupAccessMode->setModel(nullptr);
 }
 
-void QMAMSGroupSettingsWidget::activateGroupAccessModeList(int selRow)
+void QMAMSGroupSettingsWidget::activateGroup(int selRow)
 {
     ui->gbAccessMode->setEnabled(true);
+    ui->gbEmployeeAccess->setEnabled(true);
     ui->pbRemoveGroup->setEnabled(true);
+    ui->pbChangeActiveState->setEnabled(true);
+    ui->pbChangeName->setEnabled(true);
+
+    auto activeFieldIndex = amsGroupModel->fieldIndex("amsgroup_active");
+    auto activeModelIndex = amsGroupModel->index(selRow, activeFieldIndex);
+    auto selActive = amsGroupModel->data(activeModelIndex).toBool();
+
+    if (selActive)
+    {
+        ui->pbChangeActiveState->setText(tr("Deaktivieren"));
+    }
+    else
+    {
+        ui->pbChangeActiveState->setText(tr("Aktivieren"));
+    }
 
     auto selModelIndex = amsGroupModel->index(selRow, 1);
     auto selData = amsGroupModel->data(selModelIndex).toString();
 
+    // Set access mode proxy model.
     amsGroupAccessModeProxyModel->setSourceModel(amsGroupAccessModeModel.get());
     amsGroupAccessModeProxyModel->setFilterKeyColumn(1);
     amsGroupAccessModeProxyModel->setFilterRegExp(QString("^%1$").arg(selData));
@@ -355,4 +687,15 @@ void QMAMSGroupSettingsWidget::activateGroupAccessModeList(int selRow)
     ui->lvGroupAccessMode->selectionModel()->disconnect(this);
     connect(ui->lvGroupAccessMode->selectionModel(), &QItemSelectionModel::currentRowChanged, this,
             &QMAMSGroupSettingsWidget::groupAccessModeSelectionChanged);
+
+    // Set employee proxy model.
+    amsGroupEmployeeProxyModel->setSourceModel(amsGroupEmployeeModel.get());
+    amsGroupEmployeeProxyModel->setFilterKeyColumn(1);
+    amsGroupEmployeeProxyModel->setFilterRegExp(QString("^%1$").arg(selData));
+    ui->lvGroupEmployee->setModel(amsGroupEmployeeProxyModel.get());
+    ui->lvGroupEmployee->setModelColumn(2);
+
+    ui->lvGroupEmployee->selectionModel()->disconnect(this);
+    connect(ui->lvGroupEmployee->selectionModel(), &QItemSelectionModel::selectionChanged, this,
+            &QMAMSGroupSettingsWidget::groupEmployeeSelectionChanged);
 }

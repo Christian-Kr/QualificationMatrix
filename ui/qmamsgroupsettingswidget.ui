@@ -6,25 +6,25 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>838</width>
-    <height>904</height>
+    <width>810</width>
+    <height>1201</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
+  <layout class="QVBoxLayout" name="verticalLayout_5">
    <item>
     <widget class="QGroupBox" name="groupBox_2">
      <property name="minimumSize">
       <size>
        <width>0</width>
-       <height>400</height>
+       <height>300</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
-       <width>600</width>
+       <width>800</width>
        <height>16777215</height>
       </size>
      </property>
@@ -86,6 +86,26 @@
            </widget>
           </item>
           <item>
+           <widget class="QPushButton" name="pbChangeName">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Name ändern</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pbChangeActiveState">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Aktivieren</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <spacer name="verticalSpacer">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
@@ -118,12 +138,12 @@
      </property>
      <property name="maximumSize">
       <size>
-       <width>600</width>
+       <width>800</width>
        <height>16777215</height>
       </size>
      </property>
      <property name="title">
-      <string>Allgemeine Rechtzuweisung zur Gruppe</string>
+      <string>Allgemein</string>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
@@ -222,6 +242,249 @@
     </widget>
    </item>
    <item>
+    <widget class="QGroupBox" name="gbEmployeeAccess">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>400</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>800</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="title">
+      <string>Mitarbeiter</string>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_8">
+        <item>
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>Zugewiesene Mitarbeiter</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="QLabel" name="label_6">
+            <property name="text">
+             <string>Selektieren</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pbSelectAllGroupEmployee">
+            <property name="text">
+             <string>Alle</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pbDeselectAllGroupEmployee">
+            <property name="text">
+             <string>Keine</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <item>
+           <widget class="QLabel" name="label_8">
+            <property name="text">
+             <string>Anzahl selektierter Mitarbeiter:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="laSelGroupEmployee">
+            <property name="text">
+             <string>0</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QListView" name="lvGroupEmployee">
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::MultiSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_9">
+        <item>
+         <spacer name="verticalSpacer_5">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pbAddEmployee">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>100</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Hinzufügen</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pbRemoveEmployee">
+          <property name="minimumSize">
+           <size>
+            <width>100</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Löschen</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_6">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>Verfügbare Mitarbeiter</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QLabel" name="label_5">
+            <property name="text">
+             <string>Selektieren</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pbSelectAllEmployee">
+            <property name="text">
+             <string>Alle</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pbDeselectAllEmployee">
+            <property name="text">
+             <string>Keine</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <item>
+           <widget class="QLabel" name="label_7">
+            <property name="text">
+             <string>Anzahl selektierter Mitarbeiter:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="laSelEmployee">
+            <property name="text">
+             <string>0</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QListView" name="lvEmployee">
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::MultiSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
     <spacer name="verticalSpacer_4">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -302,11 +565,147 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pbChangeName</sender>
+   <signal>clicked()</signal>
+   <receiver>QMAMSGroupSettingsWidget</receiver>
+   <slot>changeName()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>545</x>
+     <y>138</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>418</x>
+     <y>451</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbChangeActiveState</sender>
+   <signal>clicked()</signal>
+   <receiver>QMAMSGroupSettingsWidget</receiver>
+   <slot>changeActiveState()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>545</x>
+     <y>178</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>418</x>
+     <y>451</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbSelectAllEmployee</sender>
+   <signal>clicked()</signal>
+   <receiver>QMAMSGroupSettingsWidget</receiver>
+   <slot>selectAllEmployee()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>630</x>
+     <y>654</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>418</x>
+     <y>600</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbDeselectAllEmployee</sender>
+   <signal>clicked()</signal>
+   <receiver>QMAMSGroupSettingsWidget</receiver>
+   <slot>deselectAllEmployee()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>742</x>
+     <y>654</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>418</x>
+     <y>600</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbDeselectAllGroupEmployee</sender>
+   <signal>clicked()</signal>
+   <receiver>QMAMSGroupSettingsWidget</receiver>
+   <slot>deselectAllGroupEmployee()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>303</x>
+     <y>654</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>404</x>
+     <y>600</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbSelectAllGroupEmployee</sender>
+   <signal>clicked()</signal>
+   <receiver>QMAMSGroupSettingsWidget</receiver>
+   <slot>selectAllGroupEmployee()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>213</x>
+     <y>654</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>404</x>
+     <y>600</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbAddEmployee</sender>
+   <signal>clicked()</signal>
+   <receiver>QMAMSGroupSettingsWidget</receiver>
+   <slot>addEmployee()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>404</x>
+     <y>770</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>404</x>
+     <y>600</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbRemoveEmployee</sender>
+   <signal>clicked()</signal>
+   <receiver>QMAMSGroupSettingsWidget</receiver>
+   <slot>removeEmployee()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>404</x>
+     <y>810</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>404</x>
+     <y>600</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>addGroup()</slot>
   <slot>removeGroup()</slot>
   <slot>addAccessMode()</slot>
   <slot>removeAccessMode()</slot>
+  <slot>changeActiveState()</slot>
+  <slot>changeName()</slot>
+  <slot>addEmployee()</slot>
+  <slot>removeEmployee()</slot>
+  <slot>selectAllEmployee()</slot>
+  <slot>deselectAllEmployee()</slot>
+  <slot>selectAllGroupEmployee()</slot>
+  <slot>deselectAllGroupEmployee()</slot>
  </slots>
 </ui>

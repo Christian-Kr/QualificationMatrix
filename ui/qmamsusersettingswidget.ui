@@ -24,7 +24,7 @@
      </property>
      <property name="maximumSize">
       <size>
-       <width>600</width>
+       <width>800</width>
        <height>16777215</height>
       </size>
      </property>
@@ -159,7 +159,7 @@
      </property>
      <property name="maximumSize">
       <size>
-       <width>600</width>
+       <width>800</width>
        <height>16777215</height>
       </size>
      </property>
@@ -180,6 +180,9 @@
          <widget class="QListView" name="lvUserGroup">
           <property name="editTriggers">
            <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectItems</enum>
           </property>
          </widget>
         </item>
@@ -254,6 +257,9 @@
          <widget class="QListView" name="lvGroup">
           <property name="editTriggers">
            <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectItems</enum>
           </property>
          </widget>
         </item>
