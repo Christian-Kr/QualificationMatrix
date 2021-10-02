@@ -12,6 +12,9 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 #include "qmemployeeviewmodel.h"
+#include "ams/qmamsmanager.h"
+
+#include <QDebug>
 
 QMEmployeeViewModel::QMEmployeeViewModel(QObject *parent, const QSqlDatabase &db)
     : QMSqlTableModel(parent, db)
@@ -29,4 +32,18 @@ QMEmployeeViewModel::QMEmployeeViewModel(QObject *parent, const QSqlDatabase &db
     QSqlRelationalTableModel::setRelation(2, QSqlRelation("Shift", "id", "name"));
 
     sort(1, Qt::AscendingOrder);
+
+    auto amsManager = QMAMSManager::getInstance();
+    QStringList primaryKeysString;
+    QList<int> primaryKeyInt = amsManager->getEmployeePrimaryKeys();
+    for (int i = 0; i < primaryKeyInt.count(); i++)
+    {
+        if (i != 0)
+        {
+            primaryKeysString << ",";
+        }
+
+        primaryKeysString << QString("%1").arg(primaryKeyInt.at(i));
+    }
+    setFilter(QString("%1.id IN (%2)").arg(tableName()).arg(primaryKeysString.join("")));
 }

@@ -30,6 +30,9 @@ public:
 
     /// Override from QMSqlTableModel.
     void initModel() override;
+
+    /// Override from QMSqlTableModel.
+    void setFilter(const QString &filter) override;
 };
 
 #endif // QMTRAININGDATAMODEL_H

@@ -21,7 +21,7 @@
 #include "ams/qmamsmanager.h"
 #include "ams/model/qmamsusergroupmodel.h"
 #include "framework/qmbooleandelegate.h"
-#include "model/qmemployeeviewmodel.h"
+#include "model/qmemployeemodel.h"
 #include "ams/model/qmamsgroupemployeemodel.h"
 
 #include <QInputDialog>
@@ -114,8 +114,8 @@ void QMAMSGroupSettingsWidget::updateData()
     amsGroupEmployeeModel = std::make_unique<QMAMSGroupEmployeeModel>(this, db);
     amsGroupEmployeeModel->select();
 
-    employeeViewModel = std::make_unique<QMEmployeeViewModel>(this, db);
-    employeeViewModel->select();
+    employeeModel = std::make_unique<QMEmployeeModel>(this, db);
+    employeeModel->select();
 
     ui->tvGroup->setModel(amsGroupModel.get());
     ui->tvGroup->hideColumn(0);
@@ -124,7 +124,7 @@ void QMAMSGroupSettingsWidget::updateData()
     ui->lvAccessMode->setModel(amsAccessModeModel.get());
     ui->lvAccessMode->setModelColumn(1);
 
-    ui->lvEmployee->setModel(employeeViewModel.get());
+    ui->lvEmployee->setModel(employeeModel.get());
     ui->lvEmployee->setModelColumn(1);
 
     // Build some connections.
@@ -225,8 +225,8 @@ void QMAMSGroupSettingsWidget::addEmployee()
         return;
     }
 
-    auto employeePrimaryIdField = employeeViewModel->fieldIndex("id");
-    auto employeeNameFieldIndex = employeeViewModel->fieldIndex("name");
+    auto employeePrimaryIdField = employeeModel->fieldIndex("id");
+    auto employeeNameFieldIndex = employeeModel->fieldIndex("name");
     if (employeePrimaryIdField < 0 || employeeNameFieldIndex < 0)
     {
         qCritical() << "Cannot find field index of id and/or name in Employee";
@@ -264,11 +264,11 @@ void QMAMSGroupSettingsWidget::addEmployee()
         // Get the primary key and name of the employee.
         auto selRow = selModelIndex.row();
 
-        auto employeeIdModelIndex = employeeViewModel->index(selRow, employeePrimaryIdField);
-        auto employeeId = employeeViewModel->data(employeeIdModelIndex).toInt();
+        auto employeeIdModelIndex = employeeModel->index(selRow, employeePrimaryIdField);
+        auto employeeId = employeeModel->data(employeeIdModelIndex).toInt();
 
-        auto employeeNameModelIndex = employeeViewModel->index(selRow, employeeNameFieldIndex);
-        auto employeeName = employeeViewModel->data(employeeNameModelIndex).toString();
+        auto employeeNameModelIndex = employeeModel->index(selRow, employeeNameFieldIndex);
+        auto employeeName = employeeModel->data(employeeNameModelIndex).toString();
 
         // Search for duplicates.
         if (groupEmployeeProxyContainsEmployee(employeeName))

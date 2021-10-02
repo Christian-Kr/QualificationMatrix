@@ -95,6 +95,10 @@ struct QMAMSUserInformation
     QString password;
 
     QMAMSUserGeneralAccessPermissions generalPermissions;
+
+    // Variable holds a list of primary keys of the users that are visible. All other users should never be visible
+    // to the currently logged in user.
+    QList<int> allowedUsersPrimaryKeys;
 };
 
 /// The class is the manager for the acces management system. Here you get all
@@ -185,6 +189,10 @@ public:
     /// \return True if successfull, else false.
     bool setPassword(int userId, const QString &password);
 
+    /// Get primary keys of allowed employees.
+    /// \return A list of allowed employee primary keys.
+    QList<int> getEmployeePrimaryKeys() { return loggedinUser->allowedUsersPrimaryKeys; }
+
 signals:
     /// Emited when the login state changed.
     /// \param before Login state before the change.
@@ -222,6 +230,11 @@ private:
     /// \return General user permission struct.
     QMAMSUserGeneralAccessPermissions getUserGeneralAccessPermissionsFromDatabase(QMAMSUserInformation &userInfo);
 
+    /// Get the employee permission information from a user.
+    /// \param userInfo The user information struct to find the user.
+    /// \return General employee permission list.
+    QList<int> getUserEmployeeAccessPermissionsFromDatabase(QMAMSUserInformation &userInfo);
+
     /// Get a list of all group names, that correlate to the given username.
     /// \param username The name of the user to get the information for.
     /// \return A list of group names, the user ist part of.
@@ -231,6 +244,16 @@ private:
     /// \param groupNames The list of group names to get the access modes for.
     /// \return A list of all access modes for the given list of group names.
     QList<QString> getGroupAccessModesFromDatabase(const QList<QString> &groupNames);
+
+    /// Get a list of all employees for the list of group names.
+    /// \param groupNames The list of group names to get the employees for.
+    /// \return A list of all employees for the given list of group names.
+    QList<QString> getGroupEmployeeFromDatabase(const QList<QString> &groupNames);
+
+    /// Get a list of primary keys from employees.
+    /// \param employeeNames The employee names list.
+    /// \return A list of all primary keys from employee names.
+    QList<int> getEmployeePrimaryKeyFromNamesFromDatabase(const QList<QString> &employeeNames);
 
     /// Get a list of values from a list access mode names.
     /// \param accessModeNames The acces mode names to translate.

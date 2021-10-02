@@ -32,7 +32,7 @@ public:
     /// \param index
     /// \param role
     /// \return
-    QVariant data(const QModelIndex &index, int role) const override;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
     /// Override from QSqlRelationalTableModel
     /// \param index

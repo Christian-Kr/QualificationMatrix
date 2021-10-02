@@ -17,6 +17,8 @@
 #include "ams/model/qmamsusergroupmodel.h"
 #include "ams/model/qmamsaccessmodemodel.h"
 #include "ams/model/qmamsgroupmodel.h"
+#include "ams/model/qmamsgroupemployeemodel.h"
+#include "model/qmemployeemodel.h"
 
 #include <QSqlDatabase>
 #include <QSqlRecord>
@@ -278,6 +280,8 @@ LoginResult QMAMSManager::loginUser(const QString &name, const QString &password
             auto generalPermissions = getUserGeneralAccessPermissionsFromDatabase(*loggedinUser);
             loggedinUser->generalPermissions = generalPermissions;
 
+            loggedinUser->allowedUsersPrimaryKeys = getUserEmployeeAccessPermissionsFromDatabase(*loggedinUser);
+            qDebug() << loggedinUser->allowedUsersPrimaryKeys;
             setLoginState(LoginState::LOGGED_IN);
 
             return LoginResult::SUCCESSFUL;
@@ -345,6 +349,85 @@ bool QMAMSManager::createAdminInDatabase()
     }
 
     return true;
+}
+
+QList<int> QMAMSManager::getUserEmployeeAccessPermissionsFromDatabase(QMAMSUserInformation &userInfo)
+{
+    // Get the database connection.
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        qWarning("Database is not connected");
+        return {};
+    }
+
+    auto db = QSqlDatabase::database("default");
+
+    // To ge the necessary information, get the user id, get the connected groups to the user id and at last, get the
+    // permissions that are correlated with the groups.
+
+    QList<QString> groupNames = getUserGroupsFromDatabase(userInfo.username);
+    QList<QString> activeGroupNames = getActiveGroups(groupNames);
+    if (activeGroupNames.isEmpty())
+    {
+        return {};
+    }
+
+    QList<QString> employeeNames = getGroupEmployeeFromDatabase(groupNames);
+    if (employeeNames.isEmpty())
+    {
+        return {};
+    }
+
+    return getEmployeePrimaryKeyFromNamesFromDatabase(employeeNames);
+}
+
+QList<int> QMAMSManager::getEmployeePrimaryKeyFromNamesFromDatabase(const QList<QString> &employeeNames)
+{
+    // Get the database connection.
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        qWarning("Database is not connected");
+        return {};
+    }
+
+    auto db = QSqlDatabase::database("default");
+
+    QMEmployeeModel employeeModel(this, db);
+    employeeModel.select();
+
+    auto employeeIdFieldIndex = employeeModel.fieldIndex("id");
+    auto employeeNameFieldIndex = employeeModel.fieldIndex("name");
+    if (employeeIdFieldIndex < 0 || employeeNameFieldIndex < 0)
+    {
+        qCritical() << "Cannot find field index in employee view model";
+        return {};
+    }
+
+    QList<int> employeeIds;
+
+    for (int i = 0; i < employeeNames.count(); i++)
+    {
+        for (int j = 0; j < employeeModel.rowCount(); j++)
+        {
+            auto employeeIdModelIndex = employeeModel.index(j, employeeIdFieldIndex);
+            auto dbEmployeeId = employeeModel.data(employeeIdModelIndex).toInt();
+
+            auto employeeNameModelIndex = employeeModel.index(j, employeeNameFieldIndex);
+            auto dbEmployeeName = employeeModel.data(employeeNameModelIndex).toString();
+
+            if (dbEmployeeName.compare(employeeNames.at(i)) == 0)
+            {
+                if (!employeeIds.contains(dbEmployeeId))
+                {
+                    employeeIds.append(dbEmployeeId);
+                }
+
+                continue;
+            }
+        }
+    }
+
+    return employeeIds;
 }
 
 QMAMSUserGeneralAccessPermissions QMAMSManager::getUserGeneralAccessPermissionsFromDatabase(
@@ -475,6 +558,55 @@ QList<int> QMAMSManager::getAccessModeValuesFromDatabase(const QList<QString> &a
     return accessModeValues;
 }
 
+QList<QString> QMAMSManager::getGroupEmployeeFromDatabase(const QList<QString> &groupNames)
+{
+    // Get the database connection.
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        qWarning("Database is not connected");
+        return {};
+    }
+
+    auto db = QSqlDatabase::database("default");
+
+    QMAMSGroupEmployeeModel amsGroupEmployeeModel(this, db);
+    amsGroupEmployeeModel.select();
+
+    QList<QString> employeeNames;
+
+    auto groupnameFieldIndex = amsGroupEmployeeModel.fieldIndex("amsgroup_name");
+    auto employeenameFieldIndex = amsGroupEmployeeModel.fieldIndex("name");
+
+    for (int i = 0; i < amsGroupEmployeeModel.rowCount(); i++)
+    {
+        auto groupnameModelIndex = amsGroupEmployeeModel.index(i, groupnameFieldIndex);
+        auto dbGroupname = amsGroupEmployeeModel.data(groupnameModelIndex).toString();
+
+        for (int j = 0; j < groupNames.count(); j++)
+        {
+            auto &groupname = groupNames.at(j);
+
+            if (dbGroupname.compare(groupname))
+            {
+                // Get the employee name.
+                auto employeeModelIndex = amsGroupEmployeeModel.index(i, employeenameFieldIndex);
+                auto dbEmployeename = amsGroupEmployeeModel.data(employeeModelIndex).toString();
+
+                if (!employeeNames.contains(dbEmployeename))
+                {
+                    employeeNames.append(dbEmployeename);
+                }
+
+                // If one of the groups fit, we don't have to search for further, cause the employee has already
+                // been added.
+                break;
+            }
+        }
+    }
+
+    return employeeNames;
+}
+
 QList<QString> QMAMSManager::getGroupAccessModesFromDatabase(const QList<QString> &groupNames)
 {
     // Get the database connection.
@@ -502,12 +634,14 @@ QList<QString> QMAMSManager::getGroupAccessModesFromDatabase(const QList<QString
         {
             auto &groupname = groupNames.at(j);
 
-            if (dbGroupname.compare(groupname) == 0) {
+            if (dbGroupname.compare(groupname) == 0)
+            {
                 // Get the access mode.
                 auto accessmodeModelIndex = amsGroupAccessModeModel.index(i, accessmodeFieldIndex);
                 auto dbAccessmode = amsGroupAccessModeModel.data(accessmodeModelIndex).toString();
 
-                if (!accessModeNames.contains(dbAccessmode)) {
+                if (!accessModeNames.contains(dbAccessmode))
+                {
                     accessModeNames.append(dbAccessmode);
                 }
 

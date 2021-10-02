@@ -12,6 +12,9 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 #include "qmtrainingdatamodel.h"
+#include "ams/qmamsmanager.h"
+
+#include <QDebug>
 
 QMTrainingDataModel::QMTrainingDataModel(QObject *parent, const QSqlDatabase &db)
     : QMSqlTableModel(parent, db, false, true)
@@ -41,4 +44,33 @@ void QMTrainingDataModel::initModel()
 
     // Default sort.
     setSort(3, Qt::DescendingOrder);
+
+    // Set Filter for initial change.
+    setFilter("");
+}
+
+void QMTrainingDataModel::setFilter(const QString &filter)
+{
+    auto amsManager = QMAMSManager::getInstance();
+    QStringList primaryKeysString;
+    QList<int> primaryKeyInt = amsManager->getEmployeePrimaryKeys();
+    for (int i = 0; i < primaryKeyInt.count(); i++)
+    {
+        if (i != 0)
+        {
+            primaryKeysString << ",";
+        }
+
+        primaryKeysString << QString("%1").arg(primaryKeyInt.at(i));
+    }
+    auto employeeFilter = QString("%1.id IN (%2)").arg("relTblAl_1", primaryKeysString.join(""));
+
+    if (filter.isEmpty())
+    {
+        QMSqlTableModel::setFilter(employeeFilter);
+    }
+    else
+    {
+        QMSqlTableModel::setFilter(QString("%1 AND %2").arg(filter, employeeFilter));
+    }
 }

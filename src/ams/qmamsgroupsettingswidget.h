@@ -21,7 +21,7 @@
 class QMAMSGroupModel;
 class QMAMSAccessModeModel;
 class QMAMSGroupAccessModeModel;
-class QMEmployeeViewModel;
+class QMEmployeeModel;
 class QSortFilterProxyModel;
 class QItemSelection;
 class QMAMSGroupEmployeeModel;
@@ -149,7 +149,7 @@ private:
     std::unique_ptr<QMAMSAccessModeModel> amsAccessModeModel;
     std::unique_ptr<QMAMSGroupModel> amsGroupModel;
     std::unique_ptr<QMAMSGroupEmployeeModel> amsGroupEmployeeModel;
-    std::unique_ptr<QMEmployeeViewModel> employeeViewModel;
+    std::unique_ptr<QMEmployeeModel> employeeModel;
     std::unique_ptr<QMAMSGroupAccessModeModel> amsGroupAccessModeModel;
 
     std::unique_ptr<QSortFilterProxyModel> amsGroupAccessModeProxyModel;
