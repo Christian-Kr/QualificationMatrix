@@ -16,6 +16,7 @@
 #include "qmamsusermodel.h"
 
 #include <QColor>
+#include <QDebug>
 
 QMAMSUserModel::QMAMSUserModel(QObject *parent, const QSqlDatabase &db)
     : QMSqlTableModel(parent, db)
@@ -57,11 +58,7 @@ QVariant QMAMSUserModel::data(const QModelIndex &index, int role) const
 
 Qt::ItemFlags QMAMSUserModel::flags(const QModelIndex &index) const
 {
-    if (index.column() == fieldIndex("last_login") ||
-        index.column() == fieldIndex("unsuccess_login_num"))
-    {
-        return Qt::ItemIsEditable | Qt::ItemIsSelectable;
-    }
+    // Empty
 
     return QSqlRelationalTableModel::flags(index);
 }

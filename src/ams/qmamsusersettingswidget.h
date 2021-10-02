@@ -87,6 +87,18 @@ public slots:
     /// Change the password of the selected user.
     void changePassword();
 
+    /// Change the username of the selected user.
+    void changeUsername();
+
+    /// Change the name of the user.
+    void changeName();
+
+    /// Reset login num.
+    void resetLoginNum();
+
+    /// Changes the user from activated to deactivated and vise versa.
+    void changeActiveState();
+
 private:
     /// Get the username from the given primary id.
     /// \param primaryId The primary key id in the table AMSUser.
@@ -112,6 +124,11 @@ private:
     /// \param name The name of the group to search for.
     /// \return True if minimum one exist, else false.
     bool userGroupProxyContainsGroup(const QString &group);
+
+    /// Test for username in user table.
+    /// \param username The name to search for.
+    /// \return True if found, else false.
+    bool userContainsUsername(const QString &username);
 
     Ui::QMAMSUserSettingsWidget *ui;
 

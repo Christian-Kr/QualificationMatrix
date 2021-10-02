@@ -1,17 +1,15 @@
 // qmamssettingswidget.cpp is part of QualificationMatrix
 //
-// QualificationMatrix is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by the
-// Free Software Foundation, either version 3 of the License, or (at your
-// option) any later version.
+// QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of the GNU General
+// Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
+// any later version.
 //
-// QualificationMatrix is distributed in the hope that it will be useful, but
-// WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
-// or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+// QualificationMatrix is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+// implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 // more details.
 //
-// You should have received a copy of the GNU General Public License along
-// with QualificationMatrix. If not, see <http://www.gnu.org/licenses/>.
+// You should have received a copy of the GNU General Public License along with QualificationMatrix. If not, see
+// <http://www.gnu.org/licenses/>.
 
 #include "qmamsusersettingswidget.h"
 #include "ui_qmamsusersettingswidget.h"
@@ -26,6 +24,7 @@
 #include <QSqlRecord>
 #include <QMessageBox>
 #include <QSortFilterProxyModel>
+#include <QInputDialog>
 
 #include <QDebug>
 
@@ -39,6 +38,7 @@ QMAMSUserSettingsWidget::QMAMSUserSettingsWidget(QWidget *parent)
     // Ui
     auto booleanDelegate = new QMBooleanDelegate(this);
     booleanDelegate->setEditable(true);
+    ui->tvUser->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tvUser->setItemDelegateForColumn(6, booleanDelegate);
 }
 
@@ -54,6 +54,9 @@ void QMAMSUserSettingsWidget::saveSettings()
     if (amsUserModel->isDirty())
     {
         error = error | !amsUserModel->submitAll();
+
+        // After user has changed, some databases should be updated.
+        amsUserGroupProxyModel->sourceModel();
     }
 
     if (amsUserGroupModel->isDirty())
@@ -358,10 +361,59 @@ void QMAMSUserSettingsWidget::userSelectionChanged(const QModelIndex &selected, 
     activateUserGroupList(selected.row());
 }
 
+void QMAMSUserSettingsWidget::changeActiveState()
+{
+    auto selRows = ui->tvUser->selectionModel()->selectedRows();
+    if (selRows.count() != 1)
+    {
+        qWarning() << "wrong number of selected rows";
+    }
+
+    auto selRow = selRows.first().row();
+
+    auto usernameFieldIndex = amsUserModel->fieldIndex("amsuser_username");
+    auto usernameModelIndex = amsUserModel->index(selRow, usernameFieldIndex);
+    auto selUsername = amsUserModel->data(usernameModelIndex).toString();
+
+    // Don't change if selected user is administrator.
+    if (selUsername.compare("administrator") == 0)
+    {
+        QMessageBox::information(this, tr("Aktiviert-Status ändern"),
+                tr("Der Aktiviert-Status von 'administrator' kann nicht geändert werden."));
+        return;
+    }
+
+    auto activeFieldIndex = amsUserModel->fieldIndex("amsuser_active");
+    auto activeModelIndex = amsUserModel->index(selRow, activeFieldIndex);
+    auto selActive = amsUserModel->data(activeModelIndex).toBool();
+
+    // Change the activated state.
+    if (!amsUserModel->setData(activeModelIndex, !selActive))
+    {
+        QMessageBox::information(this, tr("Aktiviert-Status ändern"),
+                tr("Der Aktiviert-Status konnte nicht geändert werden."));
+        return;
+    }
+
+    if (!selActive)
+    {
+        ui->pbChangeActiveState->setText(tr("Deaktivieren"));
+    }
+    else
+    {
+        ui->pbChangeActiveState->setText(tr("Aktivieren"));
+    }
+
+    emitSettingsChanged();
+}
+
 void QMAMSUserSettingsWidget::deactivateUserGroupList()
 {
     ui->gbGroups->setEnabled(false);
     ui->pbRemoveUser->setEnabled(false);
+    ui->pbChangeName->setEnabled(false);
+    ui->pbChangeUsername->setEnabled(false);
+    ui->pbChangeActiveState->setEnabled(false);
 
     ui->lvUserGroup->setModel(nullptr);
 }
@@ -370,10 +422,27 @@ void QMAMSUserSettingsWidget::activateUserGroupList(int selRow)
 {
     ui->gbGroups->setEnabled(true);
     ui->pbRemoveUser->setEnabled(true);
+    ui->pbChangeName->setEnabled(true);
+    ui->pbChangeUsername->setEnabled(true);
+    ui->pbChangeActiveState->setEnabled(true);
+
+    auto activeFieldIndex = amsUserModel->fieldIndex("amsuser_active");
+    auto activeModelIndex = amsUserModel->index(selRow, activeFieldIndex);
+    auto selActive = amsUserModel->data(activeModelIndex).toBool();
+
+    if (selActive)
+    {
+        ui->pbChangeActiveState->setText(tr("Deaktivieren"));
+    }
+    else
+    {
+        ui->pbChangeActiveState->setText(tr("Aktivieren"));
+    }
 
     auto selModelIndex = amsUserModel->index(selRow, 2);
     auto selData = amsUserModel->data(selModelIndex).toString();
 
+    amsUserGroupModel->select();
     amsUserGroupProxyModel->setSourceModel(amsUserGroupModel.get());
     amsUserGroupProxyModel->setFilterKeyColumn(1);
     amsUserGroupProxyModel->setFilterRegExp(QString("^%1$").arg(selData));
@@ -383,6 +452,174 @@ void QMAMSUserSettingsWidget::activateUserGroupList(int selRow)
     ui->lvUserGroup->selectionModel()->disconnect(this);
     connect(ui->lvUserGroup->selectionModel(), &QItemSelectionModel::currentRowChanged, this,
             &QMAMSUserSettingsWidget::userGroupSelectionChanged);
+}
+
+void QMAMSUserSettingsWidget::resetLoginNum()
+{
+    auto selRows = ui->tvUser->selectionModel()->selectedRows();
+    if (selRows.count() != 1)
+    {
+        qWarning() << "wrong number of selected rows";
+    }
+
+    auto selRow = selRows.first().row();
+
+    auto loginNumFieldIndex = amsUserModel->fieldIndex("amsuser_unsuccess_login_num");
+    auto loginNumModelIndex = amsUserModel->index(selRow, loginNumFieldIndex);
+
+    if (!amsUserModel->setData(loginNumModelIndex, 0))
+    {
+        QMessageBox::information(this, tr("Loginversuche zurücksetzen"),
+                tr("Die Anzahl der Loginversuche konnte nicht zurückgesetzt werden."));
+        return;
+    }
+
+    emitSettingsChanged();
+}
+
+void QMAMSUserSettingsWidget::changeName()
+{
+    auto selRows = ui->tvUser->selectionModel()->selectedRows();
+    if (selRows.count() != 1)
+    {
+        qWarning() << "wrong number of selected rows";
+    }
+
+    auto selRow = selRows.first().row();
+
+    auto usernameFieldIndex = amsUserModel->fieldIndex("amsuser_username");
+    auto usernameModelIndex = amsUserModel->index(selRow, usernameFieldIndex);
+    auto selUsername = amsUserModel->data(usernameModelIndex).toString();
+
+    // Don't change if selected user is administrator.
+    if (selUsername.compare("administrator") == 0)
+    {
+        QMessageBox::information(this, tr("Name ändern"),
+                tr("Der Name von 'administrator' kann nicht geändert werden."));
+        return;
+    }
+
+    auto nameFieldIndex = amsUserModel->fieldIndex("amsuser_name");
+    auto nameModelIndex = amsUserModel->index(selRow, nameFieldIndex);
+    auto selName = amsUserModel->data(nameModelIndex).toString();
+
+    // Get the new username.
+    bool ok = false;
+    bool first = true;
+    QString newName = selName;
+    while (ok || first)
+    {
+        first = false;
+        newName = QInputDialog::getText(this, tr("Name von %1 ändern").arg(selName), tr("Name"), QLineEdit::Normal,
+                newName, &ok);
+
+        if (!ok) {
+            return;
+        }
+
+        // The name should only consist of letters and spaces.
+        if (!newName.contains(QRegExp("^[a-zA-Z ]+$")) || newName.length() < 6)
+        {
+            QMessageBox::information(this, tr("Name ändern"),
+                    tr("Der Name darf nur Buchstaben und Leerzeichen enthalten und muss mindestens 6 Zeichen "
+                    "lang sein."));
+            continue;
+        }
+
+        break;
+    }
+
+    // Change the name.
+    if (!amsUserModel->setData(nameModelIndex, newName))
+    {
+        QMessageBox::information(this, tr("Name ändern"), tr("Der Name konnte nicht geändert werden."));
+        return;
+    }
+
+    emitSettingsChanged();
+}
+
+void QMAMSUserSettingsWidget::changeUsername()
+{
+    auto selRows = ui->tvUser->selectionModel()->selectedRows();
+    if (selRows.count() != 1)
+    {
+        qWarning() << "wrong number of selected rows";
+    }
+
+    auto selRow = selRows.first().row();
+
+    auto usernameFieldIndex = amsUserModel->fieldIndex("amsuser_username");
+    auto usernameModelIndex = amsUserModel->index(selRow, usernameFieldIndex);
+    auto selUsername = amsUserModel->data(usernameModelIndex).toString();
+
+    // Don't change if selected user is administrator.
+    if (selUsername.compare("administrator") == 0)
+    {
+        QMessageBox::information(this, tr("Benutzername ändern"),
+                tr("Der Benutzername von 'administrator' kann nicht geändert werden."));
+        return;
+    }
+
+    // Get the new username.
+    bool ok = false;
+    bool first = true;
+    QString newUsername = selUsername;
+    while (ok || first)
+    {
+        first = false;
+        newUsername = QInputDialog::getText(this, tr("Benutzername von %1 ändern").arg(selUsername),
+                tr("Benutzername"), QLineEdit::Normal, newUsername, &ok);
+
+        if (!ok) {
+            return;
+        }
+
+        // The username should only consist of letters.
+        if (!newUsername.contains(QRegExp("^[a-zA-Z]+$")) || newUsername.length() < 6)
+        {
+            QMessageBox::information(this, tr("Benutzername ändern"),
+                    tr("Der Benutzername darf nur Buchstaben enthalten und muss mindestens 6 Zeichen lang sein."));
+            continue;
+        }
+
+        // The username should not already exist.
+        if (userContainsUsername(newUsername) && selUsername.compare(newUsername) != 0)
+        {
+            QMessageBox::information(this, tr("Benutzername ändern"), tr("Der Benutzername existiert bereits."));
+            continue;
+        }
+
+        break;
+    }
+
+    // Change the username.
+    if (!amsUserModel->setData(usernameModelIndex, newUsername))
+    {
+        QMessageBox::information(this, tr("Benutzername ändern"),
+                tr("Der Benutzername konnte nicht geändert werden."));
+        return;
+    }
+
+    emitSettingsChanged();
+}
+
+bool QMAMSUserSettingsWidget::userContainsUsername(const QString &username)
+{
+    auto usernameFieldIndex = amsUserModel->fieldIndex("amsuser_username");
+
+    for (int i = 0; i < amsUserModel->rowCount(); i++)
+    {
+        auto usernameModelIndex = amsUserModel->index(i, usernameFieldIndex);
+        auto tmpUsername = amsUserModel->data(usernameModelIndex).toString();
+
+        if (tmpUsername.compare(username) == 0)
+        {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 void QMAMSUserSettingsWidget::changePassword()

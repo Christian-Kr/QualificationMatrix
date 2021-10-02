@@ -90,6 +90,43 @@
            </widget>
           </item>
           <item>
+           <widget class="QPushButton" name="pbChangeUsername">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Nutzername ändern</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pbChangeName">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Name ändern</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pbResetLoginNum">
+            <property name="text">
+             <string>Anmeldungen zurücks.</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pbChangeActiveState">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Aktivieren</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <spacer name="verticalSpacer">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
@@ -322,6 +359,70 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pbChangeName</sender>
+   <signal>clicked()</signal>
+   <receiver>QMAMSUserSettingsWidget</receiver>
+   <slot>changeName()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>517</x>
+     <y>218</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>583</x>
+     <y>380</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbChangeUsername</sender>
+   <signal>clicked()</signal>
+   <receiver>QMAMSUserSettingsWidget</receiver>
+   <slot>changeUsername()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>517</x>
+     <y>178</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>583</x>
+     <y>380</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbResetLoginNum</sender>
+   <signal>clicked()</signal>
+   <receiver>QMAMSUserSettingsWidget</receiver>
+   <slot>resetLoginNum()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>517</x>
+     <y>258</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>583</x>
+     <y>380</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbChangeActiveState</sender>
+   <signal>clicked()</signal>
+   <receiver>QMAMSUserSettingsWidget</receiver>
+   <slot>changeActiveState()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>517</x>
+     <y>298</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>583</x>
+     <y>380</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>addUser()</slot>
@@ -331,5 +432,9 @@
   <slot>removeGroup()</slot>
   <slot>configGroup()</slot>
   <slot>changePassword()</slot>
+  <slot>changeUsername()</slot>
+  <slot>changeName()</slot>
+  <slot>resetLoginNum()</slot>
+  <slot>changeActiveState()</slot>
  </slots>
 </ui>

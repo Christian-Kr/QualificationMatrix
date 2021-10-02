@@ -41,8 +41,7 @@ void QMEmployeeModel::initModel()
 
 QVariant QMEmployeeModel::data(const QModelIndex &index, int role) const
 {
-    bool activated = QMSqlTableModel::data(
-            this->index(index.row(), 3), Qt::DisplayRole).toBool();
+    bool activated = QMSqlTableModel::data(this->index(index.row(), 3), Qt::DisplayRole).toBool();
     if (!activated)
     {
         if (role == Qt::BackgroundRole)
@@ -56,8 +55,7 @@ QVariant QMEmployeeModel::data(const QModelIndex &index, int role) const
 
 Qt::ItemFlags QMEmployeeModel::flags(const QModelIndex &index) const
 {
-    bool activated = QMSqlTableModel::data(
-            this->index(index.row(), 3), Qt::DisplayRole).toBool();
+    bool activated = QMSqlTableModel::data(this->index(index.row(), 3), Qt::DisplayRole).toBool();
     if (!activated)
     {
         return Qt::ItemIsEditable | Qt::ItemIsSelectable;
