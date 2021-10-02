@@ -586,7 +586,7 @@ QList<QString> QMAMSManager::getGroupEmployeeFromDatabase(const QList<QString> &
         {
             auto &groupname = groupNames.at(j);
 
-            if (dbGroupname.compare(groupname))
+            if (dbGroupname.compare(groupname) == 0)
             {
                 // Get the employee name.
                 auto employeeModelIndex = amsGroupEmployeeModel.index(i, employeenameFieldIndex);
