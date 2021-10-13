@@ -84,28 +84,6 @@ QMMainWindow::~QMMainWindow()
     delete ui;
 }
 
-void QMMainWindow::showEvent(QShowEvent *event)
-{
-    // IMPORTANT: This event will also be triggered, when minimizing and afterwarts showing the dialog again. In this
-    // state, no database initializing should happen.
-    if (isMinimized())
-    {
-        QMainWindow::showEvent(event);
-        return;
-    }
-
-    QMainWindow::showEvent(event);
-
-    // Load database on startup. If there are some settings for automatic loading of database on startup, follow
-    // them. Otherwise show the manage database dialog, cause the application is not useful if there is no database
-    // loaded.
-    initDatabaseSettings();
-
-    // Try to bring window to top.
-    activateWindow();
-    raise();
-}
-
 void QMMainWindow::initDatabaseSettings()
 {
     auto &settings = QMApplicationSettings::getInstance();

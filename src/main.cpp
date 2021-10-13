@@ -35,7 +35,7 @@
 
 /// Initialize the main window state with saved data.
 /// \param mainWin The main window object to initialize.
-void initShowMainWindow(QMainWindow &mainWin)
+void initShowMainWindow(QMMainWindow &mainWin)
 {
     auto &settings = QMApplicationSettings::getInstance();
     auto showMaximized = settings.read("MainWin/Maximized", false).toBool();
@@ -89,6 +89,15 @@ void initShowMainWindow(QMainWindow &mainWin)
 
         mainWin.show();
     }
+
+    // Load database on startup. If there are some settings for automatic loading of database on startup, follow
+    // them. Otherwise show the manage database dialog, cause the application is not useful if there is no database
+    // loaded.
+    mainWin.initDatabaseSettings();
+
+    // Try to bring window to top.
+    mainWin.activateWindow();
+    mainWin.raise();
 }
 
 /// Set the style of the application, which is "Fusion" by default.

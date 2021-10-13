@@ -159,20 +159,16 @@ public slots:
     /// \param current Current login state after change.
     void handleLoginChange(LoginState before, LoginState current);
 
+    /// Initialize database information.
+    void initDatabaseSettings();
+
 protected:
     /// Override from QMainWindow. This function will be called on closeing
     /// the widget.
     /// \param event The close event object that will be created.
     void closeEvent(QCloseEvent *event) override;
 
-    /// Override from QMainWindow.
-    /// \param event
-    void showEvent(QShowEvent *event) override;
-
 private:
-    /// Initialize database information.
-    void initDatabaseSettings();
-
     /// Save QSqlDatabase information to QMApplicationSettings.
     static void saveDatabaseSettings();
 
