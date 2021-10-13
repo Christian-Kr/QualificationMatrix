@@ -112,6 +112,13 @@ public slots:
     /// Add multiple entries.
     void addMultipleEntries();
 
+    /// Choose a certificate and return the id.
+    /// \return The id if one has been selected, else -1.
+    int chooseCertificate();
+
+    /// Choose a certificate and set it to multi edit dialog.
+    void chooseMultiCertificate();
+
 signals:
     /// There is a short message that should be displayed.
     /// \param msg
@@ -130,6 +137,8 @@ private:
     std::unique_ptr<QSqlTableModel> trainDataStateViewModel;
     std::unique_ptr<QSqlTableModel> trainDataCertModel;
     std::unique_ptr<QSqlTableModel> trainDataCertViewModel;
+
+    int multiEditCertiId;
 };
 
 #endif // QMTRAINDATAWIDGET_H

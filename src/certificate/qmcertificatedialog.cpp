@@ -82,6 +82,7 @@ void QMCertificateDialog::accept()
     {
         auto row = modelIndex.at(0).row();
         selectedId = nameFilterModel->data(nameFilterModel->index(row, 0)).toInt();
+        selectedName = nameFilterModel->data(nameFilterModel->index(row, 1)).toString();
     }
 
     QDialog::accept();

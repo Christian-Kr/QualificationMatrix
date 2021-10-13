@@ -42,6 +42,7 @@
 QMTrainDataWidget::QMTrainDataWidget(QWidget *parent)
     : QMWinModeWidget(parent)
     , ui(new Ui::QMTrainDataWidget)
+    , multiEditCertiId(-1)
 {
     ui->setupUi(this);
 
@@ -125,6 +126,7 @@ void QMTrainDataWidget::executeMultiEdit()
     for (int i = 0; i < modelIndexList.size(); i++)
     {
         auto modelIndex = modelIndexList.at(i);
+        auto modelIndexIdFieldIndex = trainDataModel->fieldIndex("id");
         auto modelIndexTrainFieldIndex = trainDataModel->fieldIndex("Train_name_2");
         auto modelIndexEmployeeFieldIndex = trainDataModel->fieldIndex("Employee_name_3");
         auto modelIndexStateFieldIndex = trainDataModel->fieldIndex("name");
@@ -158,7 +160,7 @@ void QMTrainDataWidget::executeMultiEdit()
 
             if (!ok)
             {
-                emit warnMessageAvailable(tr("Cannot den Eintrag Nr. %1 nicht ändern.").arg(modelIndex.row()));
+                emit warnMessageAvailable(tr("Kann den Eintrag Nr. %1 nicht ändern.").arg(modelIndex.row()));
             }
         }
         if (ui->cbSetState->isChecked())
@@ -173,7 +175,7 @@ void QMTrainDataWidget::executeMultiEdit()
 
             if (!ok)
             {
-                emit warnMessageAvailable(tr("Cannot den Eintrag Nr. %1 nicht ändern.").arg(modelIndex.row()));
+                emit warnMessageAvailable(tr("Kann den Eintrag Nr. %1 nicht ändern.").arg(modelIndex.row()));
             }
         }
         if (ui->cbSetDate->isChecked())
@@ -185,8 +187,57 @@ void QMTrainDataWidget::executeMultiEdit()
 
             if (!ok)
             {
-                emit warnMessageAvailable(tr("Cannot den Eintrag Nr. %1 nicht ändern.").arg(modelIndex.row()));
+                emit warnMessageAvailable(tr("Kann den Eintrag Nr. %1 nicht ändern.").arg(modelIndex.row()));
             }
+        }
+        if (ui->cbAddMultiCertificate->isChecked())
+        {
+            if (multiEditCertiId < 0)
+            {
+                emit warnMessageAvailable(tr("Kann das Zertifikat nicht anhängen."));
+            }
+
+            auto trainDataIdModelIndex = trainDataModel->index(modelIndex.row(), modelIndexIdFieldIndex);
+            auto trainDataId = trainDataModel->data(trainDataIdModelIndex).toInt();
+            auto certId = multiEditCertiId;
+
+            // Test whether the certificate id already exist.
+            auto exist = false;
+            for (int j = 0; j < trainDataCertViewModel->rowCount(); j++)
+            {
+                auto tmpCertId = trainDataCertViewModel->data(trainDataCertViewModel->index(j, 2)).toInt();
+                if (tmpCertId == certId)
+                {
+                    emit infoMessageAvailable(tr("Nachweis ist bereits angehängt"));
+                    exist = true;
+                    break;
+                }
+            }
+
+            if (exist)
+            {
+                continue;
+            }
+
+            auto row = trainDataCertModel->rowCount();
+
+            if (trainDataCertModel->insertRow(row))
+            {
+                qWarning() << "cannot add a new row";
+                qWarning() << trainDataCertModel->lastError().text();
+            }
+
+            trainDataCertModel->setData(trainDataCertModel->index(row, 1), trainDataId);
+            trainDataCertModel->setData(trainDataCertModel->index(row, 2), certId);
+
+            if (trainDataCertModel->submitAll())
+            {
+                qWarning() << "cannot submit changes to database";
+                qWarning() << trainDataCertModel->lastError().text();
+            }
+
+            trainDataCertModel->select();
+            trainDataCertViewModel->select();
         }
     }
 }
@@ -572,7 +623,7 @@ void QMTrainDataWidget::updateMultiEditEnabledState()
     ui->cbTrain->setEnabled(ui->cbSetTrain->isChecked());
 }
 
-void QMTrainDataWidget::addCertificate()
+void QMTrainDataWidget::chooseMultiCertificate()
 {
     // In order to add a certificate, the general certificate will be used. This dialog has a
     // special mode, which returns the id of a selected certificate. With this system, it is also
@@ -590,8 +641,41 @@ void QMTrainDataWidget::addCertificate()
     certDialog.setModal(true);
     certDialog.exec();
 
+    multiEditCertiId = certDialog.getSelectedId();
+
+    if (multiEditCertiId < 0)
+    {
+        return;
+    }
+
+    ui->leCertName->setText(certDialog.getSelectedName());
+}
+
+int QMTrainDataWidget::chooseCertificate()
+{
+    // In order to add a certificate, the general certificate will be used. This dialog has a
+    // special mode, which returns the id of a selected certificate. With this system, it is also
+    // possible to upload new certificate.
+    auto &settings = QMApplicationSettings::getInstance();
+
+    auto varWidth = settings.read("CertificateDialog/Width");
+    auto width = (varWidth.isNull()) ? 400 : varWidth.toInt();
+    auto varHeight = settings.read("CertificateDialog/Height");
+    auto height = (varHeight.isNull()) ? 400 : varHeight.toInt();
+
+    QMCertificateDialog certDialog(Mode::CHOOSE, this);
+    certDialog.updateData();
+    certDialog.resize(width, height);
+    certDialog.setModal(true);
+    certDialog.exec();
+
+    return certDialog.getSelectedId();
+}
+
+void QMTrainDataWidget::addCertificate()
+{
     // Get the certificate id.
-    auto selId = certDialog.getSelectedId();
+    auto selId = chooseCertificate();
 
     if (selId == -1)
     {

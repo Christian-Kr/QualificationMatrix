@@ -60,6 +60,9 @@ public:
     /// Return the selected entry id.
     int getSelectedId() { return selectedId; }
 
+    /// Return the selected entry name.
+    QString getSelectedName() { return selectedName; }
+
 public slots:
     /// Add a new certificate.
     void addCertificate();
@@ -97,6 +100,7 @@ private:
     Mode runMode;
 
     int selectedId;
+    QString selectedName;
 
     QSortFilterProxyModel *nameFilterModel;
 

@@ -759,7 +759,7 @@
      <property name="minimumSize">
       <size>
        <width>400</width>
-       <height>606</height>
+       <height>686</height>
       </size>
      </property>
      <property name="maximumSize">
@@ -920,6 +920,38 @@
             <number>0</number>
            </property>
           </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QCheckBox" name="cbAddMultiCertificate">
+           <property name="text">
+            <string>Zertifikat hinzufügen</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_11">
+           <item>
+            <widget class="QLineEdit" name="leCertName">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pbChooseCertificate">
+             <property name="text">
+              <string>Auswählen</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
         </layout>
        </item>
@@ -1178,6 +1210,38 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pbChooseCertificate</sender>
+   <signal>clicked()</signal>
+   <receiver>QMTrainDataWidget</receiver>
+   <slot>chooseMultiCertificate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1537</x>
+     <y>594</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>797</x>
+     <y>433</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cbAddMultiCertificate</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>QMTrainDataWidget</receiver>
+   <slot>updateMultiEditEnabledState()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1389</x>
+     <y>565</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>797</x>
+     <y>433</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>resetFilter()</slot>
@@ -1193,5 +1257,6 @@
   <slot>executeMultiEdit()</slot>
   <slot>updateMultiEditEnabledState()</slot>
   <slot>addMultipleEntries()</slot>
+  <slot>chooseMultiCertificate()</slot>
  </slots>
 </ui>
