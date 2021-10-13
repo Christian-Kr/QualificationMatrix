@@ -86,6 +86,14 @@ QMMainWindow::~QMMainWindow()
 
 void QMMainWindow::showEvent(QShowEvent *event)
 {
+    // IMPORTANT: This event will also be triggered, when minimizing and afterwarts showing the dialog again. In this
+    // state, no database initializing should happen.
+    if (isMinimized())
+    {
+        QMainWindow::showEvent(event);
+        return;
+    }
+
     QMainWindow::showEvent(event);
 
     // Load database on startup. If there are some settings for automatic loading of database on startup, follow
@@ -140,7 +148,8 @@ void QMMainWindow::manageDatabase()
 {
     // Before the dialog for managing a database will be shown, close a
     // currently loaded one.
-    if (QSqlDatabase::contains("default") && QSqlDatabase::database("default", false).isOpen())
+    if (QSqlDatabase::contains("default") &&
+        QSqlDatabase::database("default", false).isOpen())
     {
         auto res = QMessageBox::question(this, tr("Datenbank verwalten"),
             tr("Es besteht bereits eine Verbindung zu einer Datenbank. Jetzt trennen?"),
@@ -519,6 +528,7 @@ bool QMMainWindow::closeDatabase()
 
 void QMMainWindow::closeEvent(QCloseEvent *event)
 {
+    qDebug() << "Close";
     QMainWindow::closeEvent(event);
     saveSettings();
 }
