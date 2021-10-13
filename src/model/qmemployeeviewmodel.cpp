@@ -46,6 +46,4 @@ QMEmployeeViewModel::QMEmployeeViewModel(QObject *parent, const QSqlDatabase &db
         primaryKeysString << QString("%1").arg(primaryKeyInt.at(i));
     }
     setFilter(QString("%1.id IN (%2)").arg(tableName()).arg(primaryKeysString.join("")));
-    qDebug() << filter();
-    qDebug() << QMSqlTableModel::selectStatement();
 }

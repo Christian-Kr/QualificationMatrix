@@ -43,7 +43,7 @@ set(APP_ICON_RESOURCE_WINDOWS "rcs/qm_res.rc"
 # Botan
 
 find_package(Botan REQUIRED)
-include_directories(${BOTAN_INCLUDE_DIRS})
+include_directories(${BOTAN_INCLUDE_DIRS} ${BOTAN_INCLUDE_DIRS}/botan-2)
 
 # ------------------------------------------------------------------------------
 # Translation
@@ -65,7 +65,7 @@ add_executable(QualificationMatrix
         WIN32 rcs/icons.qrc ${SRCS} ${UIS} ${APP_ICON_RESOURCE_WINDOWS})
 target_link_libraries(QualificationMatrix
         Qt5::Widgets Qt5::Sql Qt5::PrintSupport
-        botan-2)
+        ${BOTAN_LIBRARIES})
 
 # ------------------------------------------------------------------------------
 # Deploy

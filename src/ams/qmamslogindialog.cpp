@@ -106,8 +106,7 @@ void QMAMSLoginDialog::login()
             break;
     }
 
-    QMessageBox::information(this, tr("Anmelden"),
-            tr("Die Anmeldung ist fehlgeschlagen. ") + result);
+    QMessageBox::information(this, tr("Anmelden"), tr("Die Anmeldung ist fehlgeschlagen. ") + result);
 }
 
 void QMAMSLoginDialog::cancel()

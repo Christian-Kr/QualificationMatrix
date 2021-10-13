@@ -40,7 +40,6 @@ QMQualiResultWidget::QMQualiResultWidget(QWidget *parent)
     : QMWinModeWidget(parent)
     , ui(new Ui::QMQualiResultWidget)
     , qualiResultFilterTRState(new QSortFilterProxyModel(this))
-    , qualiResultFilterTState(new QSortFilterProxyModel(this))
 {
     ui->setupUi(this);
 
@@ -116,13 +115,10 @@ void QMQualiResultWidget::updateData()
 
     // Set models to different ui controls.
     qualiResultFilterTRState->setSourceModel(qualiResultModel.get());
-    qualiResultFilterTRState->setFilterKeyColumn(6);
-
-    qualiResultFilterTState->setSourceModel(qualiResultFilterTRState);
-    qualiResultFilterTState->setFilterKeyColumn(7);
+    qualiResultFilterTRState->setFilterKeyColumn(7);
 
     // Update the views.
-    ui->tvQualiResult->setModel(qualiResultFilterTState);
+    ui->tvQualiResult->setModel(qualiResultFilterTRState);
 
     // Update all table views with the new models.
     ui->cbFilterFunc->setModel(funcViewModel.get());
@@ -137,9 +133,6 @@ void QMQualiResultWidget::updateData()
     ui->cbFilterEmployee->setModel(employeeViewModel.get());
     ui->cbFilterEmployee->setModelColumn(1);
 
-    ui->cbTrainStateFilter->setModel(trainDataStateViewModel.get());
-    ui->cbTrainStateFilter->setModelColumn(1);
-
     resetFilter();
 }
 
@@ -149,7 +142,6 @@ void QMQualiResultWidget::resetFilter()
     ui->cbFilterTrain->setCurrentText("");
     ui->cbFilterEmployee->setCurrentText("");
     ui->cbFilterEmployeeGroup->setCurrentText("");
-    ui->cbTrainStateFilter->setCurrentText("");
 }
 
 void QMQualiResultWidget::resetModel()
@@ -171,7 +163,6 @@ void QMQualiResultWidget::updateFilterAndCalculate()
 
     qualiResultModel->updateQualiInfo(tmpEmployee, tmpFunc, tmpTrain, tmpEmployeeGroup);
     qualiResultFilterTRState->setFilterRegExp(ui->cbTrainResultState->currentText());
-    qualiResultFilterTState->setFilterRegExp(ui->cbTrainStateFilter->currentText());
     ui->tvQualiResult->resizeColumnsToContents();
 }
 
@@ -224,13 +215,13 @@ void QMQualiResultWidget::saveToCsv()
 
     QTextStream csvStream(&csvFile);
 
-    int colCount = qualiResultFilterTState->columnCount();
-    int rowCount = qualiResultFilterTState->rowCount();
+    int colCount = qualiResultFilterTRState->columnCount();
+    int rowCount = qualiResultFilterTRState->rowCount();
 
     // Write header.
     for (int i = 0; i < colCount; i++)
     {
-        csvStream << qualiResultFilterTState->headerData(i, Qt::Horizontal).toString();
+        csvStream << qualiResultFilterTRState->headerData(i, Qt::Horizontal).toString();
         if (i < colCount - 1)
         {
             csvStream << ";";
@@ -247,7 +238,7 @@ void QMQualiResultWidget::saveToCsv()
         for (int j = 0; j < colCount; j++)
         {
             csvStream
-                << qualiResultFilterTState->data(qualiResultFilterTState->index(i, j)).toString();
+                << qualiResultFilterTRState->data(qualiResultFilterTRState->index(i, j)).toString();
             if (j < colCount - 1)
             {
                 csvStream << ";";
@@ -285,7 +276,7 @@ void QMQualiResultWidget::paintPdfRequest(QPrinter *printer)
 {
     QTextDocument document;
     QTextCursor cursor(&document);
-    QSortFilterProxyModel *model = qualiResultFilterTState;
+    QSortFilterProxyModel *model = qualiResultFilterTRState;
 
     // Set default font.
     QFont font;
@@ -379,11 +370,6 @@ void QMQualiResultWidget::resetTrain()
     ui->cbFilterTrain->clearEditText();
 }
 
-void QMQualiResultWidget::resetTrainState()
-{
-    ui->cbTrainStateFilter->clearEditText();
-}
-
 void QMQualiResultWidget::resetTrainResultState()
 {
     ui->cbTrainResultState->clearEditText();
@@ -439,18 +425,4 @@ void QMQualiResultWidget::extSelTrainResultState()
     }
 
     ui->cbTrainResultState->setCurrentText(extSelDialog.getRegExpText());
-}
-
-void QMQualiResultWidget::extSelTrainDataState()
-{
-    QMExtendedSelectionDialog extSelDialog(this, trainDataStateViewModel.get(), 1);
-    auto res = extSelDialog.exec();
-    auto modelIndexList = extSelDialog.getFilterSelected();
-
-    if (modelIndexList.size() < 1 || res == QDialog::Rejected)
-    {
-        return;
-    }
-
-    ui->cbTrainStateFilter->setCurrentText(extSelDialog.getRegExpText());
 }

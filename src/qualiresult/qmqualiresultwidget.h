@@ -82,9 +82,6 @@ public slots:
     /// Reset train filter box.
     void resetTrain();
 
-    /// Reset train state filter box.
-    void resetTrainState();
-
     /// Reset train result state filter box.
     void resetTrainResultState();
 
@@ -102,9 +99,6 @@ public slots:
 
     /// Show extended filter dialog for train result state.
     void extSelTrainResultState();
-
-    /// Show extended filter dialog for train data state.
-    void extSelTrainDataState();
 
     /// Reaction when there is a double click on an element.
     void onDoubleClick(const QModelIndex index);
@@ -128,7 +122,6 @@ private:
     std::unique_ptr<QSqlTableModel> trainDataStateViewModel;
 
     QSortFilterProxyModel *qualiResultFilterTRState;
-    QSortFilterProxyModel *qualiResultFilterTState;
 };
 
 #endif // QMQUALIRESULTWIDGET_H
