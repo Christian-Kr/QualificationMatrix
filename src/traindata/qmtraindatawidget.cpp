@@ -202,6 +202,7 @@ void QMTrainDataWidget::executeMultiEdit()
             auto certId = multiEditCertiId;
 
             // Test whether the certificate id already exist.
+            trainDataCertViewModel->setFilter(QString("train_data=%1").arg(trainDataId));
             auto exist = false;
             for (int j = 0; j < trainDataCertViewModel->rowCount(); j++)
             {
@@ -621,6 +622,8 @@ void QMTrainDataWidget::updateMultiEditEnabledState()
     ui->cbName->setEnabled(ui->cbSetName->isChecked());
     ui->cwTrainDate->setEnabled(ui->cbSetDate->isChecked());
     ui->cbTrain->setEnabled(ui->cbSetTrain->isChecked());
+    ui->leCertName->setEnabled(ui->cbAddMultiCertificate->isChecked());
+    ui->pbChooseCertificate->setEnabled(ui->cbAddMultiCertificate->isChecked());
 }
 
 void QMTrainDataWidget::chooseMultiCertificate()
