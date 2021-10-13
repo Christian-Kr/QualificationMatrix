@@ -528,7 +528,6 @@ bool QMMainWindow::closeDatabase()
 
 void QMMainWindow::closeEvent(QCloseEvent *event)
 {
-    qDebug() << "Close";
     QMainWindow::closeEvent(event);
     saveSettings();
 }

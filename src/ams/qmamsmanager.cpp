@@ -114,8 +114,7 @@ bool QMAMSManager::setFailedLoginCount(QString &name, int count)
     amsUserModel.select();
 
     auto usernameFieldIndex = amsUserModel.fieldIndex("amsuser_username");
-    auto failedLoginIndex = amsUserModel.fieldIndex(
-            "amsuser_unsuccess_login_num");
+    auto failedLoginIndex = amsUserModel.fieldIndex("amsuser_unsuccess_login_num");
 
     for (int i = 0; i < amsUserModel.rowCount(); i++)
     {
@@ -281,7 +280,6 @@ LoginResult QMAMSManager::loginUser(const QString &name, const QString &password
             loggedinUser->generalPermissions = generalPermissions;
 
             loggedinUser->allowedUsersPrimaryKeys = getUserEmployeeAccessPermissionsFromDatabase(*loggedinUser);
-            qDebug() << loggedinUser->allowedUsersPrimaryKeys;
             setLoginState(LoginState::LOGGED_IN);
 
             return LoginResult::SUCCESSFUL;
@@ -677,7 +675,6 @@ QList<QString> QMAMSManager::getUserGroupsFromDatabase(const QString &username)
     {
         auto usernameModelIndex = amsUserGroupModel.index(i, usernameFieldIndex);
         auto dbUsername = amsUserGroupModel.data(usernameModelIndex).toString();
-        qDebug() << dbUsername << username;
         if (dbUsername.compare(username) == 0)
         {
             // Get the group name.
