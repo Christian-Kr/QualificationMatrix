@@ -127,6 +127,7 @@ void QMCertificateDialog::updateData()
     ui->tvFiles->hideColumn(4);
     ui->tvFiles->setColumnWidth(1, 400);
     ui->tvFiles->setColumnWidth(5, 300);
+    ui->tvFiles->setSortingEnabled(true);
 
     resetFilter();
 }
