@@ -44,7 +44,6 @@ QMCertificateDialog::QMCertificateDialog(Mode mode, QWidget *parent)
     nameFilterModel = new QSortFilterProxyModel(this);
 
     ui->tvFiles->horizontalHeader()->setStretchLastSection(false);
-    ui->tvFiles->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     ui->tvFiles->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft);
 
     if (runMode == Mode::MANAGE)
@@ -58,8 +57,7 @@ QMCertificateDialog::QMCertificateDialog(Mode mode, QWidget *parent)
         setWindowTitle(tr("Nachweis auswählen"));
     }
 
-    // If do not have the permission, make a lot of stuff disable.
-    // Permission check.
+    // If do not have the permission, make a lot of stuff disable. Permission check.
     auto amsManager = QMAMSManager::getInstance();
     if (!amsManager->checkPermission(AccessMode::TD_MODE_WRITE))
     {
@@ -85,7 +83,13 @@ void QMCertificateDialog::accept()
         selectedName = nameFilterModel->data(nameFilterModel->index(row, 1)).toString();
     }
 
-    QDialog::accept();
+    QMDialog::accept();
+}
+
+void QMCertificateDialog::reject()
+{
+    saveSettings();
+    QDialog::reject();
 }
 
 void QMCertificateDialog::saveSettings()
@@ -121,6 +125,8 @@ void QMCertificateDialog::updateData()
     ui->tvFiles->hideColumn(0);
     ui->tvFiles->hideColumn(3);
     ui->tvFiles->hideColumn(4);
+    ui->tvFiles->setColumnWidth(1, 400);
+    ui->tvFiles->setColumnWidth(5, 300);
 
     resetFilter();
 }

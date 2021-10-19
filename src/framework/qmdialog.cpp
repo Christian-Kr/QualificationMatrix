@@ -37,3 +37,9 @@ void QMDialog::keyPressEvent(QKeyEvent *event)
 
     QDialog::keyPressEvent(event);
 }
+
+void QMDialog::accept()
+{
+    saveSettings();
+    QDialog::accept();
+}

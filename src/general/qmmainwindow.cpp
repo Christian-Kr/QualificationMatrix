@@ -564,17 +564,14 @@ void QMMainWindow::manageCertificate()
     if (!amsManager->checkPermission(AccessMode::TD_MODE_WRITE) &&
         !amsManager->checkPermission(AccessMode::TD_MODE_READ))
     {
-        QMessageBox::warning(this, tr("Nachweise verwalten"),
-                tr("Sie haben nicht die notwendigen Berechtigungen."));
+        QMessageBox::warning(this, tr("Nachweise verwalten"), tr("Sie haben nicht die notwendigen Berechtigungen."));
         return;
     }
 
     auto &settings = QMApplicationSettings::getInstance();
 
-    auto varWidth = settings.read("CertificateDialog/Width");
-    auto width = (varWidth.isNull()) ? 400 : varWidth.toInt();
-    auto varHeight = settings.read("CertificateDialog/Height");
-    auto height = (varHeight.isNull()) ? 400 : varHeight.toInt();
+    auto width = settings.read("CertificateDialog/Width", 400).toInt();
+    auto height = settings.read("CertificateDialog/Height", 400).toInt();
 
     QMCertificateDialog certDialog(Mode::MANAGE, this);
     certDialog.updateData();

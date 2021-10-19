@@ -85,6 +85,9 @@ public slots:
     /// Override from QDialog.
     void accept() override;
 
+    /// Override from QDialog.
+    void reject() override;
+
     /// Sets the name filter to the given text.
     /// \param filter
     void setNameFilter(QString filter);

@@ -34,6 +34,9 @@ public:
     /// Will be called from constructor.
     virtual void loadSettings() {};
 
+    /// Accept from button box.
+    virtual void accept();
+
     /// Override from QDialog. Do several actions on close.
     /// \param event
     void closeEvent(QCloseEvent *event) override;
