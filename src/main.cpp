@@ -25,7 +25,7 @@
 
 #include <QDebug>
 
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
+#if (QT_VERSION >= QT_VERSION_CHECK(6, 2, 0))
 #define DEPR_ENDL Qt::endl
 #else
 #define DEPR_ENDL endl
@@ -105,6 +105,19 @@ void initApplicationStyle()
     auto style = settings.read("General/Style", "Fusion").toString();
 
     QApplication::setStyle(style);
+}
+
+/// Set the style sheet of the application, which is "default.css" by default. For now only the default stylesheet
+/// will be loaded.
+/// \param app The application object to apply style sheet.
+void initApplicationStyleSheet(QApplication &app)
+{
+    QFile file("styles/default.css");
+    file.open(QFile::ReadOnly);
+
+    auto styleSheet = QLatin1String(file.readAll());
+
+    app.setStyleSheet(styleSheet);
 }
 
 /// Install the translator into the qt application. If the loading or
@@ -236,6 +249,7 @@ int main(int argc, char *argv[])
     qInstallMessageHandler(customMessageHandler);
     initApplicationTranslation();
     initApplicationStyle();
+    initApplicationStyleSheet(app);
 
     QMMainWindow win;
     initShowMainWindow(win);

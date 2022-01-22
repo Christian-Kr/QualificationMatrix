@@ -445,7 +445,7 @@ void QMAMSUserSettingsWidget::activateUserGroupList(int selRow)
     amsUserGroupModel->select();
     amsUserGroupProxyModel->setSourceModel(amsUserGroupModel.get());
     amsUserGroupProxyModel->setFilterKeyColumn(1);
-    amsUserGroupProxyModel->setFilterRegExp(QString("^%1$").arg(selData));
+    amsUserGroupProxyModel->setFilterRegularExpression(QString("^%1$").arg(selData));
     ui->lvUserGroup->setModel(amsUserGroupProxyModel.get());
     ui->lvUserGroup->setModelColumn(2);
 
@@ -518,7 +518,7 @@ void QMAMSUserSettingsWidget::changeName()
         }
 
         // The name should only consist of letters and spaces.
-        if (!newName.contains(QRegExp("^[a-zA-Z ]+$")) || newName.length() < 6)
+        if (!newName.contains(QRegularExpression("^[a-zA-Z ]+$")) || newName.length() < 6)
         {
             QMessageBox::information(this, tr("Name ändern"),
                     tr("Der Name darf nur Buchstaben und Leerzeichen enthalten und muss mindestens 6 Zeichen "
@@ -576,7 +576,7 @@ void QMAMSUserSettingsWidget::changeUsername()
         }
 
         // The username should only consist of letters.
-        if (!newUsername.contains(QRegExp("^[a-zA-Z]+$")) || newUsername.length() < 6)
+        if (!newUsername.contains(QRegularExpression("^[a-zA-Z]+$")) || newUsername.length() < 6)
         {
             QMessageBox::information(this, tr("Benutzername ändern"),
                     tr("Der Benutzername darf nur Buchstaben enthalten und muss mindestens 6 Zeichen lang sein."));

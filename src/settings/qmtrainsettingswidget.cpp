@@ -135,7 +135,7 @@ void QMTrainSettingsWidget::updateTableView()
 
 void QMTrainSettingsWidget::filterTrain()
 {
-    trainFilterModel->setFilterRegExp(ui->leTrainFilter->text());
+    trainFilterModel->setFilterRegularExpression(ui->leTrainFilter->text());
 }
 
 void QMTrainSettingsWidget::addTrain()

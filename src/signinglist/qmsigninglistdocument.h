@@ -16,10 +16,10 @@
 
 #include <QTextDocument>
 #include <QDate>
+#include <QStringList>
 
 // Forward declaration.
 class QString;
-class QStringList;
 
 /// Enum for sort types of employee list.
 enum class EmployeeSort { SortNo = 0, SortFirstName = 1, SortLastName = 2 };

@@ -61,7 +61,7 @@ QWidget *QMProxySqlRelationalDelegate::createEditor(
     // If no child model could be found, get standard editor.
     if (!childModel)
     {
-        return QItemDelegate::createEditor(aParent, option, index);
+        return QStyledItemDelegate::createEditor(aParent, option, index);
     }
 
     // ... else, create the combo box
@@ -105,7 +105,7 @@ void QMProxySqlRelationalDelegate::setEditorData(QWidget *editor, const QModelIn
 
     if (strVal.isEmpty() || !combo)
     {
-        QItemDelegate::setEditorData(editor, index);
+        QStyledItemDelegate::setEditorData(editor, index);
         return;
     }
 
@@ -132,7 +132,7 @@ void QMProxySqlRelationalDelegate::setModelData(
      auto combo = dynamic_cast<QComboBox *>(editor);
     if (!childModel || !combo)
     {
-        QItemDelegate::setModelData(editor, model, index);
+        QStyledItemDelegate::setModelData(editor, model, index);
         return;
     }
 

@@ -543,7 +543,7 @@ void QMAMSGroupSettingsWidget::changeName()
         }
 
         // The name should only consist of letters and spaces.
-        if (!newName.contains(QRegExp("^[a-zA-Z ]+$")) || newName.length() < 6)
+        if (!newName.contains(QRegularExpression("^[a-zA-Z ]+$")) || newName.length() < 6)
         {
             QMessageBox::information(this, tr("Name ändern"),
                     tr("Der Name darf nur Buchstaben und Leerzeichen enthalten und muss mindestens 6 Zeichen "
@@ -680,7 +680,7 @@ void QMAMSGroupSettingsWidget::activateGroup(int selRow)
     // Set access mode proxy model.
     amsGroupAccessModeProxyModel->setSourceModel(amsGroupAccessModeModel.get());
     amsGroupAccessModeProxyModel->setFilterKeyColumn(1);
-    amsGroupAccessModeProxyModel->setFilterRegExp(QString("^%1$").arg(selData));
+    amsGroupAccessModeProxyModel->setFilterRegularExpression(QString("^%1$").arg(selData));
     ui->lvGroupAccessMode->setModel(amsGroupAccessModeProxyModel.get());
     ui->lvGroupAccessMode->setModelColumn(2);
 
@@ -691,7 +691,7 @@ void QMAMSGroupSettingsWidget::activateGroup(int selRow)
     // Set employee proxy model.
     amsGroupEmployeeProxyModel->setSourceModel(amsGroupEmployeeModel.get());
     amsGroupEmployeeProxyModel->setFilterKeyColumn(1);
-    amsGroupEmployeeProxyModel->setFilterRegExp(QString("^%1$").arg(selData));
+    amsGroupEmployeeProxyModel->setFilterRegularExpression(QString("^%1$").arg(selData));
     ui->lvGroupEmployee->setModel(amsGroupEmployeeProxyModel.get());
     ui->lvGroupEmployee->setModelColumn(2);
 

@@ -114,7 +114,7 @@ void QMFuncSettingsWidget::updateTableView()
 
 void QMFuncSettingsWidget::filterFunc()
 {
-    funcFilterModel->setFilterRegExp(ui->leFuncFilter->text());
+    funcFilterModel->setFilterRegularExpression(ui->leFuncFilter->text());
 }
 
 void QMFuncSettingsWidget::addFunc()

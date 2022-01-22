@@ -19,7 +19,7 @@ if (CMAKE_VERSION VERSION_LESS "3.7.0")
 endif ()
 
 # General CPP macros
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # ------------------------------------------------------------------------------
@@ -30,7 +30,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOUIC_SEARCH_PATHS ui)
 
-find_package(Qt5 5.15
+find_package(Qt6 6.2
         COMPONENTS LinguistTools Widgets Sql PrintSupport
         REQUIRED)
 
@@ -51,7 +51,7 @@ include_directories(${BOTAN_INCLUDE_DIRS} ${BOTAN_INCLUDE_DIRS}/botan-2)
 set(TS_FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/trans/qm_de.ts
         ${CMAKE_CURRENT_SOURCE_DIR}/trans/qm_en.ts)
-qt5_add_translation(QM_FILES
+qt6_add_translation(QM_FILES
         ${TS_FILES})
 
 # ------------------------------------------------------------------------------
@@ -64,7 +64,7 @@ file(GLOB_RECURSE UIS ui/*.ui)
 add_executable(QualificationMatrix
         WIN32 rcs/icons.qrc ${SRCS} ${UIS} ${APP_ICON_RESOURCE_WINDOWS})
 target_link_libraries(QualificationMatrix
-        Qt5::Widgets Qt5::Sql Qt5::PrintSupport
+        Qt6::Widgets Qt6::Sql Qt6::PrintSupport
         ${BOTAN_LIBRARIES})
 
 # ------------------------------------------------------------------------------
@@ -75,6 +75,12 @@ add_custom_command(TARGET QualificationMatrix
         PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_SOURCE_DIR}/database
         $<TARGET_FILE_DIR:QualificationMatrix>/database)
+
+# Copy the database directory.
+add_custom_command(TARGET QualificationMatrix
+        PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/styles
+        $<TARGET_FILE_DIR:QualificationMatrix>/styles)
 
 # Copy translation files.
 target_sources(QualificationMatrix

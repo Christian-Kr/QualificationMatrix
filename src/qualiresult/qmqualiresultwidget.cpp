@@ -162,7 +162,7 @@ void QMQualiResultWidget::updateFilterAndCalculate()
     QString tmpEmployeeGroup = ui->cbFilterEmployeeGroup->currentText();
 
     qualiResultModel->updateQualiInfo(tmpEmployee, tmpFunc, tmpTrain, tmpEmployeeGroup);
-    qualiResultFilterTRState->setFilterRegExp(ui->cbTrainResultState->currentText());
+    qualiResultFilterTRState->setFilterRegularExpression(ui->cbTrainResultState->currentText());
     ui->tvQualiResult->resizeColumnsToContents();
 }
 

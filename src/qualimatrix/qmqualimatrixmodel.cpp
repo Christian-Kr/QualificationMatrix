@@ -320,22 +320,22 @@ Qt::ItemFlags QMQualiMatrixModel::flags(const QModelIndex &index) const
 
 void QMQualiMatrixModel::setFuncGroupFilter(const QString &filter)
 {
-    funcFilterGroupModel->setFilterRegExp(filter);
+    funcFilterGroupModel->setFilterRegularExpression(filter);
 }
 
 void QMQualiMatrixModel::setTrainGroupFilter(const QString &filter)
 {
-    trainFilterGroupModel->setFilterRegExp(filter);
+    trainFilterGroupModel->setFilterRegularExpression(filter);
 }
 
 void QMQualiMatrixModel::setFuncFilter(const QString &filter)
 {
-    funcFilterModel->setFilterRegExp(filter);
+    funcFilterModel->setFilterRegularExpression(filter);
 }
 
 void QMQualiMatrixModel::setTrainFilter(const QString &filter)
 {
-    trainFilterModel->setFilterRegExp(filter);
+    trainFilterModel->setFilterRegularExpression(filter);
 }
 
 void QMQualiMatrixModel::setTrainLegalFilter(bool filter)

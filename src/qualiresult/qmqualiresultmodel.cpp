@@ -87,12 +87,12 @@ bool QMQualiResultModel::updateQualiInfo(const QString &filterName, const QStrin
     QSortFilterProxyModel filterEmployeeGroupModel(this);
     filterEmployeeGroupModel.setSourceModel(&employeeViewModel);
     filterEmployeeGroupModel.setFilterKeyColumn(2);
-    filterEmployeeGroupModel.setFilterRegExp(filterEmployeeGroup);
+    filterEmployeeGroupModel.setFilterRegularExpression(filterEmployeeGroup);
 
     QSortFilterProxyModel filterEmployeeModel(this);
     filterEmployeeModel.setSourceModel(&filterEmployeeGroupModel);
     filterEmployeeModel.setFilterKeyColumn(1);
-    filterEmployeeModel.setFilterRegExp(filterName);
+    filterEmployeeModel.setFilterRegularExpression(filterName);
 
     resetModel();
 
@@ -149,6 +149,7 @@ bool QMQualiResultModel::updateQualiInfo(const QString &filterName, const QStrin
                 }
 
                 // General filter in settings für ignoring trainings and training groups.
+                // TODO: Implement in frontend (description)
                 if (doIgnore)
                 {
                     if (trainGroupCache->contains(train))

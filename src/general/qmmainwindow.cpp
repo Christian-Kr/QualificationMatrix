@@ -36,7 +36,6 @@
 #include "ams/qmamslogindialog.h"
 
 #include <QProgressDialog>
-#include <QDesktopWidget>
 #include <QSqlRelationalTableModel>
 #include <QMessageBox>
 #include <QFileDialog>
