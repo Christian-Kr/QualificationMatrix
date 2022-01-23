@@ -46,12 +46,9 @@
 #include <QSqlRelationalDelegate>
 #include <QtPrintSupport/QPrinter>
 #include <QPainter>
-#include <QDebug>
-#include <QScreen>
 #include <QDateTime>
 #include <QSqlQuery>
 #include <QSqlError>
-#include <QTextStream>
 #include <QTranslator>
 #include <QWindow>
 #include <QStatusBar>
@@ -106,13 +103,12 @@ bool QMMainWindow::manageDatabaseFromSettings()
     loadDatabaseFromSettings("default");
     auto db = QSqlDatabase::database("default", false);
 
-    // If opening the database fails, show a message and stop automatic loading
-    // the database. If the opening fails, this could be due to wrong database
-    // information and/or failure in the database itself.
+    // If opening the database fails, show a message and stop automatic loading the database. If the opening fails,
+    // this could be due to wrong database information and/or failure in the database itself.
     if (!db.open())
     {
         QMessageBox::critical(this, tr("Datenbankverbindung"),
-            tr("Die Datenbank konnte nicht geöffnet werden, überprüfen Sie ihre Einstellungen."));
+                tr("Die Datenbank konnte nicht geöffnet werden, überprüfen Sie ihre Einstellungen."));
         return false;
     }
 
@@ -123,14 +119,12 @@ bool QMMainWindow::manageDatabaseFromSettings()
 
 void QMMainWindow::manageDatabase()
 {
-    // Before the dialog for managing a database will be shown, close a
-    // currently loaded one.
-    if (QSqlDatabase::contains("default") &&
-        QSqlDatabase::database("default", false).isOpen())
+    // Before the dialog for managing a database will be shown, close a currently loaded one.
+    if (QSqlDatabase::contains("default") && QSqlDatabase::database("default", false).isOpen())
     {
         auto res = QMessageBox::question(this, tr("Datenbank verwalten"),
-            tr("Es besteht bereits eine Verbindung zu einer Datenbank. Jetzt trennen?"),
-            QMessageBox::Yes | QMessageBox::No);
+                tr("Es besteht bereits eine Verbindung zu einer Datenbank. Jetzt trennen?"),
+                QMessageBox::Yes | QMessageBox::No);
 
         if (res == QMessageBox::No)
         {
@@ -140,9 +134,8 @@ void QMMainWindow::manageDatabase()
         closeDatabase();
     }
 
-    // The manage dialog will manipulate the data in QSqlDatabase. This is the
-    // buffer for the settings which will be saved in application settings
-    // afterwards.
+    // The manage dialog will manipulate the data in QSqlDatabase. This is the buffer for the settings which will be
+    // saved in application settings afterwards.
     QMDatabaseDialog databaseDialog("default", this);
     databaseDialog.exec();
 
@@ -156,8 +149,8 @@ void QMMainWindow::manageDatabase()
 
 void QMMainWindow::loadDatabaseFromSettings(const QString &dbName)
 {
-    // If a database with the name exist, remove it. This is needed, because
-    // the driver can only be set during object creation.
+    // If a database with the name exist, remove it. This is needed, because the driver can only be set during object
+    // creation.
     if (QSqlDatabase::contains(dbName))
     {
         closeDatabase();
@@ -218,8 +211,8 @@ void QMMainWindow::initAfterDatabaseOpened()
     if (!QMDataManager::testVersion(db))
     {
         auto resMb = QMessageBox::question(this, tr("Datenbank laden"), tr("Die Version der Datenbank entspricht "
-            "nicht der Vorgabe. Möchten Sie versuchen die Datenbank zu aktualisieren?"),
-            QMessageBox::Yes | QMessageBox::No);
+                "nicht der Vorgabe. Möchten Sie versuchen die Datenbank zu aktualisieren?"),
+                QMessageBox::Yes | QMessageBox::No);
 
         if (resMb != QMessageBox::Yes)
         {
@@ -306,8 +299,7 @@ void QMMainWindow::initAfterDatabaseOpened()
 
 bool QMMainWindow::saveSingleDatabaseBackup(const QSqlDatabase &db)
 {
-    auto fileName = QFileDialog::getSaveFileName(this, tr("Datenbank-Backup"),
-        QDir::homePath());
+    auto fileName = QFileDialog::getSaveFileName(this, tr("Datenbank-Backup"), QDir::homePath());
 
     if (fileName.isEmpty())
     {
@@ -329,12 +321,10 @@ void QMMainWindow::workloadStarts(QString info, int maxSteps)
     showProgress(tr("Berechnung"), info, 0, maxSteps);
 }
 
-void QMMainWindow::showProgress(const QString &title, const QString &text,
-    const int &minSteps, const int &maxSteps)
+void QMMainWindow::showProgress(const QString &title, const QString &text, const int &minSteps, const int &maxSteps)
 {
-    // The progress dialog object will be recreated on every use, cause it
-    // would show up by itself when ui does not react for view seconds
-    // (qt related).
+    // The progress dialog object will be recreated on every use, cause it would show up by itself when ui does not
+    // react for view seconds (qt related).
 
     if (progressDialog == nullptr)
     {
@@ -376,18 +366,17 @@ void QMMainWindow::closeProgress()
 
 [[maybe_unused]] void QMMainWindow::showAbout()
 {
-    QMessageBox::about(
-        this, tr("Über QualificationMatrix"),
-        tr("Copyright (c) 2020 by Christian Kr"
-            "\nVersion:\t" VERSION_MAJOR "." VERSION_MINOR " " RELEASE_STATE
-            " // " BUILD
-            "\nLizenz:\tGNU GENERAL PUBLIC LICENSE Version 3"
-            "\n\nEine Kopie der Lizenz wird mit dem Quellcode der Software "
-            "mitgeliefert"
-            " (COPYING.txt)"
-            "\n\nhttps://github.com/Christian-Kr/QualificationMatrix"
-            "\n\nBug-Reports: Fehler können direkt auf GitHub gemeldet werden"
-            " oder per E-Mail an CerebrosuS_aedd_gmx.net"));
+    QMessageBox::about(this, tr("Über QualificationMatrix"),
+            tr("Copyright (c) 2020 by Christian Kr"
+                "\nVersion:\t" VERSION_MAJOR "." VERSION_MINOR " " RELEASE_STATE
+                " // " BUILD
+                "\nLizenz:\tGNU GENERAL PUBLIC LICENSE Version 3"
+                "\n\nEine Kopie der Lizenz wird mit dem Quellcode der Software "
+                "mitgeliefert"
+                " (COPYING.txt)"
+                "\n\nhttps://github.com/Christian-Kr/QualificationMatrix"
+                "\n\nBug-Reports: Fehler können direkt auf GitHub gemeldet werden"
+                " oder per E-Mail an CerebrosuS_aedd_gmx.net"));
 }
 
 bool QMMainWindow::runAutoBackup()
@@ -399,8 +388,8 @@ bool QMMainWindow::runAutoBackup()
     if (!pathInfo.isDir() || !pathInfo.exists() || !pathInfo.isWritable())
     {
         QMessageBox::critical(this, tr("Backup anlegen"),
-            tr("Der angegebene Ordner in den Einstellungen ist kein "
-                "Verzeichnis, existiert nicht oder ist nicht beschreibbar."));
+                tr("Der angegebene Ordner in den Einstellungen ist kein "
+                    "Verzeichnis, existiert nicht oder ist nicht beschreibbar."));
         return false;
     }
 
@@ -415,12 +404,11 @@ bool QMMainWindow::runAutoBackup()
     backupDir.setSorting(QDir::Name);
     QFileInfoList backupFileList = backupDir.entryInfoList();
 
-    // If auto backup delete is on and too many backup files exist, delete
-    // the last x backups to fit the maximum number of backup counts. The
-    // files have a timestamp. Therefore the sorting is from oldest to newest.
+    // If auto backup delete is on and too many backup files exist, delete the last x backups to fit the maximum
+    // number of backup counts. The files have a timestamp. Therefore the sorting is from oldest to newest.
 
     auto varAutoBackupDelete = settings.read("Database/LocalAutoBackupDelete");
-    auto autoBackupDelete = (varAutoBackupDelete.isNull()) ? false : varAutoBackupDelete.toBool();
+    auto autoBackupDelete = !(varAutoBackupDelete.isNull()) && varAutoBackupDelete.toBool();
     auto varBackupCount = settings.read("Database/LocalBackupCount");
     auto backupCount = (varBackupCount.isNull()) ? 10 : varBackupCount.toInt();
 
@@ -434,8 +422,7 @@ bool QMMainWindow::runAutoBackup()
             if (!deleteFile.remove())
             {
                 QMessageBox::critical(this, tr("Backup löschen"),
-                    tr("Die Backupdatei konnte nicht gelöscht werden und wird "
-                        "übersprungen."));
+                        tr("Die Backupdatei konnte nicht gelöscht werden und wird übersprungen."));
             }
         }
     }
@@ -448,8 +435,7 @@ bool QMMainWindow::runAutoBackup()
     if (!copyFile.copy(pathInfo.absoluteFilePath() + QDir::separator() + newName))
     {
         QMessageBox::critical(this, tr("Backup erstellen"),
-            tr("Die Backupdatei konnte nicht kopiert werden und wird "
-                "übersprungen."));
+                tr("Die Backupdatei konnte nicht kopiert werden und wird übersprungen."));
     }
 
     return true;
@@ -465,8 +451,8 @@ bool QMMainWindow::closeDatabase()
         if (db.isOpen())
         {
             auto res = QMessageBox::question(this, tr("Datenbank schließen"),
-                tr("Soll die verbundene Datenbank wirklich geschlossen "
-                    "werden? (Nicht gespeicherte Daten gehen verloren!)"),
+                    tr("Soll die verbundene Datenbank wirklich geschlossen werden? (Nicht gespeicherte Daten gehen "
+                       "verloren!)"),
                 QMessageBox::Yes | QMessageBox::No);
 
             switch (res)
@@ -487,8 +473,7 @@ bool QMMainWindow::closeDatabase()
         }
     }
 
-    // After database has been closed, everything needs to be deleted or
-    // locked.
+    // After database has been closed, everything needs to be deleted or locked.
     closeCurrentWindowMode();
     ui->actSettings->setEnabled(false);
     ui->actCloseDatabase->setEnabled(false);
@@ -557,8 +542,7 @@ void QMMainWindow::showTrainingData(QString name, QString training)
 
 [[maybe_unused]] void QMMainWindow::manageCertificate()
 {
-    // If do not have the permission, make a lot of stuff disable.
-    // Permission check.
+    // If do not have the permission, make a lot of stuff disabled.
     auto amsManager = QMAMSManager::getInstance();
     if (!amsManager->checkPermission(AccessMode::TD_MODE_WRITE) &&
         !amsManager->checkPermission(AccessMode::TD_MODE_READ))
@@ -723,13 +707,11 @@ void QMMainWindow::enterWindowMode(WIN_MODE mode)
             trainDataWidget = std::make_unique<QMTrainDataWidget>();
             layout->insertWidget(0, trainDataWidget.get());
 
-            connect(trainDataWidget.get(),
-                &QMTrainDataWidget::infoMessageAvailable, ui->laInfo,
-                &QMInfoLabel::showInfoMessage);
+            connect(trainDataWidget.get(), &QMTrainDataWidget::infoMessageAvailable, ui->laInfo,
+                    &QMInfoLabel::showInfoMessage);
 
-            connect(trainDataWidget.get(),
-                &QMTrainDataWidget::warnMessageAvailable, ui->laInfo,
-                &QMInfoLabel::showWarnMessage);
+            connect(trainDataWidget.get(), &QMTrainDataWidget::warnMessageAvailable, ui->laInfo,
+                    &QMInfoLabel::showWarnMessage);
 
             trainDataWidget->updateData();
 
@@ -757,12 +739,9 @@ void QMMainWindow::enterWindowMode(WIN_MODE mode)
             qualiMatrixWidget = std::make_unique<QMQualiMatrixWidget>();
             layout->insertWidget(0, qualiMatrixWidget.get());
 
-            connect(qualiMatrixWidget.get(), &QMWinModeWidget::startWorkload,
-                this, &QMMainWindow::workloadStarts);
-            connect(qualiMatrixWidget.get(), &QMWinModeWidget::updateWorkload,
-                this, &QMMainWindow::workloadUpdates);
-            connect(qualiMatrixWidget.get(), &QMWinModeWidget::endWorkload,
-                this, &QMMainWindow::closeProgress);
+            connect(qualiMatrixWidget.get(), &QMWinModeWidget::startWorkload, this, &QMMainWindow::workloadStarts);
+            connect(qualiMatrixWidget.get(), &QMWinModeWidget::updateWorkload, this, &QMMainWindow::workloadUpdates);
+            connect(qualiMatrixWidget.get(), &QMWinModeWidget::endWorkload, this, &QMMainWindow::closeProgress);
 
             qualiMatrixWidget->updateData();
 
@@ -789,15 +768,11 @@ void QMMainWindow::enterWindowMode(WIN_MODE mode)
             qualiResultWidget = std::make_unique<QMQualiResultWidget>();
             layout->insertWidget(0, qualiResultWidget.get());
 
-            connect(qualiResultWidget.get(), &QMWinModeWidget::startWorkload,
-                this, &QMMainWindow::workloadStarts);
-            connect(qualiResultWidget.get(), &QMWinModeWidget::updateWorkload,
-                this, &QMMainWindow::workloadUpdates);
-            connect(qualiResultWidget.get(), &QMWinModeWidget::endWorkload,
-                this, &QMMainWindow::closeProgress);
-            connect(qualiResultWidget.get(),
-                &QMQualiResultWidget::showTrainData, this,
-                &QMMainWindow::showTrainingData);
+            connect(qualiResultWidget.get(), &QMWinModeWidget::startWorkload, this, &QMMainWindow::workloadStarts);
+            connect(qualiResultWidget.get(), &QMWinModeWidget::updateWorkload, this, &QMMainWindow::workloadUpdates);
+            connect(qualiResultWidget.get(), &QMWinModeWidget::endWorkload, this, &QMMainWindow::closeProgress);
+            connect(qualiResultWidget.get(), &QMQualiResultWidget::showTrainData, this,
+                    &QMMainWindow::showTrainingData);
 
             qualiResultWidget->updateData();
 
@@ -817,8 +792,7 @@ void QMMainWindow::enterWindowMode(WIN_MODE mode)
 
 void QMMainWindow::handleLoginChange(LoginState before, LoginState current)
 {
-    auto *tbAMS = dynamic_cast<QToolButton *>(
-            ui->toolBar->widgetForAction(ui->actAMS));
+    auto *tbAMS = dynamic_cast<QToolButton *>(ui->toolBar->widgetForAction(ui->actAMS));
 
     if (current == LoginState::LOGGED_IN)
     {
