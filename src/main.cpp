@@ -242,6 +242,8 @@ int main(int argc, char *argv[])
     initApplicationStyle();
     initApplicationStyleSheet(app);
 
+    QGuiApplication::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::Round);
+
     QMMainWindow win;
     initShowMainWindow(win);
 
