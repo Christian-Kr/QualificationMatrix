@@ -529,7 +529,7 @@ void QMMainWindow::saveSettings()
     enterWindowMode(tmpMode);
 }
 
-void QMMainWindow::showTrainingData(QString name, QString training)
+void QMMainWindow::showTrainingData(QString, QString)
 {
     // TODO: This is not possible anymore. Think about different ways.
 //    ui->twQualiMatrix->setCurrentIndex(2);
@@ -790,7 +790,7 @@ void QMMainWindow::enterWindowMode(WIN_MODE mode)
     }
 }
 
-void QMMainWindow::handleLoginChange(LoginState before, LoginState current)
+void QMMainWindow::handleLoginChange(LoginState, LoginState current)
 {
     auto *tbAMS = dynamic_cast<QToolButton *>(ui->toolBar->widgetForAction(ui->actAMS));
 
