@@ -38,8 +38,8 @@ void initShowMainWindow(QMMainWindow &mainWin)
     auto &settings = QMApplicationSettings::getInstance();
     auto showMaximized = settings.read("MainWin/Maximized", false).toBool();
 
-    // Load the active screen from settings and put the window on this screen.
-    // Detection of the right screen is done by the screen name.
+    // Load the active screen from settings and put the window on this screen. Detection of the right screen is done
+    // by the screen name.
     QScreen *screen;
     {
         auto screens = QGuiApplication::screens();
@@ -81,8 +81,7 @@ void initShowMainWindow(QMMainWindow &mainWin)
         auto savedHeight = settings.read("MainWin/Height", 500).toInt();
 
         mainWin.resize(savedWidth, savedHeight);
-        mainWin.move(screen->geometry().x() + (screen->geometry().width() -
-            savedWidth) / 2, screen->geometry().y() +
+        mainWin.move(screen->geometry().x() + (screen->geometry().width() - savedWidth) / 2, screen->geometry().y() +
             (screen->geometry().height() - savedHeight) / 2);
 
         mainWin.show();
@@ -120,9 +119,8 @@ void initApplicationStyleSheet(QApplication &app)
     app.setStyleSheet(styleSheet);
 }
 
-/// Install the translator into the qt application. If the loading or
-/// installing of the translation certificate fails, a warning message will
-/// be send for documentation.
+/// Install the translator into the qt application. If the loading or installing of the translation certificate fails,
+/// a warning message will be send for documentation.
 /// \param name The name of the translator certificate.
 /// \param path The path, where the tranaltor certificate could be found.
 void installTranslator(const QString &name, const QString &path)
@@ -132,8 +130,7 @@ void installTranslator(const QString &name, const QString &path)
 
     if (loaded)
     {
-        // Info: Installing certificate fails, if there is no translation in
-        // ts certificate itself.
+        // Info: Installing certificate fails, if there is no translation in ts certificate itself.
         auto installed = QApplication::installTranslator(translator);
 
         if (!installed)
@@ -159,24 +156,20 @@ void initApplicationTranslation()
 
     // Qt and qtbase translation files come from installed qt version or they
     // need to be deployed with the application and its libraries.
-    installTranslator("qt_" + lang,
-        QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-    installTranslator("qtbase_" + lang,
-        QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+    installTranslator("qt_" + lang, QLibraryInfo::path(QLibraryInfo::TranslationsPath));
+    installTranslator("qtbase_" + lang, QLibraryInfo::path(QLibraryInfo::TranslationsPath));
 }
 
-/// Take all messages coming from qWarning, qDebug etc. and write them into a
-/// log certificate. In general, all message will be written into a log
-/// certificate. If this log certificate is not writeable, the message will be
-/// printed on stdout. Debug messages will always only be printed on stdout.
+/// Take all messages coming from qWarning, qDebug etc. and write them into a log certificate. In general, all message
+/// will be written into a log certificate. If this log certificate is not writeable, the message will be printed on
+/// stdout. Debug messages will always only be printed on stdout.
 ///
 /// The certificate file will be create in user directory, to be readable and
 /// individual by every user.
 ///
 /// \param type The message type (debug, warning etc.).
 /// \param msg The message to display/log.
-void customMessageHandler(QtMsgType type, const QMessageLogContext &,
-    const QString &msg)
+void customMessageHandler(QtMsgType type, const QMessageLogContext &, const QString &msg)
 {
     auto txt = QDateTime::currentDateTime().toString();
 
@@ -231,13 +224,11 @@ int main(int argc, char *argv[])
     // General information, used by qt - example: QSettings certificate naming
     QCoreApplication::setOrganizationName("Kr");
     QCoreApplication::setOrganizationDomain("Kr");
-    QCoreApplication::setApplicationVersion(
-            QString("%1.%2").arg(VERSION_MAJOR, VERSION_MINOR));
+    QCoreApplication::setApplicationVersion(QString("%1.%2").arg(VERSION_MAJOR, VERSION_MINOR));
 
     if (QString(RELEASE_STATE).compare("beta") == 0)
     {
-        QCoreApplication::setApplicationName(
-                QString("QualificationMatrix_%1").arg(RELEASE_STATE));
+        QCoreApplication::setApplicationName(QString("QualificationMatrix_%1").arg(RELEASE_STATE));
     }
     else
     {
