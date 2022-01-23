@@ -369,12 +369,12 @@ void QMMainWindow::closeProgress()
     }
 }
 
-void QMMainWindow::showAboutQt()
+[[maybe_unused]] void QMMainWindow::showAboutQt()
 {
     QMessageBox::aboutQt(this);
 }
 
-void QMMainWindow::showAbout()
+[[maybe_unused]] void QMMainWindow::showAbout()
 {
     QMessageBox::about(
         this, tr("Über QualificationMatrix"),
@@ -521,7 +521,7 @@ void QMMainWindow::saveSettings()
     settings.write("MainWin/Maximized", testFlag);
 }
 
-void QMMainWindow::showSettings()
+[[maybe_unused]] void QMMainWindow::showSettings()
 {
     WIN_MODE tmpMode = winMode;
 
@@ -555,7 +555,7 @@ void QMMainWindow::showTrainingData(QString name, QString training)
 //    trainDataWidget->updateFilter();
 }
 
-void QMMainWindow::manageCertificate()
+[[maybe_unused]] void QMMainWindow::manageCertificate()
 {
     // If do not have the permission, make a lot of stuff disable.
     // Permission check.
@@ -579,7 +579,7 @@ void QMMainWindow::manageCertificate()
     certDialog.exec();
 }
 
-void QMMainWindow::showCertificateIntegrityCheck()
+[[maybe_unused]] void QMMainWindow::showCertificateIntegrityCheck()
 {
     auto &settings = QMApplicationSettings::getInstance();
 
@@ -594,7 +594,7 @@ void QMMainWindow::showCertificateIntegrityCheck()
     certIntCheckDialog.exec();
 }
 
-void QMMainWindow::showCreateSigningList()
+[[maybe_unused]] void QMMainWindow::showCreateSigningList()
 {
     auto &settings = QMApplicationSettings::getInstance();
 
@@ -609,17 +609,17 @@ void QMMainWindow::showCreateSigningList()
     signingListDialog.exec();
 }
 
-void QMMainWindow::enterResultMode()
+[[maybe_unused]] void QMMainWindow::enterResultMode()
 {
     enterWindowMode(WIN_MODE::RESULT);
 }
 
-void QMMainWindow::enterQualiMatrixMode()
+[[maybe_unused]] void QMMainWindow::enterQualiMatrixMode()
 {
     enterWindowMode(WIN_MODE::MATRIX);
 }
 
-void QMMainWindow::enterTrainingDataMode()
+[[maybe_unused]] void QMMainWindow::enterTrainingDataMode()
 {
     enterWindowMode(WIN_MODE::TRAININGDATA);
 }
