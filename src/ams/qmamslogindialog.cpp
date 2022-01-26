@@ -36,6 +36,7 @@ QMAMSLoginDialog::~QMAMSLoginDialog()
 void QMAMSLoginDialog::setUsername(QString name)
 {
     ui->leUsername->setText(name);
+    ui->lePassword->setFocus();
 }
 
 void QMAMSLoginDialog::login()
