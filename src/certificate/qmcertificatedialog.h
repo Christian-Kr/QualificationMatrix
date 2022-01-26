@@ -28,18 +28,17 @@ class QMCertificateDialog;
 }
 QT_END_NAMESPACE
 
-/// Enumeration definitions
+/// Enumeration for different dialog modes.
 enum class Mode
 {
-    CHOOSE,
-    MANAGE
+    CHOOSE,     // Dialog will be open to choose a single entry and close the dialog with a selection.
+    MANAGE      // Dialog will be opened for managing all entries.
 };
 
-/// Show certificate files and manage them. The dialog can handle different modes. In "CHOOSE"
-/// mode, the dialog save a selection, which can be claaed later. Also the name on the buttons
-/// will be different, so that the user can determine which mode is running and what he has to do.
-/// Neverless, in both modes, one can manage (search, filter, add, remove, preview, ...)
-/// different certificates.
+/// Show certificate files and manage them. The dialog can handle different modes. In "CHOOSE" mode, the dialog saves
+/// a selection, which can be returned later. Also the name on the buttons will be different, so that the user can
+/// determine which mode is running and what he has to do. Both modes can manage (search, filter,
+/// add, remove, preview, ...) different certificates.
 /// \author Christian Kr, Copyright 2020
 class QMCertificateDialog: public QMDialog
 {
@@ -47,12 +46,15 @@ class QMCertificateDialog: public QMDialog
 
 public:
     /// Constructor
-    /// \param parent The parent object of the widgt. This is important for a modal dialog.
-    /// \param mode The ode of the dialog to choose.
+    /// \param parent The parent object of the widget. This is important for a modal dialog.
+    /// \param mode The mode of the dialog to choose. Default ist Mode::MANAGE.
     explicit QMCertificateDialog(Mode mode = Mode::MANAGE, QWidget *parent = nullptr);
 
     /// Destructor
     ~QMCertificateDialog() override;
+
+    /// Override from QMDialog.
+    void loadSettings() override;
 
     /// Override from QMDialog.
     void saveSettings() override;
@@ -96,11 +98,11 @@ private:
     /// Save the given file external: Copy to file system structure.
     /// \param file File to save external.
     /// \return New file name if success, else empty string.
-    static QString saveFileExternal(QFile &file);
+    QString saveFileExternal(QFile &file);
 
     Ui::QMCertificateDialog *ui;
 
-    Mode runMode;
+    Mode mode;
 
     int selectedId;
     QString selectedName;

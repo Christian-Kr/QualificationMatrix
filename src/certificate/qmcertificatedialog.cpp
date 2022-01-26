@@ -34,19 +34,20 @@
 
 QMCertificateDialog::QMCertificateDialog(Mode mode, QWidget *parent)
     : QMDialog(parent)
+    , ui(new Ui::QMCertificateDialog)
+    , mode(mode)
+    , selectedId(-1)
+    , nameFilterModel(new QSortFilterProxyModel(this))
 {
-    ui = new Ui::QMCertificateDialog;
+    // Initialize ui from designer.
     ui->setupUi(this);
 
-    runMode = mode;
-    selectedId = -1;
-
-    nameFilterModel = new QSortFilterProxyModel(this);
-
+    // Initialize additional settings for the files table view.
     ui->tvFiles->horizontalHeader()->setStretchLastSection(false);
     ui->tvFiles->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft);
 
-    if (runMode == Mode::MANAGE)
+    // Show different button related to choosen mode.
+    if (this->mode == Mode::MANAGE)
     {
         ui->buttonBox->setStandardButtons(QDialogButtonBox::Close);
         setWindowTitle(tr("Nachweise verwalten"));
@@ -57,9 +58,9 @@ QMCertificateDialog::QMCertificateDialog(Mode mode, QWidget *parent)
         setWindowTitle(tr("Nachweis auswählen"));
     }
 
-    // If do not have the permission, make a lot of stuff disable. Permission check.
-    auto amsManager = QMAMSManager::getInstance();
-    if (!amsManager->checkPermission(AccessMode::TD_MODE_WRITE))
+    // Permission check! If the right permission is not available for the logged in user, disable all controls. To get
+    // full access, the user needs the TD_MODE_WRITE flag.
+    if (!QMAMSManager::getInstance()->checkPermission(AccessMode::TD_MODE_WRITE))
     {
         ui->tvFiles->setEditTriggers(QAbstractItemView::NoEditTriggers);
         ui->tbAdd->setEnabled(false);
@@ -74,15 +75,26 @@ QMCertificateDialog::~QMCertificateDialog()
 
 void QMCertificateDialog::accept()
 {
+    // Get a list of selected rows. This list might also be zero, if nothing has been selected. Only one selected row
+    // at the same time is allowed.
     auto modelIndex = ui->tvFiles->selectionModel()->selectedRows();
 
-    if (modelIndex.size() > 0)
+    if (modelIndex.size() != 0)
     {
+        QMessageBox::information(this, tr("Nachweis auswählen"), tr("Es muss exakt ein Nachweis ausgewählt werden."),
+                QMessageBox::Button::Ok);
+    }
+    else
+    {
+        // Get the row number from the table view and set the corresponding id and name from the model. The model
+        // needs to be the proxy model for filtering.
         auto row = modelIndex.at(0).row();
+
         selectedId = nameFilterModel->data(nameFilterModel->index(row, 0)).toInt();
         selectedName = nameFilterModel->data(nameFilterModel->index(row, 1)).toString();
     }
 
+    saveSettings();
     QMDialog::accept();
 }
 
@@ -92,11 +104,21 @@ void QMCertificateDialog::reject()
     QDialog::reject();
 }
 
+void QMCertificateDialog::loadSettings()
+{
+    auto &settings = QMApplicationSettings::getInstance();
+
+    // Window size
+    int width = settings.read("CertificateDialog/Width", 400).toInt();
+    int height = settings.read("CertificateDialog/Height", 400).toInt();
+    resize(width, height);
+}
+
 void QMCertificateDialog::saveSettings()
 {
     auto &settings = QMApplicationSettings::getInstance();
 
-    // Window settings.
+    // Window size
     settings.write("CertificateDialog/Width", width());
     settings.write("CertificateDialog/Height", height());
 }
@@ -119,14 +141,16 @@ void QMCertificateDialog::updateData()
 
     nameFilterModel->setSourceModel(certificateModel.get());
     nameFilterModel->setFilterKeyColumn(1);
+    nameFilterModel->sort(7, Qt::AscendingOrder);
 
     // Update the views. Only show name and type.
     ui->tvFiles->setModel(nameFilterModel);
     ui->tvFiles->hideColumn(0);
+    ui->tvFiles->hideColumn(2);
     ui->tvFiles->hideColumn(3);
     ui->tvFiles->hideColumn(4);
+    ui->tvFiles->hideColumn(5);
     ui->tvFiles->setColumnWidth(1, 400);
-    ui->tvFiles->setColumnWidth(5, 300);
     ui->tvFiles->setSortingEnabled(true);
 
     resetFilter();
@@ -150,7 +174,7 @@ void QMCertificateDialog::resetFilter()
 
 void QMCertificateDialog::addCertificate()
 {
-    // Get data from user.
+    // Get data from user
     auto &settings = QMApplicationSettings::getInstance();
 
     auto width = settings.read("NewCertificateDialog/Width", 400).toInt();
@@ -165,14 +189,13 @@ void QMCertificateDialog::addCertificate()
         return;
     }
 
-    // Insert certificate.
+    // Insert certificate
     QFile file(newCertDialog.getCertPath());
     file.open(QIODevice::ReadOnly);
 
     if (!file.isReadable() || !file.exists())
     {
-        qWarning() << "certificate file does not exist or is not readable"
-                << newCertDialog.getCertPath();
+        qWarning() << "certificate file does not exist or is not readable" << newCertDialog.getCertPath();
         return;
     }
 
@@ -180,23 +203,23 @@ void QMCertificateDialog::addCertificate()
     file.seek(0);
 
     // If we are here, adding a new file was basically ok. Now create a new model entry.
-    int rowIndex = certificateModel->rowCount();
+    auto rowIndex = certificateModel->rowCount();
     QFileInfo fileInfo(file.fileName());
 
     certificateModel->insertRow(certificateModel->rowCount());
 
     // Create the name and set it.
-    QString name =
-            newCertDialog.getTrain() + "_" + newCertDialog.getEmployee() +
+    QString name = newCertDialog.getTrain() + "_" + newCertDialog.getEmployee() +
             newCertDialog.getEmployeeGroup() + "_" + newCertDialog.getTrainDate();
     certificateModel->setData(certificateModel->index(rowIndex, 1), name);
     certificateModel->setData(certificateModel->index(rowIndex, 2), fileInfo.completeSuffix());
     certificateModel->setData(certificateModel->index(rowIndex, 5), hash);
-    certificateModel->setData(
-            certificateModel->index(rowIndex, 6), QDate::currentDate().toString("yyyyMMdd"));
+    certificateModel->setData(certificateModel->index(rowIndex, 6), QDate::currentDate().toString("yyyyMMdd"));
     certificateModel->setData(certificateModel->index(rowIndex, 7), newCertDialog.getTrainDate());
 
-    // Handle related to extern/internal.
+    // Handle related to extern/internal. Internal files will be saved directly into the database with a blob. External
+    // files will be saved on the file system and a path to that file will be saved into the database.
+    // TODO: Make Modes switchable.
     auto dm = QMDataManager::getInstance();
 
     if (dm->getCertificateLocation() == CertLoc::EXTERNAL)
@@ -205,10 +228,7 @@ void QMCertificateDialog::addCertificate()
 
         if (certificateFileName.isEmpty())
         {
-            QMessageBox::warning(
-                this, tr("Nachweis hinzufügen"),
-                tr("Der Nachweis konnte nicht hinzugefügt werden. Bitte informieren Sie den "
-                   "Entwickler."));
+            QMessageBox::warning(this, tr("Nachweis hinzufügen"), tr("Der Nachweis konnte nicht hinzugefügt werden."));
             certificateModel->revertRow(rowIndex);
             return;
         }
@@ -217,11 +237,9 @@ void QMCertificateDialog::addCertificate()
 
         if (!certificateModel->submitAll())
         {
-            QMessageBox::warning(
-                    this, tr("Nachweis hinzufügen"),
+            QMessageBox::warning(this, tr("Nachweis hinzufügen"),
                     tr("Der Nachweis konnte hinzugefügt aber die Tabelle nicht aktualisiert werden. "
-                       "Bitte informieren Sie den Entwickler. Die Datei und der Eintrag werden "
-                       "wieder entfernt."));
+                    "Die Datei und der Eintrag werden wieder entfernt."));
             certificateModel->revertAll();
             QFile::remove(certificateFileName);
         }
@@ -233,10 +251,8 @@ void QMCertificateDialog::addCertificate()
 
         if (blob.isEmpty())
         {
-            QMessageBox::warning(
-                this, tr("Nachweis hinzufügen"),
-                tr("Der Nachweis konnte nicht hinzugefügt werden. Bitte informieren Sie den "
-                   "Entwickler."));
+            QMessageBox::warning(this, tr("Nachweis hinzufügen"),
+                    tr("Der Nachweis konnte nicht hinzugefügt werden. Bitte informieren Sie den Entwickler."));
             certificateModel->revertRow(rowIndex);
             return;
         }
@@ -244,11 +260,9 @@ void QMCertificateDialog::addCertificate()
         certificateModel->setData(certificateModel->index(rowIndex, 4), blob);
         if (!certificateModel->submitAll())
         {
-            QMessageBox::warning(
-                    this, tr("Nachweis hinzufügen"),
+            QMessageBox::warning(this, tr("Nachweis hinzufügen"),
                     tr("Der Nachweis konnte hinzugefügt aber die Tabelle nicht aktualisiert werden. "
-                       "Bitte informieren Sie den Entwickler. Die Datei und der Eintrag werden "
-                       "wieder entfernt."));
+                    "Die Datei und der Eintrag werden wieder entfernt."));
             certificateModel->revertAll();
         }
     }
@@ -256,10 +270,8 @@ void QMCertificateDialog::addCertificate()
 
 QString QMCertificateDialog::saveFileExternal(QFile &file)
 {
-    auto dm = QMDataManager::getInstance();
-
-    // The path is relative to the database location. This should make sure, that the external
-    // files are located in direct vicinity to the database.
+    // The path is relative to the database location. This should make sure, that the external files are located in
+    // direct vicinity to the database.
 
     auto db = QSqlDatabase::database("default", false);
     auto dbPath = QFileInfo(db.databaseName()).absolutePath();
@@ -298,6 +310,8 @@ QString QMCertificateDialog::saveFileExternal(QFile &file)
 
     if (QDir(fullFileName).exists())
     {
+        QMessageBox::critical(this, tr("Nachweis hinzufügen"), tr("Es existiert bereits eine Datei mit dem Namen. "
+                "Der gleiche Nachweis kann pro Tag nur einmal hinzugefügt werden."), QMessageBox::Button::Ok);
         qWarning() << "file does already exist" << fullFileName;
         return {};
     }
