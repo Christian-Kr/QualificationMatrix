@@ -31,7 +31,7 @@
 #define DEPR_ENDL endl
 #endif
 
-/// Initialize the main window state with saved data.
+/// Initialize the main window state. This includes the dimension and position of the window.
 /// \param mainWin The main window object to initialize.
 void initShowMainWindow(QMMainWindow &mainWin)
 {
