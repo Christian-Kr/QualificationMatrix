@@ -35,9 +35,7 @@ find_package(Qt6 6.2
         REQUIRED)
 
 # Add application icon for windows.
-set(APP_ICON_RESOURCE_WINDOWS "rcs/qm_res.rc"
-        src/ams/qmamsusersettingswidget.h
-        src/ams/qmamsusersettingswidget.cpp)
+set(APP_ICON_RESOURCE_WINDOWS "rcs/qm_res.rc")
 
 # ------------------------------------------------------------------------------
 # Botan
