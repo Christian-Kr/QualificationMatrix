@@ -59,6 +59,12 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="editable">
              <bool>true</bool>
             </property>
@@ -69,6 +75,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbResetFuncGroup">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Zurücksetzen</string>
             </property>
@@ -77,18 +89,24 @@
             </property>
             <property name="icon">
              <iconset resource="../rcs/icons.qrc">
-              <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
+              <normaloff>:/icons/icons/lc_undo.png</normaloff>:/icons/icons/lc_undo.png</iconset>
             </property>
             <property name="iconSize">
              <size>
-              <width>22</width>
-              <height>22</height>
+              <width>24</width>
+              <height>24</height>
              </size>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QToolButton" name="tbExtSelFuncGroup">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Erweiterte Auswahl</string>
             </property>
@@ -97,12 +115,12 @@
             </property>
             <property name="icon">
              <iconset resource="../rcs/icons.qrc">
-              <normaloff>:/icons/icons/view-list-details.svg</normaloff>:/icons/icons/view-list-details.svg</iconset>
+              <normaloff>:/icons/icons/lc_selectdb.png</normaloff>:/icons/icons/lc_selectdb.png</iconset>
             </property>
             <property name="iconSize">
              <size>
-              <width>22</width>
-              <height>22</height>
+              <width>24</width>
+              <height>24</height>
              </size>
             </property>
            </widget>
@@ -126,6 +144,12 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="editable">
              <bool>true</bool>
             </property>
@@ -136,6 +160,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbResetTrainGroup">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Zurücksetzen</string>
             </property>
@@ -144,18 +174,24 @@
             </property>
             <property name="icon">
              <iconset resource="../rcs/icons.qrc">
-              <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
+              <normaloff>:/icons/icons/lc_undo.png</normaloff>:/icons/icons/lc_undo.png</iconset>
             </property>
             <property name="iconSize">
              <size>
-              <width>22</width>
-              <height>22</height>
+              <width>24</width>
+              <height>24</height>
              </size>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QToolButton" name="tbExtSelTrainGroup">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Erweiterte Auswahl</string>
             </property>
@@ -164,12 +200,12 @@
             </property>
             <property name="icon">
              <iconset resource="../rcs/icons.qrc">
-              <normaloff>:/icons/icons/view-list-details.svg</normaloff>:/icons/icons/view-list-details.svg</iconset>
+              <normaloff>:/icons/icons/lc_selectdb.png</normaloff>:/icons/icons/lc_selectdb.png</iconset>
             </property>
             <property name="iconSize">
              <size>
-              <width>22</width>
-              <height>22</height>
+              <width>24</width>
+              <height>24</height>
              </size>
             </property>
            </widget>
@@ -186,6 +222,12 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="editable">
              <bool>true</bool>
             </property>
@@ -196,6 +238,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbResetTrain">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Zurücksetzen</string>
             </property>
@@ -204,18 +252,24 @@
             </property>
             <property name="icon">
              <iconset resource="../rcs/icons.qrc">
-              <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
+              <normaloff>:/icons/icons/lc_undo.png</normaloff>:/icons/icons/lc_undo.png</iconset>
             </property>
             <property name="iconSize">
              <size>
-              <width>22</width>
-              <height>22</height>
+              <width>24</width>
+              <height>24</height>
              </size>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QToolButton" name="tbExtSelTrain">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Erweiterte Auswahl</string>
             </property>
@@ -224,12 +278,12 @@
             </property>
             <property name="icon">
              <iconset resource="../rcs/icons.qrc">
-              <normaloff>:/icons/icons/view-list-details.svg</normaloff>:/icons/icons/view-list-details.svg</iconset>
+              <normaloff>:/icons/icons/lc_selectdb.png</normaloff>:/icons/icons/lc_selectdb.png</iconset>
             </property>
             <property name="iconSize">
              <size>
-              <width>22</width>
-              <height>22</height>
+              <width>24</width>
+              <height>24</height>
              </size>
             </property>
            </widget>
@@ -246,6 +300,12 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="editable">
              <bool>true</bool>
             </property>
@@ -256,6 +316,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbResetFunc">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Zurücksetzen</string>
             </property>
@@ -264,18 +330,24 @@
             </property>
             <property name="icon">
              <iconset resource="../rcs/icons.qrc">
-              <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
+              <normaloff>:/icons/icons/lc_undo.png</normaloff>:/icons/icons/lc_undo.png</iconset>
             </property>
             <property name="iconSize">
              <size>
-              <width>22</width>
-              <height>22</height>
+              <width>24</width>
+              <height>24</height>
              </size>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QToolButton" name="tbExtSelFunc">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Erweiterte Auswahl</string>
             </property>
@@ -284,12 +356,12 @@
             </property>
             <property name="icon">
              <iconset resource="../rcs/icons.qrc">
-              <normaloff>:/icons/icons/view-list-details.svg</normaloff>:/icons/icons/view-list-details.svg</iconset>
+              <normaloff>:/icons/icons/lc_selectdb.png</normaloff>:/icons/icons/lc_selectdb.png</iconset>
             </property>
             <property name="iconSize">
              <size>
-              <width>22</width>
-              <height>22</height>
+              <width>24</width>
+              <height>24</height>
              </size>
             </property>
            </widget>
@@ -313,34 +385,46 @@
           </item>
           <item>
            <widget class="QPushButton" name="tbFilterReset">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="text">
              <string>Zurücksetzen</string>
             </property>
             <property name="icon">
              <iconset resource="../rcs/icons.qrc">
-              <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
+              <normaloff>:/icons/icons/lc_undo.png</normaloff>:/icons/icons/lc_undo.png</iconset>
             </property>
             <property name="iconSize">
              <size>
-              <width>22</width>
-              <height>22</height>
+              <width>24</width>
+              <height>24</height>
              </size>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QPushButton" name="tbFilterUpdate">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="text">
              <string>Aktualisieren</string>
             </property>
             <property name="icon">
              <iconset resource="../rcs/icons.qrc">
-              <normaloff>:/icons/icons/update-none.svg</normaloff>:/icons/icons/update-none.svg</iconset>
+              <normaloff>:/icons/icons/lc_reload.png</normaloff>:/icons/icons/lc_reload.png</iconset>
             </property>
             <property name="iconSize">
              <size>
-              <width>22</width>
-              <height>22</height>
+              <width>24</width>
+              <height>24</height>
              </size>
             </property>
            </widget>
@@ -419,7 +503,7 @@
            <property name="minimumSize">
             <size>
              <width>100</width>
-             <height>0</height>
+             <height>30</height>
             </size>
            </property>
            <property name="text">
@@ -427,12 +511,12 @@
            </property>
            <property name="icon">
             <iconset resource="../rcs/icons.qrc">
-             <normaloff>:/icons/icons/view-filter.svg</normaloff>:/icons/icons/view-filter.svg</iconset>
+             <normaloff>:/icons/icons/lc_goalseekdialog.png</normaloff>:/icons/icons/lc_goalseekdialog.png</iconset>
            </property>
            <property name="iconSize">
             <size>
-             <width>22</width>
-             <height>22</height>
+             <width>24</width>
+             <height>24</height>
             </size>
            </property>
           </widget>
@@ -455,7 +539,7 @@
            <property name="minimumSize">
             <size>
              <width>100</width>
-             <height>0</height>
+             <height>30</height>
             </size>
            </property>
            <property name="text">
@@ -467,14 +551,20 @@
            </property>
            <property name="iconSize">
             <size>
-             <width>22</width>
-             <height>22</height>
+             <width>24</width>
+             <height>24</height>
             </size>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QToolButton" name="tbLock">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
            <property name="text">
             <string/>
            </property>
@@ -485,8 +575,8 @@
            </property>
            <property name="iconSize">
             <size>
-             <width>22</width>
-             <height>22</height>
+             <width>24</width>
+             <height>24</height>
             </size>
            </property>
            <property name="shortcut">
@@ -570,7 +660,6 @@
            <widget class="QLabel" name="label_3">
             <property name="font">
              <font>
-              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -597,7 +686,6 @@
            <widget class="QLabel" name="label_8">
             <property name="font">
              <font>
-              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -621,7 +709,6 @@
            <widget class="QLabel" name="label_9">
             <property name="font">
              <font>
-              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -694,7 +781,6 @@
            <widget class="QLabel" name="label_6">
             <property name="font">
              <font>
-              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -721,7 +807,6 @@
            <widget class="QLabel" name="label_7">
             <property name="font">
              <font>
-              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>

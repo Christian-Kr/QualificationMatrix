@@ -66,7 +66,7 @@ QMMainWindow::QMMainWindow(QWidget *parent)
     connect(am, &QMAMSManager::loginStateChanged, this, &QMMainWindow::handleLoginChange);
 
     // Initialize some ui elements.
-    auto *tbAMS = dynamic_cast<QToolButton *>(ui->toolBar->widgetForAction(ui->actAMS));
+    auto *tbAMS = dynamic_cast<QToolButton *>(ui->tbaUser->widgetForAction(ui->actAMS));
     tbAMS->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
     tbAMS->setText("");
     tbAMS->setPopupMode(QToolButton::InstantPopup);
@@ -792,7 +792,7 @@ void QMMainWindow::enterWindowMode(WIN_MODE mode)
 
 void QMMainWindow::handleLoginChange(LoginState, LoginState current)
 {
-    auto *tbAMS = dynamic_cast<QToolButton *>(ui->toolBar->widgetForAction(ui->actAMS));
+    auto *tbAMS = dynamic_cast<QToolButton *>(ui->tbaUser->widgetForAction(ui->actAMS));
 
     if (current == LoginState::LOGGED_IN)
     {

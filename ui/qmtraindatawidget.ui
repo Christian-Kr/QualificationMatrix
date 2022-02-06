@@ -62,6 +62,12 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
            <property name="maximumSize">
             <size>
              <width>300</width>
@@ -104,6 +110,12 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
            <property name="maximumSize">
             <size>
              <width>300</width>
@@ -145,6 +157,12 @@
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
            </property>
            <property name="maximumSize">
             <size>
@@ -190,6 +208,12 @@
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>30</height>
+              </size>
+             </property>
              <property name="displayFormat">
               <string>yyyy-MM-dd</string>
              </property>
@@ -219,6 +243,12 @@
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>30</height>
+              </size>
              </property>
              <property name="displayFormat">
               <string>yyyy-MM-dd</string>
@@ -252,7 +282,7 @@
            <property name="minimumSize">
             <size>
              <width>100</width>
-             <height>0</height>
+             <height>30</height>
             </size>
            </property>
            <property name="toolTip">
@@ -263,12 +293,12 @@
            </property>
            <property name="icon">
             <iconset resource="../rcs/icons.qrc">
-             <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
+             <normaloff>:/icons/icons/lc_undo.png</normaloff>:/icons/icons/lc_undo.png</iconset>
            </property>
            <property name="iconSize">
             <size>
-             <width>22</width>
-             <height>22</height>
+             <width>24</width>
+             <height>24</height>
             </size>
            </property>
           </widget>
@@ -278,7 +308,7 @@
            <property name="minimumSize">
             <size>
              <width>100</width>
-             <height>0</height>
+             <height>30</height>
             </size>
            </property>
            <property name="toolTip">
@@ -289,12 +319,12 @@
            </property>
            <property name="icon">
             <iconset resource="../rcs/icons.qrc">
-             <normaloff>:/icons/icons/view-filter.svg</normaloff>:/icons/icons/view-filter.svg</iconset>
+             <normaloff>:/icons/icons/lc_goalseekdialog.png</normaloff>:/icons/icons/lc_goalseekdialog.png</iconset>
            </property>
            <property name="iconSize">
             <size>
-             <width>22</width>
-             <height>22</height>
+             <width>24</width>
+             <height>24</height>
             </size>
            </property>
           </widget>
@@ -330,7 +360,7 @@
          <property name="minimumSize">
           <size>
            <width>100</width>
-           <height>0</height>
+           <height>30</height>
           </size>
          </property>
          <property name="toolTip">
@@ -345,8 +375,8 @@
          </property>
          <property name="iconSize">
           <size>
-           <width>22</width>
-           <height>22</height>
+           <width>24</width>
+           <height>24</height>
           </size>
          </property>
         </widget>
@@ -356,7 +386,7 @@
          <property name="minimumSize">
           <size>
            <width>100</width>
-           <height>0</height>
+           <height>30</height>
           </size>
          </property>
          <property name="text">
@@ -368,8 +398,8 @@
          </property>
          <property name="iconSize">
           <size>
-           <width>22</width>
-           <height>22</height>
+           <width>24</width>
+           <height>24</height>
           </size>
          </property>
         </widget>
@@ -379,7 +409,7 @@
          <property name="minimumSize">
           <size>
            <width>100</width>
-           <height>0</height>
+           <height>30</height>
           </size>
          </property>
          <property name="toolTip">
@@ -394,8 +424,8 @@
          </property>
          <property name="iconSize">
           <size>
-           <width>22</width>
-           <height>22</height>
+           <width>24</width>
+           <height>24</height>
           </size>
          </property>
         </widget>
@@ -404,6 +434,12 @@
         <widget class="QPushButton" name="tbImportCsv">
          <property name="enabled">
           <bool>false</bool>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>30</width>
+           <height>30</height>
+          </size>
          </property>
          <property name="toolTip">
           <string>Import von Daten aus einer CSV-Datei</string>
@@ -417,8 +453,8 @@
          </property>
          <property name="iconSize">
           <size>
-           <width>22</width>
-           <height>22</height>
+           <width>24</width>
+           <height>24</height>
           </size>
          </property>
         </widget>
@@ -505,7 +541,6 @@
            </property>
            <property name="font">
             <font>
-             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
@@ -535,7 +570,6 @@
            </property>
            <property name="font">
             <font>
-             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
@@ -565,7 +599,6 @@
            </property>
            <property name="font">
             <font>
-             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
@@ -595,7 +628,6 @@
            </property>
            <property name="font">
             <font>
-             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
@@ -665,6 +697,12 @@
           <layout class="QVBoxLayout" name="verticalLayout_2">
            <item>
             <widget class="QToolButton" name="tbAddCertificate">
+             <property name="minimumSize">
+              <size>
+               <width>30</width>
+               <height>30</height>
+              </size>
+             </property>
              <property name="text">
               <string>...</string>
              </property>
@@ -674,14 +712,20 @@
              </property>
              <property name="iconSize">
               <size>
-               <width>22</width>
-               <height>22</height>
+               <width>24</width>
+               <height>24</height>
               </size>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QToolButton" name="tbRemoveCertificate">
+             <property name="minimumSize">
+              <size>
+               <width>30</width>
+               <height>30</height>
+              </size>
+             </property>
              <property name="text">
               <string/>
              </property>
@@ -691,14 +735,20 @@
              </property>
              <property name="iconSize">
               <size>
-               <width>22</width>
-               <height>22</height>
+               <width>24</width>
+               <height>24</height>
               </size>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QToolButton" name="tbShowCert">
+             <property name="minimumSize">
+              <size>
+               <width>30</width>
+               <height>30</height>
+              </size>
+             </property>
              <property name="toolTip">
               <string>Im Nachweisdialog suchen</string>
              </property>
@@ -711,8 +761,8 @@
              </property>
              <property name="iconSize">
               <size>
-               <width>22</width>
-               <height>22</height>
+               <width>24</width>
+               <height>24</height>
               </size>
              </property>
             </widget>
@@ -794,7 +844,6 @@
            </property>
            <property name="font">
             <font>
-             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
@@ -826,6 +875,12 @@
          </item>
          <item>
           <widget class="QComboBox" name="cbName">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>30</height>
+            </size>
+           </property>
            <property name="editable">
             <bool>true</bool>
            </property>
@@ -856,6 +911,12 @@
          </item>
          <item>
           <widget class="QComboBox" name="cbTrain">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>30</height>
+            </size>
+           </property>
            <property name="editable">
             <bool>true</bool>
            </property>
@@ -907,6 +968,12 @@
          </item>
          <item>
           <widget class="QComboBox" name="cbTrainState">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>30</height>
+            </size>
+           </property>
            <property name="editable">
             <bool>true</bool>
            </property>
@@ -939,6 +1006,12 @@
           <layout class="QHBoxLayout" name="horizontalLayout_11">
            <item>
             <widget class="QLineEdit" name="leCertName">
+             <property name="minimumSize">
+              <size>
+               <width>100</width>
+               <height>30</height>
+              </size>
+             </property>
              <property name="readOnly">
               <bool>true</bool>
              </property>
@@ -946,6 +1019,12 @@
            </item>
            <item>
             <widget class="QPushButton" name="pbChooseCertificate">
+             <property name="minimumSize">
+              <size>
+               <width>100</width>
+               <height>30</height>
+              </size>
+             </property>
              <property name="text">
               <string>Auswählen</string>
              </property>
@@ -972,6 +1051,12 @@
          </item>
          <item>
           <widget class="QPushButton" name="pbExecMultiEdit">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>30</height>
+            </size>
+           </property>
            <property name="text">
             <string>Ausführen</string>
            </property>

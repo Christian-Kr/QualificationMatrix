@@ -78,6 +78,12 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="editable">
              <bool>true</bool>
             </property>
@@ -106,6 +112,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbResetTrainResultState">
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Zurücksetzen</string>
             </property>
@@ -114,18 +126,24 @@
             </property>
             <property name="icon">
              <iconset resource="../rcs/icons.qrc">
-              <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
+              <normaloff>:/icons/icons/lc_undo.png</normaloff>:/icons/icons/lc_undo.png</iconset>
             </property>
             <property name="iconSize">
              <size>
-              <width>22</width>
-              <height>22</height>
+              <width>24</width>
+              <height>24</height>
              </size>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QToolButton" name="tbExtSelTrainResultState">
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Erweiterte Auswahl</string>
             </property>
@@ -134,12 +152,12 @@
             </property>
             <property name="icon">
              <iconset resource="../rcs/icons.qrc">
-              <normaloff>:/icons/icons/view-list-details.svg</normaloff>:/icons/icons/view-list-details.svg</iconset>
+              <normaloff>:/icons/icons/lc_selectdb.png</normaloff>:/icons/icons/lc_selectdb.png</iconset>
             </property>
             <property name="iconSize">
              <size>
-              <width>22</width>
-              <height>22</height>
+              <width>24</width>
+              <height>24</height>
              </size>
             </property>
            </widget>
@@ -177,6 +195,12 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="editable">
              <bool>true</bool>
             </property>
@@ -187,6 +211,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbResetFunc">
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Zurücksetzen</string>
             </property>
@@ -195,12 +225,12 @@
             </property>
             <property name="icon">
              <iconset resource="../rcs/icons.qrc">
-              <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
+              <normaloff>:/icons/icons/lc_undo.png</normaloff>:/icons/icons/lc_undo.png</iconset>
             </property>
             <property name="iconSize">
              <size>
-              <width>22</width>
-              <height>22</height>
+              <width>24</width>
+              <height>24</height>
              </size>
             </property>
            </widget>
@@ -217,6 +247,12 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="editable">
              <bool>true</bool>
             </property>
@@ -227,6 +263,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbResetEmployeeGroup">
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Zurücksetzen</string>
             </property>
@@ -235,18 +277,24 @@
             </property>
             <property name="icon">
              <iconset resource="../rcs/icons.qrc">
-              <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
+              <normaloff>:/icons/icons/lc_undo.png</normaloff>:/icons/icons/lc_undo.png</iconset>
             </property>
             <property name="iconSize">
              <size>
-              <width>22</width>
-              <height>22</height>
+              <width>24</width>
+              <height>24</height>
              </size>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QToolButton" name="tbExtSelEmployeeGroup">
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Erweiterte Auswahl</string>
             </property>
@@ -255,12 +303,12 @@
             </property>
             <property name="icon">
              <iconset resource="../rcs/icons.qrc">
-              <normaloff>:/icons/icons/view-list-details.svg</normaloff>:/icons/icons/view-list-details.svg</iconset>
+              <normaloff>:/icons/icons/lc_selectdb.png</normaloff>:/icons/icons/lc_selectdb.png</iconset>
             </property>
             <property name="iconSize">
              <size>
-              <width>22</width>
-              <height>22</height>
+              <width>24</width>
+              <height>24</height>
              </size>
             </property>
            </widget>
@@ -287,7 +335,7 @@
             <property name="minimumSize">
              <size>
               <width>100</width>
-              <height>0</height>
+              <height>30</height>
              </size>
             </property>
             <property name="text">
@@ -295,12 +343,12 @@
             </property>
             <property name="icon">
              <iconset resource="../rcs/icons.qrc">
-              <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
+              <normaloff>:/icons/icons/sc_undo.png</normaloff>:/icons/icons/sc_undo.png</iconset>
             </property>
             <property name="iconSize">
              <size>
-              <width>22</width>
-              <height>22</height>
+              <width>16</width>
+              <height>16</height>
              </size>
             </property>
            </widget>
@@ -310,7 +358,7 @@
             <property name="minimumSize">
              <size>
               <width>100</width>
-              <height>0</height>
+              <height>30</height>
              </size>
             </property>
             <property name="text">
@@ -318,12 +366,12 @@
             </property>
             <property name="icon">
              <iconset resource="../rcs/icons.qrc">
-              <normaloff>:/icons/icons/update-none.svg</normaloff>:/icons/icons/update-none.svg</iconset>
+              <normaloff>:/icons/icons/sc_reload.png</normaloff>:/icons/icons/sc_reload.png</iconset>
             </property>
             <property name="iconSize">
              <size>
-              <width>22</width>
-              <height>22</height>
+              <width>16</width>
+              <height>16</height>
              </size>
             </property>
            </widget>
@@ -340,6 +388,12 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="editable">
              <bool>true</bool>
             </property>
@@ -350,6 +404,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbResetEmployee">
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Zurücksetzen</string>
             </property>
@@ -358,18 +418,24 @@
             </property>
             <property name="icon">
              <iconset resource="../rcs/icons.qrc">
-              <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
+              <normaloff>:/icons/icons/lc_undo.png</normaloff>:/icons/icons/lc_undo.png</iconset>
             </property>
             <property name="iconSize">
              <size>
-              <width>22</width>
-              <height>22</height>
+              <width>24</width>
+              <height>24</height>
              </size>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QToolButton" name="tbExtSelEmployee">
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Erweiterte Auswahl</string>
             </property>
@@ -378,12 +444,12 @@
             </property>
             <property name="icon">
              <iconset resource="../rcs/icons.qrc">
-              <normaloff>:/icons/icons/view-list-details.svg</normaloff>:/icons/icons/view-list-details.svg</iconset>
+              <normaloff>:/icons/icons/lc_selectdb.png</normaloff>:/icons/icons/lc_selectdb.png</iconset>
             </property>
             <property name="iconSize">
              <size>
-              <width>22</width>
-              <height>22</height>
+              <width>24</width>
+              <height>24</height>
              </size>
             </property>
            </widget>
@@ -407,6 +473,12 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="editable">
              <bool>true</bool>
             </property>
@@ -417,6 +489,12 @@
           </item>
           <item>
            <widget class="QToolButton" name="tbResetTrain">
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>Zurücksetzen</string>
             </property>
@@ -425,12 +503,12 @@
             </property>
             <property name="icon">
              <iconset resource="../rcs/icons.qrc">
-              <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
+              <normaloff>:/icons/icons/lc_undo.png</normaloff>:/icons/icons/lc_undo.png</iconset>
             </property>
             <property name="iconSize">
              <size>
-              <width>22</width>
-              <height>22</height>
+              <width>24</width>
+              <height>24</height>
              </size>
             </property>
            </widget>
@@ -478,7 +556,7 @@
            <property name="minimumSize">
             <size>
              <width>100</width>
-             <height>0</height>
+             <height>30</height>
             </size>
            </property>
            <property name="text">
@@ -486,12 +564,12 @@
            </property>
            <property name="icon">
             <iconset resource="../rcs/icons.qrc">
-             <normaloff>:/icons/icons/view-filter.svg</normaloff>:/icons/icons/view-filter.svg</iconset>
+             <normaloff>:/icons/icons/lc_goalseekdialog.png</normaloff>:/icons/icons/lc_goalseekdialog.png</iconset>
            </property>
            <property name="iconSize">
             <size>
-             <width>22</width>
-             <height>22</height>
+             <width>24</width>
+             <height>24</height>
             </size>
            </property>
           </widget>
@@ -514,7 +592,7 @@
            <property name="minimumSize">
             <size>
              <width>100</width>
-             <height>0</height>
+             <height>30</height>
             </size>
            </property>
            <property name="text">
@@ -526,8 +604,8 @@
            </property>
            <property name="iconSize">
             <size>
-             <width>22</width>
-             <height>22</height>
+             <width>24</width>
+             <height>24</height>
             </size>
            </property>
           </widget>
@@ -537,7 +615,7 @@
            <property name="minimumSize">
             <size>
              <width>100</width>
-             <height>0</height>
+             <height>30</height>
             </size>
            </property>
            <property name="text">
@@ -545,12 +623,12 @@
            </property>
            <property name="icon">
             <iconset resource="../rcs/icons.qrc">
-             <normaloff>:/icons/icons/application-pdf.svg</normaloff>:/icons/icons/application-pdf.svg</iconset>
+             <normaloff>:/icons/icons/lc_exportdirecttopdf.png</normaloff>:/icons/icons/lc_exportdirecttopdf.png</iconset>
            </property>
            <property name="iconSize">
             <size>
-             <width>22</width>
-             <height>22</height>
+             <width>24</width>
+             <height>24</height>
             </size>
            </property>
           </widget>
