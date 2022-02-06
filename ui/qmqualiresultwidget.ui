@@ -583,6 +583,17 @@
           </spacer>
          </item>
          <item>
+          <widget class="QPushButton" name="pbCreateReport">
+           <property name="text">
+            <string>Bericht</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../rcs/icons.qrc">
+             <normaloff>:/icons/icons/sc_reportnavigator.png</normaloff>:/icons/icons/sc_reportnavigator.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QPushButton" name="tbSaveToCsv">
            <property name="minimumSize">
             <size>
@@ -591,7 +602,7 @@
             </size>
            </property>
            <property name="text">
-            <string>CSV</string>
+            <string>Export CSV</string>
            </property>
            <property name="icon">
             <iconset resource="../rcs/icons.qrc">
@@ -614,7 +625,7 @@
             </size>
            </property>
            <property name="text">
-            <string>PDF</string>
+            <string>Export PDF</string>
            </property>
            <property name="icon">
             <iconset resource="../rcs/icons.qrc">

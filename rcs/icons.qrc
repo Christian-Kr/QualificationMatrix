@@ -58,5 +58,8 @@
         <file>icons/lc_quit.png</file>
         <file>icons/quit.png</file>
         <file>icons/sc_quit.png</file>
+        <file>icons/lc_reportnavigator.png</file>
+        <file>icons/reportnavigator.png</file>
+        <file>icons/sc_reportnavigator.png</file>
     </qresource>
 </RCC>
