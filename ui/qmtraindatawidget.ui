@@ -6,348 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1596</width>
+    <width>1728</width>
     <height>868</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Schulungen</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
-    <widget class="QDockWidget" name="dockWidget">
-     <property name="minimumSize">
-      <size>
-       <width>300</width>
-       <height>356</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>300</width>
-       <height>524287</height>
-      </size>
-     </property>
-     <property name="features">
-      <set>QDockWidget::DockWidgetMovable</set>
-     </property>
-     <property name="allowedAreas">
-      <set>Qt::LeftDockWidgetArea</set>
-     </property>
-     <property name="windowTitle">
-      <string>Filter</string>
-     </property>
-     <widget class="QWidget" name="dockWidgetContents_4">
-      <layout class="QVBoxLayout" name="verticalLayout_15">
-       <property name="spacing">
-        <number>12</number>
-       </property>
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout_14">
-         <property name="spacing">
-          <number>0</number>
-         </property>
-         <item>
-          <widget class="QLabel" name="label_2">
-           <property name="text">
-            <string>Mitarbeiter</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="cbFilterEmployee">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>300</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="editable">
-            <bool>true</bool>
-           </property>
-           <property name="maxVisibleItems">
-            <number>20</number>
-           </property>
-           <property name="insertPolicy">
-            <enum>QComboBox::NoInsert</enum>
-           </property>
-           <property name="sizeAdjustPolicy">
-            <enum>QComboBox::AdjustToContentsOnFirstShow</enum>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout_13">
-         <property name="spacing">
-          <number>0</number>
-         </property>
-         <item>
-          <widget class="QLabel" name="label_3">
-           <property name="text">
-            <string>Schulung</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="cbFilterTrain">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>300</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="editable">
-            <bool>true</bool>
-           </property>
-           <property name="maxVisibleItems">
-            <number>20</number>
-           </property>
-           <property name="insertPolicy">
-            <enum>QComboBox::NoInsert</enum>
-           </property>
-           <property name="sizeAdjustPolicy">
-            <enum>QComboBox::AdjustToContentsOnFirstShow</enum>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout_12">
-         <property name="spacing">
-          <number>0</number>
-         </property>
-         <item>
-          <widget class="QLabel" name="label_4">
-           <property name="text">
-            <string>Status</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="cbFilterState">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>300</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="editable">
-            <bool>true</bool>
-           </property>
-           <property name="maxVisibleItems">
-            <number>20</number>
-           </property>
-           <property name="insertPolicy">
-            <enum>QComboBox::NoInsert</enum>
-           </property>
-           <property name="sizeAdjustPolicy">
-            <enum>QComboBox::AdjustToContentsOnFirstShow</enum>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_10">
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_10">
-           <property name="spacing">
-            <number>0</number>
-           </property>
-           <item>
-            <widget class="QLabel" name="label_7">
-             <property name="text">
-              <string>Datum ab</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QDateEdit" name="deDateFilterFrom">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>30</height>
-              </size>
-             </property>
-             <property name="displayFormat">
-              <string>yyyy-MM-dd</string>
-             </property>
-             <property name="calendarPopup">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_11">
-           <property name="spacing">
-            <number>0</number>
-           </property>
-           <item>
-            <widget class="QLabel" name="label_8">
-             <property name="text">
-              <string>Datum bis</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QDateEdit" name="deDateFilterTo">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>30</height>
-              </size>
-             </property>
-             <property name="displayFormat">
-              <string>yyyy-MM-dd</string>
-             </property>
-             <property name="calendarPopup">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_9">
-         <item>
-          <spacer name="horizontalSpacer">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QPushButton" name="tbFilterReset">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="toolTip">
-            <string>Filter zurücksetzen</string>
-           </property>
-           <property name="text">
-            <string>Zurücksetzen</string>
-           </property>
-           <property name="icon">
-            <iconset resource="../rcs/icons.qrc">
-             <normaloff>:/icons/icons/lc_undo.png</normaloff>:/icons/icons/lc_undo.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>24</width>
-             <height>24</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="tbFilter">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="toolTip">
-            <string>Daten filtern</string>
-           </property>
-           <property name="text">
-            <string>Filtern</string>
-           </property>
-           <property name="icon">
-            <iconset resource="../rcs/icons.qrc">
-             <normaloff>:/icons/icons/lc_goalseekdialog.png</normaloff>:/icons/icons/lc_goalseekdialog.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>24</width>
-             <height>24</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <spacer name="verticalSpacer_5">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </widget>
-    </widget>
-   </item>
    <item row="0" column="1">
     <layout class="QVBoxLayout" name="verticalLayout_3">
      <property name="rightMargin">
@@ -360,7 +32,7 @@
          <property name="minimumSize">
           <size>
            <width>100</width>
-           <height>30</height>
+           <height>25</height>
           </size>
          </property>
          <property name="toolTip">
@@ -375,8 +47,8 @@
          </property>
          <property name="iconSize">
           <size>
-           <width>24</width>
-           <height>24</height>
+           <width>16</width>
+           <height>16</height>
           </size>
          </property>
         </widget>
@@ -386,7 +58,7 @@
          <property name="minimumSize">
           <size>
            <width>100</width>
-           <height>30</height>
+           <height>25</height>
           </size>
          </property>
          <property name="text">
@@ -398,8 +70,8 @@
          </property>
          <property name="iconSize">
           <size>
-           <width>24</width>
-           <height>24</height>
+           <width>16</width>
+           <height>16</height>
           </size>
          </property>
         </widget>
@@ -409,7 +81,7 @@
          <property name="minimumSize">
           <size>
            <width>100</width>
-           <height>30</height>
+           <height>25</height>
           </size>
          </property>
          <property name="toolTip">
@@ -424,8 +96,8 @@
          </property>
          <property name="iconSize">
           <size>
-           <width>24</width>
-           <height>24</height>
+           <width>16</width>
+           <height>16</height>
           </size>
          </property>
         </widget>
@@ -437,8 +109,8 @@
          </property>
          <property name="minimumSize">
           <size>
-           <width>30</width>
-           <height>30</height>
+           <width>100</width>
+           <height>25</height>
           </size>
          </property>
          <property name="toolTip">
@@ -453,8 +125,8 @@
          </property>
          <property name="iconSize">
           <size>
-           <width>24</width>
-           <height>24</height>
+           <width>16</width>
+           <height>16</height>
           </size>
          </property>
         </widget>
@@ -490,6 +162,12 @@
        </attribute>
        <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
         <bool>true</bool>
+       </attribute>
+       <attribute name="verticalHeaderMinimumSectionSize">
+        <number>25</number>
+       </attribute>
+       <attribute name="verticalHeaderDefaultSectionSize">
+        <number>25</number>
        </attribute>
       </widget>
      </item>
@@ -699,8 +377,8 @@
             <widget class="QToolButton" name="tbAddCertificate">
              <property name="minimumSize">
               <size>
-               <width>30</width>
-               <height>30</height>
+               <width>25</width>
+               <height>25</height>
               </size>
              </property>
              <property name="text">
@@ -712,8 +390,8 @@
              </property>
              <property name="iconSize">
               <size>
-               <width>24</width>
-               <height>24</height>
+               <width>16</width>
+               <height>16</height>
               </size>
              </property>
             </widget>
@@ -722,8 +400,8 @@
             <widget class="QToolButton" name="tbRemoveCertificate">
              <property name="minimumSize">
               <size>
-               <width>30</width>
-               <height>30</height>
+               <width>25</width>
+               <height>25</height>
               </size>
              </property>
              <property name="text">
@@ -735,8 +413,8 @@
              </property>
              <property name="iconSize">
               <size>
-               <width>24</width>
-               <height>24</height>
+               <width>16</width>
+               <height>16</height>
               </size>
              </property>
             </widget>
@@ -745,8 +423,8 @@
             <widget class="QToolButton" name="tbShowCert">
              <property name="minimumSize">
               <size>
-               <width>30</width>
-               <height>30</height>
+               <width>25</width>
+               <height>25</height>
               </size>
              </property>
              <property name="toolTip">
@@ -761,8 +439,8 @@
              </property>
              <property name="iconSize">
               <size>
-               <width>24</width>
-               <height>24</height>
+               <width>16</width>
+               <height>16</height>
               </size>
              </property>
             </widget>
@@ -878,7 +556,7 @@
            <property name="minimumSize">
             <size>
              <width>100</width>
-             <height>30</height>
+             <height>25</height>
             </size>
            </property>
            <property name="editable">
@@ -914,7 +592,7 @@
            <property name="minimumSize">
             <size>
              <width>100</width>
-             <height>30</height>
+             <height>25</height>
             </size>
            </property>
            <property name="editable">
@@ -971,7 +649,7 @@
            <property name="minimumSize">
             <size>
              <width>100</width>
-             <height>30</height>
+             <height>25</height>
             </size>
            </property>
            <property name="editable">
@@ -1009,7 +687,7 @@
              <property name="minimumSize">
               <size>
                <width>100</width>
-               <height>30</height>
+               <height>25</height>
               </size>
              </property>
              <property name="readOnly">
@@ -1022,7 +700,7 @@
              <property name="minimumSize">
               <size>
                <width>100</width>
-               <height>30</height>
+               <height>25</height>
               </size>
              </property>
              <property name="text">
@@ -1054,7 +732,7 @@
            <property name="minimumSize">
             <size>
              <width>100</width>
-             <height>30</height>
+             <height>25</height>
             </size>
            </property>
            <property name="text">
@@ -1073,6 +751,299 @@
           <size>
            <width>10</width>
            <height>10</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QDockWidget" name="dockWidget">
+     <property name="minimumSize">
+      <size>
+       <width>350</width>
+       <height>316</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>350</width>
+       <height>524287</height>
+      </size>
+     </property>
+     <property name="features">
+      <set>QDockWidget::DockWidgetMovable</set>
+     </property>
+     <property name="allowedAreas">
+      <set>Qt::LeftDockWidgetArea</set>
+     </property>
+     <property name="windowTitle">
+      <string>Filter</string>
+     </property>
+     <widget class="QWidget" name="dockWidgetContents_4">
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0" colspan="2">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Mitarbeiter</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" colspan="2">
+        <widget class="QComboBox" name="cbFilterEmployee">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="editable">
+          <bool>true</bool>
+         </property>
+         <property name="maxVisibleItems">
+          <number>20</number>
+         </property>
+         <property name="insertPolicy">
+          <enum>QComboBox::NoInsert</enum>
+         </property>
+         <property name="sizeAdjustPolicy">
+          <enum>QComboBox::AdjustToContentsOnFirstShow</enum>
+         </property>
+         <property name="frame">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" colspan="2">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Schulung</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0" colspan="2">
+        <widget class="QComboBox" name="cbFilterTrain">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="editable">
+          <bool>true</bool>
+         </property>
+         <property name="maxVisibleItems">
+          <number>20</number>
+         </property>
+         <property name="insertPolicy">
+          <enum>QComboBox::NoInsert</enum>
+         </property>
+         <property name="sizeAdjustPolicy">
+          <enum>QComboBox::AdjustToContentsOnFirstShow</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0" colspan="2">
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>Status</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0" colspan="2">
+        <widget class="QComboBox" name="cbFilterState">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="editable">
+          <bool>true</bool>
+         </property>
+         <property name="maxVisibleItems">
+          <number>20</number>
+         </property>
+         <property name="insertPolicy">
+          <enum>QComboBox::NoInsert</enum>
+         </property>
+         <property name="sizeAdjustPolicy">
+          <enum>QComboBox::AdjustToContentsOnFirstShow</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="label_7">
+         <property name="text">
+          <string>Datum ab</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QLabel" name="label_8">
+         <property name="text">
+          <string>Datum bis</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <widget class="QDateEdit" name="deDateFilterFrom">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="displayFormat">
+          <string>yyyy-MM-dd</string>
+         </property>
+         <property name="calendarPopup">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1">
+        <widget class="QDateEdit" name="deDateFilterTo">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="displayFormat">
+          <string>yyyy-MM-dd</string>
+         </property>
+         <property name="calendarPopup">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="0" colspan="2">
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>329</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="9" column="0" colspan="2">
+        <layout class="QHBoxLayout" name="horizontalLayout_9">
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="tbFilterReset">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>Filter zurücksetzen</string>
+           </property>
+           <property name="text">
+            <string>Zurücksetzen</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../rcs/icons.qrc">
+             <normaloff>:/icons/icons/sc_undo.png</normaloff>:/icons/icons/sc_undo.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="tbFilter">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>Daten filtern</string>
+           </property>
+           <property name="text">
+            <string>Aktualisieren</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../rcs/icons.qrc">
+             <normaloff>:/icons/icons/sc_reload.png</normaloff>:/icons/icons/sc_reload.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="10" column="0" colspan="2">
+        <spacer name="verticalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
           </size>
          </property>
         </spacer>

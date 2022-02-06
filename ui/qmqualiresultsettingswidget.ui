@@ -41,10 +41,23 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="leIgnoreText"/>
+           <widget class="QLineEdit" name="leIgnoreText">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>25</height>
+             </size>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QPushButton" name="pbAddIgnore">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>25</height>
+             </size>
+            </property>
             <property name="text">
              <string>Hinzufügen</string>
             </property>
@@ -52,6 +65,12 @@
           </item>
           <item>
            <widget class="QPushButton" name="pbRemoveIgnore">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>25</height>
+             </size>
+            </property>
             <property name="text">
              <string>Entfernen</string>
             </property>
@@ -87,7 +106,7 @@
        <property name="minimumSize">
         <size>
          <width>100</width>
-         <height>0</height>
+         <height>25</height>
         </size>
        </property>
        <property name="text">
@@ -130,7 +149,7 @@
        <property name="minimumSize">
         <size>
          <width>100</width>
-         <height>0</height>
+         <height>25</height>
         </size>
        </property>
        <property name="text">
@@ -173,7 +192,7 @@
        <property name="minimumSize">
         <size>
          <width>100</width>
-         <height>0</height>
+         <height>25</height>
         </size>
        </property>
        <property name="text">
@@ -216,7 +235,7 @@
        <property name="minimumSize">
         <size>
          <width>100</width>
-         <height>0</height>
+         <height>25</height>
         </size>
        </property>
        <property name="suffix">

@@ -37,13 +37,13 @@
       </property>
       <property name="minimumSize">
        <size>
-        <width>317</width>
-        <height>572</height>
+        <width>350</width>
+        <height>366</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>524287</width>
+        <width>350</width>
         <height>524287</height>
        </size>
       </property>
@@ -72,11 +72,14 @@
           <property name="minimumSize">
            <size>
             <width>100</width>
-            <height>30</height>
+            <height>25</height>
            </size>
           </property>
           <property name="editable">
            <bool>true</bool>
+          </property>
+          <property name="maxVisibleItems">
+           <number>20</number>
           </property>
           <property name="insertPolicy">
            <enum>QComboBox::NoInsert</enum>
@@ -94,8 +97,8 @@
          <widget class="QToolButton" name="tbResetFunc">
           <property name="minimumSize">
            <size>
-            <width>30</width>
-            <height>30</height>
+            <width>25</width>
+            <height>25</height>
            </size>
           </property>
           <property name="toolTip">
@@ -106,12 +109,12 @@
           </property>
           <property name="icon">
            <iconset resource="../rcs/icons.qrc">
-            <normaloff>:/icons/icons/lc_undo.png</normaloff>:/icons/icons/lc_undo.png</iconset>
+            <normaloff>:/icons/icons/sc_undo.png</normaloff>:/icons/icons/sc_undo.png</iconset>
           </property>
           <property name="iconSize">
            <size>
-            <width>24</width>
-            <height>24</height>
+            <width>16</width>
+            <height>16</height>
            </size>
           </property>
          </widget>
@@ -120,8 +123,8 @@
          <widget class="QToolButton" name="tbResetTrain">
           <property name="minimumSize">
            <size>
-            <width>30</width>
-            <height>30</height>
+            <width>25</width>
+            <height>25</height>
            </size>
           </property>
           <property name="toolTip">
@@ -132,12 +135,12 @@
           </property>
           <property name="icon">
            <iconset resource="../rcs/icons.qrc">
-            <normaloff>:/icons/icons/lc_undo.png</normaloff>:/icons/icons/lc_undo.png</iconset>
+            <normaloff>:/icons/icons/sc_undo.png</normaloff>:/icons/icons/sc_undo.png</iconset>
           </property>
           <property name="iconSize">
            <size>
-            <width>24</width>
-            <height>24</height>
+            <width>16</width>
+            <height>16</height>
            </size>
           </property>
          </widget>
@@ -153,11 +156,14 @@
           <property name="minimumSize">
            <size>
             <width>100</width>
-            <height>30</height>
+            <height>25</height>
            </size>
           </property>
           <property name="editable">
            <bool>true</bool>
+          </property>
+          <property name="maxVisibleItems">
+           <number>20</number>
           </property>
           <property name="insertPolicy">
            <enum>QComboBox::NoInsert</enum>
@@ -175,7 +181,7 @@
           <property name="minimumSize">
            <size>
             <width>100</width>
-            <height>30</height>
+            <height>25</height>
            </size>
           </property>
           <property name="editable">
@@ -183,6 +189,9 @@
           </property>
           <property name="currentText">
            <string>Gut</string>
+          </property>
+          <property name="maxVisibleItems">
+           <number>20</number>
           </property>
           <property name="insertPolicy">
            <enum>QComboBox::NoInsert</enum>
@@ -208,8 +217,8 @@
          <widget class="QToolButton" name="tbExtSelEmployeeGroup">
           <property name="minimumSize">
            <size>
-            <width>30</width>
-            <height>30</height>
+            <width>25</width>
+            <height>25</height>
            </size>
           </property>
           <property name="toolTip">
@@ -224,8 +233,8 @@
           </property>
           <property name="iconSize">
            <size>
-            <width>24</width>
-            <height>24</height>
+            <width>16</width>
+            <height>16</height>
            </size>
           </property>
          </widget>
@@ -241,8 +250,8 @@
          <widget class="QToolButton" name="tbExtSelTrainResultState">
           <property name="minimumSize">
            <size>
-            <width>30</width>
-            <height>30</height>
+            <width>25</width>
+            <height>25</height>
            </size>
           </property>
           <property name="toolTip">
@@ -257,8 +266,8 @@
           </property>
           <property name="iconSize">
            <size>
-            <width>24</width>
-            <height>24</height>
+            <width>16</width>
+            <height>16</height>
            </size>
           </property>
          </widget>
@@ -274,11 +283,14 @@
           <property name="minimumSize">
            <size>
             <width>100</width>
-            <height>30</height>
+            <height>25</height>
            </size>
           </property>
           <property name="editable">
            <bool>true</bool>
+          </property>
+          <property name="maxVisibleItems">
+           <number>20</number>
           </property>
           <property name="insertPolicy">
            <enum>QComboBox::NoInsert</enum>
@@ -289,8 +301,8 @@
          <widget class="QToolButton" name="tbResetTrainResultState">
           <property name="minimumSize">
            <size>
-            <width>30</width>
-            <height>30</height>
+            <width>25</width>
+            <height>25</height>
            </size>
           </property>
           <property name="toolTip">
@@ -301,12 +313,12 @@
           </property>
           <property name="icon">
            <iconset resource="../rcs/icons.qrc">
-            <normaloff>:/icons/icons/lc_undo.png</normaloff>:/icons/icons/lc_undo.png</iconset>
+            <normaloff>:/icons/icons/sc_undo.png</normaloff>:/icons/icons/sc_undo.png</iconset>
           </property>
           <property name="iconSize">
            <size>
-            <width>24</width>
-            <height>24</height>
+            <width>16</width>
+            <height>16</height>
            </size>
           </property>
          </widget>
@@ -315,8 +327,8 @@
          <widget class="QToolButton" name="tbResetEmployeeGroup">
           <property name="minimumSize">
            <size>
-            <width>30</width>
-            <height>30</height>
+            <width>25</width>
+            <height>25</height>
            </size>
           </property>
           <property name="toolTip">
@@ -327,12 +339,12 @@
           </property>
           <property name="icon">
            <iconset resource="../rcs/icons.qrc">
-            <normaloff>:/icons/icons/lc_undo.png</normaloff>:/icons/icons/lc_undo.png</iconset>
+            <normaloff>:/icons/icons/sc_undo.png</normaloff>:/icons/icons/sc_undo.png</iconset>
           </property>
           <property name="iconSize">
            <size>
-            <width>24</width>
-            <height>24</height>
+            <width>16</width>
+            <height>16</height>
            </size>
           </property>
          </widget>
@@ -355,8 +367,8 @@
          <widget class="QToolButton" name="tbExtSelEmployee">
           <property name="minimumSize">
            <size>
-            <width>30</width>
-            <height>30</height>
+            <width>25</width>
+            <height>25</height>
            </size>
           </property>
           <property name="toolTip">
@@ -371,8 +383,8 @@
           </property>
           <property name="iconSize">
            <size>
-            <width>24</width>
-            <height>24</height>
+            <width>16</width>
+            <height>16</height>
            </size>
           </property>
          </widget>
@@ -388,8 +400,8 @@
          <widget class="QToolButton" name="tbResetEmployee">
           <property name="minimumSize">
            <size>
-            <width>30</width>
-            <height>30</height>
+            <width>25</width>
+            <height>25</height>
            </size>
           </property>
           <property name="toolTip">
@@ -400,12 +412,12 @@
           </property>
           <property name="icon">
            <iconset resource="../rcs/icons.qrc">
-            <normaloff>:/icons/icons/lc_undo.png</normaloff>:/icons/icons/lc_undo.png</iconset>
+            <normaloff>:/icons/icons/sc_undo.png</normaloff>:/icons/icons/sc_undo.png</iconset>
           </property>
           <property name="iconSize">
            <size>
-            <width>24</width>
-            <height>24</height>
+            <width>16</width>
+            <height>16</height>
            </size>
           </property>
          </widget>
@@ -430,7 +442,7 @@
             <property name="minimumSize">
              <size>
               <width>100</width>
-              <height>30</height>
+              <height>25</height>
              </size>
             </property>
             <property name="text">
@@ -453,7 +465,7 @@
             <property name="minimumSize">
              <size>
               <width>100</width>
-              <height>30</height>
+              <height>25</height>
              </size>
             </property>
             <property name="text">
@@ -497,11 +509,14 @@
           <property name="minimumSize">
            <size>
             <width>100</width>
-            <height>30</height>
+            <height>25</height>
            </size>
           </property>
           <property name="editable">
            <bool>true</bool>
+          </property>
+          <property name="maxVisibleItems">
+           <number>20</number>
           </property>
           <property name="insertPolicy">
            <enum>QComboBox::NoInsert</enum>
@@ -536,7 +551,7 @@
            <property name="minimumSize">
             <size>
              <width>100</width>
-             <height>30</height>
+             <height>25</height>
             </size>
            </property>
            <property name="text">
@@ -548,8 +563,8 @@
            </property>
            <property name="iconSize">
             <size>
-             <width>24</width>
-             <height>24</height>
+             <width>16</width>
+             <height>16</height>
             </size>
            </property>
           </widget>
@@ -572,7 +587,7 @@
            <property name="minimumSize">
             <size>
              <width>100</width>
-             <height>30</height>
+             <height>25</height>
             </size>
            </property>
            <property name="text">
@@ -584,8 +599,8 @@
            </property>
            <property name="iconSize">
             <size>
-             <width>24</width>
-             <height>24</height>
+             <width>16</width>
+             <height>16</height>
             </size>
            </property>
           </widget>
@@ -595,7 +610,7 @@
            <property name="minimumSize">
             <size>
              <width>100</width>
-             <height>30</height>
+             <height>25</height>
             </size>
            </property>
            <property name="text">
@@ -607,8 +622,8 @@
            </property>
            <property name="iconSize">
             <size>
-             <width>24</width>
-             <height>24</height>
+             <width>16</width>
+             <height>16</height>
             </size>
            </property>
           </widget>
@@ -633,6 +648,12 @@
            </property>
            <attribute name="horizontalHeaderDefaultSectionSize">
             <number>200</number>
+           </attribute>
+           <attribute name="verticalHeaderMinimumSectionSize">
+            <number>25</number>
+           </attribute>
+           <attribute name="verticalHeaderDefaultSectionSize">
+            <number>25</number>
            </attribute>
           </widget>
          </item>

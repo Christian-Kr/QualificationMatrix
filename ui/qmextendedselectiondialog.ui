@@ -24,14 +24,20 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>25</height>
+        </size>
+       </property>
       </widget>
      </item>
      <item>
       <widget class="QToolButton" name="tbFilter">
        <property name="minimumSize">
         <size>
-         <width>30</width>
-         <height>30</height>
+         <width>25</width>
+         <height>25</height>
         </size>
        </property>
        <property name="text">
@@ -43,8 +49,8 @@
        </property>
        <property name="iconSize">
         <size>
-         <width>24</width>
-         <height>24</height>
+         <width>16</width>
+         <height>16</height>
         </size>
        </property>
       </widget>
@@ -78,6 +84,12 @@
      </property>
      <attribute name="horizontalHeaderStretchLastSection">
       <bool>true</bool>
+     </attribute>
+     <attribute name="verticalHeaderMinimumSectionSize">
+      <number>25</number>
+     </attribute>
+     <attribute name="verticalHeaderDefaultSectionSize">
+      <number>25</number>
      </attribute>
     </widget>
    </item>
