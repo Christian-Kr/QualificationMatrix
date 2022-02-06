@@ -66,5 +66,9 @@ void QMQualiResultReportDialog::updateData()
     trainGroupViewModel->select();
 
     // Set ui elements.
+    ui->lvEmployees->setModel(employeeViewModel.get());
+    ui->lvEmployees->setModelColumn(1);
 
+    ui->lvTrainings->setModel(trainViewModel.get());
+    ui->lvTrainings->setModelColumn(1);
 }

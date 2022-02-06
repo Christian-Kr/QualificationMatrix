@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>840</width>
-    <height>676</height>
+    <width>559</width>
+    <height>572</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Schulungsbericht erstellen</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -27,8 +27,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>822</width>
-        <height>625</height>
+        <width>541</width>
+        <height>521</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
@@ -117,29 +117,22 @@
           <string/>
          </property>
          <layout class="QGridLayout" name="gridLayout_3">
-          <item row="0" column="0" colspan="2">
+          <item row="0" column="0">
            <widget class="QLabel" name="label_4">
             <property name="text">
              <string>Einzelne Mitarbeiter</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="2" colspan="2">
-           <widget class="QLabel" name="label_3">
-            <property name="text">
-             <string>Mitarbeitergruppen</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0" rowspan="3">
-           <widget class="QListWidget" name="lvTrainings_2">
+          <item row="1" column="0" rowspan="5">
+           <widget class="QListView" name="lvEmployees">
             <property name="selectionMode">
              <enum>QAbstractItemView::MultiSelection</enum>
             </property>
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QPushButton" name="pbSelectAllTrainings_2">
+           <widget class="QPushButton" name="pbResetEmployees">
             <property name="minimumSize">
              <size>
               <width>100</width>
@@ -147,32 +140,12 @@
              </size>
             </property>
             <property name="text">
-             <string>Alles</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="2" rowspan="3">
-           <widget class="QListWidget" name="lvTrainingGroups_2">
-            <property name="selectionMode">
-             <enum>QAbstractItemView::MultiSelection</enum>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="3">
-           <widget class="QPushButton" name="pbSelectAllTrainingGroups_2">
-            <property name="minimumSize">
-             <size>
-              <width>100</width>
-              <height>25</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Alles</string>
+             <string>Zurücksetzen</string>
             </property>
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QPushButton" name="pbDeselectAllTrainings_2">
+           <widget class="QPushButton" name="pbAddEmployee">
             <property name="minimumSize">
              <size>
               <width>100</width>
@@ -180,24 +153,37 @@
              </size>
             </property>
             <property name="text">
-             <string>Nichts</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="3">
-           <widget class="QPushButton" name="pbDeselectAllTrainingGroups_2">
-            <property name="minimumSize">
-             <size>
-              <width>100</width>
-              <height>25</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Nichts</string>
+             <string>Hinzufügen</string>
             </property>
            </widget>
           </item>
           <item row="3" column="1">
+           <widget class="QPushButton" name="pbAddFromEmployeeGroup">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Gruppen</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QPushButton" name="pbRemoveSelectedEmployees">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Entfernen</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
            <spacer name="verticalSpacer_4">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
@@ -205,20 +191,7 @@
             <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
-              <height>150</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="3" column="3">
-           <spacer name="verticalSpacer_3">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>150</height>
+              <height>39</height>
              </size>
             </property>
            </spacer>
@@ -242,29 +215,8 @@
           <string/>
          </property>
          <layout class="QGridLayout" name="gridLayout">
-          <item row="0" column="0" colspan="2">
-           <widget class="QLabel" name="label">
-            <property name="text">
-             <string>Einzelne Schulungen</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="2" colspan="2">
-           <widget class="QLabel" name="label_2">
-            <property name="text">
-             <string>Schulungsgruppen</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0" rowspan="3">
-           <widget class="QListWidget" name="lvTrainings">
-            <property name="selectionMode">
-             <enum>QAbstractItemView::MultiSelection</enum>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QPushButton" name="pbSelectAllTrainings">
+          <item row="4" column="1">
+           <widget class="QPushButton" name="pbRemoveSelectedTrainings">
             <property name="minimumSize">
              <size>
               <width>100</width>
@@ -272,57 +224,11 @@
              </size>
             </property>
             <property name="text">
-             <string>Alles</string>
+             <string>Entfernen</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="2" rowspan="3">
-           <widget class="QListWidget" name="lvTrainingGroups">
-            <property name="selectionMode">
-             <enum>QAbstractItemView::MultiSelection</enum>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="3">
-           <widget class="QPushButton" name="pbSelectAllTrainingGroups">
-            <property name="minimumSize">
-             <size>
-              <width>100</width>
-              <height>25</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Alles</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QPushButton" name="pbDeselectAllTrainings">
-            <property name="minimumSize">
-             <size>
-              <width>100</width>
-              <height>25</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Nichts</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="3">
-           <widget class="QPushButton" name="pbDeselectAllTrainingGroups">
-            <property name="minimumSize">
-             <size>
-              <width>100</width>
-              <height>25</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Nichts</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
+          <item row="5" column="1">
            <spacer name="verticalSpacer">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
@@ -330,23 +236,63 @@
             <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
-              <height>150</height>
+              <height>33</height>
              </size>
             </property>
            </spacer>
           </item>
-          <item row="3" column="3">
-           <spacer name="verticalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
+          <item row="1" column="0" rowspan="5">
+           <widget class="QListView" name="lvTrainings">
+            <property name="selectionMode">
+             <enum>QAbstractItemView::MultiSelection</enum>
             </property>
-            <property name="sizeHint" stdset="0">
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QPushButton" name="pbResetTrainings">
+            <property name="minimumSize">
              <size>
-              <width>20</width>
-              <height>150</height>
+              <width>100</width>
+              <height>25</height>
              </size>
             </property>
-           </spacer>
+            <property name="text">
+             <string>Zurücksetzen</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QPushButton" name="pbAddTraining">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Hinzufügen</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0" colspan="2">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Einzelne Schulungen</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QPushButton" name="pbAddFromTrainingGroup">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Gruppen</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -384,7 +330,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pbCancel">
+      <widget class="QPushButton" name="pbClose">
        <property name="minimumSize">
         <size>
          <width>100</width>
@@ -392,7 +338,7 @@
         </size>
        </property>
        <property name="text">
-        <string>Abbrechen</string>
+        <string>Schließen</string>
        </property>
        <property name="default">
         <bool>true</bool>
