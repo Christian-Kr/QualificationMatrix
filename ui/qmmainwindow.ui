@@ -168,6 +168,10 @@
    <addaction name="actAMS"/>
   </widget>
   <action name="actExit">
+   <property name="icon">
+    <iconset resource="../rcs/icons.qrc">
+     <normaloff>:/icons/icons/sc_delete.png</normaloff>:/icons/icons/sc_delete.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Beenden</string>
    </property>
@@ -199,6 +203,10 @@
    </property>
   </action>
   <action name="actAbout">
+   <property name="icon">
+    <iconset resource="../rcs/icons.qrc">
+     <normaloff>:/icons/icons/lc_helpindex.png</normaloff>:/icons/icons/lc_helpindex.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Über QualificationMatrix</string>
    </property>

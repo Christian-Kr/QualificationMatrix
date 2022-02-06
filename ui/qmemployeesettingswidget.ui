@@ -29,7 +29,7 @@
    <item row="0" column="0" rowspan="2" colspan="2">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <property name="documentMode">
       <bool>true</bool>
@@ -79,7 +79,7 @@
              <property name="minimumSize">
               <size>
                <width>0</width>
-               <height>0</height>
+               <height>25</height>
               </size>
              </property>
              <property name="clearButtonEnabled">
@@ -91,8 +91,8 @@
             <widget class="QToolButton" name="tbEmployeeFilter">
              <property name="minimumSize">
               <size>
-               <width>0</width>
-               <height>0</height>
+               <width>25</width>
+               <height>25</height>
               </size>
              </property>
              <property name="toolTip">
@@ -103,12 +103,12 @@
              </property>
              <property name="icon">
               <iconset resource="../rcs/icons.qrc">
-               <normaloff>:/icons/icons/view-filter.svg</normaloff>:/icons/icons/view-filter.svg</iconset>
+               <normaloff>:/icons/icons/lc_recsearch.png</normaloff>:/icons/icons/lc_recsearch.png</iconset>
              </property>
              <property name="iconSize">
               <size>
-               <width>22</width>
-               <height>22</height>
+               <width>16</width>
+               <height>16</height>
               </size>
              </property>
             </widget>
@@ -143,14 +143,14 @@
              <attribute name="verticalHeaderVisible">
               <bool>false</bool>
              </attribute>
+             <attribute name="verticalHeaderMinimumSectionSize">
+              <number>25</number>
+             </attribute>
              <attribute name="verticalHeaderDefaultSectionSize">
-              <number>30</number>
+              <number>25</number>
              </attribute>
              <attribute name="verticalHeaderHighlightSections">
               <bool>false</bool>
-             </attribute>
-             <attribute name="verticalHeaderMinimumSectionSize">
-              <number>30</number>
              </attribute>
              <attribute name="verticalHeaderShowSortIndicator" stdset="0">
               <bool>false</bool>
@@ -169,8 +169,8 @@
                </property>
                <property name="minimumSize">
                 <size>
-                 <width>0</width>
-                 <height>0</height>
+                 <width>25</width>
+                 <height>25</height>
                 </size>
                </property>
                <property name="toolTip">
@@ -185,14 +185,20 @@
                </property>
                <property name="iconSize">
                 <size>
-                 <width>22</width>
-                 <height>22</height>
+                 <width>16</width>
+                 <height>16</height>
                 </size>
                </property>
               </widget>
              </item>
              <item>
               <widget class="QToolButton" name="tbDeactivate">
+               <property name="minimumSize">
+                <size>
+                 <width>25</width>
+                 <height>25</height>
+                </size>
+               </property>
                <property name="statusTip">
                 <string>Deaktivieren des selektierten Mitarbeiters</string>
                </property>
@@ -205,14 +211,20 @@
                </property>
                <property name="iconSize">
                 <size>
-                 <width>22</width>
-                 <height>22</height>
+                 <width>16</width>
+                 <height>16</height>
                 </size>
                </property>
               </widget>
              </item>
              <item>
               <widget class="QToolButton" name="tbEmployeeDetails">
+               <property name="minimumSize">
+                <size>
+                 <width>25</width>
+                 <height>25</height>
+                </size>
+               </property>
                <property name="toolTip">
                 <string>Details des aktuell selektierten Mitarbeiters anzeigen und bearbeiten</string>
                </property>
@@ -225,8 +237,8 @@
                </property>
                <property name="iconSize">
                 <size>
-                 <width>22</width>
-                 <height>22</height>
+                 <width>16</width>
+                 <height>16</height>
                 </size>
                </property>
               </widget>
@@ -235,8 +247,8 @@
               <widget class="QToolButton" name="tbRevertChanges">
                <property name="minimumSize">
                 <size>
-                 <width>0</width>
-                 <height>0</height>
+                 <width>25</width>
+                 <height>25</height>
                 </size>
                </property>
                <property name="toolTip">
@@ -247,12 +259,12 @@
                </property>
                <property name="icon">
                 <iconset resource="../rcs/icons.qrc">
-                 <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
+                 <normaloff>:/icons/icons/sc_undo.png</normaloff>:/icons/icons/sc_undo.png</iconset>
                </property>
                <property name="iconSize">
                 <size>
-                 <width>22</width>
-                 <height>22</height>
+                 <width>16</width>
+                 <height>16</height>
                 </size>
                </property>
               </widget>
@@ -323,6 +335,12 @@
            <property name="selectionBehavior">
             <enum>QAbstractItemView::SelectRows</enum>
            </property>
+           <attribute name="verticalHeaderMinimumSectionSize">
+            <number>25</number>
+           </attribute>
+           <attribute name="verticalHeaderDefaultSectionSize">
+            <number>25</number>
+           </attribute>
           </widget>
          </item>
          <item>
@@ -331,8 +349,8 @@
             <widget class="QToolButton" name="tbEmployeeGroupsAdd">
              <property name="minimumSize">
               <size>
-               <width>0</width>
-               <height>0</height>
+               <width>25</width>
+               <height>25</height>
               </size>
              </property>
              <property name="toolTip">
@@ -343,12 +361,12 @@
              </property>
              <property name="icon">
               <iconset resource="../rcs/icons.qrc">
-               <normaloff>:/icons/icons/list-add.svg</normaloff>:/icons/icons/list-add.svg</iconset>
+               <normaloff>:/icons/icons/sc_add.png</normaloff>:/icons/icons/sc_add.png</iconset>
              </property>
              <property name="iconSize">
               <size>
-               <width>22</width>
-               <height>22</height>
+               <width>16</width>
+               <height>16</height>
               </size>
              </property>
             </widget>
@@ -357,8 +375,8 @@
             <widget class="QToolButton" name="tbEmployeeGroupsRemove">
              <property name="minimumSize">
               <size>
-               <width>0</width>
-               <height>0</height>
+               <width>25</width>
+               <height>25</height>
               </size>
              </property>
              <property name="toolTip">
@@ -369,12 +387,12 @@
              </property>
              <property name="icon">
               <iconset resource="../rcs/icons.qrc">
-               <normaloff>:/icons/icons/list-remove.svg</normaloff>:/icons/icons/list-remove.svg</iconset>
+               <normaloff>:/icons/icons/sc_delete.png</normaloff>:/icons/icons/sc_delete.png</iconset>
              </property>
              <property name="iconSize">
               <size>
-               <width>22</width>
-               <height>22</height>
+               <width>16</width>
+               <height>16</height>
               </size>
              </property>
             </widget>

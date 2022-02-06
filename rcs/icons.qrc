@@ -51,5 +51,12 @@
         <file>icons/lc_recsearch.png</file>
         <file>icons/sc_reload.png</file>
         <file>icons/sc_undo.png</file>
+        <file>icons/delete.png</file>
+        <file>icons/lc_delete.png</file>
+        <file>icons/sc_add.png</file>
+        <file>icons/sc_delete.png</file>
+        <file>icons/lc_quit.png</file>
+        <file>icons/quit.png</file>
+        <file>icons/sc_quit.png</file>
     </qresource>
 </RCC>
