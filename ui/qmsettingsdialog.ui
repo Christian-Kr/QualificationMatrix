@@ -53,6 +53,9 @@
        </item>
        <item>
         <widget class="QStackedWidget" name="swSettingGroups">
+         <property name="lineWidth">
+          <number>0</number>
+         </property>
          <property name="currentIndex">
           <number>-1</number>
          </property>
