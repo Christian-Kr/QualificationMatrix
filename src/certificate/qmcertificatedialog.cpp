@@ -141,7 +141,6 @@ void QMCertificateDialog::updateData()
 
     nameFilterModel->setSourceModel(certificateModel.get());
     nameFilterModel->setFilterKeyColumn(1);
-    nameFilterModel->sort(7, Qt::AscendingOrder);
 
     // Update the views. Only show name and type.
     ui->tvFiles->setModel(nameFilterModel);
@@ -151,7 +150,6 @@ void QMCertificateDialog::updateData()
     ui->tvFiles->hideColumn(4);
     ui->tvFiles->hideColumn(5);
     ui->tvFiles->setColumnWidth(1, 400);
-    ui->tvFiles->setSortingEnabled(true);
 
     resetFilter();
 }
