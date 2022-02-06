@@ -244,10 +244,9 @@ void QMQualiMatrixHeaderView::paintSection(QPainter *painter, const QRect &rect,
         else
         {
             auto trainGroupColor = trainGroupColorCache->value(
-                model()->headerData(logicalIndex, Qt::Orientation::Horizontal).toString(),
-                "no");
+                    model()->headerData(logicalIndex, Qt::Orientation::Horizontal).toString(), "");
 
-            if (trainGroupColor != "no")
+            if (!trainGroupColor.isEmpty())
             {
                 painter->setBrush(QBrush(QColor(trainGroupColor)));
                 painter->drawRect(rect);
@@ -257,36 +256,31 @@ void QMQualiMatrixHeaderView::paintSection(QPainter *painter, const QRect &rect,
 
         painter->setPen(QPen(QColor(Qt::black)));
 
+        // Draw an information if the training is legally necessary. For now, this is just a short text note.
         auto trainLegallyNecessary = trainLegallyNecessaryCache->value(
-            model()->headerData(logicalIndex, Qt::Orientation::Horizontal).toString(), false);
+                model()->headerData(logicalIndex, Qt::Orientation::Horizontal).toString(), false);
 
         if (trainLegallyNecessary)
         {
-            painter->setBrush(QBrush(QColor("#F0F0F0")));
-            painter->drawRect(rect.x(), rect.y(), rect.width(), 30);
-            painter->drawText(
-                rect.x() + 1, rect.y(), rect.width() - 2, 30, Qt::AlignCenter, tr("RN"));
-            painter->setBrush(QBrush(QColor(Qt::white)));
+            // painter->drawRect(rect.x() + 1, rect.y(), rect.width() - 2, rect.width() - 2);
+            painter->drawText(rect.x() + 1, rect.y(), rect.width() - 2, rect.width() - 2, Qt::AlignCenter, tr("RN"));
         }
 
+        // Draw the name of the training in the right direction.
         painter->translate(rect.x(), rect.y());
         painter->setFont(font);
 
         if (settings.read("QualiMatrix/TrainBottomTop", false).toBool())
         {
             painter->rotate(-90);
-            painter->drawText(
-                -1 * rect.height() + 10, 0, rect.height() - 50, rect.width(),
-                Qt::AlignVCenter,
-                model()->headerData(logicalIndex, Qt::Orientation::Horizontal).toString());
+            painter->drawText(-1 * rect.height() + 10, 0, rect.height() - 50, rect.width(),
+                    Qt::AlignVCenter, model()->headerData(logicalIndex, Qt::Orientation::Horizontal).toString());
         }
         else
         {
             painter->rotate(90);
-            painter->drawText(
-                40, -rect.width(), rect.height() - 20, rect.width(),
-                Qt::AlignVCenter,
-                model()->headerData(logicalIndex, Qt::Orientation::Horizontal).toString());
+            painter->drawText(40, -rect.width(), rect.height() - 20, rect.width(),
+                    Qt::AlignVCenter, model()->headerData(logicalIndex, Qt::Orientation::Horizontal).toString());
         }
     }
     else
@@ -302,10 +296,9 @@ void QMQualiMatrixHeaderView::paintSection(QPainter *painter, const QRect &rect,
         else
         {
             QString funcGroupColor = funcGroupColorCache->value(
-                model()->headerData(logicalIndex, Qt::Orientation::Vertical).toString(), "no"
-            );
+                    model()->headerData(logicalIndex, Qt::Orientation::Vertical).toString(), "");
 
-            if (funcGroupColor != "no")
+            if (!funcGroupColor.isEmpty())
             {
                 painter->setBrush(QBrush(QColor(funcGroupColor)));
                 painter->drawRect(rect);
@@ -317,9 +310,8 @@ void QMQualiMatrixHeaderView::paintSection(QPainter *painter, const QRect &rect,
 
         painter->translate(rect.x(), rect.y());
         painter->setFont(font);
-        painter->drawText(
-            10, 0, rect.width() - 1, rect.height(), Qt::AlignVCenter,
-            model()->headerData(logicalIndex, Qt::Orientation::Vertical).toString());
+        painter->drawText(10, 0, rect.width() - 1, rect.height(), Qt::AlignVCenter,
+                model()->headerData(logicalIndex, Qt::Orientation::Vertical).toString());
     }
 }
 
