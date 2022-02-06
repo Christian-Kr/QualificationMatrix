@@ -33,7 +33,7 @@
           <bool>false</bool>
          </property>
          <property name="indentation">
-          <number>0</number>
+          <number>20</number>
          </property>
          <property name="itemsExpandable">
           <bool>true</bool>
