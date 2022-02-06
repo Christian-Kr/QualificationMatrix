@@ -323,6 +323,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>leName</sender>
+   <signal>returnPressed()</signal>
+   <receiver>QMCertificateDialog</receiver>
+   <slot>filterNameReturnPressed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>400</x>
+     <y>44</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>447</x>
+     <y>334</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>addCertificate()</slot>
@@ -330,5 +346,6 @@
   <slot>showCertificate()</slot>
   <slot>updateFilter()</slot>
   <slot>resetFilter()</slot>
+  <slot>filterNameReturnPressed()</slot>
  </slots>
 </ui>

@@ -414,3 +414,9 @@ void QMCertificateDialog::removeCertificate()
     nameFilterModel->removeRow(row);
     certificateModel->submitAll();
 }
+
+void QMCertificateDialog::filterNameReturnPressed()
+{
+    updateFilter();
+    ui->leName->selectAll();
+}
