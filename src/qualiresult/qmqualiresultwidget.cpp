@@ -22,6 +22,7 @@
 #include "model/qmemployeeviewmodel.h"
 #include "model/qmtrainingdatastateviewmodel.h"
 #include "model/qmshiftviewmodel.h"
+#include "qualiresultreport/qmqualiresultreportdialog.h"
 
 #include <QSortFilterProxyModel>
 #include <QPrinter>
@@ -425,4 +426,11 @@ void QMQualiResultWidget::extSelTrainResultState()
     }
 
     ui->cbTrainResultState->setCurrentText(extSelDialog.getRegExpText());
+}
+
+void QMQualiResultWidget::showCreateReportDialog()
+{
+    QMQualiResultReportDialog createReportDialog(this);
+    createReportDialog.setModal(true);
+    createReportDialog.exec();
 }
