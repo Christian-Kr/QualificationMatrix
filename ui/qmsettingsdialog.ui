@@ -53,6 +53,9 @@
        </item>
        <item>
         <widget class="QStackedWidget" name="swSettingGroups">
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
+         </property>
          <property name="lineWidth">
           <number>0</number>
          </property>

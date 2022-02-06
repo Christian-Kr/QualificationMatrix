@@ -107,6 +107,7 @@ void QMSettingsDialog::appendConnectSettingsWidget(
     auto *scrollArea = new QScrollArea();
     scrollArea->setWidget(settingsWidget);
     scrollArea->setWidgetResizable(true);
+    scrollArea->setFrameStyle(QFrame::NoFrame);
 
     ui->swSettingGroups->addWidget(scrollArea);
     connect(settingsWidget, &QMSettingsWidget::settingsChanged, this,
