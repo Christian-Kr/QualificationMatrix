@@ -18,17 +18,23 @@
     <layout class="QGridLayout" name="gridLayout">
      <item row="1" column="1">
       <widget class="QToolButton" name="tbResetFilter">
+       <property name="minimumSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
        <property name="text">
         <string>...</string>
        </property>
        <property name="icon">
         <iconset resource="../rcs/icons.qrc">
-         <normaloff>:/icons/icons/edit-reset.svg</normaloff>:/icons/icons/edit-reset.svg</iconset>
+         <normaloff>:/icons/icons/lc_undo.png</normaloff>:/icons/icons/lc_undo.png</iconset>
        </property>
        <property name="iconSize">
         <size>
-         <width>22</width>
-         <height>22</height>
+         <width>16</width>
+         <height>16</height>
         </size>
        </property>
       </widget>
@@ -41,6 +47,12 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>25</height>
+        </size>
+       </property>
       </widget>
      </item>
      <item row="0" column="0">
@@ -52,17 +64,23 @@
      </item>
      <item row="1" column="2">
       <widget class="QToolButton" name="tbFilter">
+       <property name="minimumSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
        <property name="text">
         <string>...</string>
        </property>
        <property name="icon">
         <iconset resource="../rcs/icons.qrc">
-         <normaloff>:/icons/icons/view-filter.svg</normaloff>:/icons/icons/view-filter.svg</iconset>
+         <normaloff>:/icons/icons/lc_recsearch.png</normaloff>:/icons/icons/lc_recsearch.png</iconset>
        </property>
        <property name="iconSize">
         <size>
-         <width>22</width>
-         <height>22</height>
+         <width>16</width>
+         <height>16</height>
         </size>
        </property>
       </widget>
@@ -73,40 +91,58 @@
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
       <widget class="QToolButton" name="tbAdd">
+       <property name="minimumSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
        <property name="text">
         <string>...</string>
        </property>
        <property name="icon">
         <iconset resource="../rcs/icons.qrc">
-         <normaloff>:/icons/icons/list-add.svg</normaloff>:/icons/icons/list-add.svg</iconset>
+         <normaloff>:/icons/icons/sc_add.png</normaloff>:/icons/icons/sc_add.png</iconset>
        </property>
        <property name="iconSize">
         <size>
-         <width>22</width>
-         <height>22</height>
+         <width>16</width>
+         <height>16</height>
         </size>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QToolButton" name="tbRemove">
+       <property name="minimumSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
        <property name="text">
         <string>...</string>
        </property>
        <property name="icon">
         <iconset resource="../rcs/icons.qrc">
-         <normaloff>:/icons/icons/list-remove.svg</normaloff>:/icons/icons/list-remove.svg</iconset>
+         <normaloff>:/icons/icons/sc_delete.png</normaloff>:/icons/icons/sc_delete.png</iconset>
        </property>
        <property name="iconSize">
         <size>
-         <width>22</width>
-         <height>22</height>
+         <width>16</width>
+         <height>16</height>
         </size>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QToolButton" name="tbShowCertificate">
+       <property name="minimumSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
        <property name="text">
         <string>...</string>
        </property>
@@ -116,8 +152,8 @@
        </property>
        <property name="iconSize">
         <size>
-         <width>22</width>
-         <height>22</height>
+         <width>16</width>
+         <height>16</height>
         </size>
        </property>
       </widget>
@@ -145,6 +181,12 @@
      <property name="selectionBehavior">
       <enum>QAbstractItemView::SelectRows</enum>
      </property>
+     <attribute name="verticalHeaderMinimumSectionSize">
+      <number>25</number>
+     </attribute>
+     <attribute name="verticalHeaderDefaultSectionSize">
+      <number>25</number>
+     </attribute>
     </widget>
    </item>
    <item row="2" column="0" colspan="2">
@@ -281,6 +323,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>leName</sender>
+   <signal>returnPressed()</signal>
+   <receiver>QMCertificateDialog</receiver>
+   <slot>filterNameReturnPressed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>400</x>
+     <y>44</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>447</x>
+     <y>334</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>addCertificate()</slot>
@@ -288,5 +346,6 @@
   <slot>showCertificate()</slot>
   <slot>updateFilter()</slot>
   <slot>resetFilter()</slot>
+  <slot>filterNameReturnPressed()</slot>
  </slots>
 </ui>

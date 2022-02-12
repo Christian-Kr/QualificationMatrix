@@ -46,6 +46,9 @@ public:
     ~QMQualiResultWidget() override;
 
 public slots:
+    /// Show a dialog to create a report from qualification result.
+    void showCreateReportDialog();
+
     /// Prints the qualification result to a pdf certificate.
     void printToPDF();
 

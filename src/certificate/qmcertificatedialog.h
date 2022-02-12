@@ -66,6 +66,9 @@ public:
     QString getSelectedName() { return selectedName; }
 
 public slots:
+    /// Return has been pressed inside the filter name.
+    void filterNameReturnPressed();
+
     /// Add a new certificate.
     void addCertificate();
 

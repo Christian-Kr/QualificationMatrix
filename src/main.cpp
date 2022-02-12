@@ -160,12 +160,11 @@ void initApplicationTranslation()
     installTranslator("qtbase_" + lang, QLibraryInfo::path(QLibraryInfo::TranslationsPath));
 }
 
-/// Take all messages coming from qWarning, qDebug etc. and write them into a log certificate. In general, all message
-/// will be written into a log certificate. If this log certificate is not writeable, the message will be printed on
+/// Take all messages coming from qWarning, qDebug etc. and write them into a log file. In general, all message
+/// will be written into a log file. If this log file is not writeable, the message will be printed on
 /// stdout. Debug messages will always only be printed on stdout.
 ///
-/// The certificate file will be create in user directory, to be readable and
-/// individual by every user.
+/// The log file will be create in user directory, to be readable and individual by every user.
 ///
 /// \param type The message type (debug, warning etc.).
 /// \param msg The message to display/log.

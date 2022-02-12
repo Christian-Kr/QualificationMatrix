@@ -33,6 +33,12 @@
    </item>
    <item row="3" column="0">
     <widget class="QDialogButtonBox" name="bbProgress">
+     <property name="minimumSize">
+      <size>
+       <width>100</width>
+       <height>25</height>
+      </size>
+     </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>

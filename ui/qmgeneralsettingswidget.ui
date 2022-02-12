@@ -40,7 +40,7 @@
        <property name="minimumSize">
         <size>
          <width>200</width>
-         <height>0</height>
+         <height>25</height>
         </size>
        </property>
       </widget>
@@ -86,7 +86,7 @@
        <property name="minimumSize">
         <size>
          <width>200</width>
-         <height>0</height>
+         <height>25</height>
         </size>
        </property>
       </widget>
@@ -164,10 +164,23 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="leCentralizedSettingsFile"/>
+         <widget class="QLineEdit" name="leCentralizedSettingsFile">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>25</height>
+           </size>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QPushButton" name="pbChooseCentralizedSettingsFile">
+          <property name="minimumSize">
+           <size>
+            <width>100</width>
+            <height>25</height>
+           </size>
+          </property>
           <property name="text">
            <string>Auswählen</string>
           </property>
@@ -229,10 +242,23 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="leBackupPath"/>
+         <widget class="QLineEdit" name="leBackupPath">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>25</height>
+           </size>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QPushButton" name="pbChoosePath">
+          <property name="minimumSize">
+           <size>
+            <width>100</width>
+            <height>25</height>
+           </size>
+          </property>
           <property name="text">
            <string>Auswählen</string>
           </property>
@@ -269,7 +295,7 @@
           <property name="minimumSize">
            <size>
             <width>100</width>
-            <height>0</height>
+            <height>25</height>
            </size>
           </property>
          </widget>

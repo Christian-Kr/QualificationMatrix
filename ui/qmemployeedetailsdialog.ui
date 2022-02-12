@@ -65,8 +65,8 @@
           <widget class="QToolButton" name="tbAddFunc">
            <property name="minimumSize">
             <size>
-             <width>0</width>
-             <height>0</height>
+             <width>25</width>
+             <height>25</height>
             </size>
            </property>
            <property name="toolTip">
@@ -77,12 +77,12 @@
            </property>
            <property name="icon">
             <iconset resource="../rcs/icons.qrc">
-             <normaloff>:/icons/icons/list-add.svg</normaloff>:/icons/icons/list-add.svg</iconset>
+             <normaloff>:/icons/icons/sc_add.png</normaloff>:/icons/icons/sc_add.png</iconset>
            </property>
            <property name="iconSize">
             <size>
-             <width>26</width>
-             <height>26</height>
+             <width>16</width>
+             <height>16</height>
             </size>
            </property>
           </widget>
@@ -91,8 +91,8 @@
           <widget class="QToolButton" name="tbRemoveFunc">
            <property name="minimumSize">
             <size>
-             <width>0</width>
-             <height>0</height>
+             <width>25</width>
+             <height>25</height>
             </size>
            </property>
            <property name="toolTip">
@@ -103,12 +103,12 @@
            </property>
            <property name="icon">
             <iconset resource="../rcs/icons.qrc">
-             <normaloff>:/icons/icons/list-remove.svg</normaloff>:/icons/icons/list-remove.svg</iconset>
+             <normaloff>:/icons/icons/sc_delete.png</normaloff>:/icons/icons/sc_delete.png</iconset>
            </property>
            <property name="iconSize">
             <size>
-             <width>26</width>
-             <height>26</height>
+             <width>16</width>
+             <height>16</height>
             </size>
            </property>
           </widget>
@@ -142,7 +142,6 @@
      </property>
      <property name="font">
       <font>
-       <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
@@ -182,7 +181,6 @@
      </property>
      <property name="font">
       <font>
-       <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
@@ -255,8 +253,8 @@
            </property>
            <property name="minimumSize">
             <size>
-             <width>0</width>
-             <height>0</height>
+             <width>25</width>
+             <height>25</height>
             </size>
            </property>
            <property name="toolTip">
@@ -267,12 +265,12 @@
            </property>
            <property name="icon">
             <iconset resource="../rcs/icons.qrc">
-             <normaloff>:/icons/icons/list-add.svg</normaloff>:/icons/icons/list-add.svg</iconset>
+             <normaloff>:/icons/icons/sc_add.png</normaloff>:/icons/icons/sc_add.png</iconset>
            </property>
            <property name="iconSize">
             <size>
-             <width>26</width>
-             <height>26</height>
+             <width>16</width>
+             <height>16</height>
             </size>
            </property>
           </widget>
@@ -287,8 +285,8 @@
            </property>
            <property name="minimumSize">
             <size>
-             <width>0</width>
-             <height>0</height>
+             <width>25</width>
+             <height>25</height>
             </size>
            </property>
            <property name="toolTip">
@@ -299,12 +297,12 @@
            </property>
            <property name="icon">
             <iconset resource="../rcs/icons.qrc">
-             <normaloff>:/icons/icons/list-remove.svg</normaloff>:/icons/icons/list-remove.svg</iconset>
+             <normaloff>:/icons/icons/sc_delete.png</normaloff>:/icons/icons/sc_delete.png</iconset>
            </property>
            <property name="iconSize">
             <size>
-             <width>26</width>
-             <height>26</height>
+             <width>16</width>
+             <height>16</height>
             </size>
            </property>
           </widget>

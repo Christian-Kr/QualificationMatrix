@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>381</width>
-    <height>173</height>
+    <height>195</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -28,6 +28,12 @@
      </item>
      <item>
       <widget class="QLineEdit" name="leUsername">
+       <property name="minimumSize">
+        <size>
+         <width>30</width>
+         <height>25</height>
+        </size>
+       </property>
        <property name="echoMode">
         <enum>QLineEdit::Normal</enum>
        </property>
@@ -49,6 +55,12 @@
      </item>
      <item>
       <widget class="QLineEdit" name="lePassword">
+       <property name="minimumSize">
+        <size>
+         <width>30</width>
+         <height>25</height>
+        </size>
+       </property>
        <property name="echoMode">
         <enum>QLineEdit::Password</enum>
        </property>
@@ -95,7 +107,7 @@
        <property name="minimumSize">
         <size>
          <width>100</width>
-         <height>0</height>
+         <height>25</height>
         </size>
        </property>
        <property name="text">
@@ -111,7 +123,7 @@
        <property name="minimumSize">
         <size>
          <width>100</width>
-         <height>0</height>
+         <height>25</height>
         </size>
        </property>
        <property name="text">

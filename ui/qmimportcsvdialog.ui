@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>756</width>
-    <height>581</height>
+    <height>567</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -29,9 +29,9 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>-353</y>
+        <y>0</y>
         <width>721</width>
-        <height>880</height>
+        <height>626</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_4">
@@ -65,7 +65,14 @@
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QComboBox" name="cbDefaultEmployeeGroup"/>
+           <widget class="QComboBox" name="cbDefaultEmployeeGroup">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>25</height>
+             </size>
+            </property>
+           </widget>
           </item>
           <item row="1" column="0" colspan="2">
            <widget class="QLabel" name="label_7">
@@ -182,10 +189,23 @@ color: rgb(115, 115, 115);</string>
            </widget>
           </item>
           <item row="1" column="0">
-           <widget class="QLineEdit" name="leBackupFile"/>
+           <widget class="QLineEdit" name="leBackupFile">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>25</height>
+             </size>
+            </property>
+           </widget>
           </item>
           <item row="1" column="1">
            <widget class="QPushButton" name="pbOpenBackupFile">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>25</height>
+             </size>
+            </property>
             <property name="text">
              <string>Auswählen</string>
             </property>
@@ -196,6 +216,12 @@ color: rgb(115, 115, 115);</string>
        </item>
        <item row="1" column="1">
         <widget class="QPushButton" name="pbOpenImportFile">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>25</height>
+          </size>
+         </property>
          <property name="text">
           <string>Auswählen</string>
          </property>
@@ -224,7 +250,14 @@ color: rgb(115, 115, 115);</string>
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QComboBox" name="cbDefaultTrainGroup"/>
+           <widget class="QComboBox" name="cbDefaultTrainGroup">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>25</height>
+             </size>
+            </property>
+           </widget>
           </item>
           <item row="1" column="0">
            <widget class="QLabel" name="label_4">
@@ -234,7 +267,14 @@ color: rgb(115, 115, 115);</string>
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QSpinBox" name="sbDefaultTrainInterval"/>
+           <widget class="QSpinBox" name="sbDefaultTrainInterval">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>25</height>
+             </size>
+            </property>
+           </widget>
           </item>
           <item row="2" column="0" colspan="2">
            <widget class="QLabel" name="label_8">
@@ -319,7 +359,14 @@ color: rgb(115, 115, 115);</string>
         </layout>
        </item>
        <item row="1" column="0">
-        <widget class="QLineEdit" name="leImportFile"/>
+        <widget class="QLineEdit" name="leImportFile">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>25</height>
+          </size>
+         </property>
+        </widget>
        </item>
        <item row="8" column="0" colspan="2">
         <widget class="QLabel" name="label_10">

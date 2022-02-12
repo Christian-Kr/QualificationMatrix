@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>QMQualiResultReportDialog</class>
+ <widget class="QDialog" name="QMQualiResultReportDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>696</width>
+    <height>572</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Schulungsbericht erstellen</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QScrollArea" name="scrollArea">
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="scrollAreaWidgetContents">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>678</width>
+        <height>521</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <property name="spacing">
+          <number>20</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>Zeitpunkt der Betrachtung</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <widget class="QDateEdit" name="deUntil">
+             <property name="minimumSize">
+              <size>
+               <width>100</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="calendarPopup">
+              <bool>true</bool>
+             </property>
+             <property name="currentSectionIndex">
+              <number>0</number>
+             </property>
+             <property name="date">
+              <date>
+               <year>2022</year>
+               <month>1</month>
+               <day>1</day>
+              </date>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="0">
+        <widget class="QGroupBox" name="gbTraining">
+         <property name="title">
+          <string/>
+         </property>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="2" column="1">
+           <widget class="QPushButton" name="pbAddTraining">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Schulungen hinzufügen</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QPushButton" name="pbResetTrainings">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Zurücksetzen</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../rcs/icons.qrc">
+              <normaloff>:/icons/icons/sc_undo.png</normaloff>:/icons/icons/sc_undo.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QPushButton" name="pbAddFromTrainingGroup">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Gruppen hinzufügen</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QPushButton" name="pbRemoveTraining">
+            <property name="text">
+             <string>Schulungen entfernen</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0" colspan="2">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Einzelne Schulungen</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="1">
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>33</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="6" column="1">
+           <widget class="QPushButton" name="pbRemoveSelectedTrainings">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="layoutDirection">
+             <enum>Qt::LeftToRight</enum>
+            </property>
+            <property name="text">
+             <string>Selektierte entfernen</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QPushButton" name="pbRemoveFromTrainingGroup">
+            <property name="text">
+             <string>Gruppen entfernen</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" rowspan="7">
+           <widget class="QListWidget" name="lwTrainings">
+            <property name="selectionMode">
+             <enum>QAbstractItemView::MultiSelection</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pbCreateReport">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Erstellen</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pbClose">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Schließen</string>
+       </property>
+       <property name="default">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../rcs/icons.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>pbClose</sender>
+   <signal>clicked()</signal>
+   <receiver>QMQualiResultReportDialog</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>498</x>
+     <y>549</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>279</x>
+     <y>285</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbResetTrainings</sender>
+   <signal>clicked()</signal>
+   <receiver>QMQualiResultReportDialog</receiver>
+   <slot>resetTrainingList()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>470</x>
+     <y>97</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>279</x>
+     <y>285</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbAddTraining</sender>
+   <signal>clicked()</signal>
+   <receiver>QMQualiResultReportDialog</receiver>
+   <slot>addTrainings()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>470</x>
+     <y>128</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>279</x>
+     <y>285</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbAddFromTrainingGroup</sender>
+   <signal>clicked()</signal>
+   <receiver>QMQualiResultReportDialog</receiver>
+   <slot>addFromTrainingGroups()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>470</x>
+     <y>159</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>279</x>
+     <y>285</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbRemoveFromTrainingGroup</sender>
+   <signal>clicked()</signal>
+   <receiver>QMQualiResultReportDialog</receiver>
+   <slot>removeFromTrainingGroups()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>470</x>
+     <y>219</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>279</x>
+     <y>285</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbRemoveSelectedTrainings</sender>
+   <signal>clicked()</signal>
+   <receiver>QMQualiResultReportDialog</receiver>
+   <slot>removeSelectedTrainings()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>470</x>
+     <y>250</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>279</x>
+     <y>285</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbRemoveTraining</sender>
+   <signal>clicked()</signal>
+   <receiver>QMQualiResultReportDialog</receiver>
+   <slot>removeTrainings()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>470</x>
+     <y>189</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>279</x>
+     <y>285</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>resetTrainingList()</slot>
+  <slot>addTrainings()</slot>
+  <slot>addFromTrainingGroups()</slot>
+  <slot>removeTrainings()</slot>
+  <slot>removeFromTrainingGroups()</slot>
+  <slot>removeSelectedTrainings()</slot>
+ </slots>
+</ui>

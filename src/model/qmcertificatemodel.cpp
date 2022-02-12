@@ -27,6 +27,10 @@ QMCertificateModel::QMCertificateModel(QObject *parent, QSqlDatabase db)
     setHeaderData(2, Qt::Horizontal, tr("Typ"));
     setHeaderData(3, Qt::Horizontal, tr("Pfad"));
     setHeaderData(6, Qt::Horizontal, tr("Hinzugefügt"));
+
+    // Most of the time people add a new certificate and want to use it directly. So sorting by add date rather than
+    // training might be a good choice for the default setup.
     setSort(6, Qt::DescendingOrder);
+
     setHeaderData(7, Qt::Horizontal, tr("Schulungstag"));
 }
