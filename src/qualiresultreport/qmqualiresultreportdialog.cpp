@@ -18,9 +18,14 @@
 #include "model/qmtrainingviewmodel.h"
 #include "model/qmtraininggroupviewmodel.h"
 #include "settings/qmapplicationsettings.h"
+#include "framework/qmextendedselectiondialog.h"
+
+#include <QSortFilterProxyModel>
+#include <QDebug>
 
 QMQualiResultReportDialog::QMQualiResultReportDialog(QWidget *parent)
     : QMDialog(parent)
+    , trainList(std::make_unique<QHash<int, QString>>())
 {
     ui = new Ui::QMQualiResultReportDialog;
     ui->setupUi(this);
@@ -38,10 +43,11 @@ QMQualiResultReportDialog::~QMQualiResultReportDialog()
 void QMQualiResultReportDialog::saveSettings()
 {
     auto &settings = QMApplicationSettings::getInstance();
+}
 
-    // Window settings.
-    settings.write("QualiResultReportDialog/Width", width());
-    settings.write("QualiResultReportDialog/Height", height());
+void QMQualiResultReportDialog::loadSettings()
+{
+    auto &settings = QMApplicationSettings::getInstance();
 }
 
 void QMQualiResultReportDialog::updateData()
@@ -64,11 +70,172 @@ void QMQualiResultReportDialog::updateData()
 
     trainGroupViewModel = std::make_unique<QMTrainingGroupViewModel>(this, db);
     trainGroupViewModel->select();
+}
 
-    // Set ui elements.
-    ui->lvEmployees->setModel(employeeViewModel.get());
-    ui->lvEmployees->setModelColumn(1);
+void QMQualiResultReportDialog::createReport()
+{
+    // TODO: Create report.
 
-    ui->lvTrainings->setModel(trainViewModel.get());
-    ui->lvTrainings->setModelColumn(1);
+    //
+}
+
+void QMQualiResultReportDialog::addTrainings()
+{
+    // Get the training from selection dialog.
+    QMExtendedSelectionDialog extSelDialog(this, trainViewModel.get(), 1);
+    extSelDialog.exec();
+
+    QModelIndexList selIndexList = extSelDialog.getFilterSelected();
+    QSortFilterProxyModel *trainFilterModel = extSelDialog.getFilterModel();
+
+    if (!extSelDialog.isReverse())
+    {
+        for (int i = 0; i < selIndexList.size(); i++)
+        {
+            QModelIndex modelIndex = selIndexList.at(i);
+
+            // Get the name of the training, which should be the filter column that has been choosen before.
+            auto trainName = trainFilterModel->data(
+                    trainFilterModel->index(modelIndex.row(), trainFilterModel->filterKeyColumn())).toString();
+
+            // Get the primary key id as an hash value. This value should always be unique.
+            auto trainPrimaryId = trainFilterModel->data(trainFilterModel->index(modelIndex.row(), 0)).toInt();
+
+            if (!trainList->contains(trainPrimaryId))
+            {
+                trainList->insert(trainPrimaryId, trainName);
+                ui->lwTrainings->addItem(trainName);
+            }
+        }
+    }
+    else
+    {
+        // Create a temporary hash list for selection.
+        QHash<int, QString> tmpHash;
+
+        for (int i = 0; i < selIndexList.size(); i++)
+        {
+            QModelIndex modelIndex = selIndexList.at(i);
+
+            // Get the name of the training, which should be the filter column that has been choosen before.
+            auto trainName = trainFilterModel->data(
+                    trainFilterModel->index(modelIndex.row(), trainFilterModel->filterKeyColumn())).toString();
+
+            // Get the primary key id as an hash value. This value should always be unique.
+            auto trainPrimaryId = trainFilterModel->data(trainFilterModel->index(modelIndex.row(), 0)).toInt();
+
+            if (!tmpHash.contains(trainPrimaryId))
+            {
+                tmpHash.insert(trainPrimaryId, trainName);
+            }
+        }
+
+        // Go through every training and add just the ones, that are not selected and not already inserted.
+        for (int i = 0; i < trainViewModel->rowCount(); i++)
+        {
+            // Get the name of the training.
+            auto trainName = trainViewModel->data(trainViewModel->index(i, 1)).toString();
+
+            // Get the primary key id as an hash value. This value should always be unique.
+            auto trainPrimaryId = trainViewModel->data(trainViewModel->index(i, 0)).toInt();
+
+            if (!tmpHash.contains(trainPrimaryId) && !trainList->contains(trainPrimaryId))
+            {
+                trainList->insert(trainPrimaryId, trainName);
+                ui->lwTrainings->addItem(trainName);
+            }
+        }
+    }
+}
+
+void QMQualiResultReportDialog::addFromTrainingGroups()
+{
+    // Get the training group from selection dialog.
+    QMExtendedSelectionDialog extSelDialog(this, trainGroupViewModel.get(), 1);
+    extSelDialog.exec();
+
+    QModelIndexList selIndexList = extSelDialog.getFilterSelected();
+    QSortFilterProxyModel *trainGroupFilterModel = extSelDialog.getFilterModel();
+
+    if (!extSelDialog.isReverse())
+    {
+        // Create a temporary hash list for selection.
+        QHash<QString, int> tmpHash;
+
+        for (int i = 0; i < selIndexList.size(); i++)
+        {
+            QModelIndex modelIndex = selIndexList.at(i);
+
+            // Get the name of the training, which should be the filter column that has been choosen before.
+            auto trainGroupName = trainGroupFilterModel->data(
+                    trainGroupFilterModel->index(modelIndex.row(),
+                            trainGroupFilterModel->filterKeyColumn())).toString();
+
+            // Get the primary key id as an hash value. This value should always be unique.
+            auto trainGroupPrimaryId = trainGroupFilterModel->data(
+                    trainGroupFilterModel->index(modelIndex.row(), 0)).toInt();
+
+            if (!tmpHash.contains(trainGroupName))
+            {
+                tmpHash.insert(trainGroupName, trainGroupPrimaryId);
+            }
+        }
+
+        // Go through every training and add just the ones, that are not selected and not already inserted.
+        for (int i = 0; i < trainViewModel->rowCount(); i++)
+        {
+            // Get the name of the training.
+            auto trainName = trainViewModel->data(trainViewModel->index(i, 1)).toString();
+
+            // Get the primary key id as an hash value. This value should always be unique.
+            auto trainPrimaryId = trainViewModel->data(trainViewModel->index(i, 0)).toInt();
+
+            // Get the group name.
+            auto trainGroupName = trainViewModel->data(trainViewModel->index(i, 2)).toString();
+
+            if (tmpHash.contains(trainGroupName) && !trainList->contains(trainPrimaryId))
+            {
+                trainList->insert(trainPrimaryId, trainName);
+                ui->lwTrainings->addItem(trainName);
+            }
+        }
+    }
+//    else
+//    {
+//        // Create a temporary hash list for selection.
+//        QHash<int, QString> tmpHash;
+
+//        for (int i = 0; i < selIndexList.size(); i++)
+//        {
+//            QModelIndex modelIndex = selIndexList.at(i);
+
+//            // Get the name of the training, which should be the filter column that has been choosen before.
+//            auto trainName = trainFilterModel->data(
+//                    trainFilterModel->index(modelIndex.row(), trainFilterModel->filterKeyColumn())).toString();
+
+//            // Get the primary key id as an hash value. This value should always be unique.
+//            auto trainPrimaryId = trainFilterModel->data(trainFilterModel->index(modelIndex.row(), 0)).toInt();
+
+//            if (!tmpHash.contains(trainPrimaryId))
+//            {
+//                tmpHash.insert(trainPrimaryId, trainName);
+//            }
+//        }
+
+//        // Go through every training and add just the ones, that are not selected and not already inserted.
+//        for (int i = 0; i < trainViewModel->rowCount(); i++)
+//        {
+//            // Get the name of the training.
+//            auto trainName = trainViewModel->data(trainViewModel->index(i, 1)).toString();
+
+//            // Get the primary key id as an hash value. This value should always be unique.
+//            auto trainPrimaryId = trainViewModel->data(trainViewModel->index(i, 0)).toInt();
+
+//            if (!tmpHash.contains(trainPrimaryId) && !trainList->contains(trainPrimaryId))
+//            {
+//                trainList->insert(trainPrimaryId, trainName);
+//                ui->lwTrainings->addItem(trainName);
+//            }
+//        }
+//    }
 }

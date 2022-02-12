@@ -47,7 +47,19 @@ public:
     /// Override from QMDialog.
     void saveSettings() override;
 
+    /// Override from QDialog.
+    void loadSettings() override;
+
 public slots:
+    /// Add all selected trainings.
+    void addTrainings();
+
+    /// Add all trainings from selected training groups.
+    void addFromTrainingGroups();
+
+    /// Create the report.
+    void createReport();
+
     /// Update data (models).
     void updateData();
 
@@ -58,6 +70,8 @@ private:
     std::unique_ptr<QSqlTableModel> shiftViewModel;
     std::unique_ptr<QSqlTableModel> trainViewModel;
     std::unique_ptr<QSqlTableModel> trainGroupViewModel;
+
+    std::unique_ptr<QHash<int, QString>> trainList;
 };
 
 #endif // QMQUALIRESULTREPORTDIALOG_H
