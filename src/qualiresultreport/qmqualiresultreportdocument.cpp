@@ -12,15 +12,19 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 #include "qmqualiresultreportdocument.h"
+#include "ams/qmamsmanager.h"
+#include "qmqualiresultreportitem.h"
+#include "settings/qmapplicationsettings.h"
 
 #include <QTextTable>
 #include <QTextLength>
+#include <QDate>
 
 QMQualiResultReportDocument::QMQualiResultReportDocument(QObject *parent)
     : QTextDocument(parent)
 {}
 
-void QMQualiResultReportDocument::createDocument()
+void QMQualiResultReportDocument::createDocument(QList<QMQualiResultReportItem> &resultItems, QDate date)
 {
     QTextCursor cursor(this);
 
@@ -32,196 +36,115 @@ void QMQualiResultReportDocument::createDocument()
     QTextTable *headerTable = cursor.insertTable(1, 1);
 
     QTextTableFormat tableHeaderFormat = headerTable->format();
-    tableHeaderFormat.setCellPadding(10);
+    tableHeaderFormat.setCellPadding(0);
     tableHeaderFormat.setBorderStyle(QTextFrameFormat::BorderStyle_None);
     tableHeaderFormat.setWidth(QTextLength(QTextLength::PercentageLength, 100));
     headerTable->setFormat(tableHeaderFormat);
 
-    // Build header table.
-    QTextTable *table = cursor.insertTable(4, 3);
-    table->mergeCells(0, 0, 4, 2);
+    QTextCharFormat textFormat;
+    textFormat.setFontPointSize(10);
+    textFormat.setFontWeight(QFont::Bold);
+    cursor.insertText(tr("Schulungsbericht"), textFormat);
+    cursor.movePosition(QTextCursor::NextBlock);
 
-    QTextTableFormat tableFormat = table->format();
-    tableFormat.setCellPadding(2);
-    tableFormat.setBorderStyle(QTextFrameFormat::BorderStyle_None);
-    tableFormat.setWidth(QTextLength(QTextLength::PercentageLength, 100));
-    table->setFormat(tableFormat);
+    QTextTable *headerInfoTable = cursor.insertTable(3, 2);
+    tableHeaderFormat.setCellPadding(0);
+    tableHeaderFormat.setWidth(QTextLength(QTextLength::PercentageLength, 80));
+    headerInfoTable->setFormat(tableHeaderFormat);
 
-    // Fill header table with text.
-//    cursor.insertImage(imagePath);
-//    cursor.movePosition(QTextCursor::NextCell);
-//    cursor.insertText(tr("Unterweisung am: %1").arg(date.toString("dd.MM.yyyy")));
-//    cursor.movePosition(QTextCursor::NextCell);
-//    cursor.insertText(tr("Organisation: %1").arg(organisation));
-//    cursor.movePosition(QTextCursor::NextCell);
-//    cursor.insertText(tr("Unterweisender: %1").arg(trainer));
-//    cursor.movePosition(QTextCursor::NextCell);
-//    cursor.insertText(tr("Unterschrift:"));
-//    cursor.movePosition(QTextCursor::NextBlock);
-//    cursor.movePosition(QTextCursor::NextBlock);
+    textFormat.setFontPointSize(10);
+    textFormat.setFontWeight(QFont::Normal);
+    cursor.insertText(tr("Ersteller:"), textFormat);
+    cursor.movePosition(QTextCursor::NextCell);
+    cursor.insertText(QMAMSManager::getInstance()->getLoginFullName(), textFormat);
 
-//    QTextCharFormat textHeaderFormat;
-//    textHeaderFormat.setFontPointSize(16);
-//    cursor.insertText(tr("Unterweisungsprotokoll"), textHeaderFormat);
-//    cursor.movePosition(QTextCursor::NextBlock);
-//    cursor.insertHtml("<br>");
+    cursor.movePosition(QTextCursor::NextCell);
+    cursor.insertText(tr("Datum - Betrachtung:"), textFormat);
+    cursor.movePosition(QTextCursor::NextCell);
+    cursor.insertText(date.toString("dd.MM.yyyy"), textFormat);
 
-//    // Build info table.
-//    cursor.movePosition(QTextCursor::NextBlock);
-//    QTextTable *infoTable = cursor.insertTable(2, 2);
+    cursor.movePosition(QTextCursor::NextCell);
+    cursor.insertText(tr("Datum - Erstellung:"), textFormat);
+    cursor.movePosition(QTextCursor::NextCell);
+    cursor.insertText(QDate::currentDate().toString("dd.MM.yyyy"), textFormat);
+    cursor.movePosition(QTextCursor::NextBlock);
+    cursor.insertHtml("<br><br>");
 
-//    QTextTableFormat infoTableFormat = table->format();
-//    infoTableFormat.setCellPadding(2);
-//    infoTableFormat.setCellSpacing(5);
-//    infoTableFormat.setBorder(0.5);
-//    infoTableFormat.setBorderStyle(QTextFrameFormat::BorderStyle_None);
-//    infoTableFormat.setWidth(QTextLength(QTextLength::PercentageLength, 100));
-//    infoTableFormat.setColumnWidthConstraints({
-//        QTextLength(QTextLength::PercentageLength, 15),
-//        QTextLength(QTextLength::PercentageLength, 85)});
-//    infoTable->setFormat(infoTableFormat);
+    QTextTable *contentTable = cursor.insertTable((int) resultItems.size() + 1, 3);
+    tableHeaderFormat.setWidth(QTextLength(QTextLength::PercentageLength, 100));
+    contentTable->setFormat(tableHeaderFormat);
 
-//    // Fill header table with text.
-//    QTextCharFormat textFormat;
-//    textFormat.setFontPointSize(12);
-//    cursor.insertText(tr("Thema: "), textFormat);
-//    cursor.movePosition(QTextCursor::NextCell);
+    QTextTableFormat contentTableFormat = contentTable->format();
+    contentTableFormat.setCellPadding(5);
+    contentTableFormat.setCellSpacing(0);
+    contentTableFormat.setBorderStyle(QTextFrameFormat::BorderStyle_Solid);
+    contentTableFormat.setWidth(QTextLength(QTextLength::PercentageLength, 100));
+    contentTableFormat.setColumnWidthConstraints({QTextLength(QTextLength::PercentageLength, 7),
+            QTextLength(QTextLength::PercentageLength, 78),
+            QTextLength(QTextLength::PercentageLength, 15)});
+    contentTable->setFormat(contentTableFormat);
 
-//    cursor.insertText(train, textFormat);
-//    cursor.movePosition(QTextCursor::NextCell);
+    cursor.insertText(tr("Nr."), textFormat);
+    cursor.movePosition(QTextCursor::NextCell);
 
-//    textFormat.setFontPointSize(10);
-//    cursor.insertText(tr("Inhalte: "), textFormat);
-//    cursor.movePosition(QTextCursor::NextCell);
+    cursor.insertText(tr("Schulungsname"), textFormat);
+    cursor.movePosition(QTextCursor::NextCell);
 
-//    cursor.insertText(contents, textFormat);
-//    cursor.movePosition(QTextCursor::NextCell);
+    cursor.insertText(tr("Ergebnis"), textFormat);
+    cursor.movePosition(QTextCursor::NextCell);
 
-//    // Format table cells.
-//    QTextCharFormat format = table->cellAt(0, 0).format();
-//    format.setBackground(QColor("#d9d9d9"));
+    textFormat.setBackground(QColor("#d9d9d9"));
+    contentTable->cellAt(0, 0).setFormat(textFormat);
+    contentTable->cellAt(0, 1).setFormat(textFormat);
+    contentTable->cellAt(0, 2).setFormat(textFormat);
 
-//    // Build info table.
-//    cursor.movePosition(QTextCursor::NextBlock);
-//    cursor.insertHtml("<br><br>");
-//    cursor.movePosition(QTextCursor::NextBlock);
-//    QTextTable *employeeTable = cursor.insertTable(employees.size() + 1 + emptyEmployees, 4);
+    textFormat.setFontWeight(QFont::Normal);
+    textFormat.setBackground(QColor(Qt::white));
+    textFormat.setFontPointSize(8);
 
-//    QTextTableFormat employeeTableFormat = employeeTable->format();
-//    employeeTableFormat.setCellPadding(4);
-//    employeeTableFormat.setCellSpacing(0);
-//    employeeTableFormat.setBorder(0.5);
-//    employeeTableFormat.setBorderStyle(QTextFrameFormat::BorderStyle_Solid);
-//    employeeTableFormat.setWidth(QTextLength(QTextLength::PercentageLength, 100));
-//    employeeTableFormat.setColumnWidthConstraints({
-//        QTextLength(QTextLength::PercentageLength, 8),
-//        QTextLength(QTextLength::PercentageLength, 57),
-//        QTextLength(QTextLength::PercentageLength, 20),
-//        QTextLength(QTextLength::PercentageLength, 15)});
-//    employeeTable->setFormat(employeeTableFormat);
+    auto &settings = QMApplicationSettings::getInstance();
 
-//    textFormat.setFontPointSize(10);
+    QColor okColor(settings.read("QualiResult/OkColor", "#ffffff").toString());
+    QColor badColor(settings.read("QualiResult/BadColor", "#ffffff").toString());
+    QColor enoughColor(settings.read("QualiResult/EnoughColor", "#ffffff").toString());
 
-//    cursor.insertText(tr("Nr."), textFormat);
-//    cursor.movePosition(QTextCursor::NextCell);
+    int num = 0;
+    for (auto &resultItem : resultItems)
+    {
+        cursor.insertText(QString("%1").arg(++num), textFormat);
+        cursor.movePosition(QTextCursor::NextCell);
 
-//    cursor.insertText(tr("Name"), textFormat);
-//    cursor.movePosition(QTextCursor::NextCell);
+        cursor.insertText(resultItem.getTrainName(), textFormat);
+        cursor.movePosition(QTextCursor::NextCell);
 
-//    cursor.insertText(tr("Unterschrift"), textFormat);
-//    cursor.movePosition(QTextCursor::NextCell);
+        if (resultItem.getTrainResultTotal() > 0)
+        {
+            int frac = 100 * resultItem.getTrainResultOk() / resultItem.getTrainResultTotal();
 
-//    cursor.insertText(tr("Datum"), textFormat);
-//    cursor.movePosition(QTextCursor::NextCell);
+            if (frac > 90)
+            {
+                textFormat.setBackground(okColor);
+            }
+            else if (frac < 80)
+            {
+                textFormat.setBackground(badColor);
+            }
+            else
+            {
+                textFormat.setBackground(enoughColor);
+            }
 
-//    // Format header cells.
-//    QTextTableCell cell = employeeTable->cellAt(0, 0);
+            cursor.insertText(QString("%1/%2 - %3 %").arg(resultItem.getTrainResultOk())
+                    .arg(resultItem.getTrainResultTotal())
+                    .arg(frac), textFormat);
+        }
 
-//    // Set background of header.
-//    format = cell.format();
-//    format.setBackground(QColor("#d9d9d9"));
-
-//    cell.setFormat(format);
-//    employeeTable->cellAt(0, 1).setFormat(format);
-//    employeeTable->cellAt(0, 2).setFormat(format);
-//    employeeTable->cellAt(0, 3).setFormat(format);
-
-//    // Sort the list of employees.
-//    switch (sortType)
-//    {
-//    case EmployeeSort::SortFirstName:
-//        std::sort(employees.begin(), employees.end(),
-//        [this](const QString &test1, const QString &test2) -> bool {
-//            QString test1n;
-//            if (test1.contains("Dr"))
-//            {
-//                QStringList splitted = test1.split(" ");
-//                if (splitted.size() > 1)
-//                {
-//                    test1n = splitted.at(1);
-//                }
-//                else
-//                {
-//                    test1n = splitted.first();
-//                }
-//            }
-//            else
-//            {
-//                test1n = test1;
-//            }
-
-//            QString test2n;
-//            if (test2.contains("Dr."))
-//            {
-//                QStringList splitted = test2.split(" ");
-//                if (splitted.size() > 1)
-//                {
-//                    test2n = splitted.at(1);
-//                }
-//                else
-//                {
-//                    test2n = splitted.first();
-//                }
-//            }
-//            else
-//            {
-//                test2n = test2.split(" ").first();
-//            }
-
-//            return test1n < test2n;
-//        });
-//        break;
-//    case EmployeeSort::SortLastName:
-//        std::sort(employees.begin(), employees.end(),
-//        [this](const QString &test1, const QString &test2) -> bool {
-//          QString test1n = test1.split(" ").last();
-//          QString test2n = test2.split(" ").last();
-//          return test1n < test2n;
-//        });
-//        break;
-//    default:
-//        break;
-//    }
-
-//    // Go through all header cells and set them.
-//    for (int i = 1; i < employees.size() + 1 + emptyEmployees; i++)
-//    {
-//        if (i > 0)
-//        {
-//            cursor.insertText(QString::number(i), textFormat);
-//            cursor.movePosition(QTextCursor::NextCell);
-
-//            if (i < employees.size() + 1) {
-//                cursor.insertText(employees.at(i - 1), textFormat);
-//            }
-
-//            cursor.movePosition(QTextCursor::NextCell);
-//            cursor.movePosition(QTextCursor::NextCell);
-//            cursor.movePosition(QTextCursor::NextCell);
-//        }
-//    }
+        cursor.movePosition(QTextCursor::NextCell);
+        contentTable->cellAt(num, 2).setFormat(textFormat);
+        textFormat.setBackground(QColor(Qt::white));
+    }
 
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
-    //employeeTableFormat.setBorderCollapse(true);
+    contentTableFormat.setBorderCollapse(true);
 #endif
 }

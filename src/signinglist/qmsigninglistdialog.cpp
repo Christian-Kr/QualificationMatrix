@@ -208,7 +208,6 @@ void QMSigningListDialog::printToPDF()
 
 void QMSigningListDialog::paintPdfRequest(QPrinter *printer)
 {
-    // TODO: Support multiple pages when table is too long.
     QMSigningListDocument document;
 
     // Get all employees of the group.

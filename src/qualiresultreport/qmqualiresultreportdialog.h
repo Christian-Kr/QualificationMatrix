@@ -22,6 +22,7 @@ class QSqlTableModel;
 class QMSqlTableModel;
 class QSqlRelationalTableModel;
 class QPrinter;
+class QMQualiResultReportItem;
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -50,26 +51,36 @@ public:
     /// Override from QDialog.
     void loadSettings() override;
 
+    /// Update the list information.
+    void updateInfo();
+
 public slots:
     /// Add all selected trainings.
-    void addTrainings();
+    [[maybe_unused]] void addTrainings();
+
+    /// Remove selected trainings in selection dialog.
+    [[maybe_unused]] void removeTrainings();
 
     /// Add all trainings from selected training groups.
-    void addFromTrainingGroups();
+    [[maybe_unused]] void addFromTrainingGroups();
+
+    /// Remove all selected trainings from training group.
+    [[maybe_unused]] void removeFromTrainingGroups();
+
+    /// Clear the trainings list and the internal hash list.
+    [[maybe_unused]] void resetTrainingList();
 
     /// Create the report.
-    void createReport();
+    [[maybe_unused]] void createReport();
 
-    /// Update data (models).
-    void updateData();
+    // Paint request for creating the pdf.
+    void paintPdfRequest(QPrinter *printer);
 
 private:
-    Ui::QMQualiResultReportDialog *ui;
+    /// Calculate the whole result and return it as a list.
+    QList<QMQualiResultReportItem> calculateResult();
 
-    std::unique_ptr<QSqlTableModel> employeeViewModel;
-    std::unique_ptr<QSqlTableModel> shiftViewModel;
-    std::unique_ptr<QSqlTableModel> trainViewModel;
-    std::unique_ptr<QSqlTableModel> trainGroupViewModel;
+    Ui::QMQualiResultReportDialog *ui;
 
     std::unique_ptr<QHash<int, QString>> trainList;
 };

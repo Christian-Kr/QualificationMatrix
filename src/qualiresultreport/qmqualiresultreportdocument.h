@@ -16,11 +16,14 @@
 
 #include <QTextDocument>
 
+class QMQualiResultReportItem;
+class QDate;
+
 /// Class with design for quali result reports.
 /// \author Christian Kr, Copyright 2022
 class QMQualiResultReportDocument: public QTextDocument
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /// Constructor
@@ -31,8 +34,9 @@ public:
     ~QMQualiResultReportDocument() override = default;
 
     /// Create the document with all the content.
-    void createDocument();
+    /// \param date The date until the calculation has been done.
+    /// \param resultItems The resulting items to be printed.
+    void createDocument(QList<QMQualiResultReportItem> &resultItems, QDate date);
 };
-
 
 #endif // QMQUALIRESULTREPORTDOCUMENT_H
