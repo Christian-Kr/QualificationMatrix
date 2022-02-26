@@ -279,7 +279,10 @@ QList<QMQualiResultReportItem> QMQualiResultReportDialog::calculateResult()
     trainViewModel.select();
 
     QMExtendedSelectionDialog extSelDialog(this, &trainViewModel, 1);
-    extSelDialog.exec();
+    if (extSelDialog.exec() == QDialog::Rejected)
+    {
+        return;
+    }
 
     QModelIndexList selIndexList = extSelDialog.getFilterSelected();
     QSortFilterProxyModel *trainFilterModel = extSelDialog.getFilterModel();
@@ -358,7 +361,10 @@ QList<QMQualiResultReportItem> QMQualiResultReportDialog::calculateResult()
     trainGroupViewModel.select();
 
     QMExtendedSelectionDialog extSelDialog(this, &trainGroupViewModel, 1);
-    extSelDialog.exec();
+    if (extSelDialog.exec() == QDialog::Rejected)
+    {
+        return;
+    }
 
     QModelIndexList selIndexList = extSelDialog.getFilterSelected();
     QSortFilterProxyModel *trainGroupFilterModel = extSelDialog.getFilterModel();
@@ -427,7 +433,10 @@ QList<QMQualiResultReportItem> QMQualiResultReportDialog::calculateResult()
     trainViewModel.select();
 
     QMExtendedSelectionDialog extSelDialog(this, &trainViewModel, 1);
-    extSelDialog.exec();
+    if (extSelDialog.exec() == QDialog::Rejected)
+    {
+        return;
+    }
 
     QModelIndexList selIndexList = extSelDialog.getFilterSelected();
     QSortFilterProxyModel *trainFilterModel = extSelDialog.getFilterModel();
@@ -499,7 +508,10 @@ QList<QMQualiResultReportItem> QMQualiResultReportDialog::calculateResult()
     trainGroupViewModel.select();
 
     QMExtendedSelectionDialog extSelDialog(this, &trainGroupViewModel, 1);
-    extSelDialog.exec();
+    if (extSelDialog.exec() == QDialog::Rejected)
+    {
+        return;
+    }
 
     QModelIndexList selIndexList = extSelDialog.getFilterSelected();
     QSortFilterProxyModel *trainGroupFilterModel = extSelDialog.getFilterModel();
