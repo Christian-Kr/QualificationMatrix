@@ -41,6 +41,10 @@ QMEmployeeSettingsWidget::QMEmployeeSettingsWidget(QWidget *parent)
     auto booleanDelegate = new QMBooleanDelegate(this);
     booleanDelegate->setEditable(false);
     ui->tvEmployee->setItemDelegateForColumn(3, booleanDelegate);
+    ui->tvEmployee->setItemDelegateForColumn(4, new QMBooleanDelegate(this));
+    ui->tvEmployee->setItemDelegateForColumn(5, new QMBooleanDelegate(this));
+    ui->tvEmployee->setItemDelegateForColumn(6, new QMBooleanDelegate(this));
+    ui->tvEmployee->setItemDelegateForColumn(7, new QMBooleanDelegate(this));
 
     ui->tvEmployeeGroups->verticalHeader()->setVisible(true);
     ui->tvEmployeeGroups->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeMode::ResizeToContents);

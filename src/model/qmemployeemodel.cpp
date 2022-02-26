@@ -35,6 +35,10 @@ void QMEmployeeModel::initModel()
     setHeaderData(2, Qt::Horizontal, tr("Gruppe"));
     setRelation(2, QSqlRelation("Shift", "id", "name"));
     setHeaderData(3, Qt::Horizontal, tr("Aktiviert"));
+    setHeaderData(4, Qt::Horizontal, tr("Temporär deaktiviert"));
+    setHeaderData(5, Qt::Horizontal, tr("Arbeitnehmerüberlassung"));
+    setHeaderData(6, Qt::Horizontal, tr("Praktikum"));
+    setHeaderData(7, Qt::Horizontal, tr("Ausbildung"));
 
     sort(1, Qt::AscendingOrder);
 }

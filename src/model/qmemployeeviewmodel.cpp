@@ -31,6 +31,11 @@ QMEmployeeViewModel::QMEmployeeViewModel(QObject *parent, const QSqlDatabase &db
     QSqlRelationalTableModel::setHeaderData(2, Qt::Horizontal, tr("Gruppe"));
     QSqlRelationalTableModel::setRelation(2, QSqlRelation("Shift", "id", "name"));
 
+    QSqlRelationalTableModel::setHeaderData(3, Qt::Horizontal, tr("Temporär deaktiviert"));
+    QSqlRelationalTableModel::setHeaderData(4, Qt::Horizontal, tr("Arbeitnehmerüberlassung"));
+    QSqlRelationalTableModel::setHeaderData(5, Qt::Horizontal, tr("Praktikum"));
+    QSqlRelationalTableModel::setHeaderData(6, Qt::Horizontal, tr("Ausbildung"));
+
     sort(1, Qt::AscendingOrder);
 
     auto amsManager = QMAMSManager::getInstance();
