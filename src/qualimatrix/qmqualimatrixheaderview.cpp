@@ -39,6 +39,7 @@ QMQualiMatrixHeaderView::QMQualiMatrixHeaderView(Qt::Orientation orientation, QW
     , laInfo(new QLabel(parent))
 {
     setSectionResizeMode(QHeaderView::Fixed);
+    setMinimumSectionSize(30);
     setDefaultSectionSize(30);
     setStyleSheet("background-color: white;");
 
