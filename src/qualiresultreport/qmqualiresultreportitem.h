@@ -40,16 +40,16 @@ public:
 
     // Set and get for multiple object variables.
 
-    void setTrainId(unsigned int id) { trainId = id; }
+    void setTrainId(int id) { trainId = id; }
     int getTrainId() { return trainId; }
 
     void setTrainName(QString name) { *trainName = name; }
     QString getTrainName() { return *trainName; }
 
-    void setTrainResultTotal(unsigned int resultTotal) { trainResultTotal = resultTotal; }
+    void setTrainResultTotal(int resultTotal) { trainResultTotal = resultTotal; }
     int getTrainResultTotal() { return trainResultTotal; }
 
-    void setTrainResultOk(unsigned int resultOk) { trainResultOk = resultOk; }
+    void setTrainResultOk(int resultOk) { trainResultOk = resultOk; }
     int getTrainResultOk() { return trainResultOk; }
 
 private:
