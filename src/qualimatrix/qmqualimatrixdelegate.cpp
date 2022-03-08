@@ -23,15 +23,15 @@
 
 QMQualiMatrixDelegate::QMQualiMatrixDelegate(QWidget *parent)
     : QStyledItemDelegate(parent),
-    gridColor(QColor("#ffffff")),
-    selectionColor(QColor("#ffffff"))
+    gridColor(QColor(Qt::white)),
+    selectionColor(QColor(Qt::white))
 {
     updateColors();
 
     pColor = QColor("#ffcccc");
     aColor = QColor("#cce6ff");
     sColor = QColor("#ffe6cc");
-    whiteColor = QColor("#FFFFFF");
+    whiteColor = QColor(Qt::white);
 }
 
 void QMQualiMatrixDelegate::updateColors()
@@ -81,7 +81,7 @@ void QMQualiMatrixDelegate::paint(QPainter *painter, const QStyleOptionViewItem 
 
 QSize QMQualiMatrixDelegate::sizeHint(const QStyleOptionViewItem &, const QModelIndex &) const
 {
-    return QSize(30, 30);
+    return {30, 30};
 }
 
 QWidget *QMQualiMatrixDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option,

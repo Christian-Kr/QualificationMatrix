@@ -31,14 +31,13 @@ public:
     /// \param index
     /// \param option
     /// \param painter
-    void paint(QPainter *painter, const QStyleOptionViewItem &option,
-        const QModelIndex &index) const;
+    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
 
     /// Override from QStyleItemDelegate.
     /// \param index
     /// \param option
     /// \return
-    QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
+    [[nodiscard]] QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;
 
     /// Override from QStyleItemDelegate.
     /// \param index
@@ -46,25 +45,25 @@ public:
     /// \param parent
     /// \return
     QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option,
-        const QModelIndex &index) const;
+            const QModelIndex &index) const override;
 
     /// Override from QStyleItemDelegate.
     /// \param editor
     /// \param index
-    void setEditorData(QWidget *editor, const QModelIndex &index) const;
+    void setEditorData(QWidget *editor, const QModelIndex &index) const override;
 
     /// Override from QStyleItemDelegate.
     /// \param editor
     /// \param model
     /// \param index
-    void setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const;
+    void setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const override;
 
     /// Override from QStyleItemDelegate.
     /// \param index
     /// \param editor
     /// \param option
     void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option,
-        const QModelIndex &index) const;
+            const QModelIndex &index) const override;
 
     /// Update the colors from config.
     void updateColors();
