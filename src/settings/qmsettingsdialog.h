@@ -100,7 +100,7 @@ private:
     void saveSettings() override;
 
     /// Load all settings into the widgets and control elements in one step.
-    void loadSettings();
+    void loadSettings() override;
 
     /// Save the settings for the given group.
     /// \param group The index number of the group to save.

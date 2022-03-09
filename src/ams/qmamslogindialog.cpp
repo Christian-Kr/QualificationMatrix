@@ -105,6 +105,8 @@ void QMAMSLoginDialog::login()
         case LoginResult::FAILED_UNKNOWN:
             result = tr("Unbekannter Fehler.");
             break;
+        case LoginResult::SUCCESSFUL:
+            break;
     }
 
     QMessageBox::information(this, tr("Anmelden"), tr("Die Anmeldung ist fehlgeschlagen. ") + result);

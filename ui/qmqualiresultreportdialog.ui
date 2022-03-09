@@ -33,22 +33,22 @@
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
        <item row="3" column="0">
-        <widget class="QCheckBox" name="cbExcludeApprentice">
+        <widget class="QCheckBox" name="cbIncludeApprentice">
          <property name="text">
-          <string>Auszubildende ausschließen</string>
+          <string>Auszubildende einschließen</string>
          </property>
          <property name="checked">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QCheckBox" name="cbExcludeTempDeactivated">
+        <widget class="QCheckBox" name="cbIncludeTempDeactivated">
          <property name="text">
-          <string>Temporär deaktivierte Mitarbeiter ausschließen</string>
+          <string>Temporär deaktivierte Mitarbeiter einschließen</string>
          </property>
          <property name="checked">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
         </widget>
        </item>
@@ -210,22 +210,22 @@
         </layout>
        </item>
        <item row="2" column="0">
-        <widget class="QCheckBox" name="cbExcludePersonnelLeasing">
+        <widget class="QCheckBox" name="cbIncludePersonnelLeasing">
          <property name="text">
-          <string>Mitarbeiter in Arbeitnehmerüberlassung ausschließen</string>
+          <string>Mitarbeiter in Arbeitnehmerüberlassung einschließen</string>
          </property>
          <property name="checked">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
         </widget>
        </item>
        <item row="4" column="0">
-        <widget class="QCheckBox" name="cbExcludeTrainee">
+        <widget class="QCheckBox" name="cbIncludeTrainee">
          <property name="text">
-          <string>Praktikanten ausschließen</string>
+          <string>Praktikanten einschließen</string>
          </property>
          <property name="checked">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
         </widget>
        </item>

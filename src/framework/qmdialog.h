@@ -35,7 +35,7 @@ public:
     virtual void loadSettings() {};
 
     /// Accept from button box.
-    virtual void accept();
+    virtual void accept() override;
 
     /// Override from QDialog. Do several actions on close.
     /// \param event

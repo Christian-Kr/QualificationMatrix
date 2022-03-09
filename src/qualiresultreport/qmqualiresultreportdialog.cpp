@@ -68,6 +68,7 @@ QList<QMQualiResultReportItem> QMQualiResultReportDialog::calculateResult()
     }
 
     // Initialize progress dialog to informate the user about current calculation state.
+
     QProgressDialog progressDialog(this);
     progressDialog.setWindowTitle(tr("Report erstellen"));
     progressDialog.setMinimum(0);
@@ -76,6 +77,8 @@ QList<QMQualiResultReportItem> QMQualiResultReportDialog::calculateResult()
     progressDialog.setModal(true);
     progressDialog.setCancelButton(nullptr);
     progressDialog.setVisible(true);
+
+    // Get data from all necessary models.
 
     auto db = QSqlDatabase::database("default");
 
