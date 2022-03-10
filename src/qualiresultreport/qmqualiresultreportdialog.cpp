@@ -14,7 +14,6 @@
 #include "qmqualiresultreportdialog.h"
 #include "ui_qmqualiresultreportdialog.h"
 #include "model/qmemployeeviewmodel.h"
-#include "model/qmshiftviewmodel.h"
 #include "model/qmtrainingviewmodel.h"
 #include "model/qmtraininggroupviewmodel.h"
 #include "settings/qmapplicationsettings.h"
