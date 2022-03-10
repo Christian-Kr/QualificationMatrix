@@ -91,14 +91,38 @@ QList<QMQualiResultReportItem> QMQualiResultReportDialog::calculateResult()
     QMTrainingDataViewModel trainDataViewModel(this, db);
     trainDataViewModel.select();
 
-    QMEmployeeViewModel employeeViewModel(this, db);
-    employeeViewModel.select();
-
     QMEmployeeFunctionViewModel employeeFuncViewModel(this, db);
     employeeFuncViewModel.select();
 
     QMQualificationMatrixViewModel qualiMatrixViewModel(this, db);
     qualiMatrixViewModel.select();
+
+    // To get the right employee data, the employees needs to be filtered by several options. These options are flags
+    // like apprentice etc. The employee view model is already be filtered by the flag active.
+    QMEmployeeViewModel employeeViewModel(this, db);
+    QString strFilter = "(trainee=0 AND temporarily_deactivated=0 AND personnel_leasing=0 AND apprentice=0)";
+
+    if (ui->cbIncludeTrainee->isChecked())
+    {
+        strFilter += " OR trainee=1";
+    }
+
+    if (ui->cbIncludeApprentice->isChecked())
+    {
+        strFilter += " OR apprentice=1";
+    }
+
+    if (ui->cbIncludePersonnelLeasing->isChecked())
+    {
+        strFilter += " OR personnel_leasing=1";
+    }
+
+    if (ui->cbIncludeTempDeactivated->isChecked())
+    {
+        strFilter += " OR temporarily_deactivated=1";
+    }
+
+    employeeViewModel.setFilter(strFilter);
 
     QList<QMQualiResultReportItem> resultItems;
 
