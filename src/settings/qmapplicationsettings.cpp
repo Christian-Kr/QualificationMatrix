@@ -15,7 +15,6 @@
 
 #include <QSettings>
 #include <QCoreApplication>
-#include <QDebug>
 
 QMApplicationSettings::QMApplicationSettings(QObject *parent)
     : QMSettings(parent), centralizedAvailable(false),
@@ -40,10 +39,7 @@ QMApplicationSettings::~QMApplicationSettings()
 
 void QMApplicationSettings::initLocal()
 {
-    if (local != nullptr)
-    {
-        delete local;
-    }
+    delete local;
 
     local = new QSettings(
         QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(),
@@ -53,10 +49,7 @@ void QMApplicationSettings::initLocal()
 
 void QMApplicationSettings::initCentralized()
 {
-    if (centralized != nullptr)
-    {
-        delete centralized;
-    }
+    delete centralized;
 
     centralized = new QSettings(centralizedPath, QSettings::IniFormat);
 }
@@ -144,7 +137,7 @@ QVariant QMApplicationSettings::read(const QString &name)
     // If local object is not set, return default and log.
 
     qWarning() << "Calling a settings value although the local object does not exist.";
-    return QVariant();
+    return {};
 }
 
 void QMApplicationSettings::write(const QString &name, const QVariant &value)
