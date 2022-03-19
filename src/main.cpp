@@ -32,6 +32,7 @@
 #endif
 
 /// Initialize the main window state. This includes the dimension and position of the window.
+///
 /// \param mainWin The main window object to initialize.
 void initShowMainWindow(QMMainWindow &mainWin)
 {
@@ -108,6 +109,7 @@ void initApplicationStyle()
 
 /// Set the style sheet of the application, which is "default.css" by default. For now only the default stylesheet
 /// will be loaded.
+///
 /// \param app The application object to apply style sheet.
 void initApplicationStyleSheet(QApplication &app)
 {
@@ -121,6 +123,7 @@ void initApplicationStyleSheet(QApplication &app)
 
 /// Install the translator into the qt application. If the loading or installing of the translation certificate fails,
 /// a warning message will be send for documentation.
+///
 /// \param name The name of the translator certificate.
 /// \param path The path, where the tranaltor certificate could be found.
 void installTranslator(const QString &name, const QString &path)
@@ -161,10 +164,9 @@ void initApplicationTranslation()
 }
 
 /// Take all messages coming from qWarning, qDebug etc. and write them into a log file. In general, all message
-/// will be written into a log file. If this log file is not writeable, the message will be printed on
-/// stdout. Debug messages will always only be printed on stdout.
-///
-/// The log file will be create in user directory, to be readable and individual by every user.
+/// will be written into a log file. If this log file is not writeable, the message will be printed on stdout. Debug
+/// messages will always only be printed on stdout. The log file will be create in user directory, to be readable and
+/// individual by every user.
 ///
 /// \param type The message type (debug, warning etc.).
 /// \param msg The message to display/log.
@@ -215,6 +217,7 @@ void customMessageHandler(QtMsgType type, const QMessageLogContext &, const QStr
 }
 
 /// Well, ... main entry function.
+///
 /// \param argc Number of arguments, including the name of the application.
 /// \param argv List of arguments, including the name of the application.
 /// \return Zero if exit success, else -1.
