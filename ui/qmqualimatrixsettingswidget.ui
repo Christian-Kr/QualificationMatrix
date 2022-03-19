@@ -350,7 +350,7 @@
   </connection>
   <connection>
    <sender>sbLockTime</sender>
-   <signal>valueChanged(QString)</signal>
+   <signal>valueChanged(int)</signal>
    <receiver>QMQualiMatrixSettingsWidget</receiver>
    <slot>emitSettingsChanged()</slot>
    <hints>
