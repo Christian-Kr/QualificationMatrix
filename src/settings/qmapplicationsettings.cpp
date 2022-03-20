@@ -41,10 +41,21 @@ void QMApplicationSettings::initLocal()
 {
     delete local;
 
+    // On apple system use the internal system, which has less problems with write access etc. On all other systems
+    // (linux and win) use the init system.
+
+#ifdef __APPLE__
+    local = new QSettings(
+            QSettings::NativeFormat, QSettings::UserScope, QCoreApplication::organizationName(),
+            QCoreApplication::applicationName()
+    );
+#else
     local = new QSettings(
         QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(),
         QCoreApplication::applicationName()
     );
+#endif
+
 }
 
 void QMApplicationSettings::initCentralized()
