@@ -46,8 +46,8 @@ void QMApplicationSettings::initLocal()
 
 #ifdef __APPLE__
     local = new QSettings(
-            QSettings::NativeFormat, QSettings::UserScope, QCoreApplication::organizationName(),
-            QCoreApplication::applicationName()
+        QSettings::NativeFormat, QSettings::UserScope, QCoreApplication::organizationName(),
+        QCoreApplication::applicationName()
     );
 #else
     local = new QSettings(
