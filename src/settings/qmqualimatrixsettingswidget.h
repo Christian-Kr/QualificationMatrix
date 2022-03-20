@@ -18,7 +18,7 @@
 
 namespace Ui
 {
-class QMQualiMatrixSettingsWidget;
+    class QMQualiMatrixSettingsWidget;
 }
 
 /// Settings widget for qualification matrix.
