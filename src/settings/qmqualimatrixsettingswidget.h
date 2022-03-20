@@ -25,7 +25,7 @@ class QMQualiMatrixSettingsWidget;
 /// \author Christian Kr, Copyright 2020
 class QMQualiMatrixSettingsWidget: public QMSettingsWidget
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /// Constructor
@@ -48,10 +48,10 @@ public:
 
 public slots:
     /// Button for changing the grid color has been pressed.
-    void changeGridColor();
+    [[maybe_unused]] void changeGridColor();
 
     /// Button for changing the selection color has been pressed.
-    void changeSelectionColor();
+    [[maybe_unused]] void changeSelectionColor();
 
 private:
     Ui::QMQualiMatrixSettingsWidget *ui;

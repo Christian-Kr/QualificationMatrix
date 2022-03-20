@@ -71,7 +71,7 @@ void QMQualiMatrixSettingsWidget::loadSettings()
     ui->sbLockTime->setValue(lockTime);
 }
 
-void QMQualiMatrixSettingsWidget::changeGridColor()
+[[maybe_unused]] void QMQualiMatrixSettingsWidget::changeGridColor()
 {
     auto color = QColorDialog::getColor(
         ui->pbGridColor->text().remove("&"), this, tr("Farbe auswählen"));
@@ -87,7 +87,7 @@ void QMQualiMatrixSettingsWidget::changeGridColor()
     emitSettingsChanged();
 }
 
-void QMQualiMatrixSettingsWidget::changeSelectionColor()
+[[maybe_unused]] void QMQualiMatrixSettingsWidget::changeSelectionColor()
 {
     auto color = QColorDialog::getColor(
         ui->pbSelectionColor->text().remove("&"), this, tr("Farbe auswählen"));
