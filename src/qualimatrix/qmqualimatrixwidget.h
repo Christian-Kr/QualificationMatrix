@@ -27,7 +27,7 @@ class QMenu;
 
 namespace Ui
 {
-class QMQualiMatrixWidget;
+    class QMQualiMatrixWidget;
 }
 
 /// The view of the quali matrix.

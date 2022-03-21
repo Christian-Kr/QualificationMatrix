@@ -27,7 +27,7 @@ class QMTrainingDataModel;
 
 namespace Ui
 {
-class QMTrainDataWidget;
+    class QMTrainDataWidget;
 }
 
 /// Widget for training data to manipulate.
