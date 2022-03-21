@@ -44,7 +44,7 @@
 #include <QCloseEvent>
 #include <QStyledItemDelegate>
 #include <QSqlRelationalDelegate>
-#include <QtPrintSupport/QPrinter>
+#include <QPrinter>
 #include <QPainter>
 #include <QDateTime>
 #include <QSqlQuery>
