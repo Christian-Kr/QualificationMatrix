@@ -14,7 +14,7 @@
 #ifndef QMEXTENDEDSELECTIONDIALOG_H
 #define QMEXTENDEDSELECTIONDIALOG_H
 
-#include "framework/qmdialog.h"
+#include "qmdialog.h"
 
 #include <QModelIndexList>
 

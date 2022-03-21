@@ -14,7 +14,7 @@
 #ifndef QMADDMULTIPLETRAINDATADIALOG_H
 #define QMADDMULTIPLETRAINDATADIALOG_H
 
-#include "framework/qmdialog.h"
+#include "framework/dialog/qmdialog.h"
 
 #include <memory>
 

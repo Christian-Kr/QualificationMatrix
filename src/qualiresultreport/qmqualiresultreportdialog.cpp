@@ -17,7 +17,7 @@
 #include "model/qmtrainingviewmodel.h"
 #include "model/qmtraininggroupviewmodel.h"
 #include "settings/qmapplicationsettings.h"
-#include "framework/qmextendedselectiondialog.h"
+#include "framework/dialog/qmextendedselectiondialog.h"
 #include "qmqualiresultreportdocument.h"
 #include "qmqualiresultreportitem.h"
 #include "model/qmqualificationmatrixviewmodel.h"

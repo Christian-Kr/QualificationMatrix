@@ -17,7 +17,7 @@
 #include "model/qmtrainingviewmodel.h"
 #include "model/qmemployeefunctionmodel.h"
 #include "model/qmtrainingexceptionmodel.h"
-#include "framework/qmproxysqlrelationaldelegate.h"
+#include "framework/delegate/qmproxysqlrelationaldelegate.h"
 
 #include <QDebug>
 #include <QInputDialog>

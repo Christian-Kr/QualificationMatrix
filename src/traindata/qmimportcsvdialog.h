@@ -14,7 +14,7 @@
 #ifndef QMIMPORTCSVDIALOG_H
 #define QMIMPORTCSVDIALOG_H
 
-#include "framework/qmdialog.h"
+#include "framework/dialog/qmdialog.h"
 
 #include <memory>
 

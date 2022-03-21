@@ -18,7 +18,7 @@
 #include "ams/model/qmamsusergroupmodel.h"
 #include "ams/qmamspassworddialog.h"
 #include "ams/qmamsmanager.h"
-#include "framework/qmbooleandelegate.h"
+#include "framework/delegate/qmbooleandelegate.h"
 
 #include <QSqlDatabase>
 #include <QSqlRecord>

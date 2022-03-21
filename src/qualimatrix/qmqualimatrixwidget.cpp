@@ -18,7 +18,7 @@
 #include "qmqualimatrixdelegate.h"
 #include "qmqualimatrixheaderview.h"
 #include "settings/qmapplicationsettings.h"
-#include "framework/qmextendedselectiondialog.h"
+#include "framework/dialog/qmextendedselectiondialog.h"
 #include "model/qmfunctionviewmodel.h"
 #include "model/qmfunctiongroupviewmodel.h"
 #include "model/qmtrainingviewmodel.h"

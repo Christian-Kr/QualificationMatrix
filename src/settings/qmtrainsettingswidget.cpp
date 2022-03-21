@@ -19,10 +19,10 @@
 #include "model/qmtrainingdatastatemodel.h"
 #include "model/qmqualificationmatrixviewmodel.h"
 #include "model/qmtrainingexceptionviewmodel.h"
-#include "framework/qmproxysqlrelationaldelegate.h"
-#include "framework/qmcolorchooserdelegate.h"
-#include "framework/qmbooleandelegate.h"
-#include "framework/qmplaintexteditdelegate.h"
+#include "framework/delegate/qmproxysqlrelationaldelegate.h"
+#include "framework/delegate/qmcolorchooserdelegate.h"
+#include "framework/delegate/qmbooleandelegate.h"
+#include "framework/delegate/qmplaintexteditdelegate.h"
 
 #include <QSqlTableModel>
 #include <QMessageBox>

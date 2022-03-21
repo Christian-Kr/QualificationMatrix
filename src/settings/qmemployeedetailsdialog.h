@@ -14,7 +14,7 @@
 #ifndef QMEMPLOYEEDETAILSDIALOG_H
 #define QMEMPLOYEEDETAILSDIALOG_H
 
-#include "framework/qmdialog.h"
+#include "framework/dialog/qmdialog.h"
 
 #include <memory>
 #include <QSortFilterProxyModel>

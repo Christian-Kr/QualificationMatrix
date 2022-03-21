@@ -16,7 +16,7 @@
 #ifndef QMSETTINGSDIALOG_H
 #define QMSETTINGSDIALOG_H
 
-#include "framework/qmdialog.h"
+#include "framework/dialog/qmdialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui

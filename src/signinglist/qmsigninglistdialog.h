@@ -14,7 +14,7 @@
 #ifndef QMSIGNINGLISTDIALOG_H
 #define QMSIGNINGLISTDIALOG_H
 
-#include "framework/qmdialog.h"
+#include "framework/dialog/qmdialog.h"
 
 #include <memory>
 

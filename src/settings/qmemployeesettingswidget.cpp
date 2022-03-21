@@ -14,8 +14,8 @@
 #include "qmemployeesettingswidget.h"
 #include "ui_qmemployeesettingswidget.h"
 #include "model/qmemployeemodel.h"
-#include "framework/qmproxysqlrelationaldelegate.h"
-#include "framework/qmbooleandelegate.h"
+#include "framework/delegate/qmproxysqlrelationaldelegate.h"
+#include "framework/delegate/qmbooleandelegate.h"
 #include "qmemployeedetailsdialog.h"
 
 #include <QDebug>

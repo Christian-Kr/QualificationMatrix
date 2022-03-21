@@ -14,7 +14,7 @@
 #ifndef QMQUALIMATRIXWIDGET_H
 #define QMQUALIMATRIXWIDGET_H
 
-#include "framework/qmwinmodewidget.h"
+#include "framework/component/qmwinmodewidget.h"
 
 #include <memory>
 

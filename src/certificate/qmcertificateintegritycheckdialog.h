@@ -14,7 +14,7 @@
 #ifndef QMCERTIFICATEINTEGRITYCHECKDIALOG_H
 #define QMCERTIFICATEINTEGRITYCHECKDIALOG_H
 
-#include "framework/qmdialog.h"
+#include "framework/dialog/qmdialog.h"
 #include <memory>
 
 class QSqlTableModel;

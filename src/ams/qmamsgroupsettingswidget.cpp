@@ -20,7 +20,7 @@
 #include "ams/model/qmamsaccessmodemodel.h"
 #include "ams/qmamsmanager.h"
 #include "ams/model/qmamsusergroupmodel.h"
-#include "framework/qmbooleandelegate.h"
+#include "framework/delegate/qmbooleandelegate.h"
 #include "model/qmemployeemodel.h"
 #include "ams/model/qmamsgroupemployeemodel.h"
 

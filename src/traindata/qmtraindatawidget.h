@@ -14,7 +14,7 @@
 #ifndef QMTRAINDATAWIDGET_H
 #define QMTRAINDATAWIDGET_H
 
-#include "framework/qmwinmodewidget.h"
+#include "framework/component/qmwinmodewidget.h"
 
 #include <memory>
 

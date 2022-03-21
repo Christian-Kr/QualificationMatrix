@@ -24,7 +24,7 @@
 #include "qmqualiresultsettingswidget.h"
 #include "ams/qmamsusersettingswidget.h"
 #include "ams/qmamsgroupsettingswidget.h"
-#include "framework/qmtreesettingsdelegate.h"
+#include "framework/delegate/qmtreesettingsdelegate.h"
 #include "ams/qmamslogindialog.h"
 #include "ams/qmamsmanager.h"
 

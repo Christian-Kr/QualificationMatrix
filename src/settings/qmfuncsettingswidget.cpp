@@ -17,8 +17,8 @@
 #include "model/qmfunctiongroupmodel.h"
 #include "model/qmqualificationmatrixviewmodel.h"
 #include "model/qmemployeefunctionviewmodel.h"
-#include "framework/qmproxysqlrelationaldelegate.h"
-#include "framework/qmcolorchooserdelegate.h"
+#include "framework/delegate/qmproxysqlrelationaldelegate.h"
+#include "framework/delegate/qmcolorchooserdelegate.h"
 
 #include <QSqlTableModel>
 #include <QMessageBox>

@@ -15,7 +15,7 @@
 #include "ui_qmqualiresultwidget.h"
 #include "model/qmdatamanager.h"
 #include "qmqualiresultmodel.h"
-#include "framework/qmextendedselectiondialog.h"
+#include "framework/dialog/qmextendedselectiondialog.h"
 #include "settings/qmapplicationsettings.h"
 #include "model/qmfunctionviewmodel.h"
 #include "model/qmtrainingviewmodel.h"

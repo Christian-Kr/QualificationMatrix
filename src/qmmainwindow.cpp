@@ -27,7 +27,7 @@
 #include "database/qmdatabasedialog.h"
 #include "database/qmdatabaseupdatedialog.h"
 #include "database/qmdatabaseupdater.h"
-#include "framework/qminfolabel.h"
+#include "framework/component/qminfolabel.h"
 #include "certificate/qmcertificatedialog.h"
 #include "certificate/qmcertificateintegritycheckdialog.h"
 #include "signinglist/qmsigninglistdialog.h"
