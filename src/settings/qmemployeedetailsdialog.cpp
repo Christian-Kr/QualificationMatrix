@@ -13,8 +13,8 @@
 
 #include "qmemployeedetailsdialog.h"
 #include "ui_qmemployeedetailsdialog.h"
-#include "model/qmfunctionviewmodel.h"
-#include "model/qmtrainingviewmodel.h"
+#include "model/view/qmfunctionviewmodel.h"
+#include "model/view/qmtrainingviewmodel.h"
 #include "model/qmemployeefunctionmodel.h"
 #include "model/qmtrainingexceptionmodel.h"
 #include "framework/delegate/qmproxysqlrelationaldelegate.h"

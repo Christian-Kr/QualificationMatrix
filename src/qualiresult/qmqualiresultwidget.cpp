@@ -17,11 +17,11 @@
 #include "qmqualiresultmodel.h"
 #include "framework/dialog/qmextendedselectiondialog.h"
 #include "settings/qmapplicationsettings.h"
-#include "model/qmfunctionviewmodel.h"
-#include "model/qmtrainingviewmodel.h"
-#include "model/qmemployeeviewmodel.h"
-#include "model/qmtrainingdatastateviewmodel.h"
-#include "model/qmshiftviewmodel.h"
+#include "model/view/qmfunctionviewmodel.h"
+#include "model/view/qmtrainingviewmodel.h"
+#include "model/view/qmemployeeviewmodel.h"
+#include "model/view/qmtrainingdatastateviewmodel.h"
+#include "model/view/qmshiftviewmodel.h"
 #include "qualiresultreport/qmqualiresultreportdialog.h"
 
 #include <QSortFilterProxyModel>

@@ -13,16 +13,16 @@
 
 #include "qmqualiresultreportdialog.h"
 #include "ui_qmqualiresultreportdialog.h"
-#include "model/qmemployeeviewmodel.h"
-#include "model/qmtrainingviewmodel.h"
-#include "model/qmtraininggroupviewmodel.h"
+#include "model/view/qmemployeeviewmodel.h"
+#include "model/view/qmtrainingviewmodel.h"
+#include "model/view/qmtraininggroupviewmodel.h"
 #include "settings/qmapplicationsettings.h"
 #include "framework/dialog/qmextendedselectiondialog.h"
 #include "qmqualiresultreportdocument.h"
 #include "qmqualiresultreportitem.h"
-#include "model/qmqualificationmatrixviewmodel.h"
-#include "model/qmemployeefunctionviewmodel.h"
-#include "model/qmtrainingdataviewmodel.h"
+#include "model/view/qmqualificationmatrixviewmodel.h"
+#include "model/view/qmemployeefunctionviewmodel.h"
+#include "model/view/qmtrainingdataviewmodel.h"
 
 #include <QProgressDialog>
 #include <QPrintPreviewWidget>

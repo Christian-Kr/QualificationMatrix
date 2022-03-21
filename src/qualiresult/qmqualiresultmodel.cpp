@@ -14,13 +14,13 @@
 #include "qmqualiresultmodel.h"
 #include "qmqualiresultrecord.h"
 #include "settings/qmapplicationsettings.h"
-#include "model/qmfunctionviewmodel.h"
-#include "model/qmtrainingviewmodel.h"
-#include "model/qmemployeeviewmodel.h"
-#include "model/qmqualificationmatrixviewmodel.h"
-#include "model/qmtrainingdataviewmodel.h"
-#include "model/qmtrainingexceptionviewmodel.h"
-#include "model/qmemployeefunctionviewmodel.h"
+#include "model/view/qmfunctionviewmodel.h"
+#include "model/view/qmtrainingviewmodel.h"
+#include "model/view/qmemployeeviewmodel.h"
+#include "model/view/qmqualificationmatrixviewmodel.h"
+#include "model/view/qmtrainingdataviewmodel.h"
+#include "model/view/qmtrainingexceptionviewmodel.h"
+#include "model/view/qmemployeefunctionviewmodel.h"
 
 #include <QSqlQuery>
 #include <QSqlRecord>

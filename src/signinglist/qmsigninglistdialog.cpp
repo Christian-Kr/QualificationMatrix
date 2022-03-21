@@ -13,9 +13,9 @@
 
 #include "qmsigninglistdialog.h"
 #include "ui_qmsigninglistdialog.h"
-#include "model/qmemployeeviewmodel.h"
-#include "model/qmshiftviewmodel.h"
-#include "model/qmtrainingviewmodel.h"
+#include "model/view/qmemployeeviewmodel.h"
+#include "model/view/qmshiftviewmodel.h"
+#include "model/view/qmtrainingviewmodel.h"
 #include "settings/qmapplicationsettings.h"
 #include "signinglist/qmsigninglistdocument.h"
 

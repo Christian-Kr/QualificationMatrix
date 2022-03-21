@@ -13,8 +13,8 @@
 
 #include "qmqualimatrixmodel.h"
 #include "model/qmdatamanager.h"
-#include "model/qmfunctionviewmodel.h"
-#include "model/qmtrainingviewmodel.h"
+#include "model/view/qmfunctionviewmodel.h"
+#include "model/view/qmtrainingviewmodel.h"
 #include "model/qmqualificationmatrixmodel.h"
 
 #include <QSqlRecord>

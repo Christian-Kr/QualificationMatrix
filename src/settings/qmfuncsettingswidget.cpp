@@ -15,8 +15,8 @@
 #include "ui_qmfuncsettingswidget.h"
 #include "model/qmfunctionmodel.h"
 #include "model/qmfunctiongroupmodel.h"
-#include "model/qmqualificationmatrixviewmodel.h"
-#include "model/qmemployeefunctionviewmodel.h"
+#include "model/view/qmqualificationmatrixviewmodel.h"
+#include "model/view/qmemployeefunctionviewmodel.h"
 #include "framework/delegate/qmproxysqlrelationaldelegate.h"
 #include "framework/delegate/qmcolorchooserdelegate.h"
 

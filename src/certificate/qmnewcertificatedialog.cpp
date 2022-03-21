@@ -13,9 +13,9 @@
 
 #include "qmnewcertificatedialog.h"
 #include "ui_qmnewcertificatedialog.h"
-#include "model/qmtrainingviewmodel.h"
-#include "model/qmemployeeviewmodel.h"
-#include "model/qmshiftviewmodel.h"
+#include "model/view/qmtrainingviewmodel.h"
+#include "model/view/qmemployeeviewmodel.h"
+#include "model/view/qmshiftviewmodel.h"
 #include "settings/qmapplicationsettings.h"
 
 #include <QSortFilterProxyModel>
