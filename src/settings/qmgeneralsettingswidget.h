@@ -47,9 +47,6 @@ public:
     void loadSettings() override;
 
 public slots:
-    /// Open a certificate dialog and choose the path for the backups.
-    void chooseBackupPath();
-
     /// Open a fiel dialog and choose a centrized config certificate.
     void chooseCentralizedSettingsFile();
 

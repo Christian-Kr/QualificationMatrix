@@ -64,12 +64,6 @@ void QMGeneralSettingsWidget::loadSettings()
     auto loadLastDatabase = settings.read("Database/LoadLastOnStartup", true).toBool();
     ui->cbLoadLastDatabase->setChecked(loadLastDatabase);
 
-    ui->gbAutoBackup->setChecked(settings.read("Database/LocalAutoBackup", false).toBool());
-    ui->cbAutoBackupDelete->setChecked(
-        settings.read("Database/LocalAutoBackupDelete", false).toBool());
-    ui->leBackupPath->setText(settings.read("Database/LocalBackupPath", "").toString());
-    ui->spBackupCount->setValue(settings.read("Database/LocalBackupCount", 10).toInt());
-
     ui->cbAutoLogin->setChecked(settings.read("AMS/AutoLogin", false).toBool());
     ui->cbSaveLastLoginName->setChecked(settings.read("AMS/SaveLastLogin", false).toBool());
 }
@@ -114,18 +108,6 @@ void QMGeneralSettingsWidget::chooseCentralizedSettingsFile()
     emitSettingsChanged();
 }
 
-void QMGeneralSettingsWidget::chooseBackupPath()
-{
-    QString path = QFileDialog::getExistingDirectory(
-        this, tr("Backupverzeichnis öffnen"), QDir::homePath());
-    if (!path.isEmpty())
-    {
-        ui->leBackupPath->setText(path);
-    }
-
-    emitSettingsChanged();
-}
-
 void QMGeneralSettingsWidget::saveSettings()
 {
     auto &settings = QMApplicationSettings::getInstance();
@@ -134,10 +116,6 @@ void QMGeneralSettingsWidget::saveSettings()
     settings.write("General/Centralized", ui->gbCentralizedSettings->isChecked());
 
     settings.write("Database/LoadLastOnStartup", ui->cbLoadLastDatabase->isChecked());
-    settings.write("Database/LocalAutoBackup", ui->gbAutoBackup->isChecked());
-    settings.write("Database/LocalAutoBackupDelete", ui->cbAutoBackupDelete->isChecked());
-    settings.write("Database/LocalBackupPath", ui->leBackupPath->text());
-    settings.write("Database/LocalBackupCount", ui->spBackupCount->value());
 
     settings.write("General/Lang", ui->cbLanguage->currentText());
     settings.write("General/Style", ui->cbStyle->currentText());

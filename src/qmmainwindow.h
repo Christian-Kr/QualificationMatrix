@@ -102,11 +102,6 @@ public slots:
     /// \return False if it cannot be close or don't exist, else true.
     bool closeDatabase();
 
-    /// Run the auto backup, which includes multiple steps.
-    /// TODO: Put this function into a separate class.
-    /// \return True if success, else false.
-    bool runAutoBackup();
-
     /// Shows the database dialog to manage the database information.
     void manageDatabase();
 

@@ -34,6 +34,7 @@
 #include "framework/qmsqltablemodel.h"
 #include "ams/qmamsmanager.h"
 #include "ams/qmamslogindialog.h"
+#include "backup/qmbackupmanager.h"
 
 #include <QProgressDialog>
 #include <QSqlRelationalTableModel>
@@ -266,15 +267,14 @@ void QMMainWindow::initAfterDatabaseOpened()
     // Make an database backup from the auto system if wanted. Backup should only be run if the driver is QSQLITE,
     // cause this one is file based.
     auto &settings = QMApplicationSettings::getInstance();
-    auto autoBackup = settings.read("Database/LocalAutoBackup", false).toBool();
 
-    if (autoBackup && db.driverName() == "QSQLITE")
+    // Run backup trigger of the database.
+    auto bm = QMBackupManager::getInstance();
+
+    if (!bm->trigger())
     {
-        if (!runAutoBackup())
-        {
-            QMessageBox::warning(this, tr("Backup"), tr("Das Backup konnte nicht erfolgreich durchgeführt werden."));
-            return;
-        }
+        QMessageBox::warning(this, tr("Backup"), tr("Das Backup konnte nicht erfolgreich durchgeführt werden."));
+        return;
     }
 
     // Initialize the AMS system.
@@ -377,68 +377,6 @@ void QMMainWindow::closeProgress()
                 "\n\nhttps://github.com/Christian-Kr/QualificationMatrix"
                 "\n\nBug-Reports: Fehler können direkt auf GitHub gemeldet werden"
                 " oder per E-Mail an CerebrosuS_aedd_gmx.net"));
-}
-
-bool QMMainWindow::runAutoBackup()
-{
-    // Look if the path exist.
-    auto &settings = QMApplicationSettings::getInstance();
-    QFileInfo pathInfo(settings.read("Database/LocalBackupPath").toString());
-
-    if (!pathInfo.isDir() || !pathInfo.exists() || !pathInfo.isWritable())
-    {
-        QMessageBox::critical(this, tr("Backup anlegen"),
-                tr("Der angegebene Ordner in den Einstellungen ist kein "
-                    "Verzeichnis, existiert nicht oder ist nicht beschreibbar."));
-        return false;
-    }
-
-    // Get a list of all backup files for the given database.
-    auto db = QSqlDatabase::database("default", false);
-
-    QString preName = db.databaseName().split("/").last().split(".").first();
-    QDir backupDir(pathInfo.absoluteFilePath());
-    QStringList filters;
-    filters << QString(preName + "-*.qmsql");
-    backupDir.setNameFilters(filters);
-    backupDir.setSorting(QDir::Name);
-    QFileInfoList backupFileList = backupDir.entryInfoList();
-
-    // If auto backup delete is on and too many backup files exist, delete the last x backups to fit the maximum
-    // number of backup counts. The files have a timestamp. Therefore the sorting is from oldest to newest.
-
-    auto varAutoBackupDelete = settings.read("Database/LocalAutoBackupDelete");
-    auto autoBackupDelete = !(varAutoBackupDelete.isNull()) && varAutoBackupDelete.toBool();
-    auto varBackupCount = settings.read("Database/LocalBackupCount");
-    auto backupCount = (varBackupCount.isNull()) ? 10 : varBackupCount.toInt();
-
-    if (autoBackupDelete && backupFileList.size() >= backupCount)
-    {
-        // Delete files till backupCount is ok.
-        while (backupFileList.size() >= backupCount)
-        {
-            QFileInfo deleteFileInfo = backupFileList.takeFirst();
-            QFile deleteFile(deleteFileInfo.absoluteFilePath());
-            if (!deleteFile.remove())
-            {
-                QMessageBox::critical(this, tr("Backup löschen"),
-                        tr("Die Backupdatei konnte nicht gelöscht werden und wird übersprungen."));
-            }
-        }
-    }
-
-    // Create new backup file.
-    auto currDateTime = QDateTime::currentDateTime();
-    QString newName = currDateTime.toString("yyyy-MM-dd-hh-mm-ss");
-    newName = preName + "-" + newName + ".qmsql";
-    QFile copyFile(db.databaseName());
-    if (!copyFile.copy(pathInfo.absoluteFilePath() + QDir::separator() + newName))
-    {
-        QMessageBox::critical(this, tr("Backup erstellen"),
-                tr("Die Backupdatei konnte nicht kopiert werden und wird übersprungen."));
-    }
-
-    return true;
 }
 
 bool QMMainWindow::closeDatabase()
