@@ -397,8 +397,7 @@ bool QMMainWindow::closeDatabase()
                     // TODO: save database
                     break;
                 case QMessageBox::No:
-                    // TODO: nothing to do
-                    break;
+                    return false;
                 default:
                     break;
             }
