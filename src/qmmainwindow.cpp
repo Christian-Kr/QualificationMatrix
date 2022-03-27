@@ -695,8 +695,8 @@ void QMMainWindow::enterWindowMode(WIN_MODE mode)
             connect(qualiResultWidget.get(), &QMWinModeWidget::startWorkload, this, &QMMainWindow::workloadStarts);
             connect(qualiResultWidget.get(), &QMWinModeWidget::updateWorkload, this, &QMMainWindow::workloadUpdates);
             connect(qualiResultWidget.get(), &QMWinModeWidget::endWorkload, this, &QMMainWindow::closeProgress);
-            connect(qualiResultWidget.get(), &QMQualiResultWidget::showTrainData, this,
-                    &QMMainWindow::showTrainingData);
+//            connect(qualiResultWidget.get(), &QMQualiResultWidget::showTrainData, this,
+//                    &QMMainWindow::showTrainingData);
 
             qualiResultWidget->updateData();
 
