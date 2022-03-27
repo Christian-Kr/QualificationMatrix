@@ -120,11 +120,6 @@ public slots:
     /// Show dialog for certificate integrity check.
     [[maybe_unused]] void showCertificateIntegrityCheck();
 
-    /// Show the training data widget with the given filter name and training.
-    /// \param name
-    /// \param training
-    void showTrainingData(QString name, QString training);
-
     /// Enter the result window mode.
     [[maybe_unused]] void enterResultMode();
 

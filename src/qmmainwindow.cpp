@@ -464,17 +464,6 @@ void QMMainWindow::saveSettings()
     enterWindowMode(tmpMode);
 }
 
-void QMMainWindow::showTrainingData(QString, QString)
-{
-    // TODO: This is not possible anymore. Think about different ways.
-//    ui->twQualiMatrix->setCurrentIndex(2);
-//
-//    trainDataWidget->resetFilter();
-//    trainDataWidget->setNameFilter(name);
-//    trainDataWidget->setTrainFilter(training);
-//    trainDataWidget->updateFilter();
-}
-
 [[maybe_unused]] void QMMainWindow::manageCertificate()
 {
     // If do not have the permission, make a lot of stuff disabled.
