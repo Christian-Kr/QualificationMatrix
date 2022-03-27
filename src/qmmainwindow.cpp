@@ -47,7 +47,6 @@
 #include <QSqlRelationalDelegate>
 #include <QPrinter>
 #include <QPainter>
-#include <QDateTime>
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QTranslator>
