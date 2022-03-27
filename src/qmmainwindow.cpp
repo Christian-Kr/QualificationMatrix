@@ -315,7 +315,7 @@ bool QMMainWindow::saveSingleDatabaseBackup(const QSqlDatabase &db)
     return true;
 }
 
-void QMMainWindow::workloadStarts(QString info, int maxSteps)
+void QMMainWindow::workloadStarts(const QString& info, int maxSteps)
 {
     showProgress(tr("Berechnung"), info, 0, maxSteps);
 }

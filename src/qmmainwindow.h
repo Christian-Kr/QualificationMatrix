@@ -89,7 +89,7 @@ public slots:
     /// Informate before a workload starts. This will show a progress dialog with progress information.
     /// \param maxSteps Maximum number of steps in progress.
     /// \param info Information about what happens.
-    void workloadStarts(QString info, int maxSteps);
+    void workloadStarts(const QString& info, int maxSteps);
 
     /// Only call when progressdialog object has been created and dialog is visible.
     /// \param currentStep Needs be lower than maximum step.
