@@ -388,8 +388,7 @@ bool QMMainWindow::closeDatabase()
         if (db.isOpen())
         {
             auto res = QMessageBox::question(this, tr("Datenbank schließen"),
-                    tr("Soll die verbundene Datenbank wirklich geschlossen werden? (Nicht gespeicherte Daten gehen "
-                       "verloren!)"),
+                    tr("Soll die verbundene Datenbank wirklich geschlossen werden?"),
                 QMessageBox::Yes | QMessageBox::No);
 
             switch (res)
