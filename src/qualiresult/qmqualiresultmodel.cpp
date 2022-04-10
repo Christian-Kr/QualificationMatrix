@@ -16,6 +16,7 @@
 #include "settings/qmapplicationsettings.h"
 #include "model/view/qmtrainingviewmodel.h"
 #include "ams/qmamsmanager.h"
+#include "model/view/qmtrainingexceptionviewmodel.h"
 
 #include <QSqlQuery>
 #include <QSqlRecord>
@@ -282,6 +283,21 @@ bool QMQualiResultModel::updateQualiInfo(const QString &filterName, const QStrin
     auto ignoreList = settings.read("QualiResult/IgnoreList", QStringList()).toStringList();
     auto doIgnore = settings.read("QualiResult/DoIgnore", true).toBool();
 
+    // Get the TrainExceptionView model.
+    QMTrainingExceptionViewModel trainExceptViewModel(this, db);
+    trainExceptViewModel.select();
+
+    // Create hash table from training exception model.
+    QHash<QString, QString> trainExceptHash;
+    for (int i = 0; i < trainExceptViewModel.rowCount(); i++)
+    {
+        auto name = trainExceptViewModel.data(trainExceptViewModel.index(i, 1)).toString();
+        auto train = trainExceptViewModel.data(trainExceptViewModel.index(i, 2)).toString();
+        auto desc = trainExceptViewModel.data(trainExceptViewModel.index(i, 3)).toString();
+
+        trainExceptHash.insert(name + "_" + train, desc);
+    }
+
     int i = 0;
     while (query.next())
     {
@@ -309,6 +325,13 @@ bool QMQualiResultModel::updateQualiInfo(const QString &filterName, const QStrin
                 delete result;
                 continue;
             }
+        }
+
+        // Remove all entries, an expetion exist for.
+        if (trainExceptHash.contains(result->getFirstName() + "_" + result->getTraining()))
+        {
+            delete result;
+            continue;
         }
 
         resultRecords->append(result);
@@ -340,7 +363,7 @@ QVariant QMQualiResultModel::headerData(int section, Qt::Orientation orientation
 {
     if (role != Qt::DisplayRole)
     {
-        return QVariant();
+        return {};
     }
 
     if (orientation == Qt::Orientation::Horizontal)
@@ -372,7 +395,7 @@ QVariant QMQualiResultModel::headerData(int section, Qt::Orientation orientation
         return section + 1;
     }
 
-    return QVariant();
+    return {};
 }
 
 bool QMQualiResultModel::setHeaderData(
