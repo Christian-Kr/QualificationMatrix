@@ -14,24 +14,18 @@
 #include "qmqualiresultmodel.h"
 #include "qmqualiresultrecord.h"
 #include "settings/qmapplicationsettings.h"
-#include "model/view/qmfunctionviewmodel.h"
 #include "model/view/qmtrainingviewmodel.h"
-#include "model/view/qmemployeeviewmodel.h"
-#include "model/view/qmqualificationmatrixviewmodel.h"
-#include "model/view/qmtrainingdataviewmodel.h"
-#include "model/view/qmtrainingexceptionviewmodel.h"
-#include "model/view/qmemployeefunctionviewmodel.h"
+#include "ams/qmamsmanager.h"
 
 #include <QSqlQuery>
 #include <QSqlRecord>
+#include <QSqlResult>
 #include <QSqlError>
 #include <QList>
 #include <QDate>
 #include <QColor>
 #include <QSortFilterProxyModel>
 #include <QHash>
-
-#include <QDebug>
 
 QMQualiResultModel::QMQualiResultModel(QObject *parent)
     : QAbstractTableModel(parent)
@@ -52,262 +46,294 @@ void QMQualiResultModel::resetModel()
     endRemoveRows();
 }
 
-bool QMQualiResultModel::updateQualiInfo(const QString &filterName, const QString &filterFunc,
-    const QString &filterTrain, const QString &filterEmployeeGroup)
+QMQualiResultRecord* QMQualiResultModel::getResultFromRecord(const QSqlRecord &record)
 {
+    auto *result = new QMQualiResultRecord(this);
+
+    result->setFirstName(record.value("employee_name").toString());
+    result->setFunction(record.value("func_name").toString());
+    result->setInterval(record.value("train_interval").toInt());
+    result->setLastDate(record.value("train_date").toString());
+    result->setTraining(record.value("train_name").toString());
+    result->setQualiState(record.value("quali_state").toString());
+    result->setTrainingGroup(record.value("train_group").toString());
+
+    // Calculate and set further information.
+    auto lastDate = QDate::fromString(result->getLastDate(), Qt::DateFormat::ISODate);
+    QDate nextDate;
+    if (result->getInterval() > 0)
+    {
+        nextDate = lastDate.addYears(result->getInterval());
+        result->setNextDate(nextDate.toString(Qt::DateFormat::ISODate));
+    }
+
+    if (result->getQualiState().compare(tr("Pflicht")) == 0)
+    {
+        auto currDate = QDate::currentDate();
+
+        if (lastDate.isValid())
+        {
+            if (result->getInterval() == 0)
+            {
+                result->setTrainingState(tr("Gut"));
+            }
+            else
+            {
+                if (nextDate < currDate)
+                {
+                    result->setTrainingState(tr("Schlecht"));
+                    result->setInformation(tr("Schulung planen!"));
+                }
+                else
+                {
+                    auto &settings = QMApplicationSettings::getInstance();
+                    auto monthExpire = settings.read("QualiResult/MonthExpire", 6).toInt();
+
+                    result->setTrainingState(tr("Gut"));
+
+                    if (nextDate.addMonths(-1*monthExpire) < currDate && !nextDate.isValid())
+                    {
+                        result->setInformation(tr("Schulung planen!"));
+                    }
+                }
+            }
+        }
+        else
+        {
+            result->setTrainingState(tr("Schlecht"));
+            result->setInformation(tr("Schulung planen!"));
+        }
+    }
+    else
+    {
+        result->setTrainingState(tr("Gut"));
+    }
+
+    return result;
+}
+
+bool QMQualiResultModel::updateQualiInfo(const QString &filterName, const QString &filterFunc,
+    const QString &filterTrain, const QString &filterEmployeeGroup, bool showTemporarilyDeactivated,
+    bool showPersonnelLeasing, bool showTrainee, bool showApprentice)
+{
+    resetModel();
+
+    // Informate listener.
+    emit beforeUpdateQualiInfo(tr("Datenbankabfrage"), 100);
+
+    // Generate filter string for query.
+
+    QStringList employeeFilterValues;
+    QString employeeFilterQuery = "";
+    for (const QString &employee : filterName.split(";"))
+    {
+        if (!employee.isEmpty())
+        {
+            employeeFilterValues << "employee_name = '" + employee + "'";
+        }
+    }
+    employeeFilterQuery = (!employeeFilterValues.isEmpty()) ? "(" + employeeFilterValues.join(" OR ") + ") and " : "";
+
+    QStringList employeeGroupFilterValues;
+    QString employeeGroupFilterQuery = "";
+    for (const QString &employeeGroup : filterEmployeeGroup.split(";"))
+    {
+        if (!employeeGroup.isEmpty())
+        {
+            employeeGroupFilterValues << "employee_group = '" + employeeGroup + "'";
+        }
+    }
+    employeeGroupFilterQuery = (!employeeGroupFilterValues.isEmpty()) ? "(" + employeeGroupFilterValues.join(" OR ") +
+            ") and " : "";
+
+    QStringList funcFilterValues;
+    QString funcFilterQuery = "";
+    for (const QString &func : filterFunc.split(";"))
+    {
+        if (!func.isEmpty())
+        {
+            funcFilterValues << "func_name = '" + func + "'";
+        }
+    }
+    funcFilterQuery = (!funcFilterValues.isEmpty()) ? "(" + funcFilterValues.join(" OR ") + ") and " : "";
+
+    QStringList trainFilterValues;
+    QString trainFilterQuery = "";
+    for (const QString &train : filterTrain.split(";"))
+    {
+        if (!train.isEmpty())
+        {
+            trainFilterValues << "train_name = '" + train + "'";
+        }
+    }
+    trainFilterQuery = (!trainFilterValues.isEmpty()) ? "(" + trainFilterValues.join(" OR ") + ") and " : "";
+
     // Get the current database and update data only when it is connected.
     if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
     {
         return false;
     }
 
+    // Test if a query should include temporarily deactivated employee or not.
+    QString temporarilyDeactivatedQuery = "";
+    if (!showTemporarilyDeactivated)
+    {
+        temporarilyDeactivatedQuery = "Employee.temporarily_deactivated = 0 and ";
+    }
+
+    // Test if a query should include personnel leasing employee or not.
+    QString personnelLeasingQuery = "";
+    if (!showPersonnelLeasing)
+    {
+        personnelLeasingQuery = "Employee.personnel_leasing = 0 and ";
+    }
+
+    // Test if a query should include trainee employee or not.
+    QString traineeQuery = "";
+    if (!showTrainee)
+    {
+        traineeQuery = "Employee.trainee = 0 and ";
+    }
+
+    // Test if a query should include apprentice employee or not.
+    QString apprenticeQuery = "";
+    if (!showApprentice)
+    {
+        apprenticeQuery = "Employee.apprentice = 0 and ";
+    }
+
+    // Most important filter should be done for employee ams manager permissions. The ams system restricts the access
+    // to employees. Only access to employees is allowed, that are in the permission list of the
+    auto amsManager = QMAMSManager::getInstance();
+
+    QStringList primaryKeysString;
+    QList<int> primaryKeyInt = amsManager->getEmployeePrimaryKeys();
+    for (int i = 0; i < primaryKeyInt.count(); i++)
+    {
+        if (i != 0)
+        {
+            primaryKeysString << ",";
+        }
+
+        primaryKeysString << QString("%1").arg(primaryKeyInt.at(i));
+    }
+
+    QString amsQuery = "Employee.id IN (" + primaryKeysString.join("") + ") and";
+
     auto db = QSqlDatabase::database("default");
 
-    QMFunctionViewModel funcViewModel(this, db);
-    funcViewModel.select();
+    QString strQualiMatrixQuery =
+            "SELECT DISTINCT "
+            "   Train.id as train_id, "
+            "   Employee.id as employee_id, "
+            "   Employee.name as employee_name, "
+            "   Shift.name as employee_group, "
+            "   Func.name as func_name, "
+            "   Train.name as train_name, "
+            "   TrainGroup.name train_group, "
+            "   Train.interval as train_interval, "
+            "   QualiState.name as quali_state, "
+            "   TrainData.date as train_date, "
+            "   TrainException.explanation as train_exception "
+            "FROM "
+            "   Employee, Train, Func, EmployeeFunc, QualiData, QualiState, TrainGroup, Shift "
+            "LEFT OUTER JOIN TrainData ON "
+            "   Train.id = TrainData.train and "
+            "   Employee.id = TrainData.employee "
+            "LEFT OUTER JOIN TrainException ON "
+            "   Train.id = TrainException.train and "
+            "   Employee.id = TrainException.employee "
+            "WHERE "
+            + amsQuery +
+            "   Employee.shift = Shift.id and "
+            "   Train.'group' = TrainGroup.id and "
+            "   QualiData.train = Train.id and "
+            "   QualiData.func = Func.id and "
+            "   EmployeeFunc.func = Func.id and "
+            "   EmployeeFunc.employee = Employee.id and "
+            "   QualiData.qualistate = QualiState.id and "
+            "   Employee.active = 1 and "
+            + employeeFilterQuery
+            + funcFilterQuery
+            + employeeGroupFilterQuery
+            + trainFilterQuery
+            + temporarilyDeactivatedQuery
+            + personnelLeasingQuery
+            + traineeQuery
+            + apprenticeQuery +
+            "   (train_date = ( "
+            "       SELECT "
+            "           MAX(date) "
+            "       FROM "
+            "           TrainData "
+            "       WHERE "
+            "           Train.id = TrainData.train and "
+            "           Employee.id = TrainData.employee "
+            "   ) OR train_date IS NULL) "
+            "ORDER BY "
+            "   Employee.name";
 
-    QMTrainingViewModel trainViewModel(this, db);
-    trainViewModel.select();
-
-    QMTrainingDataViewModel trainDataViewModel(this, db);
-    trainDataViewModel.select();
-
-    QMQualificationMatrixViewModel qualiViewModel(this, db);
-    qualiViewModel.select();
-
-    QMEmployeeViewModel employeeViewModel(this, db);
-    employeeViewModel.select();
-
-    QMEmployeeFunctionViewModel employeeFuncViewModel(this, db);
-    employeeFuncViewModel.select();
-
-    QMTrainingExceptionViewModel trainExceptionViewModel(this, db);
-    trainExceptionViewModel.select();
-
-    QSortFilterProxyModel filterEmployeeGroupModel(this);
-    filterEmployeeGroupModel.setSourceModel(&employeeViewModel);
-    filterEmployeeGroupModel.setFilterKeyColumn(2);
-    filterEmployeeGroupModel.setFilterRegularExpression(filterEmployeeGroup);
-
-    QSortFilterProxyModel filterEmployeeModel(this);
-    filterEmployeeModel.setSourceModel(&filterEmployeeGroupModel);
-    filterEmployeeModel.setFilterKeyColumn(1);
-    filterEmployeeModel.setFilterRegularExpression(filterName);
-
-    resetModel();
-
-    // Rebuild caches.
-    buildIntervalCache(trainViewModel);
-    buildTrainGroupCache(trainViewModel);
-
-    // Informate listener.
-    emit beforeUpdateQualiInfo(tr("Berechne Qualifizierungsresultat"), filterEmployeeModel.rowCount());
+    QSqlQuery query(strQualiMatrixQuery, db);
+    query.last();
+    int numElem = query.at() + 1;
+    query.seek(-1);
 
     auto &settings = QMApplicationSettings::getInstance();
     auto ignoreList = settings.read("QualiResult/IgnoreList", QStringList()).toStringList();
     auto doIgnore = settings.read("QualiResult/DoIgnore", true).toBool();
-    auto monthExpire = settings.read("QualiResult/MonthExpire", 6).toInt();
 
-    for (int i = 0; i < filterEmployeeModel.rowCount(); i++)
+    int i = 0;
+    while (query.next())
     {
-        // Informate listener.
-        emit updateUpdateQualiInfo(i);
+        emit updateUpdateQualiInfo(i++*100/numElem);
 
-        // Build new data structure.
-        QString name = filterEmployeeModel.data(filterEmployeeModel.index(i, 1)).toString();
+        // Read in the first entry.
+        QMQualiResultRecord *result = getResultFromRecord(query.record());
 
-        // get all functions as a list from an employee
-        employeeFuncViewModel.setFilter("name='" + name + "'");
-        for (int j = 0; j < employeeFuncViewModel.rowCount(); j++)
+        // Remove all entries, that are set on ignore for qualification result.
+        if (doIgnore)
         {
-            QString func = employeeFuncViewModel.data(employeeFuncViewModel.index(j, 2)).toString();
-
-            // Ignore if filtered or global filtered in settings.
-            if (!filterFunc.isEmpty() && !func.contains(filterFunc))
+            auto found = false;
+            for (const QString &ignoreEntry : ignoreList)
             {
+                if (result->getTraining().contains(ignoreEntry) ||
+                    result->getTrainingGroup().contains(ignoreEntry))
+                {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (found)
+            {
+                delete result;
                 continue;
             }
-
-            // Go through all trainings of a function.
-            qualiViewModel.setFilter("name='" + func + "'");
-            for (int k = 0; k < qualiViewModel.rowCount(); k++)
-            {
-                QString train = qualiViewModel.data(qualiViewModel.index(k, 2)).toString();
-                QString qualiState = qualiViewModel.data(qualiViewModel.index(k, 3)).toString();
-
-                // Ignore, if there is no qualiState.
-                if (qualiState.isEmpty())
-                {
-                    continue;
-                }
-
-                // Ignore if filtered or global filtered in settings.
-                if ((!filterTrain.isEmpty() && !train.contains(filterTrain)) ||
-                    (doIgnore && ignoreList.contains(train)))
-                {
-                    continue;
-                }
-
-                // General filter in settings für ignoring trainings and training groups.
-                // TODO: Implement in frontend (description)
-                if (doIgnore)
-                {
-                    if (trainGroupCache->contains(train))
-                    {
-                        QString trainGroup = trainGroupCache->value(train);
-
-                        if (!trainGroup.isEmpty() && ignoreList.contains(trainGroup))
-                        {
-                            continue;
-                        }
-                    }
-                }
-
-                // Search for train exception and filter train.
-                bool filterException = false;
-                for (int l = 0; l < trainExceptionViewModel.rowCount(); l++)
-                {
-                    QString temEmployee = trainExceptionViewModel.data(trainExceptionViewModel.index(l, 1)).toString();
-                    QString temTrain = trainExceptionViewModel.data(trainExceptionViewModel.index(l, 2)).toString();
-                    if (temEmployee == name && temTrain == train)
-                    {
-                        filterException = true;
-                    }
-                }
-                if (filterException)
-                {
-                    continue;
-                }
-
-                // create result record with all properties
-                auto record = new QMQualiResultRecord(this);
-                record->setFirstName(name);
-                record->setFunction(func);
-                record->setTraining(train);
-                record->setQualiState(qualiState);
-
-                // Find all trainings of this type for the employee and add them to calculate the latest last date.
-                trainDataViewModel.setFilter("name='" + name + "'");
-
-                // Final date and state objects.
-                QDate lastDate;
-                QDate nextDate;
-                QString trainDataState;
-
-                // Search for a training data entry, that fits the searched train to get a record.
-                for (int l = 0; l < trainDataViewModel.rowCount(); l++)
-                {
-                    QString trainDataEntry = trainDataViewModel.data(trainDataViewModel.index(l, 2)).toString();
-
-                    if (train == trainDataEntry)
-                    {
-                        // Found an entry that fits the train and employee in train data.
-
-                        // Get and set the date and train data state.
-                        QString strDate = trainDataViewModel.data(trainDataViewModel.index(l, 3)).toString();
-                        QDate tmpDate = QDate::fromString(strDate, Qt::ISODate);
-                        trainDataState = trainDataViewModel.data(trainDataViewModel.index(l, 4)).toString();
-
-                        // Logic: There two different states. The training could have been conducted or registered. For
-                        // both states, the newest date are the relevant ones.
-                        if (trainDataState == tr("Angemeldet"))
-                        {
-                            if (nextDate.isNull() || tmpDate > nextDate)
-                            {
-                                nextDate = tmpDate;
-                            }
-                        }
-
-                        if (trainDataState == tr("Durchgeführt"))
-                        {
-                            if (lastDate.isNull() || tmpDate > lastDate)
-                            {
-                                lastDate = tmpDate;
-                            }
-                        }
-                    }
-                }
-
-                if (lastDate.isValid())
-                {
-                    record->setLastDate(lastDate.toString(Qt::ISODate));
-                }
-
-                if (nextDate.isValid())
-                {
-                    record->setNextDate(nextDate.toString(Qt::ISODate));
-                }
-
-                int interval = -1;
-                if (intervalCache->contains(train))
-                {
-                    interval = intervalCache->value(train);
-                }
-
-                if (interval < 0)
-                {
-                    qDebug() << "This should never happen. No training with this name found for interval";
-                }
-
-                record->setInterval(interval);
-
-                // Training state: Can only be good or bad. There should nothing exist inbetween.
-                if (qualiState == tr("Pflicht"))
-                {
-                    auto currDate = QDate::currentDate();
-
-                    if (lastDate.isValid())
-                    {
-                        if (interval == 0)
-                        {
-                            record->setTrainingState(tr("Gut"));
-                        }
-                        else
-                        {
-                            if (lastDate.addYears(interval) < currDate)
-                            {
-                                record->setTrainingState(tr("Schlecht"));
-                                record->setInformation(tr("Schulung planen!"));
-                            }
-                            else
-                            {
-                                record->setTrainingState(tr("Gut"));
-
-                                if (lastDate.addYears(interval).addMonths(-1*monthExpire) < currDate &&
-                                    !nextDate.isValid())
-                                {
-                                    record->setInformation(tr("Schulung planen!"));
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {
-                        record->setTrainingState(tr("Schlecht"));
-                        record->setInformation(tr("Schulung planen!"));
-                    }
-                }
-                else
-                {
-                    record->setTrainingState(tr("Gut"));
-                }
-
-                resultRecords->append(record);
-            }
         }
+
+        resultRecords->append(result);
     }
 
-    beginInsertRows(QModelIndex(), 0, resultRecords->size() - 1);
-    endInsertRows();
+    // After finish the results are not accesible anymore.
+    query.finish();
 
-    employeeFuncViewModel.setFilter("");
-    qualiViewModel.setFilter("");
-    trainDataViewModel.setFilter("");
+    beginInsertRows(QModelIndex(), 0, (int) resultRecords->size() - 1);
+    endInsertRows();
 
     // Informate listener.
     emit afterUpdateQualiInfo();
 
     return true;
+}
+
+QMQualiResultRecord* QMQualiResultModel::getQualiResultRecord(const int &num)
+{
+    if (num >= resultRecords->count() || num < 0)
+    {
+        return nullptr;
+    }
+
+    return resultRecords->at(num);
 }
 
 QVariant QMQualiResultModel::headerData(int section, Qt::Orientation orientation, int role) const

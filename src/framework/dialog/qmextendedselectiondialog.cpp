@@ -95,3 +95,19 @@ QString QMExtendedSelectionDialog::getRegExpText() const
 
     return finalValue;
 }
+
+QStringList QMExtendedSelectionDialog::getSelectedElements() const
+{
+    QStringList selection;
+
+    auto modelIndexList = getFilterSelected();
+
+    for (auto modelIndex : modelIndexList)
+    {
+        auto value = filterModel->data(
+                filterModel->index(modelIndex.row(), filterModel->filterKeyColumn())).toString();
+        selection << value;
+    }
+
+    return selection;
+}

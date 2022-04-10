@@ -42,6 +42,9 @@ public:
     void setTraining(const QString &training) { train = training; }
     QString getTraining() const { return train; }
 
+    void setTrainingGroup(const QString &trainingGroup) { trainGroup = trainingGroup; }
+    QString getTrainingGroup() const { return trainGroup; }
+
     void setTrainingDataState(const QString &tDState) { trainDataState = tDState; }
     QString getTrainingDataState() const { return trainDataState; }
 
@@ -66,12 +69,17 @@ public:
     void setInformation(const QString &info) { information = info; }
     QString getInformation() { return information; }
 
+    void setCertificateFilePath(const QString &path) { certificateFilePath = path; }
+    QString getCertificateFilePath() { return certificateFilePath; }
+
 private:
+    QString certificateFilePath;
     QString information;
     QString firstName;
     QString lastName;
     QString func;
     QString train;
+    QString trainGroup;
     QString nextDate;
     QString qualiState;
     QString lastDate;

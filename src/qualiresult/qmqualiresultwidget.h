@@ -50,19 +50,19 @@ public slots:
     void showCreateReportDialog();
 
     /// Prints the qualification result to a pdf certificate.
-    void printToPDF();
+    [[maybe_unused]] void printToPDF();
 
     /// Save table to csv certificate.
     void saveToCsv();
 
     /// Update calculation with all filters.
-    void updateFilterAndCalculate();
+    [[maybe_unused]] void updateFilterAndCalculate();
 
     /// Update the models, cause they might have changed.
     void updateData();
 
     /// Show or hide filter elements.
-    void switchFilterVisibility();
+    [[maybe_unused]] void switchFilterVisibility();
 
     /// Empty the text in all filters.
     void resetFilter();
@@ -74,13 +74,13 @@ public slots:
     void saveSettings();
 
     /// Resets the model.
-    void resetModel();
+    [[maybe_unused]] void resetModel();
 
     /// Called when the visibility of the filter dock widget changed.
     void filterVisibilityChanged();
 
     /// Reset func filter box.
-    void resetFunc();
+    [[maybe_unused]] void resetFunc();
 
     /// Reset train filter box.
     void resetTrain();
@@ -97,6 +97,12 @@ public slots:
     /// Show extended filter dialog for employee.
     void extSelEmployee();
 
+    /// Show extended filter dialog for train.
+    void extSelTrain();
+
+    /// Show extended filter dialog for func.
+    void extSelFunc();
+
     /// Show extended filter dialog for employee group.
     void extSelEmployeeGroup();
 
@@ -104,11 +110,10 @@ public slots:
     void extSelTrainResultState();
 
     /// Reaction when there is a double click on an element.
-    void onDoubleClick(const QModelIndex index);
+    void onDoubleClick(QModelIndex index);
 
-signals:
-    /// Emited when the corresponding train data entry should be shown.
-    void showTrainData(QString name, QString training);
+    /// Show the certificate of the selected entry.
+    void showCertificate();
 
 private:
     /// Create printer for pdf.

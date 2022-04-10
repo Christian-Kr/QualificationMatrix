@@ -56,6 +56,10 @@ public:
     /// \return The regular expression text.
     QString getRegExpText() const;
 
+    /// Get the selections as a list.
+    /// return The selected values as a list.
+    QStringList getSelectedElements() const;
+
 public slots:
     /// Update filter.
     void updateFilter();

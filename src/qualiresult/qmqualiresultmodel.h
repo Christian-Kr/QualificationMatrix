@@ -21,6 +21,7 @@
 class QMQualiResultRecord;
 class QMTrainingViewModel;
 class QSqlTableModel;
+class QSqlRecord;
 
 /// A model for holding the table view data representation.
 /// \author Christian Kr, Copyright 2020
@@ -84,12 +85,22 @@ public:
     /// \param filterFunc
     /// \param filterName
     /// \param filterTrain
+    /// \param showTemporaryDeactivated Show employees that are temporarily deactivated if true.
+    /// \param showPersonnelLeasing Show employees that are personnel leasing if true.
+    /// \param showTrainee Show employees that are trainees if true.
+    /// \param showApprentice Show employees that are apprentice if true.
     /// \return true if succes, else false.
     bool updateQualiInfo(const QString &filterName, const QString &filterFunc, const QString &filterTrain,
-        const QString &filterEmployeeGroup);
+        const QString &filterEmployeeGroup, bool showTemporaryDeactivated = false, bool showPersonnelLeasing = false,
+        bool showTrainee = false, bool showApprentice = false);
 
     /// Resets the model to be empty.
     void resetModel();
+
+    /// Get the result record with the given id.
+    /// \param num The result record number num.
+    /// \return Get the record or null if not availabe.
+    QMQualiResultRecord* getQualiResultRecord(const int &num);
 
 signals:
     /// Emited before the quali info will be updated.
@@ -113,6 +124,11 @@ private:
     /// Build an train group cache to speed up search. This correlates the training name to a group.
     /// \param trainViewModel The training group view model.
     void buildTrainGroupCache(QMTrainingViewModel &trainViewModel);
+
+    /// Read the result record and return a new result record object.
+    /// The object needs to be deleted by the reciever.
+    /// \return The new object or nullptr if reading fails.
+    QMQualiResultRecord* getResultFromRecord(const QSqlRecord &record);
 
     QList<QMQualiResultRecord *> *resultRecords;
     QHash<QString, int> *intervalCache;

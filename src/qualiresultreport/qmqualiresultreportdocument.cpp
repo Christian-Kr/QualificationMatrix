@@ -26,6 +26,8 @@ QMQualiResultReportDocument::QMQualiResultReportDocument(QObject *parent)
 
 void QMQualiResultReportDocument::createDocument(QList<QMQualiResultReportItem> &resultItems, QDate date)
 {
+    // TODO: Keine Pflichtschulungen wenn niemand eine Schulung braucht.
+
     QTextCursor cursor(this);
 
     // Set default font.

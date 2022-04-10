@@ -13,7 +13,6 @@
 
 #include "qmqualiresultwidget.h"
 #include "ui_qmqualiresultwidget.h"
-#include "model/qmdatamanager.h"
 #include "qmqualiresultmodel.h"
 #include "framework/dialog/qmextendedselectiondialog.h"
 #include "settings/qmapplicationsettings.h"
@@ -23,6 +22,7 @@
 #include "model/view/qmtrainingdatastateviewmodel.h"
 #include "model/view/qmshiftviewmodel.h"
 #include "qualiresultreport/qmqualiresultreportdialog.h"
+#include "qualiresult/qmqualiresultrecord.h"
 
 #include <QSortFilterProxyModel>
 #include <QPrinter>
@@ -33,9 +33,13 @@
 #include <QPainter>
 #include <QFileDialog>
 #include <QDir>
-#include <QDebug>
 #include <QMessageBox>
 #include <QTextStream>
+#include <QSqlQuery>
+#include <QSqlRecord>
+
+#include <QDesktopServices>
+#include <QTemporaryFile>
 
 QMQualiResultWidget::QMQualiResultWidget(QWidget *parent)
     : QMWinModeWidget(parent)
@@ -67,12 +71,9 @@ QMQualiResultWidget::~QMQualiResultWidget()
     delete ui;
 }
 
-void QMQualiResultWidget::onDoubleClick(const QModelIndex index)
+void QMQualiResultWidget::onDoubleClick(QModelIndex)
 {
-    // Set focus to training data widget.
-    auto name = qualiResultModel->data(qualiResultModel->index(index.row(), 0), Qt::DisplayRole).toString();
-    auto training = qualiResultModel->data(qualiResultModel->index(index.row(), 2), Qt::DisplayRole).toString();
-    emit showTrainData(name, training);
+    showCertificate();
 }
 
 void QMQualiResultWidget::saveSettings()
@@ -145,12 +146,12 @@ void QMQualiResultWidget::resetFilter()
     ui->cbFilterEmployeeGroup->setCurrentText("");
 }
 
-void QMQualiResultWidget::resetModel()
+[[maybe_unused]] void QMQualiResultWidget::resetModel()
 {
     qualiResultModel->resetModel();
 }
 
-void QMQualiResultWidget::updateFilterAndCalculate()
+[[maybe_unused]] void QMQualiResultWidget::updateFilterAndCalculate()
 {
     if (qualiResultModel == nullptr)
     {
@@ -162,12 +163,15 @@ void QMQualiResultWidget::updateFilterAndCalculate()
     QString tmpEmployee = ui->cbFilterEmployee->currentText();
     QString tmpEmployeeGroup = ui->cbFilterEmployeeGroup->currentText();
 
-    qualiResultModel->updateQualiInfo(tmpEmployee, tmpFunc, tmpTrain, tmpEmployeeGroup);
+    ui->tvQualiResult->clearSelection();
+    qualiResultModel->updateQualiInfo(tmpEmployee, tmpFunc, tmpTrain, tmpEmployeeGroup,
+            ui->cbShowTempDeactEmployees->isChecked(), ui->cbShowPersonnelLeasings->isChecked(),
+            ui->cbShowTrainees->isChecked(), ui->cbShowApprentices->isChecked());
     qualiResultFilterTRState->setFilterRegularExpression(ui->cbTrainResultState->currentText());
     ui->tvQualiResult->resizeColumnsToContents();
 }
 
-void QMQualiResultWidget::switchFilterVisibility()
+[[maybe_unused]] void QMQualiResultWidget::switchFilterVisibility()
 {
     ui->dwFilter->setVisible(!ui->dwFilter->isVisible());
 
@@ -189,7 +193,7 @@ void QMQualiResultWidget::filterVisibilityChanged()
     }
 }
 
-void QMQualiResultWidget::saveToCsv()
+[[maybe_unused]] void QMQualiResultWidget::saveToCsv()
 {
     // Ask where to save the csv certificate.
     QString fileName = QFileDialog::getSaveFileName(
@@ -238,8 +242,7 @@ void QMQualiResultWidget::saveToCsv()
     {
         for (int j = 0; j < colCount; j++)
         {
-            csvStream
-                << qualiResultFilterTRState->data(qualiResultFilterTRState->index(i, j)).toString();
+            csvStream << qualiResultFilterTRState->data(qualiResultFilterTRState->index(i, j)).toString();
             if (j < colCount - 1)
             {
                 csvStream << ";";
@@ -258,10 +261,10 @@ void QMQualiResultWidget::saveToCsv()
         tr("Die Daten wurden erfolgreich gespeichert."));
 }
 
-void QMQualiResultWidget::printToPDF()
+[[maybe_unused]] void QMQualiResultWidget::printToPDF()
 {
     // Set up default printer.
-    QPrinter *printer = new QPrinter();
+    auto *printer = new QPrinter();
     printer->setPageOrientation(QPageLayout::Orientation::Landscape);
 
     // Call printer dialog.
@@ -347,7 +350,7 @@ void QMQualiResultWidget::paintPdfRequest(QPrinter *printer)
             // First number column.
             if (j == 0)
             {
-                cursor.insertText(QString().number(i + 1));
+                cursor.insertText(QString::number(i + 1));
             }
             else
             {
@@ -361,66 +364,94 @@ void QMQualiResultWidget::paintPdfRequest(QPrinter *printer)
     document.print(printer);
 }
 
-void QMQualiResultWidget::resetFunc()
+[[maybe_unused]] void QMQualiResultWidget::resetFunc()
 {
     ui->cbFilterFunc->clearEditText();
 }
 
-void QMQualiResultWidget::resetTrain()
+[[maybe_unused]] void QMQualiResultWidget::resetTrain()
 {
     ui->cbFilterTrain->clearEditText();
 }
 
-void QMQualiResultWidget::resetTrainResultState()
+[[maybe_unused]] void QMQualiResultWidget::resetTrainResultState()
 {
     ui->cbTrainResultState->clearEditText();
 }
 
-void QMQualiResultWidget::resetEmployee()
+[[maybe_unused]] void QMQualiResultWidget::resetEmployee()
 {
     ui->cbFilterEmployee->clearEditText();
 }
 
-void QMQualiResultWidget::resetEmployeeGroup()
+[[maybe_unused]] void QMQualiResultWidget::resetEmployeeGroup()
 {
     ui->cbFilterEmployeeGroup->clearEditText();
 }
 
-void QMQualiResultWidget::extSelEmployee()
+[[maybe_unused]] void QMQualiResultWidget::extSelEmployee()
 {
     QMExtendedSelectionDialog extSelDialog(this, employeeViewModel.get(), 1);
     auto res = extSelDialog.exec();
     auto modelIndexList = extSelDialog.getFilterSelected();
 
-    if (modelIndexList.size() < 1 || res == QDialog::Rejected)
+    if (modelIndexList.isEmpty() || res == QDialog::Rejected)
     {
         return;
     }
 
-    ui->cbFilterEmployee->setCurrentText(extSelDialog.getRegExpText());
+    ui->cbFilterEmployee->setCurrentText(extSelDialog.getSelectedElements().join(";"));
 }
 
-void QMQualiResultWidget::extSelEmployeeGroup()
+[[maybe_unused]] void QMQualiResultWidget::extSelTrain()
+{
+    QMExtendedSelectionDialog extSelDialog(this, trainViewModel.get(), 1);
+    auto res = extSelDialog.exec();
+    auto modelIndexList = extSelDialog.getFilterSelected();
+
+    if (modelIndexList.isEmpty() || res == QDialog::Rejected)
+    {
+        return;
+    }
+
+    ui->cbFilterTrain->setCurrentText(extSelDialog.getSelectedElements().join(";"));
+}
+
+[[maybe_unused]] void QMQualiResultWidget::extSelFunc()
+{
+    QMExtendedSelectionDialog extSelDialog(this, funcViewModel.get(), 1);
+    auto res = extSelDialog.exec();
+    auto modelIndexList = extSelDialog.getFilterSelected();
+
+    if (modelIndexList.isEmpty() || res == QDialog::Rejected)
+    {
+        return;
+    }
+
+    ui->cbFilterFunc->setCurrentText(extSelDialog.getSelectedElements().join(";"));
+}
+
+[[maybe_unused]] void QMQualiResultWidget::extSelEmployeeGroup()
 {
     QMExtendedSelectionDialog extSelDialog(this, employeeGroupViewModel.get(), 1);
     auto res = extSelDialog.exec();
     auto modelIndexList = extSelDialog.getFilterSelected();
 
-    if (modelIndexList.size() < 1 || res == QDialog::Rejected)
+    if (modelIndexList.isEmpty() || res == QDialog::Rejected)
     {
         return;
     }
 
-    ui->cbFilterEmployeeGroup->setCurrentText(extSelDialog.getRegExpText());
+    ui->cbFilterEmployeeGroup->setCurrentText(extSelDialog.getSelectedElements().join(";"));
 }
 
-void QMQualiResultWidget::extSelTrainResultState()
+[[maybe_unused]] void QMQualiResultWidget::extSelTrainResultState()
 {
     QMExtendedSelectionDialog extSelDialog(this, ui->cbTrainResultState->model(), 0);
     auto res = extSelDialog.exec();
     auto modelIndexList = extSelDialog.getFilterSelected();
 
-    if (modelIndexList.size() < 1 || res == QDialog::Rejected)
+    if (modelIndexList.isEmpty() || res == QDialog::Rejected)
     {
         return;
     }
@@ -428,9 +459,112 @@ void QMQualiResultWidget::extSelTrainResultState()
     ui->cbTrainResultState->setCurrentText(extSelDialog.getRegExpText());
 }
 
-void QMQualiResultWidget::showCreateReportDialog()
+[[maybe_unused]] void QMQualiResultWidget::showCreateReportDialog()
 {
     QMQualiResultReportDialog createReportDialog(this);
     createReportDialog.setModal(true);
     createReportDialog.exec();
+}
+
+void QMQualiResultWidget::showCertificate()
+{
+    auto selIndex = ui->tvQualiResult->selectionModel()->currentIndex();
+
+    if (!selIndex.isValid())
+    {
+        QMessageBox::information(this, tr("Nachweis"), tr("Kein Eintrag ausgewählt."));
+        return;
+    }
+
+    auto trainDate = qualiResultModel->data(qualiResultModel->index(selIndex.row(), 5), Qt::DisplayRole).toString();
+
+    if (trainDate.isEmpty())
+    {
+        QMessageBox::information(this, tr("Nachweis"), tr("Keine durchgeführte Schulung vorhanden."));
+        return;
+    }
+
+    auto name = qualiResultModel->data(qualiResultModel->index(selIndex.row(), 0), Qt::DisplayRole).toString();
+    auto training = qualiResultModel->data(qualiResultModel->index(selIndex.row(), 2), Qt::DisplayRole).toString();
+
+    auto db = QSqlDatabase::database("default");
+
+    QString strCertQuery =
+        "SELECT "
+        "   Certificate.path as cert_path, "
+        "   Certificate.md5_hash as cert_hash, "
+        "   Certificate.type as cert_type, "
+        "   TrainDataCertificate.train_data as train_data_id, "
+        "   TrainData.date as train_data_date, "
+        "   Train.name as train_name, "
+        "   Employee.name as employee_name "
+        "FROM "
+        "   Certificate, TrainDataCertificate, TrainData, Train, Employee "
+        "WHERE "
+        "   TrainData.employee = Employee.id and "
+        "   TrainDataCertificate.certificate = Certificate.id and "
+        "   TrainData.train = Train.id and "
+        "   TrainDataCertificate.train_data = TrainData.id and "
+        "   train_name = '" + training + "' and "
+        "   employee_name = '" + name + "' and "
+        "   train_data_date = '" + trainDate + "'";
+
+    QSqlQuery query(strCertQuery, db);
+    query.last();
+    int numElem = query.at() + 1;
+    query.seek(-1);
+
+    if (numElem < 1)
+    {
+        QMessageBox::information(this, tr("Nachweis"),
+                tr("Kein Nachweis gefunden. Eventuell existiert ein geplanter Schulungseintrag der noch nicht durch"
+                   "geführt wurde."));
+        query.finish();
+        return;
+    }
+
+    if (numElem > 1)
+    {
+        QMessageBox::warning(this, tr("Nachweis"),
+                tr("Es wurde mehr als ein Nachweis gefunden. Nur der erste wird angezeigt."));
+    }
+
+    if (query.next())
+    {
+        // To show the file, a temporary file will be created. This happens for safety reason.
+
+        auto certPath = query.record().value("cert_path").toString();
+        auto certHash = query.record().value("cert_hash").toString();
+        auto certType = query.record().value("cert_type").toString();
+
+        QFile file(certPath);
+
+        if (!file.exists())
+        {
+            QMessageBox::critical(this, tr("Nachweis"),
+                    tr("Es gibt einen Nachweis, aber die Datei konnte nicht gefunden werden."));
+            query.finish();
+            return;
+        }
+
+        file.open(QIODevice::ReadOnly);
+
+        QTemporaryFile temp(QDir::tempPath() + QDir::separator() + certHash + "XXXXXX" + "." + certType, this);
+        temp.setAutoRemove(false);
+        temp.open();
+
+        temp.write(file.readAll());
+        file.close();
+
+        qDebug() << temp.fileName();
+
+        QDesktopServices::openUrl(QUrl::fromLocalFile(temp.fileName()));
+
+        query.finish();
+    }
+    else
+    {
+        QMessageBox::warning(this, tr("Nachweis"), tr("Datensatz konnte nicht geholt werden."));
+        query.finish();
+    }
 }

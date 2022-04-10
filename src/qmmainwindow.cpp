@@ -337,6 +337,8 @@ void QMMainWindow::showProgress(const QString &title, const QString &text, const
     progressDialog->setLabelText(text);
     progressDialog->setModal(true);
     progressDialog->setVisible(true);
+
+    QApplication::processEvents();
 }
 
 void QMMainWindow::workloadUpdates(int currentStep)
