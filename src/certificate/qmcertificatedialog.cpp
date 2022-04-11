@@ -79,7 +79,7 @@ void QMCertificateDialog::accept()
     // at the same time is allowed.
     auto modelIndex = ui->tvFiles->selectionModel()->selectedRows();
 
-    if (modelIndex.size() != 0)
+    if (modelIndex.size() != 1)
     {
         QMessageBox::information(this, tr("Nachweis auswählen"), tr("Es muss exakt ein Nachweis ausgewählt werden."),
                 QMessageBox::Button::Ok);
