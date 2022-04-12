@@ -476,7 +476,8 @@ void QMQualiResultWidget::showCertificate()
         return;
     }
 
-    auto trainDate = qualiResultModel->data(qualiResultModel->index(selIndex.row(), 5), Qt::DisplayRole).toString();
+    auto trainDate = qualiResultFilterTRState->data(qualiResultFilterTRState->index(selIndex.row(), 5),
+            Qt::DisplayRole).toString();
 
     if (trainDate.isEmpty())
     {
@@ -484,8 +485,10 @@ void QMQualiResultWidget::showCertificate()
         return;
     }
 
-    auto name = qualiResultModel->data(qualiResultModel->index(selIndex.row(), 0), Qt::DisplayRole).toString();
-    auto training = qualiResultModel->data(qualiResultModel->index(selIndex.row(), 2), Qt::DisplayRole).toString();
+    auto name = qualiResultFilterTRState->data(
+            qualiResultFilterTRState->index(selIndex.row(), 0), Qt::DisplayRole).toString();
+    auto training = qualiResultFilterTRState->data(
+            qualiResultFilterTRState->index(selIndex.row(), 2), Qt::DisplayRole).toString();
 
     auto db = QSqlDatabase::database("default");
 
