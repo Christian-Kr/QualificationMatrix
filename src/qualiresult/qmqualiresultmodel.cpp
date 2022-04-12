@@ -54,7 +54,8 @@ QMQualiResultRecord* QMQualiResultModel::getResultFromRecord(const QSqlRecord &r
     result->setFirstName(record.value("employee_name").toString());
     result->setFunction(record.value("func_name").toString());
     result->setInterval(record.value("train_interval").toInt());
-    result->setLastDate(record.value("train_date").toString());
+    result->setLastDate(record.value("train_date_1").toString());
+    result->setNextDate(record.value("train_date_2").toString());
     result->setTraining(record.value("train_name").toString());
     result->setQualiState(record.value("quali_state").toString());
     result->setTrainingGroup(record.value("train_group").toString());
@@ -65,7 +66,6 @@ QMQualiResultRecord* QMQualiResultModel::getResultFromRecord(const QSqlRecord &r
     if (result->getInterval() > 0)
     {
         nextDate = lastDate.addYears(result->getInterval());
-        result->setNextDate(nextDate.toString(Qt::DateFormat::ISODate));
     }
 
     if (result->getQualiState().compare(tr("Pflicht")) == 0)
@@ -234,15 +234,21 @@ bool QMQualiResultModel::updateQualiInfo(const QString &filterName, const QStrin
             "   TrainGroup.name train_group, "
             "   Train.interval as train_interval, "
             "   QualiState.name as quali_state, "
-            "   TrainData.date as train_date, "
-            "   TrainData.state as train_state, "
+            "   TrainDataState1.date as train_date_1, "
+            "   TrainDataState1.state as train_state_1, "
+            "   TrainDataState2.date as train_date_2, "
+            "   TrainDataState2.state as train_state_2, "
             "   TrainException.explanation as train_exception "
             "FROM "
             "   Employee, Train, Func, EmployeeFunc, QualiData, QualiState, TrainGroup, Shift "
-            "LEFT OUTER JOIN TrainData ON "
-            "   Train.id = TrainData.train and "
-            "   Employee.id = TrainData.employee and "
-            "   TrainData.state = 1 "
+            "LEFT OUTER JOIN TrainData TrainDataState1 ON "
+            "   Train.id = TrainDataState1.train and "
+            "   Employee.id = TrainDataState1.employee and "
+            "   TrainDataState1.state = 1 "
+            "LEFT OUTER JOIN TrainData TrainDataState2 ON "
+            "   Train.id = TrainDataState2.train and "
+            "   Employee.id = TrainDataState2.employee and "
+            "   TrainDataState2.state = 2 "
             "LEFT OUTER JOIN TrainException ON "
             "   Train.id = TrainException.train and "
             "   Employee.id = TrainException.employee "
@@ -264,16 +270,26 @@ bool QMQualiResultModel::updateQualiInfo(const QString &filterName, const QStrin
             + personnelLeasingQuery
             + traineeQuery
             + apprenticeQuery +
-            "   (train_date = ( "
-            "       SELECT "
-            "           MAX(date) "
-            "       FROM "
-            "           TrainData "
-            "       WHERE "
-            "           Train.id = TrainData.train and "
-            "           Employee.id = TrainData.employee and "
-            "           TrainData.state = 1 "
-            "   ) OR train_date IS NULL) "
+            "(train_date_1 = ( "
+            "   SELECT "
+            "       MAX(date) "
+            "   FROM "
+            "       TrainData "
+            "   WHERE "
+            "       Train.id = TrainData.train and "
+            "       Employee.id = TrainData.employee and "
+            "       TrainData.state = 1 "
+            ") OR train_date_1 IS NULL) and "
+            "(train_date_2 = ( "
+            "   SELECT "
+            "       MAX(date) "
+            "   FROM "
+            "       TrainData "
+            "   WHERE "
+            "       Train.id = TrainData.train and "
+            "       Employee.id = TrainData.employee and "
+            "       TrainData.state = 2 "
+            ") OR train_date_2 IS NULL) "
             "ORDER BY "
             "   Employee.name";
 
@@ -386,7 +402,7 @@ QVariant QMQualiResultModel::headerData(int section, Qt::Orientation orientation
             case 5:
                 return tr("Letzte Schulung");
             case 6:
-                return tr("Nächste Schulung");
+                return tr("Angemeldete Schulung");
             case 7:
                 return tr("Schulungsstatus");
             case 8:
