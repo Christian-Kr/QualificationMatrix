@@ -23,6 +23,7 @@
 #include "model/view/qmshiftviewmodel.h"
 #include "qualiresultreport/qmqualiresultreportdialog.h"
 #include "qualiresult/qmqualiresultrecord.h"
+#include "framework/dialog/qmselectfromlistdialog.h"
 
 #include <QSortFilterProxyModel>
 #include <QPrinter>
@@ -497,6 +498,7 @@ void QMQualiResultWidget::showCertificate()
         "   Certificate.path as cert_path, "
         "   Certificate.md5_hash as cert_hash, "
         "   Certificate.type as cert_type, "
+        "   Certificate.name as cert_name, "
         "   TrainDataCertificate.train_data as train_data_id, "
         "   TrainData.date as train_data_date, "
         "   Train.name as train_name, "
@@ -513,61 +515,84 @@ void QMQualiResultWidget::showCertificate()
         "   train_data_date = '" + trainDate + "'";
 
     QSqlQuery query(strCertQuery, db);
-    query.last();
-    int numElem = query.at() + 1;
-    query.seek(-1);
 
-    if (numElem < 1)
+    // Read in all certificate rows.
+    struct CertData
     {
-        QMessageBox::information(this, tr("Nachweis"),
-                tr("Kein Nachweis gefunden. Eventuell existiert ein geplanter Schulungseintrag der noch nicht durch"
-                   "geführt wurde."));
-        query.finish();
+        QString path;
+        QString hash;
+        QString type;
+        QString name;
+    };
+
+    QList<CertData> certList;
+
+    while (query.next())
+    {
+        CertData tmpCert;
+
+        tmpCert.path = query.record().value("cert_path").toString();
+        tmpCert.hash = query.record().value("cert_hash").toString();
+        tmpCert.type = query.record().value("cert_type").toString();
+        tmpCert.name = query.record().value("cert_name").toString();
+
+        certList.append(tmpCert);
+    }
+
+    query.finish();
+
+    // If there is no certificate result, there is nothing to show.
+    if (certList.size() < 1)
+    {
+        QMessageBox::information(this, tr("Nachweis"), tr("Kein Nachweis gefunden. Eventuell existiert ein geplanter "
+                "Schulungseintrag der noch nicht durchgeführt wurde."));
         return;
     }
 
-    if (numElem > 1)
+    // If there is more than one certificate, the user should select one certificate to show.
+    int certNum = 0;
+    if (certList.size() > 1)
     {
-        QMessageBox::warning(this, tr("Nachweis"),
-                tr("Es wurde mehr als ein Nachweis gefunden. Nur der erste wird angezeigt."));
-    }
-
-    if (query.next())
-    {
-        // To show the file, a temporary file will be created. This happens for safety reason.
-
-        auto certPath = query.record().value("cert_path").toString();
-        auto certHash = query.record().value("cert_hash").toString();
-        auto certType = query.record().value("cert_type").toString();
-
-        QFile file(certPath);
-
-        if (!file.exists())
+        QStringList selectionList;
+        for (CertData certData : certList)
         {
-            QMessageBox::critical(this, tr("Nachweis"),
-                    tr("Es gibt einen Nachweis, aber die Datei konnte nicht gefunden werden."));
-            query.finish();
-            return;
+            selectionList.append(certData.name);
         }
 
-        file.open(QIODevice::ReadOnly);
+        QMSelectFromListDialog selectDialog(this, tr("Nachweis zum öffnen auswählen"), SelectionMode::SINGLE);
+        selectDialog.setSelectionList(selectionList);
 
-        QTemporaryFile temp(QDir::tempPath() + QDir::separator() + certHash + "XXXXXX" + "." + certType, this);
-        temp.setAutoRemove(false);
-        temp.open();
-
-        temp.write(file.readAll());
-        file.close();
-
-        qDebug() << temp.fileName();
-
-        QDesktopServices::openUrl(QUrl::fromLocalFile(temp.fileName()));
-
-        query.finish();
+        if (selectDialog.exec() == QDialog::Rejected || selectDialog.getSelected().size() < 1)
+        {
+            return;
+        }
+        else
+        {
+            certNum = selectDialog.getSelected().first();
+        }
     }
-    else
+
+    CertData showCertData = certList.at(certNum);
+
+    // Open the selected or found certificate file.
+    QFile file(showCertData.path);
+
+    if (!file.exists())
     {
-        QMessageBox::warning(this, tr("Nachweis"), tr("Datensatz konnte nicht geholt werden."));
-        query.finish();
+        QMessageBox::critical(this, tr("Nachweis"),
+                tr("Es gibt einen Nachweis, aber die Datei konnte nicht gefunden werden."));
+        return;
     }
+
+    file.open(QIODevice::ReadOnly);
+
+    QTemporaryFile temp(QDir::tempPath() + QDir::separator() + showCertData.hash + "XXXXXX" + "." + 
+            showCertData.type, this);
+    temp.setAutoRemove(false);
+    temp.open();
+
+    temp.write(file.readAll());
+    file.close();
+
+    QDesktopServices::openUrl(QUrl::fromLocalFile(temp.fileName()));
 }
