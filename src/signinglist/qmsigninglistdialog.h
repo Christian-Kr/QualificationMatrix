@@ -30,6 +30,28 @@ class QMSigningListDialog;
 }
 QT_END_NAMESPACE
 
+// Struct for train data information.
+struct QMTrainDataInfo
+{
+    // Primary key in database
+    int id;
+
+    int employeeId;
+    int trainId;
+    int trainstateId;
+    QString trainDate;
+};
+
+// Struct for signing list employee info, holding some information for later handling.
+struct QMSigningListEmployeeInfo
+{
+    // Primary key of the employee in the database.
+    int id;
+
+    // Name of the employee in the database.
+    QString name;
+};
+
 /// Sett different proprties to start creating a signing list.
 /// \author Christian Kr, Copyright 2020
 class QMSigningListDialog: public QMDialog
@@ -79,17 +101,23 @@ public slots:
     void trainingChanged();
 
 private:
-    /// Test whether the employee list on the dialog contains the given employee name.
-    /// \param employeeName Name of the employee to test.
+    /// Test whether the employee list contains the given employee id.
+    /// \param employeeId The id (primary key in table) of the employee to test.
     /// \return True if the employee already exist, else false.
-    bool listContainsEmployee(const QString &employeeName) const;
+    bool listContainsEmployee(const int &employeeName) const;
 
     /// Create entries for every employee with the given training information. All entries will be set to be planned.
     /// If the entry already exist, don't create them again. Informate the user afterwarts about the amount of entries
     /// that have been created and that already exist.
     void createTrainDataEntries();
 
+    /// Get a list of selected employee ids.
+    /// \return List with all ids.
+    QStringList getSelectedEmployeeIds() const;
+
     Ui::QMSigningListDialog *ui;
+
+    QList<QMSigningListEmployeeInfo> *m_selectedEmployees;
 
     std::unique_ptr<QSqlTableModel> employeeViewModel;
     std::unique_ptr<QSqlTableModel> shiftViewModel;

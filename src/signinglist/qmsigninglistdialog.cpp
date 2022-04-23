@@ -33,6 +33,7 @@
 
 QMSigningListDialog::QMSigningListDialog(QWidget *parent)
     : QMDialog(parent)
+    , m_selectedEmployees(new QList<QMSigningListEmployeeInfo>())
 {
     ui = new Ui::QMSigningListDialog;
     ui->setupUi(this);
@@ -46,6 +47,7 @@ QMSigningListDialog::QMSigningListDialog(QWidget *parent)
 QMSigningListDialog::~QMSigningListDialog()
 {
     delete ui;
+    delete m_selectedEmployees;
 }
 
 void QMSigningListDialog::openImage()
@@ -105,6 +107,7 @@ void QMSigningListDialog::createTrainDataEntries()
 
     QString strTrainDataEntriesQuery =
             "SELECT "
+            "   TrainData.id as traindata_id, "
             "   TrainData.employee as employee_id, "
             "   TrainData.train as train_id, "
             "   Employee.name as employee_name, "
@@ -118,22 +121,15 @@ void QMSigningListDialog::createTrainDataEntries()
             "   TrainDataState.id = traindatastate_id AND "
             "   Train.id = train_id AND "
             "   Employee.id = employee_id AND "
+            "   employee_id IN (" + getSelectedEmployeeIds().join(",") + ")"
             "   TrainData.date = '" + ui->cwDate->selectedDate().toString(Qt::DateFormat::ISODate) + "' AND"
             "   train_name = '" + ui->cbTraining->currentText() + "'";
 
     QSqlQuery query(strTrainDataEntriesQuery, db);
 
-    // The list of existing entries is a list of employee names. Because for this employees no train data entries 
-    // should be created later.
-    QStringList existingTrainEntries;
-    
-    // Create a copy list of employees in list widget.
-    QStringList employees;
-    for (int i = 0; i < ui->lwEmployees->count(); i++)
-    {
-        QString employeeName = ui->lwEmployees->item(i)->text();
-        employees.append(employeeName);
-    }
+    // Save all training data entries - including some information - of entries that should be created, but already
+    // exist.
+    QList<QMTrainDataInfo> trainDataInfoList;
 
     while (query.next())
     {
@@ -141,21 +137,21 @@ void QMSigningListDialog::createTrainDataEntries()
 
         QSqlRecord record = query.record();
 
-        auto employeeName = record.value("employee_name").toString();
-        auto traindatastateId = record.value("traindatastate_id");
+        QMTrainDataInfo trainDataInfo;
+        trainDataInfo.id = record.value("traindata_id").toInt();
+        trainDataInfo.trainId = record.value("train_id").toInt();
+        trainDataInfo.employeeId = record.value("employee_id").toInt();
+        trainDataInfo.trainstateId = record.value("traindatastate_id").toInt();
 
-        if (employees.contains(employeeName) && !existingTrainEntries.contains(employeeName))
-        {
-            existingTrainEntries.append(employeeName);
-        }
+        trainDataInfoList.append(trainDataInfo);
     }
 
     query.finish();
 
-    if (!existingTrainEntries.isEmpty())
+    if (!trainDataInfoList.isEmpty())
     {
         QMessageBox::StandardButton ret = QMessageBox::question(this, tr("Erstelle Schulungsdaten"), 
-                tr("Er wurden existierende Schulungsdaten für Mitarbeiter gefunden, die zu den hier eingetragenen "
+                tr("Es wurden existierende Schulungsdaten für Mitarbeiter gefunden, die zu den hier einzutragenden "
                 "Daten passen. Möchten Sie trotzdem mit der Erstellung der übrigen Einträge fortfahren?"),
                 QMessageBox::Yes | QMessageBox::No);
     }
@@ -234,46 +230,109 @@ void QMSigningListDialog::clearList()
 void QMSigningListDialog::removeEmployee()
 {
     auto row = ui->lwEmployees->currentRow();
-    if (row < 0)
+    if (row == -1)
     {
         return;
     }
 
+    if (row > m_selectedEmployees->size() - 1)
+    {
+        qCritical() << "SigningList: List widget seem to be bigger than internal selected employee list";
+        return;
+    }
+
+    m_selectedEmployees->takeAt(row);
     ui->lwEmployees->takeItem(row);
 }
 
 void QMSigningListDialog::addEmployee()
 {
-    QString employeeName = ui->cbSingleEmployee->currentText();
+    // Selected row number from combo box
+    auto selectedRow = ui->cbSingleEmployee->currentIndex();
 
-    if (!listContainsEmployee(employeeName))
+    if (selectedRow == -1)
     {
+        return;
+    }
+
+    // Column names in model
+    auto colEmployeeId = employeeViewModel->fieldIndex("id");
+    auto colEmployeeName = employeeViewModel->fieldIndex("name");
+
+    if (colEmployeeId == -1 || colEmployeeName == -1)
+    {
+        qCritical() << "SigningList: Cannot find field index of employee model.";
+        return;
+    }
+
+    // Get model values
+    auto employeeName = employeeViewModel->data(employeeViewModel->index(selectedRow, colEmployeeName)).toString();
+    auto employeeId = employeeViewModel->data(employeeViewModel->index(selectedRow, colEmployeeId)).toInt();
+
+    if (employeeId < 1)
+    {
+        qCritical() << "SigningList: Cannot get a valid employee id";
+        return;
+    }
+
+    if (!listContainsEmployee(employeeId))
+    {
+        QMSigningListEmployeeInfo employeeInfo;
+        employeeInfo.id = employeeId;
+        employeeInfo.name = employeeName;
+
+        m_selectedEmployees->append(employeeInfo);
         ui->lwEmployees->addItem(employeeName);
     }
 }
 
 void QMSigningListDialog::addEmployeeFromGroup()
 {
-    for (int i = 0; i < employeeViewModel->rowCount(); i++)
+    // Stop if nothing has been selected
+    if (ui->cbEmployeeGroup->currentText().isEmpty() || ui->cbEmployeeGroup->currentIndex() == -1)
     {
-        QString employeeName = employeeViewModel->data(employeeViewModel->index(i, 1)).toString();
-        QString groupName = employeeViewModel->data(employeeViewModel->index(i, 2)).toString();
+        return;
+    }
 
-        if (groupName == ui->cbEmployeeGroup->currentText())
+    // Column names in model
+    auto colEmployeeId = employeeViewModel->fieldIndex("id");
+    auto colEmployeeName = employeeViewModel->fieldIndex("name");
+    auto colEmployeeGroup = employeeViewModel->fieldIndex("Shift_name_2"); // Group name is still 'shift' cause of history.
+
+    if (colEmployeeId == -1 || colEmployeeName == -1 || colEmployeeGroup == -1)
+    {
+        qCritical() << "SigningList: Cannot find field index of employee model";
+        return;
+    }
+
+    // Go through all employees and take a look, whether they are in the selected group or not
+    for (auto i = 0; i < employeeViewModel->rowCount(); i++)
+    {
+        auto employeeId = employeeViewModel->data(employeeViewModel->index(i, colEmployeeId)).toInt();
+        auto employeeName = employeeViewModel->data(employeeViewModel->index(i, colEmployeeName)).toString();
+        auto employeeGroupName = employeeViewModel->data(employeeViewModel->index(i, colEmployeeGroup)).toString();
+
+        // Only strings will be compared for now and no ids
+        if (employeeGroupName == ui->cbEmployeeGroup->currentText())
         {
-            if (!listContainsEmployee(employeeName))
+            if (!listContainsEmployee(employeeId))
             {
+                QMSigningListEmployeeInfo employeeInfo;
+                employeeInfo.id = employeeId;
+                employeeInfo.name = employeeName;
+
+                m_selectedEmployees->append(employeeInfo);
                 ui->lwEmployees->addItem(employeeName);
             }
         }
     }
 }
 
-bool QMSigningListDialog::listContainsEmployee(const QString &employeeName) const
+bool QMSigningListDialog::listContainsEmployee(const int &employeeId) const
 {
-    for (int i = 0; i < ui->lwEmployees->count(); i++)
+    for (QMSigningListEmployeeInfo employeeInfo : *m_selectedEmployees)
     {
-        if (employeeName == ui->lwEmployees->item(i)->text())
+        if (employeeId == employeeInfo.id)
         {
             return true;
         }
@@ -382,4 +441,15 @@ void QMSigningListDialog::trainingChanged()
     }
 
     ui->leTrainDetails->setPlainText(contentDesc);
+}
+
+QStringList QMSigningListDialog::getSelectedEmployeeIds() const
+{
+    QStringList tmpLst;
+    for (QMSigningListEmployeeInfo employeeInfo : *m_selectedEmployees)
+    {
+        tmpLst.append(QString::number(employeeInfo.id));
+    }
+
+    return tmpLst;
 }
