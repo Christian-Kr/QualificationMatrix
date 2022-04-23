@@ -121,9 +121,13 @@ void QMSigningListDialog::createTrainDataEntries()
             "   TrainDataState.id = traindatastate_id AND "
             "   Train.id = train_id AND "
             "   Employee.id = employee_id AND "
-            "   employee_id IN (" + getSelectedEmployeeIds().join(",") + ")"
-            "   TrainData.date = '" + ui->cwDate->selectedDate().toString(Qt::DateFormat::ISODate) + "' AND"
-            "   train_name = '" + ui->cbTraining->currentText() + "'";
+            "   employee_id IN (" + getSelectedEmployeeIds().join(",") + ") AND "
+            "   train_name = '" + ui->cbTraining->currentText() + "' AND "
+            "   (( "
+            "       TrainData.date = '" + ui->cwDate->selectedDate().toString(Qt::DateFormat::ISODate) + "' "
+            "   ) OR ( "
+            "       traindatastate_id = 2 "
+            "   ))";
 
     QSqlQuery query(strTrainDataEntriesQuery, db);
 
@@ -152,7 +156,8 @@ void QMSigningListDialog::createTrainDataEntries()
     {
         QMessageBox::StandardButton ret = QMessageBox::question(this, tr("Erstelle Schulungsdaten"), 
                 tr("Es wurden existierende Schulungsdaten für Mitarbeiter gefunden, die zu den hier einzutragenden "
-                "Daten passen. Möchten Sie trotzdem mit der Erstellung der übrigen Einträge fortfahren?"),
+                "Daten passen. Korrigieren Sie im nachfolgenden Dialog die Daten. Zum Schluss werden Einträge die "
+                "die in allen Spalten zu den erstellenden passen nicht nochmals erstellt."),
                 QMessageBox::Yes | QMessageBox::No);
     }
 
