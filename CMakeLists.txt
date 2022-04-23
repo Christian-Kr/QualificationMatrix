@@ -30,7 +30,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOUIC_SEARCH_PATHS ui)
 
-find_package(Qt6 6.2
+find_package(Qt6 6.3
         COMPONENTS LinguistTools Widgets Sql PrintSupport
         REQUIRED)
 

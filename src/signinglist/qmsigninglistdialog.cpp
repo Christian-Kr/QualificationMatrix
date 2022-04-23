@@ -16,6 +16,7 @@
 #include "model/view/qmemployeeviewmodel.h"
 #include "model/view/qmshiftviewmodel.h"
 #include "model/view/qmtrainingviewmodel.h"
+#include "model/qmtrainingdatamodel.h"
 #include "settings/qmapplicationsettings.h"
 #include "signinglist/qmsigninglistdocument.h"
 
@@ -25,6 +26,8 @@
 #include <QPrinter>
 #include <QPrintPreviewDialog>
 #include <QFileDialog>
+#include <QSqlQuery>
+#include <QSqlRecord>
 
 #include <QDebug>
 
@@ -63,7 +66,123 @@ void QMSigningListDialog::openImage()
 void QMSigningListDialog::accept()
 {
     saveSettings();
+    createTrainDataEntries();
     printToPDF();
+}
+
+void QMSigningListDialog::createTrainDataEntries()
+{
+    // Only if wanted...
+    if (!ui->cbCreateTrainDataEntries->isChecked())
+    {
+        return;
+    }
+
+    // Ask again to be sure the user wanted to create the entries.
+    QMessageBox::StandardButton ret = QMessageBox::question(this, tr("Erstelle Schulungsdaten"), 
+            tr("Bist du dir sicher, dass einen Schulungseintrag für jeden Mitarbeiter erstellen möchtest? Einmal"
+            " erstellte Einträge müssen manuell wieder gelöscht werden."), QMessageBox::Yes | QMessageBox::No);
+    
+    switch (ret)
+    {
+        case QMessageBox::Yes:
+            // Nothing to do. Just go on with creation of train data entries.
+            break;
+        case QMessageBox::No:
+            return;
+        default:
+            qDebug() << "QMSigningListDialog: Unknown return of QMessageBox";
+            break;
+    }
+
+    // Run a query to get all exisiting training data with respect to the training and date.
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        return;
+    }
+
+    auto db = QSqlDatabase::database("default");
+
+    QString strTrainDataEntriesQuery =
+            "SELECT "
+            "   TrainData.employee as employee_id, "
+            "   TrainData.train as train_id, "
+            "   Employee.name as employee_name, "
+            "   Train.name as train_name, "
+            "   TrainData.date as traindata_date, "
+            "   TrainData.state as traindatastate_id, "
+            "   TrainDataState.name as traindatastate_name "
+            "FROM "
+            "   Employee, TrainData, Train, TrainDataState "
+            "WHERE " 
+            "   TrainDataState.id = traindatastate_id AND "
+            "   Train.id = train_id AND "
+            "   Employee.id = employee_id AND "
+            "   TrainData.date = '" + ui->cwDate->selectedDate().toString(Qt::DateFormat::ISODate) + "' AND"
+            "   train_name = '" + ui->cbTraining->currentText() + "'";
+
+    QSqlQuery query(strTrainDataEntriesQuery, db);
+
+    // The list of existing entries is a list of employee names. Because for this employees no train data entries 
+    // should be created later.
+    QStringList existingTrainEntries;
+    
+    // Create a copy list of employees in list widget.
+    QStringList employees;
+    for (int i = 0; i < ui->lwEmployees->count(); i++)
+    {
+        QString employeeName = ui->lwEmployees->item(i)->text();
+        employees.append(employeeName);
+    }
+
+    while (query.next())
+    {
+        // Go through all results and find entries that might already exist.
+
+        QSqlRecord record = query.record();
+
+        auto employeeName = record.value("employee_name").toString();
+        auto traindatastateId = record.value("traindatastate_id");
+
+        if (employees.contains(employeeName) && !existingTrainEntries.contains(employeeName))
+        {
+            existingTrainEntries.append(employeeName);
+        }
+    }
+
+    query.finish();
+
+    if (!existingTrainEntries.isEmpty())
+    {
+        QMessageBox::StandardButton ret = QMessageBox::question(this, tr("Erstelle Schulungsdaten"), 
+                tr("Er wurden existierende Schulungsdaten für Mitarbeiter gefunden, die zu den hier eingetragenen "
+                "Daten passen. Möchten Sie trotzdem mit der Erstellung der übrigen Einträge fortfahren?"),
+                QMessageBox::Yes | QMessageBox::No);
+    }
+
+        switch (ret)
+    {
+        case QMessageBox::Yes:
+            // Nothing to do. Just go on with creation of train data entries.
+            break;
+        case QMessageBox::No:
+            return;
+        default:
+            qDebug() << "QMSigningListDialog: Unknown return of QMessageBox";
+            break;
+    }
+
+    // Finally create entries for the employees that are not already existing with a training data set.
+    QMTrainingDataModel trainDataModel(this, db);
+    trainDataModel.select();
+
+    auto newRecord = trainDataModel.record();
+
+    // To create a new record, the id's for primary keys have to be entered.
+    newRecord.setValue(1, employeeViewModel->data(employeeViewModel->index(0, 0)));
+    newRecord.setValue(2, trainViewModel->data(trainViewModel->index(0, 0)));
+    newRecord.setValue(3, "2020-01-01");
+    //newRecord.setValue(4, trainDataStateViewModel->data(trainDataStateViewModel->index(0, 0)));
 }
 
 void QMSigningListDialog::saveSettings()

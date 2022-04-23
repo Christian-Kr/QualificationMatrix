@@ -84,6 +84,11 @@ private:
     /// \return True if the employee already exist, else false.
     bool listContainsEmployee(const QString &employeeName) const;
 
+    /// Create entries for every employee with the given training information. All entries will be set to be planned.
+    /// If the entry already exist, don't create them again. Informate the user afterwarts about the amount of entries
+    /// that have been created and that already exist.
+    void createTrainDataEntries();
+
     Ui::QMSigningListDialog *ui;
 
     std::unique_ptr<QSqlTableModel> employeeViewModel;
