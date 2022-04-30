@@ -20,8 +20,6 @@ QMTrainDataConflictDialog::QMTrainDataConflictDialog(QWidget *parent)
 {
     ui = new Ui::QMTrainDataConflictDialog;
     ui->setupUi(this);
-
-    auto &settings = QMApplicationSettings::getInstance();
 }
 
 QMTrainDataConflictDialog::~QMTrainDataConflictDialog()
