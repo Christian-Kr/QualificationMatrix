@@ -36,3 +36,8 @@ void QMTrainDataConflictDialog::loadSettings()
 {
     auto &settings = QMApplicationSettings::getInstance();
 }
+
+void QMTrainDataConflictDialog::setTrainingData(const QList<int> &ids)
+{
+    // Set the ids to the model.
+}

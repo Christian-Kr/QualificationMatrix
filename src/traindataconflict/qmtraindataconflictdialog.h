@@ -25,6 +25,14 @@ namespace Ui
 }
 QT_END_NAMESPACE
 
+// Options how the conflict should be solved.
+enum class SolveAction
+{
+    IGNORE = 1 << 0,
+    DELETE = 1 << 1,
+    OVERWRITE = 1 << 2
+};
+
 /// Show train data entries with conflicts and give feedback options to handel.
 /// \author Christian Kr, Copyright 2022
 class QMTrainDataConflictDialog : public QMDialog
@@ -44,6 +52,10 @@ public:
 
     /// Override from QDialog.
     void loadSettings() override;
+
+    /// Set the ids of the training data that have a conflict.
+    /// \param ids The ids as a list of interger values.
+    void setTrainingData(const QList<int> &ids);
 
 private:
     Ui::QMTrainDataConflictDialog *ui;
