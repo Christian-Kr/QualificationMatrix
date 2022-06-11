@@ -73,23 +73,13 @@ bool QMTrainDataConflictModel::updateFromTrainDataIds(const QList<int> &ids)
     // After finish the results are not accesible anymore.
     query.finish();
 
-    beginInsertRows(QModelIndex(), 0, (int) resultRecords->size() - 1);
+    beginInsertRows(QModelIndex(), 0, (int) m_conflictEntries->size() - 1);
     endInsertRows();
 
     return true;
 }
 
-QMQualiResultRecord* QMQualiResultModel::getQualiResultRecord(const int &num)
-{
-    if (num >= resultRecords->count() || num < 0)
-    {
-        return nullptr;
-    }
-
-    return resultRecords->at(num);
-}
-
-QVariant QMQualiResultModel::headerData(int section, Qt::Orientation orientation, int role) const
+QVariant QMTrainDataConflictModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     if (role != Qt::DisplayRole)
     {
@@ -101,23 +91,13 @@ QVariant QMQualiResultModel::headerData(int section, Qt::Orientation orientation
         switch (section)
         {
             case 0:
-                return tr("Name");
+                return tr("Id");
             case 1:
-                return tr("Funktion");
+                return tr("Mitarbeiter");
             case 2:
                 return tr("Schulung");
-            case 3:
-                return tr("Intervall");
-            case 4:
-                return tr("Notwendigkeit");
-            case 5:
-                return tr("Letzte Schulung");
-            case 6:
-                return tr("Angemeldete Schulung");
-            case 7:
-                return tr("Schulungsstatus");
-            case 8:
-                return tr("Information");
+            default:
+                return {};
         }
     }
     else
@@ -128,8 +108,7 @@ QVariant QMQualiResultModel::headerData(int section, Qt::Orientation orientation
     return {};
 }
 
-bool QMQualiResultModel::setHeaderData(
-    int section, Qt::Orientation orientation, const QVariant &value, int role)
+bool QMTrainDataConflictModel::setHeaderData(int section, Qt::Orientation orientation, const QVariant &value, int role)
 {
     if (value != headerData(section, orientation, role))
     {
@@ -140,17 +119,17 @@ bool QMQualiResultModel::setHeaderData(
     return false;
 }
 
-int QMQualiResultModel::rowCount(const QModelIndex &) const
+int QMTrainDataConflictModel::rowCount(const QModelIndex &) const
 {
-    return 0;
+    return m_conflictEntries->size();
 }
 
-int QMQualiResultModel::columnCount(const QModelIndex &) const
+int QMTrainDataConflictModel::columnCount(const QModelIndex &) const
 {
-    return 9;
+    return 3;
 }
 
-QVariant QMQualiResultModel::data(const QModelIndex &index, int role) const
+QVariant QMTrainDataConflictModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid())
     {
@@ -163,12 +142,14 @@ QVariant QMQualiResultModel::data(const QModelIndex &index, int role) const
         switch (index.column())
         {
             case 0:
-                return {};
+                return m_conflictEntries->at(row).trainDataId;
             case 1:
+                return m_conflictEntries->at(row).employeeName;
+            case 2:
+                return m_conflictEntries->at(row).trainName;
+            default:
                 return {};
         }
-
-        return resultRecords->at(index.row())->getFirstName();
     }
 
     if (role == Qt::BackgroundRole)
@@ -179,12 +160,12 @@ QVariant QMQualiResultModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-bool QMQualiResultModel::setData(const QModelIndex &index, const QVariant &value, int role)
+bool QMTrainDataConflictModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     return QAbstractTableModel::setData(index, value, role);
 }
 
-Qt::ItemFlags QMQualiResultModel::flags(const QModelIndex &index) const
+Qt::ItemFlags QMTrainDataConflictModel::flags(const QModelIndex &index) const
 {
     if (!index.isValid())
     {

@@ -33,6 +33,8 @@ enum class SolveAction
     OVERWRITE = 1 << 2
 };
 
+class QMTrainDataConflictModel;
+
 /// Show train data entries with conflicts and give feedback options to handel.
 /// \author Christian Kr, Copyright 2022
 class QMTrainDataConflictDialog : public QMDialog
@@ -59,6 +61,8 @@ public:
 
 private:
     Ui::QMTrainDataConflictDialog *ui;
+
+    QMTrainDataConflictModel *m_trainDataConflictModel;
 };
 
 #endif // QMTRAINDATACONFLICTDIALOG_H

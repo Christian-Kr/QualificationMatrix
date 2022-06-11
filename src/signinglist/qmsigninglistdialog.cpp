@@ -19,6 +19,7 @@
 #include "model/qmtrainingdatamodel.h"
 #include "settings/qmapplicationsettings.h"
 #include "signinglist/qmsigninglistdocument.h"
+#include "traindataconflict/qmtraindataconflictdialog.h"
 
 #include <QDate>
 #include <QMessageBox>
@@ -82,7 +83,7 @@ void QMSigningListDialog::createTrainDataEntries()
 
     // Ask again to be sure the user wanted to create the entries.
     QMessageBox::StandardButton ret = QMessageBox::question(this, tr("Erstelle Schulungsdaten"), 
-            tr("Bist du dir sicher, dass einen Schulungseintrag für jeden Mitarbeiter erstellen möchtest? Einmal"
+            tr("Bist du dir sicher, dass du einen Schulungseintrag für jeden Mitarbeiter erstellen möchtest? Einmal"
             " erstellte Einträge müssen manuell wieder gelöscht werden."), QMessageBox::Yes | QMessageBox::No);
     
     switch (ret)
@@ -100,6 +101,7 @@ void QMSigningListDialog::createTrainDataEntries()
     // Run a query to get all exisiting training data with respect to the training and date.
     if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
     {
+        qDebug() << "QMSigningListDialog: Cannot open database";
         return;
     }
 
@@ -154,36 +156,29 @@ void QMSigningListDialog::createTrainDataEntries()
 
     if (!trainDataInfoList.isEmpty())
     {
-        QMessageBox::StandardButton ret = QMessageBox::question(this, tr("Erstelle Schulungsdaten"), 
+        QMessageBox::information(this, tr("Erstelle Schulungsdaten"), 
                 tr("Es wurden existierende Schulungsdaten für Mitarbeiter gefunden, die zu den hier einzutragenden "
-                "Daten passen. Korrigieren Sie im nachfolgenden Dialog die Daten. Zum Schluss werden Einträge die "
-                "die in allen Spalten zu den erstellenden passen nicht nochmals erstellt."),
-                QMessageBox::Yes | QMessageBox::No);
-    }
+                "Daten passen. Nutze den nachfolgend angezeigten Dialog um zu entscheiden wie du mit den Einträgen "
+                "umgehen möchtest."));
 
-        switch (ret)
-    {
-        case QMessageBox::Yes:
-            // Nothing to do. Just go on with creation of train data entries.
-            break;
-        case QMessageBox::No:
-            return;
-        default:
-            qDebug() << "QMSigningListDialog: Unknown return of QMessageBox";
-            break;
+        // Show the conflict dialog and let user decide how to act.
+        // TODO: Implement!
+        QMTrainDataConflictDialog trainDataConflictDialog(this);
+        trainDataConflictDialog.exec();
     }
 
     // Finally create entries for the employees that are not already existing with a training data set.
     QMTrainingDataModel trainDataModel(this, db);
     trainDataModel.select();
 
-    auto newRecord = trainDataModel.record();
+    // TODO: Add all entries.
+    // auto newRecord = trainDataModel.record();
 
-    // To create a new record, the id's for primary keys have to be entered.
-    newRecord.setValue(1, employeeViewModel->data(employeeViewModel->index(0, 0)));
-    newRecord.setValue(2, trainViewModel->data(trainViewModel->index(0, 0)));
-    newRecord.setValue(3, "2020-01-01");
-    //newRecord.setValue(4, trainDataStateViewModel->data(trainDataStateViewModel->index(0, 0)));
+    // // To create a new record, the id's for primary keys have to be entered.
+    // newRecord.setValue(1, employeeViewModel->data(employeeViewModel->index(0, 0)));
+    // newRecord.setValue(2, trainViewModel->data(trainViewModel->index(0, 0)));
+    // newRecord.setValue(3, "2020-01-01");
+    // //newRecord.setValue(4, trainDataStateViewModel->data(trainDataStateViewModel->index(0, 0)));
 }
 
 void QMSigningListDialog::saveSettings()

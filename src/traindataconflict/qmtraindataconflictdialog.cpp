@@ -14,9 +14,11 @@
 #include "qmtraindataconflictdialog.h"
 #include "ui_qmtraindataconflictdialog.h"
 #include "settings/qmapplicationsettings.h"
+#include "qmtraindataconflictmodel.h"
 
 QMTrainDataConflictDialog::QMTrainDataConflictDialog(QWidget *parent)
     : QMDialog(parent)
+    , m_trainDataConflictModel(new QMTrainDataConflictModel(this))
 {
     ui = new Ui::QMTrainDataConflictDialog;
     ui->setupUi(this);
