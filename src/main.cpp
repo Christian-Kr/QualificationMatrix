@@ -25,7 +25,7 @@
 
 #include <QDebug>
 
-#if (QT_VERSION >= QT_VERSION_CHECK(6, 2, 0))
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
 #define DEPR_ENDL Qt::endl
 #else
 #define DEPR_ENDL endl
