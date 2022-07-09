@@ -147,6 +147,21 @@ void installTranslator(const QString &name, const QString &path)
     }
 }
 
+/// Set the dpi settings read from the settings file at startup.
+void readGuiDPISetting()
+{
+    auto &settings = QMApplicationSettings::getInstance();
+    auto dpi = settings.read("General/DPI", 1).toInt();
+
+    if (dpi < 1 || dpi > 5)
+    {
+        qWarning() << "Unknown DPI setting - Default value of 1 will be choosen";
+        dpi = 1;
+    }
+
+    QGuiApplication::setHighDpiScaleFactorRoundingPolicy(static_cast<Qt::HighDpiScaleFactorRoundingPolicy>(dpi));
+}
+
 /// Initialize the application with the translation files (custom and qt-based).
 void initApplicationTranslation()
 {
@@ -242,7 +257,8 @@ int main(int argc, char *argv[])
     initApplicationStyle();
     initApplicationStyleSheet(app);
 
-    QGuiApplication::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::Round);
+    // Set gui dpi setting.
+    readGuiDPISetting();
 
     QMMainWindow win;
     initShowMainWindow(win);
