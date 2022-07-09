@@ -161,9 +161,16 @@ void QMSigningListDialog::createTrainDataEntries()
                 "Daten passen. Nutze den nachfolgend angezeigten Dialog um zu entscheiden wie du mit den Einträgen "
                 "umgehen möchtest."));
 
+        QList<int> ids;
+        for (auto trainDataInfo : trainDataInfoList)
+        {
+            ids.append(trainDataInfo.id);
+        }
+
         // Show the conflict dialog and let user decide how to act.
         // TODO: Implement!
         QMTrainDataConflictDialog trainDataConflictDialog(this);
+        trainDataConflictDialog.setTrainingData(ids);
         trainDataConflictDialog.exec();
     }
 

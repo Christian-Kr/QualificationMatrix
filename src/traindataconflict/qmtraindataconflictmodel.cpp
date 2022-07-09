@@ -47,7 +47,7 @@ bool QMTrainDataConflictModel::updateFromTrainDataIds(const QList<int> &ids)
             "   TrainData.train as train_id, "
             "   Train.name as train_name, "
             "   TrainData.employee as employee_id, "
-            "   Employee.name as employee.name, "
+            "   Employee.name as employee_name, "
             "   TrainData.date as traindata_date, "
             "   TrainData.state as traindata_state "
             "FROM "
@@ -58,7 +58,7 @@ bool QMTrainDataConflictModel::updateFromTrainDataIds(const QList<int> &ids)
             "   traindata_id IN (" + strIds.join(",") + ")";
 
     QSqlQuery query(strTrainDataQuery, db);
-
+    qDebug() << strTrainDataQuery;
     while (query.next())
     {
         QMTrainDataConflictEntry conflictEntry;
@@ -73,7 +73,7 @@ bool QMTrainDataConflictModel::updateFromTrainDataIds(const QList<int> &ids)
     // After finish the results are not accesible anymore.
     query.finish();
 
-    beginInsertRows(QModelIndex(), 0, (int) m_conflictEntries->size() - 1);
+    beginInsertRows(QModelIndex(), 0, (int) m_conflictEntries->size());
     endInsertRows();
 
     return true;

@@ -22,6 +22,8 @@ QMTrainDataConflictDialog::QMTrainDataConflictDialog(QWidget *parent)
 {
     ui = new Ui::QMTrainDataConflictDialog;
     ui->setupUi(this);
+
+    ui->tvTrainDataConflict->setModel(m_trainDataConflictModel);
 }
 
 QMTrainDataConflictDialog::~QMTrainDataConflictDialog()
@@ -41,5 +43,5 @@ void QMTrainDataConflictDialog::loadSettings()
 
 void QMTrainDataConflictDialog::setTrainingData(const QList<int> &ids)
 {
-    // Set the ids to the model.
+    m_trainDataConflictModel->updateFromTrainDataIds(ids);
 }

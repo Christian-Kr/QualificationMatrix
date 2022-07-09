@@ -94,7 +94,7 @@ public:
     Qt::ItemFlags flags(const QModelIndex &index) const override;
 
     /// Update the model with given train data ids. The model will be completly reseted before.
-    /// \param ids T
+    /// \param ids The ids to be set.
     /// \return True if successful, else false.
     bool updateFromTrainDataIds(const QList<int> &ids);
 
