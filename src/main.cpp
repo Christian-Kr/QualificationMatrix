@@ -121,11 +121,11 @@ void initApplicationStyleSheet(QApplication &app)
     app.setStyleSheet(styleSheet);
 }
 
-/// Install the translator into the qt application. If the loading or installing of the translation certificate fails,
+/// Install the translator into the qt application. If the loading or installing of the translation file fails,
 /// a warning message will be send for documentation.
 ///
-/// \param name The name of the translator certificate.
-/// \param path The path, where the tranaltor certificate could be found.
+/// \param name The name of the translator file.
+/// \param path The path, where the tranaltor file could be found.
 void installTranslator(const QString &name, const QString &path)
 {
     auto translator = new QTranslator();
@@ -133,19 +133,17 @@ void installTranslator(const QString &name, const QString &path)
 
     if (loaded)
     {
-        // Info: Installing certificate fails, if there is no translation in ts certificate itself.
+        // Info: Installing file fails, if there is no translation in ts file itself.
         auto installed = QApplication::installTranslator(translator);
 
         if (!installed)
         {
-            qWarning() << "cannot install language certificate" <<
-                translator->filePath();
+            qWarning() << "cannot install language file" << translator->filePath();
         }
     }
     else
     {
-        qWarning() << "cannot load custom language certificate" <<
-            translator->filePath();
+        qWarning() << "cannot load custom language file" << translator->filePath();
     }
 }
 
