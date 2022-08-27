@@ -104,8 +104,6 @@ QVariant QMTrainDataConflictModel::headerData(int section, Qt::Orientation orien
     {
         return section + 1;
     }
-
-    return {};
 }
 
 bool QMTrainDataConflictModel::setHeaderData(int section, Qt::Orientation orientation, const QVariant &value, int role)
@@ -121,7 +119,7 @@ bool QMTrainDataConflictModel::setHeaderData(int section, Qt::Orientation orient
 
 int QMTrainDataConflictModel::rowCount(const QModelIndex &) const
 {
-    return m_conflictEntries->size();
+    return (int) m_conflictEntries->size();
 }
 
 int QMTrainDataConflictModel::columnCount(const QModelIndex &) const
@@ -133,7 +131,7 @@ QVariant QMTrainDataConflictModel::data(const QModelIndex &index, int role) cons
 {
     if (!index.isValid())
     {
-        return QVariant();
+        return {};
     }
 
     if (role == Qt::DisplayRole)
@@ -157,7 +155,7 @@ QVariant QMTrainDataConflictModel::data(const QModelIndex &index, int role) cons
         // TODO:: Return background color.
     }
 
-    return QVariant();
+    return {};
 }
 
 bool QMTrainDataConflictModel::setData(const QModelIndex &index, const QVariant &value, int role)
@@ -172,5 +170,5 @@ Qt::ItemFlags QMTrainDataConflictModel::flags(const QModelIndex &index) const
         return Qt::NoItemFlags;
     }
 
-    return Qt::ItemIsSelectable | Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+    return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
 }
