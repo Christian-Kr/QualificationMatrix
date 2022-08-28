@@ -114,11 +114,7 @@ void QMSigningListDialog::createTrainDataEntries()
             "   Employee.id = employee_id AND "
             "   employee_id IN (" + getSelectedEmployeeIds().join(",") + ") AND "
             "   train_name = '" + ui->cbTraining->currentText() + "' AND "
-            "   (( "
-            "       TrainData.date = '" + ui->cwDate->selectedDate().toString(Qt::DateFormat::ISODate) + "' "
-            "   ) OR ( "
-            "       traindatastate_id = 2 "
-            "   ))";
+            "   TrainData.date = '" + ui->cwDate->selectedDate().toString(Qt::DateFormat::ISODate) + "'; ";
 
     QSqlQuery query(strTrainDataEntriesQuery, db);
 
