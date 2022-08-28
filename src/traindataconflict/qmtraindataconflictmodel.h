@@ -55,7 +55,7 @@ public:
     /// \param role
     /// \param section
     /// \return
-    QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
+    [[nodiscard]] QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
 
     /// Override from QAbstractTableModel.
     /// \param section
@@ -68,18 +68,18 @@ public:
     /// Override from QAbstractTableModel.
     /// \param parent
     /// \return
-    int rowCount(const QModelIndex &parent) const override;
+    [[nodiscard]] int rowCount(const QModelIndex &parent) const override;
 
     /// Override from QAbstractTableModel.
     /// \param parent
     /// \return
-    int columnCount(const QModelIndex &parent) const override;
+    [[nodiscard]] int columnCount(const QModelIndex &parent) const override;
 
     /// Override from QAbstractTableModel.
     /// \param index
     /// \param role
     /// \return
-    QVariant data(const QModelIndex &index, int role) const override;
+    [[nodiscard]] QVariant data(const QModelIndex &index, int role) const override;
 
     /// Override from QAbstractTableModel.
     /// \param value
@@ -91,7 +91,7 @@ public:
     /// Override from QAbstractTableModel.
     /// \param index
     /// \return
-    Qt::ItemFlags flags(const QModelIndex &index) const override;
+    [[nodiscard]] Qt::ItemFlags flags(const QModelIndex &index) const override;
 
     /// Update the model with given train data ids. The model will be completly reseted before.
     /// \param ids The ids to be set.
