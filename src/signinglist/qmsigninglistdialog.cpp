@@ -141,20 +141,23 @@ void QMSigningListDialog::createTrainDataEntries()
     // Close query, to prevent blocking other queries.
     query.finish();
 
+    // Every entry that is part of trainDataInfoList conflicts with the process to create a new training data entry.
+    // The conflict for every entry needs to be solved before the process can go on.
     if (!trainDataInfoList.isEmpty())
     {
         QMessageBox::information(this, tr("Erstelle Schulungsdaten"), 
                 tr("Es wurden existierende Schulungsdaten für Mitarbeiter gefunden, die zu den hier einzutragenden "
-                "Daten passen. Nutze den nachfolgend angezeigten Dialog um zu entscheiden wie du mit den Einträgen "
-                "umgehen möchtest."));
+                "Daten passen. Nutzen Sie den nachfolgend angezeigten Dialog um zu entscheiden wie Sie mit den "
+                "Einträgen umgehen möchten."));
 
+        // Create a temporary list of ids for every conflict entry, which is needed for the conflict dialog.
         QList<int> ids;
         for (const QMTrainDataInfo &trainDataInfo : trainDataInfoList)
         {
             ids.append(trainDataInfo.id);
         }
 
-        // Show the conflict dialog and let user decide how to act.
+        // Show the conflict dialog and let user decide how to handle them.
         // TODO: Implement!
         QMTrainDataConflictDialog trainDataConflictDialog(this);
         trainDataConflictDialog.setTrainingData(ids);
