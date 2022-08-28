@@ -82,16 +82,9 @@ void QMSigningListDialog::createTrainDataEntries()
             tr("Bist du dir sicher, dass du einen Schulungseintrag für jeden Mitarbeiter erstellen möchtest? Einmal"
             " erstellte Einträge müssen manuell wieder gelöscht werden."), QMessageBox::Yes | QMessageBox::No);
     
-    switch (ret)
+    if (ret != QMessageBox::Yes)
     {
-        case QMessageBox::Yes:
-            // Nothing to do. Just go on with creation of train data entries.
-            break;
-        case QMessageBox::No:
-            return;
-        default:
-            qDebug() << "QMSigningListDialog: Unknown return of QMessageBox";
-            break;
+        return;
     }
 
     // Run a query to get all exisiting training data with respect to the training and date.
