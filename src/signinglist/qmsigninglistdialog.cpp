@@ -20,6 +20,7 @@
 #include "settings/qmapplicationsettings.h"
 #include "signinglist/qmsigninglistdocument.h"
 #include "traindataconflict/qmtraindataconflictdialog.h"
+#include "ams/qmamsmanager.h"
 
 #include <QMessageBox>
 #include <QPrinter>
@@ -75,6 +76,21 @@ void QMSigningListDialog::createTrainDataEntries()
     if (!ui->cbCreateTrainDataEntries->isChecked())
     {
         return;
+    }
+
+    // and only if you are allowed to!
+    auto ams = QMAMSManager::getInstance();
+    if (!ams->checkPermission(AccessMode::TD_MODE_WRITE))
+    {
+        QMessageBox::StandardButton ret = QMessageBox::question(this, tr("Nachweise verwalten"),
+                tr("Sie haben nicht die notwendigen Berechtigungen zum Erstellen von Schulungseinträgen. Möchtest "
+                   "Sie trotzdem fortfahren?"),
+                QMessageBox::Yes | QMessageBox::No);
+
+        if (ret != QMessageBox::Yes)
+        {
+            return;
+        }
     }
 
     // Ask again to be sure the user wanted to create the entries.
