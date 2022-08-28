@@ -67,6 +67,7 @@ bool QMTrainDataConflictModel::updateFromTrainDataIds(const QList<int> &ids)
         conflictEntry.trainDataId = query.record().value("traindata_id").toInt();
         conflictEntry.trainId = query.record().value("train_id").toInt();
         conflictEntry.trainName = query.record().value("train_name").toString();
+        conflictEntry.trainDate = query.record().value("traindata_date").toDate();
         m_conflictEntries->append(conflictEntry);
     }
 
@@ -91,11 +92,11 @@ QVariant QMTrainDataConflictModel::headerData(int section, Qt::Orientation orien
         switch (section)
         {
             case 0:
-                return tr("Id");
-            case 1:
                 return tr("Mitarbeiter");
-            case 2:
+            case 1:
                 return tr("Schulung");
+            case 2:
+                return tr("Schulungsdatum");
             default:
                 return {};
         }
@@ -140,11 +141,11 @@ QVariant QMTrainDataConflictModel::data(const QModelIndex &index, int role) cons
         switch (index.column())
         {
             case 0:
-                return m_conflictEntries->at(row).trainDataId;
-            case 1:
                 return m_conflictEntries->at(row).employeeName;
-            case 2:
+            case 1:
                 return m_conflictEntries->at(row).trainName;
+            case 2:
+                return m_conflictEntries->at(row).trainDate.toString(Qt::DateFormat::ISODate);
             default:
                 return {};
         }
