@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>567</width>
-    <height>446</height>
+    <width>684</width>
+    <height>473</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <item row="0" column="0">
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>Schulungsdaten mit Konflikt - Bitte wählen Sie eine Aktion aus.</string>
+      <string>Schulungsdaten mit Konflikt - Bitte wählen Sie eine Aktion für jeden Eintrag aus.</string>
      </property>
     </widget>
    </item>
