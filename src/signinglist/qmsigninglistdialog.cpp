@@ -21,16 +21,12 @@
 #include "signinglist/qmsigninglistdocument.h"
 #include "traindataconflict/qmtraindataconflictdialog.h"
 
-#include <QDate>
 #include <QMessageBox>
-#include <QSqlTableModel>
 #include <QPrinter>
 #include <QPrintPreviewDialog>
 #include <QFileDialog>
 #include <QSqlQuery>
 #include <QSqlRecord>
-
-#include <QDebug>
 
 QMSigningListDialog::QMSigningListDialog(QWidget *parent)
     : QMDialog(parent)
@@ -51,7 +47,7 @@ QMSigningListDialog::~QMSigningListDialog()
     delete m_selectedEmployees;
 }
 
-void QMSigningListDialog::openImage()
+[[maybe_unused]] void QMSigningListDialog::openImage()
 {
     auto imagePath = QFileDialog::getOpenFileName(
             this, tr("Öffne Bilddatei"), QDir::homePath(), tr("Image Files (*.png *.jpg *.bmp)"));
@@ -162,7 +158,7 @@ void QMSigningListDialog::createTrainDataEntries()
                 "umgehen möchtest."));
 
         QList<int> ids;
-        for (auto trainDataInfo : trainDataInfoList)
+        for (const QMTrainDataInfo &trainDataInfo : trainDataInfoList)
         {
             ids.append(trainDataInfo.id);
         }
@@ -229,12 +225,12 @@ void QMSigningListDialog::updateData()
     ui->cbSingleEmployee->setModelColumn(1);
 }
 
-void QMSigningListDialog::clearList()
+[[maybe_unused]] void QMSigningListDialog::clearList()
 {
     ui->lwEmployees->clear();
 }
 
-void QMSigningListDialog::removeEmployee()
+[[maybe_unused]] void QMSigningListDialog::removeEmployee()
 {
     auto row = ui->lwEmployees->currentRow();
     if (row == -1)
@@ -293,7 +289,7 @@ void QMSigningListDialog::addEmployee()
     }
 }
 
-void QMSigningListDialog::addEmployeeFromGroup()
+[[maybe_unused]] void QMSigningListDialog::addEmployeeFromGroup()
 {
     // Stop if nothing has been selected
     if (ui->cbEmployeeGroup->currentText().isEmpty() || ui->cbEmployeeGroup->currentIndex() == -1)
@@ -337,7 +333,7 @@ void QMSigningListDialog::addEmployeeFromGroup()
 
 bool QMSigningListDialog::listContainsEmployee(const int &employeeId) const
 {
-    for (QMSigningListEmployeeInfo employeeInfo : *m_selectedEmployees)
+    for (const QMSigningListEmployeeInfo &employeeInfo : *m_selectedEmployees)
     {
         if (employeeId == employeeInfo.id)
         {
@@ -426,7 +422,7 @@ void QMSigningListDialog::paintPdfRequest(QPrinter *printer)
     document.print(printer);
 }
 
-void QMSigningListDialog::trainingChanged()
+[[maybe_unused]] void QMSigningListDialog::trainingChanged()
 {
     auto contentDesc = trainViewModel->data(trainViewModel->index(ui->cbTraining->currentIndex(), 5)).toString();
 
@@ -453,7 +449,7 @@ void QMSigningListDialog::trainingChanged()
 QStringList QMSigningListDialog::getSelectedEmployeeIds() const
 {
     QStringList tmpLst;
-    for (QMSigningListEmployeeInfo employeeInfo : *m_selectedEmployees)
+    for (const QMSigningListEmployeeInfo &employeeInfo : *m_selectedEmployees)
     {
         tmpLst.append(QString::number(employeeInfo.id));
     }

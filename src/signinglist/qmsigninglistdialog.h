@@ -77,10 +77,10 @@ public slots:
     void addEmployee();
 
     /// Add new employees from group.
-    void addEmployeeFromGroup();
+    [[maybe_unused]] void addEmployeeFromGroup();
 
     /// Remove an existing and selected employee.
-    void removeEmployee();
+    [[maybe_unused]] void removeEmployee();
 
     /// Override from QDialog.
     void accept() override;
@@ -92,13 +92,13 @@ public slots:
     void paintPdfRequest(QPrinter *printer);
 
     /// Open the image
-    void openImage();
+    [[maybe_unused]] void openImage();
 
     /// Clear signing list
-    void clearList();
+    [[maybe_unused]] void clearList();
 
     /// Training changed.
-    void trainingChanged();
+    [[maybe_unused]] void trainingChanged();
 
 private:
     /// Test whether the employee list contains the given employee id.
