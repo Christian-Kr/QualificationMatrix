@@ -23,15 +23,21 @@
 // which has been choosen by the user.
 struct QMTrainDataConflictEntry
 {
+    // The primary key of the training data entry.
     int trainDataId = -1;
 
+    // The primary key and name of the training entry.
     int trainId = -1;
     QString trainName;
 
+    // The primary key and name of the employee.
     int employeeId = -1;
     QString employeeName;
 
+    // The training date of the train data entry.
     QDate trainDate;
+
+    // The training state id of the training data entry.
     int trainState = -1;
 };
 
