@@ -11,13 +11,13 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Konflikt beim Bearbeiten von Schulungseinträgen</string>
+   <string>Erstellen von Schulungseinträgen</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>Schulungsdaten mit Konflikt - Bitte wählen Sie eine Aktion für jeden Eintrag aus.</string>
+      <string>Bereits existierende Schulungsdaten</string>
      </property>
     </widget>
    </item>
