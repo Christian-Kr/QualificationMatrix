@@ -412,10 +412,10 @@ bool QMMainWindow::closeDatabase()
     ui->actSettings->setEnabled(false);
     ui->actCloseDatabase->setEnabled(false);
 
-    // Logout from database.
+    // Logout from database
     amsLogout();
 
-    // Set ui elements.
+    // Set ui elements
     setWindowTitle(tr("QualificationMatrix"));
     ui->statusbar->showMessage(tr("Datenbank getrennt"));
 
