@@ -25,8 +25,6 @@
 #include <QJsonObject>
 #include <QJsonArray>
 
-#include <QDebug>
-
 QMBackupManager *QMBackupManager::instance = nullptr;
 
 QMBackupMetaInfo::QMBackupMetaInfo()
