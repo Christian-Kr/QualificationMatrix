@@ -34,7 +34,7 @@ class QSqlDatabase;
 
 enum class LoginState;
 
-// Enum: The WIN_MODE. Every time the mode will be switched and a new widget will be shown, the objects will be
+// Enum: The WIN_MODE. Every time the mode will be switched and a new widget will be shown, the old objects will be
 // deleted. This makes sure, nothing happens or blocks access in unused application parts.
 enum class WIN_MODE {
     NONE,           // Show no widget. This normally happens, when no database has been loaded.

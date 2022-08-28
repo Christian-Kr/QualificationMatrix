@@ -25,6 +25,7 @@
 
 #include <QDebug>
 
+// Since Qt 5.15.0 the endl variable has been changed to Qt::endl
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
 #define DEPR_ENDL Qt::endl
 #else
