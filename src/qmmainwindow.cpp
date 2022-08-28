@@ -391,22 +391,19 @@ bool QMMainWindow::closeDatabase()
         {
             auto res = QMessageBox::question(this, tr("Datenbank schließen"),
                     tr("Soll die verbundene Datenbank wirklich geschlossen werden?"),
-                QMessageBox::Yes | QMessageBox::No);
+                    QMessageBox::Yes | QMessageBox::No);
 
-            switch (res)
+            if (res == QMessageBox::No)
             {
-                case QMessageBox::Yes:
-                    // TODO: save database
-                    break;
-                case QMessageBox::No:
-                    return false;
-                default:
-                    break;
+                return false;
             }
-
-            // close the database
-            // TODO: do more related stuff to reset everything
-            db.close();
+            else
+            {
+                // The database will be closed. There is no need to ask for saving, because all changes will be written
+                // directly to the database.
+                // TODO: Check if anything else needs to be done before closing the database.
+                db.close();
+            }
         }
     }
 
