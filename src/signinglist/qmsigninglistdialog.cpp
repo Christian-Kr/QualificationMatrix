@@ -87,7 +87,7 @@ void QMSigningListDialog::createTrainDataEntries()
         return;
     }
 
-    // Run a query to get all exisiting training data with respect to the training and date.
+    // Run a query to get all exisiting training data with respect to the training, employee and date.
     if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
     {
         qDebug() << "QMSigningListDialog: Cannot open database";
@@ -122,14 +122,11 @@ void QMSigningListDialog::createTrainDataEntries()
 
     QSqlQuery query(strTrainDataEntriesQuery, db);
 
-    // Save all training data entries - including some information - of entries that should be created, but already
-    // exist.
+    // Save the query result to objects with its information.
     QList<QMTrainDataInfo> trainDataInfoList;
 
     while (query.next())
     {
-        // Go through all results and find entries that might already exist.
-
         QSqlRecord record = query.record();
 
         QMTrainDataInfo trainDataInfo;
@@ -141,6 +138,7 @@ void QMSigningListDialog::createTrainDataEntries()
         trainDataInfoList.append(trainDataInfo);
     }
 
+    // Close query, to prevent blocking other queries.
     query.finish();
 
     if (!trainDataInfoList.isEmpty())
