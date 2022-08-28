@@ -109,7 +109,7 @@ public:
     }
 
     /// Delete the static variable.
-    static void resetInstance()
+    [[maybe_unused]] static void resetInstance()
     {
         if (instance != nullptr)
         {
