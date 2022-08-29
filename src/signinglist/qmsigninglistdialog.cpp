@@ -66,43 +66,34 @@ QMSigningListDialog::~QMSigningListDialog()
 void QMSigningListDialog::accept()
 {
     saveSettings();
-    createTrainDataEntries();
+
+    if (ui->cbCreateTrainDataEntries->isChecked())
+    {
+        // Check permissions for adding training data.
+        auto ams = QMAMSManager::getInstance();
+        if (!ams->checkPermission(AccessMode::TD_MODE_WRITE))
+        {
+            QMessageBox::StandardButton ret = QMessageBox::question(this, tr("Nachweise verwalten"),
+                    tr("Sie haben nicht die notwendigen Berechtigungen zum Erstellen von Schulungseinträgen. Möchtest "
+                       "Sie trotzdem fortfahren?"),
+                    QMessageBox::Yes | QMessageBox::No);
+
+            if (ret != QMessageBox::Yes)
+            {
+                return;
+            }
+        }
+        else
+        {
+            createTrainDataEntries();
+        }
+    }
+
     printToPDF();
 }
 
 void QMSigningListDialog::createTrainDataEntries()
 {
-    // Only if wanted...
-    if (!ui->cbCreateTrainDataEntries->isChecked())
-    {
-        return;
-    }
-
-    // and only if you are allowed to!
-    auto ams = QMAMSManager::getInstance();
-    if (!ams->checkPermission(AccessMode::TD_MODE_WRITE))
-    {
-        QMessageBox::StandardButton ret = QMessageBox::question(this, tr("Nachweise verwalten"),
-                tr("Sie haben nicht die notwendigen Berechtigungen zum Erstellen von Schulungseinträgen. Möchtest "
-                   "Sie trotzdem fortfahren?"),
-                QMessageBox::Yes | QMessageBox::No);
-
-        if (ret != QMessageBox::Yes)
-        {
-            return;
-        }
-    }
-
-    // Ask again to be sure the user wanted to create the entries.
-    QMessageBox::StandardButton ret = QMessageBox::question(this, tr("Erstelle Schulungsdaten"), 
-            tr("Bist du dir sicher, dass du einen Schulungseintrag für jeden Mitarbeiter erstellen möchtest? Einmal"
-            " erstellte Einträge müssen manuell wieder gelöscht werden."), QMessageBox::Yes | QMessageBox::No);
-    
-    if (ret != QMessageBox::Yes)
-    {
-        return;
-    }
-
     // Run a query to get all exisiting training data with respect to the training, employee and date.
     if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
     {
