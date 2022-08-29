@@ -105,7 +105,7 @@ private:
     /// Test whether the employee list contains the given employee id.
     /// \param employeeId The id (primary key in table) of the employee to test.
     /// \return True if the employee already exist, else false.
-    bool listContainsEmployee(const int &employeeName) const;
+    [[nodiscard]] bool listContainsEmployee(const int &employeeName) const;
 
     /// Finally create the given set of train data entries.
     void createTrainDataEntries(const QSqlDatabase &db);
@@ -116,7 +116,7 @@ private:
 
     /// Get a list of selected employee ids.
     /// \return List with all ids.
-    QStringList getSelectedEmployeeIds() const;
+    [[nodiscard]] QStringList getSelectedEmployeeIds() const;
 
     Ui::QMSigningListDialog *ui;
 
