@@ -22,6 +22,7 @@ class QSqlTableModel;
 class QMSqlTableModel;
 class QSqlRelationalTableModel;
 class QPrinter;
+class QSqlDatabase;
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -106,10 +107,12 @@ private:
     /// \return True if the employee already exist, else false.
     bool listContainsEmployee(const int &employeeName) const;
 
-    /// Create entries for every employee with the given training information. All entries will be set to be planned.
-    /// If the entry already exist, don't create them again. Informate the user afterwarts about the amount of entries
-    /// that have been created and that already exist.
-    void createTrainDataEntries();
+    /// Finally create the given set of train data entries.
+    void createTrainDataEntries(const QSqlDatabase &db);
+
+    /// This method should be called to perform a check on whether there are entries already existing, which should
+    /// not be created.
+    void createTrainDataEntriesCheck();
 
     /// Get a list of selected employee ids.
     /// \return List with all ids.

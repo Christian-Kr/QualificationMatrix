@@ -85,14 +85,14 @@ void QMSigningListDialog::accept()
         }
         else
         {
-            createTrainDataEntries();
+            createTrainDataEntriesCheck();
         }
     }
 
     printToPDF();
 }
 
-void QMSigningListDialog::createTrainDataEntries()
+void QMSigningListDialog::createTrainDataEntriesCheck()
 {
     // Run a query to get all exisiting training data with respect to the training, employee and date.
     if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
@@ -162,20 +162,24 @@ void QMSigningListDialog::createTrainDataEntries()
         }
 
         // Show the conflict dialog and let user decide how to handle them.
-        // TODO: Implement!
         QMTrainDataConflictDialog trainDataConflictDialog(this);
         trainDataConflictDialog.setTrainingData(ids);
         trainDataConflictDialog.exec();
     }
 
-    // Finally create entries for the employees that are not already existing with a training data set.
+    createTrainDataEntries(db);
+}
+
+void QMSigningListDialog::createTrainDataEntries(const QSqlDatabase &db)
+{
+    // Finally create entries for the employees that are not already existing within a training data set.
     QMTrainingDataModel trainDataModel(this, db);
     trainDataModel.select();
 
     // TODO: Add all entries.
-    // auto newRecord = trainDataModel.record();
+    auto newRecord = trainDataModel.record();
 
-    // // To create a new record, the id's for primary keys have to be entered.
+    // To create a new record, the id's for primary keys have to be entered.
     // newRecord.setValue(1, employeeViewModel->data(employeeViewModel->index(0, 0)));
     // newRecord.setValue(2, trainViewModel->data(trainViewModel->index(0, 0)));
     // newRecord.setValue(3, "2020-01-01");
