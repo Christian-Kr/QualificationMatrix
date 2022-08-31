@@ -110,7 +110,7 @@ bool QMSigningListDialog::checkInput()
     if (ui->leTrainer->text().isEmpty())
     {
         QMessageBox::warning(this, tr("Unterschriftenliste erstellen"),
-                tr("Bitte der Schulungsdurchführenden eintragen!"));
+                tr("Bitte den Schulungsdurchführenden eintragen!"));
         return false;
     }
 
