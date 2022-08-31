@@ -37,9 +37,16 @@ struct QMTrainDataInfo
     // Primary key in database
     int id;
 
+    // The Primary key id of the employee.
     int employeeId;
+
+    // The primary key id of the training.
     int trainId;
+
+    // The primary key id of the training state.
     int trainstateId;
+
+    // The date of the training.
     QString trainDate;
 };
 
