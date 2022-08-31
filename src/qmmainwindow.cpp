@@ -57,6 +57,7 @@
 QMMainWindow::QMMainWindow(QWidget *parent)
     : QMainWindow(parent)
     , winMode(WIN_MODE::NONE)
+    , m_signingListDialog(std::make_unique<QMSigningListDialog>(this))
 {
     ui = new Ui::QMMainWindow;
     ui->setupUi(this);
@@ -73,6 +74,17 @@ QMMainWindow::QMMainWindow(QWidget *parent)
     tbAMS->removeAction(ui->actAMS);
     tbAMS->addAction(ui->actLogin);
     tbAMS->addAction(ui->actLogout);
+
+    // QMSigningListDialog
+    auto &settings = QMApplicationSettings::getInstance();
+
+    auto varWidth = settings.read("SigningListDialog/Width");
+    auto width = (varWidth.isNull()) ? 400 : varWidth.toInt();
+    auto varHeight = settings.read("SigningListDialog/Height");
+    auto height = (varHeight.isNull()) ? 400 : varHeight.toInt();
+
+    m_signingListDialog->resize(width, height);
+    m_signingListDialog->setModal(true);
 }
 
 QMMainWindow::~QMMainWindow()
@@ -503,17 +515,8 @@ void QMMainWindow::saveSettings()
 
 [[maybe_unused]] void QMMainWindow::showCreateSigningList()
 {
-    auto &settings = QMApplicationSettings::getInstance();
-
-    auto varWidth = settings.read("SigningListDialog/Width");
-    auto width = (varWidth.isNull()) ? 400 : varWidth.toInt();
-    auto varHeight = settings.read("SigningListDialog/Height");
-    auto height = (varHeight.isNull()) ? 400 : varHeight.toInt();
-
-    QMSigningListDialog signingListDialog(this);
-    signingListDialog.resize(width, height);
-    signingListDialog.setModal(true);
-    signingListDialog.exec();
+    m_signingListDialog->updateData();
+    m_signingListDialog->open();
 }
 
 [[maybe_unused]] void QMMainWindow::enterResultMode()

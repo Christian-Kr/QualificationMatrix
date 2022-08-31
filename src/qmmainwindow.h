@@ -31,6 +31,7 @@ class QMQualiMatrixWidget;
 class QMTrainDataWidget;
 class QTranslator;
 class QSqlDatabase;
+class QMSigningListDialog;
 
 enum class LoginState;
 
@@ -164,6 +165,7 @@ private:
 
     Ui::QMMainWindow *ui;
 
+    std::unique_ptr<QMSigningListDialog> m_signingListDialog;
     std::unique_ptr<QProgressDialog> progressDialog;
     std::unique_ptr<QMQualiResultWidget> qualiResultWidget;
     std::unique_ptr<QMQualiMatrixWidget> qualiMatrixWidget;

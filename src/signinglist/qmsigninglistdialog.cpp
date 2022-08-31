@@ -37,8 +37,6 @@ QMSigningListDialog::QMSigningListDialog(QWidget *parent)
     ui = new Ui::QMSigningListDialog;
     ui->setupUi(this);
 
-    updateData();
-
     auto &settings = QMApplicationSettings::getInstance();
     ui->leImagePath->setText(settings.read("SigningListDialog/ImagePath", "").toString());
 
