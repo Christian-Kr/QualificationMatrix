@@ -124,7 +124,7 @@ bool QMSigningListDialog::checkInput()
     if (ui->lwEmployees->count() < 1)
     {
         QMessageBox::warning(this, tr("Unterschriftenliste erstellen"),
-                tr("Bitte die mindestens einen Mitarbeiter eintragen!"));
+                tr("Bitte mindestens einen Mitarbeiter eintragen!"));
         return false;
     }
 
