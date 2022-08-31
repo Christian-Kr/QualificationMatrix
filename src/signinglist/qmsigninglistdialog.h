@@ -23,6 +23,7 @@ class QMSqlTableModel;
 class QSqlRelationalTableModel;
 class QPrinter;
 class QSqlDatabase;
+class QMTrainDataConflictDialog;
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -108,6 +109,10 @@ public slots:
     /// Training changed.
     [[maybe_unused]] void trainingChanged();
 
+    /// Finished the train data conflict dialog.
+    /// \param result The result of the dialog (e.g. accepted or rejected).
+    [[maybe_unused]] void trainDataConflictDialogFinished(int result);
+
 private:
     /// Test whether the employee list contains the given employee id.
     /// \param employeeId The id (primary key in table) of the employee to test.
@@ -115,7 +120,7 @@ private:
     [[nodiscard]] bool listContainsEmployee(const int &employeeName) const;
 
     /// Finally create the given set of train data entries.
-    void createTrainDataEntries(const QSqlDatabase &db);
+    void createTrainDataEntries();
 
     /// This method should be called to perform a check on whether there are entries already existing, which should
     /// not be created.
@@ -132,6 +137,8 @@ private:
     Ui::QMSigningListDialog *ui;
 
     QList<QMSigningListEmployeeInfo> *m_selectedEmployees;
+
+    QMTrainDataConflictDialog *m_trainDataConflictDialog;
 
     std::unique_ptr<QSqlTableModel> employeeViewModel;
     std::unique_ptr<QSqlTableModel> shiftViewModel;

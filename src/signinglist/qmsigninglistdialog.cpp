@@ -32,6 +32,7 @@
 QMSigningListDialog::QMSigningListDialog(QWidget *parent)
     : QMDialog(parent)
     , m_selectedEmployees(new QList<QMSigningListEmployeeInfo>())
+    , m_trainDataConflictDialog(new QMTrainDataConflictDialog(this))
 {
     ui = new Ui::QMSigningListDialog;
     ui->setupUi(this);
@@ -40,12 +41,16 @@ QMSigningListDialog::QMSigningListDialog(QWidget *parent)
 
     auto &settings = QMApplicationSettings::getInstance();
     ui->leImagePath->setText(settings.read("SigningListDialog/ImagePath", "").toString());
+
+    connect(m_trainDataConflictDialog, &QMTrainDataConflictDialog::finished, this,
+            &QMSigningListDialog::trainDataConflictDialogFinished);
 }
 
 QMSigningListDialog::~QMSigningListDialog()
 {
     delete ui;
     delete m_selectedEmployees;
+    delete m_trainDataConflictDialog;
 }
 
 [[maybe_unused]] void QMSigningListDialog::openImage()
@@ -79,7 +84,7 @@ void QMSigningListDialog::accept()
         if (!ams->checkPermission(AccessMode::TD_MODE_WRITE))
         {
             QMessageBox::StandardButton ret = QMessageBox::question(this, tr("Nachweise verwalten"),
-                    tr("Sie haben nicht die notwendigen Berechtigungen zum Erstellen von Schulungseinträgen. Möchtest "
+                    tr("Sie haben nicht die notwendigen Berechtigungen zum Erstellen von Schulungseinträgen. Möchten "
                        "Sie trotzdem fortfahren?"),
                     QMessageBox::Yes | QMessageBox::No);
 
@@ -87,14 +92,20 @@ void QMSigningListDialog::accept()
             {
                 return;
             }
+            else
+            {
+                printToPDF();
+            }
         }
         else
         {
             createTrainDataEntriesCheck();
         }
     }
-
-    printToPDF();
+    else
+    {
+        printToPDF();
+    }
 }
 
 bool QMSigningListDialog::checkInput()
@@ -201,28 +212,79 @@ void QMSigningListDialog::createTrainDataEntriesCheck()
         }
 
         // Show the conflict dialog and let user decide how to handle them.
-        QMTrainDataConflictDialog trainDataConflictDialog(this);
-        trainDataConflictDialog.setTrainingData(ids);
-        trainDataConflictDialog.exec();
+        m_trainDataConflictDialog->setTrainingData(ids);
+        m_trainDataConflictDialog->open();
     }
-
-    createTrainDataEntries(db);
+    else
+    {
+        createTrainDataEntries();
+        printToPDF();
+    }
 }
 
-void QMSigningListDialog::createTrainDataEntries(const QSqlDatabase &db)
+void QMSigningListDialog::trainDataConflictDialogFinished(int result)
 {
+    if (result == QDialog::Accepted)
+    {
+        createTrainDataEntries();
+    }
+
+    printToPDF();
+}
+
+void QMSigningListDialog::createTrainDataEntries()
+{
+    // Check for and get the database object.
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        qDebug() << "QMSigningListDialog: Cannot open database";
+        return;
+    }
+
+    auto db = QSqlDatabase::database("default");
+
     // Finally create entries for the employees that are not already existing within a training data set.
     QMTrainingDataModel trainDataModel(this, db);
     trainDataModel.select();
 
-    // TODO: Add all entries.
-    auto newRecord = trainDataModel.record();
+    // Get current selected training id.
+    auto trainRow = ui->cbTraining->currentIndex();
+    auto trainIdFieldColumn = trainViewModel->fieldIndex("id");
+    auto selectedTrainId = trainViewModel->data(trainViewModel->index(trainRow, trainIdFieldColumn)).toInt();
 
-    // To create a new record, the id's for primary keys have to be entered.
-    // newRecord.setValue(1, employeeViewModel->data(employeeViewModel->index(0, 0)));
-    // newRecord.setValue(2, trainViewModel->data(trainViewModel->index(0, 0)));
-    // newRecord.setValue(3, "2020-01-01");
-    // //newRecord.setValue(4, trainDataStateViewModel->data(trainDataStateViewModel->index(0, 0)));
+    // Get current selected date.
+    auto selectedDate = ui->cwDate->selectedDate().toString(Qt::DateFormat::ISODate);
+
+    // The train data state can only be the default one for registered. For now, the id is defaulted to 2 which
+    // is registered in database. This is a bad handle.
+    // TODO: Give option to selected the default state for the entries.
+    auto trainDataState = 2;
+
+    auto error = false;
+
+    for (const QMSigningListEmployeeInfo &employeeInfo : *m_selectedEmployees)
+    {
+        auto record = trainDataModel.record();
+
+        // To create a new record, the id's for primary keys have to be entered.
+        record.setValue(1, employeeInfo.id);
+        record.setValue(2, selectedTrainId);
+        record.setValue(3, selectedDate);
+        record.setValue(4, trainDataState);
+
+        auto res = trainDataModel.insertRecord(-1, record);
+        if (!res)
+        {
+            qDebug() << "QMSigningListDialog: Cannot add train data entry";
+            error = true;
+        }
+    }
+
+    if (!trainDataModel.submitAll() || error)
+    {
+        QMessageBox::warning(this, tr("Erstelle Schulungsdaten"),
+                tr("Es sind Fehler beim Erstellen der Schulungsdaten aufgetreten."));
+    }
 }
 
 void QMSigningListDialog::saveSettings()
