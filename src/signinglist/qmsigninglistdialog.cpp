@@ -65,6 +65,11 @@ QMSigningListDialog::~QMSigningListDialog()
 
 void QMSigningListDialog::accept()
 {
+    if (!checkInput())
+    {
+        return;
+    }
+
     saveSettings();
 
     if (ui->cbCreateTrainDataEntries->isChecked())
@@ -90,6 +95,40 @@ void QMSigningListDialog::accept()
     }
 
     printToPDF();
+}
+
+bool QMSigningListDialog::checkInput()
+{
+    // First of all, test for must have fields.
+    if (ui->leTrainDetails->toPlainText().isEmpty())
+    {
+        QMessageBox::warning(this, tr("Unterschriftenliste erstellen"),
+                tr("Bitte Details zu den Schulungsinhalten eingeben!"));
+        return false;
+    }
+
+    if (ui->leTrainer->text().isEmpty())
+    {
+        QMessageBox::warning(this, tr("Unterschriftenliste erstellen"),
+                tr("Bitte der Schulungsdurchführenden eintragen!"));
+        return false;
+    }
+
+    if (ui->leOrganisation->text().isEmpty())
+    {
+        QMessageBox::warning(this, tr("Unterschriftenliste erstellen"),
+                tr("Bitte die Schulungsorganisation eintragen!"));
+        return false;
+    }
+
+    if (ui->lwEmployees->count() < 1)
+    {
+        QMessageBox::warning(this, tr("Unterschriftenliste erstellen"),
+                tr("Bitte die mindestens einen Mitarbeiter eintragen!"));
+        return false;
+    }
+
+    return true;
 }
 
 void QMSigningListDialog::createTrainDataEntriesCheck()
@@ -348,35 +387,6 @@ bool QMSigningListDialog::listContainsEmployee(const int &employeeId) const
 
 void QMSigningListDialog::printToPDF()
 {
-    // First of all, test for must have fields.
-    if (ui->leTrainDetails->toPlainText().isEmpty())
-    {
-        QMessageBox::warning(this, tr("Unterschriftenliste erstellen"),
-            tr("Bitte Details zu den Schulungsinhalten eingeben!"));
-        return;
-    }
-
-    if (ui->leTrainer->text().isEmpty())
-    {
-        QMessageBox::warning(this, tr("Unterschriftenliste erstellen"),
-             tr("Bitte der Schulungsdurchführenden eintragen!"));
-        return;
-    }
-
-    if (ui->leOrganisation->text().isEmpty())
-    {
-        QMessageBox::warning(this, tr("Unterschriftenliste erstellen"),
-                             tr("Bitte die Schulungsorganisation eintragen!"));
-        return;
-    }
-
-    if (ui->lwEmployees->count() < 1)
-    {
-        QMessageBox::warning(this, tr("Unterschriftenliste erstellen"),
-                             tr("Bitte die mindestens einen Mitarbeiter eintragen!"));
-        return;
-    }
-
     // Set up default printer.
     auto printer = new QPrinter();
     printer->setPageOrientation(QPageLayout::Orientation::Portrait);

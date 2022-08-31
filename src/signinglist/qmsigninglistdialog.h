@@ -125,6 +125,10 @@ private:
     /// \return List with all ids.
     [[nodiscard]] QStringList getSelectedEmployeeIds() const;
 
+    /// Checks all input fields, whether they are fully filled.
+    /// \return True if success, else false.
+    [[nodiscard]] bool checkInput();
+
     Ui::QMSigningListDialog *ui;
 
     QList<QMSigningListEmployeeInfo> *m_selectedEmployees;
