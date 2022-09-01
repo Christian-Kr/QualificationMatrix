@@ -32,6 +32,7 @@ class QMTrainDataWidget;
 class QTranslator;
 class QSqlDatabase;
 class QMSigningListDialog;
+class QMAMSLoginDialog;
 
 enum class LoginState;
 
@@ -61,6 +62,10 @@ public:
 public slots:
     /// AMS login user.
     void amsLogin();
+
+    /// Login dialog has finished and result has to be handle.
+    /// \param result The result of the user (e.g. accpeted or rejected).
+    [[maybe_unused]] void amsLoginDialogFinished(int result);
 
     /// AMS logout user.
     void amsLogout();
@@ -166,12 +171,14 @@ private:
     Ui::QMMainWindow *ui;
 
     std::unique_ptr<QMSigningListDialog> m_signingListDialog;
+    std::unique_ptr<QMAMSLoginDialog> m_amsLoginDialog;
     std::unique_ptr<QProgressDialog> progressDialog;
     std::unique_ptr<QMQualiResultWidget> qualiResultWidget;
     std::unique_ptr<QMQualiMatrixWidget> qualiMatrixWidget;
     std::unique_ptr<QMTrainDataWidget> trainDataWidget;
 
     WIN_MODE winMode;
+    WIN_MODE lastWinMode;
 };
 
 #endif // QMMAINWINDOW_H

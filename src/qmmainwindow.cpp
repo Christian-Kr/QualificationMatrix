@@ -57,7 +57,9 @@
 QMMainWindow::QMMainWindow(QWidget *parent)
     : QMainWindow(parent)
     , winMode(WIN_MODE::NONE)
+    , lastWinMode(WIN_MODE::NONE)
     , m_signingListDialog(std::make_unique<QMSigningListDialog>(this))
+    , m_amsLoginDialog(std::make_unique<QMAMSLoginDialog>(this))
 {
     ui = new Ui::QMMainWindow;
     ui->setupUi(this);
@@ -85,6 +87,9 @@ QMMainWindow::QMMainWindow(QWidget *parent)
 
     m_signingListDialog->resize(width, height);
     m_signingListDialog->setModal(true);
+
+    // QMAMSLoginDialog
+    connect(m_amsLoginDialog.get(), &QMAMSLoginDialog::finished, this, &QMMainWindow::amsLoginDialogFinished);
 }
 
 QMMainWindow::~QMMainWindow()
@@ -571,6 +576,8 @@ bool QMMainWindow::closeCurrentWindowMode()
         ui->centralwidget->layout()->removeWidget(widget);
         widget->disconnect();
         delete widget;
+
+        lastWinMode = winMode;
         winMode = WIN_MODE::NONE;
 
         // Check right buttons.
@@ -646,6 +653,7 @@ void QMMainWindow::enterWindowMode(WIN_MODE mode)
             ui->actModeQualiMatrix->setChecked(false);
             ui->actModeTrainingData->setChecked(true);
 
+            lastWinMode = winMode;
             winMode = WIN_MODE::TRAININGDATA;
         }
         break;
@@ -676,6 +684,7 @@ void QMMainWindow::enterWindowMode(WIN_MODE mode)
             ui->actModeQualiMatrix->setChecked(true);
             ui->actModeTrainingData->setChecked(false);
 
+            lastWinMode = winMode;
             winMode = WIN_MODE::MATRIX;
         }
         break;
@@ -707,6 +716,7 @@ void QMMainWindow::enterWindowMode(WIN_MODE mode)
             ui->actModeQualiMatrix->setChecked(false);
             ui->actModeTrainingData->setChecked(false);
 
+            lastWinMode = winMode;
             winMode = WIN_MODE::RESULT;
         }
         break;
@@ -736,8 +746,6 @@ void QMMainWindow::handleLoginChange(LoginState, LoginState current)
 
 void QMMainWindow::amsLogin()
 {
-    WIN_MODE tmpMode = winMode;
-
     // Close all modes.
     closeCurrentWindowMode();
 
@@ -770,19 +778,20 @@ void QMMainWindow::amsLogin()
         lastLoginName = settings.read("AMS/LastLoginName", "").toString();
     }
 
-    QMAMSLoginDialog loginDialog(this);
-
     if (!lastLoginName.isEmpty())
     {
-        loginDialog.setUsername(lastLoginName);
+        m_amsLoginDialog->setUsername(lastLoginName);
     }
 
-    loginDialog.exec();
+    m_amsLoginDialog->open();
+}
 
+void QMMainWindow::amsLoginDialogFinished(int)
+{
     // Reset the win mode only when not NONE (cause it already is NONE).
-    if (tmpMode != WIN_MODE::NONE)
+    if (lastWinMode != WIN_MODE::NONE)
     {
-        enterWindowMode(tmpMode);
+        enterWindowMode(lastWinMode);
     }
 }
 
