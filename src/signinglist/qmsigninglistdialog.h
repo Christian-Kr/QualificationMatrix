@@ -141,6 +141,7 @@ private:
     Ui::QMSigningListDialog *ui;
 
     QList<QMSigningListEmployeeInfo> *m_selectedEmployees;
+    QList<QMSigningListEmployeeInfo> *m_duplicatedEmployeeEntries;
 
     QMTrainDataConflictDialog *m_trainDataConflictDialog;
 

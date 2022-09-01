@@ -33,6 +33,7 @@
 QMSigningListDialog::QMSigningListDialog(QWidget *parent)
     : QMDialog(parent)
     , m_selectedEmployees(new QList<QMSigningListEmployeeInfo>())
+    , m_duplicatedEmployeeEntries(new QList<QMSigningListEmployeeInfo>())
     , m_trainDataConflictDialog(new QMTrainDataConflictDialog(this))
 {
     ui = new Ui::QMSigningListDialog;
@@ -49,6 +50,7 @@ QMSigningListDialog::~QMSigningListDialog()
 {
     delete ui;
     delete m_selectedEmployees;
+    delete m_duplicatedEmployeeEntries;
     delete m_trainDataConflictDialog;
 }
 
@@ -193,6 +195,16 @@ void QMSigningListDialog::createTrainDataEntriesCheck()
     // Close query, to prevent blocking other queries.
     query.finish();
 
+    // Empty the duplicated entry list and fill it with the found ones.
+    m_duplicatedEmployeeEntries->clear();
+    for (const QMTrainDataInfo &trainDataInfo : trainDataInfoList)
+    {
+        QMSigningListEmployeeInfo employeeInfo;
+        employeeInfo.id = trainDataInfo.employeeId;
+
+        m_duplicatedEmployeeEntries->append(employeeInfo);
+    }
+
     // Every entry that is part of trainDataInfoList conflicts with the process to create a new training data entry.
     // As a result, these entries won't be created. The user has the possiblities to view the list of not created
     // entries before the process goes on.
@@ -265,6 +277,28 @@ void QMSigningListDialog::createTrainDataEntries()
 
     for (const QMSigningListEmployeeInfo &employeeInfo : *m_selectedEmployees)
     {
+        // Jump over and don't create if an entry for the employee already exist. This test has already been done in
+        // createTrainDataEntriesCheck() and the result has been saved to m_duplicatedEmployeeEntries. Because the
+        // only variable that might change on duplicate are the employees, the duplicated training data entries might
+        // directly correlate with the employee column and therefore a list of employees that are duplicate is
+        // sufficient.
+        bool duplicate = false;
+
+        for (const QMSigningListEmployeeInfo &duplicatedEmployeeInfo : *m_duplicatedEmployeeEntries)
+        {
+            if (duplicatedEmployeeInfo.id == employeeInfo.id)
+            {
+                duplicate = true;
+                break;
+            }
+        }
+
+        if (duplicate)
+        {
+            continue;
+        }
+
+        // Go on with creating a new record.
         auto record = trainDataModel.record();
 
         // To create a new record, the id's for primary keys have to be entered.
@@ -538,7 +572,7 @@ QStringList QMSigningListDialog::getSelectedEmployeeIds() const
     return tmpLst;
 }
 
-void QMSigningListDialog::createTrainDataEntriesChanged(int state)
+[[maybe_unused]] void QMSigningListDialog::createTrainDataEntriesChanged(int state)
 {
     if (state == Qt::CheckState::Checked)
     {
