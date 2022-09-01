@@ -17,6 +17,7 @@
 #include "model/view/qmshiftviewmodel.h"
 #include "model/view/qmtrainingviewmodel.h"
 #include "model/qmtrainingdatamodel.h"
+#include "model/view/qmtrainingdatastateviewmodel.h"
 #include "settings/qmapplicationsettings.h"
 #include "signinglist/qmsigninglistdocument.h"
 #include "traindataconflict/qmtraindataconflictdialog.h"
@@ -247,16 +248,18 @@ void QMSigningListDialog::createTrainDataEntries()
 
     // Get current selected training id.
     auto trainRow = ui->cbTraining->currentIndex();
-    auto trainIdFieldColumn = trainViewModel->fieldIndex("id");
-    auto selectedTrainId = trainViewModel->data(trainViewModel->index(trainRow, trainIdFieldColumn)).toInt();
+    auto trainIdFieldColumn = m_trainViewModel->fieldIndex("id");
+    auto selectedTrainId = m_trainViewModel->data(m_trainViewModel->index(trainRow, trainIdFieldColumn)).toInt();
 
     // Get current selected date.
     auto selectedDate = ui->cwDate->selectedDate().toString(Qt::DateFormat::ISODate);
 
     // The train data state can only be the default one for registered. For now, the id is defaulted to 2 which
     // is registered in database. This is a bad handle.
-    // TODO: Give option to selected the default state for the entries.
-    auto trainDataState = 2;
+    auto trainDataStateRow = ui->cbTrainingState->currentIndex();
+    auto trainDataStateIdFieldColumn = m_trainDataStateViewModel->fieldIndex("id");
+    auto selectedTrainDataStateRow = m_trainDataStateViewModel->data(
+            m_trainDataStateViewModel->index(trainDataStateRow, trainDataStateIdFieldColumn)).toInt();
 
     auto error = false;
 
@@ -268,7 +271,7 @@ void QMSigningListDialog::createTrainDataEntries()
         record.setValue(1, employeeInfo.id);
         record.setValue(2, selectedTrainId);
         record.setValue(3, selectedDate);
-        record.setValue(4, trainDataState);
+        record.setValue(4, selectedTrainDataStateRow);
 
         auto res = trainDataModel.insertRecord(-1, record);
         if (!res)
@@ -306,23 +309,29 @@ void QMSigningListDialog::updateData()
 
     auto db = QSqlDatabase::database("default");
 
-    employeeViewModel = std::make_unique<QMEmployeeViewModel>(this, db);
-    employeeViewModel->select();
+    m_trainDataStateViewModel = std::make_unique<QMTrainingDataStateViewModel>(this, db);
+    m_trainDataStateViewModel->select();
 
-    shiftViewModel = std::make_unique<QMShiftViewModel>(this, db);
-    shiftViewModel->select();
+    m_employeeViewModel = std::make_unique<QMEmployeeViewModel>(this, db);
+    m_employeeViewModel->select();
 
-    trainViewModel = std::make_unique<QMTrainingViewModel>(this, db);
-    trainViewModel->select();
+    m_shiftViewModel = std::make_unique<QMShiftViewModel>(this, db);
+    m_shiftViewModel->select();
+
+    m_trainViewModel = std::make_unique<QMTrainingViewModel>(this, db);
+    m_trainViewModel->select();
 
     // Set ui elements.
-    ui->cbTraining->setModel(trainViewModel.get());
+    ui->cbTrainingState->setModel(m_trainDataStateViewModel.get());
+    ui->cbTrainingState->setModelColumn(1);
+
+    ui->cbTraining->setModel(m_trainViewModel.get());
     ui->cbTraining->setModelColumn(1);
 
-    ui->cbEmployeeGroup->setModel(shiftViewModel.get());
+    ui->cbEmployeeGroup->setModel(m_shiftViewModel.get());
     ui->cbEmployeeGroup->setModelColumn(1);
 
-    ui->cbSingleEmployee->setModel(employeeViewModel.get());
+    ui->cbSingleEmployee->setModel(m_employeeViewModel.get());
     ui->cbSingleEmployee->setModelColumn(1);
 }
 
@@ -360,8 +369,8 @@ void QMSigningListDialog::addEmployee()
     }
 
     // Column names in model
-    auto colEmployeeId = employeeViewModel->fieldIndex("id");
-    auto colEmployeeName = employeeViewModel->fieldIndex("name");
+    auto colEmployeeId = m_employeeViewModel->fieldIndex("id");
+    auto colEmployeeName = m_employeeViewModel->fieldIndex("name");
 
     if (colEmployeeId == -1 || colEmployeeName == -1)
     {
@@ -370,8 +379,8 @@ void QMSigningListDialog::addEmployee()
     }
 
     // Get model values
-    auto employeeName = employeeViewModel->data(employeeViewModel->index(selectedRow, colEmployeeName)).toString();
-    auto employeeId = employeeViewModel->data(employeeViewModel->index(selectedRow, colEmployeeId)).toInt();
+    auto employeeName = m_employeeViewModel->data(m_employeeViewModel->index(selectedRow, colEmployeeName)).toString();
+    auto employeeId = m_employeeViewModel->data(m_employeeViewModel->index(selectedRow, colEmployeeId)).toInt();
 
     if (employeeId < 1)
     {
@@ -399,9 +408,9 @@ void QMSigningListDialog::addEmployee()
     }
 
     // Column names in model
-    auto colEmployeeId = employeeViewModel->fieldIndex("id");
-    auto colEmployeeName = employeeViewModel->fieldIndex("name");
-    auto colEmployeeGroup = employeeViewModel->fieldIndex("Shift_name_2"); // Group name is still 'shift' cause of history.
+    auto colEmployeeId = m_employeeViewModel->fieldIndex("id");
+    auto colEmployeeName = m_employeeViewModel->fieldIndex("name");
+    auto colEmployeeGroup = m_employeeViewModel->fieldIndex("Shift_name_2"); // Group name is still 'shift' cause of history.
 
     if (colEmployeeId == -1 || colEmployeeName == -1 || colEmployeeGroup == -1)
     {
@@ -410,11 +419,11 @@ void QMSigningListDialog::addEmployee()
     }
 
     // Go through all employees and take a look, whether they are in the selected group or not
-    for (auto i = 0; i < employeeViewModel->rowCount(); i++)
+    for (auto i = 0; i < m_employeeViewModel->rowCount(); i++)
     {
-        auto employeeId = employeeViewModel->data(employeeViewModel->index(i, colEmployeeId)).toInt();
-        auto employeeName = employeeViewModel->data(employeeViewModel->index(i, colEmployeeName)).toString();
-        auto employeeGroupName = employeeViewModel->data(employeeViewModel->index(i, colEmployeeGroup)).toString();
+        auto employeeId = m_employeeViewModel->data(m_employeeViewModel->index(i, colEmployeeId)).toInt();
+        auto employeeName = m_employeeViewModel->data(m_employeeViewModel->index(i, colEmployeeName)).toString();
+        auto employeeGroupName = m_employeeViewModel->data(m_employeeViewModel->index(i, colEmployeeGroup)).toString();
 
         // Only strings will be compared for now and no ids
         if (employeeGroupName == ui->cbEmployeeGroup->currentText())
@@ -496,7 +505,7 @@ void QMSigningListDialog::paintPdfRequest(QPrinter *printer)
 
 [[maybe_unused]] void QMSigningListDialog::trainingChanged()
 {
-    auto contentDesc = trainViewModel->data(trainViewModel->index(ui->cbTraining->currentIndex(), 5)).toString();
+    auto contentDesc = m_trainViewModel->data(m_trainViewModel->index(ui->cbTraining->currentIndex(), 5)).toString();
 
     if (contentDesc.isEmpty())
     {
@@ -527,4 +536,16 @@ QStringList QMSigningListDialog::getSelectedEmployeeIds() const
     }
 
     return tmpLst;
+}
+
+void QMSigningListDialog::createTrainDataEntriesChanged(int state)
+{
+    if (state == Qt::CheckState::Checked)
+    {
+        ui->cbTrainingState->setEnabled(true);
+    }
+    else
+    {
+        ui->cbTrainingState->setEnabled(false);
+    }
 }

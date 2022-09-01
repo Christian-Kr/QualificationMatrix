@@ -113,6 +113,10 @@ public slots:
     /// \param result The result of the dialog (e.g. accepted or rejected).
     [[maybe_unused]] void trainDataConflictDialogFinished(int result);
 
+    /// Called when the check box state of the train data creation changed.
+    /// \param state The state of a qt check box.
+    [[maybe_unused]] void createTrainDataEntriesChanged(int state);
+
 private:
     /// Test whether the employee list contains the given employee id.
     /// \param employeeId The id (primary key in table) of the employee to test.
@@ -140,9 +144,10 @@ private:
 
     QMTrainDataConflictDialog *m_trainDataConflictDialog;
 
-    std::unique_ptr<QSqlTableModel> employeeViewModel;
-    std::unique_ptr<QSqlTableModel> shiftViewModel;
-    std::unique_ptr<QSqlTableModel> trainViewModel;
+    std::unique_ptr<QSqlTableModel> m_trainDataStateViewModel;
+    std::unique_ptr<QSqlTableModel> m_employeeViewModel;
+    std::unique_ptr<QSqlTableModel> m_shiftViewModel;
+    std::unique_ptr<QSqlTableModel> m_trainViewModel;
 };
 
 #endif // QMSIGNINGLISTDIALOG_H
