@@ -172,7 +172,7 @@ private:
 
     std::unique_ptr<QMSigningListDialog> m_signingListDialog;
     std::unique_ptr<QMAMSLoginDialog> m_amsLoginDialog;
-    std::unique_ptr<QProgressDialog> progressDialog;
+    std::unique_ptr<QProgressDialog> m_progressDialog;
     std::unique_ptr<QMQualiResultWidget> qualiResultWidget;
     std::unique_ptr<QMQualiMatrixWidget> qualiMatrixWidget;
     std::unique_ptr<QMTrainDataWidget> trainDataWidget;

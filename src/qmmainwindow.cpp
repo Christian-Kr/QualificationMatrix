@@ -342,25 +342,25 @@ void QMMainWindow::showProgress(const QString &title, const QString &text, const
     // The progress dialog object will be recreated on every use, cause it would show up by itself when ui does not
     // react for view seconds (qt related).
 
-    if (progressDialog == nullptr)
+    if (m_progressDialog == nullptr)
     {
-        progressDialog = std::make_unique<QProgressDialog>(this);
+        m_progressDialog = std::make_unique<QProgressDialog>(this);
     }
 
-    progressDialog->setWindowTitle(title);
-    progressDialog->setCancelButton(nullptr);
-    progressDialog->setMinimum(minSteps);
-    progressDialog->setMaximum(maxSteps);
-    progressDialog->setLabelText(text);
-    progressDialog->setModal(true);
-    progressDialog->setVisible(true);
+    m_progressDialog->setWindowTitle(title);
+    m_progressDialog->setCancelButton(nullptr);
+    m_progressDialog->setMinimum(minSteps);
+    m_progressDialog->setMaximum(maxSteps);
+    m_progressDialog->setLabelText(text);
+    m_progressDialog->setModal(true);
+    m_progressDialog->open();
 
     QApplication::processEvents();
 }
 
 void QMMainWindow::workloadUpdates(int currentStep)
 {
-    progressDialog->setValue(currentStep);
+    m_progressDialog->setValue(currentStep);
 
     // Keep the ui alive.
     QApplication::processEvents();
@@ -368,12 +368,12 @@ void QMMainWindow::workloadUpdates(int currentStep)
 
 void QMMainWindow::closeProgress()
 {
-    if (progressDialog != nullptr)
+    if (m_progressDialog != nullptr)
     {
-        progressDialog->close();
+        m_progressDialog->close();
 
         // Kills the object (although method name doesn't suggest).
-        progressDialog.reset();
+        m_progressDialog.reset();
     }
 }
 
