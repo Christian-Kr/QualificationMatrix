@@ -25,8 +25,6 @@
 #include <QKeyEvent>
 #include <QTemporaryFile>
 
-#include <QDebug>
-
 QMNewCertificateDialog::QMNewCertificateDialog(QWidget *parent)
     : QMDialog(parent)
 {

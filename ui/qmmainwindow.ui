@@ -133,7 +133,7 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actManageDatabase"/>
-   <addaction name="actManageCertificate"/>
+   <addaction name="actAddCertificate"/>
    <addaction name="actCreateSigningList"/>
    <addaction name="separator"/>
    <addaction name="actSettings"/>
@@ -256,10 +256,6 @@
    </property>
   </action>
   <action name="actManageCertificate">
-   <property name="icon">
-    <iconset resource="../rcs/icons.qrc">
-     <normaloff>:/icons/icons/lc_setreminder.png</normaloff>:/icons/icons/lc_setreminder.png</iconset>
-   </property>
    <property name="text">
     <string>&amp;Nachweise verwalten</string>
    </property>
@@ -357,6 +353,15 @@
    </property>
    <property name="text">
     <string>Text anzeigen</string>
+   </property>
+  </action>
+  <action name="actAddCertificate">
+   <property name="icon">
+    <iconset resource="../rcs/icons.qrc">
+     <normaloff>:/icons/icons/lc_setreminder.png</normaloff>:/icons/icons/lc_setreminder.png</iconset>
+   </property>
+   <property name="text">
+    <string>Nachweis hinzufügen</string>
    </property>
   </action>
  </widget>
@@ -595,6 +600,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actAddCertificate</sender>
+   <signal>triggered()</signal>
+   <receiver>QMMainWindow</receiver>
+   <slot>addCertificate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>436</x>
+     <y>319</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>showAbout()</slot>
@@ -616,5 +637,6 @@
   <slot>showAMSMenu()</slot>
   <slot>amsLogin()</slot>
   <slot>amsLogout()</slot>
+  <slot>addCertificate()</slot>
  </slots>
 </ui>

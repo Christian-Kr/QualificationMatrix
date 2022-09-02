@@ -30,6 +30,7 @@
 #include "framework/component/qminfolabel.h"
 #include "certificate/qmcertificatedialog.h"
 #include "certificate/qmcertificateintegritycheckdialog.h"
+#include "certificate/qmnewcertificatedialog.h"
 #include "signinglist/qmsigninglistdialog.h"
 #include "framework/qmsqltablemodel.h"
 #include "ams/qmamsmanager.h"
@@ -59,6 +60,7 @@ QMMainWindow::QMMainWindow(QWidget *parent)
     , winMode(WIN_MODE::NONE)
     , lastWinMode(WIN_MODE::NONE)
     , m_signingListDialog(std::make_unique<QMSigningListDialog>(this))
+    , m_newCertificateDialog(std::make_unique<QMNewCertificateDialog>(this))
     , m_amsLoginDialog(std::make_unique<QMAMSLoginDialog>(this))
 {
     ui = new Ui::QMMainWindow;
@@ -90,6 +92,9 @@ QMMainWindow::QMMainWindow(QWidget *parent)
 
     // QMAMSLoginDialog
     connect(m_amsLoginDialog.get(), &QMAMSLoginDialog::finished, this, &QMMainWindow::amsLoginDialogFinished);
+
+    // QMNewCertificateDialog
+    m_newCertificateDialog->setModal(true);
 }
 
 QMMainWindow::~QMMainWindow()
@@ -478,6 +483,21 @@ void QMMainWindow::saveSettings()
 
     // Reset the win mode.
     enterWindowMode(tmpMode);
+}
+
+[[maybe_unused]] void QMMainWindow::addCertificate()
+{
+    // If do not have the permission, make a lot of stuff disabled.
+    auto amsManager = QMAMSManager::getInstance();
+    if (!amsManager->checkPermission(AccessMode::TD_MODE_WRITE) &&
+        !amsManager->checkPermission(AccessMode::TD_MODE_READ))
+    {
+        QMessageBox::warning(this, tr("Nachweise verwalten"), tr("Sie haben nicht die notwendigen Berechtigungen."));
+        return;
+    }
+
+    m_newCertificateDialog->updateData();
+    m_newCertificateDialog->open();
 }
 
 [[maybe_unused]] void QMMainWindow::manageCertificate()

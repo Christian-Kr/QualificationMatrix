@@ -33,6 +33,7 @@ class QTranslator;
 class QSqlDatabase;
 class QMSigningListDialog;
 class QMAMSLoginDialog;
+class QMNewCertificateDialog;
 
 enum class LoginState;
 
@@ -151,6 +152,9 @@ public slots:
     /// Initialize database information.
     void initDatabaseSettings();
 
+    /// Add a new certificate.
+    [[maybe_unused]] void addCertificate();
+
 protected:
     /// Override from QMainWindow. This function will be called on closeing the widget.
     /// \param event The close event object that will be created.
@@ -170,6 +174,7 @@ private:
 
     Ui::QMMainWindow *ui;
 
+    std::unique_ptr<QMNewCertificateDialog> m_newCertificateDialog;
     std::unique_ptr<QMSigningListDialog> m_signingListDialog;
     std::unique_ptr<QMAMSLoginDialog> m_amsLoginDialog;
     std::unique_ptr<QProgressDialog> m_progressDialog;
