@@ -6,28 +6,60 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>473</width>
-    <height>600</height>
+    <width>471</width>
+    <height>541</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Nachweis hinzufügen</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="1" column="0">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabTrainingData">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tabGeneral">
       <attribute name="title">
        <string>Allgemein</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="6" column="0">
-        <widget class="QLabel" name="label_3">
+       <item row="2" column="0" colspan="2">
+        <widget class="QRadioButton" name="rbEmployeeGroup">
          <property name="text">
-          <string>Nachweis</string>
+          <string>Mitarbeiter&amp;gruppe</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0" colspan="2">
+        <widget class="QComboBox" name="cbEmployeeGroup">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="editable">
+          <bool>true</bool>
+         </property>
+         <property name="insertPolicy">
+          <enum>QComboBox::NoInsert</enum>
+         </property>
+         <property name="sizeAdjustPolicy">
+          <enum>QComboBox::AdjustToMinimumContentsLengthWithIcon</enum>
          </property>
         </widget>
        </item>
@@ -43,29 +75,6 @@
           <bool>true</bool>
          </property>
         </widget>
-       </item>
-       <item row="7" column="1">
-        <widget class="QPushButton" name="pbOpenCertificate">
-         <property name="minimumSize">
-          <size>
-           <width>100</width>
-           <height>25</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Öffnen</string>
-         </property>
-        </widget>
-       </item>
-       <item row="8" column="0" colspan="2">
-        <widget class="QLabel" name="label_2">
-         <property name="text">
-          <string>Datum der Schulung</string>
-         </property>
-        </widget>
-       </item>
-       <item row="9" column="0" colspan="2">
-        <widget class="QCalendarWidget" name="cwTrainDate"/>
        </item>
        <item row="5" column="0" colspan="2">
         <widget class="QComboBox" name="cbEmployee">
@@ -89,6 +98,13 @@
          </property>
         </widget>
        </item>
+       <item row="8" column="0" colspan="2">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Datum der Schulung</string>
+         </property>
+        </widget>
+       </item>
        <item row="4" column="0" colspan="2">
         <widget class="QRadioButton" name="rbEmployee">
          <property name="text">
@@ -96,32 +112,16 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="0" colspan="2">
-        <widget class="QComboBox" name="cbEmployeeGroup">
+       <item row="7" column="1">
+        <widget class="QPushButton" name="pbOpenCertificate">
          <property name="minimumSize">
           <size>
-           <width>0</width>
+           <width>100</width>
            <height>25</height>
           </size>
          </property>
-         <property name="editable">
-          <bool>true</bool>
-         </property>
-         <property name="insertPolicy">
-          <enum>QComboBox::NoInsert</enum>
-         </property>
-         <property name="sizeAdjustPolicy">
-          <enum>QComboBox::AdjustToMinimumContentsLengthWithIcon</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0" colspan="2">
-        <widget class="QRadioButton" name="rbEmployeeGroup">
          <property name="text">
-          <string>Mitarbeiter&amp;gruppe</string>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
+          <string>Öffnen</string>
          </property>
         </widget>
        </item>
@@ -144,10 +144,20 @@
          </property>
         </widget>
        </item>
+       <item row="9" column="0" colspan="2">
+        <widget class="QCalendarWidget" name="cwTrainDate"/>
+       </item>
        <item row="0" column="0" colspan="2">
         <widget class="QLabel" name="label">
          <property name="text">
           <string>Schulung</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0" colspan="2">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Nachweis</string>
          </property>
         </widget>
        </item>
@@ -158,50 +168,112 @@
        <string>Schulungsdaten</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_3">
-       <item row="3" column="0">
-        <widget class="QLabel" name="label_4">
+       <item row="0" column="0">
+        <widget class="QCheckBox" name="cbAddCertToTrainData">
          <property name="text">
-          <string>Liste der existierenden Schulungsdaten denen der Eintrag angehängt werden soll. Einträgen denen der Nachweis angehängt werden soll müssen selektiert werden.</string>
-         </property>
-         <property name="wordWrap">
-          <bool>true</bool>
+          <string>Nachweis an Schulungseinträgen anhängen</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="QCheckBox" name="cbAddCertToTrainData">
+       <item row="1" column="0" colspan="2">
+        <widget class="QCheckBox" name="cbCreateTrainData">
          <property name="text">
-          <string>Nachweis an Schulungen anhängen</string>
+          <string>Erstelle die Schulungseinträge, wenn diese nicht existieren</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QCheckBox" name="cbNoExactDate">
+         <property name="text">
+          <string>Kein exaktes Datum für existierende Einträge</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>Mitarbeiter und das dazugehörige Schulungsdatum:</string>
          </property>
         </widget>
        </item>
        <item row="4" column="0">
         <widget class="QTableView" name="tvSelectionTrainingData"/>
        </item>
-       <item row="0" column="0">
-        <widget class="QCheckBox" name="cbCreateTrainData">
-         <property name="text">
-          <string>Erstelle die Schulungseinträge</string>
-         </property>
-        </widget>
+       <item row="4" column="1">
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <widget class="QToolButton" name="tbExtSelEmployee">
+           <property name="minimumSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>Erweiterte Auswahl</string>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../rcs/icons.qrc">
+             <normaloff>:/icons/icons/lc_selectdb.png</normaloff>:/icons/icons/lc_selectdb.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="tbRemove">
+           <property name="minimumSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../rcs/icons.qrc">
+             <normaloff>:/icons/icons/sc_delete.png</normaloff>:/icons/icons/sc_delete.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>118</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>
     </widget>
    </item>
-   <item row="1" column="0">
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
-   </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../rcs/icons.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>
