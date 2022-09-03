@@ -355,10 +355,26 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>cbAppendToTrainData</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>QMNewCertificateDialog</receiver>
+   <slot>appendToTrainDataChanged(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>219</x>
+     <y>50</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>235</x>
+     <y>270</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>openCertificatePath()</slot>
   <slot>switchEmployeeSelection()</slot>
-  <slot>appendToTrainDataChanged()</slot>
+  <slot>appendToTrainDataChanged(int)</slot>
  </slots>
 </ui>

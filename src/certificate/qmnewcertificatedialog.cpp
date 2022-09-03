@@ -186,3 +186,13 @@ void QMNewCertificateDialog::switchEmployeeSelection()
         ui->cbEmployeeGroup->setEnabled(true);
     }
 }
+
+[[maybe_unused]] void QMNewCertificateDialog::appendToTrainDataChanged(int state)
+{
+    bool checked = state == Qt::CheckState::Checked;
+    ui->cbCreateTrainData->setEnabled(checked);
+    ui->cbNoExactDate->setEnabled(checked);
+    ui->tvSelectionTrainingData->setEnabled(checked);
+    ui->tbExtSelEmployee->setEnabled(checked);
+    ui->tbRemove->setEnabled(checked);
+}

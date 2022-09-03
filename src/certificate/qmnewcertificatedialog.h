@@ -76,7 +76,11 @@ public slots:
     void accept() override;
 
     /// Make controls editable if corresponding radio button is selected.
-    [[maybe_unused]]  void switchEmployeeSelection();
+    [[maybe_unused]] void switchEmployeeSelection();
+
+    /// Called when the check box of append to train data changed.
+    /// \param state The current state of the check box.
+    [[maybe_unused]] void appendToTrainDataChanged(int state);
 
 private:
     /// Check the data in the ui elements to be valid.
