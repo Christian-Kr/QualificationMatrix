@@ -169,7 +169,7 @@
       </attribute>
       <layout class="QGridLayout" name="gridLayout_3">
        <item row="0" column="0">
-        <widget class="QCheckBox" name="cbAddCertToTrainData">
+        <widget class="QCheckBox" name="cbAppendToTrainData">
          <property name="text">
           <string>Nachweis an Schulungseinträgen anhängen</string>
          </property>
@@ -359,5 +359,6 @@
  <slots>
   <slot>openCertificatePath()</slot>
   <slot>switchEmployeeSelection()</slot>
+  <slot>appendToTrainDataChanged()</slot>
  </slots>
 </ui>

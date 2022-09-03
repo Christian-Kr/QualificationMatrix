@@ -70,13 +70,13 @@ public:
 
 public slots:
     /// Open certificate path file.
-    void openCertificatePath();
+    [[maybe_unused]] void openCertificatePath();
 
     /// Override from QDialog.
     void accept() override;
 
     /// Make controls editable if corresponding radio button is selected.
-    void switchEmployeeSelection();
+    [[maybe_unused]]  void switchEmployeeSelection();
 
 private:
     /// Check the data in the ui elements to be valid.
