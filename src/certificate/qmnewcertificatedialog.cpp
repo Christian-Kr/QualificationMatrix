@@ -46,7 +46,7 @@ void QMNewCertificateDialog::accept()
         return;
     }
 
-    QDialog::accept();
+    QMDialog::accept();
 }
 
 bool QMNewCertificateDialog::checkInputData()
@@ -91,7 +91,7 @@ bool QMNewCertificateDialog::checkInputData()
         else
         {
             employee = "";
-            employeeGroup = ui->cbEmployeeGroup->currentText();;
+            employeeGroup = ui->cbEmployeeGroup->currentText();
         }
     }
 
@@ -148,7 +148,7 @@ void QMNewCertificateDialog::updateData()
     ui->cbEmployeeGroup->setModelColumn(1);
 }
 
-void QMNewCertificateDialog::openCertificatePath()
+[[maybe_unused]] void QMNewCertificateDialog::openCertificatePath()
 {
     auto fileName = QFileDialog::getOpenFileName(
         this, tr("Nachweis hinzufügen"), QDir::homePath(),
@@ -173,7 +173,7 @@ void QMNewCertificateDialog::openCertificatePath()
     certPath = fileName;
 }
 
-void QMNewCertificateDialog::switchEmployeeSelection()
+[[maybe_unused]] void QMNewCertificateDialog::switchEmployeeSelection()
 {
     if (ui->rbEmployee->isChecked())
     {
@@ -195,4 +195,5 @@ void QMNewCertificateDialog::switchEmployeeSelection()
     ui->tvSelectionTrainingData->setEnabled(checked);
     ui->tbExtSelEmployee->setEnabled(checked);
     ui->tbRemove->setEnabled(checked);
+    ui->label_4->setEnabled(checked);
 }

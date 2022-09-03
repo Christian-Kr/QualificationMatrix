@@ -177,32 +177,54 @@
        </item>
        <item row="1" column="0" colspan="2">
         <widget class="QCheckBox" name="cbCreateTrainData">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>Erstelle die Schulungseinträge, wenn diese nicht existieren</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
        <item row="2" column="0">
         <widget class="QCheckBox" name="cbNoExactDate">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>Kein exaktes Datum für existierende Einträge</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
        <item row="3" column="0">
         <widget class="QLabel" name="label_4">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>Mitarbeiter und das dazugehörige Schulungsdatum:</string>
          </property>
         </widget>
        </item>
        <item row="4" column="0">
-        <widget class="QTableView" name="tvSelectionTrainingData"/>
+        <widget class="QTableView" name="tvSelectionTrainingData">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+        </widget>
        </item>
        <item row="4" column="1">
         <layout class="QVBoxLayout" name="verticalLayout">
          <item>
           <widget class="QToolButton" name="tbExtSelEmployee">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="minimumSize">
             <size>
              <width>25</width>
@@ -229,6 +251,9 @@
          </item>
          <item>
           <widget class="QToolButton" name="tbRemove">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="minimumSize">
             <size>
              <width>25</width>
