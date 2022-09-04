@@ -13,10 +13,12 @@
 
 #include "qmnewcertificatedialog.h"
 #include "ui_qmnewcertificatedialog.h"
+#include "qmemployeedatemodel.h"
 #include "model/view/qmtrainingviewmodel.h"
 #include "model/view/qmemployeeviewmodel.h"
 #include "model/view/qmshiftviewmodel.h"
 #include "settings/qmapplicationsettings.h"
+#include "framework/dialog/qmextendedselectiondialog.h"
 
 #include <QSortFilterProxyModel>
 #include <QFileDialog>
@@ -27,11 +29,13 @@
 
 QMNewCertificateDialog::QMNewCertificateDialog(QWidget *parent)
     : QMDialog(parent)
+    , m_employeeDateModel(std::make_unique<QMEmployeeDateModel>(this))
 {
     ui = new Ui::QMNewCertificateDialog;
     ui->setupUi(this);
 
-    updateData();
+    // Table model for employee/date entries.
+    ui->tvEmployeeDateData->setModel(m_employeeDateModel.get());
 }
 
 QMNewCertificateDialog::~QMNewCertificateDialog()
@@ -192,8 +196,50 @@ void QMNewCertificateDialog::updateData()
     bool checked = state == Qt::CheckState::Checked;
     ui->cbCreateTrainData->setEnabled(checked);
     ui->cbNoExactDate->setEnabled(checked);
-    ui->tvSelectionTrainingData->setEnabled(checked);
+    ui->tvEmployeeDateData->setEnabled(checked);
     ui->tbExtSelEmployee->setEnabled(checked);
     ui->tbRemove->setEnabled(checked);
     ui->label_4->setEnabled(checked);
+}
+
+[[maybe_unused]] void QMNewCertificateDialog::addEmployees()
+{
+    m_extSelEmployeeDialog = std::make_unique<QMExtendedSelectionDialog>(this, employeeViewModel.get(), 1);
+    connect(m_extSelEmployeeDialog.get(), &QMExtendedSelectionDialog::finished, this,
+            &QMNewCertificateDialog::extSelEmployeeFinished);
+    m_extSelEmployeeDialog->open();
+}
+
+[[maybe_unused]] void QMNewCertificateDialog::extSelEmployeeFinished(int result)
+{
+    if (result != QDialog::DialogCode::Accepted)
+    {
+        return;
+    }
+
+    auto modelIndexList = m_extSelEmployeeDialog->getFilterSelected();
+    if (modelIndexList.isEmpty())
+    {
+        return;
+    }
+
+    auto employeeIdField = employeeViewModel->fieldIndex("id");
+    auto employeeNameField = employeeViewModel->fieldIndex("name");
+
+    // Add the selected employees to the model.
+    for (const QModelIndex &modelIndex : modelIndexList)
+    {
+        QMEmployeeDateEntry employeeEntry;
+
+        // Get the name of the employee and the id of the employee.
+        auto employeeId = employeeViewModel->data(
+                employeeViewModel->index(modelIndex.row(), employeeIdField)).toInt();
+        auto employeeName = employeeViewModel->data(
+                employeeViewModel->index(modelIndex.row(), employeeNameField)).toString();
+
+        employeeEntry.employeeId = employeeId;
+        employeeEntry.employeeName = employeeName;
+
+        m_employeeDateModel->addEntry(employeeEntry);
+    }
 }

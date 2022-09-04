@@ -20,6 +20,8 @@
 class QMSqlTableModel;
 class QSqlRelationalTableModel;
 class QSqlTableModel;
+class QMEmployeeDateModel;
+class QMExtendedSelectionDialog;
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -82,6 +84,13 @@ public slots:
     /// \param state The current state of the check box.
     [[maybe_unused]] void appendToTrainDataChanged(int state);
 
+    /// Add employees to define the training date.
+    [[maybe_unused]] void addEmployees();
+
+    /// The extended selection of employees has been finished.
+    /// \param result The result id the dialog has been closed with.
+    [[maybe_unused]] void extSelEmployeeFinished(int result);
+
 private:
     /// Check the data in the ui elements to be valid.
     /// \return True if ok, else false.
@@ -95,6 +104,8 @@ private:
     QString trainDate;
     QString certPath;
 
+    std::unique_ptr<QMExtendedSelectionDialog> m_extSelEmployeeDialog;
+    std::unique_ptr<QMEmployeeDateModel> m_employeeDateModel;
     std::unique_ptr<QSqlTableModel> trainViewModel;
     std::unique_ptr<QSqlTableModel> employeeViewModel;
     std::unique_ptr<QSqlTableModel> employeeGroupViewModel;

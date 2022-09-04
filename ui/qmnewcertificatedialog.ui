@@ -212,7 +212,7 @@
         </widget>
        </item>
        <item row="4" column="0">
-        <widget class="QTableView" name="tvSelectionTrainingData">
+        <widget class="QTableView" name="tvEmployeeDateData">
          <property name="enabled">
           <bool>false</bool>
          </property>
@@ -396,10 +396,27 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>tbExtSelEmployee</sender>
+   <signal>clicked()</signal>
+   <receiver>QMNewCertificateDialog</receiver>
+   <slot>addEmployees()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>421</x>
+     <y>152</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>235</x>
+     <y>270</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>openCertificatePath()</slot>
   <slot>switchEmployeeSelection()</slot>
   <slot>appendToTrainDataChanged(int)</slot>
+  <slot>addEmployees()</slot>
  </slots>
 </ui>
