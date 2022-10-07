@@ -14,12 +14,10 @@
 #include "framework/qmsqltablemodel.h"
 #include "model/qmdatamanager.h"
 
-#include <QDebug>
 #include <QSqlRelationalTableModel>
 #include <QSqlQuery>
 
-QMSqlTableModel::QMSqlTableModel(QObject *parent, QSqlDatabase db, bool doFetchAll,
-                                 bool doFetchAllSub)
+QMSqlTableModel::QMSqlTableModel(QObject *parent, const QSqlDatabase &db, bool doFetchAll, bool doFetchAllSub)
     : QSqlRelationalTableModel(parent, db)
     , limit(0)
 {

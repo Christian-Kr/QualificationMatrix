@@ -26,7 +26,7 @@ public:
     /// Constructor
     /// \param parent The parent object for the qt system.
     /// \param db The database to work with.
-    explicit QMSqlTableModel(QObject *parent = nullptr, QSqlDatabase db = QSqlDatabase(),
+    explicit QMSqlTableModel(QObject *parent = nullptr, const QSqlDatabase &db = QSqlDatabase(),
             bool doFetchAll = true, bool doFetchAllSub = true);
 
     /// Override from QSqlRelationalTableModel.
@@ -34,20 +34,20 @@ public:
     bool select() override;
 
     /// Override from QSqlRelationalTableModel.
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    [[nodiscard]] QVariant data(const QModelIndex &index, int role) const override;
 
     /// Override from QSqlRelationalTableModel.
-    bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
+    bool setData(const QModelIndex &index, const QVariant &value, int role) override;
 
     /// Fetch all sub data exceeding 255 limit.
     /// \param value
     void setFetchAll(bool value) { doFetchAll = value; }
-    bool getFetchAll() const { return doFetchAll; }
+    [[nodiscard]] bool getFetchAll() const { return doFetchAll; }
 
     /// Fetch all sub data (relation tables) exceeding 255 limit.
     /// \param value
     void setFetchAllSub(bool value) { doFetchAllSub = value; }
-    bool getFetchAllSub() const { return doFetchAllSub; }
+    [[nodiscard]] bool getFetchAllSub() const { return doFetchAllSub; }
 
     /// This function musst be implemented for the model to be recreated after clear.
     virtual void initModel() {};
@@ -58,7 +58,7 @@ public:
 
     /// Get the selection limit row number.
     /// \return The limit value.
-    int getLimit() const { return limit; }
+    [[nodiscard]] int getLimit() const { return limit; }
 
 public slots:
     /// Test for need of new select. Based on the models changed in application.
@@ -67,7 +67,7 @@ public slots:
 
 protected:
     /// Override from QSqlRelationalTableModel.
-    QString selectStatement() const override;
+    [[nodiscard]] QString selectStatement() const override;
 
 private:
     /// If true, fetch all data exceeding the 255 limit of the tables.
