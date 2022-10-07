@@ -12,10 +12,10 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 #include "qmqualimatrixmodel.h"
-#include "model/qmdatamanager.h"
-#include "model/function/qmfunctionviewmodel.h"
-#include "model/training/qmtrainingviewmodel.h"
-#include "model/qualificationmatrix/qmqualificationmatrixmodel.h"
+#include "data/qmdatamanager.h"
+#include "data/function/qmfunctionviewmodel.h"
+#include "data/training/qmtrainingviewmodel.h"
+#include "data/qualificationmatrix/qmqualificationmatrixmodel.h"
 
 #include <QSqlRecord>
 #include <QSqlError>

@@ -67,7 +67,7 @@ public:
     /// \return Path of the certification path
     QString getCertPath() { return certPath; }
 
-    /// Update database model data.
+    /// Update database data data.
     void updateData();
 
 public slots:

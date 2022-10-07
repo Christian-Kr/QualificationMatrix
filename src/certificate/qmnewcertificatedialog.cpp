@@ -14,9 +14,9 @@
 #include "qmnewcertificatedialog.h"
 #include "ui_qmnewcertificatedialog.h"
 #include "qmemployeedatemodel.h"
-#include "model/training/qmtrainingviewmodel.h"
-#include "model/employee/qmemployeeviewmodel.h"
-#include "model/employee/qmshiftviewmodel.h"
+#include "data/training/qmtrainingviewmodel.h"
+#include "data/employee/qmemployeeviewmodel.h"
+#include "data/employee/qmshiftviewmodel.h"
 #include "settings/qmapplicationsettings.h"
 #include "framework/dialog/qmextendedselectiondialog.h"
 
@@ -34,7 +34,7 @@ QMNewCertificateDialog::QMNewCertificateDialog(QWidget *parent)
     ui = new Ui::QMNewCertificateDialog;
     ui->setupUi(this);
 
-    // Table model for employee/date entries.
+    // Table data for employee/date entries.
     ui->tvEmployeeDateData->setModel(m_employeeDateModel.get());
 }
 
@@ -141,7 +141,7 @@ void QMNewCertificateDialog::updateData()
     employeeGroupViewModel = std::make_unique<QMShiftViewModel>(this, db);
     employeeGroupViewModel->select();
 
-    // Set model to ui elements.
+    // Set data to ui elements.
     ui->cbTrain->setModel(trainViewModel.get());
     ui->cbTrain->setModelColumn(1);
 
@@ -226,7 +226,7 @@ void QMNewCertificateDialog::updateData()
     auto employeeIdField = employeeViewModel->fieldIndex("id");
     auto employeeNameField = employeeViewModel->fieldIndex("name");
 
-    // Add the selected employees to the model.
+    // Add the selected employees to the data.
     for (const QModelIndex &modelIndex : modelIndexList)
     {
         QMEmployeeDateEntry employeeEntry;

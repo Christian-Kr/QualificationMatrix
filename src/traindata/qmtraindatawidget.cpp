@@ -13,13 +13,13 @@
 
 #include "qmtraindatawidget.h"
 #include "ui_qmtraindatawidget.h"
-#include "model/qmdatamanager.h"
-#include "model/employee/qmemployeeviewmodel.h"
-#include "model/training/qmtrainingviewmodel.h"
-#include "model/trainingdata/qmtrainingdatamodel.h"
-#include "model/trainingdata/qmtrainingdatastateviewmodel.h"
-#include "model/trainingdata/qmtraindatacertificatemodel.h"
-#include "model/trainingdata/qmtraindatacertificateviewmodel.h"
+#include "data/qmdatamanager.h"
+#include "data/employee/qmemployeeviewmodel.h"
+#include "data/training/qmtrainingviewmodel.h"
+#include "data/trainingdata/qmtrainingdatamodel.h"
+#include "data/trainingdata/qmtrainingdatastateviewmodel.h"
+#include "data/trainingdata/qmtraindatacertificatemodel.h"
+#include "data/trainingdata/qmtraindatacertificateviewmodel.h"
 #include "framework/delegate/qmproxysqlrelationaldelegate.h"
 #include "framework/delegate/qmdatedelegate.h"
 #include "certificate/qmcertificatedialog.h"
@@ -495,7 +495,7 @@ void QMTrainDataWidget::deleteSelected()
     auto modelIndex = modelIndexList.at(0);
 
     // Delete all entries in tvCertificate. Therefore select a row and run removeCertificate, till
-    // model has no entries left. It is important to be sure that the certificate correlation model
+    // data has no entries left. It is important to be sure that the certificate correlation data
     // has been filtered. Otherwise other entries might be deleted. Therefore make a check before
     // running the deletion process.
 

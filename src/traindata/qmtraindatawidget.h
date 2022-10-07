@@ -63,7 +63,7 @@ public slots:
     /// Reset the content of the filter.
     void resetFilter();
 
-    /// Add single entry into train data model.
+    /// Add single entry into train data data.
     void addSingleEntry();
 
     /// Delete selected train data elements.

@@ -24,7 +24,7 @@ class QSettings;
 /// for certificate based settings and for application NOT database related settings.
 ///
 /// (example: Color of qm grid is an application setting! Files on filesystem or in sql table blobb
-/// is an database setting, cause the database structure depend on it! It behaves like model and
+/// is an database setting, cause the database structure depend on it! It behaves like data and
 /// view separation in the mfc arch.)
 ///
 /// The object of this class is a singleton, cause there is only one application to run and

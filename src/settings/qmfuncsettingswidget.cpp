@@ -13,10 +13,10 @@
 
 #include "qmfuncsettingswidget.h"
 #include "ui_qmfuncsettingswidget.h"
-#include "model/function/qmfunctionmodel.h"
-#include "model/function/qmfunctiongroupmodel.h"
-#include "model/qualificationmatrix/qmqualificationmatrixviewmodel.h"
-#include "model/employee/qmemployeefunctionviewmodel.h"
+#include "data/function/qmfunctionmodel.h"
+#include "data/function/qmfunctiongroupmodel.h"
+#include "data/qualificationmatrix/qmqualificationmatrixviewmodel.h"
+#include "data/employee/qmemployeefunctionviewmodel.h"
 #include "framework/delegate/qmproxysqlrelationaldelegate.h"
 #include "framework/delegate/qmcolorchooserdelegate.h"
 
@@ -90,7 +90,7 @@ void QMFuncSettingsWidget::updateData()
     funcGroupModel = std::make_unique<QMFunctionGroupModel>(this, db);
     funcGroupModel->select();
 
-    // Set filter model.
+    // Set filter data.
     funcFilterModel->setSourceModel(funcModel.get());
 
     // Update the views.
@@ -134,7 +134,7 @@ void QMFuncSettingsWidget::addFunc()
     ui->leFuncFilter->setText("");
     filterFunc();
 
-    // Add a new temp row to the model.
+    // Add a new temp row to the data.
     funcModel->insertRow(funcModel->rowCount());
 
     // Set a default function group.
@@ -155,7 +155,7 @@ void QMFuncSettingsWidget::addFunc()
 
 void QMFuncSettingsWidget::removeFunc()
 {
-    // Get the selected model index.
+    // Get the selected data index.
     QModelIndex selectedIndex = ui->tvFunc->selectionModel()->currentIndex();
     if (!selectedIndex.isValid())
     {
@@ -252,7 +252,7 @@ void QMFuncSettingsWidget::revertFunc()
 
 void QMFuncSettingsWidget::addFuncGroups()
 {
-    // Add a new temp row to the model.
+    // Add a new temp row to the data.
     funcGroupModel->insertRow(funcGroupModel->rowCount());
 
     // Set a default color.
@@ -271,7 +271,7 @@ void QMFuncSettingsWidget::addFuncGroups()
 
 void QMFuncSettingsWidget::removeFuncGroups()
 {
-    // Get the selected model index.
+    // Get the selected data index.
     auto selectedIndex = ui->tvFuncGroups->selectionModel()->currentIndex();
     if (!selectedIndex.isValid())
     {
@@ -284,7 +284,7 @@ void QMFuncSettingsWidget::removeFuncGroups()
     auto selectedGroupName = funcGroupModel->data(
         funcGroupModel->index(selectedIndex.row(), 1)).toString();
 
-    // Do not delete when entries in function model have a reference to the group.
+    // Do not delete when entries in function data have a reference to the group.
     auto found = false;
 
     for (int i = 0; i < funcModel->rowCount(); i++)

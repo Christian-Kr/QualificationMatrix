@@ -70,7 +70,7 @@ void QMColorChooserDelegate::setEditorData(QWidget *editor, const QModelIndex &i
 void QMColorChooserDelegate::setModelData(
     QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
 {
-    // Set the new selected color in the data model.
+    // Set the new selected color in the data data.
     auto cd = dynamic_cast<QColorDialog *>(editor);
     if (cd->result() == QDialog::Accepted)
     {

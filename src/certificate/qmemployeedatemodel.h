@@ -31,7 +31,7 @@ struct QMEmployeeDateEntry
     QDate trainDate;
 };
 
-/// The model represents a table structure of dates and names of employees' training.
+/// The data represents a table structure of dates and names of employees' training.
 /// \author Christian Kr, Copyright 2022
 class QMEmployeeDateModel: public QAbstractTableModel
 {

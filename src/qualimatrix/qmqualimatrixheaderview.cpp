@@ -13,10 +13,10 @@
 
 #include "qmqualimatrixheaderview.h"
 #include "settings/qmapplicationsettings.h"
-#include "model/training/qmtrainingviewmodel.h"
-#include "model/training/qmtraininggroupviewmodel.h"
-#include "model/function/qmfunctionviewmodel.h"
-#include "model/function/qmfunctiongroupviewmodel.h"
+#include "data/training/qmtrainingviewmodel.h"
+#include "data/training/qmtraininggroupviewmodel.h"
+#include "data/function/qmfunctionviewmodel.h"
+#include "data/function/qmfunctiongroupviewmodel.h"
 
 #include <QPainter>
 #include <QHash>

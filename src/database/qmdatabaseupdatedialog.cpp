@@ -13,7 +13,7 @@
 
 #include "qmdatabaseupdatedialog.h"
 #include "ui_qmdatabaseupdatedialog.h"
-#include "model/qmdatamanager.h"
+#include "data/qmdatamanager.h"
 
 #include <QSqlDatabase>
 #include <QSqlQuery>

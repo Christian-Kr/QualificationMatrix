@@ -38,10 +38,10 @@ signals:
 public slots:
     void emitSettingsChanged();
 
-    /// All settings have to be saved in model.
+    /// All settings have to be saved in data.
     virtual void saveSettings() = 0;
 
-    /// Reset settings to model.
+    /// Reset settings to data.
     virtual void revertChanges() = 0;
 
     /// Load settings from appropriate source. (Might be a database or qsettings.)

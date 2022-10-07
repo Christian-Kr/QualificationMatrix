@@ -23,7 +23,7 @@ class QMTrainingViewModel;
 class QSqlTableModel;
 class QSqlRecord;
 
-/// A model for holding the table view data representation.
+/// A data for holding the table view data representation.
 /// \author Christian Kr, Copyright 2020
 class QMQualiResultModel: public QAbstractTableModel
 {
@@ -94,7 +94,7 @@ public:
         const QString &filterEmployeeGroup, bool showTemporaryDeactivated = false, bool showPersonnelLeasing = false,
         bool showTrainee = false, bool showApprentice = false);
 
-    /// Resets the model to be empty.
+    /// Resets the data to be empty.
     void resetModel();
 
     /// Get the result record with the given id.
@@ -118,11 +118,11 @@ signals:
 
 private:
     /// Build an interval cache to speed up search.
-    /// \param trainViewModel The training view model.
+    /// \param trainViewModel The training view data.
     void buildIntervalCache(QMTrainingViewModel &trainViewModel);
 
     /// Build an train group cache to speed up search. This correlates the training name to a group.
-    /// \param trainViewModel The training group view model.
+    /// \param trainViewModel The training group view data.
     void buildTrainGroupCache(QMTrainingViewModel &trainViewModel);
 
     /// Read the result record and return a new result record object.

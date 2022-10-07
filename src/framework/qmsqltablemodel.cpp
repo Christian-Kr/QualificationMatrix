@@ -12,7 +12,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 #include "framework/qmsqltablemodel.h"
-#include "model/qmdatamanager.h"
+#include "data/qmdatamanager.h"
 
 #include <QSqlRelationalTableModel>
 #include <QSqlQuery>
@@ -25,7 +25,7 @@ QMSqlTableModel::QMSqlTableModel(QObject *parent, const QSqlDatabase &db, bool d
     // relations work with big data sets.
     this->doFetchAllSub = doFetchAllSub;
 
-    // Fetching all data exceeding 255 can be true by default to make model work fully.
+    // Fetching all data exceeding 255 can be true by default to make data work fully.
     this->doFetchAll = doFetchAll;
 }
 
@@ -43,11 +43,11 @@ bool QMSqlTableModel::select()
 
 QVariant QMSqlTableModel::data(const QModelIndex &index, int role) const
 {
-    // Before getting a value, look if it is a relational model. If so: Update all related table models.
+    // Before getting a value, look if it is a relational data. If so: Update all related table models.
     QSqlTableModel *tableModel = relationModel(index.column());
     if (tableModel != nullptr && doFetchAllSub)
     {
-        // Fetch all rows from related table model.
+        // Fetch all rows from related table data.
         while (tableModel->canFetchMore())
         {
             tableModel->fetchMore();
@@ -59,11 +59,11 @@ QVariant QMSqlTableModel::data(const QModelIndex &index, int role) const
 
 bool QMSqlTableModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
-    // Before setting a value, look if it is a relational model. If so: Update all related table models.
+    // Before setting a value, look if it is a relational data. If so: Update all related table models.
     QSqlTableModel *tableModel = relationModel(index.column());
     if (tableModel != nullptr && doFetchAllSub)
     {
-        // Fetch all rows from related table model.
+        // Fetch all rows from related table data.
         while (tableModel->canFetchMore())
         {
             tableModel->fetchMore();

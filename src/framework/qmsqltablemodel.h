@@ -16,7 +16,7 @@
 
 #include <QSqlRelationalTableModel>
 
-/// Own model class for making it more customize.
+/// Own data class for making it more customize.
 /// \author Christian Kr, Copyright 2020
 class QMSqlTableModel: public QSqlRelationalTableModel
 {
@@ -51,7 +51,7 @@ public:
     void setFetchAllSub(bool value) { doFetchAllSub = value; }
     [[nodiscard]] bool getFetchAllSub() const { return doFetchAllSub; }
 
-    /// This function musst be implemented for the model to be recreated after clear.
+    /// This function musst be implemented for the data to be recreated after clear.
     virtual void initModel() {};
 
     /// Set the limit of the select rows.
@@ -64,7 +64,7 @@ public:
 
 public slots:
     /// Test for need of new select. Based on the models changed in application.
-    /// \param sender The sending model object indicating whether the reciever needs to be updated.
+    /// \param sender The sending data object indicating whether the reciever needs to be updated.
     virtual void otherModelChanged(QObject *sender) {};
 
 protected:

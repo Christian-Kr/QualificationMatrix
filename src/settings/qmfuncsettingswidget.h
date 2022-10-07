@@ -65,7 +65,7 @@ public slots:
     /// Remove a selected function.
     void removeFunc();
 
-    /// Revert changes in function data model.
+    /// Revert changes in function data data.
     void revertFunc();
 
     /// Add a new function group.
@@ -74,7 +74,7 @@ public slots:
     /// Remove a selected function group.
     void removeFuncGroups();
 
-    /// Revert changes in function group data model.
+    /// Revert changes in function group data data.
     void revertFuncGroups();
 
     /// Filter the function table.

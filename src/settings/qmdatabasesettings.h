@@ -20,7 +20,7 @@
 
 class QMInfoModel;
 
-/// \brief only a wrapper to data from an sql table model
+/// \brief only a wrapper to data from an sql table data
 class QMDatabaseSettings: public QMSettings
 {
 Q_OBJECT

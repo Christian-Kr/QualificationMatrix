@@ -13,7 +13,7 @@
 
 #include "qmcertificateintegritycheckdialog.h"
 #include "ui_qmcertificateintegritycheckdialog.h"
-#include "model/certificate/qmcertificatemodel.h"
+#include "data/certificate/qmcertificatemodel.h"
 #include "settings/qmapplicationsettings.h"
 
 #include <QSqlTableModel>

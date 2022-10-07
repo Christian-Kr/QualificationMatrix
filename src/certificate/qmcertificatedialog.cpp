@@ -13,9 +13,9 @@
 
 #include "qmcertificatedialog.h"
 #include "ui_qmcertificatedialog.h"
-#include "model/qmdatamanager.h"
-#include "model/certificate/qmcertificatemodel.h"
-#include "model/trainingdata/qmtraindatacertificatemodel.h"
+#include "data/qmdatamanager.h"
+#include "data/certificate/qmcertificatemodel.h"
+#include "data/trainingdata/qmtraindatacertificatemodel.h"
 #include "settings/qmapplicationsettings.h"
 #include "qmnewcertificatedialog.h"
 #include "ams/qmamsmanager.h"
@@ -86,8 +86,8 @@ void QMCertificateDialog::accept()
     }
     else
     {
-        // Get the row number from the table view and set the corresponding id and name from the model. The model
-        // needs to be the proxy model for filtering.
+        // Get the row number from the table view and set the corresponding id and name from the data. The data
+        // needs to be the proxy data for filtering.
         auto row = modelIndex.at(0).row();
 
         selectedId = nameFilterModel->data(nameFilterModel->index(row, 0)).toInt();
@@ -200,7 +200,7 @@ void QMCertificateDialog::addCertificate()
     auto hash = QString(QCryptographicHash::hash(file.readAll(), QCryptographicHash::Md5).toHex());
     file.seek(0);
 
-    // If we are here, adding a new file was basically ok. Now create a new model entry.
+    // If we are here, adding a new file was basically ok. Now create a new data entry.
     auto rowIndex = certificateModel->rowCount();
     QFileInfo fileInfo(file.fileName());
 

@@ -33,7 +33,7 @@ QMExtendedSelectionDialog::QMExtendedSelectionDialog(QWidget *parent, QAbstractI
     // Be sure only settings will be called, that are available during this state.
     loadSettings();
 
-    // Set model to table view.
+    // Set data to table view.
     if (model != nullptr)
     {
         ui->tvSelection->setModel(filterModel);

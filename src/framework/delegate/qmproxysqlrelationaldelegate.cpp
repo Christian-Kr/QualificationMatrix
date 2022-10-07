@@ -50,15 +50,15 @@ const QAbstractItemModel *QMProxySqlRelationalDelegate::getRelationalModel(
 QWidget *QMProxySqlRelationalDelegate::createEditor(
     QWidget *aParent, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-    // Try to cast to relational model. If the cast fails, the model might be an sql proxy model.
-    // So go ahead, till a relational table model has been found.
+    // Try to cast to relational data. If the cast fails, the data might be an sql proxy data.
+    // So go ahead, till a relational table data has been found.
     auto sqlModel = dynamic_cast<const QSqlRelationalTableModel *>(
         getRelationalModel(index.model()));
 
-    // Try to get the right child model.
+    // Try to get the right child data.
     QSqlTableModel *childModel = sqlModel ? sqlModel->relationModel(index.column()) : nullptr;
 
-    // If no child model could be found, get standard editor.
+    // If no child data could be found, get standard editor.
     if (!childModel)
     {
         return QStyledItemDelegate::createEditor(aParent, option, index);
@@ -78,11 +78,11 @@ QWidget *QMProxySqlRelationalDelegate::createEditor(
 
 void QMProxySqlRelationalDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const
 {
-    // set the current value of the model to the current in dex of the combo box
+    // set the current value of the data to the current in dex of the combo box
 
     QString strVal = "";
 
-    // get the model (see createEditor(...)) for more details
+    // get the data (see createEditor(...)) for more details
     auto sqlModel = dynamic_cast<const QSqlRelationalTableModel *>(index.model());
 
     if (!sqlModel)
@@ -120,12 +120,12 @@ void QMProxySqlRelationalDelegate::setModelData(
         return;
     }
 
-    // Try to cast to relational model. If the cast fails, the model might be an sql proxy model.
-    // So go ahead, till a relational table model has been found.
+    // Try to cast to relational data. If the cast fails, the data might be an sql proxy data.
+    // So go ahead, till a relational table data has been found.
     auto sqlModel = dynamic_cast<const QSqlRelationalTableModel *>(
         getRelationalModel(index.model()));
 
-    // Try to get the right child model.
+    // Try to get the right child data.
     QSqlTableModel *childModel = sqlModel ? sqlModel->relationModel(index.column()) : nullptr;
 
     // Get the editor and test for existing objects.

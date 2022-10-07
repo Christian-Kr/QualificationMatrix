@@ -21,7 +21,7 @@
 #include "ams/qmamsmanager.h"
 #include "ams/model/qmamsusergroupmodel.h"
 #include "framework/delegate/qmbooleandelegate.h"
-#include "model/employee/qmemployeemodel.h"
+#include "data/employee/qmemployeemodel.h"
 #include "ams/model/qmamsgroupemployeemodel.h"
 
 #include <QInputDialog>
@@ -385,7 +385,7 @@ void QMAMSGroupSettingsWidget::removeEmployee()
         auto row = employeeModelIndexes.at(i).row();
         if (!amsGroupEmployeeProxyModel->removeRow(row))
         {
-            qCritical() << "Cannot remove employee from group emploee model";
+            qCritical() << "Cannot remove employee from group emploee data";
         }
     }
 
@@ -677,7 +677,7 @@ void QMAMSGroupSettingsWidget::activateGroup(int selRow)
     auto selModelIndex = amsGroupModel->index(selRow, 1);
     auto selData = amsGroupModel->data(selModelIndex).toString();
 
-    // Set access mode proxy model.
+    // Set access mode proxy data.
     amsGroupAccessModeProxyModel->setSourceModel(amsGroupAccessModeModel.get());
     amsGroupAccessModeProxyModel->setFilterKeyColumn(1);
     amsGroupAccessModeProxyModel->setFilterRegularExpression(QString("^%1$").arg(selData));
@@ -688,7 +688,7 @@ void QMAMSGroupSettingsWidget::activateGroup(int selRow)
     connect(ui->lvGroupAccessMode->selectionModel(), &QItemSelectionModel::currentRowChanged, this,
             &QMAMSGroupSettingsWidget::groupAccessModeSelectionChanged);
 
-    // Set employee proxy model.
+    // Set employee proxy data.
     amsGroupEmployeeProxyModel->setSourceModel(amsGroupEmployeeModel.get());
     amsGroupEmployeeProxyModel->setFilterKeyColumn(1);
     amsGroupEmployeeProxyModel->setFilterRegularExpression(QString("^%1$").arg(selData));

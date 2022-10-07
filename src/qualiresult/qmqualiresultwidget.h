@@ -73,7 +73,7 @@ public slots:
     /// Save settings
     void saveSettings();
 
-    /// Resets the model.
+    /// Resets the data.
     [[maybe_unused]] void resetModel();
 
     /// Called when the visibility of the filter dock widget changed.

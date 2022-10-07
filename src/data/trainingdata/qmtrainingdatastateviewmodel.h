@@ -1,4 +1,4 @@
-// qmtrainingviewmodel.h is part of QualificationMatrix
+// qmtrainingdatastateviewmodel.h is part of QualificationMatrix
 //
 // QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of the GNU General
 // Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
@@ -11,14 +11,14 @@
 // You should have received a copy of the GNU General Public License along with QualificationMatrix.
 // If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef QMTRAININGVIEWMODEL_H
-#define QMTRAININGVIEWMODEL_H
+#ifndef QMTRAININGDATASTATEVIEWMODEL_H
+#define QMTRAININGDATASTATEVIEWMODEL_H
 
 #include "framework/qmsqltablemodel.h"
 
-/// Employee training view table in sql.
+/// Employee training data state view table in sql.
 /// \author Christian Kr, Copyright 2021
-class QMTrainingViewModel: public QMSqlTableModel
+class QMTrainingDataStateViewModel: public QMSqlTableModel
 {
     Q_OBJECT
 
@@ -26,10 +26,10 @@ public:
     /// Constructor - Override from QSqlRelationalTableModel.
     /// \param parent
     /// \param db
-    explicit QMTrainingViewModel(QObject *parent = nullptr, QSqlDatabase db = QSqlDatabase());
+    explicit QMTrainingDataStateViewModel(QObject *parent = nullptr, const QSqlDatabase &db = QSqlDatabase());
 
-    /// Initialize the model with its settings.
+    /// Initialize the data with settings.
     void initModel();
 };
 
-#endif // QMTRAININGVIEWMODEL_H
+#endif // QMTRAININGDATASTATEVIEWMODEL_H

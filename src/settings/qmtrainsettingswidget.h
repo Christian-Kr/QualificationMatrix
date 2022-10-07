@@ -65,7 +65,7 @@ public slots:
     /// Remove a selected training.
     void removeTrain();
 
-    /// Revert changes in training data model.
+    /// Revert changes in training data data.
     void revertTrain();
 
     /// Add a new training group.
@@ -74,7 +74,7 @@ public slots:
     /// Remove a selected training group.
     void removeTrainGroups();
 
-    /// Revert changes in training group data model.
+    /// Revert changes in training group data data.
     void revertTrainGroups();
 
     /// Filter the training table.

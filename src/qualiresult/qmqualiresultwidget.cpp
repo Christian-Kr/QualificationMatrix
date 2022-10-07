@@ -16,11 +16,11 @@
 #include "qmqualiresultmodel.h"
 #include "framework/dialog/qmextendedselectiondialog.h"
 #include "settings/qmapplicationsettings.h"
-#include "model/function/qmfunctionviewmodel.h"
-#include "model/training/qmtrainingviewmodel.h"
-#include "model/employee/qmemployeeviewmodel.h"
-#include "model/trainingdata/qmtrainingdatastateviewmodel.h"
-#include "model/employee/qmshiftviewmodel.h"
+#include "data/function/qmfunctionviewmodel.h"
+#include "data/training/qmtrainingviewmodel.h"
+#include "data/employee/qmemployeeviewmodel.h"
+#include "data/trainingdata/qmtrainingdatastateviewmodel.h"
+#include "data/employee/qmshiftviewmodel.h"
 #include "qualiresultreport/qmqualiresultreportdialog.h"
 #include "qualiresult/qmqualiresultrecord.h"
 #include "framework/dialog/qmselectfromlistdialog.h"
@@ -104,7 +104,7 @@ void QMQualiResultWidget::updateData()
 
     auto db = QSqlDatabase::database("default");
 
-    // Create the model objects.
+    // Create the data objects.
     qualiResultModel = std::make_unique<QMQualiResultModel>();
     connect(qualiResultModel.get(), &QMQualiResultModel::beforeUpdateQualiInfo, this, &QMWinModeWidget::startWorkload);
     connect(qualiResultModel.get(), &QMQualiResultModel::updateUpdateQualiInfo, this, &QMWinModeWidget::updateWorkload);
@@ -320,7 +320,7 @@ void QMQualiResultWidget::paintPdfRequest(QPrinter *printer)
 
     auto &settings = QMApplicationSettings::getInstance();
 
-    // Put data of the model into the table and style them.
+    // Put data of the data into the table and style them.
     for (int i = 0; i < model->rowCount(); i++)
     {
         for (int j = 0; j < model->columnCount() + 1; j++)

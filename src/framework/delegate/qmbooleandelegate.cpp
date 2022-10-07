@@ -80,12 +80,12 @@ QWidget *QMBooleanDelegate::createEditor(
 
 void QMBooleanDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const
 {
-    // Get the combo box selected value and set it to the model.
+    // Get the combo box selected value and set it to the data.
 
     auto combo = dynamic_cast<QComboBox *>(editor);
     if (combo == nullptr)
     {
-        qWarning() << "cannot get combo box editor for qm model";
+        qWarning() << "cannot get combo box editor for qm data";
         return;
     }
 
@@ -102,7 +102,7 @@ void QMBooleanDelegate::setEditorData(QWidget *editor, const QModelIndex &index)
 void QMBooleanDelegate::setModelData(
         QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
 {
-    /// Data in the model must be set with the right boolean value.
+    /// Data in the data must be set with the right boolean value.
 
     if (!index.isValid())
     {
@@ -112,7 +112,7 @@ void QMBooleanDelegate::setModelData(
     auto combo = dynamic_cast<QComboBox *>(editor);
     if (combo == nullptr)
     {
-        qWarning() << "cannot get combo box editor for saving model data";
+        qWarning() << "cannot get combo box editor for saving data data";
         return;
     }
 

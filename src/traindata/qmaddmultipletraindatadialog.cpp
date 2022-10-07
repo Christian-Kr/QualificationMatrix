@@ -13,12 +13,12 @@
 
 #include "qmaddmultipletraindatadialog.h"
 #include "ui_qmaddmultipletraindatadialog.h"
-#include "model/training/qmtrainingviewmodel.h"
-#include "model/employee/qmshiftviewmodel.h"
-#include "model/trainingdata/qmtrainingdatastateviewmodel.h"
-#include "model/training/qmtraininggroupviewmodel.h"
-#include "model/trainingdata/qmtrainingdatamodel.h"
-#include "model/employee/qmemployeeviewmodel.h"
+#include "data/training/qmtrainingviewmodel.h"
+#include "data/employee/qmshiftviewmodel.h"
+#include "data/trainingdata/qmtrainingdatastateviewmodel.h"
+#include "data/training/qmtraininggroupviewmodel.h"
+#include "data/trainingdata/qmtrainingdatamodel.h"
+#include "data/employee/qmemployeeviewmodel.h"
 
 #include <QDebug>
 #include <QMessageBox>
@@ -33,7 +33,7 @@ QMAddMultipleTrainDataDialog::QMAddMultipleTrainDataDialog(QMTrainingDataModel *
 {
     ui->setupUi(this);
 
-    // Update model data. Calling this method here is dangerous, cause there might be no model
+    // Update data data. Calling this method here is dangerous, cause there might be no data
     // data at the moment. There need to be an extra check in this class.
     updateData();
 }
@@ -117,7 +117,7 @@ void QMAddMultipleTrainDataDialog::accept()
         auto selTrainId = trainViewModel->data(selTrainIdModelIndex).toInt();
         auto selTrainStateId = trainDataStateViewModel->data(selTrainStateIdModelIndex).toInt();
 
-        // Add a new entry to train data model.
+        // Add a new entry to train data data.
         auto record = trainDataModel->record();
 
         record.setValue("Employee_name_3", employeeId->at(i));

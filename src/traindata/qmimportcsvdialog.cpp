@@ -13,12 +13,12 @@
 
 #include "qmimportcsvdialog.h"
 #include "ui_qmimportcsvdialog.h"
-#include "model/training/qmtrainingviewmodel.h"
-#include "model/employee/qmemployeeviewmodel.h"
-#include "model/employee/qmshiftviewmodel.h"
-#include "model/trainingdata/qmtrainingdatastateviewmodel.h"
-#include "model/trainingdata/qmtrainingdatamodel.h"
-#include "model/training/qmtraininggroupviewmodel.h"
+#include "data/training/qmtrainingviewmodel.h"
+#include "data/employee/qmemployeeviewmodel.h"
+#include "data/employee/qmshiftviewmodel.h"
+#include "data/trainingdata/qmtrainingdatastateviewmodel.h"
+#include "data/trainingdata/qmtrainingdatamodel.h"
+#include "data/training/qmtraininggroupviewmodel.h"
 #include "framework/qmsqltablemodel.h"
 
 #include <QFileDialog>
@@ -38,7 +38,7 @@ QMImportCsvDialog::QMImportCsvDialog(QWidget *parent)
 {
     ui->setupUi(this);
 
-    // Update model data. Calling this method here is dangerous, cause there might be no model
+    // Update data data. Calling this method here is dangerous, cause there might be no data
     // data at the moment. There need to be an extra check in this class.
     updateData();
 }
@@ -357,7 +357,7 @@ void QMImportCsvDialog::parseCsv(QFile &importFile)
             continue;
         }
 
-        // Finally create the data train model entry.
+        // Finally create the data train data entry.
         trainDataModel->insertRow(trainDataModel->rowCount());
         auto rowNew = trainDataModel->rowCount() - 1;
 

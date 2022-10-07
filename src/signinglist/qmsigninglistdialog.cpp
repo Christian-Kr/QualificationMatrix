@@ -13,11 +13,11 @@
 
 #include "qmsigninglistdialog.h"
 #include "ui_qmsigninglistdialog.h"
-#include "model/employee/qmemployeeviewmodel.h"
-#include "model/employee/qmshiftviewmodel.h"
-#include "model/training/qmtrainingviewmodel.h"
-#include "model/trainingdata/qmtrainingdatamodel.h"
-#include "model/trainingdata/qmtrainingdatastateviewmodel.h"
+#include "data/employee/qmemployeeviewmodel.h"
+#include "data/employee/qmshiftviewmodel.h"
+#include "data/training/qmtrainingviewmodel.h"
+#include "data/trainingdata/qmtrainingdatamodel.h"
+#include "data/trainingdata/qmtrainingdatastateviewmodel.h"
 #include "settings/qmapplicationsettings.h"
 #include "signinglist/qmsigninglistdocument.h"
 #include "traindataconflict/qmtraindataconflictdialog.h"
@@ -402,17 +402,17 @@ void QMSigningListDialog::addEmployee()
         return;
     }
 
-    // Column names in model
+    // Column names in data
     auto colEmployeeId = m_employeeViewModel->fieldIndex("id");
     auto colEmployeeName = m_employeeViewModel->fieldIndex("name");
 
     if (colEmployeeId == -1 || colEmployeeName == -1)
     {
-        qCritical() << "SigningList: Cannot find field index of employee model.";
+        qCritical() << "SigningList: Cannot find field index of employee data.";
         return;
     }
 
-    // Get model values
+    // Get data values
     auto employeeName = m_employeeViewModel->data(m_employeeViewModel->index(selectedRow, colEmployeeName)).toString();
     auto employeeId = m_employeeViewModel->data(m_employeeViewModel->index(selectedRow, colEmployeeId)).toInt();
 
@@ -441,14 +441,14 @@ void QMSigningListDialog::addEmployee()
         return;
     }
 
-    // Column names in model
+    // Column names in data
     auto colEmployeeId = m_employeeViewModel->fieldIndex("id");
     auto colEmployeeName = m_employeeViewModel->fieldIndex("name");
     auto colEmployeeGroup = m_employeeViewModel->fieldIndex("Shift_name_2"); // Group name is still 'shift' cause of history.
 
     if (colEmployeeId == -1 || colEmployeeName == -1 || colEmployeeGroup == -1)
     {
-        qCritical() << "SigningList: Cannot find field index of employee model";
+        qCritical() << "SigningList: Cannot find field index of employee data";
         return;
     }
 

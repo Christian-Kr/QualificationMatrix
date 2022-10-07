@@ -18,7 +18,7 @@
 #include "ams/model/qmamsaccessmodemodel.h"
 #include "ams/model/qmamsgroupmodel.h"
 #include "ams/model/qmamsgroupemployeemodel.h"
-#include "model/employee/qmemployeemodel.h"
+#include "data/employee/qmemployeemodel.h"
 
 #include <QSqlDatabase>
 #include <QSqlRecord>
@@ -397,7 +397,7 @@ QList<int> QMAMSManager::getEmployeePrimaryKeyFromNamesFromDatabase(const QList<
     auto employeeNameFieldIndex = employeeModel.fieldIndex("name");
     if (employeeIdFieldIndex < 0 || employeeNameFieldIndex < 0)
     {
-        qCritical() << "Cannot find field index in employee view model";
+        qCritical() << "Cannot find field index in employee view data";
         return {};
     }
 

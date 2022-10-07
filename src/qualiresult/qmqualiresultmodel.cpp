@@ -14,9 +14,9 @@
 #include "qmqualiresultmodel.h"
 #include "qmqualiresultrecord.h"
 #include "settings/qmapplicationsettings.h"
-#include "model/training/qmtrainingviewmodel.h"
+#include "data/training/qmtrainingviewmodel.h"
 #include "ams/qmamsmanager.h"
-#include "model/training/qmtrainingexceptionviewmodel.h"
+#include "data/training/qmtrainingexceptionviewmodel.h"
 
 #include <QSqlQuery>
 #include <QSqlRecord>
@@ -302,11 +302,11 @@ bool QMQualiResultModel::updateQualiInfo(const QString &filterName, const QStrin
     auto ignoreList = settings.read("QualiResult/IgnoreList", QStringList()).toStringList();
     auto doIgnore = settings.read("QualiResult/DoIgnore", true).toBool();
 
-    // Get the TrainExceptionView model.
+    // Get the TrainExceptionView data.
     QMTrainingExceptionViewModel trainExceptViewModel(this, db);
     trainExceptViewModel.select();
 
-    // Create hash table from training exception model.
+    // Create hash table from training exception data.
     QHash<QString, QString> trainExceptHash;
     for (int i = 0; i < trainExceptViewModel.rowCount(); i++)
     {

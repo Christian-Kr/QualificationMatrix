@@ -13,7 +13,7 @@
 
 #include "qmemployeesettingswidget.h"
 #include "ui_qmemployeesettingswidget.h"
-#include "model/employee/qmemployeemodel.h"
+#include "data/employee/qmemployeemodel.h"
 #include "framework/delegate/qmproxysqlrelationaldelegate.h"
 #include "framework/delegate/qmbooleandelegate.h"
 #include "qmemployeedetailsdialog.h"
@@ -242,7 +242,7 @@ void QMEmployeeSettingsWidget::addEmployee()
 
 void QMEmployeeSettingsWidget::addEmployeeGroup()
 {
-    // Add a new temp row to the model.
+    // Add a new temp row to the data.
     shiftModel->insertRow(shiftModel->rowCount());
 
     // Set a default group name and start editor.
@@ -258,7 +258,7 @@ void QMEmployeeSettingsWidget::addEmployeeGroup()
 
 void QMEmployeeSettingsWidget::removeEmployeeGroup()
 {
-    // Get the selected model index.
+    // Get the selected data index.
     auto selectedIndex = ui->tvEmployeeGroups->selectionModel()->currentIndex();
     if (!selectedIndex.isValid())
     {
@@ -271,7 +271,7 @@ void QMEmployeeSettingsWidget::removeEmployeeGroup()
     // Get the selected group name.
     auto selectedGroupName = shiftModel->data(shiftModel->index(selectedIndex.row(), 1)).toString();
 
-    // Do not delete when entries in employee model have a reference to the group. This will only
+    // Do not delete when entries in employee data have a reference to the group. This will only
     // search for the name as a text and not for the unique id!
     auto found = false;
 

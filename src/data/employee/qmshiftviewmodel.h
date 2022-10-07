@@ -28,7 +28,7 @@ public:
     /// \param db
     explicit QMShiftViewModel(QObject *parent = nullptr, QSqlDatabase db = QSqlDatabase());
 
-    /// Initialize model with settings.
+    /// Initialize data with settings.
     void initModel();
 };
 

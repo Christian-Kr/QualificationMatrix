@@ -19,7 +19,7 @@
 #include "qualimatrix/qmqualimatrixmodel.h"
 #include "qualimatrix/qmqualimatrixheaderview.h"
 #include "qualiresult/qmqualiresultmodel.h"
-#include "model/qmdatamanager.h"
+#include "data/qmdatamanager.h"
 #include "qualimatrix/qmqualimatrixwidget.h"
 #include "qualiresult/qmqualiresultwidget.h"
 #include "settings/qmapplicationsettings.h"

@@ -13,16 +13,16 @@
 
 #include "qmqualiresultreportdialog.h"
 #include "ui_qmqualiresultreportdialog.h"
-#include "model/employee/qmemployeeviewmodel.h"
-#include "model/training/qmtrainingviewmodel.h"
-#include "model/training/qmtraininggroupviewmodel.h"
+#include "data/employee/qmemployeeviewmodel.h"
+#include "data/training/qmtrainingviewmodel.h"
+#include "data/training/qmtraininggroupviewmodel.h"
 #include "settings/qmapplicationsettings.h"
 #include "framework/dialog/qmextendedselectiondialog.h"
 #include "qmqualiresultreportdocument.h"
 #include "qmqualiresultreportitem.h"
-#include "model/qualificationmatrix/qmqualificationmatrixviewmodel.h"
-#include "model/employee/qmemployeefunctionviewmodel.h"
-#include "model/trainingdata/qmtrainingdataviewmodel.h"
+#include "data/qualificationmatrix/qmqualificationmatrixviewmodel.h"
+#include "data/employee/qmemployeefunctionviewmodel.h"
+#include "data/trainingdata/qmtrainingdataviewmodel.h"
 
 #include <QProgressDialog>
 #include <QPrintPreviewWidget>
@@ -97,7 +97,7 @@ QList<QMQualiResultReportItem> QMQualiResultReportDialog::calculateResult()
     qualiMatrixViewModel.select();
 
     // To get the right employee data, the employees needs to be filtered by several options. These options are flags
-    // like apprentice etc. The employee view model is already be filtered by the flag active.
+    // like apprentice etc. The employee view data is already be filtered by the flag active.
     QMEmployeeViewModel employeeViewModel(this, db);
     QString strFilter = "(trainee=0 AND temporarily_deactivated=0 AND personnel_leasing=0 AND apprentice=0)";
 

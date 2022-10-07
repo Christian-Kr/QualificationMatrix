@@ -54,7 +54,7 @@ public slots:
     /// Scroll bars changed, so do some updating.
     void updateHeaderLabel();
 
-    /// Actions after the model cache has been build.
+    /// Actions after the data cache has been build.
     void afterBuildCacheModel();
 
     /// Sort the quali matrix by primary key.
@@ -153,7 +153,7 @@ public slots:
     /// Reset func group filter.
     void resetFuncGroup();
 
-    /// Update the model and view.
+    /// Update the data and view.
     void updateModel();
 
     /// Export the current quali matrix as csv file.

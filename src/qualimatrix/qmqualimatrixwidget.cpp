@@ -14,15 +14,15 @@
 #include "qmqualimatrixwidget.h"
 #include "ui_qmqualimatrixwidget.h"
 #include "qmqualimatrixmodel.h"
-#include "model/qmdatamanager.h"
+#include "data/qmdatamanager.h"
 #include "qmqualimatrixdelegate.h"
 #include "qmqualimatrixheaderview.h"
 #include "settings/qmapplicationsettings.h"
 #include "framework/dialog/qmextendedselectiondialog.h"
-#include "model/function/qmfunctionviewmodel.h"
-#include "model/function/qmfunctiongroupviewmodel.h"
-#include "model/training/qmtrainingviewmodel.h"
-#include "model/training/qmtraininggroupviewmodel.h"
+#include "data/function/qmfunctionviewmodel.h"
+#include "data/function/qmfunctiongroupviewmodel.h"
+#include "data/training/qmtrainingviewmodel.h"
+#include "data/training/qmtraininggroupviewmodel.h"
 #include "ams/qmamsmanager.h"
 
 #include <QSortFilterProxyModel>
@@ -282,7 +282,7 @@ void QMQualiMatrixWidget::saveSettings()
 
 void QMQualiMatrixWidget::updateFilter()
 {
-    // Set filter of model.
+    // Set filter of data.
     qualiMatrixModel->setFuncFilter(ui->cbFuncFilter->currentText());
     qualiMatrixModel->setTrainFilter(ui->cbTrainFilter->currentText());
     qualiMatrixModel->setFuncGroupFilter(ui->cbFuncGroupFilter->currentText());
@@ -355,7 +355,7 @@ void QMQualiMatrixWidget::updateData()
     // Update the views.
     ui->tvQualiMatrix->setModel(qualiMatrixModel.get());
 
-    // After setting the new model, the connection fo the selection model
+    // After setting the new data, the connection fo the selection data
     // has to be reset.
     ui->tvQualiMatrix->selectionModel()->disconnect(this);
     connect(ui->tvQualiMatrix->selectionModel(),
@@ -517,7 +517,7 @@ void QMQualiMatrixWidget::updateModel()
     ui->tvQualiMatrix->clearSelection();
     ui->tvQualiMatrix->selectionModel()->clearCurrentIndex();
 
-    // Rebuild cache of model.
+    // Rebuild cache of data.
     qualiMatrixModel->buildCache();
 }
 

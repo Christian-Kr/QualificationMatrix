@@ -1,4 +1,4 @@
-// qmtraininggroupviewmodel.h is part of QualificationMatrix
+// qmemployeefunctionviewmodel.h is part of QualificationMatrix
 //
 // QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of the GNU General
 // Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
@@ -11,25 +11,25 @@
 // You should have received a copy of the GNU General Public License along with QualificationMatrix.
 // If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef QMTRAININGGROUPVIEWMODEL_H
-#define QMTRAININGGROUPVIEWMODEL_H
+#ifndef QMEMPLOYEEFUNCTIONVIEWMODEL_H
+#define QMEMPLOYEEFUNCTIONVIEWMODEL_H
 
 #include "framework/qmsqltablemodel.h"
 
-/// Employee training group view table in sql.
+/// Employee function relation view table in sql.
 /// \author Christian Kr, Copyright 2021
-class QMTrainingGroupViewModel: public QMSqlTableModel
+class QMEmployeeFunctionViewModel: public QMSqlTableModel
 {
     Q_OBJECT
 
 public:
-    /// Constructor - Override from QSqlTableModel.
+    /// Constructor - Override from QSqlRelationalTableModel.
     /// \param parent
     /// \param db
-    explicit QMTrainingGroupViewModel(QObject *parent = nullptr, QSqlDatabase db = QSqlDatabase());
+    explicit QMEmployeeFunctionViewModel(QObject *parent = nullptr, const QSqlDatabase &db = QSqlDatabase());
 
-    /// Initialize the model with its settings.
+    /// Initialize data.
     void initModel();
 };
 
-#endif // QMTRAININGGROUPVIEWMODEL_H
+#endif // QMEMPLOYEEFUNCTIONVIEWMODEL_H

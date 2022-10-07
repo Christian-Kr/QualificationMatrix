@@ -26,7 +26,7 @@ class QSortFilterProxyModel;
 enum class FUNCTION_SORT { PRIMARY_KEY, NAME, GROUP };
 enum class TRAINING_SORT { PRIMARY_KEY, NAME, GROUP };
 
-/// A model for holding the table view data representation
+/// A data for holding the table view data representation
 /// \author Christian Kr, Copyright (c) 2020
 class QMQualiMatrixModel: public QAbstractTableModel
 {
@@ -106,7 +106,7 @@ public:
     /// \param filter True if activate, else false.
     void setTrainLegalFilter(bool filter);
 
-    /// Due to performance reasons, use caching of model data.
+    /// Due to performance reasons, use caching of data data.
     void buildCache();
 
     /// Set function sort to given system.
@@ -117,7 +117,7 @@ public:
     /// \param sortOrderValue Set the sort order.
     void setFunctionSortOrder(Qt::SortOrder sortOrderValue);
 
-    /// Update the sorting parameter to the model.
+    /// Update the sorting parameter to the data.
     void updateFunctionSort();
 
     /// Set training sort to given system.
@@ -128,7 +128,7 @@ public:
     /// \param sortOrderValue Set the sort order.
     void setTrainingSortOrder(Qt::SortOrder sortOrderValue);
 
-    /// Update the sorting parameter to the model.
+    /// Update the sorting parameter to the data.
     void updateTrainingSort();
 
 signals:

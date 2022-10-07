@@ -12,7 +12,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 #include "qmdatabaseupdater.h"
-#include "model/qmdatamanager.h"
+#include "data/qmdatamanager.h"
 
 #include <QSqlDatabase>
 #include <QSqlQuery>

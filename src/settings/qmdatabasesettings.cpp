@@ -12,7 +12,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 #include "qmdatabasesettings.h"
-#include "model/qminfomodel.h"
+#include "data/qminfomodel.h"
 
 #include <QVariant>
 

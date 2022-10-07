@@ -53,7 +53,7 @@ public slots:
     /// Dialog button "Apply" has been pressed.
     void apply();
 
-    /// Data of a model has changed.
+    /// Data of a data has changed.
     /// \param topLeft not interested
     /// \param bottomRight not interested
     /// \param roles not interested
@@ -65,7 +65,7 @@ public slots:
     /// \param item The item that has been choosed.
     void changeSettingsGroup(QTreeWidgetItem *item, int);
 
-    /// Reset all settings - for model settings just revert changes.
+    /// Reset all settings - for data settings just revert changes.
     /// \param group The group id to reset settings for.
     /// \return True if success, else false.
     bool resetSettingsGroup(int group);

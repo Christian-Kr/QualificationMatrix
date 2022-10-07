@@ -35,17 +35,17 @@ Q_OBJECT
 public:
     /// Constructor
     /// \param parent
-    /// \param tableModel The data model to show for selection.
-    /// \param column The column of the model to show.
+    /// \param tableModel The data data to show for selection.
+    /// \param column The column of the data to show.
     explicit QMExtendedSelectionDialog(QWidget *parent = nullptr,
         QAbstractItemModel *tableModel = nullptr, int column = 0);
 
     /// Get the number of rows selected.
-    /// \return The selected index list of the filter model.
+    /// \return The selected index list of the filter data.
     QModelIndexList getFilterSelected() const;
 
-    /// Get the filter model. This object will be destroyed on object deletion.
-    /// \return The filter model that is created temporary inside this object.
+    /// Get the filter data. This object will be destroyed on object deletion.
+    /// \return The filter data that is created temporary inside this object.
     QSortFilterProxyModel* getFilterModel() { return filterModel; }
 
     /// Should the selection be reversed.

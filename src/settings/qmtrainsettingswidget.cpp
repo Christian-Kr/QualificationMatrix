@@ -13,12 +13,12 @@
 
 #include "qmtrainsettingswidget.h"
 #include "ui_qmtrainsettingswidget.h"
-#include "model/trainingdata/qmtrainingdataviewmodel.h"
-#include "model/training/qmtrainingmodel.h"
-#include "model/training/qmtraininggroupmodel.h"
-#include "model/trainingdata/qmtrainingdatastatemodel.h"
-#include "model/qualificationmatrix/qmqualificationmatrixviewmodel.h"
-#include "model/training/qmtrainingexceptionviewmodel.h"
+#include "data/trainingdata/qmtrainingdataviewmodel.h"
+#include "data/training/qmtrainingmodel.h"
+#include "data/training/qmtraininggroupmodel.h"
+#include "data/trainingdata/qmtrainingdatastatemodel.h"
+#include "data/qualificationmatrix/qmqualificationmatrixviewmodel.h"
+#include "data/training/qmtrainingexceptionviewmodel.h"
 #include "framework/delegate/qmproxysqlrelationaldelegate.h"
 #include "framework/delegate/qmcolorchooserdelegate.h"
 #include "framework/delegate/qmbooleandelegate.h"
@@ -108,7 +108,7 @@ void QMTrainSettingsWidget::updateData()
     trainDataViewModel = std::make_unique<QMTrainingDataViewModel>(this, db);
     trainDataViewModel->select();
 
-    // Set filter model.
+    // Set filter data.
     trainFilterModel->setSourceModel(trainModel.get());
 
     // Update the views.
@@ -154,7 +154,7 @@ void QMTrainSettingsWidget::addTrain()
     ui->leTrainFilter->setText("");
     filterTrain();
 
-    // Add a new temp row to the model.
+    // Add a new temp row to the data.
     trainModel->insertRow(trainModel->rowCount());
 
     // Set a default train group.
@@ -175,7 +175,7 @@ void QMTrainSettingsWidget::addTrain()
 
 void QMTrainSettingsWidget::removeTrain()
 {
-    // Get the selected model index.
+    // Get the selected data index.
     QModelIndex selectedIndex = ui->tvTrain->selectionModel()->currentIndex();
     if (!selectedIndex.isValid()) {
         QMessageBox::information(
@@ -230,7 +230,7 @@ bool QMTrainSettingsWidget::trainReference(const QString &train)
     std::unique_ptr<QSqlTableModel> trainExcpViewModel = std::make_unique<QMTrainingExceptionViewModel>(this, db);
     trainExcpViewModel->select();
 
-    // Search inside quali model.
+    // Search inside quali data.
     for (int i = 0; i < qualiViewModel->rowCount(); i++) {
         QString trainName = qualiViewModel->data(qualiViewModel->index(i, 2)).toString();
         if (train == trainName) {
@@ -238,7 +238,7 @@ bool QMTrainSettingsWidget::trainReference(const QString &train)
         }
     }
 
-    // Search inside exception model.
+    // Search inside exception data.
     for (int i = 0; i < trainExcpViewModel->rowCount(); i++) {
         QString trainName = trainExcpViewModel
             ->data(trainExcpViewModel->index(i, 2)).toString();
@@ -284,7 +284,7 @@ void QMTrainSettingsWidget::revertTrainStates()
 
 void QMTrainSettingsWidget::addTrainGroups()
 {
-    // Add a new temp row to the model.
+    // Add a new temp row to the data.
     trainGroupModel->insertRow(trainGroupModel->rowCount());
 
     // Set a default color.
@@ -303,7 +303,7 @@ void QMTrainSettingsWidget::addTrainGroups()
 
 void QMTrainSettingsWidget::addTrainState()
 {
-    // Add a new temp row to the model.
+    // Add a new temp row to the data.
     trainDataStateModel->insertRow(trainDataStateModel->rowCount());
 
     // Set a default color.
@@ -324,7 +324,7 @@ void QMTrainSettingsWidget::addTrainState()
 
 void QMTrainSettingsWidget::removeTrainGroups()
 {
-    // Get the selected model index.
+    // Get the selected data index.
     QModelIndex selectedIndex = ui->tvTrainGroups->selectionModel()->currentIndex();
     if (!selectedIndex.isValid()) {
         QMessageBox::information(
@@ -336,7 +336,7 @@ void QMTrainSettingsWidget::removeTrainGroups()
     QString selectedGroupName = trainGroupModel
         ->data(trainGroupModel->index(selectedIndex.row(), 1)).toString();
 
-    // Do not delete when entries in train model have a reference to the group.
+    // Do not delete when entries in train data have a reference to the group.
     bool found = false;
     for (int i = 0; i < trainModel->rowCount(); i++) {
         QString trainGroupName = trainModel->data(trainModel->index(i, 2)).toString();
@@ -371,7 +371,7 @@ void QMTrainSettingsWidget::removeTrainGroups()
 
 void QMTrainSettingsWidget::removeTrainState()
 {
-    // Get the selected model index.
+    // Get the selected data index.
     QModelIndex selectedIndex = ui->tvTrainState->selectionModel()->currentIndex();
     if (!selectedIndex.isValid())
     {
@@ -385,7 +385,7 @@ void QMTrainSettingsWidget::removeTrainState()
     QString selectedStateName = trainDataStateModel->data(
             trainDataStateModel->index(selectedIndex.row(), 1)).toString();
 
-//    // Do not delete when entries in train data model have a reference to the state.
+//    // Do not delete when entries in train data data have a reference to the state.
 //    bool found = false;
 //    for (int i = 0; i < trainDataViewModel->rowCount(); i++)
 //    {

@@ -47,7 +47,7 @@ public slots:
     /// Start the process of importing.
     void accept() override;
 
-    /// Update model data.
+    /// Update data data.
     void updateData();
 
     /// Add simgle employee to list.

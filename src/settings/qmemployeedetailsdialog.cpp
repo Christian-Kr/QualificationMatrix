@@ -13,10 +13,10 @@
 
 #include "qmemployeedetailsdialog.h"
 #include "ui_qmemployeedetailsdialog.h"
-#include "model/function/qmfunctionviewmodel.h"
-#include "model/training/qmtrainingviewmodel.h"
-#include "model/employee/qmemployeefunctionmodel.h"
-#include "model/training/qmtrainingexceptionmodel.h"
+#include "data/function/qmfunctionviewmodel.h"
+#include "data/training/qmtrainingviewmodel.h"
+#include "data/employee/qmemployeefunctionmodel.h"
+#include "data/training/qmtrainingexceptionmodel.h"
 #include "framework/delegate/qmproxysqlrelationaldelegate.h"
 
 #include <QDebug>
@@ -163,7 +163,7 @@ void QMEmployeeDetailsDialog::addFunc()
         return;
     }
 
-    // Add a new temp row to the model.
+    // Add a new temp row to the data.
     employeeFuncModel->insertRow(employeeFuncModel->rowCount());
 
     // Insert the id of the selected employee to the new data.
@@ -186,7 +186,7 @@ void QMEmployeeDetailsDialog::addTrainException()
         return;
     }
 
-    // Add a new temp row to the model.
+    // Add a new temp row to the data.
     trainExceptionModel->insertRow(trainExceptionModel->rowCount());
 
     // Insert the id of the selected employee to the new data.

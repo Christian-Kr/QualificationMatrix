@@ -89,7 +89,7 @@ LEFT JOIN Func ON QualiData.func = Func.id
 LEFT JOIN Train ON QualiData.train = Train.id
 LEFT JOIN QualiState ON QualiData.qualistate = QualiState.id;
 
--- Create employee func view model
+-- Create employee func view data
 
 CREATE VIEW IF NOT EXISTS EmployeeFuncView AS
 SELECT

@@ -41,7 +41,7 @@ struct QMTrainDataConflictEntry
     int trainState = -1;
 };
 
-/// The model holds some information about every train data row and additionally a column of how to handel the conflict
+/// The data holds some information about every train data row and additionally a column of how to handel the conflict
 /// of the entry.
 /// \author Christian Kr, Copyright 2022
 class QMTrainDataConflictModel: public QAbstractTableModel
@@ -99,7 +99,7 @@ public:
     /// \return
     [[nodiscard]] Qt::ItemFlags flags(const QModelIndex &index) const override;
 
-    /// Update the model with given train data ids. The model will be completly reseted before.
+    /// Update the data with given train data ids. The data will be completly reseted before.
     /// \param ids The ids to be set.
     /// \return True if successful, else false.
     bool updateFromTrainDataIds(const QList<int> &ids);

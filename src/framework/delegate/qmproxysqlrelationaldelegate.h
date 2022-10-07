@@ -27,7 +27,7 @@ public:
     /// \param parent
     explicit QMProxySqlRelationalDelegate(QObject *parent = nullptr);
 
-    /// Creates a combo box editor and sets all items from the child model.
+    /// Creates a combo box editor and sets all items from the child data.
     /// \param aParent
     /// \param option
     /// \param index
@@ -36,21 +36,21 @@ public:
         QWidget *aParent, const QStyleOptionViewItem &option,
         const QModelIndex &index) const override;
 
-    /// Sets the data from the editor to the model.
+    /// Sets the data from the editor to the data.
     /// \param editor
     /// \param model
     /// \param index
     void setModelData(
         QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const override;
 
-    /// Sets the model value to the beginning editor value.
+    /// Sets the data value to the beginning editor value.
     /// \param editor
     /// \param index
     void setEditorData(QWidget *editor, const QModelIndex &index) const override;
 
-    /// Search recursively for a relational table model and return it.
-    /// \param itemModel The starting parent model.
-    /// \return Relational table model pointer if success, else nullptr.
+    /// Search recursively for a relational table data and return it.
+    /// \param itemModel The starting parent data.
+    /// \return Relational table data pointer if success, else nullptr.
     const QAbstractItemModel *getRelationalModel(const QAbstractItemModel *itemModel) const;
 };
 

@@ -110,7 +110,7 @@ private:
     /// \return The group or empty string if nothing found.
     QString getGroupFromPrimaryId(int primaryId);
 
-    /// Update model data.
+    /// Update data data.
     void updateData();
 
     /// Run action for enabling the usergroup list.
@@ -120,7 +120,7 @@ private:
     /// Run action for disabling the usergroup list.
     void deactivateUserGroupList();
 
-    /// Search for a user in user group proxy model.
+    /// Search for a user in user group proxy data.
     /// \param name The name of the group to search for.
     /// \return True if minimum one exist, else false.
     bool userGroupProxyContainsGroup(const QString &group);

@@ -119,7 +119,7 @@ public slots:
     void removeEmployee();
 
 private:
-    /// Update model data.
+    /// Update data data.
     void updateData();
 
     /// Run action for enabling the usergroup list.
@@ -129,17 +129,17 @@ private:
     /// Run action for disabling the usergroup list.
     void deactivateGroup();
 
-    /// Search for an access mode in group proxy model.
+    /// Search for an access mode in group proxy data.
     /// \param name The name of the group to search for.
     /// \return True if minimum one exist, else false.
     bool groupAccessModeProxyContainsAccessMode(const QString &accessMode);
 
-    /// Search for an employee name in the group employee proxy model.
+    /// Search for an employee name in the group employee proxy data.
     /// \param name The name of the employee to search for.
     /// \return True if found, else false.
     bool groupEmployeeProxyContainsEmployee(const QString &name);
 
-    /// Search for group name in group model.
+    /// Search for group name in group data.
     /// \param The group name to search for.
     /// \return True if found, else false.
     bool groupContainsGroupname(const QString &groupname);
