@@ -27,7 +27,7 @@ public:
     /// \param parent The parent object for the qt system.
     /// \param db The database to work with.
     explicit QMSqlTableModel(QObject *parent = nullptr, QSqlDatabase db = QSqlDatabase(),
-                             bool doFetchAll = true, bool doFetchAllSub = true);
+            bool doFetchAll = true, bool doFetchAllSub = true);
 
     /// Override from QSqlRelationalTableModel.
     /// \return True is selection was successful, else false.
