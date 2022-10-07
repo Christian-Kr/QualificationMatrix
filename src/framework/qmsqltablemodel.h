@@ -34,10 +34,10 @@ public:
     bool select() override;
 
     /// Override from QSqlRelationalTableModel.
-    [[nodiscard]] QVariant data(const QModelIndex &index, int role) const override;
+    [[nodiscard]] QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
     /// Override from QSqlRelationalTableModel.
-    bool setData(const QModelIndex &index, const QVariant &value, int role) override;
+    bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
 
     /// Fetch all sub data exceeding 255 limit.
     /// \param value
