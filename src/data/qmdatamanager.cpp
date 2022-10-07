@@ -16,7 +16,6 @@
 
 #include <QSqlQuery>
 #include <QSqlError>
-#include <QDebug>
 
 QMDataManager *QMDataManager::instance = nullptr;
 
