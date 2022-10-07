@@ -13,10 +13,10 @@
 
 #include "qmfuncsettingswidget.h"
 #include "ui_qmfuncsettingswidget.h"
-#include "model/qmfunctionmodel.h"
-#include "model/qmfunctiongroupmodel.h"
-#include "model/view/qmqualificationmatrixviewmodel.h"
-#include "model/view/qmemployeefunctionviewmodel.h"
+#include "model/function/qmfunctionmodel.h"
+#include "model/function/qmfunctiongroupmodel.h"
+#include "model/qualificationmatrix/qmqualificationmatrixviewmodel.h"
+#include "model/employee/qmemployeefunctionviewmodel.h"
 #include "framework/delegate/qmproxysqlrelationaldelegate.h"
 #include "framework/delegate/qmcolorchooserdelegate.h"
 

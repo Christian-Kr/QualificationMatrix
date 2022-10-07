@@ -13,7 +13,7 @@
 
 #include "qmemployeesettingswidget.h"
 #include "ui_qmemployeesettingswidget.h"
-#include "model/qmemployeemodel.h"
+#include "model/employee/qmemployeemodel.h"
 #include "framework/delegate/qmproxysqlrelationaldelegate.h"
 #include "framework/delegate/qmbooleandelegate.h"
 #include "qmemployeedetailsdialog.h"

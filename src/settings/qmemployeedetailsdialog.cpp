@@ -13,10 +13,10 @@
 
 #include "qmemployeedetailsdialog.h"
 #include "ui_qmemployeedetailsdialog.h"
-#include "model/view/qmfunctionviewmodel.h"
-#include "model/view/qmtrainingviewmodel.h"
-#include "model/qmemployeefunctionmodel.h"
-#include "model/qmtrainingexceptionmodel.h"
+#include "model/function/qmfunctionviewmodel.h"
+#include "model/training/qmtrainingviewmodel.h"
+#include "model/employee/qmemployeefunctionmodel.h"
+#include "model/training/qmtrainingexceptionmodel.h"
 #include "framework/delegate/qmproxysqlrelationaldelegate.h"
 
 #include <QDebug>

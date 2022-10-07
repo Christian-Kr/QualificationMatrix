@@ -12,7 +12,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 #include "qmdatamanager.h"
-#include "model/view/qmtraindatacertificateviewmodel.h"
+#include "model/trainingdata/qmtraindatacertificateviewmodel.h"
 
 #include <QSqlQuery>
 #include <QSqlError>

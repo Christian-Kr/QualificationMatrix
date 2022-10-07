@@ -13,12 +13,12 @@
 
 #include "qmaddmultipletraindatadialog.h"
 #include "ui_qmaddmultipletraindatadialog.h"
-#include "model/view/qmtrainingviewmodel.h"
-#include "model/view/qmshiftviewmodel.h"
-#include "model/view/qmtrainingdatastateviewmodel.h"
-#include "model/view/qmtraininggroupviewmodel.h"
-#include "model/qmtrainingdatamodel.h"
-#include "model/view/qmemployeeviewmodel.h"
+#include "model/training/qmtrainingviewmodel.h"
+#include "model/employee/qmshiftviewmodel.h"
+#include "model/trainingdata/qmtrainingdatastateviewmodel.h"
+#include "model/training/qmtraininggroupviewmodel.h"
+#include "model/trainingdata/qmtrainingdatamodel.h"
+#include "model/employee/qmemployeeviewmodel.h"
 
 #include <QDebug>
 #include <QMessageBox>

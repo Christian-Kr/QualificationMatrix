@@ -13,9 +13,9 @@
 
 #include "qmqualimatrixmodel.h"
 #include "model/qmdatamanager.h"
-#include "model/view/qmfunctionviewmodel.h"
-#include "model/view/qmtrainingviewmodel.h"
-#include "model/qmqualificationmatrixmodel.h"
+#include "model/function/qmfunctionviewmodel.h"
+#include "model/training/qmtrainingviewmodel.h"
+#include "model/qualificationmatrix/qmqualificationmatrixmodel.h"
 
 #include <QSqlRecord>
 #include <QSqlError>

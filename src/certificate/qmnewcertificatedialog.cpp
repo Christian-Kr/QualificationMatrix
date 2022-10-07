@@ -14,9 +14,9 @@
 #include "qmnewcertificatedialog.h"
 #include "ui_qmnewcertificatedialog.h"
 #include "qmemployeedatemodel.h"
-#include "model/view/qmtrainingviewmodel.h"
-#include "model/view/qmemployeeviewmodel.h"
-#include "model/view/qmshiftviewmodel.h"
+#include "model/training/qmtrainingviewmodel.h"
+#include "model/employee/qmemployeeviewmodel.h"
+#include "model/employee/qmshiftviewmodel.h"
 #include "settings/qmapplicationsettings.h"
 #include "framework/dialog/qmextendedselectiondialog.h"
 

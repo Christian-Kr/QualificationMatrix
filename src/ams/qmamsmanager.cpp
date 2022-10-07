@@ -18,7 +18,7 @@
 #include "ams/model/qmamsaccessmodemodel.h"
 #include "ams/model/qmamsgroupmodel.h"
 #include "ams/model/qmamsgroupemployeemodel.h"
-#include "model/qmemployeemodel.h"
+#include "model/employee/qmemployeemodel.h"
 
 #include <QSqlDatabase>
 #include <QSqlRecord>

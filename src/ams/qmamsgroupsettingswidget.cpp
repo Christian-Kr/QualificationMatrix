@@ -21,7 +21,7 @@
 #include "ams/qmamsmanager.h"
 #include "ams/model/qmamsusergroupmodel.h"
 #include "framework/delegate/qmbooleandelegate.h"
-#include "model/qmemployeemodel.h"
+#include "model/employee/qmemployeemodel.h"
 #include "ams/model/qmamsgroupemployeemodel.h"
 
 #include <QInputDialog>

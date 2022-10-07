@@ -13,12 +13,12 @@
 
 #include "qmimportcsvdialog.h"
 #include "ui_qmimportcsvdialog.h"
-#include "model/view/qmtrainingviewmodel.h"
-#include "model/view/qmemployeeviewmodel.h"
-#include "model/view/qmshiftviewmodel.h"
-#include "model/view/qmtrainingdatastateviewmodel.h"
-#include "model/qmtrainingdatamodel.h"
-#include "model/view/qmtraininggroupviewmodel.h"
+#include "model/training/qmtrainingviewmodel.h"
+#include "model/employee/qmemployeeviewmodel.h"
+#include "model/employee/qmshiftviewmodel.h"
+#include "model/trainingdata/qmtrainingdatastateviewmodel.h"
+#include "model/trainingdata/qmtrainingdatamodel.h"
+#include "model/training/qmtraininggroupviewmodel.h"
 #include "framework/qmsqltablemodel.h"
 
 #include <QFileDialog>

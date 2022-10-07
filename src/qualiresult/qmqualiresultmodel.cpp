@@ -14,9 +14,9 @@
 #include "qmqualiresultmodel.h"
 #include "qmqualiresultrecord.h"
 #include "settings/qmapplicationsettings.h"
-#include "model/view/qmtrainingviewmodel.h"
+#include "model/training/qmtrainingviewmodel.h"
 #include "ams/qmamsmanager.h"
-#include "model/view/qmtrainingexceptionviewmodel.h"
+#include "model/training/qmtrainingexceptionviewmodel.h"
 
 #include <QSqlQuery>
 #include <QSqlRecord>
