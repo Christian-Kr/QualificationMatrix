@@ -87,6 +87,9 @@ public slots:
     /// Add employees to define the training date.
     [[maybe_unused]] void addEmployees();
 
+    /// Remove an employee by selected id.
+    [[maybe_unused]] void removeEmployees();
+
     /// The extended selection of employees has been finished.
     /// \param result The result id the dialog has been closed with.
     [[maybe_unused]] void extSelEmployeeFinished(int result);

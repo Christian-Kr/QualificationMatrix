@@ -18,6 +18,7 @@
 #include "data/employee/qmemployeeviewmodel.h"
 #include "data/employee/qmshiftviewmodel.h"
 #include "settings/qmapplicationsettings.h"
+#include "framework/delegate/qmdatedelegate.h"
 #include "framework/dialog/qmextendedselectiondialog.h"
 
 #include <QSortFilterProxyModel>
@@ -36,6 +37,10 @@ QMNewCertificateDialog::QMNewCertificateDialog(QWidget *parent)
 
     // Table data for employee/date entries.
     ui->tvEmployeeDateData->setModel(m_employeeDateModel.get());
+    ui->tvEmployeeDateData->horizontalHeader()->setMinimumSectionSize(100);
+    ui->tvEmployeeDateData->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    ui->tvEmployeeDateData->setItemDelegateForColumn(1, new DateDelegate());
 }
 
 QMNewCertificateDialog::~QMNewCertificateDialog()
@@ -240,6 +245,23 @@ void QMNewCertificateDialog::updateData()
         employeeEntry.employeeId = employeeId;
         employeeEntry.employeeName = employeeName;
 
+        // set default date to selected for the training (this value might be different and editable by the user)
+        employeeEntry.trainDate = ui->cwTrainDate->selectedDate();
+
         m_employeeDateModel->addEntry(employeeEntry);
+    }
+}
+
+[[maybe_unused]] void QMNewCertificateDialog::removeEmployees()
+{
+    auto selectedEntries = ui->tvEmployeeDateData->selectionModel()->selectedRows();
+    if (selectedEntries.isEmpty())
+    {
+        return;
+    }
+
+    for (const QModelIndex &modelIndex : selectedEntries)
+    {
+        m_employeeDateModel->removeEntry(modelIndex.row());
     }
 }

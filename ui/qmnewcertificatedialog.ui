@@ -216,6 +216,12 @@
          <property name="enabled">
           <bool>false</bool>
          </property>
+         <property name="selectionMode">
+          <enum>QAbstractItemView::SingleSelection</enum>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
         </widget>
        </item>
        <item row="4" column="1">
@@ -412,11 +418,28 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>tbRemove</sender>
+   <signal>clicked()</signal>
+   <receiver>QMNewCertificateDialog</receiver>
+   <slot>removeEmployees()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>421</x>
+     <y>186</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>235</x>
+     <y>270</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>openCertificatePath()</slot>
   <slot>switchEmployeeSelection()</slot>
   <slot>appendToTrainDataChanged(int)</slot>
   <slot>addEmployees()</slot>
+  <slot>removeEmployees()</slot>
  </slots>
 </ui>

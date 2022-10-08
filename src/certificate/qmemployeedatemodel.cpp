@@ -18,11 +18,16 @@
 
 QMEmployeeDateModel::QMEmployeeDateModel(QObject *parent)
     : QAbstractTableModel(parent)
-    , m_entries(new QList<QMEmployeeDateEntry>())
+    , m_entries(new QList<QMEmployeeDateEntry*>())
 {}
 
 QMEmployeeDateModel::~QMEmployeeDateModel()
 {
+    while (!m_entries->empty())
+    {
+        delete m_entries->takeFirst();
+    }
+
     delete m_entries;
 }
 
@@ -85,9 +90,9 @@ QVariant QMEmployeeDateModel::data(const QModelIndex &index, int role) const
         switch (index.column())
         {
             case 0:
-                return m_entries->at(row).employeeName;
+                return m_entries->at(row)->employeeName;
             case 1:
-                return m_entries->at(row).trainDate.toString(Qt::DateFormat::ISODate);
+                return m_entries->at(row)->trainDate.toString(Qt::DateFormat::ISODate);
             default:
                 return {};
         }
@@ -103,7 +108,30 @@ QVariant QMEmployeeDateModel::data(const QModelIndex &index, int role) const
 
 bool QMEmployeeDateModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
-    return QAbstractTableModel::setData(index, value, role);
+    if (role == Qt::EditRole)
+    {
+        if (index.row() >= m_entries->size() || index.row() < 0)
+        {
+            qWarning() << "QMEmployeeDateModel: Wrong size of m_entries";
+            return false;
+        }
+
+        switch (index.column())
+        {
+            case 0:
+                m_entries->at(index.row())->employeeName = value.toString();
+                break;
+            case 1:
+                m_entries->at(index.row())->trainDate = value.toDate();
+                break;
+            default:
+                return false;
+        }
+
+        return true;
+    }
+
+    return false;
 }
 
 Qt::ItemFlags QMEmployeeDateModel::flags(const QModelIndex &index) const
@@ -113,25 +141,40 @@ Qt::ItemFlags QMEmployeeDateModel::flags(const QModelIndex &index) const
         return Qt::NoItemFlags;
     }
 
-    return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+    Qt::ItemFlags baseFlags = Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+
+    // allow edit of date column
+    if (index.column() == 1)
+    {
+        baseFlags = baseFlags | Qt::ItemIsEditable;
+    }
+
+    return baseFlags;
 }
 
 bool QMEmployeeDateModel::addEntry(const QMEmployeeDateEntry &entry)
 {
+    // don't add if employee id does not exist at all
     if (entry.employeeId <= -1)
     {
         return false;
     }
 
-    for (const QMEmployeeDateEntry &tmpEntry : *m_entries)
+    // don't add entry if the employee already exist by its id
+    for (const QMEmployeeDateEntry *tmpEntry : *m_entries)
     {
-        if (tmpEntry.employeeId == entry.employeeId)
+        if (tmpEntry->employeeId == entry.employeeId)
         {
             return false;
         }
     }
 
-    m_entries->append(entry);
+    auto *employeeDataEntry = new QMEmployeeDateEntry();
+    employeeDataEntry->employeeId = entry.employeeId;
+    employeeDataEntry->employeeName = entry.employeeName;
+    employeeDataEntry->trainDate = entry.trainDate;
+
+    m_entries->append(employeeDataEntry);
 
     beginInsertRows(QModelIndex(), (int) m_entries->size(), (int) m_entries->size());
     endInsertRows();
@@ -147,5 +190,9 @@ bool QMEmployeeDateModel::removeEntry(int index)
     }
 
     m_entries->removeAt(index);
+
+    beginRemoveRows(QModelIndex(), index, index);
+    endRemoveRows();
+
     return true;
 }

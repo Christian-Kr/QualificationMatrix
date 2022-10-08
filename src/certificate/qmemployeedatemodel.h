@@ -99,7 +99,7 @@ public:
     bool removeEntry(int index);
 
 private:
-    QList<QMEmployeeDateEntry> *m_entries;
+    QList<QMEmployeeDateEntry*> *m_entries;
 };
 
 #endif // QMEMPLOYEEDATEMODEL_H
