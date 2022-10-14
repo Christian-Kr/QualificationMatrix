@@ -12,9 +12,9 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 #include "qmemployeedatemodel.h"
+#include "qmemployeedateentry.h"
 
 #include <QSqlDatabase>
-#include <QSqlResult>
 
 QMEmployeeDateModel::QMEmployeeDateModel(QObject *parent)
     : QAbstractTableModel(parent)

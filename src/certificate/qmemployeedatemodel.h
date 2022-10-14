@@ -15,21 +15,11 @@
 #define QMEMPLOYEEDATEMODEL_H
 
 #include <QAbstractTableModel>
-#include <QDate>
 
 #include <memory>
 
-// Data for one entry. This includes the employee naame and the date when the training happen. This should be the exact
-// training date as written down on the signing list and not the planned date.
-struct QMEmployeeDateEntry
-{
-    // The primary id of the employee and its name.
-    int employeeId = -1;
-    QString employeeName;
-
-    // The date when the training happened related to the certificate.
-    QDate trainDate;
-};
+// Forward declarations
+struct QMEmployeeDateEntry;
 
 /// The data represents a table structure of dates and names of employees' training.
 /// \author Christian Kr, Copyright 2022
