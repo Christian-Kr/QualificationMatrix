@@ -20,6 +20,7 @@
 #include "settings/qmapplicationsettings.h"
 #include "framework/delegate/qmdatedelegate.h"
 #include "framework/dialog/qmextendedselectiondialog.h"
+#include "qmemployeedateentry.h"
 
 #include <QSortFilterProxyModel>
 #include <QFileDialog>
