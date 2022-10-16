@@ -58,6 +58,12 @@ public:
     /// Revert all changes.
     void revertChanges();
 
+    /// Override from QMDialog
+    void loadSettings() override {};
+
+    /// Override from QMDialog
+    void saveSettings() override {};
+
 public slots:
     /// Add a new func.
     void addFunc();

@@ -60,6 +60,12 @@ public:
     /// return The selected values as a list.
     QStringList getSelectedElements() const;
 
+    /// Override from QMDialog
+    void loadSettings() override {};
+
+    /// Override from QMDialog
+    void saveSettings() override {};
+
 public slots:
     /// Update filter.
     void updateFilter();

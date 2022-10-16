@@ -53,6 +53,12 @@ public:
     /// \return A list with row numbers. The first row number of the selection list is 0.
     QList<int> getSelected() const;
 
+    /// Override from QMDialog
+    void loadSettings() override {};
+
+    /// Override from QMDialog
+    void saveSettings() override {};
+
 private:
     Ui::QMSelectFromListDialog *ui;
 

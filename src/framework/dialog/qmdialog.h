@@ -29,10 +29,10 @@ public:
     explicit QMDialog(QWidget *parent = nullptr);
 
     /// Will be called from closeEvent.
-    virtual void saveSettings() {};
+    virtual void saveSettings() = 0;
 
     /// Will be called from constructor.
-    virtual void loadSettings() {};
+    virtual void loadSettings() = 0;
 
     /// Accept from button box.
     virtual void accept() override;

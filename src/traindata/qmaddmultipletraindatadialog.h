@@ -43,6 +43,12 @@ public:
     /// Destructor
     ~QMAddMultipleTrainDataDialog() override;
 
+    /// Override from QMDialog
+    void loadSettings() override {};
+
+    // Override from QMDialog
+    void saveSettings() override {};
+
 public slots:
     /// Start the process of importing.
     void accept() override;

@@ -45,6 +45,12 @@ public:
     /// Destructor
     ~QMImportCsvDialog() override;
 
+    /// Override from QMDialog
+    void loadSettings() override {};
+
+    /// Override from QMDialog
+    void saveSettings() override {};
+
 public slots:
     /// Open the certificate path from a open dialog window.
     void openImportFile();

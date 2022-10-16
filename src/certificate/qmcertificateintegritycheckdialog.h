@@ -43,6 +43,9 @@ public:
     /// Override from QMDialog.
     void saveSettings() override;
 
+    /// Override from QMDialog
+    void loadSettings() override {};
+
     /// Accept dialog: Run check!
     void accept() override;
 

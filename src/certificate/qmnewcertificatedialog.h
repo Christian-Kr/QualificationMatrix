@@ -50,6 +50,9 @@ public:
     /// Override from QMDialog.
     void saveSettings() override;
 
+    /// Override from QMDialog
+    void loadSettings() override;
+
 public slots:
     /// Open certificate path file.
     [[maybe_unused]] void openCertificatePath();

@@ -483,7 +483,7 @@ void QMMainWindow::saveSettings()
 
 [[maybe_unused]] void QMMainWindow::addCertificate()
 {
-    // If do not have the permission, make a lot of stuff disabled.
+    // exit if no permission for current user
     auto amsManager = QMAMSManager::getInstance();
     if (!amsManager->checkPermission(AccessMode::TD_MODE_WRITE) &&
         !amsManager->checkPermission(AccessMode::TD_MODE_READ))
@@ -505,11 +505,13 @@ void QMMainWindow::saveSettings()
     connect(m_newCertificateDialog.get(), &QMNewCertificateDialog::finished, this,
             &QMMainWindow::addCertificateFinished);
 
+    m_newCertificateDialog->loadSettings();
     m_newCertificateDialog->open();
 }
 
 [[maybe_unused]] void QMMainWindow::addCertificateFinished(int)
 {
+    m_newCertificateDialog->saveSettings();
     m_newCertificateDialog.reset();
 }
 

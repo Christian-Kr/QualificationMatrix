@@ -17,10 +17,7 @@
 
 QMDialog::QMDialog(QWidget *parent)
     : QDialog(parent)
-{
-    /// Be sure only settings will be called, that are available during this state.
-    loadSettings();
-}
+{}
 
 void QMDialog::closeEvent(QCloseEvent *event)
 {

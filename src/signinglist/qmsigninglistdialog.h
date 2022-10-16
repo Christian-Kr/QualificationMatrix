@@ -78,6 +78,9 @@ public:
     /// Override from QMDialog.
     void saveSettings() override;
 
+    /// Override from QMDialog
+    void loadSettings() override {};
+
 public slots:
     /// Update data (models).
     void updateData();
