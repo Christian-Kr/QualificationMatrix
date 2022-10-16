@@ -139,23 +139,23 @@ void QMNewCertificateDialog::updateData()
 
     auto db = QSqlDatabase::database("default");
 
-    trainViewModel = std::make_unique<QMTrainingViewModel>(this, db);
-    trainViewModel->select();
+    m_trainViewModel = std::make_unique<QMTrainingViewModel>(this, db);
+    m_trainViewModel->select();
 
-    employeeViewModel = std::make_unique<QMEmployeeViewModel>(this, db);
-    employeeViewModel->select();
+    m_employeeViewModel = std::make_unique<QMEmployeeViewModel>(this, db);
+    m_employeeViewModel->select();
 
-    employeeGroupViewModel = std::make_unique<QMShiftViewModel>(this, db);
-    employeeGroupViewModel->select();
+    m_employeeGroupViewModel = std::make_unique<QMShiftViewModel>(this, db);
+    m_employeeGroupViewModel->select();
 
     // Set data to ui elements.
-    m_ui->cbTrain->setModel(trainViewModel.get());
+    m_ui->cbTrain->setModel(m_trainViewModel.get());
     m_ui->cbTrain->setModelColumn(1);
 
-    m_ui->cbEmployee->setModel(employeeViewModel.get());
+    m_ui->cbEmployee->setModel(m_employeeViewModel.get());
     m_ui->cbEmployee->setModelColumn(1);
 
-    m_ui->cbEmployeeGroup->setModel(employeeGroupViewModel.get());
+    m_ui->cbEmployeeGroup->setModel(m_employeeGroupViewModel.get());
     m_ui->cbEmployeeGroup->setModelColumn(1);
 }
 
@@ -211,7 +211,7 @@ void QMNewCertificateDialog::updateData()
 
 [[maybe_unused]] void QMNewCertificateDialog::addEmployees()
 {
-    m_extSelEmployeeDialog = std::make_unique<QMExtendedSelectionDialog>(this, employeeViewModel.get(), 1);
+    m_extSelEmployeeDialog = std::make_unique<QMExtendedSelectionDialog>(this, m_employeeViewModel.get(), 1);
     connect(m_extSelEmployeeDialog.get(), &QMExtendedSelectionDialog::finished, this,
             &QMNewCertificateDialog::extSelEmployeeFinished);
     m_extSelEmployeeDialog->open();
@@ -230,8 +230,8 @@ void QMNewCertificateDialog::updateData()
         return;
     }
 
-    auto employeeIdField = employeeViewModel->fieldIndex("id");
-    auto employeeNameField = employeeViewModel->fieldIndex("name");
+    auto employeeIdField = m_employeeViewModel->fieldIndex("id");
+    auto employeeNameField = m_employeeViewModel->fieldIndex("name");
 
     // Add the selected employees to the data.
     for (const QModelIndex &modelIndex : modelIndexList)
@@ -239,10 +239,10 @@ void QMNewCertificateDialog::updateData()
         QMEmployeeDateEntry employeeEntry;
 
         // Get the name of the employee and the id of the employee.
-        auto employeeId = employeeViewModel->data(
-                employeeViewModel->index(modelIndex.row(), employeeIdField)).toInt();
-        auto employeeName = employeeViewModel->data(
-                employeeViewModel->index(modelIndex.row(), employeeNameField)).toString();
+        auto employeeId = m_employeeViewModel->data(
+                m_employeeViewModel->index(modelIndex.row(), employeeIdField)).toInt();
+        auto employeeName = m_employeeViewModel->data(
+                m_employeeViewModel->index(modelIndex.row(), employeeNameField)).toString();
 
         employeeEntry.employeeId = employeeId;
         employeeEntry.employeeName = employeeName;

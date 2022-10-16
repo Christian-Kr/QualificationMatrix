@@ -121,9 +121,9 @@ private:
     std::unique_ptr<QSqlTableModel> m_certificateModel;
     std::unique_ptr<QMExtendedSelectionDialog> m_extSelEmployeeDialog;
     std::unique_ptr<QMEmployeeDateModel> m_employeeDateModel;
-    std::unique_ptr<QSqlTableModel> trainViewModel;
-    std::unique_ptr<QSqlTableModel> employeeViewModel;
-    std::unique_ptr<QSqlTableModel> employeeGroupViewModel;
+    std::unique_ptr<QSqlTableModel> m_trainViewModel;
+    std::unique_ptr<QSqlTableModel> m_employeeViewModel;
+    std::unique_ptr<QSqlTableModel> m_employeeGroupViewModel;
 };
 
 #endif // QMNEWCERTIFICATEDIALOG_H
