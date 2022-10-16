@@ -505,7 +505,6 @@ void QMMainWindow::saveSettings()
     connect(m_newCertificateDialog.get(), &QMNewCertificateDialog::finished, this,
             &QMMainWindow::addCertificateFinished);
 
-    m_newCertificateDialog->updateData();
     m_newCertificateDialog->open();
 }
 

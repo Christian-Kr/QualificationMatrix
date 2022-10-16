@@ -33,15 +33,33 @@
 QMNewCertificateDialog::QMNewCertificateDialog(const QSqlDatabase &db, QWidget *parent)
     : QMDialog(parent)
     , m_employeeDateModel(std::make_unique<QMEmployeeDateModel>(this))
+    , m_trainViewModel(std::make_unique<QMTrainingViewModel>(this, db))
+    , m_employeeViewModel(std::make_unique<QMEmployeeViewModel>(this, db))
+    , m_employeeGroupViewModel(std::make_unique<QMShiftViewModel>(this, db))
 {
     m_ui = new Ui::QMNewCertificateDialog;
     m_ui->setupUi(this);
 
-    // Table data for employee/date entries.
+    // select data from models
+    m_trainViewModel->select();
+    m_employeeViewModel->select();
+    m_employeeGroupViewModel->select();
+
+    // set model to ui elements
+    m_ui->cbTrain->setModel(m_trainViewModel.get());
+    m_ui->cbTrain->setModelColumn(1);
+
+    m_ui->cbEmployee->setModel(m_employeeViewModel.get());
+    m_ui->cbEmployee->setModelColumn(1);
+
+    m_ui->cbEmployeeGroup->setModel(m_employeeGroupViewModel.get());
+    m_ui->cbEmployeeGroup->setModelColumn(1);
+
     m_ui->tvEmployeeDateData->setModel(m_employeeDateModel.get());
+
+    // set employee date data table ui
     m_ui->tvEmployeeDateData->horizontalHeader()->setMinimumSectionSize(100);
     m_ui->tvEmployeeDateData->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-
     m_ui->tvEmployeeDateData->setItemDelegateForColumn(1, new DateDelegate());
 }
 
@@ -127,36 +145,6 @@ void QMNewCertificateDialog::saveSettings()
     // Window settings.
     settings.write("NewCertificateDialog/Width", width());
     settings.write("NewCertificateDialog/Height", height());
-}
-
-void QMNewCertificateDialog::updateData()
-{
-    // Get the current database and update data only when it is connected.
-    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
-    {
-        return;
-    }
-
-    auto db = QSqlDatabase::database("default");
-
-    m_trainViewModel = std::make_unique<QMTrainingViewModel>(this, db);
-    m_trainViewModel->select();
-
-    m_employeeViewModel = std::make_unique<QMEmployeeViewModel>(this, db);
-    m_employeeViewModel->select();
-
-    m_employeeGroupViewModel = std::make_unique<QMShiftViewModel>(this, db);
-    m_employeeGroupViewModel->select();
-
-    // Set data to ui elements.
-    m_ui->cbTrain->setModel(m_trainViewModel.get());
-    m_ui->cbTrain->setModelColumn(1);
-
-    m_ui->cbEmployee->setModel(m_employeeViewModel.get());
-    m_ui->cbEmployee->setModelColumn(1);
-
-    m_ui->cbEmployeeGroup->setModel(m_employeeGroupViewModel.get());
-    m_ui->cbEmployeeGroup->setModelColumn(1);
 }
 
 [[maybe_unused]] void QMNewCertificateDialog::openCertificatePath()
