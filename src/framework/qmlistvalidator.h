@@ -18,6 +18,8 @@
 
 #include <memory>
 
+class QAbstractTableModel;
+
 /// Custom validator against a list of entries.
 /// \author Christian Kr, Copyright 2022
 class QMListValidator : public QValidator
@@ -27,8 +29,19 @@ class QMListValidator : public QValidator
 public:
     /// Constructor
     /// \param list validation list
-    /// \param parent parent object
+    /// \param parent the parent object
     explicit QMListValidator(const QStringList &list, QObject *parent = nullptr);
+
+    /// Contructor with model
+    /// \param model the model to get the list from
+    /// \param column the column number of the model to use
+    /// \param parent the parent object
+    explicit QMListValidator(const QAbstractTableModel &model, int column, QObject *parent = nullptr);
+
+    /// Override from QValidator. Changing input and position will change the values for validated input field.
+    /// \param input text string to validate
+    /// \param pos position where the current cursor is
+    QValidator::State validate(QString &input, int &pos) const override;
 
 private:
     std::unique_ptr<QStringList> m_list;

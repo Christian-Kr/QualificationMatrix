@@ -26,6 +26,11 @@ public:
     /// Constructor
     /// \param parent
     explicit QMComboBox(QWidget *parent = nullptr);
+
+protected:
+    /// Override from QComboBox
+    /// \param e the focus event
+    void focusOutEvent(QFocusEvent *e) override;
 };
 
 #endif // QMCOMBOBOX_H

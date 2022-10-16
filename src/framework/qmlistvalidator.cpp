@@ -13,6 +13,7 @@
 
 #include "framework/qmlistvalidator.h"
 
+#include <QAbstractTableModel>
 #include <QStringList>
 
 QMListValidator::QMListValidator(const QStringList &list, QObject *parent)
@@ -20,4 +21,29 @@ QMListValidator::QMListValidator(const QStringList &list, QObject *parent)
     , m_list(std::make_unique<QStringList>())
 {
     m_list->append(list);
+}
+
+QMListValidator::QMListValidator(const QAbstractTableModel &model, int column, QObject *parent)
+    : QValidator(parent)
+    , m_list(std::make_unique<QStringList>())
+{
+    Q_ASSERT(column > -1 && column < model.columnCount());
+
+    for (auto i = 0; i < model.rowCount(); i++)
+    {
+        m_list->append(model.data(model.index(i, column), Qt::DisplayRole).toString());
+    }
+}
+
+
+QValidator::State QMListValidator::validate(QString &input, int &pos) const
+{
+    for (const QString &item : *m_list)
+    {
+        if (item.startsWith(input))
+        {
+            return QValidator::State::Acceptable;
+        }
+    }
+    return QValidator::State::Invalid;
 }
