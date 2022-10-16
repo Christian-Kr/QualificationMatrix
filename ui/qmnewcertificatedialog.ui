@@ -126,7 +126,7 @@
         </widget>
        </item>
        <item row="1" column="0" colspan="2">
-        <widget class="QComboBox" name="cbTrain">
+        <widget class="QMComboBox" name="cbTrain">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -302,6 +302,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QMComboBox</class>
+   <extends>QComboBox</extends>
+   <header location="global">framework/component/qmcombobox.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../rcs/icons.qrc"/>
  </resources>
@@ -441,5 +448,6 @@
   <slot>appendToTrainDataChanged(int)</slot>
   <slot>addEmployees()</slot>
   <slot>removeEmployees()</slot>
+  <slot>validateTraining()</slot>
  </slots>
 </ui>

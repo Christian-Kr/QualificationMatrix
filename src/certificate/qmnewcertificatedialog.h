@@ -80,6 +80,9 @@ public slots:
     /// Add a new certificate.
     [[maybe_unused]] void addCertificate();
 
+    /// Validate the training input field.
+    [[maybe_unused]] void validateTraining();
+
 private:
     /// Save the given file external: Copy to file system structure.
     /// \param file File to save external.
