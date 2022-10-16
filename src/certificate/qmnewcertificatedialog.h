@@ -50,26 +50,6 @@ public:
     /// Override from QMDialog.
     void saveSettings() override;
 
-    /// Get employee
-    /// \return Name of the employee
-    QString getEmployee() { return m_employee; }
-
-    /// Get employee group
-    /// \return Name of the employee group
-    QString getEmployeeGroup() { return m_employeeGroup; }
-
-    /// Get training
-    /// \return Name of the training
-    QString getTrain() { return m_train; }
-
-    /// Get train date
-    /// \return Name of the training date
-    QString getTrainDate() { return m_trainDate; }
-
-    /// Get cert path
-    /// \return Path of the certification path
-    QString getCertPath() { return m_certPath; }
-
 public slots:
     /// Open certificate path file.
     [[maybe_unused]] void openCertificatePath();

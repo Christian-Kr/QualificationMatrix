@@ -98,11 +98,6 @@ public slots:
     void setNameFilter(QString filter);
 
 private:
-    /// Save the given file external: Copy to file system structure.
-    /// \param file File to save external.
-    /// \return New file name if success, else empty string.
-    QString saveFileExternal(QFile &file);
-
     Ui::QMCertificateDialog *ui;
 
     Mode mode;
