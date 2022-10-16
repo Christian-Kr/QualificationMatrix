@@ -49,23 +49,23 @@ public:
 
     /// Get employee
     /// \return Name of the employee
-    QString getEmployee() { return employee; }
+    QString getEmployee() { return m_employee; }
 
     /// Get employee group
     /// \return Name of the employee group
-    QString getEmployeeGroup() { return employeeGroup; }
+    QString getEmployeeGroup() { return m_employeeGroup; }
 
     /// Get training
     /// \return Name of the training
-    QString getTrain() { return train; }
+    QString getTrain() { return m_train; }
 
     /// Get train date
     /// \return Name of the training date
-    QString getTrainDate() { return trainDate; }
+    QString getTrainDate() { return m_trainDate; }
 
     /// Get cert path
     /// \return Path of the certification path
-    QString getCertPath() { return certPath; }
+    QString getCertPath() { return m_certPath; }
 
     /// Update database data data.
     void updateData();
@@ -99,13 +99,13 @@ private:
     /// \return True if ok, else false.
     bool checkInputData();
 
-    Ui::QMNewCertificateDialog *ui;
+    Ui::QMNewCertificateDialog *m_ui;
 
-    QString employeeGroup;
-    QString employee;
-    QString train;
-    QString trainDate;
-    QString certPath;
+    QString m_employeeGroup;
+    QString m_employee;
+    QString m_train;
+    QString m_trainDate;
+    QString m_certPath;
 
     std::unique_ptr<QMExtendedSelectionDialog> m_extSelEmployeeDialog;
     std::unique_ptr<QMEmployeeDateModel> m_employeeDateModel;

@@ -33,20 +33,20 @@ QMNewCertificateDialog::QMNewCertificateDialog(QWidget *parent)
     : QMDialog(parent)
     , m_employeeDateModel(std::make_unique<QMEmployeeDateModel>(this))
 {
-    ui = new Ui::QMNewCertificateDialog;
-    ui->setupUi(this);
+    m_ui = new Ui::QMNewCertificateDialog;
+    m_ui->setupUi(this);
 
     // Table data for employee/date entries.
-    ui->tvEmployeeDateData->setModel(m_employeeDateModel.get());
-    ui->tvEmployeeDateData->horizontalHeader()->setMinimumSectionSize(100);
-    ui->tvEmployeeDateData->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    m_ui->tvEmployeeDateData->setModel(m_employeeDateModel.get());
+    m_ui->tvEmployeeDateData->horizontalHeader()->setMinimumSectionSize(100);
+    m_ui->tvEmployeeDateData->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
-    ui->tvEmployeeDateData->setItemDelegateForColumn(1, new DateDelegate());
+    m_ui->tvEmployeeDateData->setItemDelegateForColumn(1, new DateDelegate());
 }
 
 QMNewCertificateDialog::~QMNewCertificateDialog()
 {
-    delete ui;
+    delete m_ui;
 }
 
 void QMNewCertificateDialog::accept()
@@ -62,7 +62,7 @@ void QMNewCertificateDialog::accept()
 bool QMNewCertificateDialog::checkInputData()
 {
     // Training name
-    if (ui->cbTrain->findText(ui->cbTrain->currentText()) == -1)
+    if (m_ui->cbTrain->findText(m_ui->cbTrain->currentText()) == -1)
     {
         QMessageBox::information(
                 this, tr("Nachweis hinzufügen"), tr("Die eingetragene Schulung existiert nicht."));
@@ -70,13 +70,13 @@ bool QMNewCertificateDialog::checkInputData()
     }
     else
     {
-        train = ui->cbTrain->currentText();
+        m_train = m_ui->cbTrain->currentText();
     }
 
     // Employee
-    if (ui->rbEmployee->isChecked())
+    if (m_ui->rbEmployee->isChecked())
     {
-        if (ui->cbEmployee->findText(ui->cbEmployee->currentText()) == -1)
+        if (m_ui->cbEmployee->findText(m_ui->cbEmployee->currentText()) == -1)
         {
             QMessageBox::information(
                     this, tr("Nachweis hinzufügen"),
@@ -85,13 +85,13 @@ bool QMNewCertificateDialog::checkInputData()
         }
         else
         {
-            employee = ui->cbEmployee->currentText();
-            employeeGroup = "";
+            m_employee = m_ui->cbEmployee->currentText();
+            m_employeeGroup = "";
         }
     }
     else
     {
-        if (ui->cbEmployeeGroup->findText(ui->cbEmployeeGroup->currentText()) == -1)
+        if (m_ui->cbEmployeeGroup->findText(m_ui->cbEmployeeGroup->currentText()) == -1)
         {
             QMessageBox::information(
                     this, tr("Nachweis hinzufügen"),
@@ -100,16 +100,16 @@ bool QMNewCertificateDialog::checkInputData()
         }
         else
         {
-            employee = "";
-            employeeGroup = ui->cbEmployeeGroup->currentText();
+            m_employee = "";
+            m_employeeGroup = m_ui->cbEmployeeGroup->currentText();
         }
     }
 
     // Datum
-    trainDate = ui->cwTrainDate->selectedDate().toString("yyyyMMdd");
+    m_trainDate = m_ui->cwTrainDate->selectedDate().toString("yyyyMMdd");
 
     // Certificate path
-    if (ui->leCertificatePath->text().isEmpty())
+    if (m_ui->leCertificatePath->text().isEmpty())
     {
         QMessageBox::information(
                 this, tr("Nachweis hinzufügen"), tr("Es wurde kein Zertifikat ausgewählt."));
@@ -148,14 +148,14 @@ void QMNewCertificateDialog::updateData()
     employeeGroupViewModel->select();
 
     // Set data to ui elements.
-    ui->cbTrain->setModel(trainViewModel.get());
-    ui->cbTrain->setModelColumn(1);
+    m_ui->cbTrain->setModel(trainViewModel.get());
+    m_ui->cbTrain->setModelColumn(1);
 
-    ui->cbEmployee->setModel(employeeViewModel.get());
-    ui->cbEmployee->setModelColumn(1);
+    m_ui->cbEmployee->setModel(employeeViewModel.get());
+    m_ui->cbEmployee->setModelColumn(1);
 
-    ui->cbEmployeeGroup->setModel(employeeGroupViewModel.get());
-    ui->cbEmployeeGroup->setModelColumn(1);
+    m_ui->cbEmployeeGroup->setModel(employeeGroupViewModel.get());
+    m_ui->cbEmployeeGroup->setModelColumn(1);
 }
 
 [[maybe_unused]] void QMNewCertificateDialog::openCertificatePath()
@@ -179,33 +179,33 @@ void QMNewCertificateDialog::updateData()
     }
 
     file.close();
-    ui->leCertificatePath->setText(fileName);
-    certPath = fileName;
+    m_ui->leCertificatePath->setText(fileName);
+    m_certPath = fileName;
 }
 
 [[maybe_unused]] void QMNewCertificateDialog::switchEmployeeSelection()
 {
-    if (ui->rbEmployee->isChecked())
+    if (m_ui->rbEmployee->isChecked())
     {
-        ui->cbEmployee->setEnabled(true);
-        ui->cbEmployeeGroup->setEnabled(false);
+        m_ui->cbEmployee->setEnabled(true);
+        m_ui->cbEmployeeGroup->setEnabled(false);
     }
     else
     {
-        ui->cbEmployee->setEnabled(false);
-        ui->cbEmployeeGroup->setEnabled(true);
+        m_ui->cbEmployee->setEnabled(false);
+        m_ui->cbEmployeeGroup->setEnabled(true);
     }
 }
 
 [[maybe_unused]] void QMNewCertificateDialog::appendToTrainDataChanged(int state)
 {
     bool checked = state == Qt::CheckState::Checked;
-    ui->cbCreateTrainData->setEnabled(checked);
-    ui->cbNoExactDate->setEnabled(checked);
-    ui->tvEmployeeDateData->setEnabled(checked);
-    ui->tbExtSelEmployee->setEnabled(checked);
-    ui->tbRemove->setEnabled(checked);
-    ui->label_4->setEnabled(checked);
+    m_ui->cbCreateTrainData->setEnabled(checked);
+    m_ui->cbNoExactDate->setEnabled(checked);
+    m_ui->tvEmployeeDateData->setEnabled(checked);
+    m_ui->tbExtSelEmployee->setEnabled(checked);
+    m_ui->tbRemove->setEnabled(checked);
+    m_ui->label_4->setEnabled(checked);
 }
 
 [[maybe_unused]] void QMNewCertificateDialog::addEmployees()
@@ -247,7 +247,7 @@ void QMNewCertificateDialog::updateData()
         employeeEntry.employeeName = employeeName;
 
         // set default date to selected for the training (this value might be different and editable by the user)
-        employeeEntry.trainDate = ui->cwTrainDate->selectedDate();
+        employeeEntry.trainDate = m_ui->cwTrainDate->selectedDate();
 
         m_employeeDateModel->addEntry(employeeEntry);
     }
@@ -255,7 +255,7 @@ void QMNewCertificateDialog::updateData()
 
 [[maybe_unused]] void QMNewCertificateDialog::removeEmployees()
 {
-    auto selectedEntries = ui->tvEmployeeDateData->selectionModel()->selectedRows();
+    auto selectedEntries = m_ui->tvEmployeeDateData->selectionModel()->selectedRows();
     if (selectedEntries.isEmpty())
     {
         return;
