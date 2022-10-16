@@ -50,6 +50,7 @@ QMNewCertificateDialog::QMNewCertificateDialog(const QSqlDatabase &db, QWidget *
     m_ui->cbTrain->setModel(m_trainViewModel.get());
     m_ui->cbTrain->setModelColumn(1);
     m_ui->cbTrain->setValidator(new QMListValidator(*m_trainViewModel, 1, this));
+    m_ui->cbTrain->setFocusOutListValidation(true);
 
     m_ui->cbEmployee->setModel(m_employeeViewModel.get());
     m_ui->cbEmployee->setModelColumn(1);

@@ -27,10 +27,21 @@ public:
     /// \param parent
     explicit QMComboBox(QWidget *parent = nullptr);
 
+    /// Get focus out validation state.
+    /// \returns true if validation on focus out is active, else false
+    [[nodiscard]] bool getFocusOutListValidation() const { return m_focusOutListValidation; }
+
+    /// Set the focus out validation state.
+    /// \param focusOutValidation true if validation on focus out should be active
+    void setFocusOutListValidation(bool focusOutListValidation) {m_focusOutListValidation = focusOutListValidation; }
+
 protected:
     /// Override from QComboBox
     /// \param e the focus event
     void focusOutEvent(QFocusEvent *e) override;
+
+private:
+    bool m_focusOutListValidation;
 };
 
 #endif // QMCOMBOBOX_H

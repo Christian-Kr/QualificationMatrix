@@ -15,33 +15,32 @@
 
 QMComboBox::QMComboBox(QWidget *parent)
     : QComboBox(parent)
+    ,m_focusOutListValidation(false)
 {}
 
 void QMComboBox::focusOutEvent(QFocusEvent *e)
 {
-    // do validation when losing focus to be sure no bad value is in combo box
-    auto index = findData(currentText(), Qt::MatchStartsWith);
+    if (m_focusOutListValidation)
+    {
+        // do validation when losing focus to be sure no bad value is in combo box
+        auto index = findData(currentText(), Qt::MatchStartsWith);
 
-    // if no element fits, try to set one
-    if (index == -1)
-    {
-        // if there is no element to select, just empty everything
-        if (count() == 0)
-        {
-            setCurrentText("");
-            setCurrentIndex(-1);
+        // if no element fits, try to set one
+        if (index == -1) {
+            // if there is no element to select, just empty everything
+            if (count() == 0) {
+                setCurrentText("");
+                setCurrentIndex(-1);
+            }
+                // if there are possible elements, select the one that fits
+            else {
+                setCurrentIndex(0);
+            }
         }
-        // if there are possible elements, select the one that fits
-        else
-        {
-            setCurrentIndex(0);
-            setCurrentText(currentText());
+            // if any element fits, this might be full or just start with
+        else {
+            setCurrentIndex(index);
         }
-    }
-    // if any element fits, this might be full or just start with
-    else
-    {
-        setCurrentIndex(index);
     }
 
     // handle in parent
