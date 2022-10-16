@@ -88,7 +88,7 @@ private:
 
     /// Check the data in the ui elements to be valid.
     /// \return True if ok, else false.
-    bool checkInputData();
+    bool validateInputData();
 
     Ui::QMNewCertificateDialog *m_ui;
 

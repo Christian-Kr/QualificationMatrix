@@ -70,7 +70,7 @@ QMNewCertificateDialog::~QMNewCertificateDialog()
 
 void QMNewCertificateDialog::accept()
 {
-    if (!checkInputData())
+    if (!validateInputData())
     {
         return;
     }
@@ -78,7 +78,7 @@ void QMNewCertificateDialog::accept()
     QMDialog::accept();
 }
 
-bool QMNewCertificateDialog::checkInputData()
+bool QMNewCertificateDialog::validateInputData()
 {
     // Training name
     if (m_ui->cbTrain->findText(m_ui->cbTrain->currentText()) == -1)
