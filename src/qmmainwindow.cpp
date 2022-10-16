@@ -60,7 +60,6 @@ QMMainWindow::QMMainWindow(QWidget *parent)
     , winMode(WIN_MODE::NONE)
     , lastWinMode(WIN_MODE::NONE)
     , m_signingListDialog(std::make_unique<QMSigningListDialog>(this))
-    , m_newCertificateDialog(std::make_unique<QMNewCertificateDialog>(this))
     , m_amsLoginDialog(std::make_unique<QMAMSLoginDialog>(this))
 {
     ui = new Ui::QMMainWindow;
@@ -92,9 +91,6 @@ QMMainWindow::QMMainWindow(QWidget *parent)
 
     // QMAMSLoginDialog
     connect(m_amsLoginDialog.get(), &QMAMSLoginDialog::finished, this, &QMMainWindow::amsLoginDialogFinished);
-
-    // QMNewCertificateDialog
-    m_newCertificateDialog->setModal(true);
 }
 
 QMMainWindow::~QMMainWindow()
@@ -496,8 +492,26 @@ void QMMainWindow::saveSettings()
         return;
     }
 
+    // proceed only when database is available and connected
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        QMessageBox::warning(this, tr("Nachweise verwalten"), tr("Datenbank nicht verbunden."));
+        return;
+    }
+
+    auto db = QSqlDatabase::database("default");
+
+    m_newCertificateDialog = std::make_unique<QMNewCertificateDialog>(db, this);
+    connect(m_newCertificateDialog.get(), &QMNewCertificateDialog::finished, this,
+            &QMMainWindow::addCertificateFinished);
+
     m_newCertificateDialog->updateData();
     m_newCertificateDialog->open();
+}
+
+[[maybe_unused]] void QMMainWindow::addCertificateFinished(int)
+{
+    m_newCertificateDialog.reset();
 }
 
 [[maybe_unused]] void QMMainWindow::manageCertificate()

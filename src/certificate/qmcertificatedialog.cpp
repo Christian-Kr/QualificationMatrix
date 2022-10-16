@@ -178,7 +178,16 @@ void QMCertificateDialog::addCertificate()
     auto width = settings.read("NewCertificateDialog/Width", 400).toInt();
     auto height = settings.read("NewCertificateDialog/Height", 600).toInt();
 
-    QMNewCertificateDialog newCertDialog(this);
+    // proceed only when database is available and connected
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        QMessageBox::warning(this, tr("Nachweise verwalten"), tr("Datenbank nicht verbunden."));
+        return;
+    }
+
+    auto db = QSqlDatabase::database("default");
+
+    QMNewCertificateDialog newCertDialog(db, this);
     newCertDialog.resize(width, height);
     newCertDialog.setModal(true);
 

@@ -15,8 +15,10 @@
 #define QMNEWCERTIFICATEDIALOG_H
 
 #include "framework/dialog/qmdialog.h"
+
 #include <memory>
 
+class QSqlDatabase;
 class QMSqlTableModel;
 class QSqlRelationalTableModel;
 class QSqlTableModel;
@@ -39,7 +41,7 @@ Q_OBJECT
 public:
     /// Constructor
     /// \param mode The ode of the dialog to choose.
-    explicit QMNewCertificateDialog(QWidget *parent = nullptr);
+    explicit QMNewCertificateDialog(const QSqlDatabase &db, QWidget *parent = nullptr);
 
     /// Destructor
     ~QMNewCertificateDialog() override;

@@ -29,7 +29,7 @@
 #include <QKeyEvent>
 #include <QTemporaryFile>
 
-QMNewCertificateDialog::QMNewCertificateDialog(QWidget *parent)
+QMNewCertificateDialog::QMNewCertificateDialog(const QSqlDatabase &db, QWidget *parent)
     : QMDialog(parent)
     , m_employeeDateModel(std::make_unique<QMEmployeeDateModel>(this))
 {

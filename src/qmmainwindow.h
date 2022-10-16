@@ -155,6 +155,9 @@ public slots:
     /// Add a new certificate.
     [[maybe_unused]] void addCertificate();
 
+    /// Dialog has been closed.
+    [[maybe_unused]] void addCertificateFinished(int);
+
 protected:
     /// Override from QMainWindow. This function will be called on closeing the widget.
     /// \param event The close event object that will be created.
