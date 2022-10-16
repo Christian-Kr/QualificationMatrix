@@ -21,6 +21,7 @@
 #include "framework/delegate/qmdatedelegate.h"
 #include "framework/dialog/qmextendedselectiondialog.h"
 #include "qmemployeedateentry.h"
+#include "data/qmdatamanager.h"
 
 #include <QSortFilterProxyModel>
 #include <QFileDialog>
@@ -265,4 +266,141 @@ void QMNewCertificateDialog::updateData()
     {
         m_employeeDateModel->removeEntry(modelIndex.row());
     }
+}
+
+[[maybe_unused]] void QMNewCertificateDialog::addCertificate()
+{
+    // open the certificate file
+    QFile file(m_certPath);
+    file.open(QIODevice::ReadOnly);
+
+    if (!file.isReadable() || !file.exists())
+    {
+        qWarning() << "certificate file does not exist or is not readable" << m_certPath;
+        return;
+    }
+
+    // create the hash value as an md5 sum
+    auto hash = QString(QCryptographicHash::hash(file.readAll(), QCryptographicHash::Md5).toHex());
+    file.seek(0);
+
+    // create the new data entry
+    auto rowIndex = m_certificateModel->rowCount();
+    QFileInfo fileInfo(file.fileName());
+
+    m_certificateModel->insertRow(m_certificateModel->rowCount());
+
+    // Create the name and set it.
+    QString name = m_train + "_" + m_employee + m_employeeGroup + "_" + m_trainDate;
+    m_certificateModel->setData(m_certificateModel->index(rowIndex, 1), name);
+    m_certificateModel->setData(m_certificateModel->index(rowIndex, 2), fileInfo.completeSuffix());
+    m_certificateModel->setData(m_certificateModel->index(rowIndex, 5), hash);
+    m_certificateModel->setData(m_certificateModel->index(rowIndex, 6), QDate::currentDate().toString("yyyyMMdd"));
+    m_certificateModel->setData(m_certificateModel->index(rowIndex, 7), m_trainDate);
+
+    // Handle related to extern/internal. Internal files will be saved directly into the database with a blob. External
+    // files will be saved on the file system and a path to that file will be saved into the database.
+    // TODO: Make Modes switchable.
+    auto dm = QMDataManager::getInstance();
+
+    if (dm->getCertificateLocation() == CertLoc::EXTERNAL)
+    {
+        auto certificateFileName = saveFileExternal(file);
+
+        if (certificateFileName.isEmpty())
+        {
+            QMessageBox::warning(this, tr("Nachweis hinzufügen"), tr("Der Nachweis konnte nicht hinzugefügt werden."));
+            m_certificateModel->revertRow(rowIndex);
+            return;
+        }
+
+        m_certificateModel->setData(m_certificateModel->index(rowIndex, 3), certificateFileName);
+
+        if (!m_certificateModel->submitAll())
+        {
+            QMessageBox::warning(this, tr("Nachweis hinzufügen"),
+                                 tr("Der Nachweis konnte hinzugefügt aber die Tabelle nicht aktualisiert werden. "
+                                    "Die Datei und der Eintrag werden wieder entfernt."));
+            m_certificateModel->revertAll();
+            QFile::remove(certificateFileName);
+        }
+    }
+    else
+    {
+        auto blob = file.readAll();
+        file.seek(0);
+
+        if (blob.isEmpty())
+        {
+            QMessageBox::warning(this, tr("Nachweis hinzufügen"),
+                                 tr("Der Nachweis konnte nicht hinzugefügt werden. Bitte informieren Sie den Entwickler."));
+            m_certificateModel->revertRow(rowIndex);
+            return;
+        }
+
+        m_certificateModel->setData(m_certificateModel->index(rowIndex, 4), blob);
+        if (!m_certificateModel->submitAll())
+        {
+            QMessageBox::warning(this, tr("Nachweis hinzufügen"),
+                                 tr("Der Nachweis konnte hinzugefügt aber die Tabelle nicht aktualisiert werden. "
+                                    "Die Datei und der Eintrag werden wieder entfernt."));
+            m_certificateModel->revertAll();
+        }
+    }
+}
+
+QString QMNewCertificateDialog::saveFileExternal(QFile &file)
+{
+    // for the files placeds in direct vicinity to the database, relative path begins at the database location
+    auto db = QSqlDatabase::database("default", false);
+    auto dbPath = QFileInfo(db.databaseName()).absolutePath();
+    auto certPath = dbPath + QDir::separator() + "certificates";
+
+    // create the certificate path if it does not exist
+    if (!QDir(certPath).exists())
+    {
+        if (!QDir(certPath).mkpath(certPath))
+        {
+            qWarning() << "cannot create path" << certPath;
+            return {};
+        }
+    }
+
+    // structure for a certificate file
+    // certificates/<current year>/<current month>/<current day>/<filename>
+    auto insidePath = QDate::currentDate().toString(Qt::ISODate).replace("-", QDir::separator());
+    auto fullPath = certPath + QDir::separator() + insidePath;
+
+    if (!QDir(fullPath).exists())
+    {
+        if (!QDir(fullPath).mkpath(fullPath))
+        {
+            qWarning() << "cannot create path" << fullPath;
+            return {};
+        }
+    }
+
+    auto certFileInfo = QFileInfo(file.fileName());
+    auto hash = QString(QCryptographicHash::hash(file.readAll(), QCryptographicHash::Md5).toHex());
+    auto fullFileName = fullPath + QDir::separator() + hash + "." + certFileInfo.completeSuffix();
+
+    file.seek(0);
+
+    if (QDir(fullFileName).exists())
+    {
+        QMessageBox::critical(this, tr("Nachweis hinzufügen"),
+                tr("Es existiert bereits eine Datei mit dem Namen. Der gleiche Nachweis kann pro Tag nur einmal "
+                   "hinzugefügt werden."), QMessageBox::Button::Ok);
+        qWarning() << "file does already exist" << fullFileName;
+        return {};
+    }
+
+    // copy file to target
+    if (!file.copy(fullFileName))
+    {
+        qWarning() << "cannot copy file to" << fullFileName;
+        return {};
+    }
+
+    return fullFileName;
 }

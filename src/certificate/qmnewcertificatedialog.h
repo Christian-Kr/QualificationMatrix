@@ -18,6 +18,7 @@
 
 #include <memory>
 
+class QFile;
 class QSqlDatabase;
 class QMSqlTableModel;
 class QSqlRelationalTableModel;
@@ -96,7 +97,15 @@ public slots:
     /// \param result The result id the dialog has been closed with.
     [[maybe_unused]] void extSelEmployeeFinished(int result);
 
+    /// Add a new certificate.
+    [[maybe_unused]] void addCertificate();
+
 private:
+    /// Save the given file external: Copy to file system structure.
+    /// \param file File to save external.
+    /// \return New file name if success, else empty string.
+    QString saveFileExternal(QFile &file);
+
     /// Check the data in the ui elements to be valid.
     /// \return True if ok, else false.
     bool checkInputData();
@@ -109,6 +118,7 @@ private:
     QString m_trainDate;
     QString m_certPath;
 
+    std::unique_ptr<QSqlTableModel> m_certificateModel;
     std::unique_ptr<QMExtendedSelectionDialog> m_extSelEmployeeDialog;
     std::unique_ptr<QMEmployeeDateModel> m_employeeDateModel;
     std::unique_ptr<QSqlTableModel> trainViewModel;
