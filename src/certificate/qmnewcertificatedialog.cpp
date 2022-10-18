@@ -145,13 +145,10 @@ void QMNewCertificateDialog::saveSettings()
     // window settings.
     settings.write("NewCertificateDialog/Width", width());
     settings.write("NewCertificateDialog/Height", height());
-
-    qDebug() << "save";
 }
 
 void QMNewCertificateDialog::loadSettings()
 {
-    qDebug() << "load";
     auto &settings = QMApplicationSettings::getInstance();
 
     // window settings
