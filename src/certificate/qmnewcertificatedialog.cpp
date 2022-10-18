@@ -77,8 +77,11 @@ QMNewCertificateDialog::~QMNewCertificateDialog()
 
 void QMNewCertificateDialog::accept()
 {
-    if (!validateInputData())
+    // validate input data, to be sure everything has been filled with valid information to add the certificate
+    QString errorMessage;
+    if (!validateInputData(errorMessage))
     {
+        QMessageBox::information(this, tr("Nachweis hinzufügen"), errorMessage);
         return;
     }
 
@@ -93,30 +96,21 @@ void QMNewCertificateDialog::validateTraining()
     }
 }
 
-bool QMNewCertificateDialog::validateInputData()
+bool QMNewCertificateDialog::validateInputData(QString &errorMessage)
 {
     // search for training name
-    qDebug() << m_ui->cbTrain->currentIndex();
-    return false;
     if (m_ui->cbTrain->findText(m_ui->cbTrain->currentText()) == -1)
     {
-        QMessageBox::information(
-                this, tr("Nachweis hinzufügen"), tr("Die eingetragene Schulung existiert nicht."));
+        errorMessage = tr("Die Schulung existiert nicht.");
         return false;
     }
-    else
-    {
-        m_train = m_ui->cbTrain->currentText();
-    }
 
-    // Employee
+    // search for employee
     if (m_ui->rbEmployee->isChecked())
     {
         if (m_ui->cbEmployee->findText(m_ui->cbEmployee->currentText()) == -1)
         {
-            QMessageBox::information(
-                    this, tr("Nachweis hinzufügen"),
-                    tr("Der eingetragene Mitarbeiter existiert nicht."));
+            errorMessage = tr("Der Mitarbeiter existiert nicht.");
             return false;
         }
         else
@@ -129,9 +123,7 @@ bool QMNewCertificateDialog::validateInputData()
     {
         if (m_ui->cbEmployeeGroup->findText(m_ui->cbEmployeeGroup->currentText()) == -1)
         {
-            QMessageBox::information(
-                    this, tr("Nachweis hinzufügen"),
-                    tr("Die eingetragene Mitarbeitergruppe existiert nicht."));
+            errorMessage = tr("Die Mitarbeitergruppe existiert nicht.");
             return false;
         }
         else
@@ -141,14 +133,13 @@ bool QMNewCertificateDialog::validateInputData()
         }
     }
 
-    // Datum
+    // date
     m_trainDate = m_ui->cwTrainDate->selectedDate().toString("yyyyMMdd");
 
-    // Certificate path
+    // proof the certificate path - just whether it is empty or not
     if (m_ui->leCertificatePath->text().isEmpty())
     {
-        QMessageBox::information(
-                this, tr("Nachweis hinzufügen"), tr("Es wurde kein Zertifikat ausgewählt."));
+        errorMessage = tr("Keine Nacheisdatei angegeben.");
         return false;
     }
 

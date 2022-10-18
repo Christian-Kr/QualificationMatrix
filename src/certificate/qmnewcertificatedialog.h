@@ -90,8 +90,9 @@ private:
     QString saveFileExternal(QFile &file);
 
     /// Check the data in the ui elements to be valid.
-    /// \return True if ok, else false.
-    bool validateInputData();
+    /// \param errorMessage the error message if the validation failed and the return value is false
+    /// \returns true if input fields have valid data, else false
+    bool validateInputData(QString &errorMessage);
 
     Ui::QMNewCertificateDialog *m_ui;
 
