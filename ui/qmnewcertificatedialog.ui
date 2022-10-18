@@ -45,7 +45,7 @@
         </widget>
        </item>
        <item row="3" column="0" colspan="2">
-        <widget class="QComboBox" name="cbEmployeeGroup">
+        <widget class="QMComboBox" name="cbEmployeeGroup">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -77,7 +77,7 @@
         </widget>
        </item>
        <item row="5" column="0" colspan="2">
-        <widget class="QComboBox" name="cbEmployee">
+        <widget class="QMComboBox" name="cbEmployee">
          <property name="enabled">
           <bool>false</bool>
          </property>

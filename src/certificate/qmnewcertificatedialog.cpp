@@ -54,9 +54,13 @@ QMNewCertificateDialog::QMNewCertificateDialog(const QSqlDatabase &db, QWidget *
 
     m_ui->cbEmployee->setModel(m_employeeViewModel.get());
     m_ui->cbEmployee->setModelColumn(1);
+    m_ui->cbEmployee->setValidator(new QMListValidator(*m_employeeViewModel, 1, this));
+    m_ui->cbEmployee->setFocusOutListValidation(true);
 
     m_ui->cbEmployeeGroup->setModel(m_employeeGroupViewModel.get());
     m_ui->cbEmployeeGroup->setModelColumn(1);
+    m_ui->cbEmployeeGroup->setValidator(new QMListValidator(*m_employeeGroupViewModel, 1, this));
+    m_ui->cbEmployeeGroup->setFocusOutListValidation(true);
 
     m_ui->tvEmployeeDateData->setModel(m_employeeDateModel.get());
 
