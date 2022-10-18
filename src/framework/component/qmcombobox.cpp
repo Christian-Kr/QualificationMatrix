@@ -15,7 +15,7 @@
 
 QMComboBox::QMComboBox(QWidget *parent)
     : QComboBox(parent)
-    ,m_focusOutListValidation(false)
+    , m_focusOutListValidation(false)
 {}
 
 void QMComboBox::focusOutEvent(QFocusEvent *e)
