@@ -88,14 +88,6 @@ void QMNewCertificateDialog::accept()
     QMDialog::accept();
 }
 
-void QMNewCertificateDialog::validateTraining()
-{
-    if (m_ui->cbTrain->findText(m_ui->cbTrain->currentText()) == -1)
-    {
-        m_ui->cbTrain->setCurrentIndex(m_ui->cbTrain->currentIndex());
-    }
-}
-
 bool QMNewCertificateDialog::validateInputData(QString &errorMessage)
 {
     // search for training name
