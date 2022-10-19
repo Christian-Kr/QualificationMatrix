@@ -78,7 +78,11 @@ public slots:
     [[maybe_unused]] void extSelEmployeeFinished(int result);
 
     /// Add a new certificate.
-    [[maybe_unused]] void addCertificate();
+    /// \returns true if successfull, else false
+    [[maybe_unused]] bool addCertificate();
+
+    /// Add the certificate to training data entries or create them.
+    [[maybe_unused]] void addCertificateTrainingDataEntries();
 
 private:
     /// Save the given file external: Copy to file system structure.

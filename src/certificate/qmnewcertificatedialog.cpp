@@ -86,9 +86,26 @@ void QMNewCertificateDialog::accept()
     }
 
     // add the certificate
-    addCertificate();
+    if (!addCertificate())
+    {
+        return;
+    }
+
+    // add certificate to training data entries, or create them is necessary and wanted
+    addCertificateTrainingDataEntries();
 
     QMDialog::accept();
+}
+
+void QMNewCertificateDialog::addCertificateTrainingDataEntries()
+{
+    // should certificate be added?
+    if (!m_ui->cbAppendToTrainData->isChecked())
+    {
+        return;
+    }
+
+
 }
 
 bool QMNewCertificateDialog::validateInputData(QString &errorMessage)
@@ -269,7 +286,7 @@ void QMNewCertificateDialog::loadSettings()
     }
 }
 
-[[maybe_unused]] void QMNewCertificateDialog::addCertificate()
+[[maybe_unused]] bool QMNewCertificateDialog::addCertificate()
 {
     // open the certificate file
     QFile file(m_certPath);
@@ -278,7 +295,7 @@ void QMNewCertificateDialog::loadSettings()
     if (!file.isReadable() || !file.exists())
     {
         qWarning() << "certificate file does not exist or is not readable" << m_certPath;
-        return;
+        return false;
     }
 
     // create the hash value as an md5 sum
@@ -312,7 +329,7 @@ void QMNewCertificateDialog::loadSettings()
         {
             QMessageBox::warning(this, tr("Nachweis hinzufügen"), tr("Der Nachweis konnte nicht hinzugefügt werden."));
             m_certificateModel->revertRow(rowIndex);
-            return;
+            return false;
         }
 
         m_certificateModel->setData(m_certificateModel->index(rowIndex, 3), certificateFileName);
@@ -336,7 +353,7 @@ void QMNewCertificateDialog::loadSettings()
             QMessageBox::warning(this, tr("Nachweis hinzufügen"),
                     tr("Der Nachweis konnte nicht hinzugefügt werden. Bitte informieren Sie den Entwickler."));
             m_certificateModel->revertRow(rowIndex);
-            return;
+            return false;
         }
 
         m_certificateModel->setData(m_certificateModel->index(rowIndex, 4), blob);
@@ -348,6 +365,8 @@ void QMNewCertificateDialog::loadSettings()
             m_certificateModel->revertAll();
         }
     }
+
+    return true;
 }
 
 QString QMNewCertificateDialog::saveFileExternal(QFile &file)
