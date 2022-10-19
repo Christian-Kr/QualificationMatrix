@@ -85,6 +85,9 @@ void QMNewCertificateDialog::accept()
         return;
     }
 
+    // add the certificate
+    addCertificate();
+
     QMDialog::accept();
 }
 
@@ -160,9 +163,8 @@ void QMNewCertificateDialog::loadSettings()
 
 [[maybe_unused]] void QMNewCertificateDialog::openCertificatePath()
 {
-    auto fileName = QFileDialog::getOpenFileName(
-        this, tr("Nachweis hinzufügen"), QDir::homePath(),
-        tr("All files (*.*);;JPEG (*.jpg *.jpeg);;PDF (*.pdf)" ));
+    auto fileName = QFileDialog::getOpenFileName(this, tr("Nachweis hinzufügen"), QDir::homePath(),
+            tr("All files (*.*);;JPEG (*.jpg *.jpeg);;PDF (*.pdf)" ));
 
     if (fileName.isEmpty())
     {
@@ -297,7 +299,7 @@ void QMNewCertificateDialog::loadSettings()
     m_certificateModel->setData(m_certificateModel->index(rowIndex, 6), QDate::currentDate().toString("yyyyMMdd"));
     m_certificateModel->setData(m_certificateModel->index(rowIndex, 7), m_trainDate);
 
-    // Handle related to extern/internal. Internal files will be saved directly into the database with a blob. External
+    // Handle related to extern/internal. Internal files will be saved directly into the database as a blob. External
     // files will be saved on the file system and a path to that file will be saved into the database.
     // TODO: Make Modes switchable.
     auto dm = QMDataManager::getInstance();
@@ -318,8 +320,8 @@ void QMNewCertificateDialog::loadSettings()
         if (!m_certificateModel->submitAll())
         {
             QMessageBox::warning(this, tr("Nachweis hinzufügen"),
-                                 tr("Der Nachweis konnte hinzugefügt aber die Tabelle nicht aktualisiert werden. "
-                                    "Die Datei und der Eintrag werden wieder entfernt."));
+                    tr("Der Nachweis konnte hinzugefügt, aber die Tabelle nicht aktualisiert werden. "
+                       "Die Datei und der Eintrag werden wieder entfernt."));
             m_certificateModel->revertAll();
             QFile::remove(certificateFileName);
         }
@@ -332,7 +334,7 @@ void QMNewCertificateDialog::loadSettings()
         if (blob.isEmpty())
         {
             QMessageBox::warning(this, tr("Nachweis hinzufügen"),
-                                 tr("Der Nachweis konnte nicht hinzugefügt werden. Bitte informieren Sie den Entwickler."));
+                    tr("Der Nachweis konnte nicht hinzugefügt werden. Bitte informieren Sie den Entwickler."));
             m_certificateModel->revertRow(rowIndex);
             return;
         }
@@ -341,8 +343,8 @@ void QMNewCertificateDialog::loadSettings()
         if (!m_certificateModel->submitAll())
         {
             QMessageBox::warning(this, tr("Nachweis hinzufügen"),
-                                 tr("Der Nachweis konnte hinzugefügt aber die Tabelle nicht aktualisiert werden. "
-                                    "Die Datei und der Eintrag werden wieder entfernt."));
+                    tr("Der Nachweis konnte hinzugefügt aber die Tabelle nicht aktualisiert werden. "
+                       "Die Datei und der Eintrag werden wieder entfernt."));
             m_certificateModel->revertAll();
         }
     }
