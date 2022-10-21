@@ -81,9 +81,6 @@ public slots:
     /// \returns true if successfull, else false
     [[maybe_unused]] bool addCertificate();
 
-    /// Add the certificate to training data entries or create them.
-    [[maybe_unused]] void addCertificateTrainingDataEntries();
-
 private:
     /// Save the given file external: Copy to file system structure.
     /// \param file File to save external.
@@ -94,6 +91,11 @@ private:
     /// \param errorMessage the error message if the validation failed and the return value is false
     /// \returns true if input fields have valid data, else false
     bool validateInputData(QString &errorMessage);
+
+    /// Add the certificate to training data entries or create them.
+    /// \param errorMessage the error message if adding the certificate failed and the return value is false
+    /// \returns false is adding certificate to training data failed, else true
+    [[maybe_unused]] bool addCertificateTrainingDataEntries(QString &errorMessage);
 
     Ui::QMNewCertificateDialog *m_ui;
 

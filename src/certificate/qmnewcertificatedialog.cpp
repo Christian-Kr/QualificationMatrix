@@ -92,20 +92,27 @@ void QMNewCertificateDialog::accept()
     }
 
     // add certificate to training data entries, or create them is necessary and wanted
-    addCertificateTrainingDataEntries();
+    if (!addCertificateTrainingDataEntries(errorMessage))
+    {
+        QMessageBox::information(this, tr("Nachweis hinzufügen"), errorMessage);
+        return;
+    }
 
     QMDialog::accept();
 }
 
-void QMNewCertificateDialog::addCertificateTrainingDataEntries()
+bool QMNewCertificateDialog::addCertificateTrainingDataEntries(QString &errorMessage)
 {
     // should certificate be added?
     if (!m_ui->cbAppendToTrainData->isChecked())
     {
-        return;
+        // this is not an error, cause the user does not want to do this action
+        return true;
     }
 
+    // TODO: Implement adding the certificate to the training data entries.
 
+    return true;
 }
 
 bool QMNewCertificateDialog::validateInputData(QString &errorMessage)
