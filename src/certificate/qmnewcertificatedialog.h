@@ -94,8 +94,9 @@ private:
 
     /// Add the certificate to training data entries or create them.
     /// \param errorMessage the error message if adding the certificate failed and the return value is false
+    /// \param certId the certification primary key to be connected to
     /// \returns false is adding certificate to training data failed, else true
-    [[maybe_unused]] bool addCertificateTrainingDataEntries(QString &errorMessage);
+    [[maybe_unused]] bool addCertificateTrainingDataEntries(QString &errorMessage, int certId);
 
     Ui::QMNewCertificateDialog *m_ui;
 

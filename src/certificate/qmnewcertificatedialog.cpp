@@ -88,28 +88,32 @@ void QMNewCertificateDialog::accept()
     }
 
     // add the certificate
-    if (!addCertificate())
+    int certId = addCertificate();
+    if (certId == -1)
     {
         return;
     }
 
-    // add certificate to training data entries, or create them is necessary and wanted
-    if (!addCertificateTrainingDataEntries(errorMessage))
+    // should certificate be added?
+    if (m_ui->cbAppendToTrainData->isChecked())
     {
-        QMessageBox::information(this, tr("Nachweis hinzufügen"), errorMessage);
-        return;
+        // add certificate to training data entries, or create them is necessary and wanted
+        if (!addCertificateTrainingDataEntries(errorMessage, certId))
+        {
+            QMessageBox::information(this, tr("Nachweis hinzufügen"), errorMessage);
+            return;
+        }
     }
 
     QMDialog::accept();
 }
 
-bool QMNewCertificateDialog::addCertificateTrainingDataEntries(QString &errorMessage)
+bool QMNewCertificateDialog::addCertificateTrainingDataEntries(QString &errorMessage, int certId)
 {
-    // should certificate be added?
-    if (!m_ui->cbAppendToTrainData->isChecked())
+    // certification id should be bigger than 0
+    if (certId < 1)
     {
-        // this is not an error, cause the user does not want to do this action
-        return true;
+        return false;
     }
 
     // TODO: Implement adding the certificate to the training data entries.
@@ -381,12 +385,7 @@ void QMNewCertificateDialog::loadSettings()
         }
     }
 
-    auto certId = m_certificateModel->data(m_certificateModel->index(rowIndex, 0)).toInt();
-    qDebug() << certId;
-
-    m_certificateModel.reset();
-
-    return certId;
+    return m_certificateModel->data(m_certificateModel->index(rowIndex, 0)).toInt();
 }
 
 QString QMNewCertificateDialog::saveFileExternal(QFile &file)
