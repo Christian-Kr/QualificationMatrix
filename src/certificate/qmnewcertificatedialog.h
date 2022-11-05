@@ -79,7 +79,7 @@ public slots:
 
     /// Add a new certificate.
     /// \returns true if successfull, else false
-    [[maybe_unused]] bool addCertificate();
+    [[maybe_unused]] int addCertificate();
 
 private:
     /// Save the given file external: Copy to file system structure.

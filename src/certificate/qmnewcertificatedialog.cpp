@@ -293,7 +293,7 @@ void QMNewCertificateDialog::loadSettings()
     }
 }
 
-[[maybe_unused]] bool QMNewCertificateDialog::addCertificate()
+[[maybe_unused]] int QMNewCertificateDialog::addCertificate()
 {
     // open the certificate file
     QFile file(m_certPath);
