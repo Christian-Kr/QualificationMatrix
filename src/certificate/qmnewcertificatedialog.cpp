@@ -17,6 +17,7 @@
 #include "data/training/qmtrainingviewmodel.h"
 #include "data/employee/qmemployeeviewmodel.h"
 #include "data/employee/qmshiftviewmodel.h"
+#include "data/certificate/qmcertificatemodel.h"
 #include "settings/qmapplicationsettings.h"
 #include "framework/delegate/qmdatedelegate.h"
 #include "framework/dialog/qmextendedselectiondialog.h"
@@ -37,6 +38,7 @@ QMNewCertificateDialog::QMNewCertificateDialog(const QSqlDatabase &db, QWidget *
     , m_trainViewModel(std::make_unique<QMTrainingViewModel>(this, db))
     , m_employeeViewModel(std::make_unique<QMEmployeeViewModel>(this, db))
     , m_employeeGroupViewModel(std::make_unique<QMShiftViewModel>(this, db))
+    , m_certificateModel(std::make_unique<QMCertificateModel>(this, db))
 {
     m_ui = new Ui::QMNewCertificateDialog;
     m_ui->setupUi(this);
@@ -310,6 +312,7 @@ void QMNewCertificateDialog::loadSettings()
     file.seek(0);
 
     // create the new data entry
+    m_certificateModel->select();
     auto rowIndex = m_certificateModel->rowCount();
     QFileInfo fileInfo(file.fileName());
 
@@ -348,6 +351,8 @@ void QMNewCertificateDialog::loadSettings()
                        "Die Datei und der Eintrag werden wieder entfernt."));
             m_certificateModel->revertAll();
             QFile::remove(certificateFileName);
+
+            return -1;
         }
     }
     else
@@ -360,7 +365,8 @@ void QMNewCertificateDialog::loadSettings()
             QMessageBox::warning(this, tr("Nachweis hinzufügen"),
                     tr("Der Nachweis konnte nicht hinzugefügt werden. Bitte informieren Sie den Entwickler."));
             m_certificateModel->revertRow(rowIndex);
-            return false;
+
+            return -1;
         }
 
         m_certificateModel->setData(m_certificateModel->index(rowIndex, 4), blob);
@@ -370,10 +376,17 @@ void QMNewCertificateDialog::loadSettings()
                     tr("Der Nachweis konnte hinzugefügt aber die Tabelle nicht aktualisiert werden. "
                        "Die Datei und der Eintrag werden wieder entfernt."));
             m_certificateModel->revertAll();
+
+            return -1;
         }
     }
 
-    return true;
+    auto certId = m_certificateModel->data(m_certificateModel->index(rowIndex, 0)).toInt();
+    qDebug() << certId;
+
+    m_certificateModel.reset();
+
+    return certId;
 }
 
 QString QMNewCertificateDialog::saveFileExternal(QFile &file)

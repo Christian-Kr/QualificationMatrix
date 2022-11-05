@@ -78,7 +78,7 @@ public slots:
     [[maybe_unused]] void extSelEmployeeFinished(int result);
 
     /// Add a new certificate.
-    /// \returns true if successfull, else false
+    /// \returns -1 if something fails, else the primary key number of the new certificate entry
     [[maybe_unused]] int addCertificate();
 
 private:
