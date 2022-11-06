@@ -54,17 +54,20 @@ public:
     /// \param parent
     /// \return
     [[nodiscard]] int rowCount(const QModelIndex &parent) const override;
+    [[nodiscard]] int rowCount() const { return rowCount(QModelIndex()); }
 
     /// Override from QAbstractTableModel.
     /// \param parent
     /// \return
     [[nodiscard]] int columnCount(const QModelIndex &parent) const override;
+    [[nodiscard]] int columnCount() const { return columnCount(QModelIndex()); }
 
     /// Override from QAbstractTableModel.
     /// \param index
     /// \param role
     /// \return
     [[nodiscard]] QVariant data(const QModelIndex &index, int role) const override;
+    [[nodiscard]] QVariant data(const QModelIndex &index) const { return data(index, Qt::DisplayRole); }
 
     /// Override from QAbstractTableModel.
     /// \param value
@@ -87,6 +90,11 @@ public:
     /// \param index The index number of the entry to remove.
     /// \return True if entry removed, else false. False might also be an index number out of range.
     bool removeEntry(int index);
+
+    /// Get an entry at the given row
+    /// \param row the row should be existing
+    /// \returns a copy of the employee date entry, or an empty object if not found
+    [[nodiscard]] QMEmployeeDateEntry getEntry(int row) const;
 
 private:
     QList<QMEmployeeDateEntry*> *m_entries;

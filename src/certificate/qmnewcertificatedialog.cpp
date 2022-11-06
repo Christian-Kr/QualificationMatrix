@@ -17,6 +17,7 @@
 #include "data/training/qmtrainingviewmodel.h"
 #include "data/employee/qmemployeeviewmodel.h"
 #include "data/employee/qmshiftviewmodel.h"
+#include "data/trainingdata/qmtrainingdatamodel.h"
 #include "data/certificate/qmcertificatemodel.h"
 #include "settings/qmapplicationsettings.h"
 #include "framework/delegate/qmdatedelegate.h"
@@ -31,6 +32,8 @@
 #include <QMessageBox>
 #include <QKeyEvent>
 #include <QTemporaryFile>
+#include <QSqlQuery>
+#include <QSqlRecord>
 
 QMNewCertificateDialog::QMNewCertificateDialog(const QSqlDatabase &db, QWidget *parent)
     : QMDialog(parent)
@@ -65,6 +68,7 @@ QMNewCertificateDialog::QMNewCertificateDialog(const QSqlDatabase &db, QWidget *
     m_ui->cbEmployeeGroup->setFocusOutListValidation(true);
 
     m_ui->tvEmployeeDateData->setModel(m_employeeDateModel.get());
+    m_ui->tvEmployeeDateData->hideColumn(0);
 
     // set employee date data table ui
     m_ui->tvEmployeeDateData->horizontalHeader()->setMinimumSectionSize(100);
@@ -117,6 +121,100 @@ bool QMNewCertificateDialog::addCertificateTrainingDataEntries(QString &errorMes
     }
 
     // TODO: Implement adding the certificate to the training data entries.
+
+    // filter by id and get the right certificate entry
+    m_certificateModel->setFilter(QString("id=%1").arg(certId));
+    auto rowIdx = m_certificateModel->rowCount() - 1;
+    if (rowIdx != 0)
+    {
+        qCritical() << "QMNewCertificateDialog: Could not find certification id=" << certId;
+        errorMessage = tr("Der gesuchte Nachweis konnte nicht gefunden werden.");
+        return false;
+    }
+
+    // get database for running a query
+    if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
+    {
+        qCritical() << "QMNewCertificateDialog: Cannot open database";
+        errorMessage = tr("Es konnte keine Verbindung zur Datenbank hergestellt werden.");
+        return false;
+    }
+
+    auto db = QSqlDatabase::database("default");
+
+    // create query template
+    QString queryTemplate =
+            "SELECT "
+            "    TrainData.id as traindata_id, "
+            "    TrainData.employee as employee_id, "
+            "    TrainData.train as train_id, "
+            "    Employee.name as employee_name, "
+            "    Train.name as train_name, "
+            "    TrainData.date as traindata_date, "
+            "    TrainData.state as traindatastate_id, "
+            "    TrainDataState.name as traindatastate_name "
+            "FROM "
+            "    Employee, TrainData, Train, TrainDataState "
+            "WHERE "
+            "    TrainDataState.id = traindatastate_id AND "
+            "    Train.id = train_id AND "
+            "    Employee.id = employee_id AND "
+            "    employee_id=%1 AND "
+            "    train_id=%2"
+            "ORDER BY"
+            "    traindata_date DESC;";
+
+    // get train information
+    auto trainIdFieldIdx = m_trainViewModel->fieldIndex("id");
+    auto trainIdIdx = m_trainViewModel->index(m_ui->cbTrain->currentIndex(), trainIdFieldIdx);
+    auto trainId = m_trainViewModel->data(trainIdIdx).toInt();
+
+    // go through every employee
+    for (auto i = 0; i < m_employeeDateModel->rowCount(); i++)
+    {
+        // get employee information
+        auto employeeDateEntry = m_employeeDateModel->getEntry(i);
+
+        // create and run query
+        auto queryString = queryTemplate.arg(employeeDateEntry.employeeId).arg(trainId);
+        QSqlQuery query(queryString, db);
+
+        // the first result is the newest - order by traindata_date DESC
+        // Detail information:
+        // - The best and first case is: There is one entry with train, employee name and train date, that has no
+        //   certificate and the state is on planned.
+
+        // get the first query - nothing else is needed - and if it false, no result exist
+        if (!query.first())
+        {
+            // 1) there is no train data entry for this constelation so create it
+            query.finish();
+
+            QMTrainingDataModel trainDataModel(this, db);
+            auto newRecord = trainDataModel.record();
+            newRecord.setValue("employee", employeeDateEntry.employeeId);
+            newRecord.setValue("train", trainId);
+            newRecord.setValue("date", employeeDateEntry.trainDate.toString(Qt::ISODate));
+
+            // 1 - executed/done; 2 - planned
+            newRecord.setValue("state", 1);
+
+            // -1 for row == append to the end
+            trainDataModel.insertRecord(-1, newRecord);
+
+            trainDataModel.submitAll();
+
+            // 2) add the certificate to the created train data entry
+            qDebug() << "get the id: " << trainDataModel.query().lastInsertId();
+        }
+        else
+        {
+
+        }
+
+        // Close query, to prevent blocking other queries.
+        query.finish();
+    }
 
     return true;
 }

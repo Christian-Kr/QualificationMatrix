@@ -43,8 +43,10 @@ QVariant QMEmployeeDateModel::headerData(int section, Qt::Orientation orientatio
         switch (section)
         {
             case 0:
-                return tr("Mitarbeiter");
+                return tr("id");
             case 1:
+                return tr("Mitarbeiter");
+            case 2:
                 return tr("Schulungsdatum");
             default:
                 return {};
@@ -90,8 +92,10 @@ QVariant QMEmployeeDateModel::data(const QModelIndex &index, int role) const
         switch (index.column())
         {
             case 0:
-                return m_entries->at(row)->employeeName;
+                return m_entries->at(row)->employeeId;
             case 1:
+                return m_entries->at(row)->employeeName;
+            case 2:
                 return m_entries->at(row)->trainDate.toString(Qt::DateFormat::ISODate);
             default:
                 return {};
@@ -195,4 +199,11 @@ bool QMEmployeeDateModel::removeEntry(int index)
     endRemoveRows();
 
     return true;
+}
+
+QMEmployeeDateEntry QMEmployeeDateModel::getEntry(int row) const
+{
+    Q_ASSERT(row >= 0 && row < rowCount());
+
+    return *m_entries->at(row);
 }
