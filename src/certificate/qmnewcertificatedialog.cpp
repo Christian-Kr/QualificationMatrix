@@ -122,16 +122,6 @@ bool QMNewCertificateDialog::addCertificateTrainingDataEntries(QString &errorMes
 
     // TODO: Implement adding the certificate to the training data entries.
 
-    // filter by id and get the right certificate entry
-    m_certificateModel->setFilter(QString("id=%1").arg(certId));
-    auto rowIdx = m_certificateModel->rowCount() - 1;
-    if (rowIdx != 0)
-    {
-        qCritical() << "QMNewCertificateDialog: Could not find certification id=" << certId;
-        errorMessage = tr("Der gesuchte Nachweis konnte nicht gefunden werden.");
-        return false;
-    }
-
     // get database for running a query
     if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
     {
@@ -141,6 +131,16 @@ bool QMNewCertificateDialog::addCertificateTrainingDataEntries(QString &errorMes
     }
 
     auto db = QSqlDatabase::database("default");
+
+    // filter by id and get the right certificate entry
+    m_certificateModel->setFilter(QString("id=%1").arg(certId));
+    auto rowIdx = m_certificateModel->rowCount() - 1;
+    if (rowIdx != 0)
+    {
+        qCritical() << "QMNewCertificateDialog: Could not find certification id=" << certId;
+        errorMessage = tr("Der gesuchte Nachweis konnte nicht gefunden werden.");
+        return false;
+    }
 
     // create query template
     QString queryTemplate =
@@ -179,15 +179,11 @@ bool QMNewCertificateDialog::addCertificateTrainingDataEntries(QString &errorMes
         auto queryString = queryTemplate.arg(employeeDateEntry.employeeId).arg(trainId);
         QSqlQuery query(queryString, db);
 
-        // the first result is the newest - order by traindata_date DESC
-        // Detail information:
-        // - The best and first case is: There is one entry with train, employee name and train date, that has no
-        //   certificate and the state is on planned.
-
-        // get the first query - nothing else is needed - and if it false, no result exist
+        // the first result is the newest (order by traindata_date DESC)
+        // get the first query - the other entries are not needed
         if (!query.first())
         {
-            // 1) there is no train data entry for this constelation so create it
+            // 1) if there is no train data entry for this constelation -> just create it
             query.finish();
 
             QMTrainingDataModel trainDataModel(this, db);
@@ -209,6 +205,7 @@ bool QMNewCertificateDialog::addCertificateTrainingDataEntries(QString &errorMes
         }
         else
         {
+            // there is an entry - check whether it is the searched one
 
         }
 
