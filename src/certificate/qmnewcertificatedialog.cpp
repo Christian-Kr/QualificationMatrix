@@ -216,9 +216,9 @@ int QMNewCertificateDialog::createTrainingDataEntry(const QMEmployeeDateEntry &e
     newRecord.setValue("state", stateId);
 
     // -1 for appending the row to the end of the table
-    qDebug() << trainDataModel.insertRecord(-1, newRecord);
+    trainDataModel.insertRecord(-1, newRecord);
 
-    qDebug() << trainDataModel.submitAll();
+    trainDataModel.submitAll();
 
     qDebug() << "get the id: " << trainDataModel.query().lastInsertId().toInt();
 
