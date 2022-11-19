@@ -186,22 +186,7 @@ bool QMNewCertificateDialog::addCertificateTrainingDataEntries(QString &errorMes
             // 1) if there is no train data entry for this constelation -> just create it
             query.finish();
 
-            QMTrainingDataModel trainDataModel(this, db);
-            auto newRecord = trainDataModel.record();
-            newRecord.setValue("employee", employeeDateEntry.employeeId);
-            newRecord.setValue("train", trainId);
-            newRecord.setValue("date", employeeDateEntry.trainDate.toString(Qt::ISODate));
-
-            // 1 - executed/done; 2 - planned
-            newRecord.setValue("state", 1);
-
-            // -1 for row == append to the end
-            trainDataModel.insertRecord(-1, newRecord);
-
-            trainDataModel.submitAll();
-
-            // 2) add the certificate to the created train data entry
-            qDebug() << "get the id: " << trainDataModel.query().lastInsertId();
+            createTrainingDataEntry(employeeDateEntry, trainId, employeeDateEntry.trainDate, 1, db);
         }
         else
         {
@@ -214,6 +199,30 @@ bool QMNewCertificateDialog::addCertificateTrainingDataEntries(QString &errorMes
     }
 
     return true;
+}
+
+int QMNewCertificateDialog::createTrainingDataEntry(const QMEmployeeDateEntry &employeeDateEntry, int trainId,
+        const QDate &date, int stateId, const QSqlDatabase &db)
+{
+    QMTrainingDataModel trainDataModel(this, db);
+
+    // create the new record and fill it with data
+    auto newRecord = trainDataModel.record();
+    newRecord.setValue("employee", employeeDateEntry.employeeId);
+    newRecord.setValue("train", trainId);
+    newRecord.setValue("date", employeeDateEntry.trainDate.toString(Qt::ISODate));
+
+    // 1 - executed/done; 2 - planned
+    newRecord.setValue("state", stateId);
+
+    // -1 for appending the row to the end of the table
+    qDebug() << trainDataModel.insertRecord(-1, newRecord);
+
+    qDebug() << trainDataModel.submitAll();
+
+    qDebug() << "get the id: " << trainDataModel.query().lastInsertId().toInt();
+
+    return trainDataModel.query().lastInsertId().toInt();
 }
 
 bool QMNewCertificateDialog::validateInputData(QString &errorMessage)
