@@ -19,6 +19,7 @@
 #include "data/employee/qmshiftviewmodel.h"
 #include "data/trainingdata/qmtrainingdatamodel.h"
 #include "data/certificate/qmcertificatemodel.h"
+#include "data/trainingdata/qmtraindatacertificatemodel.h"
 #include "settings/qmapplicationsettings.h"
 #include "framework/delegate/qmdatedelegate.h"
 #include "framework/dialog/qmextendedselectiondialog.h"
@@ -73,7 +74,7 @@ QMNewCertificateDialog::QMNewCertificateDialog(const QSqlDatabase &db, QWidget *
     // set employee date data table ui
     m_ui->tvEmployeeDateData->horizontalHeader()->setMinimumSectionSize(100);
     m_ui->tvEmployeeDateData->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    m_ui->tvEmployeeDateData->setItemDelegateForColumn(1, new DateDelegate());
+    m_ui->tvEmployeeDateData->setItemDelegateForColumn(2, new DateDelegate());
 }
 
 QMNewCertificateDialog::~QMNewCertificateDialog()
@@ -95,6 +96,7 @@ void QMNewCertificateDialog::accept()
     int certId = addCertificate();
     if (certId == -1)
     {
+        qDebug() << "Nachweis nicht gefunden";
         return;
     }
 
@@ -114,11 +116,7 @@ void QMNewCertificateDialog::accept()
 
 bool QMNewCertificateDialog::addCertificateTrainingDataEntries(QString &errorMessage, int certId)
 {
-    // certification id should be bigger than 0
-    if (certId < 1)
-    {
-        return false;
-    }
+    Q_ASSERT(certId < 1);
 
     // TODO: Implement adding the certificate to the training data entries.
 
@@ -160,7 +158,8 @@ bool QMNewCertificateDialog::addCertificateTrainingDataEntries(QString &errorMes
             "    Train.id = train_id AND "
             "    Employee.id = employee_id AND "
             "    employee_id=%1 AND "
-            "    train_id=%2"
+            "    train_id=%2 AND "
+            "    traindata_date IN ('%3', '%4') "
             "ORDER BY"
             "    traindata_date DESC;";
 
@@ -176,26 +175,82 @@ bool QMNewCertificateDialog::addCertificateTrainingDataEntries(QString &errorMes
         auto employeeDateEntry = m_employeeDateModel->getEntry(i);
 
         // create and run query
-        auto queryString = queryTemplate.arg(employeeDateEntry.employeeId).arg(trainId);
+        auto queryString = queryTemplate
+                .arg(employeeDateEntry.employeeId)
+                .arg(trainId)
+                .arg(employeeDateEntry.trainDate.toString(Qt::ISODate),
+                        m_ui->cwTrainDate->selectedDate().toString(Qt::ISODate));
         QSqlQuery query(queryString, db);
 
-        // the first result is the newest (order by traindata_date DESC)
-        // get the first query - the other entries are not needed
+        // the first result is the newest training (related to the training data date) - if there is no entry, no one
+        // matches training, employee and training date (date for planned or current date)
         if (!query.first())
         {
-            // 1) if there is no train data entry for this constelation -> just create it
             query.finish();
 
-            createTrainingDataEntry(employeeDateEntry, trainId, employeeDateEntry.trainDate, 1, db);
+            // if no entry has been found, create it if the user wants to, else do nothing and go to the next employee
+            if (m_ui->cbCreateTrainData->isChecked())
+            {
+                createTrainingDataEntry(employeeDateEntry, trainId, employeeDateEntry.trainDate, 1, db);
+            }
+            else
+            {
+                // no entry has been found for the user and it should not be created - go to next employee
+                continue;
+            }
         }
         else
         {
-            // there is an entry - check whether it is the searched one
+            // an entry has been found, check for train data date
+            auto trainDataDate = query.value("traindata_date").toString();
+            auto trainDataId = query.value("traindata_id").toInt();
 
+            auto employeeDate = employeeDateEntry.trainDate.toString(Qt::ISODate);
+            if (trainDataDate.compare(employeeDate) == 0)
+            {
+                // the train data date equals the date for the employee, this is the best case and the certificate
+                // will just be added
+                QMTrainDataCertificateModel trainDataCertificateModel(this, db);
+
+                // TODO: Do we need the select statement here to be able to insert a record?
+                trainDataCertificateModel.select();
+
+                if (!trainDataCertificateModel.addRow(trainDataId, certId))
+                {
+                    qDebug() << "QMNewCertificateDialog::addCertificateTrainingDataEntries: Cannot add certificate";
+                    continue;
+                }
+            }
+            else
+            {
+                // the train data date equals the date that has been planned for the training, so the date has be
+                // corrected before adding the certificate
+                QMTrainingDataModel trainDataModel(this, db);
+
+                // TODO: Do we need the select statement here to be able to update a record?
+                trainDataModel.select();
+
+                QSqlRecord updateRecord = trainDataModel.record();
+                updateRecord.setValue("date", employeeDate);
+
+                if (!trainDataModel.updateById(trainDataId, updateRecord))
+                {
+                    qDebug() << "QMNewCertificateDialog::addCertificateTrainingDataEntries: Cannot update date";
+                    continue;
+                }
+
+                QMTrainDataCertificateModel trainDataCertificateModel(this, db);
+
+                // TODO: Do we need the select statement here to be able to insert a record?
+                trainDataCertificateModel.select();
+
+                if (!trainDataCertificateModel.addRow(trainDataId, certId))
+                {
+                    qDebug() << "QMNewCertificateDialog::addCertificateTrainingDataEntries: Cannot add certificate";
+                    continue;
+                }
+            }
         }
-
-        // Close query, to prevent blocking other queries.
-        query.finish();
     }
 
     return true;
@@ -218,11 +273,13 @@ int QMNewCertificateDialog::createTrainingDataEntry(const QMEmployeeDateEntry &e
     // -1 for appending the row to the end of the table
     trainDataModel.insertRecord(-1, newRecord);
 
-    trainDataModel.submitAll();
+    if (trainDataModel.submitAll())
+    {
+        qDebug() << "QNewCertificateDialog::createTrainingDataEntry: Cannot submit trainDataModel changes";
+        return -1;
+    }
 
-    qDebug() << "get the id: " << trainDataModel.query().lastInsertId().toInt();
-
-    return trainDataModel.query().lastInsertId().toInt();
+    return trainDataModel.getIdOfRecord(newRecord);
 }
 
 bool QMNewCertificateDialog::validateInputData(QString &errorMessage)
@@ -424,15 +481,15 @@ void QMNewCertificateDialog::loadSettings()
     auto rowIndex = m_certificateModel->rowCount();
     QFileInfo fileInfo(file.fileName());
 
-    m_certificateModel->insertRow(m_certificateModel->rowCount());
-
     // Create the name and set it.
     QString name = m_train + "_" + m_employee + m_employeeGroup + "_" + m_trainDate;
-    m_certificateModel->setData(m_certificateModel->index(rowIndex, 1), name);
-    m_certificateModel->setData(m_certificateModel->index(rowIndex, 2), fileInfo.completeSuffix());
-    m_certificateModel->setData(m_certificateModel->index(rowIndex, 5), hash);
-    m_certificateModel->setData(m_certificateModel->index(rowIndex, 6), QDate::currentDate().toString("yyyyMMdd"));
-    m_certificateModel->setData(m_certificateModel->index(rowIndex, 7), m_trainDate);
+
+    QSqlRecord newRecord = m_certificateModel->record();
+    newRecord.setValue("name", name);
+    newRecord.setValue("type", fileInfo.completeSuffix());
+    newRecord.setValue("md5_hash", hash);
+    newRecord.setValue("add_date", QDate::currentDate().toString(Qt::ISODate));
+    newRecord.setValue("train_date", m_trainDate);
 
     // Handle related to extern/internal. Internal files will be saved directly into the database as a blob. External
     // files will be saved on the file system and a path to that file will be saved into the database.
@@ -446,13 +503,13 @@ void QMNewCertificateDialog::loadSettings()
         if (certificateFileName.isEmpty())
         {
             QMessageBox::warning(this, tr("Nachweis hinzufügen"), tr("Der Nachweis konnte nicht hinzugefügt werden."));
-            m_certificateModel->revertRow(rowIndex);
             return false;
         }
 
-        m_certificateModel->setData(m_certificateModel->index(rowIndex, 3), certificateFileName);
+        newRecord.setValue("path", certificateFileName);
+        bool res = m_certificateModel->insertRecord(-1, newRecord);
 
-        if (!m_certificateModel->submitAll())
+        if (!res | !m_certificateModel->submitAll())
         {
             QMessageBox::warning(this, tr("Nachweis hinzufügen"),
                     tr("Der Nachweis konnte hinzugefügt, aber die Tabelle nicht aktualisiert werden. "
@@ -472,13 +529,13 @@ void QMNewCertificateDialog::loadSettings()
         {
             QMessageBox::warning(this, tr("Nachweis hinzufügen"),
                     tr("Der Nachweis konnte nicht hinzugefügt werden. Bitte informieren Sie den Entwickler."));
-            m_certificateModel->revertRow(rowIndex);
-
             return -1;
         }
 
-        m_certificateModel->setData(m_certificateModel->index(rowIndex, 4), blob);
-        if (!m_certificateModel->submitAll())
+        newRecord.setValue("binary", blob);
+        bool res = m_certificateModel->insertRecord(-1, newRecord);
+
+        if (!res | !m_certificateModel->submitAll())
         {
             QMessageBox::warning(this, tr("Nachweis hinzufügen"),
                     tr("Der Nachweis konnte hinzugefügt aber die Tabelle nicht aktualisiert werden. "
@@ -489,7 +546,7 @@ void QMNewCertificateDialog::loadSettings()
         }
     }
 
-    return m_certificateModel->data(m_certificateModel->index(rowIndex, 0)).toInt();
+    return m_certificateModel->getIdOfRecord(newRecord);
 }
 
 QString QMNewCertificateDialog::saveFileExternal(QFile &file)

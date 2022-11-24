@@ -26,6 +26,7 @@ class QSqlTableModel;
 class QMEmployeeDateModel;
 class QMExtendedSelectionDialog;
 class QMEmployeeDateEntry;
+class QMCertificateModel;
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -117,7 +118,7 @@ private:
     QString m_trainDate;
     QString m_certPath;
 
-    std::unique_ptr<QSqlTableModel> m_certificateModel;
+    std::unique_ptr<QMCertificateModel> m_certificateModel;
     std::unique_ptr<QMExtendedSelectionDialog> m_extSelEmployeeDialog;
     std::unique_ptr<QMEmployeeDateModel> m_employeeDateModel;
     std::unique_ptr<QSqlTableModel> m_trainViewModel;

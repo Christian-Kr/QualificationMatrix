@@ -76,7 +76,7 @@ int QMEmployeeDateModel::rowCount(const QModelIndex &) const
 
 int QMEmployeeDateModel::columnCount(const QModelIndex &) const
 {
-    return 2;
+    return 3;
 }
 
 QVariant QMEmployeeDateModel::data(const QModelIndex &index, int role) const
@@ -148,7 +148,7 @@ Qt::ItemFlags QMEmployeeDateModel::flags(const QModelIndex &index) const
     Qt::ItemFlags baseFlags = Qt::ItemIsSelectable | Qt::ItemIsEnabled;
 
     // allow edit of date column
-    if (index.column() == 1)
+    if (index.column() == 2)
     {
         baseFlags = baseFlags | Qt::ItemIsEditable;
     }

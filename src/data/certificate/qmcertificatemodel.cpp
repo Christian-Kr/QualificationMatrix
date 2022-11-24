@@ -13,6 +13,10 @@
 
 #include "qmcertificatemodel.h"
 
+#include <QSqlRecord>
+#include <QSqlQuery>
+#include <QSqlError>
+
 QMCertificateModel::QMCertificateModel(QObject *parent, QSqlDatabase db)
     : QMSqlTableModel(parent, db)
 {
@@ -33,4 +37,55 @@ QMCertificateModel::QMCertificateModel(QObject *parent, QSqlDatabase db)
     setSort(6, Qt::DescendingOrder);
 
     setHeaderData(7, Qt::Horizontal, tr("Schulungstag"));
+}
+
+int QMCertificateModel::getIdOfRecord(const QSqlRecord &record)
+{
+    // get variables
+    auto name = (record.contains("name")) ? record.value("name").toString() : QString();
+    auto type = (record.contains("type")) ? record.value("type").toString() : QString();
+    auto addDate = (record.contains("add_date")) ? record.value("add_date").toString() : QString();
+    auto trainDate = (record.contains("train_date")) ? record.value("train_date").toString() : QString();
+    auto md5Hash = (record.contains("md5_hash")) ? record.value("md5_hash").toString() : QString();
+
+    // if no variable has been defined, just exit
+    if (name.isEmpty() && type.isEmpty() && addDate.isEmpty() && trainDate.isEmpty() && md5Hash.isEmpty())
+    {
+        return -1;
+    }
+
+    // build query string
+    QString qry =
+            "SELECT * FROM Certificate "
+            "WHERE "
+            + ((!name.isEmpty()) ? QString("name='%1' AND ").arg(name) : QString())
+            + ((!type.isEmpty()) ? QString("type='%1' AND ").arg(type) : QString())
+            + ((!addDate.isEmpty()) ? QString("add_date='%1' AND ").arg(addDate) : QString())
+            + ((!trainDate.isEmpty()) ? QString("train_date='%1' AND ").arg(trainDate) : QString())
+            + ((!md5Hash.isEmpty()) ? QString("md5_hash='%1' AND ").arg(md5Hash) : QString());
+
+    qry.chop(5);
+    qry.append(";");
+
+    // run query
+    QSqlQuery sqlQuery(database());
+    if (!sqlQuery.exec(qry))
+    {
+        qDebug() << "QMCertificateModel::getIdOfRecord: " << sqlQuery.lastError().text();
+        return -1;
+    }
+
+    // get query result
+    if (!sqlQuery.first())
+    {
+        // no result
+        sqlQuery.finish();
+        return -1;
+    }
+
+    // just get the first value, which should be a number
+    auto id = sqlQuery.value(1).toInt();
+    sqlQuery.finish();
+
+    return id;
 }

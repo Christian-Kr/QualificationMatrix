@@ -27,6 +27,11 @@ public:
     /// \param parent
     /// \param db
     explicit QMCertificateModel(QObject *parent = nullptr, QSqlDatabase db = QSqlDatabase());
+
+    /// Get the id of the record in a single query.
+    /// \param record the sql record without relation to other tables (relations columns will have ids)
+    /// \returns the id of the first entry that has been found, else -1
+    int getIdOfRecord(const QSqlRecord &record);
 };
 
 #endif // QMCERTIFICATEMODEL_H
