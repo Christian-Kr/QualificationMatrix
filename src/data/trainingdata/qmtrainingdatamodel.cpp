@@ -123,7 +123,7 @@ int QMTrainingDataModel::getIdOfRecord(const QSqlRecord &record)
     }
 
     // just get the first value, which should be a number
-    auto id = sqlQuery.value(1).toInt();
+    auto id = sqlQuery.value("id").toInt();
     sqlQuery.finish();
 
     return id;
@@ -132,7 +132,7 @@ int QMTrainingDataModel::getIdOfRecord(const QSqlRecord &record)
 
 bool QMTrainingDataModel::updateById(int trainDataId, const QSqlRecord &record)
 {
-    Q_ASSERT(trainDataId < 1);
+    Q_ASSERT(trainDataId > 1);
 
     // get variables
     auto employee = (record.contains("employee")) ? record.value("employee").toInt() : -1;
@@ -148,7 +148,7 @@ bool QMTrainingDataModel::updateById(int trainDataId, const QSqlRecord &record)
 
     // build query string
     QString qry =
-            "SELECT TrainData "
+            "UPDATE TrainData "
             "SET "
             + ((employee != -1) ? QString("employee=%1, ").arg(employee) : QString())
             + ((train != -1) ? QString("train=%1, ").arg(train) : QString())

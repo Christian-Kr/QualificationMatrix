@@ -35,6 +35,7 @@
 #include <QTemporaryFile>
 #include <QSqlQuery>
 #include <QSqlRecord>
+#include <QSqlField>
 
 QMNewCertificateDialog::QMNewCertificateDialog(const QSqlDatabase &db, QWidget *parent)
     : QMDialog(parent)
@@ -116,9 +117,7 @@ void QMNewCertificateDialog::accept()
 
 bool QMNewCertificateDialog::addCertificateTrainingDataEntries(QString &errorMessage, int certId)
 {
-    Q_ASSERT(certId < 1);
-
-    // TODO: Implement adding the certificate to the training data entries.
+    Q_ASSERT(certId > 0);
 
     // get database for running a query
     if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
@@ -236,14 +235,20 @@ bool QMNewCertificateDialog::addCertificateTrainingDataEntries(QString &errorMes
             {
                 // the train data date equals the date that has been planned for the training, so the date has to be
                 // corrected before adding the certificate
-                updateRecord.setValue("date", employeeDate);
+                QSqlField dateField;
+                dateField.setName("date");
+                dateField.setValue(employeeDate);
+                updateRecord.append(dateField);
             }
 
             // if wanted, change the state
             if (m_ui->cbChangeState->isChecked())
             {
                 // 1 - executed/done; 2 - planned
-                updateRecord.setValue("state", 1);
+                QSqlField changeStateField;
+                changeStateField.setName("state");
+                changeStateField.setValue(1);
+                updateRecord.append(changeStateField);
             }
 
             // update the train data entry
@@ -285,7 +290,7 @@ int QMNewCertificateDialog::createTrainingDataEntry(const QMEmployeeDateEntry &e
     // -1 for appending the row to the end of the table
     trainDataModel.insertRecord(-1, newRecord);
 
-    if (trainDataModel.submitAll())
+    if (!trainDataModel.submitAll())
     {
         qDebug() << "QNewCertificateDialog::createTrainingDataEntry: Cannot submit trainDataModel changes";
         return -1;
@@ -302,6 +307,8 @@ bool QMNewCertificateDialog::validateInputData(QString &errorMessage)
         errorMessage = tr("Die Schulung existiert nicht.");
         return false;
     }
+
+    m_train = m_ui->cbTrain->currentText();
 
     // search for employee
     if (m_ui->rbEmployee->isChecked())
@@ -481,7 +488,7 @@ void QMNewCertificateDialog::loadSettings()
     if (!file.isReadable() || !file.exists())
     {
         qWarning() << "certificate file does not exist or is not readable" << m_certPath;
-        return false;
+        return -1;
     }
 
     // create the hash value as an md5 sum
@@ -490,7 +497,6 @@ void QMNewCertificateDialog::loadSettings()
 
     // create the new data entry
     m_certificateModel->select();
-    auto rowIndex = m_certificateModel->rowCount();
     QFileInfo fileInfo(file.fileName());
 
     // Create the name and set it.
@@ -515,7 +521,7 @@ void QMNewCertificateDialog::loadSettings()
         if (certificateFileName.isEmpty())
         {
             QMessageBox::warning(this, tr("Nachweis hinzufügen"), tr("Der Nachweis konnte nicht hinzugefügt werden."));
-            return false;
+            return -1;
         }
 
         newRecord.setValue("path", certificateFileName);

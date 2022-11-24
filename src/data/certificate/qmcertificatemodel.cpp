@@ -84,7 +84,7 @@ int QMCertificateModel::getIdOfRecord(const QSqlRecord &record)
     }
 
     // just get the first value, which should be a number
-    auto id = sqlQuery.value(1).toInt();
+    auto id = sqlQuery.value("id").toInt();
     sqlQuery.finish();
 
     return id;
