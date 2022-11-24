@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>471</width>
-    <height>541</height>
+    <width>509</width>
+    <height>621</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -27,7 +27,7 @@
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabTrainingData">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tabGeneral">
       <attribute name="title">
@@ -188,42 +188,6 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
-        <widget class="QCheckBox" name="cbNoExactDate">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>Kein exaktes Datum für existierende Einträge</string>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="label_4">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>Mitarbeiter und das dazugehörige Schulungsdatum:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QTableView" name="tvEmployeeDateData">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="selectionMode">
-          <enum>QAbstractItemView::SingleSelection</enum>
-         </property>
-         <property name="selectionBehavior">
-          <enum>QAbstractItemView::SelectRows</enum>
-         </property>
-        </widget>
-       </item>
        <item row="4" column="1">
         <layout class="QVBoxLayout" name="verticalLayout">
          <item>
@@ -295,6 +259,42 @@
           </spacer>
          </item>
         </layout>
+       </item>
+       <item row="4" column="0">
+        <widget class="QTableView" name="tvEmployeeDateData">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="selectionMode">
+          <enum>QAbstractItemView::SingleSelection</enum>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_4">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Mitarbeiter und das dazugehörige Schulungsdatum:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QCheckBox" name="cbChangeState">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Status der Einträge von &quot;Angemeldet&quot; auf &quot;Durchgeführt&quot; setzen</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>

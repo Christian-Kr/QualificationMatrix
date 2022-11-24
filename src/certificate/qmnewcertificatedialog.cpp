@@ -394,7 +394,7 @@ void QMNewCertificateDialog::loadSettings()
 {
     bool checked = state == Qt::CheckState::Checked;
     m_ui->cbCreateTrainData->setEnabled(checked);
-    m_ui->cbNoExactDate->setEnabled(checked);
+    m_ui->cbChangeState->setEnabled(checked);
     m_ui->tvEmployeeDateData->setEnabled(checked);
     m_ui->tbExtSelEmployee->setEnabled(checked);
     m_ui->tbRemove->setEnabled(checked);
