@@ -211,8 +211,6 @@ bool QMNewCertificateDialog::addCertificateTrainingDataEntries(QString &errorMes
                 // the train data date equals the date for the employee, this is the best case and the certificate
                 // will just be added
                 QMTrainDataCertificateModel trainDataCertificateModel(this, db);
-
-                // TODO: Do we need the select statement here to be able to insert a record?
                 trainDataCertificateModel.select();
 
                 if (!trainDataCertificateModel.addRow(trainDataId, certId))
@@ -226,8 +224,6 @@ bool QMNewCertificateDialog::addCertificateTrainingDataEntries(QString &errorMes
                 // the train data date equals the date that has been planned for the training, so the date has be
                 // corrected before adding the certificate
                 QMTrainingDataModel trainDataModel(this, db);
-
-                // TODO: Do we need the select statement here to be able to update a record?
                 trainDataModel.select();
 
                 QSqlRecord updateRecord = trainDataModel.record();
@@ -240,8 +236,6 @@ bool QMNewCertificateDialog::addCertificateTrainingDataEntries(QString &errorMes
                 }
 
                 QMTrainDataCertificateModel trainDataCertificateModel(this, db);
-
-                // TODO: Do we need the select statement here to be able to insert a record?
                 trainDataCertificateModel.select();
 
                 if (!trainDataCertificateModel.addRow(trainDataId, certId))
