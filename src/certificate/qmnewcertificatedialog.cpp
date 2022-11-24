@@ -191,7 +191,24 @@ bool QMNewCertificateDialog::addCertificateTrainingDataEntries(QString &errorMes
             // if no entry has been found, create it if the user wants to, else do nothing and go to the next employee
             if (m_ui->cbCreateTrainData->isChecked())
             {
-                createTrainingDataEntry(employeeDateEntry, trainId, employeeDateEntry.trainDate, 1, db);
+                auto trainDataId = createTrainingDataEntry(
+                        employeeDateEntry, trainId, employeeDateEntry.trainDate, 1, db);
+                if (trainDataId == -1)
+                {
+                    qDebug() << "QMNewCertificateDialog::addCertificateTrainingDataEntries: Cannot create training "
+                                "data entry";
+                    continue;
+                }
+
+                // add the certificate
+                QMTrainDataCertificateModel trainDataCertificateModel(this, db);
+                trainDataCertificateModel.select();
+
+                if (!trainDataCertificateModel.addRow(trainDataId, certId))
+                {
+                    qDebug() << "QMNewCertificateDialog::addCertificateTrainingDataEntries: Cannot add certificate";
+                    continue;
+                }
             }
             else
             {
@@ -205,44 +222,45 @@ bool QMNewCertificateDialog::addCertificateTrainingDataEntries(QString &errorMes
             auto trainDataDate = query.value("traindata_date").toString();
             auto trainDataId = query.value("traindata_id").toInt();
 
+            query.finish();
+
+            // get a record with default values if anything has to be changed like date or state
+            QMTrainingDataModel trainDataModel(this, db);
+            trainDataModel.select();
+
+            QSqlRecord updateRecord = trainDataModel.record();
+
+            // check the date and change it if needed
             auto employeeDate = employeeDateEntry.trainDate.toString(Qt::ISODate);
-            if (trainDataDate.compare(employeeDate) == 0)
+            if (trainDataDate.compare(employeeDate) != 0)
             {
-                // the train data date equals the date for the employee, this is the best case and the certificate
-                // will just be added
-                QMTrainDataCertificateModel trainDataCertificateModel(this, db);
-                trainDataCertificateModel.select();
-
-                if (!trainDataCertificateModel.addRow(trainDataId, certId))
-                {
-                    qDebug() << "QMNewCertificateDialog::addCertificateTrainingDataEntries: Cannot add certificate";
-                    continue;
-                }
-            }
-            else
-            {
-                // the train data date equals the date that has been planned for the training, so the date has be
+                // the train data date equals the date that has been planned for the training, so the date has to be
                 // corrected before adding the certificate
-                QMTrainingDataModel trainDataModel(this, db);
-                trainDataModel.select();
-
-                QSqlRecord updateRecord = trainDataModel.record();
                 updateRecord.setValue("date", employeeDate);
+            }
 
-                if (!trainDataModel.updateById(trainDataId, updateRecord))
-                {
-                    qDebug() << "QMNewCertificateDialog::addCertificateTrainingDataEntries: Cannot update date";
-                    continue;
-                }
+            // if wanted, change the state
+            if (m_ui->cbChangeState->isChecked())
+            {
+                // 1 - executed/done; 2 - planned
+                updateRecord.setValue("state", 1);
+            }
 
-                QMTrainDataCertificateModel trainDataCertificateModel(this, db);
-                trainDataCertificateModel.select();
+            // update the train data entry
+            if (!trainDataModel.updateById(trainDataId, updateRecord))
+            {
+                qDebug() << "QMNewCertificateDialog::addCertificateTrainingDataEntries: Cannot update date";
+                continue;
+            }
 
-                if (!trainDataCertificateModel.addRow(trainDataId, certId))
-                {
-                    qDebug() << "QMNewCertificateDialog::addCertificateTrainingDataEntries: Cannot add certificate";
-                    continue;
-                }
+            // add the certificate
+            QMTrainDataCertificateModel trainDataCertificateModel(this, db);
+            trainDataCertificateModel.select();
+
+            if (!trainDataCertificateModel.addRow(trainDataId, certId))
+            {
+                qDebug() << "QMNewCertificateDialog::addCertificateTrainingDataEntries: Cannot add certificate";
+                continue;
             }
         }
     }
