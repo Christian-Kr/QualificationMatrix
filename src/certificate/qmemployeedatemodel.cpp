@@ -122,10 +122,10 @@ bool QMEmployeeDateModel::setData(const QModelIndex &index, const QVariant &valu
 
         switch (index.column())
         {
-            case 0:
+            case 1:
                 m_entries->at(index.row())->employeeName = value.toString();
                 break;
-            case 1:
+            case 2:
                 m_entries->at(index.row())->trainDate = value.toDate();
                 break;
             default:
