@@ -92,7 +92,7 @@ QMQualiResultRecord* QMQualiResultModel::getResultFromRecord(const QSqlRecord &r
 
                     result->setTrainingState(tr("Gut"));
 
-                    if (nextDate.addMonths(-1*monthExpire) < currDate && !nextDate.isValid())
+                    if (nextDate.addMonths(-1*monthExpire) < currDate)
                     {
                         result->setInformation(tr("Schulung planen!"));
                     }
