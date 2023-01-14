@@ -13,6 +13,9 @@
 
 #include "qmtraindatacertificatemodel.h"
 
+#include <QSqlQuery>
+#include <QSqlRecord>
+
 QMTrainDataCertificateModel::QMTrainDataCertificateModel(QObject *parent, QSqlDatabase db)
     : QMSqlTableModel(parent, db)
 {
@@ -25,4 +28,57 @@ QMTrainDataCertificateModel::QMTrainDataCertificateModel(QObject *parent, QSqlDa
     // Specifiy header data of table.
     setHeaderData(1, Qt::Horizontal, tr("Schulung"));
     setHeaderData(2, Qt::Horizontal, tr("Nachweis"));
+}
+
+int QMTrainDataCertificateModel::getIdOfTrainData(int trainDataId)
+{
+    Q_ASSERT(trainDataId < 1);
+
+    // build query string
+    QString qry =
+            "SELECT * FROM TrainDataCertificate "
+            "WHERE "
+            "    train_data=%1;";
+
+    // run query
+    QSqlQuery sqlQuery(database());
+    if (!sqlQuery.exec(qry.arg(trainDataId)))
+    {
+        return -1;
+    }
+
+    // get query result
+    if (!sqlQuery.first())
+    {
+        // no result - train data entry is not in table
+        sqlQuery.finish();
+        return -1;
+    }
+
+    // just get the first value, which should be a number
+    auto id = sqlQuery.value(1).toInt();
+    sqlQuery.finish();
+
+    return id;
+}
+
+bool QMTrainDataCertificateModel::addRow(int trainDataId, int certId)
+{
+    QSqlRecord newRecord = record();
+    newRecord.setValue("train_data", trainDataId);
+    newRecord.setValue("certificate", certId);
+
+    if (!insertRecord(-1, newRecord))
+    {
+        qDebug() << "QMTrainDataCertificateModel::addRow: Cannot insert new record";
+        return false;
+    }
+
+    if (!submitAll())
+    {
+        qDebug() << "QMTrainDataCertificateModel::addRow: Cannot submit all";
+        return false;
+    }
+
+    return true;
 }

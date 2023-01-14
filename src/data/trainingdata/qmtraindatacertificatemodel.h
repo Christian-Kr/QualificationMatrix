@@ -28,6 +28,17 @@ public:
     /// \param parent
     /// \param db
     explicit QMTrainDataCertificateModel(QObject *parent = nullptr, QSqlDatabase db = QSqlDatabase());
+
+    /// Get the id of the first entry with the given train data id.
+    /// \param trainDataId the id of the train data to search for
+    /// \returns the id of the first entry that has the train data id, else -1
+    int getIdOfTrainData(int trainDataId);
+
+    /// Add a new entry.
+    /// \param trainDataId id of the train data entry
+    /// \param certId id of the certificate
+    ///\returns true if success, else false
+    bool addRow(int trainDataId, int certId);
 };
 
 #endif // QMTRAINDATACERTIFICATEMODEL_H

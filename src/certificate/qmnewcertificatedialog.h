@@ -25,6 +25,8 @@ class QSqlRelationalTableModel;
 class QSqlTableModel;
 class QMEmployeeDateModel;
 class QMExtendedSelectionDialog;
+class QMEmployeeDateEntry;
+class QMCertificateModel;
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -98,6 +100,16 @@ private:
     /// \returns false is adding certificate to training data failed, else true
     [[maybe_unused]] bool addCertificateTrainingDataEntries(QString &errorMessage, int certId);
 
+    /// Create a training data entry to add the certificate afterwarts.
+    /// \param employeeDateEntry employee information
+    /// \param trainId primary key of the training
+    /// \param date the date of the training
+    /// \param stateId primary key of the state
+    /// \param db to create entry in
+    /// \returns the primary key of the new entry or -1 if something fails
+    int createTrainingDataEntry(const QMEmployeeDateEntry &employeeDateEntry, int trainId,
+            const QDate &date, int stateId, const QSqlDatabase &db);
+
     Ui::QMNewCertificateDialog *m_ui;
 
     QString m_employeeGroup;
@@ -106,7 +118,7 @@ private:
     QString m_trainDate;
     QString m_certPath;
 
-    std::unique_ptr<QSqlTableModel> m_certificateModel;
+    std::unique_ptr<QMCertificateModel> m_certificateModel;
     std::unique_ptr<QMExtendedSelectionDialog> m_extSelEmployeeDialog;
     std::unique_ptr<QMEmployeeDateModel> m_employeeDateModel;
     std::unique_ptr<QSqlTableModel> m_trainViewModel;

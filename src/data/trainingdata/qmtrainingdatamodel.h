@@ -33,6 +33,17 @@ public:
 
     /// Override from QMSqlTableModel.
     void setFilter(const QString &filter) override;
+
+    /// Get the id of the record in a single query.
+    /// \param record the sql record without relation to other tables (relations columns will have ids)
+    /// \returns the id of the first entry that has been found, else -1
+    int getIdOfRecord(const QSqlRecord &record);
+
+    /// Set the training data set by its id.
+    /// \param trainDataId the id to update the values for
+    /// \param record the record to get the values for update
+    /// \returns true if success, else false
+    bool updateById(int trainDataId, const QSqlRecord &record);
 };
 
 #endif // QMTRAININGDATAMODEL_H
