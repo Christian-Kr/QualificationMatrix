@@ -80,27 +80,37 @@ void QMSigningListDialog::accept()
 
     if (ui->cbCreateTrainDataEntries->isChecked())
     {
-        // Check permissions for adding training data.
-        auto ams = QMAMSManager::getInstance();
-        if (!ams->checkPermission(AccessMode::TD_MODE_WRITE))
+        if (ui->cbEnterTrainDate->isChecked())
         {
-            QMessageBox::StandardButton ret = QMessageBox::question(this, tr("Nachweise verwalten"),
-                    tr("Sie haben nicht die notwendigen Berechtigungen zum Erstellen von Schulungseinträgen. Möchten "
-                       "Sie trotzdem fortfahren?"),
-                    QMessageBox::Yes | QMessageBox::No);
-
-            if (ret != QMessageBox::Yes)
+            // Check permissions for adding training data.
+            auto ams = QMAMSManager::getInstance();
+            if (!ams->checkPermission(AccessMode::TD_MODE_WRITE))
             {
-                return;
+                QMessageBox::StandardButton ret = QMessageBox::question(this, tr("Nachweise verwalten"),
+                        tr("Sie haben nicht die notwendigen Berechtigungen zum Erstellen von Schulungseinträgen. Möchten "
+                           "Sie trotzdem fortfahren?"),
+                        QMessageBox::Yes | QMessageBox::No);
+
+                if (ret != QMessageBox::Yes)
+                {
+                    return;
+                }
+                else
+                {
+                    printToPDF();
+                }
             }
             else
             {
-                printToPDF();
+                createTrainDataEntriesCheck();
             }
         }
         else
         {
-            createTrainDataEntriesCheck();
+            QMessageBox::information(this, tr("Nachweise verwalten"),
+                    tr("Ohne die Angabe eines Schulungsdatums können keine Schulungseinträge erstellt werden."
+                       " Die Aktion wird abgebrochen."));
+            return;
         }
     }
     else
@@ -531,6 +541,7 @@ void QMSigningListDialog::paintPdfRequest(QPrinter *printer)
     document.setTrainingName(ui->cbTraining->currentText());
     document.setImagePath(ui->leImagePath->text());
     document.setSortType((EmployeeSort) ui->cbSort->currentIndex());
+    document.setCreateEmptyTrainerFields(ui->cbCreateEmptyTrainerSigningFields->isChecked());
     document.createDocument();
 
     // Default printer settings.
@@ -581,5 +592,19 @@ QStringList QMSigningListDialog::getSelectedEmployeeIds() const
     else
     {
         ui->cbTrainingState->setEnabled(false);
+    }
+}
+
+[[maybe_unused]] void QMSigningListDialog::enterTrainDateChanged(int state)
+{
+    if (state == Qt::CheckState::Checked)
+    {
+        ui->laTrainDate->setEnabled(true);
+        ui->cwDate->setEnabled(true);
+    }
+    else
+    {
+        ui->laTrainDate->setEnabled(false);
+        ui->cwDate->setEnabled(false);
     }
 }

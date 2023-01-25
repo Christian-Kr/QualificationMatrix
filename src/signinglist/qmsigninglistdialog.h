@@ -120,6 +120,10 @@ public slots:
     /// \param state The state of a qt check box.
     [[maybe_unused]] void createTrainDataEntriesChanged(int state);
 
+    /// Called when the check box state of the enter train date changed.
+    /// \param state The state of a qt check box.
+    [[maybe_unused]] void enterTrainDateChanged(int state);
+
 private:
     /// Test whether the employee list contains the given employee id.
     /// \param employeeId The id (primary key in table) of the employee to test.

@@ -74,11 +74,16 @@ public:
     /// \param emptyEmployees
     void setEmptyEmployees(int emptyEmployees) { this->emptyEmployees = emptyEmployees; }
 
+    /// Create empty signing fields for the trainer.
+    /// \param createEmptyTrainerFields
+    void setCreateEmptyTrainerFields(bool createEmptyTrainerFields) { this->m_createEmptyTrainerFields = createEmptyTrainerFields; }
+
     /// Create the document with all the content.
     void createDocument();
 
 private:
     int emptyEmployees;
+    bool m_createEmptyTrainerFields;
     EmployeeSort sortType;
     QStringList employees;
     QString trainer;

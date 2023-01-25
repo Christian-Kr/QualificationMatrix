@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>474</width>
-    <height>533</height>
+    <width>545</width>
+    <height>618</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <item row="0" column="0">
     <widget class="QTabWidget" name="twGroups">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="taGeneral">
       <attribute name="title">
@@ -104,9 +104,33 @@
         </layout>
        </item>
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_9">
+        <layout class="QVBoxLayout" name="verticalLayout_5">
          <item>
-          <widget class="QLabel" name="label_9">
+          <widget class="QCheckBox" name="cbCreateEmptyTrainerSigningFields">
+           <property name="text">
+            <string>Zusätzliche Leerfelder für die Unterschriften der Schulungsdurchführenden</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_9">
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QCheckBox" name="cbEnterTrainDate">
+           <property name="text">
+            <string>Schulungsdatum eingeben</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="laTrainDate">
            <property name="text">
             <string>Datum</string>
            </property>
@@ -634,6 +658,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>cbEnterTrainDate</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>QMSigningListDialog</receiver>
+   <slot>enterTrainDateChanged(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>236</x>
+     <y>246</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>236</x>
+     <y>266</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <designerdata>
   <property name="gridDeltaX">
@@ -660,5 +700,6 @@
   <slot>clearList()</slot>
   <slot>trainingChanged()</slot>
   <slot>createTrainDataEntriesChanged(int)</slot>
+  <slot>enterTrainDateChanged(int)</slot>
  </slots>
 </ui>

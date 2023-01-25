@@ -16,11 +16,14 @@
 #include <QTextTable>
 #include <QTextLength>
 
+const int NUM_EMPTY_TRAINER_FIELDS = 3;
+
 QMSigningListDocument::QMSigningListDocument(QObject *parent)
     : QTextDocument(parent)
 {
     emptyEmployees = 0;
     sortType = EmployeeSort::SortNo;
+    m_createEmptyTrainerFields = false;
 }
 
 void QMSigningListDocument::createDocument()
@@ -32,20 +35,11 @@ void QMSigningListDocument::createDocument()
     font.setPointSize(8);
     setDefaultFont(font);
 
-    QTextTable *headerTable = cursor.insertTable(1, 1);
-
-    QTextTableFormat tableHeaderFormat = headerTable->format();
-    tableHeaderFormat.setCellPadding(10);
-    tableHeaderFormat.setBorderStyle(QTextFrameFormat::BorderStyle_None);
-    tableHeaderFormat.setWidth(QTextLength(QTextLength::PercentageLength, 100));
-    headerTable->setFormat(tableHeaderFormat);
-
     // Build header table.
     QTextTable *table = cursor.insertTable(4, 3);
     table->mergeCells(0, 0, 4, 2);
 
     QTextTableFormat tableFormat = table->format();
-    tableFormat.setCellPadding(2);
     tableFormat.setBorderStyle(QTextFrameFormat::BorderStyle_None);
     tableFormat.setWidth(QTextLength(QTextLength::PercentageLength, 100));
     table->setFormat(tableFormat);
@@ -65,9 +59,9 @@ void QMSigningListDocument::createDocument()
 
     QTextCharFormat textHeaderFormat;
     textHeaderFormat.setFontPointSize(16);
+    cursor.insertHtml("<br><br>");
     cursor.insertText(tr("Unterweisungsprotokoll"), textHeaderFormat);
     cursor.movePosition(QTextCursor::NextBlock);
-    cursor.insertHtml("<br>");
 
     // Build info table.
     cursor.movePosition(QTextCursor::NextBlock);
@@ -224,7 +218,46 @@ void QMSigningListDocument::createDocument()
         }
     }
 
+    cursor.movePosition(QTextCursor::NextBlock);
+    cursor.insertHtml("<br>");
+
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
     employeeTableFormat.setBorderCollapse(true);
 #endif
+
+    if (m_createEmptyTrainerFields)
+    {
+        textHeaderFormat.setFontPointSize(14);
+        cursor.insertHtml("<br><br>");
+        cursor.insertText(tr("Zusätzliche Leerfelder des Schlungsdurchführenden"), textHeaderFormat);
+        cursor.movePosition(QTextCursor::NextBlock);
+        cursor.insertHtml("<br>");
+
+        // Additional signing fields for the trainer.
+        QTextTable *addTrainerTable = cursor.insertTable(4, 3);
+        addTrainerTable->setFormat(tableFormat);
+
+        // Fill header table with text.
+        for (int i = 0; i < NUM_EMPTY_TRAINER_FIELDS; i++)
+        {
+            cursor.insertText(tr("Unterweisung am: "));
+            cursor.movePosition(QTextCursor::NextCell);
+        }
+        for (int i = 0; i < NUM_EMPTY_TRAINER_FIELDS; i++)
+        {
+            cursor.insertText(tr("Organisation: "));
+            cursor.movePosition(QTextCursor::NextCell);
+        }
+        for (int i = 0; i < NUM_EMPTY_TRAINER_FIELDS; i++)
+        {
+            cursor.insertText(tr("Unterweisender: "));
+            cursor.movePosition(QTextCursor::NextCell);
+        }
+        for (int i = 0; i < NUM_EMPTY_TRAINER_FIELDS; i++)
+        {
+            cursor.insertText(tr("Unterschrift: "));
+            cursor.movePosition(QTextCursor::NextCell);
+        }
+        cursor.movePosition(QTextCursor::NextBlock);
+    }
 }
