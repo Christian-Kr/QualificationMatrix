@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>545</width>
-    <height>618</height>
+    <width>566</width>
+    <height>712</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -106,10 +106,35 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_5">
          <item>
-          <widget class="QCheckBox" name="cbCreateEmptyTrainerSigningFields">
-           <property name="text">
-            <string>Zusätzliche Leerfelder für die Unterschriften der Schulungsdurchführenden</string>
+          <widget class="QGroupBox" name="gbCreateEmptyTrainerFields">
+           <property name="title">
+            <string>Erstelle leere Felder für die Schulungsdurchführenden</string>
            </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_3">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_9">
+              <property name="text">
+               <string>Anzahl der leeren Felder</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QSpinBox" name="spTotalEmptyTrainerFields">
+              <property name="minimum">
+               <number>3</number>
+              </property>
+              <property name="maximum">
+               <number>9</number>
+              </property>
+              <property name="singleStep">
+               <number>3</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </widget>
          </item>
         </layout>
@@ -120,27 +145,29 @@
           <number>0</number>
          </property>
          <item>
-          <widget class="QCheckBox" name="cbEnterTrainDate">
-           <property name="text">
+          <widget class="QGroupBox" name="gbEnterTrainDate">
+           <property name="title">
             <string>Schulungsdatum eingeben</string>
            </property>
-           <property name="checked">
+           <property name="checkable">
             <bool>true</bool>
            </property>
+           <layout class="QVBoxLayout" name="verticalLayout_11">
+            <item>
+             <widget class="QLabel" name="laTrainDate">
+              <property name="text">
+               <string>Datum</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCalendarWidget" name="cwDate"/>
+            </item>
+           </layout>
           </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="laTrainDate">
-           <property name="text">
-            <string>Datum</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QCalendarWidget" name="cwDate"/>
          </item>
         </layout>
        </item>
@@ -151,7 +178,114 @@
        <string>Mitarbeiter</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
+       <item row="6" column="1">
+        <widget class="QComboBox" name="cbSingleEmployee">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="editable">
+          <bool>true</bool>
+         </property>
+         <property name="maxVisibleItems">
+          <number>20</number>
+         </property>
+         <property name="insertPolicy">
+          <enum>QComboBox::NoInsert</enum>
+         </property>
+         <property name="minimumContentsLength">
+          <number>20</number>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Leerfelder</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0" colspan="2">
+        <widget class="QListWidget" name="lwEmployees">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
        <item row="3" column="1">
+        <widget class="QComboBox" name="cbSort">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>25</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>Nein</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Vorname</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Nachname</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Gruppe</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>Einzel</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="2">
+        <widget class="QToolButton" name="tbAddEmployeeFromGroup">
+         <property name="minimumSize">
+          <size>
+           <width>25</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>...</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../rcs/icons.qrc">
+           <normaloff>:/icons/icons/list-add.svg</normaloff>:/icons/icons/list-add.svg</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>16</width>
+           <height>16</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
           <widget class="QSpinBox" name="spEmpty">
@@ -181,75 +315,8 @@
          </item>
         </layout>
        </item>
-       <item row="0" column="0" colspan="2">
-        <widget class="QCheckBox" name="cbCreateTrainDataEntries">
-         <property name="text">
-          <string>Geplante Schulungseinträge erstellen </string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="0">
-        <widget class="QLabel" name="label_4">
-         <property name="text">
-          <string>Einzel</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="1">
-        <widget class="QComboBox" name="cbSingleEmployee">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>25</height>
-          </size>
-         </property>
-         <property name="editable">
-          <bool>true</bool>
-         </property>
-         <property name="maxVisibleItems">
-          <number>20</number>
-         </property>
-         <property name="insertPolicy">
-          <enum>QComboBox::NoInsert</enum>
-         </property>
-         <property name="minimumContentsLength">
-          <number>20</number>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QComboBox" name="cbSort">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>25</height>
-          </size>
-         </property>
-         <item>
-          <property name="text">
-           <string>Nein</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Vorname</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Nachname</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item row="4" column="2">
-        <widget class="QToolButton" name="tbAddEmployeeFromGroup">
+       <item row="6" column="2">
+        <widget class="QToolButton" name="tbAddEmployee">
          <property name="minimumSize">
           <size>
            <width>25</width>
@@ -271,31 +338,14 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="label_2">
+       <item row="0" column="0" colspan="2">
+        <widget class="QCheckBox" name="cbCreateTrainDataEntries">
          <property name="text">
-          <string>Leerfelder</string>
+          <string>Geplante Schulungseinträge erstellen </string>
          </property>
         </widget>
        </item>
-       <item row="6" column="0" colspan="2">
-        <widget class="QListWidget" name="lwEmployees">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QLabel" name="label_3">
-         <property name="text">
-          <string>Gruppe</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="1">
+       <item row="5" column="1">
         <widget class="QComboBox" name="cbEmployeeGroup">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -323,7 +373,7 @@
          </property>
         </widget>
        </item>
-       <item row="6" column="2">
+       <item row="7" column="2">
         <layout class="QVBoxLayout" name="verticalLayout_3">
          <item>
           <widget class="QToolButton" name="tbRemoveEmployee">
@@ -386,58 +436,45 @@
          </item>
         </layout>
        </item>
-       <item row="5" column="2">
-        <widget class="QToolButton" name="tbAddEmployee">
-         <property name="minimumSize">
-          <size>
-           <width>25</width>
-           <height>25</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>...</string>
-         </property>
-         <property name="icon">
-          <iconset resource="../rcs/icons.qrc">
-           <normaloff>:/icons/icons/list-add.svg</normaloff>:/icons/icons/list-add.svg</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>16</width>
-           <height>16</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
+       <item row="3" column="0">
         <widget class="QLabel" name="label_10">
          <property name="text">
           <string>Sortieren</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_11">
-         <property name="text">
-          <string>Schulungsstatus</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QComboBox" name="cbTrainingState">
-         <property name="editable">
-          <bool>false</bool>
-         </property>
-         <property name="maxVisibleItems">
+       <item row="1" column="0" colspan="2">
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <property name="leftMargin">
           <number>20</number>
          </property>
-         <property name="insertPolicy">
-          <enum>QComboBox::NoInsert</enum>
-         </property>
-         <property name="minimumContentsLength">
+         <property name="rightMargin">
           <number>20</number>
          </property>
-        </widget>
+         <item>
+          <widget class="QLabel" name="label_11">
+           <property name="text">
+            <string>Schulungsstatus</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="cbTrainingState">
+           <property name="editable">
+            <bool>false</bool>
+           </property>
+           <property name="maxVisibleItems">
+            <number>20</number>
+           </property>
+           <property name="insertPolicy">
+            <enum>QComboBox::NoInsert</enum>
+           </property>
+           <property name="minimumContentsLength">
+            <number>20</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>
@@ -659,18 +696,18 @@
    </hints>
   </connection>
   <connection>
-   <sender>cbEnterTrainDate</sender>
-   <signal>stateChanged(int)</signal>
+   <sender>spTotalEmptyTrainerFields</sender>
+   <signal>valueChanged(int)</signal>
    <receiver>QMSigningListDialog</receiver>
-   <slot>enterTrainDateChanged(int)</slot>
+   <slot>totalEmptyTrainerFieldsChanged(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>236</x>
-     <y>246</y>
+     <x>400</x>
+     <y>280</y>
     </hint>
     <hint type="destinationlabel">
-     <x>236</x>
-     <y>266</y>
+     <x>282</x>
+     <y>355</y>
     </hint>
    </hints>
   </connection>
@@ -700,6 +737,6 @@
   <slot>clearList()</slot>
   <slot>trainingChanged()</slot>
   <slot>createTrainDataEntriesChanged(int)</slot>
-  <slot>enterTrainDateChanged(int)</slot>
+  <slot>totalEmptyTrainerFieldsChanged(int)</slot>
  </slots>
 </ui>

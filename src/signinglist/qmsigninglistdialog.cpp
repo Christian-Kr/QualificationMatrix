@@ -80,7 +80,7 @@ void QMSigningListDialog::accept()
 
     if (ui->cbCreateTrainDataEntries->isChecked())
     {
-        if (ui->cbEnterTrainDate->isChecked())
+        if (ui->gbEnterTrainDate->isChecked())
         {
             // Check permissions for adding training data.
             auto ams = QMAMSManager::getInstance();
@@ -541,7 +541,7 @@ void QMSigningListDialog::paintPdfRequest(QPrinter *printer)
     document.setTrainingName(ui->cbTraining->currentText());
     document.setImagePath(ui->leImagePath->text());
     document.setSortType((EmployeeSort) ui->cbSort->currentIndex());
-    document.setCreateEmptyTrainerFields(ui->cbCreateEmptyTrainerSigningFields->isChecked());
+    document.setCreateEmptyTrainerFields(ui->gbCreateEmptyTrainerFields->isChecked());
     document.createDocument();
 
     // Default printer settings.
@@ -595,16 +595,10 @@ QStringList QMSigningListDialog::getSelectedEmployeeIds() const
     }
 }
 
-[[maybe_unused]] void QMSigningListDialog::enterTrainDateChanged(int state)
+[[maybe_unused]] void QMSigningListDialog::totalEmptyTrainerFieldsChanged(int count)
 {
-    if (state == Qt::CheckState::Checked)
+    if (count % 3 != 0)
     {
-        ui->laTrainDate->setEnabled(true);
-        ui->cwDate->setEnabled(true);
-    }
-    else
-    {
-        ui->laTrainDate->setEnabled(false);
-        ui->cwDate->setEnabled(false);
+        ui->spTotalEmptyTrainerFields->setValue(count / 3 * 3);
     }
 }
