@@ -78,7 +78,7 @@ void QMSigningListDialog::accept()
 
     saveSettings();
 
-    if (ui->cbCreateTrainDataEntries->isChecked())
+    if (ui->gbCreateTrainDataEntries->isChecked())
     {
         if (ui->gbEnterTrainDate->isChecked())
         {
