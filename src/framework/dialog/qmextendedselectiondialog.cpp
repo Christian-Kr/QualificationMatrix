@@ -49,7 +49,13 @@ QMExtendedSelectionDialog::QMExtendedSelectionDialog(QWidget *parent, QAbstractI
 
 QModelIndexList QMExtendedSelectionDialog::getFilterSelected() const
 {
-    return ui->tvSelection->selectionModel()->selectedRows();
+    QModelIndexList sourceList;
+    for (auto modelIndex : ui->tvSelection->selectionModel()->selectedRows())
+    {
+        sourceList.append(filterModel->mapToSource(modelIndex));
+    }
+
+    return sourceList;
 }
 
 void QMExtendedSelectionDialog::updateFilter()
@@ -100,11 +106,12 @@ QStringList QMExtendedSelectionDialog::getSelectedElements() const
     QStringList selection;
 
     auto modelIndexList = getFilterSelected();
+    auto sourceModel = filterModel->sourceModel();
 
     for (auto modelIndex : modelIndexList)
     {
-        auto value = filterModel->data(
-                filterModel->index(modelIndex.row(), filterModel->filterKeyColumn())).toString();
+        auto value = sourceModel->data(
+                sourceModel->index(modelIndex.row(), filterModel->filterKeyColumn())).toString();
         selection << value;
     }
 
