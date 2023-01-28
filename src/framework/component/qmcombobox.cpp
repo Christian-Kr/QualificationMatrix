@@ -18,27 +18,55 @@ QMComboBox::QMComboBox(QWidget *parent)
     , m_focusOutListValidation(false)
 {}
 
+int QMComboBox::findData(const QString &text) const
+{
+    auto elementModel = model();
+    if (elementModel == nullptr)
+    {
+        return -1;
+    }
+
+    auto selectedColumn = modelColumn();
+    auto rowCount = elementModel->rowCount();
+    auto index = -1;
+
+    for (auto i = 0; i < rowCount; i++)
+    {
+        auto element = elementModel->data(elementModel->index(i, selectedColumn), Qt::DisplayRole).toString();
+        if (element.contains(text, Qt::CaseInsensitive)) {
+            index = i;
+            break;
+        }
+    }
+
+    return index;
+}
+
 void QMComboBox::focusOutEvent(QFocusEvent *e)
 {
     if (m_focusOutListValidation)
     {
         // do validation when losing focus to be sure no bad value is in combo box
-        auto index = findData(currentText(), Qt::MatchStartsWith);
+        auto index = findData(currentText());
 
         // if no element fits, try to set one
-        if (index == -1) {
+        if (index == -1)
+        {
             // if there is no element to select, just empty everything
-            if (count() == 0) {
+            if (count() == 0)
+            {
                 setCurrentText("");
                 setCurrentIndex(-1);
             }
                 // if there are possible elements, select the one that fits
-            else {
+            else
+            {
                 setCurrentIndex(0);
             }
         }
             // if any element fits, this might be full or just start with
-        else {
+        else
+        {
             setCurrentIndex(index);
         }
     }

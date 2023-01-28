@@ -35,6 +35,11 @@ public:
     /// \param focusOutValidation true if validation on focus out should be active
     void setFocusOutListValidation(bool focusOutListValidation) {m_focusOutListValidation = focusOutListValidation; }
 
+    /// Find the given text in the current model and return the index.
+    /// \param text the text to find
+    /// \returns the index if found, else -1. if no model has been set, -1 will be returned
+    [[nodiscard]] int findData(const QString &text) const;
+
 protected:
     /// Override from QComboBox
     /// \param e the focus event
