@@ -19,8 +19,7 @@
 
 #include <QDebug>
 
-QMExtendedSelectionDialog::QMExtendedSelectionDialog(QWidget *parent, QAbstractItemModel *model,
-    int column)
+QMExtendedSelectionDialog::QMExtendedSelectionDialog(QWidget *parent, QAbstractItemModel *model, int column)
     : QMDialog(parent)
 {
     ui = new Ui::QMExtendedSelectionDialog;
