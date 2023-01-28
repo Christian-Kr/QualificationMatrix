@@ -20,12 +20,14 @@ QMComboBox::QMComboBox(QWidget *parent)
 
 int QMComboBox::findData(const QString &text) const
 {
+    // try to get the model, if there is non, just return "not found" with -1
     auto elementModel = model();
     if (elementModel == nullptr)
     {
         return -1;
     }
 
+    // go through every element of the model column and search for the element - not that efficient, but it works
     auto selectedColumn = modelColumn();
     auto rowCount = elementModel->rowCount();
     auto index = -1;
