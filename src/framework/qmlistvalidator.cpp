@@ -40,7 +40,7 @@ QValidator::State QMListValidator::validate(QString &input, int &pos) const
 {
     for (const QString &item : *m_list)
     {
-        if (item.startsWith(input))
+        if (item.startsWith(input, Qt::CaseSensitivity::CaseInsensitive))
         {
             return QValidator::State::Acceptable;
         }
