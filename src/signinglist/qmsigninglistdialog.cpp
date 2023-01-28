@@ -54,7 +54,7 @@ QMSigningListDialog::~QMSigningListDialog()
     delete m_trainDataConflictDialog;
 }
 
-[[maybe_unused]] void QMSigningListDialog::openImage()
+void QMSigningListDialog::openImage()
 {
     auto imagePath = QFileDialog::getOpenFileName(
             this, tr("Öffne Bilddatei"), QDir::homePath(), tr("Image Files (*.png *.jpg *.bmp)"));
@@ -581,18 +581,6 @@ QStringList QMSigningListDialog::getSelectedEmployeeIds() const
     }
 
     return tmpLst;
-}
-
-[[maybe_unused]] void QMSigningListDialog::createTrainDataEntriesChanged(int state)
-{
-    if (state == Qt::CheckState::Checked)
-    {
-        ui->cbTrainingState->setEnabled(true);
-    }
-    else
-    {
-        ui->cbTrainingState->setEnabled(false);
-    }
 }
 
 [[maybe_unused]] void QMSigningListDialog::totalEmptyTrainerFieldsChanged(int count)

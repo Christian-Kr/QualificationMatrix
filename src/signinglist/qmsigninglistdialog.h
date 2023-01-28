@@ -116,10 +116,6 @@ public slots:
     /// \param result The result of the dialog (e.g. accepted or rejected).
     [[maybe_unused]] void trainDataConflictDialogFinished(int result);
 
-    /// Called when the check box state of the train data creation changed.
-    /// \param state The state of a qt check box.
-    [[maybe_unused]] void createTrainDataEntriesChanged(int state);
-
     /// Called when the value of the total empty trainer fields changed.
     /// \param count The new value.
     [[maybe_unused]] void totalEmptyTrainerFieldsChanged(int count);
