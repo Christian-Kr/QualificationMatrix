@@ -44,31 +44,31 @@ public:
 
     /// Set the employees.
     /// \param employees List with employees to print.
-    void setEmployees(QStringList employees) { m_employees = employees; }
+    void setEmployees(const QStringList &employees) { m_employees = employees; }
 
     /// Set the trainer name.
     /// \param trainer Name of the trainer.
-    void setTrainer(QString trainer) { m_trainer = trainer; }
+    void setTrainer(const QString &trainer) { m_trainer = trainer; }
 
     /// Set the organisation doing the training.
     /// \param organisation The organisation doing the training.
-    void setOrganisationName(QString organisation) { m_organisation = organisation; }
+    void setOrganisationName(const QString &organisation) { m_organisation = organisation; }
 
     /// Set the name of the training.
     /// \param train The training name.
-    void setTrainingName(QString train) { m_train = train; }
+    void setTrainingName(const QString &train) { m_train = train; }
 
     /// Set the description of the training contents.
     /// \param contents The contents of the training.
-    void setTrainingContents(QString contents) { m_contents = contents; }
+    void setTrainingContents(const QString &contents) { m_contents = contents; }
 
     /// Set date of the training.
     /// \param date The date of the training.
-    void setTrainingDate(QDate date) { m_date = date; }
+    void setTrainingDate(const QDate &date) { m_date = date; }
 
     /// Set path of image.
     /// \param path
-    void setImagePath(QString path) { m_imagePath = path; }
+    void setImagePath(const QString &path) { m_imagePath = path; }
 
     /// Set empty rows for unknown employees.
     /// \param emptyEmployees
