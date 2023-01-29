@@ -20,11 +20,11 @@ const int NUM_EMPTY_TRAINER_FIELDS = 3;
 
 QMSigningListDocument::QMSigningListDocument(QObject *parent)
     : QTextDocument(parent)
-{
-    m_emptyEmployees = 0;
-    m_sortType = EmployeeSort::SortNo;
-    m_createEmptyTrainerFields = false;
-}
+    , m_emptyEmployees(0)
+    , m_sortType(EmployeeSort::SortNo)
+    , m_createEmptyTrainerFields(false)
+    , m_insertTrainingDate(true)
+{}
 
 void QMSigningListDocument::createDocument()
 {

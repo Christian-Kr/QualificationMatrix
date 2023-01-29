@@ -81,10 +81,14 @@ public:
     /// Create the document with all the content.
     void createDocument();
 
+    /// Add training date.
+    /// \param insert true if insert training date, else false
+    void setInsertTrainingDate(bool insert) { m_insertTrainingDate = insert; }
+
 private:
     int m_emptyEmployees;
     bool m_createEmptyTrainerFields;
-    bool m_insertTrainerDate;
+    bool m_insertTrainingDate;
     EmployeeSort m_sortType;
     QStringList m_employees;
     QString m_trainer;
