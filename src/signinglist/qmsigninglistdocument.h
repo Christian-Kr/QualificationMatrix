@@ -60,23 +60,23 @@ public:
 
     /// Set the description of the training contents.
     /// \param contents The contents of the training.
-    void setTrainingContents(QString contents) { this->contents = contents; }
+    void setTrainingContents(QString contents) { m_contents = contents; }
 
     /// Set date of the training.
     /// \param date The date of the training.
-    void setTrainingDate(QDate date) { this->date = date; }
+    void setTrainingDate(QDate date) { m_date = date; }
 
     /// Set path of image.
     /// \param path
-    void setImagePath(QString path) { imagePath = path; }
+    void setImagePath(QString path) { m_imagePath = path; }
 
     /// Set empty rows for unknown employees.
     /// \param emptyEmployees
-    void setEmptyEmployees(int emptyEmployees) { this->m_emptyEmployees = emptyEmployees; }
+    void setEmptyEmployees(int emptyEmployees) { m_emptyEmployees = emptyEmployees; }
 
     /// Create empty signing fields for the trainer.
     /// \param createEmptyTrainerFields
-    void setCreateEmptyTrainerFields(bool createEmptyTrainerFields) { this->m_createEmptyTrainerFields = createEmptyTrainerFields; }
+    void setCreateEmptyTrainerFields(bool createEmptyTrainerFields) { m_createEmptyTrainerFields = createEmptyTrainerFields; }
 
     /// Create the document with all the content.
     void createDocument();
@@ -90,9 +90,9 @@ private:
     QString m_trainer;
     QString m_organisation;
     QString m_train;
-    QString contents;
-    QDate date;
-    QString imagePath;
+    QString m_contents;
+    QDate m_date;
+    QString m_imagePath;
 };
 
 

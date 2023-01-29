@@ -45,9 +45,9 @@ void QMSigningListDocument::createDocument()
     table->setFormat(tableFormat);
 
     // Fill header table with text.
-    cursor.insertImage(imagePath);
+    cursor.insertImage(m_imagePath);
     cursor.movePosition(QTextCursor::NextCell);
-    cursor.insertText(tr("Unterweisung am: %1").arg(date.toString("dd.MM.yyyy")));
+    cursor.insertText(tr("Unterweisung am: %1").arg(m_date.toString("dd.MM.yyyy")));
     cursor.movePosition(QTextCursor::NextCell);
     cursor.insertText(tr("Organisation: %1").arg(m_organisation));
     cursor.movePosition(QTextCursor::NextCell);
@@ -91,7 +91,7 @@ void QMSigningListDocument::createDocument()
     cursor.insertText(tr("Inhalte: "), textFormat);
     cursor.movePosition(QTextCursor::NextCell);
 
-    cursor.insertText(contents, textFormat);
+    cursor.insertText(m_contents, textFormat);
     cursor.movePosition(QTextCursor::NextCell);
 
     // Format table cells.
