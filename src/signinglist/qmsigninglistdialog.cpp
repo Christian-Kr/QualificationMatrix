@@ -542,6 +542,7 @@ void QMSigningListDialog::paintPdfRequest(QPrinter *printer)
     document.setImagePath(ui->leImagePath->text());
     document.setSortType((EmployeeSort) ui->cbSort->currentIndex());
     document.setCreateEmptyTrainerFields(ui->gbCreateEmptyTrainerFields->isChecked());
+    document.setNumberEmptyTrainerFields(ui->spTotalEmptyTrainerFields->value());
     document.setInsertTrainingDate(ui->gbEnterTrainDate->isChecked());
     document.createDocument();
 

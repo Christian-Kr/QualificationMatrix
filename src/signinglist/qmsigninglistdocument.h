@@ -76,7 +76,8 @@ public:
 
     /// Create empty signing fields for the trainer.
     /// \param createEmptyTrainerFields
-    void setCreateEmptyTrainerFields(bool createEmptyTrainerFields) { m_createEmptyTrainerFields = createEmptyTrainerFields; }
+    void setCreateEmptyTrainerFields(bool createEmptyTrainerFields)
+            { m_createEmptyTrainerFields = createEmptyTrainerFields; }
 
     /// Create the document with all the content.
     void createDocument();
@@ -85,7 +86,12 @@ public:
     /// \param insert true if insert training date, else false
     void setInsertTrainingDate(bool insert) { m_insertTrainingDate = insert; }
 
+    /// Add the given number of empty trainer fields.
+    /// \param numberEmptyTrainerFields the total number of empty trainer fields
+    void setNumberEmptyTrainerFields(int numberEmptyTrainerFields);
+
 private:
+    int m_numberEmptyTrainerFields;
     int m_emptyEmployees;
     bool m_createEmptyTrainerFields;
     bool m_insertTrainingDate;

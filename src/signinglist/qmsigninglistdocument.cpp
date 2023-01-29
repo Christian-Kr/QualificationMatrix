@@ -24,6 +24,7 @@ QMSigningListDocument::QMSigningListDocument(QObject *parent)
     , m_sortType(EmployeeSort::SortNo)
     , m_createEmptyTrainerFields(false)
     , m_insertTrainingDate(true)
+    , m_numberEmptyTrainerFields(1)
 {}
 
 void QMSigningListDocument::createDocument()
@@ -47,7 +48,14 @@ void QMSigningListDocument::createDocument()
     // Fill header table with text.
     cursor.insertImage(m_imagePath);
     cursor.movePosition(QTextCursor::NextCell);
-    cursor.insertText(tr("Unterweisung am: %1").arg(m_date.toString("dd.MM.yyyy")));
+    if (m_insertTrainingDate)
+    {
+        cursor.insertText(tr("Unterweisung am: %1").arg(m_date.toString("dd.MM.yyyy")));
+    }
+    else
+    {
+        cursor.insertText(tr("Unterweisung am:"));
+    }
     cursor.movePosition(QTextCursor::NextCell);
     cursor.insertText(tr("Organisation: %1").arg(m_organisation));
     cursor.movePosition(QTextCursor::NextCell);
@@ -233,31 +241,46 @@ void QMSigningListDocument::createDocument()
         cursor.movePosition(QTextCursor::NextBlock);
         cursor.insertHtml("<br>");
 
-        // Additional signing fields for the trainer.
-        QTextTable *addTrainerTable = cursor.insertTable(4, 3);
-        addTrainerTable->setFormat(tableFormat);
+        for (auto j = 0; j < m_numberEmptyTrainerFields; j++)
+        {
+            // Additional signing fields for the trainer.
+            QTextTable *addTrainerTable = cursor.insertTable(4, 3);
+            addTrainerTable->setFormat(tableFormat);
 
-        // Fill header table with text.
-        for (int i = 0; i < NUM_EMPTY_TRAINER_FIELDS; i++)
-        {
-            cursor.insertText(tr("Unterweisung am: "));
-            cursor.movePosition(QTextCursor::NextCell);
+            // Fill header table with text.
+            for (int i = 0; i < NUM_EMPTY_TRAINER_FIELDS; i++)
+            {
+                cursor.insertText(tr("Unterweisung am: "));
+                cursor.movePosition(QTextCursor::NextCell);
+            }
+            for (int i = 0; i < NUM_EMPTY_TRAINER_FIELDS; i++)
+            {
+                cursor.insertText(tr("Organisation: "));
+                cursor.movePosition(QTextCursor::NextCell);
+            }
+            for (int i = 0; i < NUM_EMPTY_TRAINER_FIELDS; i++)
+            {
+                cursor.insertText(tr("Unterweisender: "));
+                cursor.movePosition(QTextCursor::NextCell);
+            }
+            for (int i = 0; i < NUM_EMPTY_TRAINER_FIELDS; i++)
+            {
+                cursor.insertText(tr("Unterschrift: "));
+                cursor.movePosition(QTextCursor::NextCell);
+            }
+            cursor.movePosition(QTextCursor::NextBlock);
+            cursor.insertHtml("<br>");
         }
-        for (int i = 0; i < NUM_EMPTY_TRAINER_FIELDS; i++)
-        {
-            cursor.insertText(tr("Organisation: "));
-            cursor.movePosition(QTextCursor::NextCell);
-        }
-        for (int i = 0; i < NUM_EMPTY_TRAINER_FIELDS; i++)
-        {
-            cursor.insertText(tr("Unterweisender: "));
-            cursor.movePosition(QTextCursor::NextCell);
-        }
-        for (int i = 0; i < NUM_EMPTY_TRAINER_FIELDS; i++)
-        {
-            cursor.insertText(tr("Unterschrift: "));
-            cursor.movePosition(QTextCursor::NextCell);
-        }
-        cursor.movePosition(QTextCursor::NextBlock);
     }
+}
+
+void QMSigningListDocument::setNumberEmptyTrainerFields(int numberEmptyTrainerFields)
+{
+    // only set number if it is a number times 3
+    if (numberEmptyTrainerFields % 3 != 0)
+    {
+        return;
+    }
+
+    m_numberEmptyTrainerFields = numberEmptyTrainerFields / 3;
 }
