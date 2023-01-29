@@ -21,8 +21,8 @@ const int NUM_EMPTY_TRAINER_FIELDS = 3;
 QMSigningListDocument::QMSigningListDocument(QObject *parent)
     : QTextDocument(parent)
 {
-    emptyEmployees = 0;
-    sortType = EmployeeSort::SortNo;
+    m_emptyEmployees = 0;
+    m_sortType = EmployeeSort::SortNo;
     m_createEmptyTrainerFields = false;
 }
 
@@ -49,9 +49,9 @@ void QMSigningListDocument::createDocument()
     cursor.movePosition(QTextCursor::NextCell);
     cursor.insertText(tr("Unterweisung am: %1").arg(date.toString("dd.MM.yyyy")));
     cursor.movePosition(QTextCursor::NextCell);
-    cursor.insertText(tr("Organisation: %1").arg(organisation));
+    cursor.insertText(tr("Organisation: %1").arg(m_organisation));
     cursor.movePosition(QTextCursor::NextCell);
-    cursor.insertText(tr("Unterweisender: %1").arg(trainer));
+    cursor.insertText(tr("Unterweisender: %1").arg(m_trainer));
     cursor.movePosition(QTextCursor::NextCell);
     cursor.insertText(tr("Unterschrift:"));
     cursor.movePosition(QTextCursor::NextBlock);
@@ -84,7 +84,7 @@ void QMSigningListDocument::createDocument()
     cursor.insertText(tr("Thema: "), textFormat);
     cursor.movePosition(QTextCursor::NextCell);
 
-    cursor.insertText(train, textFormat);
+    cursor.insertText(m_train, textFormat);
     cursor.movePosition(QTextCursor::NextCell);
 
     textFormat.setFontPointSize(10);
@@ -102,7 +102,7 @@ void QMSigningListDocument::createDocument()
     cursor.movePosition(QTextCursor::NextBlock);
     cursor.insertHtml("<br><br>");
     cursor.movePosition(QTextCursor::NextBlock);
-    QTextTable *employeeTable = cursor.insertTable(employees.size() + 1 + emptyEmployees, 4);
+    QTextTable *employeeTable = cursor.insertTable(m_employees.size() + 1 + m_emptyEmployees, 4);
 
     QTextTableFormat employeeTableFormat = employeeTable->format();
     employeeTableFormat.setCellPadding(4);
@@ -144,11 +144,11 @@ void QMSigningListDocument::createDocument()
     employeeTable->cellAt(0, 3).setFormat(format);
 
     // Sort the list of employees.
-    switch (sortType)
+    switch (m_sortType)
     {
     case EmployeeSort::SortFirstName:
-        std::sort(employees.begin(), employees.end(),
-        [this](const QString &test1, const QString &test2) -> bool {
+        std::sort(m_employees.begin(), m_employees.end(),
+                  [this](const QString &test1, const QString &test2) -> bool {
             QString test1n;
             if (test1.contains("Dr"))
             {
@@ -189,8 +189,8 @@ void QMSigningListDocument::createDocument()
         });
         break;
     case EmployeeSort::SortLastName:
-        std::sort(employees.begin(), employees.end(),
-        [this](const QString &test1, const QString &test2) -> bool {
+        std::sort(m_employees.begin(), m_employees.end(),
+                  [this](const QString &test1, const QString &test2) -> bool {
           QString test1n = test1.split(" ").last();
           QString test2n = test2.split(" ").last();
           return test1n < test2n;
@@ -201,15 +201,15 @@ void QMSigningListDocument::createDocument()
     }
 
     // Go through all header cells and set them.
-    for (int i = 1; i < employees.size() + 1 + emptyEmployees; i++)
+    for (int i = 1; i < m_employees.size() + 1 + m_emptyEmployees; i++)
     {
         if (i > 0)
         {
             cursor.insertText(QString::number(i), textFormat);
             cursor.movePosition(QTextCursor::NextCell);
 
-            if (i < employees.size() + 1) {
-                cursor.insertText(employees.at(i - 1), textFormat);
+            if (i < m_employees.size() + 1) {
+                cursor.insertText(m_employees.at(i - 1), textFormat);
             }
 
             cursor.movePosition(QTextCursor::NextCell);

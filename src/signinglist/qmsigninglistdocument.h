@@ -40,23 +40,23 @@ public:
 
     /// Set sort type for employees.
     /// \param sortType
-    void setSortType(EmployeeSort sortType) { this->sortType = sortType; }
+    void setSortType(EmployeeSort sortType) { this->m_sortType = sortType; }
 
     /// Set the employees.
     /// \param employees List with employees to print.
-    void setEmployees(QStringList employees) { this->employees = employees; }
+    void setEmployees(QStringList employees) { this->m_employees = employees; }
 
     /// Set the trainer name.
     /// \param trainer Name of the trainer.
-    void setTrainer(QString trainer) { this->trainer = trainer; }
+    void setTrainer(QString trainer) { this->m_trainer = trainer; }
 
     /// Set the organisation doing the training.
     /// \param organisation The organisation doing the training.
-    void setOrganisationName(QString organisation) { this->organisation = organisation; }
+    void setOrganisationName(QString organisation) { this->m_organisation = organisation; }
 
     /// Set the name of the training.
     /// \param train The training name.
-    void setTrainingName(QString train) { this->train = train; }
+    void setTrainingName(QString train) { this->m_train = train; }
 
     /// Set the description of the training contents.
     /// \param contents The contents of the training.
@@ -72,7 +72,7 @@ public:
 
     /// Set empty rows for unknown employees.
     /// \param emptyEmployees
-    void setEmptyEmployees(int emptyEmployees) { this->emptyEmployees = emptyEmployees; }
+    void setEmptyEmployees(int emptyEmployees) { this->m_emptyEmployees = emptyEmployees; }
 
     /// Create empty signing fields for the trainer.
     /// \param createEmptyTrainerFields
@@ -82,13 +82,14 @@ public:
     void createDocument();
 
 private:
-    int emptyEmployees;
+    int m_emptyEmployees;
     bool m_createEmptyTrainerFields;
-    EmployeeSort sortType;
-    QStringList employees;
-    QString trainer;
-    QString organisation;
-    QString train;
+    bool m_insertTrainerDate;
+    EmployeeSort m_sortType;
+    QStringList m_employees;
+    QString m_trainer;
+    QString m_organisation;
+    QString m_train;
     QString contents;
     QDate date;
     QString imagePath;
