@@ -558,7 +558,8 @@ void QMSigningListDialog::paintPdfRequest(QPrinter *printer)
         return;
     }
 
-    if (!ui->leTrainDetails->toPlainText().isEmpty())
+    auto plainText = ui->leTrainDetails->toPlainText();
+    if (!plainText.isEmpty() && contentDesc.compare(plainText) != 0)
     {
         auto res = QMessageBox::question(this, tr("Unterschriftenliste"),
             tr("Soll der existierende Inhalt der Schulungsdetails durch die Standardbeschreibung"
