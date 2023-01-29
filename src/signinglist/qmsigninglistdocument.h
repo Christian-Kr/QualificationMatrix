@@ -40,23 +40,23 @@ public:
 
     /// Set sort type for employees.
     /// \param sortType
-    void setSortType(EmployeeSort sortType) { this->m_sortType = sortType; }
+    void setSortType(EmployeeSort sortType) { m_sortType = sortType; }
 
     /// Set the employees.
     /// \param employees List with employees to print.
-    void setEmployees(QStringList employees) { this->m_employees = employees; }
+    void setEmployees(QStringList employees) { m_employees = employees; }
 
     /// Set the trainer name.
     /// \param trainer Name of the trainer.
-    void setTrainer(QString trainer) { this->m_trainer = trainer; }
+    void setTrainer(QString trainer) { m_trainer = trainer; }
 
     /// Set the organisation doing the training.
     /// \param organisation The organisation doing the training.
-    void setOrganisationName(QString organisation) { this->m_organisation = organisation; }
+    void setOrganisationName(QString organisation) { m_organisation = organisation; }
 
     /// Set the name of the training.
     /// \param train The training name.
-    void setTrainingName(QString train) { this->m_train = train; }
+    void setTrainingName(QString train) { m_train = train; }
 
     /// Set the description of the training contents.
     /// \param contents The contents of the training.
