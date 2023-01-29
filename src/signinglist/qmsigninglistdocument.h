@@ -28,7 +28,7 @@ enum class EmployeeSort { SortNo = 0, SortFirstName = 1, SortLastName = 2 };
 /// \author Christian Kr, Copyright 2020
 class QMSigningListDocument: public QTextDocument
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /// Constructor
