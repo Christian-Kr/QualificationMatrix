@@ -28,6 +28,7 @@ QMExtendedSelectionDialog::QMExtendedSelectionDialog(QWidget *parent, QAbstractI
     filterModel = new QSortFilterProxyModel(this);
     filterModel->setSourceModel(model);
     filterModel->setFilterKeyColumn(column);
+    filterModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
 
     // Be sure only settings will be called, that are available during this state.
     loadSettings();
