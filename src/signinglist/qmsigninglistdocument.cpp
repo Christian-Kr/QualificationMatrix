@@ -235,12 +235,6 @@ void QMSigningListDocument::createDocument()
 
     if (m_createEmptyTrainerFields)
     {
-        textHeaderFormat.setFontPointSize(14);
-        cursor.insertHtml("<br><br>");
-        cursor.insertText(tr("Zusätzliche Leerfelder des Schlungsdurchführenden"), textHeaderFormat);
-        cursor.movePosition(QTextCursor::NextBlock);
-        cursor.insertHtml("<br>");
-
         for (auto j = 0; j < m_numberEmptyTrainerFields; j++)
         {
             // Additional signing fields for the trainer.
