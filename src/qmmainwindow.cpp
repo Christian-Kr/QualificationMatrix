@@ -378,12 +378,12 @@ void QMMainWindow::closeProgress()
     }
 }
 
-[[maybe_unused]] void QMMainWindow::showAboutQt()
+void QMMainWindow::showAboutQt()
 {
     QMessageBox::aboutQt(this);
 }
 
-[[maybe_unused]] void QMMainWindow::showAbout()
+void QMMainWindow::showAbout()
 {
     QMessageBox::about(this, tr("Über QualificationMatrix"),
             tr("Copyright (c) 2020 by Christian Kr"
@@ -458,7 +458,7 @@ void QMMainWindow::saveSettings()
     settings.write("MainWin/Maximized", testFlag);
 }
 
-[[maybe_unused]] void QMMainWindow::showSettings()
+void QMMainWindow::showSettings()
 {
     WIN_MODE tmpMode = winMode;
 
@@ -481,7 +481,7 @@ void QMMainWindow::saveSettings()
     enterWindowMode(tmpMode);
 }
 
-[[maybe_unused]] void QMMainWindow::addCertificate()
+void QMMainWindow::addCertificate()
 {
     // exit if no permission for current user
     auto amsManager = QMAMSManager::getInstance();
@@ -509,13 +509,13 @@ void QMMainWindow::saveSettings()
     m_newCertificateDialog->open();
 }
 
-[[maybe_unused]] void QMMainWindow::addCertificateFinished(int)
+void QMMainWindow::addCertificateFinished(int)
 {
     m_newCertificateDialog->saveSettings();
     m_newCertificateDialog.reset();
 }
 
-[[maybe_unused]] void QMMainWindow::manageCertificate()
+void QMMainWindow::manageCertificate()
 {
     // If do not have the permission, make a lot of stuff disabled.
     auto amsManager = QMAMSManager::getInstance();
@@ -538,7 +538,7 @@ void QMMainWindow::saveSettings()
     certDialog.exec();
 }
 
-[[maybe_unused]] void QMMainWindow::showCertificateIntegrityCheck()
+void QMMainWindow::showCertificateIntegrityCheck()
 {
     auto &settings = QMApplicationSettings::getInstance();
 
@@ -553,23 +553,23 @@ void QMMainWindow::saveSettings()
     certIntCheckDialog.exec();
 }
 
-[[maybe_unused]] void QMMainWindow::showCreateSigningList()
+void QMMainWindow::showCreateSigningList()
 {
     m_signingListDialog->updateData();
     m_signingListDialog->open();
 }
 
-[[maybe_unused]] void QMMainWindow::enterResultMode()
+void QMMainWindow::enterResultMode()
 {
     enterWindowMode(WIN_MODE::RESULT);
 }
 
-[[maybe_unused]] void QMMainWindow::enterQualiMatrixMode()
+void QMMainWindow::enterQualiMatrixMode()
 {
     enterWindowMode(WIN_MODE::MATRIX);
 }
 
-[[maybe_unused]] void QMMainWindow::enterTrainingDataMode()
+void QMMainWindow::enterTrainingDataMode()
 {
     enterWindowMode(WIN_MODE::TRAININGDATA);
 }
