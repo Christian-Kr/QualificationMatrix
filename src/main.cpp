@@ -79,8 +79,8 @@ void initShowMainWindow(QMMainWindow &mainWin)
     }
     else
     {
-        auto savedWidth = settings.read("MainWin/Width", 500).toInt();
-        auto savedHeight = settings.read("MainWin/Height", 500).toInt();
+        auto savedWidth = settings.read("MainWin/Width", 800).toInt();
+        auto savedHeight = settings.read("MainWin/Height", 800).toInt();
 
         mainWin.resize(savedWidth, savedHeight);
         mainWin.move(screen->geometry().x() + (screen->geometry().width() - savedWidth) / 2, screen->geometry().y() +
