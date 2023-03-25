@@ -139,18 +139,30 @@ bool QMMainWindow::manageDatabaseFromSettings()
 
 void QMMainWindow::manageDatabase()
 {
-    // Before the dialog for managing a database will be shown, close a currently loaded one.
+    // Before a new database will be opened, close the current one.
     if (QSqlDatabase::contains("default") && QSqlDatabase::database("default", false).isOpen())
     {
-        auto res = QMessageBox::question(this, tr("Datenbank verwalten"),
-                tr("Es besteht bereits eine Verbindung zu einer Datenbank. Jetzt trennen?"),
-                QMessageBox::Yes | QMessageBox::No);
+        QMessageBox messageBox(this);
 
-        if (res == QMessageBox::No)
+        messageBox.setWindowTitle(tr("Datenbank öffnen"));
+        messageBox.setText(tr("Eine Datenbank ist bereits geöffnet."));
+        messageBox.setInformativeText(
+                tr("Wenn du fortfährst, wird die aktuelle Datebank geschlossen. "
+                   "Dabei können nicht gespeicherte Daten verloren gehen.\n\n"
+                   "Möchtest du trotzdem eine andere Datenbank öffnen?\n"));
+        messageBox.setIcon(QMessageBox::Icon::Question);
+        messageBox.setStandardButtons(QMessageBox::StandardButton::Yes | QMessageBox::StandardButton::Cancel);
+
+        auto buttonYes = messageBox.button(QMessageBox::StandardButton::Yes);
+        Q_ASSERT(buttonYes != nullptr);
+        buttonYes->setText(tr("Datenbank öffnen"));
+
+        if (messageBox.exec() != QMessageBox::Yes)
         {
             return;
         }
 
+        // TODO: Maybe inside closeDatabase(...) there should not asked again for closing.
         closeDatabase();
     }
 
