@@ -182,7 +182,7 @@
   <action name="actOpenDatabase">
    <property name="icon">
     <iconset resource="../rcs/icons.qrc">
-     <normaloff>:/icons/icons/lc_viewdatasourcebrowser.png</normaloff>:/icons/icons/lc_viewdatasourcebrowser.png</iconset>
+     <normaloff>:/icons/line-awesome/svg/icons/line-awesome/folder-open-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/folder-open-solid.svg</iconset>
    </property>
    <property name="text">
     <string>&amp;Datenbank öffnen</string>
@@ -205,7 +205,7 @@
   <action name="actAbout">
    <property name="icon">
     <iconset resource="../rcs/icons.qrc">
-     <normaloff>:/icons/icons/lc_helpindex.png</normaloff>:/icons/icons/lc_helpindex.png</iconset>
+     <normaloff>:/icons/line-awesome/svg/icons/line-awesome/question-circle-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/question-circle-solid.svg</iconset>
    </property>
    <property name="text">
     <string>&amp;Über QualificationMatrix</string>
@@ -217,7 +217,7 @@
   <action name="actSettings">
    <property name="icon">
     <iconset resource="../rcs/icons.qrc">
-     <normaloff>:/icons/icons/lc_configuredialog.png</normaloff>:/icons/icons/lc_configuredialog.png</iconset>
+     <normaloff>:/icons/line-awesome/svg/icons/line-awesome/tools-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/tools-solid.svg</iconset>
    </property>
    <property name="text">
     <string>&amp;Einstellungen</string>
@@ -271,7 +271,7 @@
   <action name="actCreateSigningList">
    <property name="icon">
     <iconset resource="../rcs/icons.qrc">
-     <normaloff>:/icons/icons/lc_signaturelinedialog.png</normaloff>:/icons/icons/lc_signaturelinedialog.png</iconset>
+     <normaloff>:/icons/line-awesome/svg/icons/line-awesome/th-list-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/th-list-solid.svg</iconset>
    </property>
    <property name="text">
     <string>&amp;Unterschriftenliste erstellen</string>
@@ -283,7 +283,7 @@
    </property>
    <property name="icon">
     <iconset resource="../rcs/icons.qrc">
-     <normaloff>:/icons/icons/lc_dbqueryrename.png</normaloff>:/icons/icons/lc_dbqueryrename.png</iconset>
+     <normaloff>:/icons/line-awesome/svg/icons/line-awesome/list-alt.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/list-alt.svg</iconset>
    </property>
    <property name="text">
     <string>Qualifizierungsergebnis</string>
@@ -298,7 +298,7 @@
    </property>
    <property name="icon">
     <iconset resource="../rcs/icons.qrc">
-     <normaloff>:/icons/icons/lc_dbviewtables.png</normaloff>:/icons/icons/lc_dbviewtables.png</iconset>
+     <normaloff>:/icons/line-awesome/svg/icons/line-awesome/table-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/table-solid.svg</iconset>
    </property>
    <property name="text">
     <string>Qualifzierungsmatrix</string>
@@ -313,7 +313,7 @@
    </property>
    <property name="icon">
     <iconset resource="../rcs/icons.qrc">
-     <normaloff>:/icons/icons/lc_dbreportedit.png</normaloff>:/icons/icons/lc_dbreportedit.png</iconset>
+     <normaloff>:/icons/line-awesome/svg/icons/line-awesome/file-alt.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/file-alt.svg</iconset>
    </property>
    <property name="text">
     <string>Schulungsdaten</string>
@@ -341,7 +341,7 @@
   <action name="actAMS">
    <property name="icon">
     <iconset resource="../rcs/icons.qrc">
-     <normaloff>:/icons/icons/lc_dbviewaliases.png</normaloff>:/icons/icons/lc_dbviewaliases.png</iconset>
+     <normaloff>:/icons/line-awesome/svg/icons/line-awesome/user-times-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/user-times-solid.svg</iconset>
    </property>
    <property name="text">
     <string>Benutzerverwaltung</string>
@@ -358,7 +358,7 @@
   <action name="actAddCertificate">
    <property name="icon">
     <iconset resource="../rcs/icons.qrc">
-     <normaloff>:/icons/icons/lc_setreminder.png</normaloff>:/icons/icons/lc_setreminder.png</iconset>
+     <normaloff>:/icons/line-awesome/svg/icons/line-awesome/file-upload-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/file-upload-solid.svg</iconset>
    </property>
    <property name="text">
     <string>Nachweis hinzufügen</string>

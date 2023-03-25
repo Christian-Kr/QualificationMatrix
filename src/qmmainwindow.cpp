@@ -821,11 +821,11 @@ void QMMainWindow::handleLoginChange(LoginState, LoginState current)
         auto am = QMAMSManager::getInstance();
 
         tbAMS->setText(am->getLoginUserName());
-        tbAMS->setIcon(QIcon(":/icons/icons/im-user-online.svg"));
+        tbAMS->setIcon(QIcon(":/icons/line-awesome/svg/icons/line-awesome/user-check-solid.svg"));
     }
     else
     {
-        tbAMS->setIcon(QIcon(":/icons/icons/im-user-offline.svg"));
+        tbAMS->setIcon(QIcon(":/icons/line-awesome/svg/icons/line-awesome/user-times-solid.svg"));
         tbAMS->setText("");
     }
 }
