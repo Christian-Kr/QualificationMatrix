@@ -566,7 +566,8 @@
            </property>
            <property name="icon">
             <iconset resource="../rcs/icons.qrc">
-             <normaloff>:/icons/line-awesome/svg/icons/line-awesome/lock-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/lock-solid.svg</iconset>
+             <normaloff>:/icons/line-awesome/svg/icons/line-awesome/lock-solid.svg</normaloff>
+             <normalon>:/icons/line-awesome/svg/icons/line-awesome/lock-open-solid.svg</normalon>:/icons/line-awesome/svg/icons/line-awesome/lock-solid.svg</iconset>
            </property>
            <property name="iconSize">
             <size>
