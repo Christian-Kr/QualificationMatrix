@@ -294,8 +294,8 @@ void QMSettingsDialog::windowLoaded()
 {
     auto &settings = QMApplicationSettings::getInstance();
 
-    auto width = settings.read("SettingsWin/Width", 500).toInt();
-    auto height = settings.read("SettingsWin/Height", 500).toInt();
+    auto width = settings.read("SettingsWin/Width", 800).toInt();
+    auto height = settings.read("SettingsWin/Height", 600).toInt();
     resize(width, height);
 
     auto parent = dynamic_cast<QWidget *>(this->parent());
