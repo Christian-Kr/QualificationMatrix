@@ -30,7 +30,7 @@ QMAMSLoginDialog::~QMAMSLoginDialog()
     delete ui;
 }
 
-void QMAMSLoginDialog::setUsername(QString name)
+void QMAMSLoginDialog::setUsername(const QString &name)
 {
     ui->leUsername->setText(name);
     ui->lePassword->setFocus();
