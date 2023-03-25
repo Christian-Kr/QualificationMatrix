@@ -54,8 +54,6 @@
 #include <QWindow>
 #include <QStatusBar>
 #include <QToolButton>
-#include <QFileDialog>
-#include <QProcess>
 
 QMMainWindow::QMMainWindow(QWidget *parent)
     : QMainWindow(parent)
