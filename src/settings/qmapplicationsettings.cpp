@@ -41,21 +41,10 @@ void QMApplicationSettings::initLocal()
 {
     delete local;
 
-    // On apple system use the internal system, which has less problems with write access etc. On all other systems
-    // (linux and win) use the init system.
-
-#ifdef __APPLE__
-    local = new QSettings(
-        QSettings::NativeFormat, QSettings::UserScope, QCoreApplication::organizationName(),
-        QCoreApplication::applicationName()
-    );
-#else
     local = new QSettings(
         QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(),
         QCoreApplication::applicationName()
     );
-#endif
-
 }
 
 void QMApplicationSettings::initCentralized()
@@ -141,13 +130,19 @@ QVariant QMApplicationSettings::read(const QString &name)
 
     if (local != nullptr)
     {
-        auto tmp = local->value(name);
-        return tmp;
+        // If only value gets called and the setting does not exist, it will create a variant object with a default
+        // value. Therefore, you cannot just ask with function value(...) to know whether the setting exist or not.
+
+        if (!local->contains(name))
+        {
+            return {};
+        }
+        else
+        {
+            return local->value(name);
+        }
     }
 
-    // If local object is not set, return default and log.
-
-    qWarning() << "Calling a settings value although the local object does not exist.";
     return {};
 }
 

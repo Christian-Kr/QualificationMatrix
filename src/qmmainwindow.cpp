@@ -98,6 +98,40 @@ QMMainWindow::~QMMainWindow()
     delete ui;
 }
 
+void QMMainWindow::initCentralizedConfiguration()
+{
+    auto &settings = QMApplicationSettings::getInstance();
+    auto firstStart = settings.read("General/FirstStart", true).toBool();
+
+    // if application has not been started for the first time, just go on with starting the application
+    if (!firstStart)
+    {
+        return;
+    }
+
+    // ask whether the user wants to load a template config file to make configuration faster
+    QMessageBox messageBox(this);
+
+    messageBox.setStandardButtons(QMessageBox::StandardButton::Yes | QMessageBox::StandardButton::No);
+    messageBox.setWindowTitle(tr("Erster Start"));
+    messageBox.setIcon(QMessageBox::Icon::Question);
+    messageBox.setText(tr("Die Anwendung wird scheinbar das erste Mal gestartet."));
+    messageBox.setInformativeText(tr("Möchtest du eine zentrale Konfiguration laden?\n"));
+
+    QAbstractButton *buttonYes = messageBox.button(QMessageBox::StandardButton::Yes);
+    Q_ASSERT(buttonYes != nullptr);
+    buttonYes->setText(tr("Konfiguration laden"));
+
+    QAbstractButton *buttonNo = messageBox.button(QMessageBox::StandardButton::No);
+    Q_ASSERT(buttonNo != nullptr);
+    buttonNo->setText(tr("Ohne fortfahren"));
+
+    messageBox.exec();
+
+    // safe variable, that first start has been done
+    settings.write("General/FirstStart", false);
+}
+
 void QMMainWindow::initDatabaseSettings()
 {
     auto &settings = QMApplicationSettings::getInstance();

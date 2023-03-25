@@ -22,6 +22,8 @@
 #include <QLibraryInfo>
 #include <QDir>
 #include <QtGlobal>
+#include <QMessageBox>
+#include <QObject>
 
 #include <QDebug>
 
@@ -79,7 +81,7 @@ void initShowMainWindow(QMMainWindow &mainWin)
     }
     else
     {
-        auto savedWidth = settings.read("MainWin/Width", 800).toInt();
+        auto savedWidth = settings.read("MainWin/Width", 1000).toInt();
         auto savedHeight = settings.read("MainWin/Height", 800).toInt();
 
         mainWin.resize(savedWidth, savedHeight);
@@ -88,6 +90,10 @@ void initShowMainWindow(QMMainWindow &mainWin)
 
         mainWin.show();
     }
+
+    // Initialize the centralized configuration. This is just a test whether the first-start-progress has been run. If
+    // not, just ask if the user wants to load a centralized configuration file.
+    mainWin.initCentralizedConfiguration();
 
     // Load database on startup. If there are some settings for automatic loading of database on startup, follow
     // them. Otherwise show the manage database dialog, cause the application is not useful if there is no database
