@@ -447,29 +447,34 @@ void QMMainWindow::showAbout()
                 " oder per E-Mail an CerebrosuS_aedd_gmx.net"));
 }
 
-bool QMMainWindow::closeDatabase()
+bool QMMainWindow::closeDatabase(bool silent)
 {
-    // If a database with a driver exist, close it.
+    // if a database exist, close it
     if (QSqlDatabase::contains("default"))
     {
         auto db = QSqlDatabase::database("default", false);
 
         if (db.isOpen())
         {
-            auto res = QMessageBox::question(this, tr("Datenbank schließen"),
-                    tr("Soll die verbundene Datenbank wirklich geschlossen werden?"),
-                    QMessageBox::Yes | QMessageBox::No);
-
-            if (res == QMessageBox::No)
+            if (silent)
             {
-                return false;
+                db.close();
             }
             else
             {
-                // The database will be closed. There is no need to ask for saving, because all changes will be written
-                // directly to the database.
-                // TODO: Check if anything else needs to be done before closing the database.
-                db.close();
+                auto res = QMessageBox::question(
+                        this, tr("Datenbank schließen"),
+                        tr("Soll die verbundene Datenbank wirklich geschlossen werden?"),
+                        QMessageBox::Yes | QMessageBox::No);
+
+                if (res == QMessageBox::No)
+                {
+                    return false;
+                }
+                else
+                {
+                    db.close();
+                }
             }
         }
     }

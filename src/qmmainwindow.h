@@ -106,8 +106,10 @@ public slots:
     void closeProgress();
 
     /// Close the database, if there is currently an open one.
+    ///
+    /// \param silent true if closing should be silent without message box, else false
     /// \return False if it cannot be close or don't exist, else true.
-    bool closeDatabase();
+    bool closeDatabase(bool silent = false);
 
     /// Shows the database dialog to manage the database information.
     void manageDatabase();
