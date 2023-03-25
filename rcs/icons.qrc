@@ -63,6 +63,8 @@
     <file>icons/sc_reportnavigator.png</file>
   </qresource>
   <qresource prefix="icons/line-awesome/svg">
+    <file>icons/line-awesome/eye-solid.svg</file>
+    <file>icons/line-awesome/search-solid.svg</file>
     <file>icons/line-awesome/folder-open-solid.svg</file>
     <file>icons/line-awesome/tools-solid.svg</file>
     <file>icons/line-awesome/database-solid.svg</file>

@@ -45,7 +45,7 @@
        </property>
        <property name="icon">
         <iconset resource="../rcs/icons.qrc">
-         <normaloff>:/icons/icons/lc_recsearch.png</normaloff>:/icons/icons/lc_recsearch.png</iconset>
+         <normaloff>:/icons/line-awesome/svg/icons/line-awesome/filter-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/filter-solid.svg</iconset>
        </property>
        <property name="iconSize">
         <size>

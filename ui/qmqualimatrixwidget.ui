@@ -32,7 +32,7 @@
       <property name="minimumSize">
        <size>
         <width>350</width>
-        <height>339</height>
+        <height>377</height>
        </size>
       </property>
       <property name="maximumSize">
@@ -97,7 +97,7 @@
           </property>
           <property name="icon">
            <iconset resource="../rcs/icons.qrc">
-            <normaloff>:/icons/icons/sc_undo.png</normaloff>:/icons/icons/sc_undo.png</iconset>
+            <normaloff>:/icons/line-awesome/svg/icons/line-awesome/undo-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/undo-solid.svg</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -123,7 +123,7 @@
           </property>
           <property name="icon">
            <iconset resource="../rcs/icons.qrc">
-            <normaloff>:/icons/icons/lc_selectdb.png</normaloff>:/icons/icons/lc_selectdb.png</iconset>
+            <normaloff>:/icons/line-awesome/svg/icons/line-awesome/list-alt.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/list-alt.svg</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -181,7 +181,7 @@
           </property>
           <property name="icon">
            <iconset resource="../rcs/icons.qrc">
-            <normaloff>:/icons/icons/sc_undo.png</normaloff>:/icons/icons/sc_undo.png</iconset>
+            <normaloff>:/icons/line-awesome/svg/icons/line-awesome/undo-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/undo-solid.svg</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -207,7 +207,7 @@
           </property>
           <property name="icon">
            <iconset resource="../rcs/icons.qrc">
-            <normaloff>:/icons/icons/lc_selectdb.png</normaloff>:/icons/icons/lc_selectdb.png</iconset>
+            <normaloff>:/icons/line-awesome/svg/icons/line-awesome/list-alt.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/list-alt.svg</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -265,7 +265,7 @@
           </property>
           <property name="icon">
            <iconset resource="../rcs/icons.qrc">
-            <normaloff>:/icons/icons/sc_undo.png</normaloff>:/icons/icons/sc_undo.png</iconset>
+            <normaloff>:/icons/line-awesome/svg/icons/line-awesome/undo-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/undo-solid.svg</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -291,7 +291,7 @@
           </property>
           <property name="icon">
            <iconset resource="../rcs/icons.qrc">
-            <normaloff>:/icons/icons/lc_selectdb.png</normaloff>:/icons/icons/lc_selectdb.png</iconset>
+            <normaloff>:/icons/line-awesome/svg/icons/line-awesome/list-alt.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/list-alt.svg</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -349,7 +349,7 @@
           </property>
           <property name="icon">
            <iconset resource="../rcs/icons.qrc">
-            <normaloff>:/icons/icons/sc_undo.png</normaloff>:/icons/icons/sc_undo.png</iconset>
+            <normaloff>:/icons/line-awesome/svg/icons/line-awesome/undo-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/undo-solid.svg</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -375,7 +375,7 @@
           </property>
           <property name="icon">
            <iconset resource="../rcs/icons.qrc">
-            <normaloff>:/icons/icons/lc_selectdb.png</normaloff>:/icons/icons/lc_selectdb.png</iconset>
+            <normaloff>:/icons/line-awesome/svg/icons/line-awesome/list-alt.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/list-alt.svg</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -439,7 +439,7 @@
             </property>
             <property name="icon">
              <iconset resource="../rcs/icons.qrc">
-              <normaloff>:/icons/icons/sc_undo.png</normaloff>:/icons/icons/sc_undo.png</iconset>
+              <normaloff>:/icons/line-awesome/svg/icons/line-awesome/undo-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/undo-solid.svg</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -462,7 +462,7 @@
             </property>
             <property name="icon">
              <iconset resource="../rcs/icons.qrc">
-              <normaloff>:/icons/icons/sc_reload.png</normaloff>:/icons/icons/sc_reload.png</iconset>
+              <normaloff>:/icons/line-awesome/svg/icons/line-awesome/undo-alt-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/undo-alt-solid.svg</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -507,7 +507,7 @@
            </property>
            <property name="icon">
             <iconset resource="../rcs/icons.qrc">
-             <normaloff>:/icons/icons/lc_goalseekdialog.png</normaloff>:/icons/icons/lc_goalseekdialog.png</iconset>
+             <normaloff>:/icons/line-awesome/svg/icons/line-awesome/filter-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/filter-solid.svg</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -543,7 +543,7 @@
            </property>
            <property name="icon">
             <iconset resource="../rcs/icons.qrc">
-             <normaloff>:/icons/icons/text-csv.svg</normaloff>:/icons/icons/text-csv.svg</iconset>
+             <normaloff>:/icons/line-awesome/svg/icons/line-awesome/file-csv-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/file-csv-solid.svg</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -566,8 +566,7 @@
            </property>
            <property name="icon">
             <iconset resource="../rcs/icons.qrc">
-             <normaloff>:/icons/icons/document-encrypted.svg</normaloff>
-             <normalon>:/icons/icons/document-decrypt.svg</normalon>:/icons/icons/document-encrypted.svg</iconset>
+             <normaloff>:/icons/line-awesome/svg/icons/line-awesome/lock-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/lock-solid.svg</iconset>
            </property>
            <property name="iconSize">
             <size>
