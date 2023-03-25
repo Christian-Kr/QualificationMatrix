@@ -32,7 +32,6 @@
 #include <QSqlQuery>
 #include <QMessageBox>
 #include <QTreeWidgetItem>
-#include <QDebug>
 #include <QSortFilterProxyModel>
 #include <QCloseEvent>
 #include <QScrollArea>
