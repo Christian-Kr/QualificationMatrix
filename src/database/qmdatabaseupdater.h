@@ -22,7 +22,7 @@ class QSqlDatabase;
 /// \author Christian Kr, Copyright 2020
 class QMDatabaseUpdater: public QObject
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /// Constructor
