@@ -104,14 +104,7 @@ void QMMainWindow::initDatabaseSettings()
 
     if (loadLast)
     {
-        if (!manageDatabaseFromSettings())
-        {
-            openDatabase();
-        }
-    }
-    else
-    {
-        openDatabase();
+        manageDatabaseFromSettings();
     }
 }
 
