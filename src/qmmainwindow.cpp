@@ -107,12 +107,12 @@ void QMMainWindow::initDatabaseSettings()
     {
         if (!manageDatabaseFromSettings())
         {
-            manageDatabase();
+            openDatabase();
         }
     }
     else
     {
-        manageDatabase();
+        openDatabase();
     }
 }
 
@@ -135,7 +135,7 @@ bool QMMainWindow::manageDatabaseFromSettings()
     return true;
 }
 
-void QMMainWindow::manageDatabase()
+void QMMainWindow::openDatabase()
 {
     // before a new database will be opened, close the current one
     if (QSqlDatabase::contains("default") && QSqlDatabase::database("default", false).isOpen())

@@ -112,7 +112,7 @@ public slots:
     bool closeDatabase(bool silent = false);
 
     /// Shows the database dialog to manage the database information.
-    void manageDatabase();
+    void openDatabase();
 
     /// Manage database information without the database dialog.
     /// \return True if it could be load and open from settings, else false.

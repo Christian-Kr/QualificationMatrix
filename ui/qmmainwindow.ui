@@ -71,7 +71,7 @@
     <property name="title">
      <string>&amp;Datei</string>
     </property>
-    <addaction name="actManageDatabase"/>
+    <addaction name="actOpenDatabase"/>
     <addaction name="actCloseDatabase"/>
     <addaction name="separator"/>
     <addaction name="separator"/>
@@ -132,7 +132,7 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actManageDatabase"/>
+   <addaction name="actOpenDatabase"/>
    <addaction name="actAddCertificate"/>
    <addaction name="actCreateSigningList"/>
    <addaction name="separator"/>
@@ -179,16 +179,16 @@
     <string>Ctrl+Q</string>
    </property>
   </action>
-  <action name="actManageDatabase">
+  <action name="actOpenDatabase">
    <property name="icon">
     <iconset resource="../rcs/icons.qrc">
      <normaloff>:/icons/icons/lc_viewdatasourcebrowser.png</normaloff>:/icons/icons/lc_viewdatasourcebrowser.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Datenbank verwalten</string>
+    <string>&amp;Datenbank öffnen</string>
    </property>
    <property name="toolTip">
-    <string>Datenbank verwalten</string>
+    <string>Datenbank öffnen</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+O</string>
@@ -393,10 +393,10 @@
    </hints>
   </connection>
   <connection>
-   <sender>actManageDatabase</sender>
+   <sender>actOpenDatabase</sender>
    <signal>triggered()</signal>
    <receiver>QMMainWindow</receiver>
-   <slot>manageDatabase()</slot>
+   <slot>openDatabase()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
@@ -619,7 +619,7 @@
  </connections>
  <slots>
   <slot>showAbout()</slot>
-  <slot>manageDatabase()</slot>
+  <slot>openDatabase()</slot>
   <slot>showSettings()</slot>
   <slot>applyTrainDataFilter()</slot>
   <slot>updateResultModel()</slot>
