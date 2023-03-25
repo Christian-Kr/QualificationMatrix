@@ -139,7 +139,7 @@ bool QMMainWindow::manageDatabaseFromSettings()
 
 void QMMainWindow::manageDatabase()
 {
-    // Before a new database will be opened, close the current one.
+    // before a new database will be opened, close the current one
     if (QSqlDatabase::contains("default") && QSqlDatabase::database("default", false).isOpen())
     {
         QMessageBox messageBox(this);
@@ -161,17 +161,52 @@ void QMMainWindow::manageDatabase()
         {
             return;
         }
-
-        // TODO: Maybe inside closeDatabase(...) there should not asked again for closing.
-        closeDatabase();
     }
 
-    // The manage dialog will manipulate the data in QSqlDatabase. This is the buffer for the settings which will be
-    // saved in application settings afterwards.
-    QMDatabaseDialog databaseDialog("default", this);
-    databaseDialog.exec();
+    // open a different database
+    QFileDialog fileDialog(this);
 
-    // If there is no default database or it is not open, something went wrong.
+    fileDialog.setWindowTitle(QObject::tr("Datenbank öffnen"));
+    fileDialog.setFileMode(QFileDialog::FileMode::ExistingFile);
+    fileDialog.setAcceptMode(QFileDialog::AcceptMode::AcceptOpen);
+    fileDialog.setNameFilter(QObject::tr("QualificationMatrix Datenbank (*.qmsql)"));
+
+    // if the user rejects the dialog just cancel everything and keep the current database loaded
+    if (fileDialog.exec() == QFileDialog::Rejected) {
+        return;
+    }
+
+    auto fileNames = fileDialog.selectedFiles();
+
+    Q_ASSERT(fileNames.count() <= 1);
+
+    // if no file has been selected, just cancel everything and keep the current database loaded
+    if (fileNames.count() == 0) {
+        return;
+    }
+
+    // if the selected object is not a file, just cancel everything and keep the current database loaded
+    QFileInfo configFileInfo(fileNames.first());
+    if (!configFileInfo.isFile()) {
+        return;
+    }
+
+    // TODO: Maybe inside closeDatabase(...) there should not asked again for closing.
+    closeDatabase();
+
+    // create the new database; only sqlite is allowed
+    QSqlDatabase::addDatabase("QSQLITE", "default");
+    auto db = QSqlDatabase::database("default", false);
+    db.setDatabaseName(fileNames.first());
+
+    // try to open the database
+    if (!db.open())
+    {
+        QMessageBox::critical(this, tr("Fehler"), tr("Die Datenbank konnte nicht geöffnet werden."));
+        return;
+    }
+
+    // if there is no database, something went wrong
     if (QSqlDatabase::contains("default") && QSqlDatabase::database("default", false).isOpen())
     {
         saveDatabaseSettings();
