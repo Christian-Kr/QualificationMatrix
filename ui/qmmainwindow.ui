@@ -170,7 +170,7 @@
   <action name="actExit">
    <property name="icon">
     <iconset resource="../rcs/icons.qrc">
-     <normaloff>:/icons/icons/sc_delete.png</normaloff>:/icons/icons/sc_delete.png</iconset>
+     <normaloff>:/icons/line-awesome/svg/icons/line-awesome/window-close-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/window-close-solid.svg</iconset>
    </property>
    <property name="text">
     <string>&amp;Beenden</string>
