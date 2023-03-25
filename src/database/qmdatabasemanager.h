@@ -1,4 +1,4 @@
-// qmdatabaseupdater.h is part of QualificationMatrix
+// qmdatabasemanager.h is part of QualificationMatrix
 //
 // QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of the GNU General
 // Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
@@ -11,8 +11,8 @@
 // You should have received a copy of the GNU General Public License along with QualificationMatrix.
 // If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef QMDATABASEUPDATER_H
-#define QMDATABASEUPDATER_H
+#ifndef QMDATABASEMANAGER_H
+#define QMDATABASEMANAGER_H
 
 #include <QObject>
 
@@ -20,17 +20,17 @@ class QSqlDatabase;
 
 /// Update a database to a current version.
 /// \author Christian Kr, Copyright 2020
-class QMDatabaseUpdater: public QObject
+class QMDatabaseManager: public QObject
 {
     Q_OBJECT
 
 public:
     /// Constructor
     /// \param parent The parent obejct for the qt system.
-    explicit QMDatabaseUpdater(QObject *parent = nullptr);
+    explicit QMDatabaseManager(QObject *parent = nullptr);
 
     /// Destructor
-    ~QMDatabaseUpdater() override = default;
+    ~QMDatabaseManager() override = default;
 
     /// Parse major number from script name string.
     /// \param scriptName The name of the script which includes the number by definition.
@@ -73,4 +73,4 @@ private:
     int minorTarget;
 };
 
-#endif // QMDATABASEUPDATER_H
+#endif // QMDATABASEMANAGER_H

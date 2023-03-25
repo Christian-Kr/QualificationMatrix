@@ -1,4 +1,4 @@
-// qmdatabaseupdater.cpp is part of QualificationMatrix
+// qmdatabasemanager.cpp is part of QualificationMatrix
 //
 // QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of the GNU General
 // Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
@@ -11,7 +11,7 @@
 // You should have received a copy of the GNU General Public License along with QualificationMatrix.
 // If not, see <http://www.gnu.org/licenses/>.
 
-#include "qmdatabaseupdater.h"
+#include "qmdatabasemanager.h"
 #include "data/qmdatamanager.h"
 
 #include <QSqlDatabase>
@@ -22,7 +22,7 @@
 
 #include <QDebug>
 
-QMDatabaseUpdater::QMDatabaseUpdater(QObject *parent)
+QMDatabaseManager::QMDatabaseManager(QObject *parent)
     : QObject(parent)
 {
     majorSource = -1;
@@ -32,7 +32,7 @@ QMDatabaseUpdater::QMDatabaseUpdater(QObject *parent)
     minorTarget = -1;
 }
 
-bool QMDatabaseUpdater::updateDatabase(const QSqlDatabase &db)
+bool QMDatabaseManager::updateDatabase(const QSqlDatabase &db)
 {
     if (!db.isOpen())
     {
@@ -54,8 +54,8 @@ bool QMDatabaseUpdater::updateDatabase(const QSqlDatabase &db)
     for (int i = 0; i < scripts.size(); i++)
     {
         auto &scriptName = scripts.at(i);
-        int tmpMajor = QMDatabaseUpdater::getMajorFromScriptName(scriptName);
-        int tmpMinor = QMDatabaseUpdater::getMinorFromScriptName(scriptName);
+        int tmpMajor = QMDatabaseManager::getMajorFromScriptName(scriptName);
+        int tmpMinor = QMDatabaseManager::getMinorFromScriptName(scriptName);
 
         if (tmpMajor < 0 && tmpMinor < 0)
         {
@@ -82,7 +82,7 @@ bool QMDatabaseUpdater::updateDatabase(const QSqlDatabase &db)
         // Try to run script to database for an update.
         emit updateProgressState(tr("Update to version %1.%2").arg(tmpMajor).arg(tmpMinor));
 
-        if (!QMDatabaseUpdater::runScriptOnDatabase(db, scriptName))
+        if (!QMDatabaseManager::runScriptOnDatabase(db, scriptName))
         {
             return false;
         }
@@ -91,7 +91,7 @@ bool QMDatabaseUpdater::updateDatabase(const QSqlDatabase &db)
     return true;
 }
 
-bool QMDatabaseUpdater::runScriptOnDatabase(const QSqlDatabase &db, const QString &scriptName)
+bool QMDatabaseManager::runScriptOnDatabase(const QSqlDatabase &db, const QString &scriptName)
 {
     QFileInfo scriptFileInfo(QDir("database"), scriptName);
 
@@ -136,7 +136,7 @@ bool QMDatabaseUpdater::runScriptOnDatabase(const QSqlDatabase &db, const QStrin
     return true;
 }
 
-int QMDatabaseUpdater::getMajorFromScriptName(const QString &scriptName)
+int QMDatabaseManager::getMajorFromScriptName(const QString &scriptName)
 {
     auto tmp = scriptName.split("_");
     bool ok;
@@ -152,7 +152,7 @@ int QMDatabaseUpdater::getMajorFromScriptName(const QString &scriptName)
     }
 }
 
-int QMDatabaseUpdater::getMinorFromScriptName(const QString &scriptName)
+int QMDatabaseManager::getMinorFromScriptName(const QString &scriptName)
 {
     auto tmp = scriptName.split("_");
     if (tmp.size() < 3)
@@ -179,7 +179,7 @@ int QMDatabaseUpdater::getMinorFromScriptName(const QString &scriptName)
     }
 }
 
-void QMDatabaseUpdater::readDatabaseVersion(const QSqlDatabase &db)
+void QMDatabaseManager::readDatabaseVersion(const QSqlDatabase &db)
 {
     if (!db.isOpen())
     {
@@ -220,7 +220,7 @@ void QMDatabaseUpdater::readDatabaseVersion(const QSqlDatabase &db)
     }
 }
 
-QStringList QMDatabaseUpdater::getUpdateScriptNames()
+QStringList QMDatabaseManager::getUpdateScriptNames()
 {
     QFileInfo pathInfo("database");
 

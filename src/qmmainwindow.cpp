@@ -25,7 +25,7 @@
 #include "settings/qmapplicationsettings.h"
 #include "traindata/qmtraindatawidget.h"
 #include "database/qmdatabaseupdatedialog.h"
-#include "database/qmdatabaseupdater.h"
+#include "database/qmdatabasemanager.h"
 #include "framework/component/qminfolabel.h"
 #include "certificate/qmcertificatedialog.h"
 #include "certificate/qmcertificateintegritycheckdialog.h"
@@ -300,7 +300,7 @@ void QMMainWindow::initAfterDatabaseOpened()
             }
         }
 
-        QMDatabaseUpdater databaseUpdater;
+        QMDatabaseManager databaseUpdater;
         if (!databaseUpdater.updateDatabase(db))
         {
             QMessageBox::critical(this, tr("Datenbank aktualisieren"), tr("Die Datenbank konnte nicht vollständig "
