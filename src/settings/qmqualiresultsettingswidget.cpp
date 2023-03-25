@@ -58,7 +58,11 @@ void QMQualiResultSettingsWidget::loadSettings()
     ui->gbQualiResIgnore->setChecked(settings.read("QualiResult/DoIgnore", true).toBool());
 
     ui->lwIgnoreList->clear();
-    ui->lwIgnoreList->addItems(settings.read("QualiResult/IgnoreList", "").toStringList());
+    auto ignoreList = settings.read("QualiResult/IgnoreList", QString()).toStringList();
+
+    // in some cases a list with empty entries will be created; remove them before working with the list
+    ignoreList.removeAll(QString(""));
+    ui->lwIgnoreList->addItems(ignoreList);
 
     auto okColor = settings.read("QualiResult/OkColor", "#ffffff").toString();
     ui->pbOkColor->setText(okColor);
