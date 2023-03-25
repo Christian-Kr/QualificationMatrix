@@ -96,7 +96,7 @@
              </property>
              <property name="icon">
               <iconset resource="../rcs/icons.qrc">
-               <normaloff>:/icons/icons/lc_recsearch.png</normaloff>:/icons/icons/lc_recsearch.png</iconset>
+               <normaloff>:/icons/line-awesome/svg/icons/line-awesome/filter-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/filter-solid.svg</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -165,7 +165,7 @@
                </property>
                <property name="icon">
                 <iconset resource="../rcs/icons.qrc">
-                 <normaloff>:/icons/icons/sc_add.png</normaloff>:/icons/icons/sc_add.png</iconset>
+                 <normaloff>:/icons/line-awesome/svg/icons/line-awesome/plus-circle-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/plus-circle-solid.svg</iconset>
                </property>
                <property name="iconSize">
                 <size>
@@ -191,7 +191,7 @@
                </property>
                <property name="icon">
                 <iconset resource="../rcs/icons.qrc">
-                 <normaloff>:/icons/icons/sc_delete.png</normaloff>:/icons/icons/sc_delete.png</iconset>
+                 <normaloff>:/icons/line-awesome/svg/icons/line-awesome/minus-circle-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/minus-circle-solid.svg</iconset>
                </property>
                <property name="iconSize">
                 <size>
@@ -314,7 +314,7 @@
              </property>
              <property name="icon">
               <iconset resource="../rcs/icons.qrc">
-               <normaloff>:/icons/icons/sc_add.png</normaloff>:/icons/icons/sc_add.png</iconset>
+               <normaloff>:/icons/line-awesome/svg/icons/line-awesome/plus-circle-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/plus-circle-solid.svg</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -340,7 +340,7 @@
              </property>
              <property name="icon">
               <iconset resource="../rcs/icons.qrc">
-               <normaloff>:/icons/icons/sc_delete.png</normaloff>:/icons/icons/sc_delete.png</iconset>
+               <normaloff>:/icons/line-awesome/svg/icons/line-awesome/minus-circle-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/minus-circle-solid.svg</iconset>
              </property>
              <property name="iconSize">
               <size>
