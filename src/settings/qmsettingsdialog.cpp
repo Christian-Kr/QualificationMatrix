@@ -59,7 +59,6 @@ QMSettingsDialog::QMSettingsDialog(QWidget *parent)
     // settingsChanged state so it has to be returned.
     changed = false;
     ui->pbApply->setEnabled(false);
-    ui->swSettingGroups->setCurrentIndex(0);
     ui->twSettingGroups->setItemDelegate(new QMTreeSettingsDelegate(this, 25));
 }
 
@@ -171,6 +170,10 @@ void QMSettingsDialog::initTreeWidgets()
     }
 
     ui->twSettingGroups->expandAll();
+
+    // select the general settings widget
+    ui->twSettingGroups->setFocus();
+    ui->twSettingGroups->setCurrentItem(twiGeneral);
 }
 
 void QMSettingsDialog::modelDataChanged(
