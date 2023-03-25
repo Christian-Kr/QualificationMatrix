@@ -423,17 +423,25 @@ void QMMainWindow::showAboutQt()
 
 void QMMainWindow::showAbout()
 {
-    QMessageBox::about(this, tr("Über QualificationMatrix"),
-            tr("Copyright (c) 2020 by Christian Kr"
-                "\nVersion:\t" VERSION_MAJOR "." VERSION_MINOR " " RELEASE_STATE
-                " // " BUILD
-                "\nLizenz:\tGNU GENERAL PUBLIC LICENSE Version 3"
-                "\n\nEine Kopie der Lizenz wird mit dem Quellcode der Software "
-                "mitgeliefert"
-                " (COPYING.txt)"
-                "\n\nhttps://github.com/Christian-Kr/QualificationMatrix"
-                "\n\nBug-Reports: Fehler können direkt auf GitHub gemeldet werden"
-                " oder per E-Mail an CerebrosuS_aedd_gmx.net"));
+    QMessageBox about(this);
+    about.setIconPixmap(this->windowIcon().pixmap(QSize(64, 64)));
+    about.setWindowTitle(tr("Über QualificationMatrix"));
+    about.setText(tr("QualificationMatrix"));
+    about.setInformativeText(
+            tr("Copyright (c) 2023 by Christian Kr"
+               "\nVersion: " VERSION_MAJOR "." VERSION_MINOR " " RELEASE_STATE " // " BUILD
+               "\n"
+               "Lizenz: GNU GENERAL PUBLIC LICENSE Version 3"
+               "\n\n"
+               "Eine Kopie der Lizenz wird mit dem Quellcode der Software "
+               "mitgeliefert (COPYING.txt)"
+               "\n\n"
+               "https://github.com/Christian-Kr/QualificationMatrix"
+               "\n\n"
+               "Bug-Reports: Fehler können direkt auf GitHub gemeldet werden "
+               "oder per E-Mail an CerebrosuS_aedd_gmx.net"
+               "\n\n"));
+    about.exec();
 }
 
 bool QMMainWindow::closeDatabase(bool silent)
