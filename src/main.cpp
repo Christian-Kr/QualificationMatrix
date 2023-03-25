@@ -63,11 +63,11 @@ unsigned short initFirstStartProgress()
     messageBox.setText(QObject::tr("Die Anwendung wird scheinbar das erste Mal gestartet."));
     messageBox.setInformativeText(QObject::tr("Möchtest du eine zentrale Konfigurationsdatei laden?\n"));
 
-    QAbstractButton *buttonYes = messageBox.button(QMessageBox::StandardButton::Yes);
+    auto *buttonYes = messageBox.button(QMessageBox::StandardButton::Yes);
     Q_ASSERT(buttonYes != nullptr);
     buttonYes->setText(QObject::tr("Konfiguration laden"));
 
-    QAbstractButton *buttonNo = messageBox.button(QMessageBox::StandardButton::No);
+    auto *buttonNo = messageBox.button(QMessageBox::StandardButton::No);
     Q_ASSERT(buttonNo != nullptr);
     buttonNo->setText(QObject::tr("Ohne fortfahren"));
 
