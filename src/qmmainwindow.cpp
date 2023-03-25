@@ -189,8 +189,7 @@ void QMMainWindow::manageDatabase()
         return;
     }
 
-    // TODO: Maybe inside closeDatabase(...) there should not asked again for closing.
-    closeDatabase();
+    closeDatabase(true);
 
     // create the new database; only sqlite is allowed
     QSqlDatabase::addDatabase("QSQLITE", "default");
