@@ -23,7 +23,8 @@
 #include <QDir>
 #include <QtGlobal>
 #include <QMessageBox>
-#include <QObject>
+#include <QFileDialog>
+#include <QAbstractButton>
 
 #include <QDebug>
 
@@ -33,6 +34,94 @@
 #else
 #define DEPR_ENDL endl
 #endif
+
+// Return codes for the first start process. If any changes have been done that require a restart, return the
+// *_RESTART return code.
+const unsigned short FIRST_START_RET_RESTART = 1;
+const unsigned short FIRST_START_RET_CODE_GOON = 2;
+
+/// Initialize the centralized configuration.
+///
+/// \return the return code to know if a restart is needed before the main qt application has been run
+unsigned short initFirstStartProgress()
+{
+    auto &settings = QMApplicationSettings::getInstance();
+    auto firstStart = settings.read("General/FirstStart", true).toBool();
+
+    // if application has not been started for the first time, just go on with starting the application
+    if (!firstStart)
+    {
+        return FIRST_START_RET_CODE_GOON;
+    }
+
+    // ask whether the user wants to load a template config file to make configuration faster
+    QMessageBox messageBox(nullptr);
+
+    messageBox.setStandardButtons(QMessageBox::StandardButton::Yes | QMessageBox::StandardButton::No);
+    messageBox.setWindowTitle(QObject::tr("Erster Start"));
+    messageBox.setIcon(QMessageBox::Icon::Question);
+    messageBox.setText(QObject::tr("Die Anwendung wird scheinbar das erste Mal gestartet."));
+    messageBox.setInformativeText(QObject::tr("Möchtest du eine zentrale Konfigurationsdatei laden?\n"));
+
+    QAbstractButton *buttonYes = messageBox.button(QMessageBox::StandardButton::Yes);
+    Q_ASSERT(buttonYes != nullptr);
+    buttonYes->setText(QObject::tr("Konfiguration laden"));
+
+    QAbstractButton *buttonNo = messageBox.button(QMessageBox::StandardButton::No);
+    Q_ASSERT(buttonNo != nullptr);
+    buttonNo->setText(QObject::tr("Ohne fortfahren"));
+
+    if (messageBox.exec() == QMessageBox::Yes)
+    {
+        // open the configuration file
+        QFileDialog fileDialog(nullptr);
+
+        fileDialog.setWindowTitle(QObject::tr("Zentrale Konfigurationsdatei öffnen"));
+        fileDialog.setFileMode(QFileDialog::FileMode::ExistingFile);
+        fileDialog.setAcceptMode(QFileDialog::AcceptMode::AcceptOpen);
+        fileDialog.setNameFilter(QObject::tr("Zentrale Konfiguration (*.ini)"));
+
+        // if user rejects the dialog, make the first start dialog appear on next start
+        if (fileDialog.exec() == QFileDialog::Rejected)
+        {
+            return FIRST_START_RET_CODE_GOON;
+        }
+
+        auto fileNames = fileDialog.selectedFiles();
+
+        Q_ASSERT(fileNames.count() <= 1);
+
+        // if no file has been selected, make the first start dialog appear on next start
+        if (fileNames.count() == 0)
+        {
+            return FIRST_START_RET_CODE_GOON;
+        }
+
+        // if the selected object is not a file (just in case), make the first start dialog appear on next start
+        QFileInfo configFileInfo(fileNames.first());
+        if (!configFileInfo.isFile())
+        {
+            return FIRST_START_RET_CODE_GOON;
+        }
+
+        // tests were ok, set settings file and restart application
+        settings.write("General/CentralizedPath", fileNames.first());
+        settings.write("General/Centralized", true);
+
+        // inform user, that the application will be restartet
+        QMessageBox::information(
+                nullptr, QObject::tr("Neustart"),
+                QObject::tr("Die Anwendung muss neugestartet werden um die Einstellungen zu übernehmen."));
+
+        // safe variable, that first start has been done
+        settings.write("General/FirstStart", false);
+
+        return FIRST_START_RET_RESTART;
+    }
+
+    // safe variable, that first start has been done
+    settings.write("General/FirstStart", false);
+}
 
 /// Initialize the main window state. This includes the dimension and position of the window.
 ///
@@ -90,10 +179,6 @@ void initShowMainWindow(QMMainWindow &mainWin)
 
         mainWin.show();
     }
-
-    // Initialize the centralized configuration. This is just a test whether the first-start-progress has been run. If
-    // not, just ask if the user wants to load a centralized configuration file.
-    mainWin.initCentralizedConfiguration();
 
     // Load database on startup. If there are some settings for automatic loading of database on startup, follow
     // them. Otherwise show the manage database dialog, cause the application is not useful if there is no database
@@ -243,32 +328,40 @@ void customMessageHandler(QtMsgType type, const QMessageLogContext &, const QStr
 /// \return Zero if exit success, else -1.
 int main(int argc, char *argv[])
 {
-    // General information, used by qt - example: QSettings certificate naming
+    // general information, used by qt - example: QSettings certificate naming
     QCoreApplication::setOrganizationName("Kr");
     QCoreApplication::setOrganizationDomain("Kr");
     QCoreApplication::setApplicationVersion(QString("%1.%2").arg(VERSION_MAJOR, VERSION_MINOR));
 
-    if (QString(RELEASE_STATE).compare("beta") == 0)
-    {
+    if (QString(RELEASE_STATE).compare("beta") == 0) {
         QCoreApplication::setApplicationName(QString("QualificationMatrix_%1").arg(RELEASE_STATE));
-    }
-    else
-    {
+    } else {
         QCoreApplication::setApplicationName(QString("QualificationMatrix"));
     }
 
-    // Create application and main window object.
-    QApplication app(argc, argv);
-    qInstallMessageHandler(customMessageHandler);
-    initApplicationTranslation();
-    initApplicationStyle();
-    initApplicationStyleSheet(app);
+    // the application loop is for restarting the application before any qt application loop is running
+    while (true)
+    {
+        // create application and main window object
+        QApplication app(argc, argv);
+        qInstallMessageHandler(customMessageHandler);
 
-    // Set gui dpi setting.
-    readGuiDPISetting();
+        initApplicationTranslation();
+        initApplicationStyle();
+        initApplicationStyleSheet(app);
 
-    QMMainWindow win;
-    initShowMainWindow(win);
+        // if any first start progress needs a restart as follow up, do so
+        if (initFirstStartProgress() == FIRST_START_RET_RESTART) {
+            continue;
+        }
 
-    return QApplication::exec();
+        // set up gui dpi settings
+        readGuiDPISetting();
+
+        QMMainWindow win;
+        initShowMainWindow(win);
+
+        // run main application loop
+        return QApplication::exec();
+    }
 }

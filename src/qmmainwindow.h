@@ -60,9 +60,6 @@ public:
     /// Destructor
     ~QMMainWindow() override;
 
-    /// Initialize the application first start.
-    void initCentralizedConfiguration();
-
 public slots:
     /// AMS login user.
     void amsLogin();
