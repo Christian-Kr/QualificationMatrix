@@ -900,5 +900,80 @@ void QMMainWindow::amsLogout()
 void QMMainWindow::createEmptyDatabase()
 {
     // get a file name and path, where the file should be saved
+    QFileDialog fileDialog(this);
 
+    fileDialog.setWindowTitle(QObject::tr("Datenbank erstellen"));
+    fileDialog.setFileMode(QFileDialog::FileMode::AnyFile);
+    fileDialog.setAcceptMode(QFileDialog::AcceptMode::AcceptSave);
+    fileDialog.setNameFilter(QObject::tr("QualificationMatrix Datenbank (*.qmsql)"));
+
+    // if the user rejects the dialog just cancel everything and keep the current database loaded
+    if (fileDialog.exec() == QFileDialog::Rejected) {
+        return;
+    }
+
+    auto fileNames = fileDialog.selectedFiles();
+
+    Q_ASSERT(fileNames.count() <= 1);
+
+    // if no file has been selected, just cancel everything
+    if (fileNames.count() == 0) {
+        return;
+    }
+
+    // if the selected object is not a file, just cancel everything
+    QFileInfo configFileInfo(fileNames.first());
+    if (configFileInfo.isDir()) {
+        return;
+    }
+
+    // create the new database; only sqlite is allowed
+    QSqlDatabase::addDatabase("QSQLITE", "new");
+    auto db = QSqlDatabase::database("new", false);
+    db.setDatabaseName(fileNames.first());
+
+    // try to open (create) the database
+    if (!db.open())
+    {
+        QSqlDatabase::removeDatabase("new");
+
+        QMessageBox messageBox(this);
+
+        messageBox.setWindowTitle(tr("Datenbank erstellen"));
+        messageBox.setText(tr("Die Datenbank konnte nicht erstellt werden."));
+        messageBox.setInformativeText(
+                tr("Eventuell fehlen die notwendigen Berechtigungen. Der Prozess wird abgebrochen."));
+        messageBox.setIcon(QMessageBox::Icon::Warning);
+        messageBox.setStandardButtons(QMessageBox::StandardButton::Ok);
+
+        messageBox.exec();
+
+        return;
+    }
+
+    // database could be create, now run the update script
+    if (!QMDatabaseManager::initializeDatabase(db))
+    {
+        QMessageBox messageBox(this);
+
+        messageBox.setWindowTitle(tr("Datenbank erstellen"));
+        messageBox.setText(tr("Die Datenbankstruktur konnte nicht erstellt werden."));
+        messageBox.setInformativeText(
+                tr("Eventuell fehlen die notwendigen Berechtigungen. Der Prozess wird abgebrochen."));
+        messageBox.setIcon(QMessageBox::Icon::Warning);
+        messageBox.setStandardButtons(QMessageBox::StandardButton::Ok);
+
+        messageBox.exec();
+    }
+    else
+    {
+        QMessageBox messageBox(this);
+
+        messageBox.setWindowTitle(tr("Datenbank erstellen"));
+        messageBox.setText(tr("Die Datenbank wurde erfolgreich erstellt."));
+        messageBox.setIcon(QMessageBox::Icon::Information);
+        messageBox.setStandardButtons(QMessageBox::StandardButton::Ok);
+
+        messageBox.exec();
+    }
 }

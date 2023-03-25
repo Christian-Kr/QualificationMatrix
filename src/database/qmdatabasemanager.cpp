@@ -239,3 +239,31 @@ QStringList QMDatabaseManager::getUpdateScriptNames()
 
     return databaseDir.entryList();
 }
+
+QString QMDatabaseManager::getInitializeScriptName()
+{
+    QFileInfo pathInfo("database");
+
+    if (!pathInfo.isDir() || !pathInfo.exists())
+    {
+        qWarning() << "Could not find initialize script.";
+        return {};
+    }
+
+    return pathInfo.absoluteFilePath() + QDir::separator() + "new.sql";
+}
+
+bool QMDatabaseManager::initializeDatabase(const QSqlDatabase &db)
+{
+    if (!db.isOpen())
+    {
+        return false;
+    }
+
+    if (!QMDatabaseManager::runScriptOnDatabase(db, getInitializeScriptName()))
+    {
+        return false;
+    }
+
+    return true;
+}

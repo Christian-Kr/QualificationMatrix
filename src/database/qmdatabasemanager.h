@@ -52,6 +52,10 @@ public slots:
     /// \param db needs to be opened already
     bool updateDatabase(const QSqlDatabase &db);
 
+    /// Run initial script to a brand new database.
+    /// \param db needs to be opened already; needs to be empty, otherwise the process will fail
+    static bool initializeDatabase(const QSqlDatabase &db);
+
 private:
     /// Run the given script on the database.
     /// \param db The database to run the script on.
@@ -65,6 +69,10 @@ private:
     /// Get a list of all scripts available to update the sql database.
     /// \return A list with all found script names.
     static QStringList getUpdateScriptNames();
+
+    /// Get the name of the initialize script.
+    /// \return the absolute path including the file name, or an empty string if anything fails
+    static QString getInitializeScriptName();
 
     int majorSource;
     int minorSource;
