@@ -24,7 +24,6 @@
 #include "qualiresult/qmqualiresultwidget.h"
 #include "settings/qmapplicationsettings.h"
 #include "traindata/qmtraindatawidget.h"
-#include "database/qmdatabasedialog.h"
 #include "database/qmdatabaseupdatedialog.h"
 #include "database/qmdatabaseupdater.h"
 #include "framework/component/qminfolabel.h"
