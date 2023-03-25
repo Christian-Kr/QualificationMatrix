@@ -121,6 +121,8 @@ unsigned short initFirstStartProgress()
 
     // safe variable, that first start has been done
     settings.write("General/FirstStart", false);
+
+    return FIRST_START_RET_CODE_GOON;
 }
 
 /// Initialize the main window state. This includes the dimension and position of the window.
