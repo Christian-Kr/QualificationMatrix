@@ -17,7 +17,6 @@
 #include "settings/qmapplicationsettings.h"
 
 #include <QMessageBox>
-#include <QDebug>
 
 QMAMSLoginDialog::QMAMSLoginDialog(QWidget *parent)
     : QDialog(parent)
