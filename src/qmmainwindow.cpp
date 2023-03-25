@@ -142,6 +142,7 @@ void QMMainWindow::openDatabase()
                    "Möchtest du trotzdem eine andere Datenbank öffnen?\n"));
         messageBox.setIcon(QMessageBox::Icon::Question);
         messageBox.setStandardButtons(QMessageBox::StandardButton::Yes | QMessageBox::StandardButton::Cancel);
+        messageBox.setDefaultButton(QMessageBox::StandardButton::Cancel);
 
         auto buttonYes = messageBox.button(QMessageBox::StandardButton::Yes);
         Q_ASSERT(buttonYes != nullptr);
