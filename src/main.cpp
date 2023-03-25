@@ -352,6 +352,7 @@ int main(int argc, char *argv[])
 
         // if any first start progress needs a restart as follow up, do so
         if (initFirstStartProgress() == FIRST_START_RET_RESTART) {
+            QMApplicationSettings::getInstance().clear();
             continue;
         }
 

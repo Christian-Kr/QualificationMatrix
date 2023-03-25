@@ -58,6 +58,9 @@ public:
     /// \brief override of QMSettings::write
     virtual void write(const QString &name, const QVariant &value) override;
 
+    /// Reset the objects in the instance to clear everything.
+    void clear();
+
     enum PRIORITY
     {
         LOCAL, CENTRAL

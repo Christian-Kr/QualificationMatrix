@@ -190,3 +190,14 @@ void QMApplicationSettings::write(const QString &name, const QVariant &value)
 
     qWarning() << "writing a settings value although the local object does not exist";
 }
+
+void QMApplicationSettings::clear()
+{
+    initLocal();
+
+    readCentralized();
+    if (centralizedAvailable)
+    {
+        initCentralized();
+    }
+}
