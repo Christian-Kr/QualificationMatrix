@@ -160,6 +160,9 @@ public slots:
     /// Dialog has been closed.
     [[maybe_unused]] void addCertificateFinished(int);
 
+    /// Create a new empty database to be used as a starting point for the application.
+    [[maybe_unused]] void createEmptyDatabase();
+
 protected:
     /// Override from QMainWindow. This function will be called on closeing the widget.
     /// \param event The close event object that will be created.

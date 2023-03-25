@@ -73,6 +73,7 @@
     </property>
     <addaction name="actOpenDatabase"/>
     <addaction name="actCloseDatabase"/>
+    <addaction name="actCreateEmptyDatabase"/>
     <addaction name="separator"/>
     <addaction name="separator"/>
     <addaction name="actExit"/>
@@ -616,6 +617,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actCreateEmptyDatabase</sender>
+   <signal>triggered()</signal>
+   <receiver>QMMainWindow</receiver>
+   <slot>createEmptyDatabase()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>436</x>
+     <y>319</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>showAbout()</slot>
@@ -638,5 +655,6 @@
   <slot>amsLogin()</slot>
   <slot>amsLogout()</slot>
   <slot>addCertificate()</slot>
+  <slot>createEmptyDatabase()</slot>
  </slots>
 </ui>

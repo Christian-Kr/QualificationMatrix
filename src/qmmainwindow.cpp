@@ -896,3 +896,9 @@ void QMMainWindow::amsLogout()
         enterWindowMode(tmpMode);
     }
 }
+
+void QMMainWindow::createEmptyDatabase()
+{
+    // get a file name and path, where the file should be saved
+
+}
