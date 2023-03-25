@@ -119,6 +119,10 @@ void QMAMSLoginDialog::login()
     messageBox.setStandardButtons(QMessageBox::StandardButton::Ok);
 
     messageBox.exec();
+
+    // select all password text for feast retype
+    ui->lePassword->setFocus();
+    ui->lePassword->selectAll();
 }
 
 void QMAMSLoginDialog::cancel()
