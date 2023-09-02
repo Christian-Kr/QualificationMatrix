@@ -676,7 +676,7 @@ bool QMAMSUserSettingsWidget::userContainsUsername(const QString &username)
         auto usernameModelIndex = amsUserModel->index(i, usernameFieldIndex);
         auto tmpUsername = amsUserModel->data(usernameModelIndex).toString();
 
-        if (tmpUsername.compare(username) == 0)
+        if (tmpUsername.toUpper().compare(username.toUpper()) == 0)
         {
             return true;
         }
