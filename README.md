@@ -1,3 +1,6 @@
+![Linux](https://github.com/Christian-Kr/QualificationMatrix/actions/workflows/cmake-single-platform/badge.svg?
+branch=master)
+
 # QualificationMatrix
 
 This project creates a software that will help you in managing a qualification matrix for 
