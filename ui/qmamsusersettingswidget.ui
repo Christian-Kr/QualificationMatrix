@@ -159,7 +159,7 @@
           <item>
            <widget class="QPushButton" name="pbChangeAdminState">
             <property name="text">
-             <string>Admin-Flag aktivieren</string>
+             <string>Admin-Flag akt.</string>
             </property>
            </widget>
           </item>

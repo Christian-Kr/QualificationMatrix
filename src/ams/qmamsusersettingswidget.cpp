@@ -336,17 +336,46 @@ bool QMAMSUserSettingsWidget::userGroupProxyContainsGroup(const QString &group)
     return false;
 }
 
-void QMAMSUserSettingsWidget::userSelectionChanged(const QModelIndex &selected, const QModelIndex &deselected)
+void QMAMSUserSettingsWidget::userSelectionChanged(
+        const QModelIndex &selected, const QModelIndex &deselected)
 {
-    ui->lvGroup->reset();
-    ui->pbAddGroup->setEnabled(false);
-    ui->pbRemoveGroup->setEnabled(false);
-
     if (!selected.isValid())
     {
         deactivateUserGroupList();
         return;
     }
+
+    // update ui buttons for changing user settings
+    auto activeFieldIndex = amsUserModel->fieldIndex("amsuser_active");
+    auto activeModelIndex = amsUserModel->index(selected.row(), activeFieldIndex);
+    auto selActive = amsUserModel->data(activeModelIndex).toBool();
+
+    if (selActive)
+    {
+        ui->pbChangeActiveState->setText(tr("Deaktivieren"));
+    }
+    else
+    {
+        ui->pbChangeActiveState->setText(tr("Aktivieren"));
+    }
+
+    auto adminFieldIndex = amsUserModel->fieldIndex("amsuser_admin");
+    auto adminModelIndex = amsUserModel->index(selected.row(), adminFieldIndex);
+    auto selAdmin = amsUserModel->data(adminModelIndex).toBool();
+
+    if (selAdmin)
+    {
+        ui->pbChangeAdminState->setText(tr("Admin-Flag deakt."));
+    }
+    else
+    {
+        ui->pbChangeAdminState->setText(tr("Admin-Flag akt."));
+    }
+
+    // update ui group parts
+    ui->lvGroup->reset();
+    ui->pbAddGroup->setEnabled(false);
+    ui->pbRemoveGroup->setEnabled(false);
 
     auto selModelIndex = amsUserModel->index(selected.row(), 2);
     auto selData = amsUserModel->data(selModelIndex).toString();
@@ -396,11 +425,11 @@ void QMAMSUserSettingsWidget::changeAdminState()
 
     if (!selAdmin)
     {
-        ui->pbChangeAdminState->setText(tr("Admin-Flag deaktivieren"));
+        ui->pbChangeAdminState->setText(tr("Admin-Flag deakt."));
     }
     else
     {
-        ui->pbChangeAdminState->setText(tr("Admin-Flag aktivieren"));
+        ui->pbChangeAdminState->setText(tr("Admin-Flag akt."));
     }
 
     emitSettingsChanged();
@@ -470,19 +499,6 @@ void QMAMSUserSettingsWidget::activateUserGroupList(int selRow)
     ui->pbChangeName->setEnabled(true);
     ui->pbChangeUsername->setEnabled(true);
     ui->pbChangeActiveState->setEnabled(true);
-
-    auto activeFieldIndex = amsUserModel->fieldIndex("amsuser_active");
-    auto activeModelIndex = amsUserModel->index(selRow, activeFieldIndex);
-    auto selActive = amsUserModel->data(activeModelIndex).toBool();
-
-    if (selActive)
-    {
-        ui->pbChangeActiveState->setText(tr("Deaktivieren"));
-    }
-    else
-    {
-        ui->pbChangeActiveState->setText(tr("Aktivieren"));
-    }
 
     auto selModelIndex = amsUserModel->index(selRow, 2);
     auto selData = amsUserModel->data(selModelIndex).toString();
