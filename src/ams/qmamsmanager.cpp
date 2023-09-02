@@ -71,9 +71,6 @@ bool QMAMSManager::checkDatabase()
 
 bool QMAMSManager::checkForAdministrator(QSqlDatabase &database)
 {
-    // TODO: The administrator can be identified by the user name or by having the admin flag in
-    // the user list. For now, only the username "administrator" is an admin.
-
     QMAMSUserModel amsUserModel(this, database);
     amsUserModel.select();
 
@@ -282,6 +279,8 @@ LoginResult QMAMSManager::loginUser(const QString &name, const QString &password
 
             loggedinUser->allowedUsersPrimaryKeys = getUserEmployeeAccessPermissionsFromDatabase(*loggedinUser);
             setLoginState(LoginState::LOGGED_IN);
+
+            loggedinUser->admin = userInfo.admin;
 
             return LoginResult::SUCCESSFUL;
         }
@@ -737,6 +736,10 @@ QMAMSUserInformation QMAMSManager::getUserFromDatabase(const QString &username)
             auto activeModelIndex = amsUserModel.index(i, activeFieldIndex);
             auto active = amsUserModel.data(activeModelIndex).toBool();
 
+            auto adminFieldIndex = amsUserModel.fieldIndex("amsuser_admin");
+            auto adminModelIndex = amsUserModel.index(i, adminFieldIndex);
+            auto admin = amsUserModel.data(adminModelIndex).toBool();
+
             userInfo.username = dbUsername;
             userInfo.password = dbPassword;
             userInfo.fullname = dbFullname;
@@ -744,6 +747,7 @@ QMAMSUserInformation QMAMSManager::getUserFromDatabase(const QString &username)
             userInfo.found = true;
             userInfo.failedLoginCount = dbFailedLoginCount;
             userInfo.active = active;
+            userInfo.admin = admin;
 
             return userInfo;
         }
@@ -767,8 +771,8 @@ void QMAMSManager::setLoginState(LoginState state)
 
 QString QMAMSManager::createPasswordHash(const QString &pw)
 {
-    auto tmpStdHash = Botan::argon2_generate_pwhash(pw.toStdString().c_str(), pw.length(), Botan::system_rng(), 1,
-            8192, 100);
+    auto tmpStdHash = Botan::argon2_generate_pwhash(pw.toStdString().c_str(), pw.length(),
+            Botan::system_rng(), 1, 8192, 100);
     return QString::fromStdString(tmpStdHash);
 }
 
@@ -791,4 +795,23 @@ bool QMAMSManager::checkPermission(AccessMode mode)
     }
 
     return loggedinUser->generalPermissions.accessModes.contains(static_cast<int>(mode));
+}
+
+bool QMAMSManager::checkAdminPermission()
+{
+    if (loginState == LoginState::NOT_LOGGED_IN)
+    {
+        return false;
+    }
+
+    if (loggedinUser->username.compare("administrator") == 0) {
+        return true;
+    }
+
+    if (loggedinUser->admin)
+    {
+        return true;
+    }
+
+    return false;
 }

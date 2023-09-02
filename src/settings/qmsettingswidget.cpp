@@ -31,13 +31,11 @@ void QMSettingsWidget::showEvent(QShowEvent *event)
 {
     if (admin)
     {
-        // If the administrator account is needed to get access to the widget: Test if the administrator is logged in,
-        // else set the widget to invisible.
-
+        // Test if administrator is logged in to get access to the admin interface.
         auto am = QMAMSManager::getInstance();
-        if (am->getLoginUserName().compare("administrator") != 0)
+        if (!am->checkAdminPermission())
         {
-            qDebug() << "Try to open admin widget without being logged in";
+            qDebug() << "Try to open admin widget without being logged in as an administrator";
             setVisible(false);
             return;
         }

@@ -83,6 +83,7 @@ struct QMAMSUserInformation
 {
     bool found = false;
     bool active = false;
+    bool admin = false;
     int failedLoginCount = 0;
 
     // The database id representing the primary key.
@@ -149,6 +150,12 @@ public:
     /// \param mode The access mode to test for.
     /// \return False if logged in user does not have the permission, else false.
     bool checkPermission(AccessMode mode);
+
+    /// Check whether the logged in user has administrator permissions or not. The admin
+    /// permission is kind of special, cause it euqals to the user "administrator" or to a user
+    /// having the admin flag set to true.
+    /// \return True if a user is logged in and has admin permissions.
+    bool checkAdminPermission();
 
     /// Get full name of the currently logged in user.
     /// \return The full name of the current login user, else empty.

@@ -90,7 +90,7 @@ void QMSettingsDialog::initStackWidgets()
     }
 
     // Don't show permission configuration if administrator ist not logged in.
-    if (amsManager->getLoginUserName().compare("administrator") == 0)
+    if (amsManager->checkAdminPermission())
     {
         appendConnectSettingsWidget(new QMAMSUserSettingsWidget(this));
         appendConnectSettingsWidget(new QMAMSGroupSettingsWidget(this));
@@ -155,7 +155,7 @@ void QMSettingsDialog::initTreeWidgets()
 
 
     // Don't show permission configuration if administrator ist not logged in.
-    if (amsManager->getLoginUserName().compare("administrator") == 0)
+    if (amsManager->checkAdminPermission())
     {
         auto twiAMS = new QTreeWidgetItem(ui->twSettingGroups);
         twiAMS->setText(0, tr("Rechtverwaltung"));
@@ -431,13 +431,8 @@ void QMSettingsDialog::changeSettingsGroup(QTreeWidgetItem *item, const int)
         }
 
         auto am = QMAMSManager::getInstance();
-        if (settingsWidget->adminAccessNeeded() &&
-            am->getLoginUserName().compare("administrator") != 0)
+        if (settingsWidget->adminAccessNeeded() && am->checkAdminPermission())
         {
-            QMAMSLoginDialog loginDialog(this);
-            loginDialog.setUsername("administrator");
-            loginDialog.exec();
-
             settingsWidget->show();
         }
     }
