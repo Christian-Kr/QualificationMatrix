@@ -119,7 +119,7 @@ bool QMAMSManager::setFailedLoginCount(QString &name, int count)
         auto usernameModelIndex = amsUserModel.index(i, usernameFieldIndex);
         auto dbUsername = amsUserModel.data(usernameModelIndex).toString();
 
-        if (dbUsername == name)
+        if (dbUsername.toUpper().compare(name.toUpper()))
         {
             auto failedLoginModelIndex = amsUserModel.index(i,
                     failedLoginIndex);
@@ -164,7 +164,7 @@ bool QMAMSManager::setLastLoginDateTime(QString &name)
         auto usernameModelIndex = amsUserModel.index(i, usernameFieldIndex);
         auto dbUsername = amsUserModel.data(usernameModelIndex).toString();
 
-        if (dbUsername.compare(name) == 0)
+        if (dbUsername.toUpper().compare(name.toUpper()) == 0)
         {
             auto currDateTime = QDateTime::currentDateTime();
             auto strCurrDateTime = currDateTime.toString(Qt::ISODate);
@@ -333,6 +333,7 @@ bool QMAMSManager::createAdminInDatabase()
     record.append(QSqlField("amsuser_last_login"));
     record.append(QSqlField("amsuser_unsuccess_login_num"));
     record.append(QSqlField("amsuser_active"));
+    record.append(QSqlField("amsuser_admin"));
 
     record.setValue("amsuser_name", "administrator");
     record.setValue("amsuser_username", "administrator");
@@ -340,6 +341,7 @@ bool QMAMSManager::createAdminInDatabase()
     record.setValue("amsuser_last_login", "");
     record.setValue("amsuser_unsuccess_login_num", 0);
     record.setValue("amsuser_active", 1);
+    record.setValue("amsuser_admin", 1);
 
     if (!amsUserModel.insertRecord(-1, record) || !amsUserModel.submitAll())
     {
@@ -675,7 +677,7 @@ QList<QString> QMAMSManager::getUserGroupsFromDatabase(const QString &username)
     {
         auto usernameModelIndex = amsUserGroupModel.index(i, usernameFieldIndex);
         auto dbUsername = amsUserGroupModel.data(usernameModelIndex).toString();
-        if (dbUsername.compare(username) == 0)
+        if (dbUsername.toUpper().compare(username.toUpper()) == 0)
         {
             // Get the group name.
             auto groupnameModelIndex = amsUserGroupModel.index(i, groupnameFieldIndex);
@@ -714,7 +716,7 @@ QMAMSUserInformation QMAMSManager::getUserFromDatabase(const QString &username)
         auto usernameModelIndex = amsUserModel.index(i, usernameFieldIndex);
         auto dbUsername = amsUserModel.data(usernameModelIndex).toString();
 
-        if (dbUsername == username)
+        if (dbUsername.toUpper().compare(username.toUpper()) == 0)
         {
             auto idFieldIndex = amsUserModel.fieldIndex("amsuser_id");
             auto idModelIndex = amsUserModel.index(i, idFieldIndex);

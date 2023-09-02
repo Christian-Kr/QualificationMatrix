@@ -74,7 +74,8 @@ enum class LoginState
 /// The struct holds information about general access permissions for a user.
 struct QMAMSUserGeneralAccessPermissions
 {
-    // A list with access modes from the database. The codes must be available as an enum from AccessMode.
+    // A list with access modes from the database. The codes must be available as an enum from
+    // AccessMode.
     QList<int> accessModes;
 };
 
@@ -97,8 +98,8 @@ struct QMAMSUserInformation
 
     QMAMSUserGeneralAccessPermissions generalPermissions;
 
-    // Variable holds a list of primary keys of the users that are visible. All other users should never be visible
-    // to the currently logged in user.
+    // Variable holds a list of primary keys of the users that are visible. All other users should
+    // never be visible to the currently logged in user.
     QList<int> allowedUsersPrimaryKeys;
 };
 
