@@ -1,5 +1,4 @@
-![Linux](https://github.com/Christian-Kr/QualificationMatrix/actions/workflows/cmake-single-platform.yml/badge.svg?
-branch=master)
+![Linux](https://github.com/Christian-Kr/QualificationMatrix/actions/workflows/cmake-single-platform.yml/badge.svg?branch=master)
 
 # QualificationMatrix
 
