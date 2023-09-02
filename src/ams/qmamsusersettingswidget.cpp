@@ -636,8 +636,8 @@ void QMAMSUserSettingsWidget::changeUsername()
             return;
         }
 
-        // The username should only consist of letters.
-        if (!newUsername.contains(QRegularExpression("^[a-zA-Z]+$")) || newUsername.length() < 6)
+        // The username should consist of letters and numbers.
+        if (!newUsername.contains(QRegularExpression("^[a-zA-Z0-9]+$")) || newUsername.length() < 5)
         {
             QMessageBox::information(this, tr("Benutzername ändern"),
                     tr("Der Benutzername darf nur Buchstaben enthalten und muss mindestens 6 Zeichen lang sein."));
