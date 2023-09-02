@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS "Info" (
 
 -- TODO: Update
 INSERT INTO "Info" ("name", "value") VALUES("MAJOR", "1");
-INSERT INTO "Info" ("name", "value") VALUES("MINOR", "5");
+INSERT INTO "Info" ("name", "value") VALUES("MINOR", "6");
 
 -- FuncGroup definition
 
@@ -346,13 +346,16 @@ CREATE TABLE IF NOT EXISTS "AMSUser" (
     "amsuser_last_login"                TEXT,
     "amsuser_unsuccess_login_num"       INTEGER DEFAULT 0,
     "amsuser_active"                    INTEGER DEFAULT 0,
+    "amsuser_admin"                     INTEGER DEFAULT 0,
     PRIMARY KEY("amsuser_id")
 );
 
-INSERT INTO "AMSUser" ("amsuser_name", "amsuser_username", "amsuser_password", "amsuser_active")
+INSERT INTO "AMSUser"
+    ("amsuser_name", "amsuser_username", "amsuser_password", "amsuser_active", "amsuser_admin")
 VALUES
     ("administrator", "administrator",
-     "$argon2id$v=19$m=8192,t=100,p=1$w93g/9FGO2nAajwoi02FHw$tHjzDkGoscBHLJOGJoqh699KXvWf+JqmARrR2L4yzxk", 1);
+     "$argon2id$v=19$m=8192,t=100,p=1$w93g/9FGO2nAajwoi02FHw$tHjzDkGoscBHLJOGJoqh699KXvWf+JqmARrR2L4yzxk",
+     1, 1);
 
 -- Group for Access Management System
 
