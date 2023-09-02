@@ -1,12 +1,12 @@
 // qmamsmanager.cpp is part of QualificationMatrix
 //
-// QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of the GNU General
-// Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
-// any later version.
+// QualificationMatrix is free software: you can redistribute it and/or modify it under the terms
+// of the GNU General Public License as published by the Free Software Foundation, either version
+// 3 of the License, or (at your option) any later version.
 //
-// QualificationMatrix is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
-// implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
-// more details.
+// QualificationMatrix is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+// without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+// the GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License along with QualificationMatrix.
 // If not, see <http://www.gnu.org/licenses/>.
@@ -28,8 +28,6 @@
 
 #include <botan/argon2.h>
 #include <botan/system_rng.h>
-
-#include <QDebug>
 
 QMAMSManager *QMAMSManager::instance = nullptr;
 
@@ -281,6 +279,8 @@ LoginResult QMAMSManager::loginUser(const QString &name, const QString &password
 
             loggedinUser->allowedUsersPrimaryKeys = getUserEmployeeAccessPermissionsFromDatabase(*loggedinUser);
             setLoginState(LoginState::LOGGED_IN);
+
+            loggedinUser->admin = userInfo.admin;
 
             return LoginResult::SUCCESSFUL;
         }
@@ -736,6 +736,10 @@ QMAMSUserInformation QMAMSManager::getUserFromDatabase(const QString &username)
             auto activeModelIndex = amsUserModel.index(i, activeFieldIndex);
             auto active = amsUserModel.data(activeModelIndex).toBool();
 
+            auto adminFieldIndex = amsUserModel.fieldIndex("amsuser_admin");
+            auto adminModelIndex = amsUserModel.index(i, adminFieldIndex);
+            auto admin = amsUserModel.data(adminModelIndex).toBool();
+
             userInfo.username = dbUsername;
             userInfo.password = dbPassword;
             userInfo.fullname = dbFullname;
@@ -743,6 +747,7 @@ QMAMSUserInformation QMAMSManager::getUserFromDatabase(const QString &username)
             userInfo.found = true;
             userInfo.failedLoginCount = dbFailedLoginCount;
             userInfo.active = active;
+            userInfo.admin = admin;
 
             return userInfo;
         }
@@ -766,8 +771,8 @@ void QMAMSManager::setLoginState(LoginState state)
 
 QString QMAMSManager::createPasswordHash(const QString &pw)
 {
-    auto tmpStdHash = Botan::argon2_generate_pwhash(pw.toStdString().c_str(), pw.length(), Botan::system_rng(), 1,
-            8192, 100);
+    auto tmpStdHash = Botan::argon2_generate_pwhash(pw.toStdString().c_str(), pw.length(),
+            Botan::system_rng(), 1, 8192, 100);
     return QString::fromStdString(tmpStdHash);
 }
 
@@ -790,4 +795,23 @@ bool QMAMSManager::checkPermission(AccessMode mode)
     }
 
     return loggedinUser->generalPermissions.accessModes.contains(static_cast<int>(mode));
+}
+
+bool QMAMSManager::checkAdminPermission()
+{
+    if (loginState == LoginState::NOT_LOGGED_IN)
+    {
+        return false;
+    }
+
+    if (loggedinUser->username.compare("administrator") == 0) {
+        return true;
+    }
+
+    if (loggedinUser->admin)
+    {
+        return true;
+    }
+
+    return false;
 }

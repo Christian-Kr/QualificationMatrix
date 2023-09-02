@@ -1,15 +1,15 @@
 // qmamssettingswidget.cpp is part of QualificationMatrix
 //
-// QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of the GNU General
-// Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
-// any later version.
+// QualificationMatrix is free software: you can redistribute it and/or modify it under the terms
+// of the GNU General Public License as published by the Free Software Foundation, either version
+// 3 of the License, or (at your option) any later version.
 //
-// QualificationMatrix is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
-// implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
-// more details.
+// QualificationMatrix is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+// without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+// the GNU General Public License for more details.
 //
-// You should have received a copy of the GNU General Public License along with QualificationMatrix. If not, see
-// <http://www.gnu.org/licenses/>.
+// You should have received a copy of the GNU General Public License along with QualificationMatrix.
+// If not, see <http://www.gnu.org/licenses/>.
 
 #include "qmamsusersettingswidget.h"
 #include "ui_qmamsusersettingswidget.h"
@@ -26,8 +26,6 @@
 #include <QSortFilterProxyModel>
 #include <QInputDialog>
 
-#include <QDebug>
-
 QMAMSUserSettingsWidget::QMAMSUserSettingsWidget(QWidget *parent)
     : QMSettingsWidget(parent, true)
     , ui(new Ui::QMAMSUserSettingsWidget)
@@ -40,6 +38,7 @@ QMAMSUserSettingsWidget::QMAMSUserSettingsWidget(QWidget *parent)
     booleanDelegate->setEditable(true);
     ui->tvUser->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tvUser->setItemDelegateForColumn(6, booleanDelegate);
+    ui->tvUser->setItemDelegateForColumn(7, booleanDelegate);
 }
 
 QMAMSUserSettingsWidget::~QMAMSUserSettingsWidget()
@@ -337,17 +336,46 @@ bool QMAMSUserSettingsWidget::userGroupProxyContainsGroup(const QString &group)
     return false;
 }
 
-void QMAMSUserSettingsWidget::userSelectionChanged(const QModelIndex &selected, const QModelIndex &deselected)
+void QMAMSUserSettingsWidget::userSelectionChanged(
+        const QModelIndex &selected, const QModelIndex &deselected)
 {
-    ui->lvGroup->reset();
-    ui->pbAddGroup->setEnabled(false);
-    ui->pbRemoveGroup->setEnabled(false);
-
     if (!selected.isValid())
     {
         deactivateUserGroupList();
         return;
     }
+
+    // update ui buttons for changing user settings
+    auto activeFieldIndex = amsUserModel->fieldIndex("amsuser_active");
+    auto activeModelIndex = amsUserModel->index(selected.row(), activeFieldIndex);
+    auto selActive = amsUserModel->data(activeModelIndex).toBool();
+
+    if (selActive)
+    {
+        ui->pbChangeActiveState->setText(tr("Deaktivieren"));
+    }
+    else
+    {
+        ui->pbChangeActiveState->setText(tr("Aktivieren"));
+    }
+
+    auto adminFieldIndex = amsUserModel->fieldIndex("amsuser_admin");
+    auto adminModelIndex = amsUserModel->index(selected.row(), adminFieldIndex);
+    auto selAdmin = amsUserModel->data(adminModelIndex).toBool();
+
+    if (selAdmin)
+    {
+        ui->pbChangeAdminState->setText(tr("Admin-Flag deakt."));
+    }
+    else
+    {
+        ui->pbChangeAdminState->setText(tr("Admin-Flag akt."));
+    }
+
+    // update ui group parts
+    ui->lvGroup->reset();
+    ui->pbAddGroup->setEnabled(false);
+    ui->pbRemoveGroup->setEnabled(false);
 
     auto selModelIndex = amsUserModel->index(selected.row(), 2);
     auto selData = amsUserModel->data(selModelIndex).toString();
@@ -359,6 +387,52 @@ void QMAMSUserSettingsWidget::userSelectionChanged(const QModelIndex &selected, 
     }
 
     activateUserGroupList(selected.row());
+}
+
+void QMAMSUserSettingsWidget::changeAdminState()
+{
+    auto selRows = ui->tvUser->selectionModel()->selectedRows();
+    if (selRows.count() != 1)
+    {
+        qWarning() << "wrong number of selected rows";
+    }
+
+    auto selRow = selRows.first().row();
+
+    auto usernameFieldIndex = amsUserModel->fieldIndex("amsuser_username");
+    auto usernameModelIndex = amsUserModel->index(selRow, usernameFieldIndex);
+    auto selUsername = amsUserModel->data(usernameModelIndex).toString();
+
+    // Don't change if selected user is administrator.
+    if (selUsername.compare("administrator") == 0)
+    {
+        QMessageBox::information(this, tr("Admin-Status ändern"),
+                tr("Der Admin-Status von 'administrator' kann nicht geändert werden."));
+        return;
+    }
+
+    auto adminFieldIndex = amsUserModel->fieldIndex("amsuser_admin");
+    auto adminModelIndex = amsUserModel->index(selRow, adminFieldIndex);
+    auto selAdmin = amsUserModel->data(adminModelIndex).toBool();
+
+    // Change the admin state.
+    if (!amsUserModel->setData(adminModelIndex, !selAdmin))
+    {
+        QMessageBox::information(this, tr("Admin-Status ändern"),
+                tr("Der Admin-Status konnte nicht geändert werden."));
+        return;
+    }
+
+    if (!selAdmin)
+    {
+        ui->pbChangeAdminState->setText(tr("Admin-Flag deakt."));
+    }
+    else
+    {
+        ui->pbChangeAdminState->setText(tr("Admin-Flag akt."));
+    }
+
+    emitSettingsChanged();
 }
 
 void QMAMSUserSettingsWidget::changeActiveState()
@@ -425,19 +499,6 @@ void QMAMSUserSettingsWidget::activateUserGroupList(int selRow)
     ui->pbChangeName->setEnabled(true);
     ui->pbChangeUsername->setEnabled(true);
     ui->pbChangeActiveState->setEnabled(true);
-
-    auto activeFieldIndex = amsUserModel->fieldIndex("amsuser_active");
-    auto activeModelIndex = amsUserModel->index(selRow, activeFieldIndex);
-    auto selActive = amsUserModel->data(activeModelIndex).toBool();
-
-    if (selActive)
-    {
-        ui->pbChangeActiveState->setText(tr("Deaktivieren"));
-    }
-    else
-    {
-        ui->pbChangeActiveState->setText(tr("Aktivieren"));
-    }
 
     auto selModelIndex = amsUserModel->index(selRow, 2);
     auto selData = amsUserModel->data(selModelIndex).toString();
