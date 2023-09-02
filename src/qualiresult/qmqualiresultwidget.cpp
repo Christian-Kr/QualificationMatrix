@@ -20,7 +20,7 @@
 #include "data/training/qmtrainingviewmodel.h"
 #include "data/employee/qmemployeeviewmodel.h"
 #include "data/trainingdata/qmtrainingdatastateviewmodel.h"
-#include "data/employee/qmshiftviewmodel.h"
+#include "data/employee/qmemployeegroupviewmodel.h"
 #include "qualiresultreport/qmqualiresultreportdialog.h"
 #include "qualiresult/qmqualiresultrecord.h"
 #include "framework/dialog/qmselectfromlistdialog.h"
@@ -114,7 +114,7 @@ void QMQualiResultWidget::updateData()
     trainViewModel = std::make_unique<QMTrainingViewModel>(this, db);
     trainDataStateViewModel = std::make_unique<QMTrainingDataStateViewModel>(this, db);
     employeeViewModel = std::make_unique<QMEmployeeViewModel>(this, db);
-    employeeGroupViewModel = std::make_unique<QMShiftViewModel>(this, db);
+    employeeGroupViewModel = std::make_unique<QMEmployeeGroupViewModel>(this, db);
 
     // Set models to different ui controls.
     qualiResultFilterTRState->setSourceModel(qualiResultModel.get());

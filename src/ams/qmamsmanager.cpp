@@ -19,6 +19,8 @@
 #include "ams/model/qmamsgroupmodel.h"
 #include "ams/model/qmamsgroupemployeemodel.h"
 #include "data/employee/qmemployeemodel.h"
+#include "ams/model/qmamsuseremployeeviewmodel.h"
+#include "ams/model/qmamsuseremployeegroupviewmodel.h"
 
 #include <QSqlDatabase>
 #include <QSqlRecord>
@@ -271,13 +273,14 @@ LoginResult QMAMSManager::loginUser(const QString &name, const QString &password
                 qCritical() << "cannot set failed login count";
             }
 
+            loggedinUser->id = userInfo.id;
             loggedinUser->username = userInfo.username;
             loggedinUser->fullname = userInfo.fullname;
 
             auto generalPermissions = getUserGeneralAccessPermissionsFromDatabase(*loggedinUser);
             loggedinUser->generalPermissions = generalPermissions;
-
-            loggedinUser->allowedUsersPrimaryKeys = getUserEmployeeAccessPermissionsFromDatabase(*loggedinUser);
+            loggedinUser->allowedUsersPrimaryKeys = getUserEmployeeAccessPermissionsIds(
+                    *loggedinUser);
             setLoginState(LoginState::LOGGED_IN);
 
             loggedinUser->admin = userInfo.admin;
@@ -351,7 +354,7 @@ bool QMAMSManager::createAdminInDatabase()
     return true;
 }
 
-QList<int> QMAMSManager::getUserEmployeeAccessPermissionsFromDatabase(QMAMSUserInformation &userInfo)
+QList<int> QMAMSManager::getUserEmployeeAccessPermissionsIds(QMAMSUserInformation &userInfo)
 {
     // Get the database connection.
     if (!QSqlDatabase::contains("default") || !QSqlDatabase::database("default", false).isOpen())
@@ -362,23 +365,38 @@ QList<int> QMAMSManager::getUserEmployeeAccessPermissionsFromDatabase(QMAMSUserI
 
     auto db = QSqlDatabase::database("default");
 
-    // To ge the necessary information, get the user id, get the connected groups to the user id and at last, get the
-    // permissions that are correlated with the groups.
+    QList<int> ids;
 
-    QList<QString> groupNames = getUserGroupsFromDatabase(userInfo.username);
-    QList<QString> activeGroupNames = getActiveGroups(groupNames);
-    if (activeGroupNames.isEmpty())
+    QMAMSUserEmployeeViewModel amsUserEmployeeViewModel(this, db);
+    amsUserEmployeeViewModel.setFilter(QString("user_id=%1").arg(userInfo.id));
+    amsUserEmployeeViewModel.select();
+
+    for (int i = 0; i < amsUserEmployeeViewModel.rowCount(); i++)
     {
-        return {};
+        auto employeeFieldIndex = amsUserEmployeeViewModel.fieldIndex("employee_id");
+        auto employeeModelIndex = amsUserEmployeeViewModel.index(i, employeeFieldIndex);
+        auto employeeId = amsUserEmployeeViewModel.data(employeeModelIndex).toInt();
+
+        ids.append(employeeId);
     }
 
-    QList<QString> employeeNames = getGroupEmployeeFromDatabase(groupNames);
-    if (employeeNames.isEmpty())
+    QMAMSUserEmployeeGroupViewModel amsUserEmployeeGroupViewModel(this, db);
+    amsUserEmployeeGroupViewModel.setFilter(QString("user_id=%1").arg(userInfo.id));
+    amsUserEmployeeGroupViewModel.select();
+
+    for (int i = 0; i < amsUserEmployeeGroupViewModel.rowCount(); i++)
     {
-        return {};
+        auto employeeFieldIndex = amsUserEmployeeGroupViewModel.fieldIndex("employee_id");
+        auto employeeModelIndex = amsUserEmployeeGroupViewModel.index(i, employeeFieldIndex);
+        auto employeeId = amsUserEmployeeGroupViewModel.data(employeeModelIndex).toInt();
+
+        if (!ids.contains(employeeId))
+        {
+            ids.append(employeeId);
+        }
     }
 
-    return getEmployeePrimaryKeyFromNamesFromDatabase(employeeNames);
+    return ids;
 }
 
 QList<int> QMAMSManager::getEmployeePrimaryKeyFromNamesFromDatabase(const QList<QString> &employeeNames)

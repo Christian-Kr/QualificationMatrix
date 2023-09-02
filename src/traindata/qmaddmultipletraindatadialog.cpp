@@ -1,12 +1,12 @@
 // qmaddmultipletraindatadialog.cpp is part of QualificationMatrix
 //
-// QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of the GNU General
-// Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
-// any later version.
+// QualificationMatrix is free software: you can redistribute it and/or modify it under the terms
+// of the GNU General Public License as published by the Free Software Foundation, either version
+// 3 of the License, or (at your option) any later version.
 //
-// QualificationMatrix is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
-// implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
-// details.
+// QualificationMatrix is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+// without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+// the GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License along with QualificationMatrix.
 // If not, see <http://www.gnu.org/licenses/>.
@@ -14,7 +14,7 @@
 #include "qmaddmultipletraindatadialog.h"
 #include "ui_qmaddmultipletraindatadialog.h"
 #include "data/training/qmtrainingviewmodel.h"
-#include "data/employee/qmshiftviewmodel.h"
+#include "data/employee/qmemployeegroupviewmodel.h"
 #include "data/trainingdata/qmtrainingdatastateviewmodel.h"
 #include "data/training/qmtraininggroupviewmodel.h"
 #include "data/trainingdata/qmtrainingdatamodel.h"
@@ -62,7 +62,7 @@ void QMAddMultipleTrainDataDialog::updateData()
 
     trainViewModel = std::make_unique<QMTrainingViewModel>(this, db);
     employeeViewModel = std::make_unique<QMEmployeeViewModel>(this, db);
-    shiftViewModel = std::make_unique<QMShiftViewModel>(this, db);
+    employeeGroupViewModel = std::make_unique<QMEmployeeGroupViewModel>(this, db);
     trainGroupViewModel = std::make_unique<QMTrainingGroupViewModel>(this, db);
     trainDataStateViewModel = std::make_unique<QMTrainingDataStateViewModel>(this, db);
 
@@ -72,7 +72,7 @@ void QMAddMultipleTrainDataDialog::updateData()
     ui->cbTrain->setModel(trainViewModel.get());
     ui->cbTrain->setModelColumn(1);
 
-    ui->cbEmployeeGroup->setModel(shiftViewModel.get());
+    ui->cbEmployeeGroup->setModel(employeeGroupViewModel.get());
     ui->cbEmployeeGroup->setModelColumn(1);
 
     ui->cbSingleEmployee->setModel(employeeViewModel.get());
@@ -169,10 +169,10 @@ void QMAddMultipleTrainDataDialog::addEmployee()
 void QMAddMultipleTrainDataDialog::addEmployeeFromGroup()
 {
     auto selEmployeeGroupRow = ui->cbEmployeeGroup->currentIndex();
-    auto selEmployeeGroupNameFieldIndex = shiftViewModel->fieldIndex("name");
-    auto selEmployeeGroupNameModelIndex = shiftViewModel->index(selEmployeeGroupRow, selEmployeeGroupNameFieldIndex);
+    auto selEmployeeGroupNameFieldIndex = employeeGroupViewModel->fieldIndex("name");
+    auto selEmployeeGroupNameModelIndex = employeeGroupViewModel->index(selEmployeeGroupRow, selEmployeeGroupNameFieldIndex);
 
-    auto selEmployeeGroupName = shiftViewModel->data(selEmployeeGroupNameModelIndex).toString();
+    auto selEmployeeGroupName = employeeGroupViewModel->data(selEmployeeGroupNameModelIndex).toString();
 
     // Go through all employee and test for right group.
     for (int i = 0; i < employeeViewModel->rowCount(); i++)
@@ -180,17 +180,17 @@ void QMAddMultipleTrainDataDialog::addEmployeeFromGroup()
         auto selEmployeeRow = i;
         auto selEmployeeIdFieldIndex = employeeViewModel->fieldIndex("id");
         auto selEmployeeNameFieldIndex = employeeViewModel->fieldIndex("name");
-        auto selEmployeeShiftFieldIndex = employeeViewModel->fieldIndex("Shift_name_2");
+        auto selEmployeeGroupFieldIndex = employeeViewModel->fieldIndex("EmployeeGroup_name_2");
         auto selEmployeeIdModelIndex = employeeViewModel->index(selEmployeeRow, selEmployeeIdFieldIndex);
         auto selEmployeeNameModelIndex = employeeViewModel->index(selEmployeeRow, selEmployeeNameFieldIndex);
-        auto selEmployeeShiftModelIndex = employeeViewModel->index(selEmployeeRow, selEmployeeShiftFieldIndex);
+        auto selEmployeeGroupModelIndex = employeeViewModel->index(selEmployeeRow, selEmployeeGroupFieldIndex);
 
         auto selEmployeeId = employeeViewModel->data(selEmployeeIdModelIndex).toInt();
         auto selEmployeeName = employeeViewModel->data(selEmployeeNameModelIndex).toString();
-        auto selEmployeeShift = employeeViewModel->data(selEmployeeShiftModelIndex).toString();
+        auto selEmployeeGroup = employeeViewModel->data(selEmployeeGroupModelIndex).toString();
 
         // If the group is wrong don't add.
-        if (selEmployeeShift.compare(selEmployeeGroupName) != 0)
+        if (selEmployeeGroup.compare(selEmployeeGroupName) != 0)
         {
             continue;
         }

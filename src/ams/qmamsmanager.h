@@ -238,10 +238,10 @@ private:
     /// \return General user permission struct.
     QMAMSUserGeneralAccessPermissions getUserGeneralAccessPermissionsFromDatabase(QMAMSUserInformation &userInfo);
 
-    /// Get the employee permission information from a user.
+    /// Get the employee permission information from a user with direct sql query.
     /// \param userInfo The user information struct to find the user.
     /// \return General employee permission list.
-    QList<int> getUserEmployeeAccessPermissionsFromDatabase(QMAMSUserInformation &userInfo);
+    QList<int> getUserEmployeeAccessPermissionsIds(QMAMSUserInformation &userInfo);
 
     /// Get a list of all group names, that correlate to the given username.
     /// \param username The name of the user to get the information for.

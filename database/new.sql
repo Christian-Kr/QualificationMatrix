@@ -10,9 +10,9 @@ CREATE TABLE IF NOT EXISTS "TrainDataState" (
 	PRIMARY KEY("id")
 );
 
--- Shift definition
+-- EmployeeGroup definition
 
-CREATE TABLE IF NOT EXISTS "Shift" (
+CREATE TABLE IF NOT EXISTS "EmployeeGroup" (
 	"id"	INTEGER,
 	"name"	TEXT NOT NULL,
 	PRIMARY KEY("id")
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS "Info" (
 
 -- TODO: Update
 INSERT INTO "Info" ("name", "value") VALUES("MAJOR", "1");
-INSERT INTO "Info" ("name", "value") VALUES("MINOR", "6");
+INSERT INTO "Info" ("name", "value") VALUES("MINOR", "8");
 
 -- FuncGroup definition
 
@@ -66,14 +66,14 @@ CREATE TABLE IF NOT EXISTS "TrainGroup" (
 CREATE TABLE IF NOT EXISTS "Employee" (
 	"id"	INTEGER,
 	"name"	TEXT NOT NULL,
-	"shift"	INTEGER NOT NULL,
+	"group"	INTEGER NOT NULL,
     "active" INTEGER default 1,
     "temporarily_deactivated" INTEGER default 0,
     "personnel_leasing" INTEGER default 0,
     "trainee" INTEGER default 0,
     "apprentice" INTEGER default 0,
 	PRIMARY KEY("id"),
-	FOREIGN KEY("shift") REFERENCES `Shift`("id")
+	FOREIGN KEY("group") REFERENCES `EmployeeGroup`("id")
 );
 
 -- Train definition
@@ -207,14 +207,14 @@ CREATE VIEW IF NOT EXISTS "EmployeeView" AS
 SELECT
     Employee.id,
     Employee.name,
-    Employee.shift,
+    Employee."group",
     Employee.temporarily_deactivated,
     Employee.personnel_leasing,
     Employee.trainee,
     Employee.apprentice
 FROM
     Employee
-        LEFT JOIN Shift ON Employee.shift = Shift.id
+        LEFT JOIN EmployeeGroup ON Employee."group" = EmployeeGroup.id
 WHERE
     Employee.active = 1;
 
@@ -273,14 +273,14 @@ SELECT
 FROM
     TrainDataState;
 
--- Create train data state view
+-- Create employee group view
 
-CREATE VIEW IF NOT EXISTS ShiftView AS
+CREATE VIEW IF NOT EXISTS "EmployeeGroupView" AS
 SELECT
-    Shift.id,
-    Shift.name
+    EmployeeGroup.id,
+    EmployeeGroup.name
 FROM
-    Shift;
+    EmployeeGroup;
 
 -- Create train exception view
 
@@ -424,6 +424,7 @@ CREATE TABLE IF NOT EXISTS "AMSGroupEmployee" (
 );
 
 -- General information for access management system
+
 CREATE TABLE IF NOT EXISTS "AMSGeneral" (
     "amsgeneral_id"            INTEGER,
     "amsgeneral_name"          TEXT,
@@ -431,4 +432,55 @@ CREATE TABLE IF NOT EXISTS "AMSGeneral" (
     "amsgeneral_description"   TEXT,
     PRIMARY KEY("amsgeneral_id")
 );
+
+
+-- Create a new view for user access
+
+CREATE VIEW AMSUserEmployeeView AS
+SELECT DISTINCT
+    AMSUser.amsuser_id as user_id,
+    Employee.id as employee_id
+FROM
+    AMSUser, AMSGroup, AMSUserGroup, AMSGroupEmployee, Employee
+                                                           LEFT OUTER JOIN AMSUserGroup AMSUserGroup1 ON
+            AMSUser.amsuser_id = AMSUserGroup1.amsusergroup_user AND
+            AMSGroup.amsgroup_id = AMSUserGroup1.amsusergroup_group
+                                                           LEFT OUTER JOIN AMSGroupEmployee AMSGroupEmployee1 ON
+            AMSGroup.amsgroup_id = AMSGroupEmployee1.amsgroupemployee_group AND
+            Employee.id = AMSGroupEmployee1.amsgroupemployee_employee
+WHERE
+        AMSGroup.amsgroup_id = AMSUserGroup.amsusergroup_group AND
+        AMSUser.amsuser_id = AMSUserGroup.amsusergroup_user AND
+        AMSGroup.amsgroup_id = AMSGroupEmployee.amsgroupemployee_group AND
+        Employee.id = AMSGroupEmployee.amsgroupemployee_employee;
+
+
+-- Create table for ams groups and employee groups relation
+
+CREATE TABLE IF NOT EXISTS "AMSGroupEmployeeGroup" (
+                                                       "amsgroupemployeegroup_id"                           INTEGER,
+                                                       "amsgroupemployeegroup_group"                        INTEGER,
+                                                       "amsgroupemployeegroup_employeegroup"                INTEGER,
+                                                       PRIMARY KEY("amsgroupemployeegroup_id"),
+                                                       FOREIGN KEY("amsgroupemployeegroup_group")           REFERENCES
+                                                           "AMSGroup" ("amsgroup_id"),
+                                                       FOREIGN KEY("amsgroupemployeegroup_employeegroup")   REFERENCES
+                                                           "EmployeeGroup" ("id")
+);
+
+
+-- Create a new view for user access with the help of employee groups
+
+CREATE VIEW AMSUserEmployeeGroupView AS
+SELECT DISTINCT
+    AMSUser.amsuser_id as user_id,
+    Employee.id as employee_id
+FROM
+    AMSUser, AMSGroup, AMSUserGroup, AMSGroupEmployeeGroup, EmployeeGroup, Employee
+WHERE
+        AMSUser.amsuser_id = AMSUserGroup.amsusergroup_user AND
+        AMSGroup.amsgroup_id = AMSUserGroup.amsusergroup_group AND
+        AMSGroup.amsgroup_id = AMSGroupEmployeeGroup.amsgroupemployeegroup_group AND
+        EmployeeGroup.id = AMSGroupEmployeeGroup.amsgroupemployeegroup_employeegroup AND
+        Employee.'group' = EmployeeGroup.id;
 
