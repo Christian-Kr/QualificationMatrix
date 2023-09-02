@@ -14,7 +14,7 @@
 #include "qmsigninglistdialog.h"
 #include "ui_qmsigninglistdialog.h"
 #include "data/employee/qmemployeeviewmodel.h"
-#include "data/employee/qmshiftviewmodel.h"
+#include "data/employee/qmemployeegroupviewmodel.h"
 #include "data/training/qmtrainingviewmodel.h"
 #include "data/trainingdata/qmtrainingdatamodel.h"
 #include "data/trainingdata/qmtrainingdatastateviewmodel.h"
@@ -359,8 +359,8 @@ void QMSigningListDialog::updateData()
     m_employeeViewModel = std::make_unique<QMEmployeeViewModel>(this, db);
     m_employeeViewModel->select();
 
-    m_shiftViewModel = std::make_unique<QMShiftViewModel>(this, db);
-    m_shiftViewModel->select();
+    m_employeeGroupViewModel = std::make_unique<QMEmployeeGroupViewModel>(this, db);
+    m_employeeGroupViewModel->select();
 
     m_trainViewModel = std::make_unique<QMTrainingViewModel>(this, db);
     m_trainViewModel->select();
@@ -372,7 +372,7 @@ void QMSigningListDialog::updateData()
     ui->cbTraining->setModel(m_trainViewModel.get());
     ui->cbTraining->setModelColumn(1);
 
-    ui->cbEmployeeGroup->setModel(m_shiftViewModel.get());
+    ui->cbEmployeeGroup->setModel(m_employeeGroupViewModel.get());
     ui->cbEmployeeGroup->setModelColumn(1);
 
     ui->cbSingleEmployee->setModel(m_employeeViewModel.get());
@@ -454,7 +454,7 @@ void QMSigningListDialog::addEmployee()
     // Column names in data
     auto colEmployeeId = m_employeeViewModel->fieldIndex("id");
     auto colEmployeeName = m_employeeViewModel->fieldIndex("name");
-    auto colEmployeeGroup = m_employeeViewModel->fieldIndex("Shift_name_2"); // Group name is still 'shift' cause of history.
+    auto colEmployeeGroup = m_employeeViewModel->fieldIndex("EmployeeGroup_name_2");
 
     if (colEmployeeId == -1 || colEmployeeName == -1 || colEmployeeGroup == -1)
     {

@@ -16,7 +16,7 @@
 #include "qmemployeedatemodel.h"
 #include "data/training/qmtrainingviewmodel.h"
 #include "data/employee/qmemployeeviewmodel.h"
-#include "data/employee/qmshiftviewmodel.h"
+#include "data/employee/qmemployeegroupviewmodel.h"
 #include "data/trainingdata/qmtrainingdatamodel.h"
 #include "data/certificate/qmcertificatemodel.h"
 #include "data/trainingdata/qmtraindatacertificatemodel.h"
@@ -42,7 +42,7 @@ QMNewCertificateDialog::QMNewCertificateDialog(const QSqlDatabase &db, QWidget *
     , m_employeeDateModel(std::make_unique<QMEmployeeDateModel>(this))
     , m_trainViewModel(std::make_unique<QMTrainingViewModel>(this, db))
     , m_employeeViewModel(std::make_unique<QMEmployeeViewModel>(this, db))
-    , m_employeeGroupViewModel(std::make_unique<QMShiftViewModel>(this, db))
+    , m_employeeGroupViewModel(std::make_unique<QMEmployeeGroupViewModel>(this, db))
     , m_certificateModel(std::make_unique<QMCertificateModel>(this, db))
 {
     m_ui = new Ui::QMNewCertificateDialog;

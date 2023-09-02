@@ -90,7 +90,7 @@ private:
     Ui::QMEmployeeSettingsWidget *ui;
 
     std::unique_ptr<QMSqlTableModel> employeeModel;
-    std::unique_ptr<QSqlTableModel> shiftModel;
+    std::unique_ptr<QSqlTableModel> employeeGroupModel;
 
     QSortFilterProxyModel *employeeFilterModel;
     QSortFilterProxyModel *employeeActivatedFilterModel;

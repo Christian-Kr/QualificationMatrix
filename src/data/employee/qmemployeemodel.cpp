@@ -33,7 +33,7 @@ void QMEmployeeModel::initModel()
     // Specifiy header data of table.
     setHeaderData(1, Qt::Horizontal, tr("Name"));
     setHeaderData(2, Qt::Horizontal, tr("Gruppe"));
-    setRelation(2, QSqlRelation("Shift", "id", "name"));
+    setRelation(2, QSqlRelation("EmployeeGroup", "id", "name"));
     setHeaderData(3, Qt::Horizontal, tr("Aktiviert"));
     setHeaderData(4, Qt::Horizontal, tr("Temporär deaktiviert"));
     setHeaderData(5, Qt::Horizontal, tr("Arbeitnehmerüberlassung"));

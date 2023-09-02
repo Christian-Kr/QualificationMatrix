@@ -68,19 +68,19 @@ void QMEmployeeSettingsWidget::updateData()
     employeeModel = std::make_unique<QMEmployeeModel>(this, db);
     employeeModel->select();
 
-    shiftModel = std::make_unique<QSqlTableModel>(this, db);
-    shiftModel->setTable("Shift");
-    shiftModel->setEditStrategy(QSqlTableModel::OnManualSubmit);
-    shiftModel->setHeaderData(1, Qt::Horizontal, tr("Name"));
-    shiftModel->sort(1, Qt::AscendingOrder);
-    shiftModel->select();
+    employeeGroupModel = std::make_unique<QSqlTableModel>(this, db);
+    employeeGroupModel->setTable("EmployeeGroup");
+    employeeGroupModel->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    employeeGroupModel->setHeaderData(1, Qt::Horizontal, tr("Name"));
+    employeeGroupModel->sort(1, Qt::AscendingOrder);
+    employeeGroupModel->select();
 
     employeeActivatedFilterModel->setSourceModel(employeeModel.get());
     employeeFilterModel->setSourceModel(employeeActivatedFilterModel);
 
     // Update the views.
     ui->tvEmployee->setModel(employeeFilterModel);
-    ui->tvEmployeeGroups->setModel(shiftModel.get());
+    ui->tvEmployeeGroups->setModel(employeeGroupModel.get());
 
     updateTableView();
 
@@ -104,9 +104,9 @@ void QMEmployeeSettingsWidget::saveSettings()
         employeeModel->submitAll();
     }
 
-    if (shiftModel->isDirty())
+    if (employeeGroupModel->isDirty())
     {
-        shiftModel->submitAll();
+        employeeGroupModel->submitAll();
         employeeModel->initModel();
         employeeModel->select();
     }
@@ -122,7 +122,7 @@ void QMEmployeeSettingsWidget::revertChanges()
     // int current = ui->cbEmployee->currentIndex();
 
     employeeModel->revertAll();
-    shiftModel->revertAll();
+    employeeGroupModel->revertAll();
 }
 
 void QMEmployeeSettingsWidget::resetFilter()
@@ -243,15 +243,15 @@ void QMEmployeeSettingsWidget::addEmployee()
 void QMEmployeeSettingsWidget::addEmployeeGroup()
 {
     // Add a new temp row to the data.
-    shiftModel->insertRow(shiftModel->rowCount());
+    employeeGroupModel->insertRow(employeeGroupModel->rowCount());
 
     // Set a default group name and start editor.
-    shiftModel->setData(
-            shiftModel->index(shiftModel->rowCount() - 1, 1), tr("Gruppenname eingeben"));
+    employeeGroupModel->setData(
+            employeeGroupModel->index(employeeGroupModel->rowCount() - 1, 1), tr("Gruppenname eingeben"));
 
     // Start editing the name.
     ui->tvEmployeeGroups->scrollToBottom();
-    ui->tvEmployeeGroups->edit(shiftModel->index(shiftModel->rowCount() - 1, 1));
+    ui->tvEmployeeGroups->edit(employeeGroupModel->index(employeeGroupModel->rowCount() - 1, 1));
 
     emit settingsChanged();
 }
@@ -269,7 +269,7 @@ void QMEmployeeSettingsWidget::removeEmployeeGroup()
     }
 
     // Get the selected group name.
-    auto selectedGroupName = shiftModel->data(shiftModel->index(selectedIndex.row(), 1)).toString();
+    auto selectedGroupName = employeeGroupModel->data(employeeGroupModel->index(selectedIndex.row(), 1)).toString();
 
     // Do not delete when entries in employee data have a reference to the group. This will only
     // search for the name as a text and not for the unique id!
@@ -298,7 +298,7 @@ void QMEmployeeSettingsWidget::removeEmployeeGroup()
     }
 
     // Delete the entry.
-    if (!shiftModel->removeRow(selectedIndex.row()))
+    if (!employeeGroupModel->removeRow(selectedIndex.row()))
     {
         QMessageBox::critical(
                 this, tr("Mitarbeitergruppe löschen"),

@@ -15,7 +15,7 @@
 #include "ui_qmimportcsvdialog.h"
 #include "data/training/qmtrainingviewmodel.h"
 #include "data/employee/qmemployeeviewmodel.h"
-#include "data/employee/qmshiftviewmodel.h"
+#include "data/employee/qmemployeegroupviewmodel.h"
 #include "data/trainingdata/qmtrainingdatastateviewmodel.h"
 #include "data/trainingdata/qmtrainingdatamodel.h"
 #include "data/training/qmtraininggroupviewmodel.h"
@@ -60,7 +60,7 @@ void QMImportCsvDialog::updateData()
 
     trainViewModel = std::make_unique<QMTrainingViewModel>(this, db);
     employeeViewModel = std::make_unique<QMEmployeeViewModel>(this, db);
-    shiftViewModel = std::make_unique<QMShiftViewModel>(this, db);
+    employeeGroupViewModel = std::make_unique<QMEmployeeGroupViewModel>(this, db);
     trainGroupViewModel = std::make_unique<QMTrainingGroupViewModel>(this, db);
     trainDataStateViewModel = std::make_unique<QMTrainingDataStateViewModel>(this, db);
     trainDataModel = std::make_unique<QMTrainingDataModel>(this, db);
@@ -68,7 +68,7 @@ void QMImportCsvDialog::updateData()
     ui->cbDefaultTrainGroup->setModel(trainGroupViewModel.get());
     ui->cbDefaultTrainGroup->setModelColumn(1);
 
-    ui->cbDefaultEmployeeGroup->setModel(shiftViewModel.get());
+    ui->cbDefaultEmployeeGroup->setModel(employeeGroupViewModel.get());
     ui->cbDefaultEmployeeGroup->setModelColumn(1);
 }
 

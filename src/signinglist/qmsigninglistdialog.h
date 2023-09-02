@@ -150,7 +150,7 @@ private:
 
     std::unique_ptr<QSqlTableModel> m_trainDataStateViewModel;
     std::unique_ptr<QSqlTableModel> m_employeeViewModel;
-    std::unique_ptr<QSqlTableModel> m_shiftViewModel;
+    std::unique_ptr<QSqlTableModel> m_employeeGroupViewModel;
     std::unique_ptr<QSqlTableModel> m_trainViewModel;
 };
 
