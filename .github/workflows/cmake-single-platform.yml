@@ -22,6 +22,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Install Botan
+      run: sudo apt-get install -y libbotan-2-dev
+
     - name: Install Qt
       uses: jurplel/install-qt-action@v3
       with:
