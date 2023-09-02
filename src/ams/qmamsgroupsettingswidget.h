@@ -1,17 +1,15 @@
 // qmamsgroupsettingswidget.h is part of QualificationMatrix
 //
-// QualificationMatrix is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by the
-// Free Software Foundation, either version 3 of the License, or (at your
-// option) any later version.
+// QualificationMatrix is free software: you can redistribute it and/or modify it under the terms
+// of the GNU General Public License as published by the Free Software Foundation, either version
+// 3 of the License, or (at your option) any later version.
 //
-// QualificationMatrix is distributed in the hope that it will be useful, but
-// WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
-// or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
-// more details.
+// QualificationMatrix is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+// without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+// the GNU General Public License for more details.
 //
-// You should have received a copy of the GNU General Public License along
-// with QualificationMatrix. If not, see <http://www.gnu.org/licenses/>.
+// You should have received a copy of the GNU General Public License along with QualificationMatrix.
+// If not, see <http://www.gnu.org/licenses/>.
 
 #ifndef QMAMSGROUPSETTINGSWIDGET_H
 #define QMAMSGROUPSETTINGSWIDGET_H
@@ -25,6 +23,8 @@ class QMEmployeeModel;
 class QSortFilterProxyModel;
 class QItemSelection;
 class QMAMSGroupEmployeeModel;
+class QMAMSGroupEmployeeGroupModel;
+class QMEmployeeGroupViewModel;
 
 namespace Ui
 {
@@ -94,6 +94,16 @@ public slots:
     /// \param selected Item that has been selected.
     void groupEmployeeSelectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
 
+    /// Employee group selection changed.
+    /// \param deselected item that has been deselected
+    /// \param selected item that has been selected
+    void employeeGroupSelectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
+
+    /// Employee group correlation table selection changed.
+    /// \param deselected item that has been deselected
+    /// \param selected item that has been selected
+    void groupEmployeeGroupSelectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
+
     /// Change the name of the group.
     void changeName();
 
@@ -118,6 +128,12 @@ public slots:
     /// Remove the selected employees.
     void removeEmployee();
 
+    /// Add an employee group.
+    void addEmployeeGroup();
+
+    /// Remove an employee group.
+    void removeEmployeeGroup();
+
 private:
     /// Update data data.
     void updateData();
@@ -139,6 +155,11 @@ private:
     /// \return True if found, else false.
     bool groupEmployeeProxyContainsEmployee(const QString &name);
 
+    /// Search for an employee group name in the group employee group proxy data.
+    /// \param name The name of the employee group to search for.
+    /// \return True if found, else false.
+    bool groupEmployeeGroupProxyContainsEmployeeGroup(const QString &name);
+
     /// Search for group name in group data.
     /// \param The group name to search for.
     /// \return True if found, else false.
@@ -149,11 +170,14 @@ private:
     std::unique_ptr<QMAMSAccessModeModel> amsAccessModeModel;
     std::unique_ptr<QMAMSGroupModel> amsGroupModel;
     std::unique_ptr<QMAMSGroupEmployeeModel> amsGroupEmployeeModel;
+    std::unique_ptr<QMAMSGroupEmployeeGroupModel> amsGroupEmployeeGroupModel;
     std::unique_ptr<QMEmployeeModel> employeeModel;
+    std::unique_ptr<QMEmployeeGroupViewModel> employeeGroupViewModel;
     std::unique_ptr<QMAMSGroupAccessModeModel> amsGroupAccessModeModel;
 
     std::unique_ptr<QSortFilterProxyModel> amsGroupAccessModeProxyModel;
     std::unique_ptr<QSortFilterProxyModel> amsGroupEmployeeProxyModel;
+    std::unique_ptr<QSortFilterProxyModel> amsGroupEmployeeGroupProxyModel;
 };
 
 #endif // QMAMSGROUPSETTINGSWIDGET_H

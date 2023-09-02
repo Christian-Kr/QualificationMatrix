@@ -36,6 +36,9 @@ QMEmployeeViewModel::QMEmployeeViewModel(QObject *parent, const QSqlDatabase &db
 
     sort(1, Qt::AscendingOrder);
 
+    // Restrict access to employees the user is allowed to see. Be aware, that is no a security
+    // feature but prevents changes by accident.
+
     auto amsManager = QMAMSManager::getInstance();
     QStringList primaryKeysString;
     QList<int> primaryKeyInt = amsManager->getEmployeePrimaryKeys();

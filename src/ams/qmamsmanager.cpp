@@ -362,8 +362,8 @@ QList<int> QMAMSManager::getUserEmployeeAccessPermissionsFromDatabase(QMAMSUserI
 
     auto db = QSqlDatabase::database("default");
 
-    // To ge the necessary information, get the user id, get the connected groups to the user id and at last, get the
-    // permissions that are correlated with the groups.
+    // To ge the necessary information, get the user id, get the connected groups to the user id
+    // and at last, get the permissions that are correlated with the groups.
 
     QList<QString> groupNames = getUserGroupsFromDatabase(userInfo.username);
     QList<QString> activeGroupNames = getActiveGroups(groupNames);
