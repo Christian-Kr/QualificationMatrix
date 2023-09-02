@@ -636,11 +636,13 @@ void QMAMSUserSettingsWidget::changeUsername()
             return;
         }
 
-        // The username should only consist of letters.
-        if (!newUsername.contains(QRegularExpression("^[a-zA-Z]+$")) || newUsername.length() < 6)
+        // The username should consist letters and numbers.
+        if (!newUsername.contains(QRegularExpression("^[a-zA-Z0-9]+$")) || newUsername.length() < 5)
         {
-            QMessageBox::information(this, tr("Benutzername ändern"),
-                    tr("Der Benutzername darf nur Buchstaben enthalten und muss mindestens 6 Zeichen lang sein."));
+            QMessageBox::information(
+                    this, tr("Benutzername ändern"),
+                    tr("Der Benutzername darf nur Buchstaben enthalten und muss mindestens 6 Zeichen lang sein.")
+            );
             continue;
         }
 
@@ -674,7 +676,7 @@ bool QMAMSUserSettingsWidget::userContainsUsername(const QString &username)
         auto usernameModelIndex = amsUserModel->index(i, usernameFieldIndex);
         auto tmpUsername = amsUserModel->data(usernameModelIndex).toString();
 
-        if (tmpUsername.compare(username) == 0)
+        if (tmpUsername.toUpper().compare(username.toUpper()) == 0)
         {
             return true;
         }
