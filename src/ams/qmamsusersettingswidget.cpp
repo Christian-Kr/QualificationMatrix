@@ -38,6 +38,7 @@ QMAMSUserSettingsWidget::QMAMSUserSettingsWidget(QWidget *parent)
     booleanDelegate->setEditable(true);
     ui->tvUser->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tvUser->setItemDelegateForColumn(6, booleanDelegate);
+    ui->tvUser->setItemDelegateForColumn(7, booleanDelegate);
 }
 
 QMAMSUserSettingsWidget::~QMAMSUserSettingsWidget()
@@ -357,6 +358,52 @@ void QMAMSUserSettingsWidget::userSelectionChanged(const QModelIndex &selected, 
     }
 
     activateUserGroupList(selected.row());
+}
+
+void QMAMSUserSettingsWidget::changeAdminState()
+{
+    auto selRows = ui->tvUser->selectionModel()->selectedRows();
+    if (selRows.count() != 1)
+    {
+        qWarning() << "wrong number of selected rows";
+    }
+
+    auto selRow = selRows.first().row();
+
+    auto usernameFieldIndex = amsUserModel->fieldIndex("amsuser_username");
+    auto usernameModelIndex = amsUserModel->index(selRow, usernameFieldIndex);
+    auto selUsername = amsUserModel->data(usernameModelIndex).toString();
+
+    // Don't change if selected user is administrator.
+    if (selUsername.compare("administrator") == 0)
+    {
+        QMessageBox::information(this, tr("Admin-Status ändern"),
+                tr("Der Admin-Status von 'administrator' kann nicht geändert werden."));
+        return;
+    }
+
+    auto adminFieldIndex = amsUserModel->fieldIndex("amsuser_admin");
+    auto adminModelIndex = amsUserModel->index(selRow, adminFieldIndex);
+    auto selAdmin = amsUserModel->data(adminModelIndex).toBool();
+
+    // Change the admin state.
+    if (!amsUserModel->setData(adminModelIndex, !selAdmin))
+    {
+        QMessageBox::information(this, tr("Admin-Status ändern"),
+                tr("Der Admin-Status konnte nicht geändert werden."));
+        return;
+    }
+
+    if (!selAdmin)
+    {
+        ui->pbChangeAdminState->setText(tr("Admin-Flag deaktivieren"));
+    }
+    else
+    {
+        ui->pbChangeAdminState->setText(tr("Admin-Flag aktivieren"));
+    }
+
+    emitSettingsChanged();
 }
 
 void QMAMSUserSettingsWidget::changeActiveState()

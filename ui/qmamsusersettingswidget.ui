@@ -157,6 +157,13 @@
            </widget>
           </item>
           <item>
+           <widget class="QPushButton" name="pbChangeAdminState">
+            <property name="text">
+             <string>Admin-Flag aktivieren</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <spacer name="verticalSpacer">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
@@ -459,6 +466,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pbChangeAdminState</sender>
+   <signal>clicked()</signal>
+   <receiver>QMAMSUserSettingsWidget</receiver>
+   <slot>changeAdminState()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>711</x>
+     <y>287</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>583</x>
+     <y>380</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>addUser()</slot>
@@ -472,5 +495,6 @@
   <slot>changeName()</slot>
   <slot>resetLoginNum()</slot>
   <slot>changeActiveState()</slot>
+  <slot>changeAdminState()</slot>
  </slots>
 </ui>

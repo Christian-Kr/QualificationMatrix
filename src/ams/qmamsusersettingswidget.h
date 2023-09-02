@@ -97,6 +97,9 @@ public slots:
     /// Changes the user from activated to deactivated and vise versa.
     void changeActiveState();
 
+    /// Changes the user admin state, which can be activated or deactivated.
+    void changeAdminState();
+
 private:
     /// Get the username from the given primary id.
     /// \param primaryId The primary key id in the table AMSUser.
