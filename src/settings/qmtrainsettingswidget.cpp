@@ -46,6 +46,8 @@ QMTrainSettingsWidget::QMTrainSettingsWidget(QWidget *parent)
     ui->tvTrainGroups->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft);
     ui->tvTrainGroups->verticalHeader()->setVisible(true);
     ui->tvTrainGroups->setItemDelegateForColumn(2, new QMColorChooserDelegate(this));
+    ui->tvTrainGroups->setItemDelegateForColumn(3, new QMBooleanDelegate());
+    ui->tvTrainGroups->setItemDelegateForColumn(4, new QMPlainTextEditDelegate());
 
     ui->tvTrainState->horizontalHeader()->setStretchLastSection(false);
     ui->tvTrainState->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
@@ -67,7 +69,6 @@ void QMTrainSettingsWidget::saveSettings()
     if (trainGroupModel->isDirty())
     {
         trainGroupModel->submitAll();
-        trainModel->initModel();
         trainModel->select();
     }
 
