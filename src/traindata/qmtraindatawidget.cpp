@@ -37,8 +37,6 @@
 #include <QSqlQuery>
 #include <QSqlError>
 
-#include <QDebug>
-
 QMTrainDataWidget::QMTrainDataWidget(QWidget *parent)
     : QMWinModeWidget(parent)
     , ui(new Ui::QMTrainDataWidget)
