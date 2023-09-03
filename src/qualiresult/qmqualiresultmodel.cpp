@@ -289,7 +289,8 @@ bool QMQualiResultModel::updateQualiInfo(const QString &filterName, const QStrin
             "       Train.id = TrainData.train and "
             "       Employee.id = TrainData.employee and "
             "       TrainData.state = 2 "
-            ") OR train_date_2 IS NULL) "
+            ") OR train_date_2 IS NULL) and "
+            "TrainGroup.qmresult_ignore = 0 "
             "ORDER BY "
             "   Employee.name";
 
@@ -297,10 +298,6 @@ bool QMQualiResultModel::updateQualiInfo(const QString &filterName, const QStrin
     query.last();
     int numElem = query.at() + 1;
     query.seek(-1);
-
-    auto &settings = QMApplicationSettings::getInstance();
-    auto ignoreList = settings.read("QualiResult/IgnoreList", QStringList()).toStringList();
-    auto doIgnore = settings.read("QualiResult/DoIgnore", true).toBool();
 
     // Get the TrainExceptionView data.
     QMTrainingExceptionViewModel trainExceptViewModel(this, db);
@@ -324,27 +321,6 @@ bool QMQualiResultModel::updateQualiInfo(const QString &filterName, const QStrin
 
         // Read in the first entry.
         QMQualiResultRecord *result = getResultFromRecord(query.record());
-
-        // Remove all entries, that are set on ignore for qualification result.
-        if (doIgnore)
-        {
-            auto found = false;
-            for (const QString &ignoreEntry : ignoreList)
-            {
-                if (result->getTraining().contains(ignoreEntry) ||
-                    result->getTrainingGroup().contains(ignoreEntry))
-                {
-                    found = true;
-                    break;
-                }
-            }
-
-            if (found)
-            {
-                delete result;
-                continue;
-            }
-        }
 
         // Remove all entries, an expetion exist for.
         if (trainExceptHash.contains(result->getFirstName() + "_" + result->getTraining()))
@@ -494,12 +470,6 @@ QVariant QMQualiResultModel::data(const QModelIndex &index, int role) const
             QMApplicationSettings &settings = QMApplicationSettings::getInstance();
             QString okColor = settings.read("QualiResult/OkColor", "#ffffff").toString();
             return QVariant(QColor(okColor));
-        }
-        if (index.column() == 7 && index.data().toString() == "Ausreichend")
-        {
-            QMApplicationSettings &settings = QMApplicationSettings::getInstance();
-            QString enoughColor = settings.read("QualiResult/EnoughColor", "#ffffff").toString();
-            return QVariant(QColor(enoughColor));
         }
     }
 

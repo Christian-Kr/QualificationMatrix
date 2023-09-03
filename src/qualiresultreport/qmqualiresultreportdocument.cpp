@@ -108,7 +108,6 @@ void QMQualiResultReportDocument::createDocument(QList<QMQualiResultReportItem> 
 
     QColor okColor(settings.read("QualiResult/OkColor", "#ffffff").toString());
     QColor badColor(settings.read("QualiResult/BadColor", "#ffffff").toString());
-    QColor enoughColor(settings.read("QualiResult/EnoughColor", "#ffffff").toString());
 
     int num = 0;
     for (auto &resultItem : resultItems)
@@ -127,13 +126,9 @@ void QMQualiResultReportDocument::createDocument(QList<QMQualiResultReportItem> 
             {
                 textFormat.setBackground(okColor);
             }
-            else if (frac < 80)
-            {
-                textFormat.setBackground(badColor);
-            }
             else
             {
-                textFormat.setBackground(enoughColor);
+                textFormat.setBackground(badColor);
             }
 
             cursor.insertText(QString("%1/%2 - %3 %").arg(resultItem.getTrainResultOk())

@@ -1,15 +1,15 @@
 // qmsettings.cpp is part of QualificationMatrix
 //
-// QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of the GNU General
-// Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
-// any later version.
+// QualificationMatrix is free software: you can redistribute it and/or modify it under the terms
+// of the GNU General Public License as published by the Free Software Foundation, either version
+// 3 of the License, or (at your option) any later version.
 //
-// QualificationMatrix is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
-// implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
-// more details.
+// QualificationMatrix is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+// without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+// the GNU General Public License for more details.
 //
-// You should have received a copy of the GNU General Public License along with QualificationMatrix. If not,
-// see <http://www.gnu.org/licenses/>.
+// You should have received a copy of the GNU General Public License along with QualificationMatrix.
+// If not, see <http://www.gnu.org/licenses/>.
 
 #include "qmsettingsdialog.h"
 #include "ui_qmsettingsdialog.h"
@@ -120,24 +120,30 @@ void QMSettingsDialog::initTreeWidgets()
 {
     int i = 0;
 
-    auto twiGeneral = new QTreeWidgetItem(ui->twSettingGroups);
+    auto twiApplicationSettings = new QTreeWidgetItem(ui->twSettingGroups);
+    twiApplicationSettings->setText(0, tr("Anwendung"));
+
+    auto twiGeneral = new QTreeWidgetItem(twiApplicationSettings);
     twiGeneral->setText(0, tr("Allgemein"));
     twiGeneral->setData(0, Qt::UserRole, i++);
 
-    auto twiQualiMatrix = new QTreeWidgetItem(ui->twSettingGroups);
+    auto twiQualiMatrix = new QTreeWidgetItem(twiApplicationSettings);
     twiQualiMatrix->setText(0, tr("Qualikationsmatrix"));
     twiQualiMatrix->setData(0, Qt::UserRole, i++);
 
-    auto twiQualiResult = new QTreeWidgetItem(ui->twSettingGroups);
+    auto twiQualiResult = new QTreeWidgetItem(twiApplicationSettings);
     twiQualiResult->setText(0, tr("Qualifizierungsergebnis"));
     twiQualiResult->setData(0, Qt::UserRole, i++);
+
+    auto twiDatabaseSettings = new QTreeWidgetItem(ui->twSettingGroups);
+    twiDatabaseSettings->setText(0, tr("Datenbank"));
 
     // If do not have the permission, make a lot of stuff disable.
     // Permission check.
     auto amsManager = QMAMSManager::getInstance();
     if (amsManager->checkPermission(AccessMode::PER_DATA_CONFIG))
     {
-        auto twiDatasets = new QTreeWidgetItem(ui->twSettingGroups);
+        auto twiDatasets = new QTreeWidgetItem(twiDatabaseSettings);
         twiDatasets->setText(0, tr("Datensätze"));
 
         auto twiTrainings = new QTreeWidgetItem(twiDatasets);
@@ -153,11 +159,10 @@ void QMSettingsDialog::initTreeWidgets()
         twiEmployee->setData(0, Qt::UserRole, i++);
     }
 
-
     // Don't show permission configuration if administrator ist not logged in.
     if (amsManager->checkAdminPermission())
     {
-        auto twiAMS = new QTreeWidgetItem(ui->twSettingGroups);
+        auto twiAMS = new QTreeWidgetItem(twiDatabaseSettings);
         twiAMS->setText(0, tr("Rechtverwaltung"));
 
         auto twiAMSUser = new QTreeWidgetItem(twiAMS);

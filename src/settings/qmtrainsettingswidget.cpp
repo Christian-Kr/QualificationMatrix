@@ -1,12 +1,12 @@
 // qmtrainsettingswidget.h is part of QualificationMatrix
 //
-// QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of the GNU General
-// Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
-// any later version.
+// QualificationMatrix is free software: you can redistribute it and/or modify it under the terms
+// of the GNU General Public License as published by the Free Software Foundation, either version
+// 3 of the License, or (at your option) any later version.
 //
-// QualificationMatrix is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
-// implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
-// details.
+// QualificationMatrix is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+// without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+// the GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License along with QualificationMatrix.
 // If not, see <http://www.gnu.org/licenses/>.
@@ -46,6 +46,8 @@ QMTrainSettingsWidget::QMTrainSettingsWidget(QWidget *parent)
     ui->tvTrainGroups->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft);
     ui->tvTrainGroups->verticalHeader()->setVisible(true);
     ui->tvTrainGroups->setItemDelegateForColumn(2, new QMColorChooserDelegate(this));
+    ui->tvTrainGroups->setItemDelegateForColumn(3, new QMBooleanDelegate());
+    ui->tvTrainGroups->setItemDelegateForColumn(4, new QMPlainTextEditDelegate());
 
     ui->tvTrainState->horizontalHeader()->setStretchLastSection(false);
     ui->tvTrainState->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
@@ -67,7 +69,6 @@ void QMTrainSettingsWidget::saveSettings()
     if (trainGroupModel->isDirty())
     {
         trainGroupModel->submitAll();
-        trainModel->initModel();
         trainModel->select();
     }
 
