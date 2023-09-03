@@ -289,7 +289,8 @@ bool QMQualiResultModel::updateQualiInfo(const QString &filterName, const QStrin
             "       Train.id = TrainData.train and "
             "       Employee.id = TrainData.employee and "
             "       TrainData.state = 2 "
-            ") OR train_date_2 IS NULL) "
+            ") OR train_date_2 IS NULL) and "
+            "TrainGroup.qmresult_ignore = 0 "
             "ORDER BY "
             "   Employee.name";
 
