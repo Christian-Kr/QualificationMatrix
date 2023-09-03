@@ -213,7 +213,6 @@
   <slot>removeIgnore()</slot>
   <slot>changeOkColor()</slot>
   <slot>changeBadColor()</slot>
-  <slot>changeEnoughColor()</slot>
   <slot>chooseBackupPath()</slot>
   <slot>chooseCentralizedSettingsFile()</slot>
   <slot>restartNeededInformation()</slot>
