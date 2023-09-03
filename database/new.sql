@@ -58,6 +58,7 @@ CREATE TABLE IF NOT EXISTS "TrainGroup" (
 	"id"	INTEGER,
 	"name"	TEXT,
 	"color"	TEXT,
+    "qmresult_ignore" INTEGER default 0,
 	PRIMARY KEY("id")
 );
 
