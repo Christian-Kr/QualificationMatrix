@@ -27,6 +27,9 @@ public:
     /// \param parent
     /// \param db
     explicit QMTrainingGroupModel(QObject *parent = nullptr, QSqlDatabase db = QSqlDatabase());
+
+    /// Override from QMSqlTableModel.
+    void initModel() override;
 };
 
 #endif // QMTRAININGGROUPMODEL_H

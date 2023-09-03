@@ -16,6 +16,11 @@
 QMTrainingGroupModel::QMTrainingGroupModel(QObject *parent, QSqlDatabase db)
     : QMSqlTableModel(parent, db)
 {
+    initModel();
+}
+
+void QMTrainingGroupModel::initModel()
+{
     // The name of the Table.
     setTable("TrainGroup");
 
@@ -25,6 +30,8 @@ QMTrainingGroupModel::QMTrainingGroupModel(QObject *parent, QSqlDatabase db)
     // Specifiy header data of table.
     setHeaderData(1, Qt::Horizontal, tr("Name"));
     setHeaderData(2, Qt::Horizontal, tr("Farbe"));
+    setHeaderData(3, Qt::Horizontal, tr("Ignorieren für Ergebnis"));
+    setHeaderData(4, Qt::Horizontal, tr("Begründung für das Ignorieren"));
 
     sort(1, Qt::AscendingOrder);
 }

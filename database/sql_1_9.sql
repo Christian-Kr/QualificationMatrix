@@ -2,6 +2,7 @@
 -- be part of qualification result.
 
 ALTER TABLE "TrainGroup" ADD COLUMN "qmresult_ignore" INTEGER default 0;
+ALTER TABLE "TrainGroup" ADD COLUMN "ignore_reason" TEXT;
 
 -- Update version of database
 
