@@ -159,7 +159,6 @@ void QMSettingsDialog::initTreeWidgets()
         twiEmployee->setData(0, Qt::UserRole, i++);
     }
 
-
     // Don't show permission configuration if administrator ist not logged in.
     if (amsManager->checkAdminPermission())
     {
