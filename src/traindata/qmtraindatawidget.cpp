@@ -13,7 +13,6 @@
 
 #include "qmtraindatawidget.h"
 #include "ui_qmtraindatawidget.h"
-#include "data/qmdatamanager.h"
 #include "data/employee/qmemployeeviewmodel.h"
 #include "data/training/qmtrainingviewmodel.h"
 #include "data/trainingdata/qmtrainingdatamodel.h"
@@ -31,7 +30,6 @@
 #include <QMessageBox>
 #include <QSqlRecord>
 #include <QSqlField>
-#include <QModelIndexList>
 #include <QSortFilterProxyModel>
 #include <QItemSelection>
 #include <QSqlQuery>
