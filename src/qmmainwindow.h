@@ -1,12 +1,12 @@
 // qmmainwindow.h is part of QualificationMatrix
 //
-// QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of the GNU General
-// Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
-// any later version.
+// QualificationMatrix is free software: you can redistribute it and/or modify it under the terms
+// of the GNU General Public License as published by the Free Software Foundation, either version
+// 3 of the License, or (at your option) any later version.
 //
-// QualificationMatrix is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
-// implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
-// more details.
+// QualificationMatrix is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+// without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+// the GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License along with QualificationMatrix.
 // If not, see <http://www.gnu.org/licenses/>.
@@ -34,6 +34,7 @@ class QSqlDatabase;
 class QMSigningListDialog;
 class QMAMSLoginDialog;
 class QMNewCertificateDialog;
+class QMFavoriteDatabaseDialog;
 
 enum class LoginState;
 
@@ -166,6 +167,9 @@ public slots:
     /// Show the favorites dialog.
     [[maybe_unused]] void showFavorites();
 
+    /// Open the favorite database file given.
+    [[maybe_unused]] void openFavoriteDatabase(QString dbFileName);
+
 protected:
     /// Override from QMainWindow. This function will be called on closeing the widget.
     /// \param event The close event object that will be created.
@@ -189,9 +193,10 @@ private:
     std::unique_ptr<QMSigningListDialog> m_signingListDialog;
     std::unique_ptr<QMAMSLoginDialog> m_amsLoginDialog;
     std::unique_ptr<QProgressDialog> m_progressDialog;
-    std::unique_ptr<QMQualiResultWidget> qualiResultWidget;
-    std::unique_ptr<QMQualiMatrixWidget> qualiMatrixWidget;
-    std::unique_ptr<QMTrainDataWidget> trainDataWidget;
+    std::unique_ptr<QMQualiResultWidget> m_qualiResultWidget;
+    std::unique_ptr<QMQualiMatrixWidget> m_qualiMatrixWidget;
+    std::unique_ptr<QMTrainDataWidget> m_trainDataWidget;
+    std::unique_ptr<QMFavoriteDatabaseDialog> m_favoriteDatabaseDialog;
 
     WIN_MODE winMode;
     WIN_MODE lastWinMode;
