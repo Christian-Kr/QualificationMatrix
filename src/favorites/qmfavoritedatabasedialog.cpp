@@ -313,7 +313,6 @@ void QMFavoriteDatabaseDialog::resetFavoriteEntry()
 
 void QMFavoriteDatabaseDialog::saveFavoriteEntry(const bool &validation)
 {
-    // todo: validate input
     if (m_selectedFavorite == nullptr)
     {
         qWarning() << "should never happend";
