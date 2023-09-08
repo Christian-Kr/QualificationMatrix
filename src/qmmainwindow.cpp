@@ -106,7 +106,34 @@ QMMainWindow::~QMMainWindow()
 
 void QMMainWindow::openFavoriteDatabase(QString dbFilePath)
 {
+    // If a database with the name exist, remove it. This is needed, because the driver can only
+    // be set while inside object creation.
+    if (QSqlDatabase::contains(DB_DEFAULT_NAME))
+    {
+        closeDatabase();
+        QSqlDatabase::removeDatabase(DB_DEFAULT_NAME);
+    }
 
+    // Here, implement the current situation, that the database can always only be a local sqlite
+    // file. If should change later, extend this part later.
+    auto db = QSqlDatabase::addDatabase("QSQLITE", DB_DEFAULT_NAME);
+    db.setDatabaseName(dbFilePath);
+
+    // If opening the database fails, show a message and stop automatic loading the database. If the opening fails,
+    // this could be due to wrong database information and/or failure in the database itself.
+    if (!db.open())
+    {
+        QMessageBox::critical(this, tr("Datenbankverbindung"),
+                tr("Die Datenbank konnte nicht geöffnet werden."));
+
+        // when opening the database fails, just show the favorites dialog
+        showFavorites();
+
+        return;
+    }
+
+    // Run initializing actions after database has been loaded.
+    initAfterDatabaseOpened();
 }
 
 void QMMainWindow::initDatabaseSettings()
@@ -117,6 +144,10 @@ void QMMainWindow::initDatabaseSettings()
     if (loadLast)
     {
         manageDatabaseFromSettings();
+    }
+    else
+    {
+        showFavorites();
     }
 }
 
@@ -130,7 +161,11 @@ bool QMMainWindow::manageDatabaseFromSettings()
     if (!db.open())
     {
         QMessageBox::critical(this, tr("Datenbankverbindung"),
-                tr("Die Datenbank konnte nicht geöffnet werden, überprüfen Sie ihre Einstellungen."));
+                tr("Die Datenbank konnte nicht geöffnet werden."));
+
+        // when opening the database fails, just show the favorites dialog
+        showFavorites();
+
         return false;
     }
 
