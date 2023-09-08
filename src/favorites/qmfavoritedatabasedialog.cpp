@@ -36,6 +36,7 @@ QMFavoriteDatabaseDialog::QMFavoriteDatabaseDialog(QWidget *parent)
             &QMFavoriteDatabaseDialog::favoriteDatabaseFileChanged);
 
     readFavoritesFromSettings();
+    updateUi();
 }
 
 QMFavoriteDatabaseDialog::~QMFavoriteDatabaseDialog()
@@ -118,9 +119,11 @@ void QMFavoriteDatabaseDialog::updateUi()
 {
     if (m_selectedFavorite == nullptr)
     {
+        ui->editWidget->setVisible(false);
         return;
     }
 
+    ui->editWidget->setVisible(true);
     ui->pbSave->setEnabled(
             (ui->leName->text().compare(m_selectedFavorite->name) != 0) ||
             (ui->leDatabaseFile->text().compare(m_selectedFavorite->dbFilePath) != 0));
@@ -219,6 +222,11 @@ void QMFavoriteDatabaseDialog::writeFavoritesToSettings()
 
 void QMFavoriteDatabaseDialog::removeFavoriteEntry()
 {
+    if (m_selectedFavorite == nullptr)
+    {
+        return;
+    }
+
     auto result = QMessageBox::question(this, tr("Favoriten löschen"),
             tr("Möchten Sie den Favoriten löschen?"),
             QMessageBox::Yes | QMessageBox::No);
@@ -256,6 +264,14 @@ void QMFavoriteDatabaseDialog::removeFavoriteEntry()
     delete selectedFavorite;
 
     writeFavoritesToSettings();
+
+    // update ui
+    if (m_favorites.isEmpty())
+    {
+        m_selectedFavorite = nullptr;
+    }
+
+    updateUi();
 }
 
 void QMFavoriteDatabaseDialog::createFavoriteEntry()
