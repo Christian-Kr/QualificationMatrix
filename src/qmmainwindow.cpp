@@ -1,15 +1,15 @@
 // qmmainwindow.cpp is part of QualificationMatrix
 //
-// QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of the GNU General
-// Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
-// any later version.
+// QualificationMatrix is free software: you can redistribute it and/or modify it under the terms
+// of the GNU General Public License as published by the Free Software Foundation, either version
+// 3 of the License, or (at your option) any later version.
 //
-// QualificationMatrix is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
-// implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
-// more details.
+// QualificationMatrix is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+// without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+// the GNU General Public License for more details.
 //
-// You should have received a copy of the GNU General Public License along with QualificationMatrix. If not, see
-// <http://www.gnu.org/licenses/>.
+// You should have received a copy of the GNU General Public License along with QualificationMatrix.
+// If not, see <http://www.gnu.org/licenses/>.
 
 #include "qmmainwindow.h"
 #include "ui_qmmainwindow.h"
@@ -35,6 +35,7 @@
 #include "ams/qmamsmanager.h"
 #include "ams/qmamslogindialog.h"
 #include "backup/qmbackupmanager.h"
+#include "favorites/qmfavoritedatabasedialog.h"
 
 #include <QProgressDialog>
 #include <QSqlRelationalTableModel>
@@ -89,12 +90,50 @@ QMMainWindow::QMMainWindow(QWidget *parent)
     m_signingListDialog->setModal(true);
 
     // QMAMSLoginDialog
-    connect(m_amsLoginDialog.get(), &QMAMSLoginDialog::finished, this, &QMMainWindow::amsLoginDialogFinished);
+    connect(m_amsLoginDialog.get(), &QMAMSLoginDialog::finished, this,
+            &QMMainWindow::amsLoginDialogFinished);
+
+    // Initialize favorite dialog.
+    m_favoriteDatabaseDialog = std::make_unique<QMFavoriteDatabaseDialog>(this);
+    connect(m_favoriteDatabaseDialog.get(), &QMFavoriteDatabaseDialog::openDatabase, this,
+            &QMMainWindow::openFavoriteDatabase);
 }
 
 QMMainWindow::~QMMainWindow()
 {
     delete ui;
+}
+
+void QMMainWindow::openFavoriteDatabase(QString dbFilePath)
+{
+    // If a database with the name exist, remove it. This is needed, because the driver can only
+    // be set while inside object creation.
+    if (QSqlDatabase::contains(DB_DEFAULT_NAME))
+    {
+        closeDatabase();
+        QSqlDatabase::removeDatabase(DB_DEFAULT_NAME);
+    }
+
+    // Here, implement the current situation, that the database can always only be a local sqlite
+    // file. If should change later, extend this part later.
+    auto db = QSqlDatabase::addDatabase("QSQLITE", DB_DEFAULT_NAME);
+    db.setDatabaseName(dbFilePath);
+
+    // If opening the database fails, show a message and stop automatic loading the database. If the opening fails,
+    // this could be due to wrong database information and/or failure in the database itself.
+    if (!db.open())
+    {
+        QMessageBox::critical(this, tr("Datenbankverbindung"),
+                tr("Die Datenbank konnte nicht geöffnet werden."));
+
+        // when opening the database fails, just show the favorites dialog
+        showFavorites();
+
+        return;
+    }
+
+    // Run initializing actions after database has been loaded.
+    initAfterDatabaseOpened();
 }
 
 void QMMainWindow::initDatabaseSettings()
@@ -105,6 +144,10 @@ void QMMainWindow::initDatabaseSettings()
     if (loadLast)
     {
         manageDatabaseFromSettings();
+    }
+    else
+    {
+        showFavorites();
     }
 }
 
@@ -118,7 +161,11 @@ bool QMMainWindow::manageDatabaseFromSettings()
     if (!db.open())
     {
         QMessageBox::critical(this, tr("Datenbankverbindung"),
-                tr("Die Datenbank konnte nicht geöffnet werden, überprüfen Sie ihre Einstellungen."));
+                tr("Die Datenbank konnte nicht geöffnet werden."));
+
+        // when opening the database fails, just show the favorites dialog
+        showFavorites();
+
         return false;
     }
 
@@ -639,17 +686,17 @@ bool QMMainWindow::closeCurrentWindowMode()
     {
         case WIN_MODE::TRAININGDATA:
         {
-            widget = trainDataWidget.release();
+            widget = m_trainDataWidget.release();
         }
         break;
         case WIN_MODE::MATRIX:
         {
-            widget = qualiMatrixWidget.release();
+            widget = m_qualiMatrixWidget.release();
         }
         break;
         case WIN_MODE::RESULT:
         {
-            widget = qualiResultWidget.release();
+            widget = m_qualiResultWidget.release();
         }
         break;
         default:
@@ -724,16 +771,16 @@ void QMMainWindow::enterWindowMode(WIN_MODE mode)
                 return;
             }
 
-            trainDataWidget = std::make_unique<QMTrainDataWidget>();
-            layout->insertWidget(0, trainDataWidget.get());
+            m_trainDataWidget = std::make_unique<QMTrainDataWidget>();
+            layout->insertWidget(0, m_trainDataWidget.get());
 
-            connect(trainDataWidget.get(), &QMTrainDataWidget::infoMessageAvailable, ui->laInfo,
+            connect(m_trainDataWidget.get(), &QMTrainDataWidget::infoMessageAvailable, ui->laInfo,
                     &QMInfoLabel::showInfoMessage);
 
-            connect(trainDataWidget.get(), &QMTrainDataWidget::warnMessageAvailable, ui->laInfo,
+            connect(m_trainDataWidget.get(), &QMTrainDataWidget::warnMessageAvailable, ui->laInfo,
                     &QMInfoLabel::showWarnMessage);
 
-            trainDataWidget->updateData();
+            m_trainDataWidget->updateData();
 
             // Check right buttons.
             ui->actModeResult->setChecked(false);
@@ -757,14 +804,14 @@ void QMMainWindow::enterWindowMode(WIN_MODE mode)
                 return;
             }
 
-            qualiMatrixWidget = std::make_unique<QMQualiMatrixWidget>();
-            layout->insertWidget(0, qualiMatrixWidget.get());
+            m_qualiMatrixWidget = std::make_unique<QMQualiMatrixWidget>();
+            layout->insertWidget(0, m_qualiMatrixWidget.get());
 
-            connect(qualiMatrixWidget.get(), &QMWinModeWidget::startWorkload, this, &QMMainWindow::workloadStarts);
-            connect(qualiMatrixWidget.get(), &QMWinModeWidget::updateWorkload, this, &QMMainWindow::workloadUpdates);
-            connect(qualiMatrixWidget.get(), &QMWinModeWidget::endWorkload, this, &QMMainWindow::closeProgress);
+            connect(m_qualiMatrixWidget.get(), &QMWinModeWidget::startWorkload, this, &QMMainWindow::workloadStarts);
+            connect(m_qualiMatrixWidget.get(), &QMWinModeWidget::updateWorkload, this, &QMMainWindow::workloadUpdates);
+            connect(m_qualiMatrixWidget.get(), &QMWinModeWidget::endWorkload, this, &QMMainWindow::closeProgress);
 
-            qualiMatrixWidget->updateData();
+            m_qualiMatrixWidget->updateData();
 
             // Check right buttons.
             ui->actModeResult->setChecked(false);
@@ -787,14 +834,14 @@ void QMMainWindow::enterWindowMode(WIN_MODE mode)
                 return;
             }
 
-            qualiResultWidget = std::make_unique<QMQualiResultWidget>();
-            layout->insertWidget(0, qualiResultWidget.get());
+            m_qualiResultWidget = std::make_unique<QMQualiResultWidget>();
+            layout->insertWidget(0, m_qualiResultWidget.get());
 
-            connect(qualiResultWidget.get(), &QMWinModeWidget::startWorkload, this, &QMMainWindow::workloadStarts);
-            connect(qualiResultWidget.get(), &QMWinModeWidget::updateWorkload, this, &QMMainWindow::workloadUpdates);
-            connect(qualiResultWidget.get(), &QMWinModeWidget::endWorkload, this, &QMMainWindow::closeProgress);
+            connect(m_qualiResultWidget.get(), &QMWinModeWidget::startWorkload, this, &QMMainWindow::workloadStarts);
+            connect(m_qualiResultWidget.get(), &QMWinModeWidget::updateWorkload, this, &QMMainWindow::workloadUpdates);
+            connect(m_qualiResultWidget.get(), &QMWinModeWidget::endWorkload, this, &QMMainWindow::closeProgress);
 
-            qualiResultWidget->updateData();
+            m_qualiResultWidget->updateData();
 
             // Check right buttons.
             ui->actModeResult->setChecked(true);
@@ -976,4 +1023,9 @@ void QMMainWindow::createEmptyDatabase()
 
         messageBox.exec();
     }
+}
+
+void QMMainWindow::showFavorites()
+{
+    m_favoriteDatabaseDialog->show();
 }

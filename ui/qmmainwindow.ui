@@ -71,6 +71,7 @@
     <property name="title">
      <string>&amp;Datei</string>
     </property>
+    <addaction name="actShowFavorites"/>
     <addaction name="actOpenDatabase"/>
     <addaction name="actCloseDatabase"/>
     <addaction name="actCreateEmptyDatabase"/>
@@ -365,6 +366,11 @@
     <string>Nachweis hinzufügen</string>
    </property>
   </action>
+  <action name="actShowFavorites">
+   <property name="text">
+    <string>Favoriten anzeigen</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -633,6 +639,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actShowFavorites</sender>
+   <signal>triggered()</signal>
+   <receiver>QMMainWindow</receiver>
+   <slot>showFavorites()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>436</x>
+     <y>319</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>showAbout()</slot>
@@ -656,5 +678,6 @@
   <slot>amsLogout()</slot>
   <slot>addCertificate()</slot>
   <slot>createEmptyDatabase()</slot>
+  <slot>showFavorites()</slot>
  </slots>
 </ui>

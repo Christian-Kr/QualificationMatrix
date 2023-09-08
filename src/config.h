@@ -26,3 +26,7 @@
 
 // BackupManager system
 #define BACKUP_META_FILE_VERSION 1
+
+// The default name of the central database. Because this database is created statically, it should
+// have one name in the whole application.
+#define DB_DEFAULT_NAME "default"
