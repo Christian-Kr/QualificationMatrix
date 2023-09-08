@@ -1027,6 +1027,5 @@ void QMMainWindow::createEmptyDatabase()
 
 void QMMainWindow::showFavorites()
 {
-    QMFavoriteDatabaseDialog favoritesDialog(this);
-    favoritesDialog.exec();
+    m_favoriteDatabaseDialog->show();
 }

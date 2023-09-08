@@ -19,6 +19,7 @@
 
 #include <QListWidgetItem>
 #include <QMessageBox>
+#include <QFileDialog>
 
 QMFavoriteDatabaseDialog::QMFavoriteDatabaseDialog(QWidget *parent)
     : QDialog(parent)
@@ -309,6 +310,29 @@ void QMFavoriteDatabaseDialog::resetFavoriteEntry()
     ui->leDatabaseFile->setText(m_selectedFavorite->dbFilePath);
 
     updateUi();
+}
+
+void QMFavoriteDatabaseDialog::openDatabaseFile()
+{
+    // open a database file
+    QFileDialog fileDialog(this);
+
+    fileDialog.setWindowTitle(QObject::tr("Datenbank öffnen"));
+    fileDialog.setFileMode(QFileDialog::FileMode::ExistingFile);
+    fileDialog.setAcceptMode(QFileDialog::AcceptMode::AcceptOpen);
+    fileDialog.setNameFilter(QObject::tr("QualificationMatrix Datenbank (*.qmsql)"));
+
+    // if the user does not accept the action, just cancel everything
+    if (fileDialog.exec() != QFileDialog::Accepted)
+    {
+        return;
+    }
+
+    auto fileNames = fileDialog.selectedFiles();
+
+    Q_ASSERT(fileNames.count() == 1);
+
+    ui->leDatabaseFile->setText(fileNames.first());
 }
 
 void QMFavoriteDatabaseDialog::saveFavoriteEntry(const bool &validation)

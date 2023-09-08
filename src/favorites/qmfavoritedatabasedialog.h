@@ -48,6 +48,9 @@ public:
     ~QMFavoriteDatabaseDialog() override;
 
 public slots:
+    /// Open the database file after pressing the open button.
+    [[maybe_unused]] void openDatabaseFile();
+
     /// Create empty database entry.
     [[maybe_unused]] void createFavoriteEntry();
 
