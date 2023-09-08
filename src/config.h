@@ -16,8 +16,8 @@
 #define _BUILD(n) STRING(n)
 #define BUILD _BUILD(__TIMESTAMP__)
 #define RELEASE_STATE "beta"
-#define VERSION_MAJOR "1"
-#define VERSION_MINOR "0"
+#define VERSION_MAJOR "0"
+#define VERSION_MINOR "1"
 
 // Define the minimum version a db must have, otherwise the software won't work with it - 0, 0 means no version
 // table or entry is available, cause the first version doesn't include this information.
