@@ -35,6 +35,7 @@
 #include "ams/qmamsmanager.h"
 #include "ams/qmamslogindialog.h"
 #include "backup/qmbackupmanager.h"
+#include "favorites/qmfavoritedatabasedialog.h"
 
 #include <QProgressDialog>
 #include <QSqlRelationalTableModel>
@@ -976,4 +977,10 @@ void QMMainWindow::createEmptyDatabase()
 
         messageBox.exec();
     }
+}
+
+void QMMainWindow::showFavorites()
+{
+    QMFavoriteDatabaseDialog favoritesDialog(this);
+    favoritesDialog.exec();
 }

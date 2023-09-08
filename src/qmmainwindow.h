@@ -163,6 +163,9 @@ public slots:
     /// Create a new empty database to be used as a starting point for the application.
     [[maybe_unused]] void createEmptyDatabase();
 
+    /// Show the favorites dialog.
+    [[maybe_unused]] void showFavorites();
+
 protected:
     /// Override from QMainWindow. This function will be called on closeing the widget.
     /// \param event The close event object that will be created.
