@@ -41,15 +41,19 @@ public:
     void saveSettings() override;
 
     /// Override from QMSettingsWidget.
-    void revertChanges() override;
-
-    /// Override from QMSettingsWidget.
     void loadSettings() override;
 
 public slots:
+    /// Toggle the active state of the appcache group box.
+    [[maybe_unused]] void toggleAppCacheGroup();
+
+    /// Choose a source folder.
+    [[maybe_unused]] void chooseSourceFolder();
+
+    /// Choose a target folder.
+    [[maybe_unused]] void chooseTargetFolder();
 
 private:
-
     Ui::QMAppCacheSettingsWidget *m_ui;
 };
 

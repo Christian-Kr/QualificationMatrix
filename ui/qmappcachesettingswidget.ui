@@ -203,9 +203,26 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>gbAppCache</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>QMAppCacheSettingsWidget</receiver>
+   <slot>toggleAppCacheGroup()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>299</x>
+     <y>221</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>299</x>
+     <y>271</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>chooseSourceFolder()</slot>
   <slot>chooseTargetFolder()</slot>
+  <slot>toggleAppCacheGroup()</slot>
  </slots>
 </ui>

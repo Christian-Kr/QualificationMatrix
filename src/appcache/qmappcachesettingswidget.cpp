@@ -13,6 +13,9 @@
 
 #include "qmappcachesettingswidget.h"
 #include "ui_qmappcachesettingswidget.h"
+#include "settings/qmapplicationsettings.h"
+
+#include <QFileDialog>
 
 QMAppCacheSettingsWidget::QMAppCacheSettingsWidget(QWidget *parent)
     : QMSettingsWidget(parent, false)
@@ -28,15 +31,79 @@ QMAppCacheSettingsWidget::~QMAppCacheSettingsWidget()
 
 void QMAppCacheSettingsWidget::saveSettings()
 {
+    auto &settings = QMApplicationSettings::getInstance();
 
-}
+    settings.write("AppCache/Active", m_ui->gbAppCache->isChecked());
 
-void QMAppCacheSettingsWidget::revertChanges()
-{
+    settings.write("AppCache/SourcePath", m_ui->leSourcePath->text());
+    settings.write("AppCache/TargetPath", m_ui->leTargetPath->text());
 
+    emit settingsApplied();
 }
 
 void QMAppCacheSettingsWidget::loadSettings()
 {
+    auto &settings = QMApplicationSettings::getInstance();
 
+    auto appCacheActive = settings.read("AppCache/Active", false).toBool();
+    m_ui->gbAppCache->setChecked(appCacheActive);
+
+    auto sourcePath = settings.read("AppCache/SourcePath", "").toString();
+    m_ui->leSourcePath->setText(sourcePath);
+
+    auto targetPath = settings.read("AppCache/TargetPath", "").toString();
+    m_ui->leTargetPath->setText(targetPath);
+}
+
+void QMAppCacheSettingsWidget::chooseSourceFolder()
+{
+    QFileDialog fileDialog(this);
+
+    fileDialog.setFileMode(QFileDialog::FileMode::Directory);
+    fileDialog.setWindowTitle(tr("Quellordner öffnen"));
+    fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
+    fileDialog.setDirectory(QDir::home());
+
+    auto result = fileDialog.exec();
+
+    if (result != QFileDialog::Accepted)
+    {
+        return;
+    }
+
+    auto selectedFiles = fileDialog.selectedFiles();
+
+    Q_ASSERT(selectedFiles.count() == 1);
+
+    m_ui->leSourcePath->setText(selectedFiles.first());
+    emit settingsChanged();
+}
+
+void QMAppCacheSettingsWidget::chooseTargetFolder()
+{
+    QFileDialog fileDialog(this);
+
+    fileDialog.setFileMode(QFileDialog::FileMode::Directory);
+    fileDialog.setWindowTitle(tr("Zielordner öffnen"));
+    fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
+    fileDialog.setDirectory(QDir::home());
+
+    auto result = fileDialog.exec();
+
+    if (result != QFileDialog::Accepted)
+    {
+        return;
+    }
+
+    auto selectedFiles = fileDialog.selectedFiles();
+
+    Q_ASSERT(selectedFiles.count() == 1);
+
+    m_ui->leTargetPath->setText(selectedFiles.first());
+    emit settingsChanged();
+}
+
+void QMAppCacheSettingsWidget::toggleAppCacheGroup()
+{
+    emit settingsChanged();
 }
