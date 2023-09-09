@@ -16,7 +16,6 @@
 #include "config.h"
 
 #include <QDir>
-#include <QDateTime>
 #include <QCryptographicHash>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -131,6 +130,8 @@ bool QMAppCacheManager::readMetaInfo(std::unique_ptr<QMAppCacheMetaInfo> &metaIn
             metaInfo->versionMajor = jsonAppVersion["Major"].toInt();
         }
     }
+
+    qDebug() << metaInfo->versionMajor << " " << metaInfo->versionMinor;
 
     return true;
 }
