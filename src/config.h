@@ -19,8 +19,9 @@
 #define VERSION_MAJOR "0"
 #define VERSION_MINOR "1"
 
-// Define the minimum version a db must have, otherwise the software won't work with it - 0, 0 means no version
-// table or entry is available, cause the first version doesn't include this information.
+// Define the minimum version a db must have, otherwise the software won't work with it - 0, 0
+// means no version table or entry is available, cause the first version doesn't include this
+// information.
 #define DB_MIN_MAJOR 1
 #define DB_MIN_MINOR 9
 
