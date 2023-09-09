@@ -25,6 +25,7 @@
 #include "framework/delegate/qmtreesettingsdelegate.h"
 #include "ams/qmamslogindialog.h"
 #include "ams/qmamsmanager.h"
+#include "appcache/qmappcachesettingswidget.h"
 
 #include <QWidget>
 #include <QSqlRelationalDelegate>
@@ -78,6 +79,7 @@ void QMSettingsDialog::initStackWidgets()
     appendConnectSettingsWidget(new QMGeneralSettingsWidget(this));
     appendConnectSettingsWidget(new QMQualiMatrixSettingsWidget(this));
     appendConnectSettingsWidget(new QMQualiResultSettingsWidget(this));
+    appendConnectSettingsWidget(new QMAppCacheSettingsWidget(this));
 
     // If do not have the permission, make a lot of stuff disable.
     // Permission check.
@@ -97,8 +99,7 @@ void QMSettingsDialog::initStackWidgets()
     }
 }
 
-void QMSettingsDialog::appendConnectSettingsWidget(
-        QMSettingsWidget *settingsWidget)
+void QMSettingsDialog::appendConnectSettingsWidget(QMSettingsWidget *settingsWidget)
 {
     auto *scrollArea = new QScrollArea();
     scrollArea->setWidget(settingsWidget);
@@ -107,7 +108,7 @@ void QMSettingsDialog::appendConnectSettingsWidget(
 
     ui->swSettingGroups->addWidget(scrollArea);
     connect(settingsWidget, &QMSettingsWidget::settingsChanged, this,
-        &QMSettingsDialog::settingsChanged);
+            &QMSettingsDialog::settingsChanged);
 }
 
 void QMSettingsDialog::settingsChanged()
@@ -134,6 +135,10 @@ void QMSettingsDialog::initTreeWidgets()
     auto twiQualiResult = new QTreeWidgetItem(twiApplicationSettings);
     twiQualiResult->setText(0, tr("Qualifizierungsergebnis"));
     twiQualiResult->setData(0, Qt::UserRole, i++);
+
+    auto twiAppCache = new QTreeWidgetItem(twiApplicationSettings);
+    twiAppCache->setText(0, tr("Lokale Anwendungskopie"));
+    twiAppCache->setData(0, Qt::UserRole, i++);
 
     auto twiDatabaseSettings = new QTreeWidgetItem(ui->twSettingGroups);
     twiDatabaseSettings->setText(0, tr("Datenbank"));
