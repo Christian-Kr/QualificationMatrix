@@ -26,27 +26,111 @@ QMAppCacheManager *QMAppCacheManager::instance = nullptr;
 
 QMAppCacheManager::QMAppCacheManager()
     : QObject()
-    , m_metaInfo(std::make_unique<QMAppCacheMetaInfo>())
-    , m_sourcePath(std::make_unique<QString>())
-    , m_targetPath(std::make_unique<QString>())
+    , m_metaInfoSource(std::make_unique<QMAppCacheMetaInfo>())
+    , m_metaInfoTarget(std::make_unique<QMAppCacheMetaInfo>())
+    , m_errorType(AppCacheError::NONE)
 {}
 
 QMAppCacheManager::~QMAppCacheManager() = default;
 
 bool QMAppCacheManager::trigger()
 {
-   // todo: start process
+    readSettings();
+
+    // check that both paths exist and are directories
+    auto sourceFileInfo = QFileInfo(m_sourcePath);
+
+    if (!sourceFileInfo.exists())
+    {
+        m_errorType = AppCacheError::SOURCE_NOT_EXIST;
+        return false;
+    }
+
+    if (!sourceFileInfo.isDir())
+    {
+        m_errorType = AppCacheError::SOURCE_NOT_DIR;
+        return false;
+    }
+
+    auto targetFileInfo = QFileInfo(m_targetPath);
+
+    if (!targetFileInfo.exists())
+    {
+        m_errorType = AppCacheError::TARGET_NOT_EXIST;
+        return false;
+    }
+
+    if (!targetFileInfo.isDir())
+    {
+        m_errorType = AppCacheError::TARGET_NOT_DIR;
+        return false;
+    }
+
+    // read in the meta file from the source
+    if (!readMetaInfo(m_metaInfoSource, m_sourcePath))
+    {
+        return false;
+    }
 }
 
 bool QMAppCacheManager::readSettings()
 {
     auto &settings = QMApplicationSettings::getInstance();
 
-    // Read the source app cache folder.
-    auto tmpBackupFolder = settings.read("Backup/Folder", "backup").toString();
+    m_sourcePath = settings.read("AppCache/SourcePath", "").toString();
+    m_targetPath = settings.read("AppCache/TargetPath", "").toString();
 }
 
-bool QMAppCacheManager::readMetaInfo(QMAppCacheMetaInfo &appCacheMetaInfo)
+bool QMAppCacheManager::readMetaInfo(std::unique_ptr<QMAppCacheMetaInfo> &metaInfo,
+        const QString &path)
 {
-    // Get the file from the given backupMetaInfo and read in all information from the file.
+    auto metaFile = QFile(path + QDir::separator() + APPCACHE_META);
+
+    if (!metaFile.exists())
+    {
+        m_errorType = AppCacheError::SOURCE_META_NOT_EXIST;
+        return false;
+    }
+
+    // start to read meta information
+    if (!metaFile.open(QFile::ReadOnly))
+    {
+        m_errorType = AppCacheError::SOURCE_META_NOT_READABLE;
+        return false;
+    }
+
+    // open the file and read in all byte data
+    auto metaFileByteArray = metaFile.readAll();
+    metaFile.close();
+
+    // parse the file content
+    auto *parseError = new QJsonParseError();
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(metaFileByteArray, parseError);
+
+    // if result is null, then parsing might have failed
+    if (jsonDoc.isNull())
+    {
+        m_errorType = AppCacheError::SOURCE_META_PARSE_FAILED;
+        return false;
+    }
+
+    // Get general information.
+    QJsonObject jsonRootObject = jsonDoc.object();
+
+    if (jsonRootObject.contains("Version"))
+    {
+        auto jsonAppVersion = jsonRootObject["Version"].toObject();
+
+        if (jsonAppVersion.contains("Minor"))
+        {
+            metaInfo->versionMinor = jsonAppVersion["Minor"].toInt();
+        }
+
+        if (jsonAppVersion.contains("Major"))
+        {
+            metaInfo->versionMajor = jsonAppVersion["Major"].toInt();
+        }
+    }
+
+    return true;
 }

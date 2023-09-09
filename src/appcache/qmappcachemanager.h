@@ -18,13 +18,38 @@
 
 #include <memory>
 
+/// Enum object for multiple error codes while running the app cache manager.
+enum class AppCacheError
+{
+    NONE,
+    SOURCE_NOT_EXIST,
+    SOURCE_NOT_DIR,
+    TARGET_NOT_EXIST,
+    TARGET_NOT_DIR,
+    SOURCE_META_NOT_EXIST,
+    SOURCE_META_NOT_READABLE,
+    SOURCE_META_PARSE_FAILED
+};
+
+// Holds information about a file that should be copied as a part of the app cache system.
+struct QMAppCacheMetaInfoFile
+{
+    QString path;
+    QString hash;
+};
+
 /// The struct is an information holder for appcache information. This includes file information
 /// about the current application version, the files that need to be copied and so on. Such a meta
 /// file exists in the local source - if any exists - and in the remote source, where the new
-// version is placed.
+/// version is placed.
 struct QMAppCacheMetaInfo
 {
-    // todo: fill with config information
+    // version number decides, when to update the target with the source
+    int versionMajor = 0;
+    int versionMinor = 0;
+
+    // file list
+    QList<QMAppCacheMetaInfoFile> files;
 };
 
 /// The app cache manager is responsible to handle app caches to the copy process and validate the
@@ -71,8 +96,10 @@ private:
 
     /// Read in the meta information from the app cache file in the root directory of every
     /// application.
-    /// \param appCacheMetaInfo meta info object that holds the information
-    static bool readMetaInfo(QMAppCacheMetaInfo &appCacheMetaInfo);
+    /// \param metaInfo meta info object to write parsed information to
+    /// \param path where the app cache meta file can be found
+    /// \return true if reading succeed, else false
+    bool readMetaInfo(std::unique_ptr<QMAppCacheMetaInfo> &metaInfo, const QString &path);
 
     /// Read in the settings of the app cache, that might be changed by the user.
     bool readSettings();
@@ -80,10 +107,13 @@ private:
     // Variables
     static QMAppCacheManager *instance;
 
-    std::unique_ptr<QMAppCacheMetaInfo> m_metaInfo;
+    std::unique_ptr<QMAppCacheMetaInfo> m_metaInfoSource;
+    std::unique_ptr<QMAppCacheMetaInfo> m_metaInfoTarget;
 
-    std::unique_ptr<QString> m_sourcePath;
-    std::unique_ptr<QString> m_targetPath;
+    QString m_sourcePath;
+    QString m_targetPath;
+
+    AppCacheError m_errorType;
 };
 
 #endif // QMAPPCACHEMANAGER_H

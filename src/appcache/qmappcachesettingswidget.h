@@ -41,6 +41,9 @@ public:
     void saveSettings() override;
 
     /// Override from QMSettingsWidget.
+    void revertChanges() override {};
+
+    /// Override from QMSettingsWidget.
     void loadSettings() override;
 
 public slots:

@@ -31,3 +31,6 @@
 // The default name of the central database. Because this database is created statically, it should
 // have one name in the whole application.
 #define DB_DEFAULT_NAME "default"
+
+// Name of the appcache meta file.
+#define APPCACHE_META "appcache.json"
