@@ -18,6 +18,9 @@
 
 #include <memory>
 
+// Forward declaration
+class QProgressDialog;
+
 /// Enum object for multiple error codes while running the app cache manager.
 enum class AppCacheError
 {
@@ -26,15 +29,22 @@ enum class AppCacheError
     SOURCE_NOT_DIR,
     TARGET_NOT_EXIST,
     TARGET_NOT_DIR,
-    SOURCE_META_NOT_EXIST,
-    SOURCE_META_NOT_READABLE,
-    SOURCE_META_PARSE_FAILED
+    META_NOT_EXIST,
+    META_NOT_READABLE,
+    META_PARSE_FAILED,
+    COPY_FAILED
 };
 
 // Holds information about a file that should be copied as a part of the app cache system.
 struct QMAppCacheMetaInfoFile
 {
-    QString path;
+    // File name with extension, but without its path.
+    QString name;
+
+    // The path to the folder, where the file is stored.
+    QString folderPath;
+
+    // The calculated hash value of the file. The hash value will be created with sha512.
     QString hash;
 };
 
@@ -85,6 +95,14 @@ public:
     /// Trigger process.
     bool trigger();
 
+    /// Get the last error type.
+    /// \return the error type of the last error
+    [[nodiscard]] AppCacheError lastErrorType() const { return m_lastErrorType; }
+
+    /// Get the last error message.
+    /// \return the error message of the last error
+    [[nodiscard]] QString lastErrorMessage() const { return m_lastErrorText; }
+
 signals:
 
 private:
@@ -101,8 +119,30 @@ private:
     /// \return true if reading succeed, else false
     bool readMetaInfo(std::unique_ptr<QMAppCacheMetaInfo> &metaInfo, const QString &path);
 
+    /// Parse meta info data from json.
+    /// \param metaInfo meta info object to write parsed information to
+    /// \param data to be parsed
+    /// \return true if reading succeed, else false
+    bool parseMetaInfo(std::unique_ptr<QMAppCacheMetaInfo> &metaInfo, const QByteArray &data);
+
+    /// Parse the version part of the config.
+    /// \param metaInf meta info object to write parsed information to
+    /// \param jsonObject the json object to read the version object from
+    bool parseVersionFromMetaInfo(std::unique_ptr<QMAppCacheMetaInfo> &metaInfo,
+            QJsonObject &jsonObject);
+
+    /// Parse the files part of the config.
+    /// \param metaInf meta info object to write parsed information to
+    /// \param jsonObject the json object to read the files object from
+    bool parseFilesFromMetaInfo(std::unique_ptr<QMAppCacheMetaInfo> &metaInfo,
+            QJsonObject &jsonObject);
+
     /// Read in the settings of the app cache, that might be changed by the user.
     bool readSettings();
+
+    /// Copy all files from source to target.
+    /// \return true if succeed, else false
+    bool copyFiles();
 
     // Variables
     static QMAppCacheManager *instance;
@@ -113,7 +153,10 @@ private:
     QString m_sourcePath;
     QString m_targetPath;
 
-    AppCacheError m_errorType;
+    AppCacheError m_lastErrorType;
+    QString m_lastErrorText;
+
+    std::unique_ptr<QProgressDialog> m_progressDialog;
 };
 
 #endif // QMAPPCACHEMANAGER_H
