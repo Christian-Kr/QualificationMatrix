@@ -343,6 +343,7 @@ void initApplicationCache()
     auto acm = QMAppCacheManager::getInstance();
     if (!acm->trigger())
     {
+        qDebug() << acm->lastErrorMessage();
         return;
     }
 
