@@ -74,7 +74,7 @@ add_custom_command(TARGET QualificationMatrix
         ${CMAKE_SOURCE_DIR}/database
         $<TARGET_FILE_DIR:QualificationMatrix>/database)
 
-# Copy the database directory.
+# Copy the styles directory.
 add_custom_command(TARGET QualificationMatrix
         PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_SOURCE_DIR}/styles
