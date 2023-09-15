@@ -22,6 +22,8 @@ endif ()
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+set(CMAKE_INSTALL_RPATH_USE_LINK_PATH ON)
+
 # ------------------------------------------------------------------------------
 # Standard macros for Qt
 
@@ -33,6 +35,7 @@ set(CMAKE_AUTOUIC_SEARCH_PATHS ui)
 find_package(Qt6 6.3
         COMPONENTS LinguistTools Widgets Sql PrintSupport
         REQUIRED)
+qt_standard_project_setup()
 
 # Add application icon for windows.
 set(APP_ICON_RESOURCE_WINDOWS "rcs/qm_res.rc")
@@ -59,8 +62,13 @@ qt6_add_translation(QM_FILES
 file(GLOB_RECURSE SRCS src/*.h src/*.cpp)
 file(GLOB_RECURSE UIS ui/*.ui)
 
-add_executable(QualificationMatrix
-        WIN32 rcs/icons.qrc ${SRCS} ${UIS} ${APP_ICON_RESOURCE_WINDOWS})
+if (APPLE)
+    add_executable(QualificationMatrix
+            MACOSX_BUNDLE rcs/icons.qrc ${SRCS} ${UIS} ${APP_ICON_RESOURCE_WINDOWS})
+else ()
+    add_executable(QualificationMatrix
+            WIN32 rcs/icons.qrc ${SRCS} ${UIS} ${APP_ICON_RESOURCE_WINDOWS})
+endif ()
 target_link_libraries(QualificationMatrix
         Qt6::Widgets Qt6::Sql Qt6::PrintSupport
         ${BOTAN_LIBRARIES})
@@ -83,3 +91,13 @@ add_custom_command(TARGET QualificationMatrix
 # Copy translation files.
 target_sources(QualificationMatrix
         PRIVATE ${QM_FILES})
+
+install(TARGETS QualificationMatrix
+        BUNDLE DESTINATION .
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+
+qt_generate_deploy_app_script(
+        TARGET QualificationMatrix
+        OUTPUT_SCRIPT deploy_script
+)
+install(SCRIPT ${deploy_script})
