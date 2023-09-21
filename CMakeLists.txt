@@ -19,7 +19,7 @@ if (CMAKE_VERSION VERSION_LESS "3.7.0")
 endif ()
 
 # General CPP macros
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH ON)
@@ -32,7 +32,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOUIC_SEARCH_PATHS ui)
 
-find_package(Qt6 6.3
+find_package(Qt6
         COMPONENTS LinguistTools Widgets Sql PrintSupport
         REQUIRED)
 qt_standard_project_setup()
@@ -44,7 +44,7 @@ set(APP_ICON_RESOURCE_WINDOWS "rcs/qm_res.rc")
 # Botan
 
 find_package(Botan REQUIRED)
-include_directories(${BOTAN_INCLUDE_DIRS} ${BOTAN_INCLUDE_DIRS}/botan-2)
+include_directories(${BOTAN_INCLUDE_DIRS} ${BOTAN_INCLUDE_DIRS}/botan-3)
 
 # ------------------------------------------------------------------------------
 # Translation
