@@ -117,8 +117,7 @@ unsigned short initFirstStartProgress()
         // inform user, that the application will be restartet
         QMessageBox::information(
                 nullptr, QObject::tr("Neustart"),
-                QObject::tr("Die Anwendung muss neugestartet werden um die Einstellungen "
-                            "zu übernehmen."));
+                QObject::tr("Die Anwendung muss neugestartet werden um die Einstellungen zu übernehmen."));
 
         // safe variable, that first start has been done
         settings.write("General/FirstStart", false);
@@ -223,8 +222,8 @@ void initApplicationStyleSheet(QApplication &app)
     app.setStyleSheet(styleSheet);
 }
 
-/// Install the translator into the qt application. If the loading or installing of the
-/// translation file fails, a warning message will be send for documentation.
+/// Install the translator into the qt application. If the loading or installing of the translation
+/// file fails, a warning message will be send for documentation.
 ///
 /// \param name The name of the translator file.
 /// \param path The path, where the tranaltor file could be found.

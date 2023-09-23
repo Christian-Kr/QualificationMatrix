@@ -28,7 +28,7 @@
 #include <QDateTime>
 #include <QCryptographicHash>
 
-#include <botan/argon2.h>
+#include <botan/argon2fmt.h>
 #include <botan/system_rng.h>
 
 QMAMSManager *QMAMSManager::instance = nullptr;
