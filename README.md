@@ -1,5 +1,3 @@
-![Linux](https://github.com/Christian-Kr/QualificationMatrix/actions/workflows/ubuntu-latest.yml/badge.svg?branch=master)
-
 # QualificationMatrix
 
 This project creates a software that will help you in managing a qualification matrix for 
