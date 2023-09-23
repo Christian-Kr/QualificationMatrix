@@ -28,13 +28,6 @@
 
 #include <QDebug>
 
-// Since Qt 5.15.0 the endl variable has been changed to Qt::endl
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
-#define DEPR_ENDL Qt::endl
-#else
-#define DEPR_ENDL endl
-#endif
-
 // Return codes for the first start process. If any changes have been done that require a restart,
 // return the *_RESTART return code.
 const unsigned short FIRST_START_RET_RESTART = 1;
@@ -297,7 +290,7 @@ void customMessageHandler(QtMsgType type, const QMessageLogContext &, const QStr
 
             // Debug messages will also be written to the terminal window.
             QTextStream ts(stdout);
-            ts << txt << DEPR_ENDL;
+            ts << txt << Qt::endl;
 
             return;
         }
@@ -320,12 +313,12 @@ void customMessageHandler(QtMsgType type, const QMessageLogContext &, const QStr
     if (opened)
     {
         QTextStream ts(&out);
-        ts << txt << DEPR_ENDL;
+        ts << txt << Qt::endl;
     }
     else
     {
         QTextStream ts(stdout);
-        ts << txt << DEPR_ENDL;
+        ts << txt << Qt::endl;
     }
 
     out.close();
