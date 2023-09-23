@@ -1,12 +1,12 @@
 ﻿// main.cpp is part of QualificationMatrix
 //
-// QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of the GNU General
-// Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
-// any later version.
+// QualificationMatrix is free software: you can redistribute it and/or modify it under the terms
+// of the GNU General Public License as published by the Free Software Foundation, either version
+// 3 of the License, or (at your option) any later version.
 //
-// QualificationMatrix is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
-// implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
-// more details.
+// QualificationMatrix is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+// without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+// the GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License along with QualificationMatrix.
 // If not, see <http://www.gnu.org/licenses/>.
@@ -35,20 +35,22 @@
 #define DEPR_ENDL endl
 #endif
 
-// Return codes for the first start process. If any changes have been done that require a restart, return the
-// *_RESTART return code.
+// Return codes for the first start process. If any changes have been done that require a restart,
+// return the *_RESTART return code.
 const unsigned short FIRST_START_RET_RESTART = 1;
 const unsigned short FIRST_START_RET_CODE_GOON = 2;
 
 /// Initialize the centralized configuration.
 ///
-/// \return the return code to know if a restart is needed before the main qt application has been run
+/// \return the return code to know if a restart is needed before the main qt application has been
+/// run
 unsigned short initFirstStartProgress()
 {
     auto &settings = QMApplicationSettings::getInstance();
     auto firstStart = settings.read("General/FirstStart", true).toBool();
 
-    // if application has not been started for the first time, just go on with starting the application
+    // if application has not been started for the first time, just go on with starting the
+    // application
     if (!firstStart)
     {
         return FIRST_START_RET_CODE_GOON;
@@ -57,11 +59,13 @@ unsigned short initFirstStartProgress()
     // ask whether the user wants to load a template config file to make configuration faster
     QMessageBox messageBox(nullptr);
 
-    messageBox.setStandardButtons(QMessageBox::StandardButton::Yes | QMessageBox::StandardButton::No);
+    messageBox.setStandardButtons(
+            QMessageBox::StandardButton::Yes | QMessageBox::StandardButton::No);
     messageBox.setWindowTitle(QObject::tr("Erster Start"));
     messageBox.setIcon(QMessageBox::Icon::Question);
     messageBox.setText(QObject::tr("Die Anwendung wird scheinbar das erste Mal gestartet."));
-    messageBox.setInformativeText(QObject::tr("Möchtest du eine zentrale Konfigurationsdatei laden?\n"));
+    messageBox.setInformativeText(
+            QObject::tr("Möchtest du eine zentrale Konfigurationsdatei laden?\n"));
     messageBox.setDefaultButton(QMessageBox::StandardButton::Yes);
 
     auto *buttonYes = messageBox.button(QMessageBox::StandardButton::Yes);
@@ -98,7 +102,8 @@ unsigned short initFirstStartProgress()
             return FIRST_START_RET_CODE_GOON;
         }
 
-        // if the selected object is not a file (just in case), make the first start dialog appear on next start
+        // if the selected object is not a file (just in case), make the first start dialog appear
+        // on next start
         QFileInfo configFileInfo(fileNames.first());
         if (!configFileInfo.isFile())
         {
@@ -112,7 +117,8 @@ unsigned short initFirstStartProgress()
         // inform user, that the application will be restartet
         QMessageBox::information(
                 nullptr, QObject::tr("Neustart"),
-                QObject::tr("Die Anwendung muss neugestartet werden um die Einstellungen zu übernehmen."));
+                QObject::tr("Die Anwendung muss neugestartet werden um die Einstellungen "
+                            "zu übernehmen."));
 
         // safe variable, that first start has been done
         settings.write("General/FirstStart", false);
@@ -134,8 +140,8 @@ void initShowMainWindow(QMMainWindow &mainWin)
     auto &settings = QMApplicationSettings::getInstance();
     auto showMaximized = settings.read("MainWin/Maximized", false).toBool();
 
-    // Load the active screen from settings and put the window on this screen. Detection of the right screen is done
-    // by the screen name.
+    // Load the active screen from settings and put the window on this screen. Detection of the
+    // right screen is done by the screen name.
     QScreen *screen;
     {
         auto screens = QGuiApplication::screens();
@@ -177,15 +183,16 @@ void initShowMainWindow(QMMainWindow &mainWin)
         auto savedHeight = settings.read("MainWin/Height", 800).toInt();
 
         mainWin.resize(savedWidth, savedHeight);
-        mainWin.move(screen->geometry().x() + (screen->geometry().width() - savedWidth) / 2, screen->geometry().y() +
-            (screen->geometry().height() - savedHeight) / 2);
+        mainWin.move(
+                screen->geometry().x() + (screen->geometry().width() - savedWidth) / 2,
+                screen->geometry().y() + (screen->geometry().height() - savedHeight) / 2);
 
         mainWin.show();
     }
 
-    // Load database on startup. If there are some settings for automatic loading of database on startup, follow
-    // them. Otherwise show the manage database dialog, cause the application is not useful if there is no database
-    // loaded.
+    // Load database on startup. If there are some settings for automatic loading of database on
+    // startup, follow them. Otherwise show the manage database dialog, cause the application is
+    // not useful if there is no database loaded.
     mainWin.initDatabaseSettings();
 
     // Try to bring window to top.
@@ -202,8 +209,8 @@ void initApplicationStyle()
     QApplication::setStyle(style);
 }
 
-/// Set the style sheet of the application, which is "default.css" by default. For now only the default stylesheet
-/// will be loaded.
+/// Set the style sheet of the application, which is "default.css" by default. For now only the
+/// default stylesheet will be loaded.
 ///
 /// \param app The application object to apply style sheet.
 void initApplicationStyleSheet(QApplication &app)
@@ -216,8 +223,8 @@ void initApplicationStyleSheet(QApplication &app)
     app.setStyleSheet(styleSheet);
 }
 
-/// Install the translator into the qt application. If the loading or installing of the translation file fails,
-/// a warning message will be send for documentation.
+/// Install the translator into the qt application. If the loading or installing of the
+/// translation file fails, a warning message will be send for documentation.
 ///
 /// \param name The name of the translator file.
 /// \param path The path, where the tranaltor file could be found.
@@ -254,7 +261,8 @@ void readGuiDPISetting()
         dpi = 1;
     }
 
-    QGuiApplication::setHighDpiScaleFactorRoundingPolicy(static_cast<Qt::HighDpiScaleFactorRoundingPolicy>(dpi));
+    QGuiApplication::setHighDpiScaleFactorRoundingPolicy(
+            static_cast<Qt::HighDpiScaleFactorRoundingPolicy>(dpi));
 }
 
 /// Initialize the application with the translation files (custom and qt-based).
@@ -271,10 +279,10 @@ void initApplicationTranslation()
     installTranslator("qtbase_" + lang, QLibraryInfo::path(QLibraryInfo::TranslationsPath));
 }
 
-/// Take all messages coming from qWarning, qDebug etc. and write them into a log file. In general, all message
-/// will be written into a log file. If this log file is not writeable, the message will be printed on stdout. Debug
-/// messages will always only be printed on stdout. The log file will be create in user directory, to be readable and
-/// individual by every user.
+/// Take all messages coming from qWarning, qDebug etc. and write them into a log file. In general,
+/// all message will be written into a log file. If this log file is not writeable, the message
+/// will be printed on stdout. Debug messages will always only be printed on stdout. The log file
+/// will be create in user directory, to be readable and individual by every user.
 ///
 /// \param type The message type (debug, warning etc.).
 /// \param msg The message to display/log.
@@ -342,7 +350,8 @@ int main(int argc, char *argv[])
         QCoreApplication::setApplicationName(QString("QualificationMatrix"));
     }
 
-    // the application loop is for restarting the application before any qt application loop is running
+    // the application loop is for restarting the application before any qt application loop is
+    // running
     while (true)
     {
         // create application and main window object
