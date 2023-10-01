@@ -13,323 +13,42 @@
 
 #include "qmfavoritedatabasedialog.h"
 #include "ui_qmfavoritedatabasedialog.h"
-
-#include "data/qmdatamanager.h"
 #include "settings/qmapplicationsettings.h"
+#include "favorites/qmfavoritemodel.h"
 
-#include <QListWidgetItem>
-#include <QMessageBox>
 #include <QFileDialog>
 
 QMFavoriteDatabaseDialog::QMFavoriteDatabaseDialog(QWidget *parent)
     : QDialog(parent)
-    , m_selectedFavorite(nullptr)
+    , m_favoriteModel(new QMFavoriteModel(this))
 {
-    ui = new Ui::QMFavoriteDatabaseDialog;
-    ui->setupUi(this);
+    m_ui = new Ui::QMFavoriteDatabaseDialog;
+    m_ui->setupUi(this);
 
-    connect(ui->lwFavorites, &QListWidget::itemSelectionChanged, this,
-            &QMFavoriteDatabaseDialog::favoriteSelectionChanged);
-    connect(ui->leName, &QLineEdit::textChanged, this,
-            &QMFavoriteDatabaseDialog::favoriteNameChanged);
-    connect(ui->leDatabaseFile, &QLineEdit::textChanged, this,
-            &QMFavoriteDatabaseDialog::favoriteDatabaseFileChanged);
+    // favorite table view
+    m_favoriteModel->readFavoritesFromSettings();
 
-    readFavoritesFromSettings();
-    updateUi();
+    m_ui->tvFavorites->setModel(m_favoriteModel);
+    m_ui->tvFavorites->resizeColumnsToContents();
+    m_ui->tvFavorites->setItemDelegateForColumn(1, nullptr);
+
+    connect(m_ui->tvFavorites, &QTableView::doubleClicked, this,
+            &QMFavoriteDatabaseDialog::favoriteDoubleClicked);
 }
 
 QMFavoriteDatabaseDialog::~QMFavoriteDatabaseDialog()
 {
-    delete ui;
-
-    while (!m_favorites.isEmpty())
-    {
-        delete m_favorites.takeFirst();
-    }
+    delete m_ui;
 }
 
-void QMFavoriteDatabaseDialog::favoriteDatabaseFileChanged()
+void QMFavoriteDatabaseDialog::favoriteDoubleClicked(const QModelIndex &index)
 {
-    updateUi();
-}
-
-void QMFavoriteDatabaseDialog::favoriteNameChanged()
-{
-    updateUi();
-}
-
-void QMFavoriteDatabaseDialog::favoriteSelectionChanged()
-{
-    // test whether you should save the the configs or not
-    if (ui->pbSave->isEnabled())
-    {
-        auto result = QMessageBox::question(this, tr("Favoriten speichern"),
-                tr("Möchten Sie die Änderungen des letzten Favoriten speichern?"),
-                QMessageBox::Yes | QMessageBox::No);
-        if (result == QMessageBox::Yes)
-        {
-            saveFavoriteEntry();
-        }
-    }
-
-    auto selectedItems = ui->lwFavorites->selectedItems();
-    if (selectedItems.size() != 1)
-    {
-        qWarning() << "to many selection should not be possible";
-        return;
-    }
-
-    auto selectedItem = selectedItems.first();
-
-    bool found = false;
-    auto selectedFavoriteName = selectedItem->data(Qt::DisplayRole).toString();
-    auto selectedFavorite = getFavoriteFromName(selectedFavoriteName, found);
-
-    if (!found)
-    {
-        qWarning() << "no favorite struct object with the given name found";
-        return;
-    }
-
-    ui->leName->setText(selectedFavorite->name);
-    ui->leDatabaseFile->setText(selectedFavorite->dbFilePath);
-
-    m_selectedFavorite = selectedFavorite;
-    favoriteNameChanged();
-}
-
-QMFavoriteDatabaseEntry* QMFavoriteDatabaseDialog::getFavoriteFromName(
-        const QString &name, bool &found)
-{
-    for (const auto &favorite : m_favorites)
-    {
-        if (favorite->name.compare(name) == 0)
-        {
-            found = true;
-            return favorite;
-        }
-    }
-
-    found = false;
-    return {};
-}
-
-void QMFavoriteDatabaseDialog::updateUi()
-{
-    if (m_selectedFavorite == nullptr)
-    {
-        ui->editWidget->setVisible(false);
-        return;
-    }
-
-    ui->editWidget->setVisible(true);
-    ui->pbSave->setEnabled(
-            (ui->leName->text().compare(m_selectedFavorite->name) != 0) ||
-            (ui->leDatabaseFile->text().compare(m_selectedFavorite->dbFilePath) != 0));
-    ui->pbReset->setEnabled(
-            (ui->leName->text().compare(m_selectedFavorite->name) != 0) ||
-            (ui->leDatabaseFile->text().compare(m_selectedFavorite->dbFilePath) != 0));
-}
-
-void QMFavoriteDatabaseDialog::reject()
-{
-    QDialog::reject();
-}
-
-void QMFavoriteDatabaseDialog::accept()
-{
-    if (m_selectedFavorite == nullptr)
+    // only handle column for database file path
+    if (index.column() != 1)
     {
         return;
     }
 
-    QDialog::accept();
-
-    emit openDatabase(m_selectedFavorite->dbFilePath);
-}
-
-void QMFavoriteDatabaseDialog::readFavoritesFromSettings()
-{
-    // clear all favorites, cause they will be recreated
-    m_selectedFavorite = nullptr;
-    while (!m_favorites.isEmpty())
-    {
-        delete m_favorites.takeFirst();
-    }
-
-    auto &settings = QMApplicationSettings::getInstance();
-
-    // the data storage is mainly a list of lists. The outer list is separated with ';' and the
-    // inner list with ','
-
-    auto data = settings.read("Favorites/Data", QString()).toString();
-    auto favListRaw = data.split(";");
-
-    for (const auto &favRaw : favListRaw)
-    {
-        auto tmpList = favRaw.split(",");
-        if (tmpList.size() != 2)
-        {
-            qWarning() << "parse failure while reading favorites from settings";
-            continue;
-        }
-
-        const auto &favName = tmpList.at(0);
-        const auto &favDbFilePath = tmpList.at(1);
-
-        // create new favorite and add it
-        auto favorite = new QMFavoriteDatabaseEntry();
-        favorite->name = favName;
-        favorite->dbFilePath = favDbFilePath;
-        m_favorites.append(favorite);
-    }
-
-    // update the ui after reading everything in
-    updateFavoritesListWidget();
-}
-
-void QMFavoriteDatabaseDialog::updateFavoritesListWidget()
-{
-    ui->lwFavorites->clear();
-
-    for (const auto &favorite : m_favorites)
-    {
-        addFavoriteToWidget(favorite);
-    }
-}
-
-void QMFavoriteDatabaseDialog::writeFavoritesToSettings()
-{
-    auto &settings = QMApplicationSettings::getInstance();
-
-    // create the string to safe
-    QString favListRaw = "";
-    for (const auto &favorite : m_favorites)
-    {
-        QString favRaw = favorite->name + "," + favorite->dbFilePath;
-
-        if (!favListRaw.isEmpty())
-        {
-            favListRaw += ";";
-        }
-
-        favListRaw += favRaw;
-    }
-
-    settings.write("Favorites/Data", favListRaw);
-}
-
-void QMFavoriteDatabaseDialog::removeFavoriteEntry()
-{
-    if (m_selectedFavorite == nullptr)
-    {
-        return;
-    }
-
-    auto result = QMessageBox::question(this, tr("Favoriten löschen"),
-            tr("Möchten Sie den Favoriten löschen?"),
-            QMessageBox::Yes | QMessageBox::No);
-    if (result != QMessageBox::Yes)
-    {
-        return;
-    }
-
-    auto selectedItems = ui->lwFavorites->selectedItems();
-    if (selectedItems.size() != 1)
-    {
-        qWarning() << "to many selection should not be possible";
-        return;
-    }
-
-    auto selectedItem = selectedItems.first();
-
-    bool found = false;
-    auto selectedFavoriteName = selectedItem->data(Qt::DisplayRole).toString();
-    auto selectedFavorite = getFavoriteFromName(selectedFavoriteName, found);
-
-    if (!found)
-    {
-        qWarning() << "no favorite struct object with the given name found";
-        return;
-    }
-
-    // because we delete an item safe and reset button should be enabled
-    ui->pbSave->setEnabled(false);
-    ui->pbReset->setEnabled(false);
-
-    // delete the elements
-    delete selectedItem;
-    m_favorites.removeOne(selectedFavorite);
-    delete selectedFavorite;
-
-    writeFavoritesToSettings();
-
-    // update ui
-    if (m_favorites.isEmpty())
-    {
-        m_selectedFavorite = nullptr;
-    }
-
-    updateUi();
-}
-
-void QMFavoriteDatabaseDialog::createFavoriteEntry()
-{
-    // test whether you should save the the configs or not
-    if (ui->pbSave->isEnabled())
-    {
-        auto result = QMessageBox::question(this, tr("Favoriten speichern"),
-                tr("Möchten Sie die Änderungen des letzten Favoriten speichern?"),
-                QMessageBox::Yes | QMessageBox::No);
-        if (result == QMessageBox::Yes)
-        {
-            saveFavoriteEntry();
-            if (ui->pbSave->isEnabled())
-            {
-                return;
-            }
-        }
-        else
-        {
-            resetFavoriteEntry();
-        }
-    }
-
-    auto *entry = new QMFavoriteDatabaseEntry;
-
-    QString name = tr("Favorit");
-    unsigned int num = 0;
-    while (favoriteNameExist(name))
-    {
-        num++;
-        name = tr("Favorit %1").arg(num);
-    }
-
-    entry->name = name;
-    m_favorites.append(entry);
-
-    addFavoriteToWidget(entry);
-
-    saveFavoriteEntry(false);
-}
-
-void QMFavoriteDatabaseDialog::resetFavoriteEntry()
-{
-    if (m_selectedFavorite == nullptr)
-    {
-        qWarning() << "no favorite selected to reset";
-        return;
-    }
-
-    ui->leName->setText(m_selectedFavorite->name);
-    ui->leDatabaseFile->setText(m_selectedFavorite->dbFilePath);
-
-    updateUi();
-}
-
-void QMFavoriteDatabaseDialog::openDatabaseFile()
-{
     // open a database file
     QFileDialog fileDialog(this);
 
@@ -337,6 +56,18 @@ void QMFavoriteDatabaseDialog::openDatabaseFile()
     fileDialog.setFileMode(QFileDialog::FileMode::ExistingFile);
     fileDialog.setAcceptMode(QFileDialog::AcceptMode::AcceptOpen);
     fileDialog.setNameFilter(QObject::tr("QualificationMatrix Datenbank (*.qmsql)"));
+
+    // get current path name if available
+    auto variFileName = index.data(Qt::DisplayRole);
+    if (variFileName.canConvert<QString>())
+    {
+        auto currFileName = index.data(Qt::DisplayRole).toString();
+
+        if (QFile::exists(currFileName) && currFileName.split(".").last().compare("qmsql") == 0)
+        {
+            fileDialog.selectFile(currFileName);
+        }
+    }
 
     // if the user does not accept the action, just cancel everything
     if (fileDialog.exec() != QFileDialog::Accepted)
@@ -348,66 +79,62 @@ void QMFavoriteDatabaseDialog::openDatabaseFile()
 
     Q_ASSERT(fileNames.count() == 1);
 
-    ui->leDatabaseFile->setText(fileNames.first());
+    m_favoriteModel->setData(index, fileNames.first(), Qt::EditRole);
 }
 
-void QMFavoriteDatabaseDialog::saveFavoriteEntry(const bool &validation)
+void QMFavoriteDatabaseDialog::reject()
 {
-    if (m_selectedFavorite == nullptr)
+    QDialog::reject();
+}
+
+void QMFavoriteDatabaseDialog::accept()
+{
+    auto rowsIndex = m_ui->tvFavorites->selectionModel()->selectedRows();
+    if (rowsIndex.size() != 1)
     {
-        qWarning() << "should never happend";
         return;
     }
 
-    if (validation)
-    {
-        if (!ui->leName->text().contains(QRegularExpression("^[a-zA-Z0-9\\s]+$")))
-        {
-            QMessageBox::information(this, tr("Favoriten speichern"),
-                    tr("Der Name darf nur alphanumerische Zeichen und Leerzeichen enthalten."),
-                    QMessageBox::Ok);
-            return;
-        }
+    auto row = rowsIndex.first().row();
 
-        if (favoriteNameExist(ui->leName->text()))
-        {
-            QMessageBox::information(this, tr("Favoriten speichern"),
-                    tr("Der Name existiert bereits, bitte wählen Sie einen anderen."),
-                    QMessageBox::Ok);
-            return;
-        }
+    auto index = m_favoriteModel->index(row, 1);
+    if (!index.isValid())
+    {
+        qWarning() << "no valid index selected";
+        return;
     }
 
-    m_selectedFavorite->name = ui->leName->text();
-    m_selectedFavorite->dbFilePath = ui->leDatabaseFile->text();
+    auto fileName = index.data(Qt::DisplayRole).toString();
 
-    writeFavoritesToSettings();
-
-    updateUi();
-}
-
-bool QMFavoriteDatabaseDialog::favoriteNameExist(const QString &name) const
-{
-    for (const auto &m_favorite : m_favorites)
+    if (!QFile::exists(fileName) || fileName.split(".").last().compare("qmsql") != 0)
     {
-        if (m_favorite->name.compare(name) == 0)
-        {
-            return true;
-        }
+        qWarning() << "cannot open because file does not exist or has wrong extension";
+        return;
     }
 
-    return false;
+    QDialog::accept();
+
+    emit openDatabase(fileName);
 }
 
-void QMFavoriteDatabaseDialog::addFavoriteToWidget(QMFavoriteDatabaseEntry *entry)
+void QMFavoriteDatabaseDialog::removeFavoriteEntry()
 {
-    auto item = new QListWidgetItem(ui->lwFavorites, QListWidgetItem::Type);
-    item->setData(Qt::DisplayRole, entry->name);
-    item->setSizeHint(QSize(100, 30));
+    auto rowsIndex = m_ui->tvFavorites->selectionModel()->selectedRows();
+    if (rowsIndex.size() != 1)
+    {
+        return;
+    }
 
-    ui->lwFavorites->addItem(item);
-    ui->lwFavorites->setFocus();
-    ui->lwFavorites->selectionModel()->select(
-            ui->lwFavorites->indexFromItem(item),
-            QItemSelectionModel::SelectionFlag::ClearAndSelect);
+    auto row = rowsIndex.first().row();
+
+    if (!m_favoriteModel->removeRecord(row))
+    {
+        qWarning() << "remove row should never fail";
+        return;
+    }
+}
+
+void QMFavoriteDatabaseDialog::createFavoriteEntry()
+{
+    m_favoriteModel->addDefaultRecord();
 }
