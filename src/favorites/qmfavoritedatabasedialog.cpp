@@ -17,6 +17,7 @@
 #include "favorites/qmfavoritemodel.h"
 
 #include <QFileDialog>
+#include <QMessageBox>
 
 QMFavoriteDatabaseDialog::QMFavoriteDatabaseDialog(QWidget *parent)
     : QDialog(parent)
@@ -108,6 +109,11 @@ void QMFavoriteDatabaseDialog::accept()
 
     if (!QFile::exists(fileName) || fileName.split(".").last().compare("qmsql") != 0)
     {
+        QMessageBox::warning(
+                this, tr("Favoriten öffnen"),
+                tr("Der Favorit kann nicht geöffnet werden oder die Dateiendung ist falsch"),
+                QMessageBox::StandardButton::Ok);
+
         qWarning() << "cannot open because file does not exist or has wrong extension";
         return;
     }
