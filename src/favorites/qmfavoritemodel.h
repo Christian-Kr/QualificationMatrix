@@ -23,7 +23,6 @@ struct QMFavoriteRecord
 {
     QString name;
     QString dbFilePath;
-    QString fileAccess;
 };
 
 /// Model for manage data of favorites.

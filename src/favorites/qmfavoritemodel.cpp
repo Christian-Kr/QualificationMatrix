@@ -42,8 +42,6 @@ QVariant QMFavoriteModel::headerData(int section, Qt::Orientation orientation, i
                 return tr("Name");
             case 1:
                 return tr("Pfad zur Datenbank");
-            case 2:
-                return tr("Zugriff");
             default:
                 return {};
         }
@@ -61,7 +59,7 @@ int QMFavoriteModel::rowCount(const QModelIndex &) const
 
 int QMFavoriteModel::columnCount(const QModelIndex &) const
 {
-    return 3;
+    return 2;
 }
 
 QVariant QMFavoriteModel::data(const QModelIndex &index, int role) const
@@ -80,8 +78,6 @@ QVariant QMFavoriteModel::data(const QModelIndex &index, int role) const
                 return m_favorites.at(row)->name;
             case 1:
                 return m_favorites.at(row)->dbFilePath;
-            case 2:
-                return m_favorites.at(row)->fileAccess;
             default:
                 return {};
         }
@@ -123,16 +119,6 @@ bool QMFavoriteModel::setData(const QModelIndex &index, const QVariant &value, i
                 else
                 {
                     m_favorites.at(row)->dbFilePath = value.toString();
-                    break;
-                }
-            case 2:
-                if (!value.canConvert<QString>())
-                {
-                    return false;
-                }
-                else
-                {
-                    m_favorites.at(row)->fileAccess = value.toString();
                     break;
                 }
             default:
@@ -233,7 +219,6 @@ void QMFavoriteModel::addDefaultRecord()
     auto favorite = m_favorites.last();
     favorite->name = tr("Favorite");
     favorite->dbFilePath = "";
-    favorite->fileAccess = tr("Undefiniert");
 
     // inform about changes
     endInsertRows();
