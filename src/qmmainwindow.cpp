@@ -492,7 +492,7 @@ void QMMainWindow::showAbout()
     about.exec();
 }
 
-bool QMMainWindow::closeDatabase(bool silent)
+bool QMMainWindow::closeDatabase(bool silent, bool showFavs)
 {
     // if a database exist, close it
     if (QSqlDatabase::contains("default"))
@@ -535,6 +535,18 @@ bool QMMainWindow::closeDatabase(bool silent)
     // Set ui elements
     setWindowTitle(tr("QualificationMatrix"));
     ui->statusbar->showMessage(tr("Datenbank getrennt"));
+
+    // check whether to show favorites dialog
+    if (showFavs)
+    {
+        auto &settings = QMApplicationSettings::getInstance();
+        auto loadLast = settings.read("Database/LoadLastOnStartup", false).toBool();
+
+        if (!loadLast)
+        {
+            showFavorites();
+        }
+    }
 
     return true;
 }

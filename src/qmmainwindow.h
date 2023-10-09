@@ -109,8 +109,11 @@ public slots:
     /// Close the database, if there is currently an open one.
     ///
     /// \param silent true if closing should be silent without message box, else false
+    /// \param showFavs true if favorite dialog should be shown afterwarts, else false; when this
+    ///         when this value is true, additional tests will be done whether to show the dialog
+    ///         or not
     /// \return False if it cannot be close or don't exist, else true.
-    bool closeDatabase(bool silent = false);
+    bool closeDatabase(bool silent = false, bool showFavs = true);
 
     /// Shows the database dialog to manage the database information.
     [[maybe_unused]] void openDatabase();
