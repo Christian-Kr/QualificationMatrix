@@ -27,7 +27,7 @@ class QSqlRecord;
 /// \author Christian Kr, Copyright 2020
 class QMQualiResultModel: public QAbstractTableModel
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     /// Constructor
