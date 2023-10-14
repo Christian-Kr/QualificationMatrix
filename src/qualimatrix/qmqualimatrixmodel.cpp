@@ -86,7 +86,10 @@ void QMQualiMatrixModel::updateModels()
 
 void QMQualiMatrixModel::buildCache()
 {
-    emit beforeBuildCache(tr("Erstelle cache"), funcFilterModel->rowCount() * trainFilterModel->rowCount());
+    emit beginResetModel();
+
+    emit beforeBuildCache(
+            tr("Erstelle cache"), funcFilterModel->rowCount() * trainFilterModel->rowCount());
 
     // Clear all data in cache.
     cache->clear();
@@ -121,8 +124,9 @@ void QMQualiMatrixModel::buildCache()
         }
     }
 
-
     emit afterBuildCache();
+
+    emit endResetModel();
 }
 
 QVariant QMQualiMatrixModel::headerData(int section, Qt::Orientation orientation, int) const
