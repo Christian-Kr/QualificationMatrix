@@ -159,6 +159,14 @@ public slots:
     /// Export the current quali matrix as csv file.
     void exportCSV();
 
+    /// Height of the training row has been changed.
+    /// \param value the new value
+    void trainRowHeightChanged(int value);
+
+    /// Width of the function row has been changed.
+    /// \param value the new value
+    void funcColumnWidthChanged(int value);
+
 private:
     /// Build context menus.
     void buildContextMenus();

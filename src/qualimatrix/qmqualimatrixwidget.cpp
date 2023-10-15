@@ -1,12 +1,12 @@
 // qmqualimatrixwidget.cpp is part of QualificationMatrix
 //
-// QualificationMatrix is free software: you can redistribute it and/or modify it under the terms of the GNU General
-// Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
-// any later version.
+// QualificationMatrix is free software: you can redistribute it and/or modify it under the terms
+// of the GNU General Public License as published by the Free Software Foundation, either version
+// 3 of the License, or (at your option) any later version.
 //
-// QualificationMatrix is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
-// implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
-// details.
+// QualificationMatrix is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+// without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+// the GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License along with QualificationMatrix.
 // If not, see <http://www.gnu.org/licenses/>.
@@ -14,7 +14,6 @@
 #include "qmqualimatrixwidget.h"
 #include "ui_qmqualimatrixwidget.h"
 #include "qmqualimatrixmodel.h"
-#include "data/qmdatamanager.h"
 #include "qmqualimatrixdelegate.h"
 #include "qmqualimatrixheaderview.h"
 #include "settings/qmapplicationsettings.h"
@@ -271,6 +270,13 @@ void QMQualiMatrixWidget::loadSettings()
 
     auto lockTime = settings.read("QualiMatrix/LockTime", 30).toInt();
     lockModeTimer->setInterval(lockTime*1000);
+
+    // get values for training row height and function column width
+    auto funcColumnWidth = settings.read("QualiMatrix/VertHeaderWidth", 100).toInt();
+    auto trainRowHeight = settings.read("QualiMatrix/HorHeaderHeight", 100).toInt();
+
+    ui->sbColumnWidth->setValue(funcColumnWidth);
+    ui->sbRowHeight->setValue(trainRowHeight);
 }
 
 void QMQualiMatrixWidget::saveSettings()
@@ -638,4 +644,46 @@ void QMQualiMatrixWidget::exportCSV()
 //    QMessageBox::information(
 //            this, tr("Qualifizierungsresultat speichern"),
 //            tr("Die Daten wurden erfolgreich gespeichert."));
+}
+
+void QMQualiMatrixWidget::trainRowHeightChanged(int value)
+{
+    if (value < 100 || value > 500)
+    {
+        qWarning() << "Value out of range.";
+        return;
+    }
+
+    auto &settings = QMApplicationSettings::getInstance();
+    settings.write("QualiMatrix/HorHeaderHeight", value);
+
+    auto header = static_cast<QMQualiMatrixHeaderView*>(ui->tvQualiMatrix->horizontalHeader());
+    if (header == nullptr)
+    {
+        qWarning() << "Object cast is nullptr";
+        return;
+    }
+
+    header->updateSizeSettings();
+}
+
+void QMQualiMatrixWidget::funcColumnWidthChanged(int value)
+{
+    if (value < 100 || value > 500)
+    {
+        qWarning() << "Value out of range.";
+        return;
+    }
+
+    auto &settings = QMApplicationSettings::getInstance();
+    settings.write("QualiMatrix/VertHeaderWidth", value);
+
+    auto header = static_cast<QMQualiMatrixHeaderView*>(ui->tvQualiMatrix->verticalHeader());
+    if (header == nullptr)
+    {
+        qWarning() << "Object cast is nullptr";
+        return;
+    }
+
+    header->updateSizeSettings();
 }

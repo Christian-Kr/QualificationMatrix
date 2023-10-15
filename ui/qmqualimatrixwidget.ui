@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1249</width>
-    <height>818</height>
+    <width>1391</width>
+    <height>847</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -49,181 +49,6 @@
       </property>
       <widget class="QWidget" name="dockWidgetContents">
        <layout class="QGridLayout" name="gridLayout_2">
-        <item row="0" column="0" colspan="3">
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>Funktion</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QComboBox" name="cbFuncFilter">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>100</width>
-            <height>25</height>
-           </size>
-          </property>
-          <property name="editable">
-           <bool>true</bool>
-          </property>
-          <property name="maxVisibleItems">
-           <number>20</number>
-          </property>
-          <property name="insertPolicy">
-           <enum>QComboBox::NoInsert</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QToolButton" name="tbResetFunc">
-          <property name="minimumSize">
-           <size>
-            <width>25</width>
-            <height>25</height>
-           </size>
-          </property>
-          <property name="toolTip">
-           <string>Zurücksetzen</string>
-          </property>
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="../rcs/icons.qrc">
-            <normaloff>:/icons/line-awesome/svg/icons/line-awesome/undo-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/undo-solid.svg</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>16</width>
-            <height>16</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="2">
-         <widget class="QToolButton" name="tbExtSelFunc">
-          <property name="minimumSize">
-           <size>
-            <width>25</width>
-            <height>25</height>
-           </size>
-          </property>
-          <property name="toolTip">
-           <string>Erweiterte Auswahl</string>
-          </property>
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="../rcs/icons.qrc">
-            <normaloff>:/icons/line-awesome/svg/icons/line-awesome/list-alt.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/list-alt.svg</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>16</width>
-            <height>16</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0" colspan="3">
-         <widget class="QLabel" name="label_2">
-          <property name="text">
-           <string>Schulung</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QComboBox" name="cbTrainFilter">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>100</width>
-            <height>25</height>
-           </size>
-          </property>
-          <property name="editable">
-           <bool>true</bool>
-          </property>
-          <property name="maxVisibleItems">
-           <number>20</number>
-          </property>
-          <property name="insertPolicy">
-           <enum>QComboBox::NoInsert</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QToolButton" name="tbResetTrain">
-          <property name="minimumSize">
-           <size>
-            <width>25</width>
-            <height>25</height>
-           </size>
-          </property>
-          <property name="toolTip">
-           <string>Zurücksetzen</string>
-          </property>
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="../rcs/icons.qrc">
-            <normaloff>:/icons/line-awesome/svg/icons/line-awesome/undo-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/undo-solid.svg</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>16</width>
-            <height>16</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="2">
-         <widget class="QToolButton" name="tbExtSelTrain">
-          <property name="minimumSize">
-           <size>
-            <width>25</width>
-            <height>25</height>
-           </size>
-          </property>
-          <property name="toolTip">
-           <string>Erweiterte Auswahl</string>
-          </property>
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="../rcs/icons.qrc">
-            <normaloff>:/icons/line-awesome/svg/icons/line-awesome/list-alt.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/list-alt.svg</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>16</width>
-            <height>16</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="0" colspan="3">
-         <widget class="QLabel" name="label_5">
-          <property name="text">
-           <string>Funktionsgruppe</string>
-          </property>
-         </widget>
-        </item>
         <item row="5" column="0">
          <widget class="QComboBox" name="cbFuncGroupFilter">
           <property name="sizePolicy">
@@ -249,34 +74,40 @@
           </property>
          </widget>
         </item>
-        <item row="5" column="1">
-         <widget class="QToolButton" name="tbResetFuncGroup">
-          <property name="minimumSize">
-           <size>
-            <width>25</width>
-            <height>25</height>
-           </size>
-          </property>
-          <property name="toolTip">
-           <string>Zurücksetzen</string>
-          </property>
+        <item row="4" column="0" colspan="3">
+         <widget class="QLabel" name="label_5">
           <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="../rcs/icons.qrc">
-            <normaloff>:/icons/line-awesome/svg/icons/line-awesome/undo-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/undo-solid.svg</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>16</width>
-            <height>16</height>
-           </size>
+           <string>Funktionsgruppe</string>
           </property>
          </widget>
         </item>
-        <item row="5" column="2">
-         <widget class="QToolButton" name="tbExtSelFuncGroup">
+        <item row="7" column="0">
+         <widget class="QComboBox" name="cbTrainGroupFilter">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>100</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="editable">
+           <bool>true</bool>
+          </property>
+          <property name="maxVisibleItems">
+           <number>20</number>
+          </property>
+          <property name="insertPolicy">
+           <enum>QComboBox::NoInsert</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="2">
+         <widget class="QToolButton" name="tbExtSelTrainGroup">
           <property name="minimumSize">
            <size>
             <width>25</width>
@@ -307,109 +138,6 @@
            <string>Schulungsgruppe</string>
           </property>
          </widget>
-        </item>
-        <item row="7" column="0">
-         <widget class="QComboBox" name="cbTrainGroupFilter">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>100</width>
-            <height>25</height>
-           </size>
-          </property>
-          <property name="editable">
-           <bool>true</bool>
-          </property>
-          <property name="maxVisibleItems">
-           <number>20</number>
-          </property>
-          <property name="insertPolicy">
-           <enum>QComboBox::NoInsert</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="1">
-         <widget class="QToolButton" name="tbResetTrainGroup">
-          <property name="minimumSize">
-           <size>
-            <width>25</width>
-            <height>25</height>
-           </size>
-          </property>
-          <property name="toolTip">
-           <string>Zurücksetzen</string>
-          </property>
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="../rcs/icons.qrc">
-            <normaloff>:/icons/line-awesome/svg/icons/line-awesome/undo-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/undo-solid.svg</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>16</width>
-            <height>16</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="2">
-         <widget class="QToolButton" name="tbExtSelTrainGroup">
-          <property name="minimumSize">
-           <size>
-            <width>25</width>
-            <height>25</height>
-           </size>
-          </property>
-          <property name="toolTip">
-           <string>Erweiterte Auswahl</string>
-          </property>
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="../rcs/icons.qrc">
-            <normaloff>:/icons/line-awesome/svg/icons/line-awesome/list-alt.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/list-alt.svg</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>16</width>
-            <height>16</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="0" colspan="3">
-         <widget class="QCheckBox" name="cbLegal">
-          <property name="enabled">
-           <bool>true</bool>
-          </property>
-          <property name="text">
-           <string>Nur rechtlich notwendige Einträge</string>
-          </property>
-         </widget>
-        </item>
-        <item row="9" column="0">
-         <spacer name="verticalSpacer_3">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Fixed</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
         </item>
         <item row="10" column="0" colspan="3">
          <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -474,6 +202,278 @@
           </item>
          </layout>
         </item>
+        <item row="1" column="0">
+         <widget class="QComboBox" name="cbFuncFilter">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>100</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="editable">
+           <bool>true</bool>
+          </property>
+          <property name="maxVisibleItems">
+           <number>20</number>
+          </property>
+          <property name="insertPolicy">
+           <enum>QComboBox::NoInsert</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="0">
+         <spacer name="verticalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="1" column="2">
+         <widget class="QToolButton" name="tbExtSelFunc">
+          <property name="minimumSize">
+           <size>
+            <width>25</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Erweiterte Auswahl</string>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../rcs/icons.qrc">
+            <normaloff>:/icons/line-awesome/svg/icons/line-awesome/list-alt.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/list-alt.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>16</width>
+            <height>16</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="0" colspan="3">
+         <widget class="QCheckBox" name="cbLegal">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="text">
+           <string>Nur rechtlich notwendige Einträge</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="1">
+         <widget class="QToolButton" name="tbResetTrainGroup">
+          <property name="minimumSize">
+           <size>
+            <width>25</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Zurücksetzen</string>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../rcs/icons.qrc">
+            <normaloff>:/icons/line-awesome/svg/icons/line-awesome/undo-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/undo-solid.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>16</width>
+            <height>16</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QComboBox" name="cbTrainFilter">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>100</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="editable">
+           <bool>true</bool>
+          </property>
+          <property name="maxVisibleItems">
+           <number>20</number>
+          </property>
+          <property name="insertPolicy">
+           <enum>QComboBox::NoInsert</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QToolButton" name="tbResetFunc">
+          <property name="minimumSize">
+           <size>
+            <width>25</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Zurücksetzen</string>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../rcs/icons.qrc">
+            <normaloff>:/icons/line-awesome/svg/icons/line-awesome/undo-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/undo-solid.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>16</width>
+            <height>16</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0" colspan="3">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Schulung</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2">
+         <widget class="QToolButton" name="tbExtSelTrain">
+          <property name="minimumSize">
+           <size>
+            <width>25</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Erweiterte Auswahl</string>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../rcs/icons.qrc">
+            <normaloff>:/icons/line-awesome/svg/icons/line-awesome/list-alt.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/list-alt.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>16</width>
+            <height>16</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="1">
+         <widget class="QToolButton" name="tbResetFuncGroup">
+          <property name="minimumSize">
+           <size>
+            <width>25</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Zurücksetzen</string>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../rcs/icons.qrc">
+            <normaloff>:/icons/line-awesome/svg/icons/line-awesome/undo-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/undo-solid.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>16</width>
+            <height>16</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QToolButton" name="tbResetTrain">
+          <property name="minimumSize">
+           <size>
+            <width>25</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Zurücksetzen</string>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../rcs/icons.qrc">
+            <normaloff>:/icons/line-awesome/svg/icons/line-awesome/undo-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/undo-solid.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>16</width>
+            <height>16</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="2">
+         <widget class="QToolButton" name="tbExtSelFuncGroup">
+          <property name="minimumSize">
+           <size>
+            <width>25</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Erweiterte Auswahl</string>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../rcs/icons.qrc">
+            <normaloff>:/icons/line-awesome/svg/icons/line-awesome/list-alt.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/list-alt.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>16</width>
+            <height>16</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0" colspan="3">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Funktion</string>
+          </property>
+         </widget>
+        </item>
         <item row="11" column="0">
          <spacer name="verticalSpacer">
           <property name="orientation">
@@ -482,7 +482,7 @@
           <property name="sizeHint" stdset="0">
            <size>
             <width>20</width>
-            <height>361</height>
+            <height>40</height>
            </size>
           </property>
          </spacer>
@@ -630,6 +630,79 @@
          </attribute>
         </widget>
        </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QLabel" name="label_11">
+           <property name="text">
+            <string>Breite der Funktionsspalte</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="sbColumnWidth">
+           <property name="suffix">
+            <string>px</string>
+           </property>
+           <property name="minimum">
+            <number>100</number>
+           </property>
+           <property name="maximum">
+            <number>500</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_5">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_10">
+           <property name="text">
+            <string>Höhe der Schulungszeile</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="sbRowHeight">
+           <property name="suffix">
+            <string>px</string>
+           </property>
+           <property name="minimum">
+            <number>100</number>
+           </property>
+           <property name="maximum">
+            <number>500</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_4">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
       </layout>
      </widget>
      <widget class="QDockWidget" name="dwTrainDetails">
@@ -650,22 +723,22 @@
         <property name="verticalSpacing">
          <number>10</number>
         </property>
-        <item row="0" column="0" colspan="2">
-         <layout class="QVBoxLayout" name="verticalLayout">
+        <item row="1" column="0" colspan="2">
+         <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
-           <widget class="QLabel" name="label_3">
+           <widget class="QLabel" name="label_6">
             <property name="font">
              <font>
               <bold>true</bold>
              </font>
             </property>
             <property name="text">
-             <string>Name:</string>
+             <string>Gruppe:</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="laName">
+           <widget class="QLabel" name="laGroup">
             <property name="text">
              <string>TextLabel</string>
             </property>
@@ -699,94 +772,22 @@
           </item>
          </layout>
         </item>
-        <item row="4" column="0" colspan="2">
-         <layout class="QVBoxLayout" name="verticalLayout_6">
+        <item row="0" column="0" colspan="2">
+         <layout class="QVBoxLayout" name="verticalLayout">
           <item>
-           <widget class="QLabel" name="label_9">
+           <widget class="QLabel" name="label_3">
             <property name="font">
              <font>
               <bold>true</bold>
              </font>
             </property>
             <property name="text">
-             <string>Inhalte:</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+             <string>Name:</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPlainTextEdit" name="pteContent">
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="6" column="0" colspan="2">
-         <layout class="QHBoxLayout" name="horizontalLayout_5">
-          <item>
-           <spacer name="horizontalSpacer_3">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pbClose">
-            <property name="minimumSize">
-             <size>
-              <width>100</width>
-              <height>25</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Schließen</string>
-            </property>
-            <property name="shortcut">
-             <string>Ctrl+I</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="5" column="0" colspan="2">
-         <spacer name="verticalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>273</width>
-            <height>185</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="1" column="0" colspan="2">
-         <layout class="QVBoxLayout" name="verticalLayout_3">
-          <item>
-           <widget class="QLabel" name="label_6">
-            <property name="font">
-             <font>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>Gruppe:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="laGroup">
+           <widget class="QLabel" name="laName">
             <property name="text">
              <string>TextLabel</string>
             </property>
@@ -815,6 +816,65 @@
            <widget class="QLabel" name="laInterval">
             <property name="text">
              <string>TextLabel</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="4" column="0" colspan="2">
+         <layout class="QVBoxLayout" name="verticalLayout_6">
+          <item>
+           <widget class="QLabel" name="label_9">
+            <property name="font">
+             <font>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Inhalte:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPlainTextEdit" name="pteContent">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="5" column="0" colspan="2">
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pbClose">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Schließen</string>
+            </property>
+            <property name="shortcut">
+             <string>Ctrl+I</string>
             </property>
            </widget>
           </item>
@@ -1318,6 +1378,38 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>sbColumnWidth</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>QMQualiMatrixWidget</receiver>
+   <slot>funcColumnWidthChanged(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>567</x>
+     <y>822</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>695</x>
+     <y>423</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sbRowHeight</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>QMQualiMatrixWidget</receiver>
+   <slot>trainRowHeightChanged(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>821</x>
+     <y>822</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>695</x>
+     <y>423</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>updateFilter()</slot>
@@ -1346,5 +1438,7 @@
   <slot>trainSortDescending()</slot>
   <slot>trainSortAscending()</slot>
   <slot>exportCSV()</slot>
+  <slot>funcColumnWidthChanged(int)</slot>
+  <slot>trainRowHeightChanged(int)</slot>
  </slots>
 </ui>

@@ -46,8 +46,8 @@ QMQualiMatrixHeaderView::QMQualiMatrixHeaderView(Qt::Orientation orientation, QW
     setSectionsClickable(true);
 
     QMApplicationSettings &settings = QMApplicationSettings::getInstance();
-    vertSectionWidth = settings.read("QualiMatrix/VertHeaderWidth", 200).toInt();
-    horSectionHeight = settings.read("QualiMatrix/HorHeaderHeight", 200).toInt();
+    vertSectionWidth = settings.read("QualiMatrix/VertHeaderWidth", 100).toInt();
+    horSectionHeight = settings.read("QualiMatrix/HorHeaderHeight", 100).toInt();
 
     updateColors();
 
