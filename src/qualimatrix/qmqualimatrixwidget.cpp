@@ -664,6 +664,10 @@ void QMQualiMatrixWidget::trainRowHeightChanged(int value)
         return;
     }
 
+    ui->hsRowHeight->blockSignals(true);
+    ui->hsRowHeight->setValue(value);
+    ui->hsRowHeight->blockSignals(false);
+
     header->updateSizeSettings();
 }
 
@@ -685,5 +689,19 @@ void QMQualiMatrixWidget::funcColumnWidthChanged(int value)
         return;
     }
 
+    ui->hsColumnWidth->blockSignals(true);
+    ui->hsColumnWidth->setValue(value);
+    ui->hsColumnWidth->blockSignals(false);
+
     header->updateSizeSettings();
+}
+
+void QMQualiMatrixWidget::trainRowHeightSliderChanged(int value)
+{
+    ui->sbRowHeight->setValue(value);
+}
+
+void QMQualiMatrixWidget::funcColumnWidthSliderChanged(int value)
+{
+    ui->sbColumnWidth->setValue(value);
 }

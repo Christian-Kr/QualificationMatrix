@@ -640,6 +640,25 @@
           </widget>
          </item>
          <item>
+          <widget class="QSlider" name="hsColumnWidth">
+           <property name="minimum">
+            <number>100</number>
+           </property>
+           <property name="maximum">
+            <number>500</number>
+           </property>
+           <property name="singleStep">
+            <number>1</number>
+           </property>
+           <property name="pageStep">
+            <number>100</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QSpinBox" name="sbColumnWidth">
            <property name="suffix">
             <string>px</string>
@@ -672,6 +691,22 @@
           <widget class="QLabel" name="label_10">
            <property name="text">
             <string>Höhe der Schulungszeile</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSlider" name="hsRowHeight">
+           <property name="minimum">
+            <number>100</number>
+           </property>
+           <property name="maximum">
+            <number>500</number>
+           </property>
+           <property name="pageStep">
+            <number>100</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
            </property>
           </widget>
          </item>
@@ -1410,6 +1445,38 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>hsColumnWidth</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>QMQualiMatrixWidget</receiver>
+   <slot>funcColumnWidthSliderChanged(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>544</x>
+     <y>820</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>695</x>
+     <y>423</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>hsRowHeight</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>QMQualiMatrixWidget</receiver>
+   <slot>trainRowHeightSliderChanged(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>820</x>
+     <y>820</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>695</x>
+     <y>423</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>updateFilter()</slot>
@@ -1440,5 +1507,7 @@
   <slot>exportCSV()</slot>
   <slot>funcColumnWidthChanged(int)</slot>
   <slot>trainRowHeightChanged(int)</slot>
+  <slot>funcColumnWidthSliderChanged(int)</slot>
+  <slot>trainRowHeightSliderChanged(int)</slot>
  </slots>
 </ui>

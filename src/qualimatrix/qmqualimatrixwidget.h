@@ -167,6 +167,14 @@ public slots:
     /// \param value the new value
     void funcColumnWidthChanged(int value);
 
+    /// Height of the training row has been changed by slider.
+    /// \param value the new value
+    void trainRowHeightSliderChanged(int value);
+
+    /// Width of the function row has been changed by slider.
+    /// \param value the new value
+    void funcColumnWidthSliderChanged(int value);
+
 private:
     /// Build context menus.
     void buildContextMenus();
