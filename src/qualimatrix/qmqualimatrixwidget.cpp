@@ -682,7 +682,7 @@ void QMQualiMatrixWidget::funcColumnWidthChanged(int value)
     auto &settings = QMApplicationSettings::getInstance();
     settings.write("QualiMatrix/VertHeaderWidth", value);
 
-    auto header = static_cast<QMQualiMatrixHeaderView*>(ui->tvQualiMatrix->verticalHeader());
+    auto header = dynamic_cast<QMQualiMatrixHeaderView*>(ui->tvQualiMatrix->verticalHeader());
     if (header == nullptr)
     {
         qWarning() << "Object cast is nullptr";
@@ -704,4 +704,14 @@ void QMQualiMatrixWidget::trainRowHeightSliderChanged(int value)
 void QMQualiMatrixWidget::funcColumnWidthSliderChanged(int value)
 {
     ui->sbColumnWidth->setValue(value);
+}
+
+void QMQualiMatrixWidget::toggleFreezeFunc()
+{
+    //ui->tvQualiMatrix->horizontalHeader()->
+}
+
+void QMQualiMatrixWidget::toggleFreezeTrain()
+{
+
 }

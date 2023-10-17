@@ -52,7 +52,7 @@ QMQualiMatrixHeaderView::QMQualiMatrixHeaderView(Qt::Orientation orientation, QW
     updateColors();
 
     laInfo->setAttribute(Qt::WA_TransparentForMouseEvents);
-    laInfo->setText(tr("HallO"));
+    laInfo->setText(tr("Hallo"));
 
     if (orientation == Qt::Horizontal)
     {
