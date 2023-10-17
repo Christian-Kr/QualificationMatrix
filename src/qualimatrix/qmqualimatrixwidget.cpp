@@ -705,13 +705,3 @@ void QMQualiMatrixWidget::funcColumnWidthSliderChanged(int value)
 {
     ui->sbColumnWidth->setValue(value);
 }
-
-void QMQualiMatrixWidget::toggleFreezeFunc()
-{
-    //ui->tvQualiMatrix->horizontalHeader()->
-}
-
-void QMQualiMatrixWidget::toggleFreezeTrain()
-{
-
-}
