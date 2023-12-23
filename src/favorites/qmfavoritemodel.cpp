@@ -242,4 +242,6 @@ bool QMFavoriteModel::removeRecord(int row)
     endRemoveRows();
 
     writeFavoritesToSettings();
+
+    return true;
 }
