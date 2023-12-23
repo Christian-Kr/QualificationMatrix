@@ -42,30 +42,29 @@ unsigned short initFirstStartProgress()
     auto &settings = QMApplicationSettings::getInstance();
     auto firstStart = settings.read("General/FirstStart", true).toBool();
 
-    // if application has not been started for the first time, just go on with starting the
-    // application
     if (!firstStart)
     {
         return FIRST_START_RET_CODE_GOON;
     }
 
-    // ask whether the user wants to load a template config file to make configuration faster
+    // On a first start, the user might want to load a configuration file as a template to fasten
+    // the configuration process.
     QMessageBox messageBox(nullptr);
 
     messageBox.setStandardButtons(
             QMessageBox::StandardButton::Yes | QMessageBox::StandardButton::No);
     messageBox.setWindowTitle(QObject::tr("Erster Start"));
     messageBox.setIcon(QMessageBox::Icon::Question);
-    messageBox.setText(QObject::tr("Die Anwendung wird scheinbar das erste Mal gestartet."));
+    messageBox.setText(QObject::tr("Die Anwendung wird das erste Mal gestartet."));
     messageBox.setInformativeText(
             QObject::tr("Möchtest du eine zentrale Konfigurationsdatei laden?\n"));
     messageBox.setDefaultButton(QMessageBox::StandardButton::Yes);
 
-    auto *buttonYes = messageBox.button(QMessageBox::StandardButton::Yes);
+    auto buttonYes = messageBox.button(QMessageBox::StandardButton::Yes);
     Q_ASSERT(buttonYes != nullptr);
     buttonYes->setText(QObject::tr("Konfiguration laden"));
 
-    auto *buttonNo = messageBox.button(QMessageBox::StandardButton::No);
+    auto buttonNo = messageBox.button(QMessageBox::StandardButton::No);
     Q_ASSERT(buttonNo != nullptr);
     buttonNo->setText(QObject::tr("Ohne fortfahren"));
 
