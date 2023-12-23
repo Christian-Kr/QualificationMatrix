@@ -338,7 +338,9 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationDomain("Krippendorf");
     QCoreApplication::setApplicationVersion(QString("%1.%2").arg(VERSION_MAJOR, VERSION_MINOR));
 
-    if (QString(RELEASE_STATE).compare("beta") == 0)
+    // The application name depends on the release state. This will also influence the name of the
+    // configuration file.
+    if (QString(RELEASE_STATE).toLower().compare("beta") == 0)
     {
         QCoreApplication::setApplicationName(QString("QualificationMatrix_%1").arg(RELEASE_STATE));
     }
