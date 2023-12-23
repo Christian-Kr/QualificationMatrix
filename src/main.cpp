@@ -349,32 +349,34 @@ int main(int argc, char *argv[])
         QCoreApplication::setApplicationName(QString("QualificationMatrix"));
     }
 
-    // the application loop is for restarting the application before any qt application loop is
-    // running
+    // This loop will force a restart of the application till it gets closed by QApplication.
     while (true)
     {
-        // create application and main window object
         QApplication app(argc, argv);
+
+        // Set a custom message handler.
         qInstallMessageHandler(customMessageHandler);
 
+        // Initialize different application functionalities.
         initApplicationTranslation();
         initApplicationStyle();
         initApplicationStyleSheet(app);
 
-        // if any first start progress needs a restart as follow up, do so
+        // Initialize the first start of the application and force a restart.
         if (initFirstStartProgress() == FIRST_START_RET_RESTART)
         {
             QMApplicationSettings::getInstance().clear();
             continue;
         }
 
-        // set up gui dpi settings
+        // Set up the dpi settings of the ui.
         readGuiDPISetting();
 
+        // Create the main window and initialize it.
         QMMainWindow win;
         initShowMainWindow(win);
 
-        // run main application loop
+        // Finally, run the application with the main event loop.
         return QApplication::exec();
     }
 }
