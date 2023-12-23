@@ -66,7 +66,7 @@ unsigned short initFirstStartProgress()
 
     auto buttonNo = messageBox.button(QMessageBox::StandardButton::No);
     Q_ASSERT(buttonNo != nullptr);
-    buttonNo->setText(QObject::tr("Ohne fortfahren"));
+    buttonNo->setText(QObject::tr("Ohne Konfiguration fortfahren"));
 
     if (messageBox.exec() == QMessageBox::Yes)
     {
