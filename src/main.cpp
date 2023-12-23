@@ -334,9 +334,8 @@ void customMessageHandler(QtMsgType type, const QMessageLogContext &, const QStr
 /// \return Zero if exit success, else -1.
 int main(int argc, char *argv[])
 {
-    // general information, used by qt - example: QSettings certificate naming
-    QCoreApplication::setOrganizationName("Kr");
-    QCoreApplication::setOrganizationDomain("Kr");
+    QCoreApplication::setOrganizationName("Krippendorf");
+    QCoreApplication::setOrganizationDomain("Krippendorf");
     QCoreApplication::setApplicationVersion(QString("%1.%2").arg(VERSION_MAJOR, VERSION_MINOR));
 
     if (QString(RELEASE_STATE).compare("beta") == 0)
