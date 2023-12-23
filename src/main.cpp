@@ -245,7 +245,10 @@ void installTranslator(const QString &name, const QString &path)
 void readGuiDPISetting()
 {
     auto &settings = QMApplicationSettings::getInstance();
-    auto dpi = settings.read("General/DPI", 1).toInt();
+
+    // Value of 3 means floor for rounding. So if you got a dpi scale factor of 1.75 you
+    // will get 1.
+    auto dpi = settings.read("General/DPI", 3).toInt();
 
     if (dpi < 1 || dpi > 5)
     {
@@ -336,9 +339,12 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationDomain("Kr");
     QCoreApplication::setApplicationVersion(QString("%1.%2").arg(VERSION_MAJOR, VERSION_MINOR));
 
-    if (QString(RELEASE_STATE).compare("beta") == 0) {
+    if (QString(RELEASE_STATE).compare("beta") == 0)
+    {
         QCoreApplication::setApplicationName(QString("QualificationMatrix_%1").arg(RELEASE_STATE));
-    } else {
+    }
+    else
+    {
         QCoreApplication::setApplicationName(QString("QualificationMatrix"));
     }
 
@@ -355,7 +361,8 @@ int main(int argc, char *argv[])
         initApplicationStyleSheet(app);
 
         // if any first start progress needs a restart as follow up, do so
-        if (initFirstStartProgress() == FIRST_START_RET_RESTART) {
+        if (initFirstStartProgress() == FIRST_START_RET_RESTART)
+        {
             QMApplicationSettings::getInstance().clear();
             continue;
         }
