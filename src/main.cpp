@@ -309,21 +309,30 @@ void customMessageHandler(QtMsgType type, const QMessageLogContext &, const QStr
             return;
     }
 
-    QFile out(QDir::homePath() + QDir::separator() + "qm_log.txt");
-    auto opened = out.open(QIODevice::WriteOnly | QIODevice::Append);
+    // Writing the log information to a file will only happen, if the configuration has set such
+    // an option.
+    auto &settings = QMApplicationSettings::getInstance();
+    auto logInFile = settings.read("General/LogInFile", false).toBool();
 
-    if (opened)
+    if (logInFile)
     {
-        QTextStream ts(&out);
-        ts << txt << Qt::endl;
-    }
-    else
-    {
-        QTextStream ts(stdout);
-        ts << txt << Qt::endl;
+        QFile out(QDir::homePath() + QDir::separator() + "qm_log.txt");
+        auto opened = out.open(QIODevice::WriteOnly | QIODevice::Append);
+
+        if (opened)
+        {
+            QTextStream ts(&out);
+            ts << txt << Qt::endl;
+
+            out.close();
+
+            return;
+        }
     }
 
-    out.close();
+    // If the message has not been saved to a file, it will be written to the console.
+    QTextStream ts(stdout);
+    ts << txt << Qt::endl;
 }
 
 /// Well, ... main entry function.
