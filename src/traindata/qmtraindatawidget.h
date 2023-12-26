@@ -119,6 +119,14 @@ public slots:
     /// Choose a certificate and set it to multi edit dialog.
     void chooseMultiCertificate();
 
+    /// State of date from checkbox changed.
+    /// \param newState The new state the checkbox has.
+    void changedDateFromState(int newState);
+
+    /// State of date to checkbox changed.
+    /// \param newState The new state the checkbox has.
+    void changedDateToState(int newState);
+
 signals:
     /// There is a short message that should be displayed.
     /// \param msg

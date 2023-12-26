@@ -319,10 +319,24 @@ void QMTrainDataWidget::updateTableView()
 
 void QMTrainDataWidget::updateFilter()
 {
+    // Check date time strings for filter.
+    QString dateFilterFrom = "";
+    QString dateFilterTo = "";
+
+    if (ui->cbDateFrom->isChecked())
+    {
+        dateFilterFrom = QString(" AND date > '%1' ").arg(ui->deDateFilterFrom->text());
+    }
+
+    if (ui->cbDateTo->isChecked())
+    {
+        dateFilterTo = QString(" AND date < '%1' ").arg(ui->deDateFilterTo->text());
+    }
+
     auto filter = QString("relTblAl_1.name LIKE '%%1%' AND relTblAl_2.name LIKE '%%2%' "
-        "AND date > '%3' AND date < '%4' AND relTblAl_4.name LIKE '%%5%'")
-        .arg(ui->cbFilterEmployee->currentText(), ui->cbFilterTrain->currentText(), ui->deDateFilterFrom->text(),
-            ui->deDateFilterTo->text(), ui->cbFilterState->currentText());
+        "%3 %4 AND relTblAl_4.name LIKE '%%5%'")
+        .arg(ui->cbFilterEmployee->currentText(), ui->cbFilterTrain->currentText(),
+             dateFilterFrom, dateFilterTo, ui->cbFilterState->currentText());
     trainDataModel->setFilter(filter);
     if (trainDataModel->rowCount() >= trainDataModel->getLimit())
     {
@@ -794,4 +808,14 @@ void QMTrainDataWidget::showCert()
     certDialog.resize(width, height);
     certDialog.setModal(true);
     certDialog.exec();
+}
+
+void QMTrainDataWidget::changedDateFromState(int newState)
+{
+    ui->deDateFilterFrom->setEnabled(newState == Qt::CheckState::Checked);
+}
+
+void QMTrainDataWidget::changedDateToState(int newState)
+{
+    ui->deDateFilterTo->setEnabled(newState == Qt::CheckState::Checked);
 }
