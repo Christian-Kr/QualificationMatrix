@@ -933,7 +933,7 @@ void QMMainWindow::amsLogin()
     {
         QMessageBox::StandardButton res = QMessageBox::question(this, tr("Anmelden"),
                 tr("Ein Nutzer ist bereits angemeldet. Möchten Sie den Nutzer abmelden?"),
-                QMessageBox::Yes | QMessageBox::No);
+                QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
 
         if (res != QMessageBox::Yes)
         {
