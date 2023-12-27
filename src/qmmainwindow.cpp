@@ -119,8 +119,9 @@ void QMMainWindow::openFavoriteDatabase(QString dbFilePath)
     auto db = QSqlDatabase::addDatabase("QSQLITE", DB_DEFAULT_NAME);
     db.setDatabaseName(dbFilePath);
 
-    // If opening the database fails, show a message and stop automatic loading the database. If the opening fails,
-    // this could be due to wrong database information and/or failure in the database itself.
+    // If opening the database fails, show a message and stop automatic loading the database.
+    // If the opening fails, this could be due to wrong database information and/or failure in the
+    // database itself.
     if (!db.open())
     {
         QMessageBox::critical(this, tr("Datenbank öffnen"),
