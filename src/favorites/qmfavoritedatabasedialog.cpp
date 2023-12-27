@@ -109,10 +109,8 @@ void QMFavoriteDatabaseDialog::accept()
 
     if (!QFile::exists(fileName) || fileName.split(".").last().compare("qmsql") != 0)
     {
-        QMessageBox::warning(
-                this, tr("Favoriten öffnen"),
-                tr("Der Favorit kann nicht geöffnet werden oder die Dateiendung ist falsch"),
-                QMessageBox::StandardButton::Ok);
+        QMessageBox::warning(this, tr("Favoriten öffnen"),
+                tr("Die Datenbank konnte nicht geöffnet werden."));
 
         qWarning() << "cannot open because file does not exist or has wrong extension";
         return;

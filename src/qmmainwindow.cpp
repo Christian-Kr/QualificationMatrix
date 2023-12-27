@@ -106,6 +106,16 @@ QMMainWindow::~QMMainWindow()
 
 void QMMainWindow::openFavoriteDatabase(QString dbFilePath)
 {
+    // The database file path might not be empty and should be a valid file path.
+    auto fileInfo = QFileInfo(dbFilePath);
+    if (dbFilePath.isEmpty() || fileInfo.isDir() || !fileInfo.exists())
+    {
+        QMessageBox::critical(this, tr("Datenbank öffnen"),
+                tr("Die Datenbank konnte nicht geöffnet werden."));
+        showFavorites();
+        return;
+    }
+
     // If a database with the name exist, remove it. This is needed, because the driver can only
     // be set while inside object creation.
     if (QSqlDatabase::contains(DB_DEFAULT_NAME))
@@ -133,7 +143,8 @@ void QMMainWindow::openFavoriteDatabase(QString dbFilePath)
         return;
     }
 
-    // Run initializing actions after database has been loaded.
+    // Save database settings and run initializing actions after database has been loaded.
+    saveDatabaseSettings();
     initAfterDatabaseOpened();
 }
 
