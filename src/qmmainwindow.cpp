@@ -924,6 +924,15 @@ void QMMainWindow::handleLoginChange(LoginState, LoginState current)
 
 void QMMainWindow::amsLogin()
 {
+    // If no database is currently open, just inform and stop.
+    if (!QSqlDatabase::contains(DB_DEFAULT_NAME) ||
+        !QSqlDatabase::database(DB_DEFAULT_NAME, false).isOpen())
+    {
+        QMessageBox::information(this, tr("Anmelden"),
+                tr("Es ist keine Datenbank geöffnet, um sich anzumelden."));
+        return;
+    }
+
     // Close all modes.
     closeCurrentWindowMode();
 
