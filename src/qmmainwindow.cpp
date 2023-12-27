@@ -123,8 +123,8 @@ void QMMainWindow::openFavoriteDatabase(QString dbFilePath)
     // this could be due to wrong database information and/or failure in the database itself.
     if (!db.open())
     {
-        QMessageBox::critical(this, tr("Datenbankverbindung"),
-                tr("Die Datenbank konnte nicht geöffnet werden."));
+        QMessageBox::critical(this, tr("Datenbank öffnen"),
+                tr("Die Datenbank konnte nicht geöffnet werden. Der Vorgang wird abgebrochen."));
 
         // when opening the database fails, just show the favorites dialog
         showFavorites();
@@ -143,7 +143,27 @@ void QMMainWindow::initDatabaseSettings()
 
     if (loadLast)
     {
-        manageDatabaseFromSettings();
+        // if the database settings cannot not be loaded, just run the show favorites dialog; cause
+        // this can also happen, when someone wants to auto load a database file on start, but no
+        // one has been set, just go on quietly
+        if (!loadDatabaseFromSettings("default"))
+        {
+            showFavorites();
+            return;
+        }
+
+        // if loading the last database failed, show the favorite dialog
+        if (!manageDatabaseFromSettings())
+        {
+            QMessageBox::critical(this, tr("Datenbank öffnen"),
+                    tr("Die Datenbank konnte nicht geöffnet werden. "
+                       "Der Vorgang wird abgebrochen."));
+            showFavorites();
+            return;
+        }
+
+        // Run initializing actions after database has been loaded.
+        initAfterDatabaseOpened();
     }
     else
     {
@@ -153,24 +173,16 @@ void QMMainWindow::initDatabaseSettings()
 
 bool QMMainWindow::manageDatabaseFromSettings()
 {
-    loadDatabaseFromSettings("default");
     auto db = QSqlDatabase::database("default", false);
 
-    // If opening the database fails, show a message and stop automatic loading the database. If the opening fails,
-    // this could be due to wrong database information and/or failure in the database itself.
+    // If opening the database fails, show a message and stop automatic loading the database.
+    // If the opening fails, this could be due to wrong database information and/or failure in
+    // the database itself.
     if (!db.open())
     {
-        QMessageBox::critical(this, tr("Datenbankverbindung"),
-                tr("Die Datenbank konnte nicht geöffnet werden."));
-
-        // when opening the database fails, just show the favorites dialog
-        showFavorites();
-
         return false;
     }
 
-    // Run initializing actions after database has been loaded.
-    initAfterDatabaseOpened();
     return true;
 }
 
@@ -251,7 +263,7 @@ void QMMainWindow::openDatabase()
     }
 }
 
-void QMMainWindow::loadDatabaseFromSettings(const QString &dbName)
+bool QMMainWindow::loadDatabaseFromSettings(const QString &dbName)
 {
     // If a database with the name exist, remove it. This is needed, because the driver can only be set during object
     // creation.
@@ -264,20 +276,30 @@ void QMMainWindow::loadDatabaseFromSettings(const QString &dbName)
     auto &settings = QMApplicationSettings::getInstance();
     auto databaseType = settings.read("Database/Type", "local").toString();
     auto driver = settings.read("Database/Driver", "QSQLITE").toString();
-    auto db = QSqlDatabase::addDatabase(driver, dbName);
 
     if (databaseType == "local")
     {
-        db.setDatabaseName(settings.read("Database/FileName").toString());
+        auto fileName = settings.read("Database/FileName").toString();
+        auto fileInfo = QFileInfo(fileName);
+        if (!fileInfo.exists() || fileInfo.isDir())
+        {
+            return false;
+        }
+
+        auto db = QSqlDatabase::addDatabase(driver, dbName);
+        db.setDatabaseName(fileName);
     }
     else
     {
+        auto db = QSqlDatabase::addDatabase(driver, dbName);
         db.setDatabaseName(settings.read("Database/Name").toString());
         db.setHostName(settings.read("Database/HostName").toString());
         db.setPort(settings.read("Database/Port").toInt());
         db.setUserName(settings.read("Database/UserName").toString());
         db.setPassword(settings.read("Database/Password").toString());
     }
+
+    return true;
 }
 
 void QMMainWindow::saveDatabaseSettings()

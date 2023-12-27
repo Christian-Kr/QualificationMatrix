@@ -185,7 +185,8 @@ private:
     /// Load QSqlDatabase information from QMApplicationSettings. A new database object will be created. If one exist
     /// with the name, the database will be closed and the object removed.
     /// \param dbName The name of the db that should be created from settings.
-    void loadDatabaseFromSettings(const QString &dbName = "default");
+    /// \return True if database from was successfull, else false.
+    bool loadDatabaseFromSettings(const QString &dbName = "default");
 
     /// Some initial actions after database has been successfully loaded.
     void initAfterDatabaseOpened();
