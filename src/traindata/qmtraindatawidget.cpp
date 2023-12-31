@@ -106,11 +106,24 @@ void QMTrainDataWidget::executeMultiEdit()
     }
 
     // Ask to be sure.
-    auto res = QMessageBox::question(this, tr("Mehrfachänderung"),
-            tr("Bist du dir sicher, dass du die Änderungen in die Datenbank schreiben möchtest? Die Rückstellung bei "
-               "fehlerhaften Eintragen ist aufwendig und muss manuell durchgeführt werden."),
-            QMessageBox::Yes | QMessageBox::No);
-    if (res != QMessageBox::Yes)
+    auto messageBox = QMessageBox(this);
+
+    messageBox.setIcon(QMessageBox::Warning);
+    messageBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    messageBox.setDefaultButton(QMessageBox::No);
+    messageBox.setText(tr("Sind Sie sich sicher?"));
+    messageBox.setInformativeText(tr("Einmal geschriebene Änderungen können nur manuell und "
+                                     "einzeln wieder zurückgestellt werden."));
+
+    auto buttonYes = messageBox.button(QMessageBox::Yes);
+    buttonYes->setText(tr("Änderungen schreiben"));
+
+    auto buttonNo = messageBox.button(QMessageBox::No);
+    buttonNo->setText(tr("Verwerfen"));
+
+    auto result = messageBox.exec();
+
+    if (result != QMessageBox::Yes)
     {
         return;
     }
