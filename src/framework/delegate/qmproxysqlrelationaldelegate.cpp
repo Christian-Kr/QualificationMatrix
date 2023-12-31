@@ -16,7 +16,6 @@
 #include <QSqlRelationalTableModel>
 #include <QSqlTableModel>
 #include <QSortFilterProxyModel>
-#include <QDebug>
 #include <QSqlRecord>
 #include <QComboBox>
 
@@ -63,6 +62,8 @@ QWidget *QMProxySqlRelationalDelegate::createEditor(
     {
         return QStyledItemDelegate::createEditor(aParent, option, index);
     }
+
+    childModel->sort(1, Qt::SortOrder::AscendingOrder);
 
     // ... else, create the combo box
     auto combo = new QComboBox(aParent);
@@ -129,7 +130,7 @@ void QMProxySqlRelationalDelegate::setModelData(
     QSqlTableModel *childModel = sqlModel ? sqlModel->relationModel(index.column()) : nullptr;
 
     // Get the editor and test for existing objects.
-     auto combo = dynamic_cast<QComboBox *>(editor);
+    auto combo = dynamic_cast<QComboBox *>(editor);
     if (!childModel || !combo)
     {
         QStyledItemDelegate::setModelData(editor, model, index);
