@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS "Info" (
 
 -- TODO: Update
 INSERT INTO "Info" ("name", "value") VALUES("MAJOR", "1");
-INSERT INTO "Info" ("name", "value") VALUES("MINOR", "8");
+INSERT INTO "Info" ("name", "value") VALUES("MINOR", "9");
 
 -- FuncGroup definition
 
