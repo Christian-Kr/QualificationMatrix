@@ -148,6 +148,9 @@
      </item>
      <item>
       <widget class="QTableView" name="tvTrainData">
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
        <property name="selectionMode">
         <enum>QAbstractItemView::ExtendedSelection</enum>
        </property>
@@ -172,598 +175,6 @@
       </widget>
      </item>
     </layout>
-   </item>
-   <item row="0" column="2">
-    <widget class="QDockWidget" name="dwTrainDataCertificates">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>400</width>
-       <height>400</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>400</width>
-       <height>524287</height>
-      </size>
-     </property>
-     <property name="features">
-      <set>QDockWidget::DockWidgetClosable</set>
-     </property>
-     <property name="allowedAreas">
-      <set>Qt::RightDockWidgetArea</set>
-     </property>
-     <property name="windowTitle">
-      <string>Schulungsnachweise</string>
-     </property>
-     <widget class="QWidget" name="dockWidgetContents">
-      <layout class="QVBoxLayout" name="verticalLayout_4">
-       <property name="spacing">
-        <number>12</number>
-       </property>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
-         <item>
-          <widget class="QLabel" name="label">
-           <property name="maximumSize">
-            <size>
-             <width>100</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Mitarbeiter</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="laEmployeeName">
-           <property name="text">
-            <string>TextLabel</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_4">
-         <item>
-          <widget class="QLabel" name="label_5">
-           <property name="maximumSize">
-            <size>
-             <width>100</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Schulung</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="laTraining">
-           <property name="text">
-            <string>TextLabel</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_5">
-         <item>
-          <widget class="QLabel" name="label_10">
-           <property name="maximumSize">
-            <size>
-             <width>100</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Datum</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="laDate">
-           <property name="text">
-            <string>TextLabel</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_6">
-         <item>
-          <widget class="QLabel" name="label_12">
-           <property name="maximumSize">
-            <size>
-             <width>100</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Status</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="laState">
-           <property name="text">
-            <string>TextLabel</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_3">
-         <property name="spacing">
-          <number>10</number>
-         </property>
-         <item>
-          <widget class="QTableView" name="tvCertificates">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>200</height>
-            </size>
-           </property>
-           <property name="editTriggers">
-            <set>QAbstractItemView::NoEditTriggers</set>
-           </property>
-           <property name="selectionMode">
-            <enum>QAbstractItemView::SingleSelection</enum>
-           </property>
-           <property name="selectionBehavior">
-            <enum>QAbstractItemView::SelectRows</enum>
-           </property>
-           <property name="showGrid">
-            <bool>false</bool>
-           </property>
-           <property name="gridStyle">
-            <enum>Qt::NoPen</enum>
-           </property>
-           <attribute name="horizontalHeaderVisible">
-            <bool>false</bool>
-           </attribute>
-           <attribute name="horizontalHeaderDefaultSectionSize">
-            <number>300</number>
-           </attribute>
-           <attribute name="horizontalHeaderStretchLastSection">
-            <bool>true</bool>
-           </attribute>
-           <attribute name="verticalHeaderVisible">
-            <bool>true</bool>
-           </attribute>
-           <attribute name="verticalHeaderMinimumSectionSize">
-            <number>25</number>
-           </attribute>
-           <attribute name="verticalHeaderDefaultSectionSize">
-            <number>25</number>
-           </attribute>
-          </widget>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_2">
-           <item>
-            <widget class="QToolButton" name="tbAddCertificate">
-             <property name="minimumSize">
-              <size>
-               <width>25</width>
-               <height>25</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>...</string>
-             </property>
-             <property name="icon">
-              <iconset resource="../rcs/icons.qrc">
-               <normaloff>:/icons/line-awesome/svg/icons/line-awesome/plus-circle-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/plus-circle-solid.svg</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>16</width>
-               <height>16</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QToolButton" name="tbRemoveCertificate">
-             <property name="minimumSize">
-              <size>
-               <width>25</width>
-               <height>25</height>
-              </size>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="icon">
-              <iconset resource="../rcs/icons.qrc">
-               <normaloff>:/icons/line-awesome/svg/icons/line-awesome/minus-circle-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/minus-circle-solid.svg</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>16</width>
-               <height>16</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QToolButton" name="tbShowCert">
-             <property name="minimumSize">
-              <size>
-               <width>25</width>
-               <height>25</height>
-              </size>
-             </property>
-             <property name="toolTip">
-              <string>Im Nachweisdialog suchen</string>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="icon">
-              <iconset resource="../rcs/icons.qrc">
-               <normaloff>:/icons/line-awesome/svg/icons/line-awesome/eye-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/eye-solid.svg</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>16</width>
-               <height>16</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer name="verticalSpacer_2">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeType">
-              <enum>QSizePolicy::MinimumExpanding</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <spacer name="verticalSpacer_3">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </widget>
-    </widget>
-   </item>
-   <item row="0" column="3">
-    <widget class="QDockWidget" name="dwMultiEdit">
-     <property name="minimumSize">
-      <size>
-       <width>400</width>
-       <height>686</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>400</width>
-       <height>524287</height>
-      </size>
-     </property>
-     <property name="features">
-      <set>QDockWidget::DockWidgetClosable|QDockWidget::DockWidgetMovable</set>
-     </property>
-     <property name="allowedAreas">
-      <set>Qt::RightDockWidgetArea</set>
-     </property>
-     <property name="windowTitle">
-      <string>Mehrfachbearbeitung</string>
-     </property>
-     <widget class="QWidget" name="dockWidgetContents_3">
-      <layout class="QVBoxLayout" name="verticalLayout_9">
-       <property name="spacing">
-        <number>12</number>
-       </property>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_7">
-         <item>
-          <widget class="QLabel" name="label_6">
-           <property name="maximumSize">
-            <size>
-             <width>100</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Anzahl</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="laSelCount">
-           <property name="text">
-            <string>TextLabel</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout_5">
-         <property name="spacing">
-          <number>0</number>
-         </property>
-         <item>
-          <widget class="QCheckBox" name="cbSetName">
-           <property name="text">
-            <string>Name festlegen</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="cbName">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>25</height>
-            </size>
-           </property>
-           <property name="editable">
-            <bool>true</bool>
-           </property>
-           <property name="maxVisibleItems">
-            <number>20</number>
-           </property>
-           <property name="insertPolicy">
-            <enum>QComboBox::NoInsert</enum>
-           </property>
-           <property name="minimumContentsLength">
-            <number>0</number>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout_6">
-         <property name="spacing">
-          <number>0</number>
-         </property>
-         <item>
-          <widget class="QCheckBox" name="cbSetTrain">
-           <property name="text">
-            <string>Schulung festlegen</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="cbTrain">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>25</height>
-            </size>
-           </property>
-           <property name="editable">
-            <bool>true</bool>
-           </property>
-           <property name="maxVisibleItems">
-            <number>20</number>
-           </property>
-           <property name="insertPolicy">
-            <enum>QComboBox::NoInsert</enum>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout_7">
-         <property name="spacing">
-          <number>0</number>
-         </property>
-         <item>
-          <widget class="QCheckBox" name="cbSetDate">
-           <property name="text">
-            <string>Datum festlegen</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QCalendarWidget" name="cwTrainDate">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout_8">
-         <property name="spacing">
-          <number>0</number>
-         </property>
-         <item>
-          <widget class="QCheckBox" name="cbSetState">
-           <property name="text">
-            <string>Status festlegen</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="cbTrainState">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>25</height>
-            </size>
-           </property>
-           <property name="editable">
-            <bool>true</bool>
-           </property>
-           <property name="maxVisibleItems">
-            <number>20</number>
-           </property>
-           <property name="insertPolicy">
-            <enum>QComboBox::NoInsert</enum>
-           </property>
-           <property name="minimumContentsLength">
-            <number>0</number>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout">
-         <property name="spacing">
-          <number>0</number>
-         </property>
-         <item>
-          <widget class="QCheckBox" name="cbAddMultiCertificate">
-           <property name="text">
-            <string>Zertifikat hinzufügen</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_11">
-           <item>
-            <widget class="QLineEdit" name="leCertName">
-             <property name="minimumSize">
-              <size>
-               <width>100</width>
-               <height>25</height>
-              </size>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="pbChooseCertificate">
-             <property name="minimumSize">
-              <size>
-               <width>100</width>
-               <height>25</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Auswählen</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_8">
-         <item>
-          <spacer name="horizontalSpacer_2">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pbExecMultiEdit">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>25</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Ausführen</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <spacer name="verticalSpacer_4">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>10</width>
-           <height>10</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </widget>
-    </widget>
    </item>
    <item row="0" column="0">
     <widget class="QDockWidget" name="dockWidget">
@@ -1064,8 +475,596 @@
      </widget>
     </widget>
    </item>
+   <item row="0" column="3">
+    <widget class="QDockWidget" name="dwMultiEdit">
+     <property name="minimumSize">
+      <size>
+       <width>400</width>
+       <height>686</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>400</width>
+       <height>524287</height>
+      </size>
+     </property>
+     <property name="features">
+      <set>QDockWidget::DockWidgetClosable|QDockWidget::DockWidgetMovable</set>
+     </property>
+     <property name="allowedAreas">
+      <set>Qt::RightDockWidgetArea</set>
+     </property>
+     <property name="windowTitle">
+      <string>Mehrfachbearbeitung</string>
+     </property>
+     <widget class="QWidget" name="dockWidgetContents_3">
+      <layout class="QVBoxLayout" name="verticalLayout_9">
+       <property name="spacing">
+        <number>12</number>
+       </property>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_7">
+         <item>
+          <widget class="QLabel" name="label_6">
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Anzahl</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="laSelCount">
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_5">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QCheckBox" name="cbSetName">
+           <property name="text">
+            <string>Name festlegen</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="cbName">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="editable">
+            <bool>true</bool>
+           </property>
+           <property name="maxVisibleItems">
+            <number>20</number>
+           </property>
+           <property name="insertPolicy">
+            <enum>QComboBox::NoInsert</enum>
+           </property>
+           <property name="minimumContentsLength">
+            <number>0</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_6">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QCheckBox" name="cbSetTrain">
+           <property name="text">
+            <string>Schulung festlegen</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="cbTrain">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="editable">
+            <bool>true</bool>
+           </property>
+           <property name="maxVisibleItems">
+            <number>20</number>
+           </property>
+           <property name="insertPolicy">
+            <enum>QComboBox::NoInsert</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_7">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QCheckBox" name="cbSetDate">
+           <property name="text">
+            <string>Datum festlegen</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCalendarWidget" name="cwTrainDate">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_8">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QCheckBox" name="cbSetState">
+           <property name="text">
+            <string>Status festlegen</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="cbTrainState">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="editable">
+            <bool>true</bool>
+           </property>
+           <property name="maxVisibleItems">
+            <number>20</number>
+           </property>
+           <property name="insertPolicy">
+            <enum>QComboBox::NoInsert</enum>
+           </property>
+           <property name="minimumContentsLength">
+            <number>0</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QCheckBox" name="cbAddMultiCertificate">
+           <property name="text">
+            <string>Zertifikat hinzufügen</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_11">
+           <item>
+            <widget class="QLineEdit" name="leCertName">
+             <property name="minimumSize">
+              <size>
+               <width>100</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pbChooseCertificate">
+             <property name="minimumSize">
+              <size>
+               <width>100</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Auswählen</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_8">
+         <item>
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pbExecMultiEdit">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Ausführen</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>10</width>
+           <height>10</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item row="0" column="2">
+    <widget class="QDockWidget" name="dwTrainDataSingleEdit">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>400</width>
+       <height>669</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>400</width>
+       <height>524287</height>
+      </size>
+     </property>
+     <property name="features">
+      <set>QDockWidget::DockWidgetClosable</set>
+     </property>
+     <property name="allowedAreas">
+      <set>Qt::RightDockWidgetArea</set>
+     </property>
+     <property name="windowTitle">
+      <string>Einzelbearbeitung</string>
+     </property>
+     <widget class="QWidget" name="dockWidgetContents">
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="5" column="0">
+        <widget class="QLabel" name="label_5">
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Schulung</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QMComboBox" name="cbSingleEditEmployee">
+         <property name="editable">
+          <bool>true</bool>
+         </property>
+         <property name="maxVisibleItems">
+          <number>20</number>
+         </property>
+         <property name="insertPolicy">
+          <enum>QComboBox::NoInsert</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="0">
+        <widget class="QMComboBox" name="cbSingleEditState">
+         <property name="editable">
+          <bool>true</bool>
+         </property>
+         <property name="maxVisibleItems">
+          <number>20</number>
+         </property>
+         <property name="insertPolicy">
+          <enum>QComboBox::NoInsert</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="0">
+        <widget class="QLabel" name="label_12">
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Status</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QMComboBox" name="cbSingleEditTraining">
+         <property name="editable">
+          <bool>true</bool>
+         </property>
+         <property name="maxVisibleItems">
+          <number>20</number>
+         </property>
+         <property name="insertPolicy">
+          <enum>QComboBox::NoInsert</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <widget class="QLabel" name="label_10">
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Datum</string>
+         </property>
+        </widget>
+       </item>
+       <item row="13" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <property name="spacing">
+          <number>10</number>
+         </property>
+         <item>
+          <widget class="QTableView" name="tvCertificates">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>200</height>
+            </size>
+           </property>
+           <property name="editTriggers">
+            <set>QAbstractItemView::NoEditTriggers</set>
+           </property>
+           <property name="selectionMode">
+            <enum>QAbstractItemView::SingleSelection</enum>
+           </property>
+           <property name="selectionBehavior">
+            <enum>QAbstractItemView::SelectRows</enum>
+           </property>
+           <property name="showGrid">
+            <bool>false</bool>
+           </property>
+           <property name="gridStyle">
+            <enum>Qt::NoPen</enum>
+           </property>
+           <attribute name="horizontalHeaderVisible">
+            <bool>false</bool>
+           </attribute>
+           <attribute name="horizontalHeaderDefaultSectionSize">
+            <number>300</number>
+           </attribute>
+           <attribute name="horizontalHeaderStretchLastSection">
+            <bool>true</bool>
+           </attribute>
+           <attribute name="verticalHeaderVisible">
+            <bool>true</bool>
+           </attribute>
+           <attribute name="verticalHeaderMinimumSectionSize">
+            <number>25</number>
+           </attribute>
+           <attribute name="verticalHeaderDefaultSectionSize">
+            <number>25</number>
+           </attribute>
+          </widget>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <item>
+            <widget class="QToolButton" name="tbAddCertificate">
+             <property name="minimumSize">
+              <size>
+               <width>25</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>...</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../rcs/icons.qrc">
+               <normaloff>:/icons/line-awesome/svg/icons/line-awesome/plus-circle-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/plus-circle-solid.svg</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>16</width>
+               <height>16</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QToolButton" name="tbRemoveCertificate">
+             <property name="minimumSize">
+              <size>
+               <width>25</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="../rcs/icons.qrc">
+               <normaloff>:/icons/line-awesome/svg/icons/line-awesome/minus-circle-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/minus-circle-solid.svg</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>16</width>
+               <height>16</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QToolButton" name="tbShowCert">
+             <property name="minimumSize">
+              <size>
+               <width>25</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="toolTip">
+              <string>Im Nachweisdialog suchen</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="../rcs/icons.qrc">
+               <normaloff>:/icons/line-awesome/svg/icons/line-awesome/eye-solid.svg</normaloff>:/icons/line-awesome/svg/icons/line-awesome/eye-solid.svg</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>16</width>
+               <height>16</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::MinimumExpanding</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label">
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Mitarbeiter</string>
+         </property>
+        </widget>
+       </item>
+       <item row="12" column="0">
+        <widget class="QLabel" name="label_7">
+         <property name="text">
+          <string>Zertifikate</string>
+         </property>
+        </widget>
+       </item>
+       <item row="14" column="0">
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="8" column="0">
+        <widget class="QDateEdit" name="deSingleEditDate">
+         <property name="displayFormat">
+          <string>yyyy-MM-dd</string>
+         </property>
+         <property name="calendarPopup">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QMComboBox</class>
+   <extends>QComboBox</extends>
+   <header location="global">framework/component/qmcombobox.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../rcs/icons.qrc"/>
  </resources>
@@ -1342,6 +1341,70 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>cbSingleEditEmployee</sender>
+   <signal>activated(int)</signal>
+   <receiver>QMTrainDataWidget</receiver>
+   <slot>updateSingleTrainData()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1105</x>
+     <y>83</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>863</x>
+     <y>433</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cbSingleEditState</sender>
+   <signal>activated(int)</signal>
+   <receiver>QMTrainDataWidget</receiver>
+   <slot>updateSingleTrainData()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1105</x>
+     <y>411</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>863</x>
+     <y>433</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cbSingleEditTraining</sender>
+   <signal>activated(int)</signal>
+   <receiver>QMTrainDataWidget</receiver>
+   <slot>updateSingleTrainData()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1105</x>
+     <y>143</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>863</x>
+     <y>433</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>deSingleEditDate</sender>
+   <signal>editingFinished()</signal>
+   <receiver>QMTrainDataWidget</receiver>
+   <slot>updateSingleTrainData()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1105</x>
+     <y>200</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>863</x>
+     <y>433</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>resetFilter()</slot>
@@ -1360,5 +1423,6 @@
   <slot>chooseMultiCertificate()</slot>
   <slot>changedDateFromState(int)</slot>
   <slot>changedDateToState(int)</slot>
+  <slot>updateSingleTrainData()</slot>
  </slots>
 </ui>

@@ -26,6 +26,7 @@
 #include "settings/qmapplicationsettings.h"
 #include "qmaddmultipletraindatadialog.h"
 #include "ams/qmamsmanager.h"
+#include "framework/qmlistvalidator.h"
 
 #include <QMessageBox>
 #include <QSqlRecord>
@@ -49,7 +50,7 @@ QMTrainDataWidget::QMTrainDataWidget(QWidget *parent)
 
     // Default settings on start.
     ui->deDateFilterTo->setDate(QDate::currentDate());
-    ui->dwTrainDataCertificates->setVisible(false);
+    ui->dwTrainDataSingleEdit->setVisible(false);
     ui->dwMultiEdit->setVisible(false);
     updateMultiEditEnabledState();
 
@@ -283,6 +284,7 @@ void QMTrainDataWidget::updateData()
     ui->cbFilterState->setModel(trainDataStateViewModel.get());
     ui->tvCertificates->setModel(trainDataCertViewModel.get());
 
+    // Set models for multi edit.
     ui->cbName->setModel(employeeViewModel.get());
     ui->cbTrainState->setModel(trainDataStateViewModel.get());
     ui->cbTrain->setModel(trainViewModel.get());
@@ -290,6 +292,23 @@ void QMTrainDataWidget::updateData()
     ui->cbName->setModelColumn(1);
     ui->cbTrainState->setModelColumn(1);
     ui->cbTrain->setModelColumn(1);
+
+    // Set models for single edit.
+    ui->cbSingleEditEmployee->setModel(employeeViewModel.get());
+    ui->cbSingleEditTraining->setModel(trainViewModel.get());
+    ui->cbSingleEditState->setModel(trainDataStateViewModel.get());
+
+    ui->cbSingleEditEmployee->setModelColumn(1);
+    ui->cbSingleEditTraining->setModelColumn(1);
+    ui->cbSingleEditState->setModelColumn(1);
+
+    ui->cbSingleEditEmployee->setValidator(new QMListValidator(*employeeViewModel, 1, this));
+    ui->cbSingleEditTraining->setValidator(new QMListValidator(*trainViewModel, 1, this));
+    ui->cbSingleEditState->setValidator(new QMListValidator(*trainDataStateViewModel, 1, this));
+
+    ui->cbSingleEditEmployee->setFocusOutListValidation(true);
+    ui->cbSingleEditTraining->setFocusOutListValidation(true);
+    ui->cbSingleEditState->setFocusOutListValidation(true);
 
     updateTableView();
 
@@ -305,19 +324,12 @@ void QMTrainDataWidget::updateData()
 
 void QMTrainDataWidget::updateTableView()
 {
-    ui->tvTrainData->hideColumn(0);
-    ui->tvTrainData->setItemDelegate(new QMProxySqlRelationalDelegate());
-    ui->tvTrainData->setItemDelegateForColumn(3, new DateDelegate());
-    ui->tvTrainData->selectionModel()->disconnect(this);
-
     ui->tvTrainData->selectionModel()->disconnect(this);
     connect(ui->tvTrainData->selectionModel(), &QItemSelectionModel::selectionChanged, this,
         &QMTrainDataWidget::trainDataSelectionChanged);
 
     ui->cbFilterEmployee->setModelColumn(1);
-
     ui->cbFilterTrain->setModelColumn(1);
-
     ui->cbFilterState->setModelColumn(1);
 
     ui->tvCertificates->hideColumn(0);
@@ -353,7 +365,7 @@ void QMTrainDataWidget::updateFilter()
     }
 
     // Close an open dock widget.
-    ui->dwTrainDataCertificates->setVisible(false);
+    ui->dwTrainDataSingleEdit->setVisible(false);
     ui->dwMultiEdit->setVisible(false);
 }
 
@@ -571,7 +583,7 @@ void QMTrainDataWidget::showMultiEdit()
     ui->laSelCount->setText(QString::number(modelIndexList.size()));
 
     // Show the details docked widget (might be invisible).
-    ui->dwTrainDataCertificates->setVisible(false);
+    ui->dwTrainDataSingleEdit->setVisible(false);
     ui->dwMultiEdit->setVisible(true);
 }
 
@@ -602,10 +614,16 @@ void QMTrainDataWidget::showTrainDataCertificates()
     auto dateFieldIndex = trainDataModel->fieldIndex("date");
     auto stateFieldIndex = trainDataModel->fieldIndex("name");
 
-    ui->laEmployeeName->setText(trainDataModel->data(trainDataModel->index(selRow, employeeFieldIndex)).toString());
-    ui->laTraining->setText(trainDataModel->data(trainDataModel->index(selRow, trainFieldIndex)).toString());
-    ui->laDate->setText(trainDataModel->data(trainDataModel->index(selRow, dateFieldIndex)).toString());
-    ui->laState->setText(trainDataModel->data(trainDataModel->index(selRow, stateFieldIndex)).toString());
+    ui->cbSingleEditEmployee->setCurrentText(
+            trainDataModel->data(trainDataModel->index(selRow, employeeFieldIndex)).toString());
+    ui->cbSingleEditTraining->setCurrentText(
+            trainDataModel->data(trainDataModel->index(selRow, trainFieldIndex)).toString());
+    ui->deSingleEditDate->setDate(
+            QDate::fromString(
+                    trainDataModel->data(trainDataModel->index(selRow, dateFieldIndex)).toString(),
+                    Qt::DateFormat::ISODate));
+    ui->cbSingleEditState->setCurrentText(trainDataModel->data(
+            trainDataModel->index(selRow, stateFieldIndex)).toString());
 
     // Get the train data id (primary key) and use it to filter the certificate table.
     auto trainDataId = trainDataModel->data(trainDataModel->index(selRow, idFieldIndex)).toInt();
@@ -613,7 +631,7 @@ void QMTrainDataWidget::showTrainDataCertificates()
 
     // Show the details docked widget (might be invisible).
     ui->dwMultiEdit->setVisible(false);
-    ui->dwTrainDataCertificates->setVisible(true);
+    ui->dwTrainDataSingleEdit->setVisible(true);
 }
 
 void QMTrainDataWidget::trainDataSelectionChanged(const QItemSelection &selected,
@@ -633,7 +651,7 @@ void QMTrainDataWidget::trainDataSelectionChanged(const QItemSelection &selected
     }
 
     ui->dwMultiEdit->setVisible(false);
-    ui->dwTrainDataCertificates->setVisible(false);
+    ui->dwTrainDataSingleEdit->setVisible(false);
 }
 
 void QMTrainDataWidget::updateMultiEditEnabledState()
@@ -828,4 +846,97 @@ void QMTrainDataWidget::changedDateFromState(int newState)
 void QMTrainDataWidget::changedDateToState(int newState)
 {
     ui->deDateFilterTo->setEnabled(newState == Qt::CheckState::Checked);
+}
+
+void QMTrainDataWidget::updateSingleTrainData()
+{
+    auto selTrainDataMultIdx = ui->tvTrainData->selectionModel()->selectedRows();
+
+    // Check if exactly one entry is selected.
+    if (selTrainDataMultIdx.size() != 1)
+    {
+        return;
+    }
+
+    // Get the first element and check every property, whether it has been changed.
+    auto selTrainDataIdx = selTrainDataMultIdx.first();
+    auto selTrainDataRow = selTrainDataIdx.row();
+
+    auto idFieldIndex = trainDataModel->fieldIndex("id");
+    auto employeeFieldIndex = trainDataModel->fieldIndex("Employee_name_3");
+    auto trainFieldIndex = trainDataModel->fieldIndex("Train_name_2");
+    auto dateFieldIndex = trainDataModel->fieldIndex("date");
+    auto stateFieldIndex = trainDataModel->fieldIndex("name");
+
+    // Check employee name.
+    auto selEmployeeName = trainDataModel->data(
+            trainDataModel->index(selTrainDataRow, employeeFieldIndex),
+            Qt::DisplayRole).toString();
+
+    if (ui->cbSingleEditEmployee->currentText().compare(selEmployeeName) != 0)
+    {
+        auto idEmployeeFieldIdx = employeeViewModel->fieldIndex("id");
+        auto employeeIdx = employeeViewModel->index(
+                ui->cbSingleEditEmployee->currentIndex(),
+                idEmployeeFieldIdx);
+        trainDataModel->setData(
+                trainDataModel->index(selTrainDataRow, employeeFieldIndex),
+                employeeViewModel->data(employeeIdx, Qt::DisplayRole));
+        trainDataModel->submit();
+
+        return;
+    }
+
+    // Check training name.
+    auto selTrainingName = trainDataModel->data(
+            trainDataModel->index(selTrainDataRow, trainFieldIndex),
+            Qt::DisplayRole).toString();
+
+    if (ui->cbSingleEditTraining->currentText().compare(selTrainingName) != 0)
+    {
+        auto idTrainingFieldIdx = trainViewModel->fieldIndex("id");
+        auto trainingIdx = trainViewModel->index(
+                ui->cbSingleEditTraining->currentIndex(),
+                idTrainingFieldIdx);
+        trainDataModel->setData(
+                trainDataModel->index(selTrainDataRow, trainFieldIndex),
+                trainViewModel->data(trainingIdx, Qt::DisplayRole));
+        trainDataModel->submit();
+
+        return;
+    }
+
+    // Check state name.
+    auto selStateName = trainDataModel->data(
+            trainDataModel->index(selTrainDataRow, stateFieldIndex),
+            Qt::DisplayRole).toString();
+
+    if (ui->cbSingleEditState->currentText().compare(selStateName) != 0)
+    {
+        auto idStateFieldIdx = trainDataStateViewModel->fieldIndex("id");
+        auto stateIdx = trainViewModel->index(
+                ui->cbSingleEditState->currentIndex(),
+                idStateFieldIdx);
+        trainDataModel->setData(
+                trainDataModel->index(selTrainDataRow, stateFieldIndex),
+                trainDataStateViewModel->data(stateIdx, Qt::DisplayRole));
+        trainDataModel->submit();
+
+        return;
+    }
+
+    // Check date.
+    auto selDate = trainDataModel->data(
+            trainDataModel->index(selTrainDataRow, dateFieldIndex),
+            Qt::DisplayRole).toString();
+
+    if (ui->deSingleEditDate->date().toString(Qt::DateFormat::ISODate).compare(selDate) != 0)
+    {
+        trainDataModel->setData(
+                trainDataModel->index(selTrainDataRow, dateFieldIndex),
+                ui->deSingleEditDate->date().toString(Qt::DateFormat::ISODate));
+        trainDataModel->submit();
+
+        return;
+    }
 }

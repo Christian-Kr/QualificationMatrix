@@ -124,6 +124,9 @@ public slots:
     /// \param newState The new state the checkbox has.
     void changedDateToState(int newState);
 
+    // Update the data of a single selected train data entry.
+    void updateSingleTrainData();
+
 signals:
     /// There is a short message that should be displayed.
     /// \param msg
