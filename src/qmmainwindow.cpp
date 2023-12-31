@@ -61,6 +61,7 @@ QMMainWindow::QMMainWindow(QWidget *parent)
     , lastWinMode(WIN_MODE::NONE)
     , m_signingListDialog(std::make_unique<QMSigningListDialog>(this))
     , m_amsLoginDialog(std::make_unique<QMAMSLoginDialog>(this))
+    , m_favoriteDatabaseDialog(std::make_unique<QMFavoriteDatabaseDialog>(this))
 {
     ui = new Ui::QMMainWindow;
     ui->setupUi(this);
@@ -94,7 +95,6 @@ QMMainWindow::QMMainWindow(QWidget *parent)
             &QMMainWindow::amsLoginDialogFinished);
 
     // Initialize favorite dialog.
-    m_favoriteDatabaseDialog = std::make_unique<QMFavoriteDatabaseDialog>(this);
     connect(m_favoriteDatabaseDialog.get(), &QMFavoriteDatabaseDialog::openDatabase, this,
             &QMMainWindow::openFavoriteDatabase);
 }
@@ -970,7 +970,7 @@ void QMMainWindow::amsLogin()
         m_amsLoginDialog->setUsername(lastLoginName);
     }
 
-    m_amsLoginDialog->open();
+    m_amsLoginDialog->exec();
 }
 
 void QMMainWindow::amsLoginDialogFinished(int)
@@ -1082,5 +1082,5 @@ void QMMainWindow::createEmptyDatabase()
 
 void QMMainWindow::showFavorites()
 {
-    m_favoriteDatabaseDialog->show();
+    m_favoriteDatabaseDialog->exec();
 }
