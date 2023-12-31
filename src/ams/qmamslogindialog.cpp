@@ -77,6 +77,10 @@ void QMAMSLoginDialog::login()
             }
         }
 
+        // After login has been successful, delete the password in the text field, to remove it
+        // from the text field buffer.
+        ui->lePassword->clear();
+
         close();
         return;
     }
