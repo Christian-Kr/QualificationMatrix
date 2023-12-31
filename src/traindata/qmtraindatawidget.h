@@ -100,9 +100,6 @@ public slots:
     /// \param name
     void setNameFilter(QString name);
 
-    /// Clear filtering dates.
-    void clearDates();
-
     /// Update which item is enabled and which not on dock widget for multi edit.
     void updateMultiEditEnabledState();
 

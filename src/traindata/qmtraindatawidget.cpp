@@ -353,6 +353,13 @@ void QMTrainDataWidget::resetFilter()
     ui->cbFilterEmployee->setCurrentText("");
     ui->cbFilterTrain->setCurrentText("");
     ui->cbFilterState->setCurrentText("");
+
+    // Reset the dates
+    ui->cbDateFrom->setChecked(false);
+    ui->cbDateTo->setChecked(false);
+
+    ui->deDateFilterFrom->setDate(QDate(2020, 1, 1));
+    ui->deDateFilterTo->setDate(QDate::currentDate());
 }
 
 void QMTrainDataWidget::setTrainFilter(QString training)
@@ -363,12 +370,6 @@ void QMTrainDataWidget::setTrainFilter(QString training)
 void QMTrainDataWidget::setNameFilter(QString name)
 {
     ui->cbFilterEmployee->setCurrentText(name);
-}
-
-void QMTrainDataWidget::clearDates()
-{
-    ui->deDateFilterFrom->clear();
-    ui->deDateFilterTo->clear();
 }
 
 void QMTrainDataWidget::addSingleEntry()
