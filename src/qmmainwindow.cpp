@@ -346,7 +346,10 @@ void QMMainWindow::initAfterDatabaseOpened()
 
     // If the version of the database doesn't fit the software version, show a message asking if the database should
     // be updated or not.
-    if (!QMDataManager::testVersion(db))
+
+    auto result = QMDataManager::testVersion(db);
+
+    if (result == -1)
     {
         auto resMb = QMessageBox::question(this, tr("Datenbank laden"), tr("Die Version der Datenbank entspricht "
                 "nicht der Vorgabe. Möchten Sie versuchen die Datenbank zu aktualisieren?"),
@@ -395,6 +398,22 @@ void QMMainWindow::initAfterDatabaseOpened()
             QMessageBox::information(this, tr("Datenbank aktualisieren"), tr("Die Aktualisierung der Datenbank war "
                     "erfolgreich. Bitte heben Sie das erstellte Backup für einen späteren Fall auf."));
         }
+    }
+    else if (result == 1)
+    {
+        auto messageBox = QMessageBox(this);
+
+        messageBox.setModal(true);
+        messageBox.setWindowTitle(tr("Datenbank laden"));
+        messageBox.setStandardButtons(QMessageBox::StandardButton::Ok);
+        messageBox.setText(tr("Die Version der Datebank entspricht nicht den Anforderungen."));
+        messageBox.setInformativeText(tr("Die Datenbank ist neuer als die Software. Bitte "
+                                         "aktualisieren Sie die Software auf die neuste Version."));
+        messageBox.setIcon(QMessageBox::Icon::Warning);
+        messageBox.exec();
+
+        closeDatabase(true, true);
+        return;
     }
 
     // After database has been loaded and version is ok, load the database models and informate the user about it.

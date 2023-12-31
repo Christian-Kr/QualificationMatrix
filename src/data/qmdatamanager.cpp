@@ -25,7 +25,7 @@ QMDataManager::QMDataManager()
     certLoc = CertLoc::EXTERNAL;
 }
 
-bool QMDataManager::testVersion(QSqlDatabase &db)
+int QMDataManager::testVersion(QSqlDatabase &db)
 {
     QSqlQuery query(db);
     QString queryText =
@@ -34,7 +34,7 @@ bool QMDataManager::testVersion(QSqlDatabase &db)
 
     if (!query.exec(queryText))
     {
-        return false;
+        return -2;
     }
 
     int major = -1;
@@ -60,12 +60,27 @@ bool QMDataManager::testVersion(QSqlDatabase &db)
         }
     }
 
+    // Test if version numbers are equal.
     if (major == QMDataManager::getMajor() && minor == QMDataManager::getMinor())
     {
-        return true;
+        return 0;
     }
 
-    return false;
+    // Test if database version is smaller than the software requires.
+    if (major < QMDataManager::getMajor() ||
+        (major == QMDataManager::getMajor() && minor < QMDataManager::getMinor()))
+    {
+        return -1;
+    }
+
+    // Test if database version is higher than the software requires.
+    if (major > QMDataManager::getMajor() ||
+        (major == QMDataManager::getMajor() && minor > QMDataManager::getMajor()))
+    {
+        return 1;
+    }
+
+    return -2;
 }
 
 bool QMDataManager::testTableStructure(QSqlDatabase &db)

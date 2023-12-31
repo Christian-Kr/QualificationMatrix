@@ -97,8 +97,9 @@ public:
     /// Test for the database version. This is only a test of an entry with the right version
     /// number. It does not include any test of available tables and/or columns.
     /// \param db The database to test.
-    /// \return True if right version, else false.
-    static bool testVersion(QSqlDatabase &db);
+    /// \return -1 if database version is smaller than, 0 if it is equal and 1 if version is higher
+    ///     than the software requires; -2 if any error occurs
+    static int testVersion(QSqlDatabase &db);
 
     /// Test for right table structure. This test only has a look for the number of tables and the
     /// table names. It does not has a look into the structure of a single table itself.
