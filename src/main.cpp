@@ -342,8 +342,8 @@ void customMessageHandler(QtMsgType type, const QMessageLogContext &, const QStr
 /// \return Zero if exit success, else -1.
 int main(int argc, char *argv[])
 {
-    QCoreApplication::setOrganizationName("Krippendorf");
-    QCoreApplication::setOrganizationDomain("Krippendorf");
+    QCoreApplication::setOrganizationName("Kr");
+    QCoreApplication::setOrganizationDomain("Kr");
     QCoreApplication::setApplicationVersion(QString("%1.%2").arg(VERSION_MAJOR, VERSION_MINOR));
 
     // The application name depends on the release state. This will also influence the name of the
